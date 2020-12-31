@@ -1,1 +1,182 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neural Body: Implicit Neural Representations with Structured Latent Codes
+        for Novel View Synthesis of Dynamic Humans</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Neural Body: Implicit Neural Representations with Structured Latent Codes
+                <br> for Novel View Synthesis of Dynamic Humans</h2>
+            <!-- <h5 style="color:#8899a5;"> Under Review </h5> -->
+            <hr>
+            <h6> <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>, 
+                Yuanqing Zhang<sup>1</sup>, 
+                <a href="https://justimyhxu.github.io/academic.html" target="_blank">Yinghao Xu</a><sup>2</sup>, 
+                <a href="http://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>3</sup>,
+                Qing Shuai<sup>1</sup>,
+                Hujun Bao<sup>1</sup>,
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>The Chinese University of Hong Kong &nbsp;&nbsp;
+                <sup>3</sup>Cornell University</p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
+                    <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
+                    <i class="fa fa-database"></i> Data</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5;"> Neural Body can reconstruct a moving human from a monocular video.</h6>
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/monocular.m4v" type="video/mp4">
+              </video>
+              <!-- <br><br> -->
+          <p class="text-left">This paper addresses the challenge of novel view synthesis for a human 
+              performer from a very sparse set of camera views. Some recent works have shown that learning
+               implicit neural representations of 3D scenes achieves remarkable view synthesis quality 
+               given dense input views. However, the representation learning will be ill-posed if the views
+                are highly sparse. To solve this ill-posed problem, our key idea is to integrate observations
+                 over video frames. To this end, we propose Neural Body, a new human body representation which
+                  assumes that the learned neural representations at different frames share the same set of 
+                  latent codes anchored to a deformable mesh, so that the observations across frames can be 
+                  naturally integrated. The deformable mesh also provides geometric guidance for the network 
+                  to learn 3D representations more efficiently. Experiments on a newly collected multi-view 
+                  dataset show that our approach outperforms prior works by a large margin in terms of the 
+                  novel view synthesis quality. We also demonstrate the capability of our approach to 
+                  reconstruct a moving person from a monocular video on the People-Snapshot dataset. We will
+                   release the code and dataset for reproducibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- street dance results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Bullet time effects on street dance</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/street_dance.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- multiview results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with state-of-the-art methods on sparse multi-view videos</h3>
+            <hr style="margin-top:0px">
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of dynamic human</h4>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/4-view-video-11.m4v" type="video/mp4">
+            </video>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/4-view-video-22.m4v" type="video/mp4">
+            </video>
+
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of frame 1</h4>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/4-view-first-frame-1.m4v" type="video/mp4">
+            </video>
+
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">3D reconstruction</h4>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/4-view-recon.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- monocular results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Results on monocular videos</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/monocular-1.m4v" type="video/mp4">
+            </video>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/monocular-2.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+   <!-- citing -->
+   <footer class="text-center">
+    <div class="container">
+      <div class="row ">
+        <div class="col-12">
+            <h3>Citation</h3>
+            <hr style="margin-top:0px">
+            <div class="bibtexsection">
+                @article{,
+                    title={},
+                    author={},
+                    year={2020}
+                }
+            </div>
+            <hr>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

@@ -40,8 +40,9 @@
                     <i class="fa fa-file"></i> Paper</a> </p>
               </div>
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/NeuralRecon" role="button"  target="_blank" disabled=1>
-                    <i class="fa fa-github-alt"></i> Code (comming soon)</a> </p>
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/NeuralRecon" role="button" 
+                    target="_blank" disabled=1 onmouseover="changeText(' Hopefully before April... ', 'code_soon')" onmouseout="changeText('Code (comming soon)', 'code_soon')">
+                <i class="fa fa-github-alt"></i> Code (comming soon)</a> </p>
               </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="files/NeuralRecon-suppmat.pdf" role="button"  target="_blank">
@@ -54,7 +55,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- abstract -->
   <section>
@@ -182,5 +182,13 @@
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
   </footer>
 
+  <script type="text/javascript">
+    function changeText(text, elem_id)
+        {
+            var display = document.getElementById(elem_id);
+            display.innerHTML = "";
+            display.innerHTML = text;
+        }
+  </script>
 </body>
 </html>

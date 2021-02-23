@@ -7,12 +7,19 @@
     <title>NeuralRecon: Real-Time Coherent 3D Reconstruction from Monocular Video</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
   </head>
 
   <!-- cover -->
   <section>
-    <div class="jumbotron text-center mt-4">
+    <div class="jumbotron text-center mt-0">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -40,8 +47,9 @@
                     <i class="fa fa-file"></i> Paper</a> </p>
               </div>
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/NeuralRecon" role="button"  target="_blank" disabled=1>
-                    <i class="fa fa-github-alt"></i> Code (comming soon)</a> </p>
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/NeuralRecon" role="button" 
+                    target="_blank" disabled=1 onmouseover="changeText(' Hopefully before April... ', 'code_soon')" onmouseout="changeText('Code (comming soon)', 'code_soon')">
+                <i class="fa fa-github-alt"></i> Code (comming soon)</a> </p>
               </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="files/NeuralRecon-suppmat.pdf" role="button"  target="_blank">
@@ -54,7 +62,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- abstract -->
   <section>
@@ -184,5 +191,13 @@
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
   </footer>
 
+  <script type="text/javascript">
+    function changeText(text, elem_id)
+        {
+            var display = document.getElementById(elem_id);
+            display.innerHTML = "";
+            display.innerHTML = text;
+        }
+  </script>
 </body>
 </html>

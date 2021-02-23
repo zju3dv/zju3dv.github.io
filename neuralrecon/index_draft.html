@@ -64,9 +64,9 @@
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
             <h6 style="color:#8899a5"> NeuralRecon reconstructs 3D scene geometry from a monocular video with known camera poses in <b>real-time</b>.</h6>
-            <!-- <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="images/monocular.m4v" type="video/mp4">
-            </video> -->
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="videos/web-scene2.m4v" type="video/mp4">
+            </video>
               <!-- <br><br> -->
           <p class="text-left">We present a novel framework named NeuralRecon for real-time 3D scene reconstruction from a monocular video. Unlike previous methods that estimate single-view depth maps separately on each key-frame and fuse them later, we propose to directly reconstruct local surfaces represented as sparse TSDF volumes for each video fragment sequentially by a neural network. A learning-based TSDF fusion module based on gated recurrent units is used to guide the network to fuse features from previous fragments. This design allows the network to capture local smoothness prior and global shape prior of 3D surfaces when sequentially reconstructing the surfaces, resulting in accurate, coherent, and real-time surface reconstruction. The experiments on ScanNet and 7-Scenes datasets show that our system outperforms state-of-the-art methods in terms of both accuracy and speed. To our best knowledge, this is the first learning-based system that is able to reconstruct dense coherent 3D geometry in real-time.</p>
         </div>
@@ -119,9 +119,9 @@
         <div class="col-12 text-center">
             <h3>Real-time incremental reconstruction</h3>
             <hr style="margin-top:0px">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/TJL3UXW862s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            </div>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="videos/web-scene1.m4v" type="video/mp4">
+            </video>
         </div>
       </div>
     </div>
@@ -133,10 +133,12 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <h3>Bullet time effects on street dance</h3>
+            <h3>Comparison with state-of-the-art methods</h3>
+            <p class="text-left">Here we compare our method with other baseline methods. 
+              Only the inference time on key frames is computed Back-face culling is enabled during rendering Ground-truth is captured using the LiDAR sensor on iPad Pro.</p>
             <hr style="margin-top:0px">
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="images/street_dance.m4v" type="video/mp4">
+                <source src="videos/Comparison1-near.m4v" type="video/mp4">
             </video>
         </div>
       </div>

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <style>
       body {
-        background: #ffffff no-repeat fixed top left;
+        background: #fdfcf9 no-repeat fixed top left;
         font-family:'Open Sans', sans-serif;
       }
     </style>
@@ -72,7 +72,7 @@
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
             <h6 style="color:#8899a5"> NeuralRecon reconstructs 3D scene geometry from a monocular video with known camera poses in <b style="color:#e94a00">real-time</b>🔥.</h6>
-            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="short_vid">
                   <source src="videos/web-scene2.m4v" type="video/mp4">
             </video>
               <!-- <br><br> -->
@@ -124,6 +124,12 @@
       <div class="row">
         <div class="col-12 text-center">
             <h3>Real-time incremental reconstruction</h3>
+            <p class="text-left"> 
+              Data is captured around the working area with an iPhone and the camera poses are obtained from <a href="https://developer.apple.com/documentation/arkit">ARKit</a>.
+              The model used here is only trained on ScanNet, which indicates that NeuralRecon generalizes well to new domains.
+              Notice that NeuralRecon can handle homogeneous textures (e.g. the booth area and the while walls in the <a href="#short_vid">header video</a>), thanks to the learned surface priors.
+              The gradual refinement on the reconstruction quality over time (through GRU-Fusion) can also be observed.
+            </p>
             <hr style="margin-top:0px">
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="videos/web-scene1.m4v" type="video/mp4">
@@ -186,6 +192,20 @@
       </div>
     </section>
     <br>  
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgement</h3>
+          <hr style="margin-top:0px">
+          <p>
+            We would like to specially thank to Reviewer 3 for the positive and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
 
   <!-- citing -->
   <div class="container">

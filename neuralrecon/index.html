@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <style>
       body {
-        background: #ffffff no-repeat fixed top left;
+        background: #fdfcf9 no-repeat fixed top left;
         font-family:'Open Sans', sans-serif;
       }
     </style>
@@ -24,15 +24,14 @@
         <div class="row">
           <div class="col">
             <h2 style="font-size:30px;">NeuralRecon: Real-Time Coherent 3D Reconstruction from Monocular Video</h2>
-            <h4 style="color:#6e6e6e;"> CVPR 2021</h4>
-            <!-- <h5 style="color:#6e6e6e;font-weight: bold;"> CVPR 2021 (Oral)</h5> -->
+            <h4 style="color:#6e6e6e;"> CVPR 2021 (Oral)</h4>
             <hr>
             <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1,2*</sup>, 
                  <a href="https://ymingxie.github.io/" target="_blank">Yiming Xie</a><sup>1*</sup>, 
                  <!-- <a href="https://ymingxie.github.io/" target="_blank">Yiming Xie</a><sup>1,2*</sup>,  -->
                 <a href="https://github.com/f-sky" target="_blank">Linghao Chen</a><sup>1</sup>,
-                <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
-                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup></h6>
             <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
                 <sup>2</sup>SenseTime Research
                 <br>
@@ -72,7 +71,7 @@
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
             <h6 style="color:#8899a5"> NeuralRecon reconstructs 3D scene geometry from a monocular video with known camera poses in <b style="color:#e94a00">real-time</b>🔥.</h6>
-            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
                   <source src="videos/web-scene2.m4v" type="video/mp4">
             </video>
               <!-- <br><br> -->
@@ -124,10 +123,19 @@
       <div class="row">
         <div class="col-12 text-center">
             <h3>Real-time incremental reconstruction</h3>
+            <p class="text-left"> 
+              Data is captured around the working area with an iPhone, and the camera poses are obtained from <a href="https://developer.apple.com/documentation/arkit">ARKit</a>.
+              The model used here is only trained on ScanNet, which indicates that NeuralRecon generalizes well to new domains.
+              Notice that NeuralRecon can handle homogeneous textures (e.g. the booth area and the while walls in the <a href="#header_vid">header video</a>), thanks to the learned surface priors.
+              The gradual refinement on the reconstruction quality over time (through GRU-Fusion) can also be observed.
+            </p>
             <hr style="margin-top:0px">
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="videos/web-scene1.m4v" type="video/mp4">
             </video>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=3d55b6141e18492790509fc93fa453c9" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
         </div>
       </div>
     </div>
@@ -140,15 +148,15 @@
       <div class="row">
         <div class="col-12 text-center">
             <h3>Comparison with state-of-the-art methods</h3>
-            <p class="text-left">Here we compare our method with other baseline methods. 
-              Only the inference time on key frames is computed Back-face culling is enabled during rendering Ground-truth is captured using the LiDAR sensor on iPad Pro.</p>
+            <p class="text-left"> 
+             Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p>
             <hr style="margin-top:0px">
-            <p class="text-left" style="color:#8899a5"> Scene 1:</p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <p class="text-left" style="color:#8899a5"> B5-Scene 1:</p>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
                 <source src="videos/Comparison1-near.m4v" type="video/mp4">
             </video>
-            <p class="text-left" style="color:#8899a5"> Scene 2:</p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <p class="text-left" style="color:#8899a5"> B5-Scene 2:</p>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
               <source src="videos/Comparison2-near.m4v" type="video/mp4">
           </video>
         </div>
@@ -156,6 +164,22 @@
     </div>
   </section>
   <br>
+
+    <!-- Comparison with Atlas -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
+              <hr style="margin-top:0px">
+              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
+                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>  
 
   <!-- Comparison with depth-based methods -->
   <section>
@@ -171,21 +195,19 @@
   </section>
   <br>
 
-    <!-- Comparison with Atlas -->
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-12 text-center">
-              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
-              <hr style="margin-top:0px">
-              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
-            </video>
-          </div>
-        </div>
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgement</h3>
+          <hr style="margin-top:0px">
+          <p>
+            We would like to specially thank to Reviewer 3 for the positive and constructive comments.
+          </p>
+          <hr>
       </div>
-    </section>
-    <br>  
+    </div>
+  </div> -->
 
   <!-- citing -->
   <div class="container">
@@ -205,7 +227,22 @@
     </div>
   </div>
 
-  <footer class="text-center" style="margin-bottom:10px">
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-left">
+            This work is partially supported by the blabla
+            We would like to specially thank Reviewer 3 for the insightful and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
   </footer>
 

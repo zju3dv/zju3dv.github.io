@@ -4,24 +4,255 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coming Soon ...</title>
+    <title>NeuralRecon: Real-Time Coherent 3D Reconstruction from Monocular Video</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
   </head>
 
   <!-- cover -->
   <section>
-    <div class="jumbotron text-center mt-4">
+    <div class="jumbotron text-center mt-0">
       <div class="container">
         <div class="row">
-          <div class="col-12">
-            <h1>Coming Soon ...</h1>
-                  
+          <div class="col">
+            <h2 style="font-size:30px;">NeuralRecon: Real-Time Coherent 3D Reconstruction from Monocular Video</h2>
+            <h4 style="color:#6e6e6e;"> CVPR 2021 (Oral)</h4>
+            <hr>
+            <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1,2*</sup>, 
+                 <a href="https://ymingxie.github.io/" target="_blank">Yiming Xie</a><sup>1*</sup>, 
+                 <!-- <a href="https://ymingxie.github.io/" target="_blank">Yiming Xie</a><sup>1,2*</sup>,  -->
+                <a href="https://github.com/f-sky" target="_blank">Linghao Chen</a><sup>1</sup>,
+                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup></h6>
+            <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>SenseTime Research
+                <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2102.00000.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/NeuralRecon" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code (comming soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/NeuralRecon-suppmat.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5"> NeuralRecon reconstructs 3D scene geometry from a monocular video with known camera poses in <b style="color:#e94a00">real-time</b>🔥.</h6>
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                  <source src="videos/web-scene2.m4v" type="video/mp4">
+            </video>
+              <!-- <br><br> -->
+          <p class="text-left">We present a novel framework named NeuralRecon for real-time 3D scene reconstruction from a monocular video. Unlike previous methods that estimate single-view depth maps separately on each key-frame and fuse them later, we propose to directly reconstruct local surfaces represented as sparse TSDF volumes for each video fragment sequentially by a neural network. A learning-based TSDF fusion module based on gated recurrent units is used to guide the network to fuse features from previous fragments. This design allows the network to capture local smoothness prior and global shape prior of 3D surfaces when sequentially reconstructing the surfaces, resulting in accurate, coherent, and real-time surface reconstruction. The experiments on ScanNet and 7-Scenes datasets show that our system outperforms state-of-the-art methods in terms of both accuracy and speed. To our best knowledge, this is the first learning-based system that is able to reconstruct dense coherent 3D geometry in real-time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- reconstruction showcase -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Reconstruction showcase</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=bd885db8684e4876976bd6616eda7ade" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <br>
+            <p> Zoom in by scrolling. You can toggle the “Single Sided” option in Model Inspector (pressing I key) to enable back-face culling (see through walls). Select “Matcap” to inspect the geometry without textures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video (10min)</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/TJL3UXW862s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- real-time incremental reconstruction -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Real-time incremental reconstruction</h3>
+            <p class="text-left"> 
+              Data is captured around the working area with an iPhone, and the camera poses are obtained from <a href="https://developer.apple.com/documentation/arkit">ARKit</a>.
+              The model used here is only trained on ScanNet, which indicates that NeuralRecon generalizes well to new domains.
+              Notice that NeuralRecon can handle homogeneous textures (e.g. the booth area and the while walls in the <a href="#header_vid">header video</a>), thanks to the learned surface priors.
+              The gradual refinement on the reconstruction quality over time (through GRU-Fusion) can also be observed.
+            </p>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="videos/web-scene1.m4v" type="video/mp4">
+            </video>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=3d55b6141e18492790509fc93fa453c9" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Comparison with state-of-the-art methods -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with state-of-the-art methods</h3>
+            <p class="text-left"> 
+             Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p>
+            <hr style="margin-top:0px">
+            <p class="text-left" style="color:#8899a5"> B5-Scene 1:</p>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+                <source src="videos/Comparison1-near.m4v" type="video/mp4">
+            </video>
+            <p class="text-left" style="color:#8899a5"> B5-Scene 2:</p>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+              <source src="videos/Comparison2-near.m4v" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- Comparison with Atlas -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
+              <hr style="margin-top:0px">
+              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
+                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>  
+
+  <!-- Comparison with depth-based methods -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with depth-based methods</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/compare-depth-based.png" alt="Comparison with depth-based methods">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgement</h3>
+          <hr style="margin-top:0px">
+          <p>
+            We would like to specially thank to Reviewer 3 for the positive and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{sun2021neucon,
+  title={NeuralRecon: Real-Time Coherent 3D Reconstruction from Monocular Video},
+  author={Sun, Jiaming and Xie, Yiming and Chen, Linghao and Bao, Hujun and Zhou, Xiaowei},
+  journal={CVPR},
+  year={2021}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-left">
+            This work is partially supported by the blabla
+            We would like to specially thank Reviewer 3 for the insightful and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+  <script type="text/javascript">
+    function changeText(text, elem_id)
+        {
+            var display = document.getElementById(elem_id);
+            display.innerHTML = "";
+            display.innerHTML = text;
+        }
+  </script>
+</body>
 </html>

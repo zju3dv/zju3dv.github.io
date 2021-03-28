@@ -137,6 +137,25 @@
   </section>
   <br>
 
+  <!-- feature visualization -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Visualizations on the attention weights and the transformed features in LoFTR</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/feature-vis.png" alt="Feature Visualization">
+            <p class="text-left">
+              We use PCA to reduce the dimension of the transformed features and visualize the results with RGB color.
+              The visualization for attention weights demonstrate that the features in indistinctive or low-texture regions are able to aggregate local and global context information through self-attention and cross-attention.
+              The PCA feature visualization demonstrate that LoFTR learns a position-dependent feature representation.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
   <!-- more videos -->
   <!-- <section>
     <div class="container">
@@ -172,21 +191,36 @@
   </div>
 
   <!-- ack -->
-  <!-- <div class="container">
+  <div class="container">
     <div class="row ">
       <div class="col-12">
           <h3>Acknowledgements</h3>
           <hr style="margin-top:0px">
           <p class="text-left">
-            This work is partially supported by the blabla
-            We would like to specially thank Reviewer 1 for the insightful and constructive comments.
+            We would like to specially thank Reviewer 1 for the insightful and constructive comments. 
+            We provide additional responses to Reviewer 1 regarding the naming of this paper in the supplementary material.
+            The authors from Zhejiang University would like to acknowledge the support from the National Key Research and Development Program of China (No. 2020AAA0108901), NSFC (No. 61806176), and ZJU-SenseTime Joint Lab of 3D Vision.
           </p>
           <hr>
       </div>
     </div>
-  </div> -->
+  </div>
+
+  <!-- rec -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-left">
+            Welcome to checkout our work on real-time 3D reconstruction (<a href="http://zju3dv.github.io/neuralrecon/">NeuralRecon</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div>
 
   <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
   </footer>
 

@@ -74,24 +74,10 @@
                   <source src="images/short_demo.m4v" type="video/mp4">
             </video> -->
               <!-- <br><br> -->
-          <p class="text-left">We present a novel method for image local feature matching. Instead of performing image feature detection, description and matching sequentially, we propose to ﬁrst establish pixel-wise dense matches in a coarse level and later refine the good matches in a fine level. In contrast to dense methods that use cost volume to search correspondences, we use self and cross attention layer in Transformers to obtain feature descriptors that are conditioned on both images. The global receptive field provided by Transformers enables our method to produce dense matches in low-texture areas, where feature detectors usually struggle to produce repeatable interest points. The experiments on indoor and outdoor datasets show that our system outperforms state-of-the-art methods by a large margin.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
-  <!-- overview video -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Pipeline overview</h3>
-            <hr style="margin-top:0px">
-            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
-                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
-            <!-- </div> -->
-                <img class="img-fluid" src="images/loftr-arch.png" alt="LoFTR Architechture">
+          <p class="text-justify">
+            We present a novel method for local image feature matching.  Instead of performing image feature detection, description, and matching sequentially,  we propose to first establish pixel-wise dense matches at a coarse level and later refine the good matches at a fine level. In contrast to dense methods that use cost volume to search correspondences,  we use self and cross attention layers in Transformers to obtain feature descriptors that are conditioned on both images. The global receptive field provided by Transformers enables our method to produce dense matches in low-texture areas,  where feature detectors usually struggle to produce repeatable interest points. The experiments on indoor and outdoor datasets show that LoFTR outperforms state-of-the-art methods by a large margin.  
+            LoFTR also ranks first on two public benchmarks of visual localization among the published methods.
+          </p>
         </div>
       </div>
     </div>
@@ -114,6 +100,42 @@
   </section>
   <br>  
 
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+            <!-- </div> -->
+                <img class="img-fluid" src="images/loftr-arch.png" alt="LoFTR Architechture">
+            <hr>
+            <p class="text-justify">
+              LoFTR has four components:
+              \(\textbf{1.}\) A local feature CNN extracts
+              the coarse-level feature maps 
+              $\tilde{F}^A$ and $\tilde{F}^B$,
+              together with the fine-level feature maps 
+              $\hat{F}^A$ and $\hat{F}^B$
+              from the image pair $I^A$ and $I^B$.
+              \(\textbf{2.}\)  The coarse feature maps are flattened to 1-D vectors and added with the
+              positional encoding.
+              The added features are then processed by the Local Feature TRansformer (LoFTR) module, which has $N_c$ self-attention and cross-attention layers.
+              \(\textbf{3.}\) A differentiable matching layer is used to match the transformed features, which ends up with a confidence matrix $\mathcal{P}_c$. 
+              The matches in $\mathcal{P}_c$ are selected according to the confidence threshold and mutual-nearest-neighbor criteria, 
+              yielding the coarse-level match prediction $\mathcal{M}_c$.
+              \(\textbf{4.}\) For every selected coarse prediction $(\tilde{i}, \tilde{j}) \in \mathcal{M}_c$,
+              a local window with size $w\times w$ is cropped from the fine-level feature map.
+              Coarse matches will be refined within this local window to a sub-pixel level as the final match prediction $\mathcal{M}_f$.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
 
   <!-- compare -->
   <section>
@@ -122,7 +144,7 @@
         <div class="col-12 text-center">
             <h3>Qualitative comparison with <a href="https://psarlin.com/superglue">SuperGlue</a></h3>
             <hr style="margin-top:0px">
-            <p class="text-left">
+            <p class="text-justify">
               Data is captured using an iPhone, color indicates the match confidence.
             </p>
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
@@ -145,10 +167,14 @@
             <h3>Visualizations on the attention weights and the transformed features in LoFTR</h3>
             <hr style="margin-top:0px">
             <img class="img-fluid" src="images/feature-vis.png" alt="Feature Visualization">
-            <p class="text-left">
+            <hr style="margin-top:0px">
+            <p class="text-justify">
               We use PCA to reduce the dimension of the transformed features and visualize the results with RGB color.
               The visualization for attention weights demonstrate that the features in indistinctive or low-texture regions are able to aggregate local and global context information through self-attention and cross-attention.
-              The PCA feature visualization demonstrate that LoFTR learns a position-dependent feature representation.
+              In the first two examples, the query point from the low-texture region is able to aggregate the surrounding global information flexibly. 
+              For instance, the point on the chair is looking at the edge of the chair. 
+              In the last two examples, the query point from the distinctive region can also utilize the richer information from other regions.
+              The feature visualization with PCA further shows that LoFTR learns a position-dependent feature representation.
             </p>
         </div>
       </div>
@@ -180,7 +206,7 @@
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>@article{sun2021loftr,
-  title={LoFTR: Detector-Free Local Feature Matching with Transformers},
+  title={{LoFTR}: Detector-Free Local Feature Matching with Transformers},
   author={Sun, Jiaming and Shen, Zehong and Wang, Yuang and Bao, Hujun and Zhou, Xiaowei},
   journal={CVPR},
   year={2021}
@@ -196,7 +222,7 @@
       <div class="col-12">
           <h3>Acknowledgements</h3>
           <hr style="margin-top:0px">
-          <p class="text-left">
+          <p class="text-justify">
             We would like to specially thank Reviewer 1 for the insightful and constructive comments. 
             We provide additional responses to Reviewer 1 regarding the naming of this paper in the supplementary material.
             The authors from Zhejiang University would like to acknowledge the support from the National Key Research and Development Program of China (No. 2020AAA0108901), NSFC (No. 61806176), and ZJU-SenseTime Joint Lab of 3D Vision.
@@ -212,7 +238,7 @@
       <div class="col-12">
           <h3>Recommendations to other works from our group</h3>
           <hr style="margin-top:0px">
-          <p class="text-left">
+          <p class="text-justify">
             Welcome to checkout our work on real-time 3D reconstruction (<a href="http://zju3dv.github.io/neuralrecon/">NeuralRecon</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
           </p>
       </div>
@@ -232,5 +258,11 @@
             display.innerHTML = text;
         }
   </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </body>
 </html>

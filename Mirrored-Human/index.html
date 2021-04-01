@@ -16,9 +16,9 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h1>Mirrored-Human: Reconstructing 3D Human Pose  
-		<br>by Watching Humans in the Mirror</h1>
-            <!-- <h5 style="color:#8899a5;"> Under Review </h5> -->
+            <!-- <img class="img-fluid" src="images/logo.jpg" alt="MHlogo" width="100"> -->
+            <h1>Reconstructing 3D Human Pose by Watching Humans in the Mirror</h1>
+            <h5 style="color:#8899a5;"> CVPR 2021(Oral) </h5>
             <hr>
             <h6> Qi Fang*, 
                 Qing Shuai*, Junting Dong,
@@ -58,14 +58,17 @@
         <div class="col-12 text-center">
           <h1>Abstract</h1>
             <hr style="margin-top:0px">
-            <h6 style="color:#8899a5">Given <a href="https://www.youtube.com/watch?v=KOCJJ27hhIE" target="_blank">an Internet video</a>, our method (blue) can generate more acurate 3D meshes than previous monocular methods (pink).  </h6>
-            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="images/xout2.mp4" type="video/mp4">
+            <!-- <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="images/xout2.mp4" type="video/mp4">
+              </video> -->
+              <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/backflip_inout.mp4" type="video/mp4">
               </video>
+              <h6 style="color:#8899a5">Given <a href="https://www.youtube.com/watch?v=KOCJJ27hhIE" target="_blank">an Internet video</a>, our method can generate acurate 3D positions and poses, which can be used to control the character.</h6>
               <!-- <br><br> -->
           <p class="text-left">In this paper, we introduce the new task of reconstructing 3D human pose from a single image in which we can see the person and the person's image through a mirror. Compared to general scenarios of 3D pose estimation from a single view, the mirror reflection provides an additional view for resolving the depth ambiguity.
-We develop an optimization-based approach that exploits mirror symmetry constraints for accurate 3D pose reconstruction. We also provide a method to estimate the surface normal of the mirror from vanishing points in the single image. 
-To validate the proposed approach, we collect a large-scale dataset named Mirrored-Human, which covers a large variety of human subjects, poses and backgrounds. The experiments demonstrate that, when trained on Mirrored-Human with our reconstructed 3D poses as pseudo ground-truth, the accuracy and generalizability of existing single-view 3D pose estimators can be largely improved. We will release our code and dataset upon publication of this work.</p>
+            We develop an optimization-based approach that exploits mirror symmetry constraints for accurate 3D pose reconstruction. We also provide a method to estimate the surface normal of the mirror from vanishing points in the single image. 
+            To validate the proposed approach, we collect a large-scale dataset named Mirrored-Human, which covers a large variety of human subjects, poses and backgrounds. The experiments demonstrate that, when trained on Mirrored-Human with our reconstructed 3D poses as pseudo ground-truth, the accuracy and generalizability of existing single-view 3D pose estimators can be largely improved.</p>
         </div>
       </div>
     </div>
@@ -79,9 +82,9 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
         <div class="col-12 text-center">
             <h1>Overview video</h1>
             <hr style="margin-top:0px">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="images/overview.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            </div>
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="images/overview.mp4" type="video/mp4">
+            </video>
         </div>
       </div>
     </div>
@@ -95,7 +98,7 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
         <div class="col-12 text-center">
             <!-- <h3>Video results</h3> -->
             <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="images/qual.mp4" type="video/mp4">
             </video>
         </div>
@@ -111,7 +114,7 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
         <div class="col-12 text-center">
             <!-- <h3>Video results</h3> -->
             <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="images/cmp.mp4" type="video/mp4">
             </video>
         </div>
@@ -127,7 +130,7 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
         <div class="col-12 text-center">
             <!-- <h1><b>Video results</b></h1> -->
             <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="images/xout1.mp4" type="video/mp4">
             </video>
         </div>
@@ -141,9 +144,9 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <h1>Collected Dataset</h1>
+            <h1>Collected Internet Dataset</h1>
             <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                 <source src="images/show_dataset.mp4" type="video/mp4">
             </video>
         </div>
@@ -151,6 +154,19 @@ To validate the proposed approach, we collect a large-scale dataset named Mirror
     </div>
   </section>
   <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h1>Collected Evaluation Dataset</h1>
+            <hr style="margin-top:0px">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/eval-seq1.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer class="text-center" style="margin-bottom:10px">
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.

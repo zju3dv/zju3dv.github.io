@@ -75,9 +75,10 @@
               TL;DR: LoFTR can extract high-quality semi-dense matches even in indistinctive regions with low-textures, motion blur, or repetitive patterns.
             </h6>
               <br>
-            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="images/loftr-homepage-demo.mp4" type="video/mp4">
+            <video id="demo" poster="images/demo-poster.png" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <!-- <source src="images/loftr-homepage-demo.mp4" type="video/mp4"> -->
             </video>
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
               <br>
               <br>
           <p class="text-justify">
@@ -294,6 +295,40 @@
             document.getElementById('inspect_vid').playbackRate = speed;
         }
         changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("demo");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/loftr/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 10000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+    var source = document.createElement("source");
+    source.setAttribute("src", "images/loftr-homepage-demo.mp4");
+    source.setAttribute("type", "video/webm");
+    demo.appendChild(source);
   </script>
   <script>
     MathJax = {

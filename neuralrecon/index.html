@@ -72,9 +72,11 @@
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
             <h6 style="color:#8899a5"> NeuralRecon reconstructs 3D scene geometry from a monocular video with known camera poses in <b style="color:#e94a00">real-time</b>🔥.</h6>
-            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
-                  <source src="videos/web-scene2.m4v" type="video/mp4">
+            <video poster="images/header-vid-poster.png" width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
             </video>
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+            <br>
+            </div>
               <!-- <br><br> -->
           <p class="text-justify">
             We present a novel framework named NeuralRecon for real-time 3D scene reconstruction from a monocular video. Unlike previous methods that estimate single-view depth maps separately on each key-frame and fuse them later, we propose to directly reconstruct local surfaces represented as sparse TSDF volumes for each video fragment sequentially by a neural network. A learning-based TSDF fusion module based on gated recurrent units is used to guide the network to fuse features from previous fragments. This design allows the network to capture local smoothness prior and global shape prior of 3D surfaces when sequentially reconstructing the surfaces, resulting in accurate, coherent, and real-time surface reconstruction. The experiments on ScanNet and 7-Scenes datasets show that our system outperforms state-of-the-art methods in terms of both accuracy and speed. To the best of our knowledge, this is the first learning-based system that is able to reconstruct dense coherent 3D geometry in real-time. 
@@ -283,12 +285,45 @@
   </footer>
 
   <script type="text/javascript">
-    function changeText(text, elem_id)
+    function changePlaybackSpeed(speed)
         {
-            var display = document.getElementById(elem_id);
-            display.innerHTML = "";
-            display.innerHTML = text;
+            document.getElementById('inspect_vid').playbackRate = speed;
         }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 10000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+    var source = document.createElement("source");
+    source.setAttribute("src", "/videos/web-scene2.m4v");
+    source.setAttribute("type", "video/webm");
+    demo.appendChild(source);
   </script>
   <script>
     MathJax = {

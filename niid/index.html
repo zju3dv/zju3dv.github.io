@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NIID-Net: Adapting Surface Normal Knowledge for Intrinsic Image
+      Decomposition in Indoor Scenes</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>NIID-Net: Adapting Surface Normal Knowledge for Intrinsic Image
+              Decomposition in Indoor Scenes</h2>
+            <h4 style="color:#5a6268;">TVCG 2020</h4>
+            <hr>
+            <h6> Jundan Luo<sup>*</sup>, <a href="https://drinkingcoder.github.io/" target="_blank">Zhaoyang Huang</a><sup>*</sup>, 
+                Yijin Li,  
+                <br>
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup></sup> 
+                Hujun Bao<sup></sup>,
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup></sup> </h6>
+            <p>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp;  <br>
+            ZJU-SenseTime Joint Lab of 3D Vision, Zhejiang University &nbsp;&nbsp;  <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9199573" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/NIID-Net" role="button"  target="_blank">
+                    <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://zjueducn-my.sharepoint.com/:f:/g/personal/pengsida_zju_edu_cn/Eo9zn4x_xcZKmYHZNjzel7gBdWf_d4m-pISHhPWB-GZBYw?e=Hf4mz7" role="button">
+                    <i class="fa fa-database"></i> Data</a> </p>
+              </div> -->
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <!-- <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""> -->
+                  <!-- <source src="images/monocular.m4v" type="video/mp4"> -->
+              <!-- </video> -->
+              <!-- <br><br> -->
+            <img class="img-fluid" src="images/abstract.png" alt="niid ab">
+          <p class="text-justify">Intrinsic image decomposition, i.e., decomposing a natural image into a reflectance image and a shading image, is used
+            in many augmented reality applications for achieving better visual coherence between virtual contents and real scenes. The main
+            challenge is that the decomposition is ill-posed, especially in indoor scenes where lighting conditions are complicated, while real
+            training data is inadequate. To solve this challenge, we propose NIID-Net, a novel learning-based framework that adapts surface
+            normal knowledge for improving the decomposition. The knowledge learned from relatively more abundant data for surface normal
+            estimation is integrated into intrinsic image decomposition in two novel ways. First, normal feature adapters are proposed to incorporate
+            scene geometry features when decomposing the image. Secondly, a map of integrated lighting is proposed for propagating object
+            contour and planarity information during shading rendering. Furthermore, this map is capable of representing spatially-varying lighting
+            conditions indoors. Experiments show that NIID-Net achieves competitive performance in reflectance estimation and outperforms
+            all previous methods in shading estimation quantitatively and qualitatively. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Photorealistic image editing</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify"> We insert virtual posters into real scenes by editing reflectance layers and remains shading layers for achieving photorealistic image editing. This application is suitable for augmented
+            reality systems such as advertising and scene refurnishing. The entire video is presented on the YouTube.</p>
+            <br>
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Demo 1</h4>
+            <video id="demo" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/Vid1.mp4" type="video/mp4">
+            </video>
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Demo 2</h4>
+            <video id="demo" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/Vid2.mp4" type="video/mp4">
+            </video>
+            <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Demo 3</h4>
+            <video id="demo" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/Vid3.mp4" type="video/mp4">
+            </video>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/0MadIlfqles" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- pipeline overview -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Framework overview</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5"> NIID-Net: Adapting Surface Normal Knowledge for Intrinsic Image
+      Decomposition in Indoor Scenes</h6>
+            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+            <!-- </div> -->
+                <img class="img-fluid" src="images/framework.png" alt="niid Architechture">
+          <p class="text-justify"> Given a single sRGB input image, the proposed NIID-Net predicts a colorful reflectance image and a gray-scale
+            shading intensity image. The NIID-Net contains a NEM (blue rectangle) and an IID-Net (orange rectangle). The IID-Net integrates surface
+            normal knowledge via the NFAs and shading rendering. </p>
+            <!-- <hr> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Landmark generation from the proposed voting-by-segmentation algorithm</h3>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/VotingbySegmentation.png" alt="VS landmark generation">
+          <p class="text-justify"> In the localization stage, pixels that are predicted to have the same landmark label in the landmark segmentation map are grouped together and we estimate its corresponding landmark location by computing the intersection of the landmark directional votes from the predicted voting map, which is dubbed the voting-by-segmentation algorithm. The landmarks generated by our voting-by-segmentation algorithm achieve high accuracy and robustness against distracting factors because we can accurately detect landmark locations by filtering disturbed pixel votes (pointed by the red arrow) and further reject unstable regions (pointed by the green arrow) in advance by checking the voting consistency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Prototype-based triplet loss for segmentation</h3>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/Proto.png" alt="VS prototype-based">
+          <p class="text-justify"> In the localization stage, pixels that are predicted to have the same landmark label in the landmark segmentation map are grouped together and we estimate its corresponding landmark location by computing the intersection of the landmark directional votes from the predicted voting map, which is dubbed the voting-by-segmentation algorithm. The landmarks generated by our voting-by-segmentation algorithm achieve high accuracy and robustness against distracting factors because we can accurately detect landmark locations by filtering disturbed pixel votes (pointed by the red arrow) and further reject unstable regions (pointed by the green arrow) in advance by checking the voting consistency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <!-- Comparison with Scene Coordinate -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with SOTAs</h3>
+            <hr style="margin-top:0px">
+            <!-- <h6 style="color:#8899a5"> VS-Net: Voting with Segmentation for Visual Localization  </h6> -->
+            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+            <!-- </div> -->
+                <img class="img-fluid" src="images/Demo1-1.png" alt="Demo1">
+                <img class="img-fluid" src="images/Demo1-2.png" alt="Demo1">
+          <p class="text-justify"> The first, second and third rows are estimated shading images, predicted or ground-truth
+            normal maps, and estimated reflectance images. We and GLoSH (SUNCG+IIW+SAW) predict surface normals by the deep neural networks,
+            while Chen and Koltun compute surface normals from ground-truth depth. Geometry contours in our predicted shading images are the
+            sharpest. Blue rectangles: we remove the most textures from the predicted shading. Green rectangles: we recover the highlights best. Orange
+            rectangles: the intensity of predicted shading from Chen and Koltun is strongly affected by that of the input image, while the intensity of our
+            predictions is more coherent in the neighborhood. Our reflectance images are also better than those of Chen and Koltun, as many shading
+            variations are shifted into their reflectance.  </p>
+                <img class="img-fluid" src="images/Demo2-1.png" alt="Demo1">
+                <img class="img-fluid" src="images/Demo2-2.png" alt="Demo1">
+                <img class="img-fluid" src="images/Demo2-3.png" alt="Demo1">
+          <p class="text-justify"> We compare our results with Li and Snavely’s (CGI+IIW+SAW), and
+            GLoSH (SUNCG+IIW+SAW). For each sample, the first row shows predicted shading images, and the second row shows predicted
+            reflectance images. Blue rectangles: our shading results have the least texture residuals. Orange rectangles: our method best captures the shading
+            effects. Green rectangles: our method predicts the most detailed reflectance as well as the most smooth shading. More results are presented in the
+            supplementary material. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+  @article{luo2020niid,
+    title={NIID-Net: Adapting Surface Normal Knowledge for Intrinsic Image Decomposition in Indoor Scenes},
+    author={Luo, Jundan and Huang, Zhaoyang and Li, Yijin and Zhou, Xiaowei and Zhang, Guofeng and Bao, Hujun},
+    journal={IEEE Transactions on Visualization and Computer Graphics},
+    volume={26},
+    number={12},
+    pages={3434--3445},
+    year={2020},
+    publisher={IEEE}
+  }
+</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

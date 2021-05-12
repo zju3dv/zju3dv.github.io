@@ -1,0 +1,112 @@
+<!--
+ * @Date: 2021-04-07 10:27:04
+ * @Author: Qing Shuai
+ * @LastEditors: Qing Shuai
+ * @LastEditTime: 2021-04-07 16:45:57
+ * @FilePath: /EasyMocap/zju-mocap.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EasyMocap</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <style>
+        table {
+            /* width: 710px; */
+            margin: 10px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        
+        td,
+        th {
+            border: 1px solid #333;
+        }
+        
+        thead tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+                <h1 tag="single" style="margin-top:10px">Multi-view videos</h1>
+                <hr style="margin-top:0px">
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sequence</th>
+                            <th>Input video</th>
+                            <th>Estimated SMPL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                
+            </div>
+          </div>
+        </div>
+    </section>
+
+    
+    <script>
+        var seqs = [377, 386, 387, 390, 392, 393, 394];
+        var seq_names = ['Warmup', 'Punch1', 'Punch2', 'Kick', 'Swing1', 'Swing3', 'Swing2'];
+        // 2、添加行tr，利用for循环（i的数量与数组的长度有关）
+        // 获取元素
+        var tbody = document.querySelector('tbody');
+
+        for (var i in seqs) {
+            //创建行tr
+            var tr = document.createElement('tr');
+            //将新创建的行tr添加给tbody
+            tbody.appendChild(tr);
+            // 3、内层for循环，创建每一行中的所有单元格td，单元格td的数量与对象中的属性多少有关，故用for...in...
+            var td0 = document.createElement('td');
+            td0.width = 100;
+            td0.innerHTML = "seq " + seqs[i] + "-" + seq_names[i];
+            tr.appendChild(td0);
+
+            var td1 = document.createElement('td');
+            td1.width = 310;
+            td1.innerHTML = '<video width="300" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="./videos/' + seqs[i] + '.mp4" type="video/mp4"></video>';
+            tr.appendChild(td1);
+
+            var td2 = document.createElement('td');
+            td2.width = 310;
+            td2.innerHTML = '<video width="300" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="./videos/' + seqs[i] + '_mesh.mp4" type="video/mp4"></video>';
+            tr.appendChild(td2);
+            //4、在每一行的最后，添加一个td，内容为a标签‘删除’
+            // 创建td新元素
+            // var td = document.createElement('td');
+            //把a标签的‘删除’传给td
+            // td.innerHTML = "<a href='javascript:;'>删除</ a>";
+            // 给tr添加上td
+            // tr.appendChild(td);
+        }
+
+        //以上，整个表格就创建完成了
+        // 5、下面给表格添加点击‘删除’，就删除整行的事件
+        // 获取元素
+        // var as = document.querySelectorAll('a');
+        // // 添加事件
+        // for (var i = 0; i < as.length; i++) {
+        //     as[i].onclick = function() {
+        //         tbody.removeChild(this.parentNode.parentNode);
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

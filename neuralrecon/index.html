@@ -118,7 +118,6 @@
             <p class="text-justify"> 
               Data is captured around the working area with an iPhone, and the camera poses are obtained from <a href="https://developer.apple.com/documentation/arkit">ARKit</a>.
               The model used here is only trained on ScanNet, which indicates that NeuralRecon generalizes well to new domains.
-              Notice that NeuralRecon can handle homogeneous textures (e.g. the booth area and the white walls in the <a href="#header_vid">header video</a>), thanks to the learned surface priors.
               The gradual refinement on the reconstruction quality over time (through GRU-Fusion) can also be observed.
             </p>
             <hr style="margin-top:0px">
@@ -134,18 +133,90 @@
   </section>
   <br>
 
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+            <h3>AR demo 1</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/ar-1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="col text-center">
+            <h3>AR demo 2</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/ar-2.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
   <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Generalization to the outdoor scene</h3>
+            <p class="text-justify"> 
+              The pretrained model of NeuralRecon can generalize reasonably to outdoor scenes, which are completely out of the domain of the training dataset ScanNet.
+            </p>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls preload="" muted="">
+                <source src="videos/outdoor-midres-8.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Handling scenes with extremely low texture</h3>
+            <p class="text-justify"> 
+              NeuralRecon can handle homogeneous textures (e.g. white walls and tables), thanks to the learned surface priors.
+            </p>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls  loop="loop" preload="" muted="">
+                <source src="videos/textureless-midres-8.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+
+
   <!-- overview video -->
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <!-- <h3>Overview video (10min)</h3>
+            <h3>Overview video (5 min)</h3>
             <hr style="margin-top:0px">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/TJL3UXW862s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            </div> -->
-            <h3>Pipeline overview (video coming soon)</h3>
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/wuMPaUTJuO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- Pipeline overview -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
             <hr style="margin-top:0px">
             <img class="img-fluid" src="images/neucon-arch.png" alt="NeuralRecon Architechture">
             <hr style="margin-top:0px">

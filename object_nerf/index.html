@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning Object-Compositional Neural Radiance Field for Editable Scene Rendering</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Learning Object-Compositional Neural Radiance Field <br/> for Editable Scene Rendering</h2>
+            <h4 style="color:#5a6268;">ICCV 2021</h4>
+            <hr>
+            <h6>
+              <a href="https://github.com/ybbbbt/" target="_blank">Bangbang Yang</a><sup>1</sup>, 
+              <a href="https://www.zhangyinda.com/" target="_blank">Yinda Zhang</a><sup>2</sup>, 
+              <a href="https://justimyhxu.github.io/" target="_blank">Yinghao Xu</a><sup>3</sup>,
+              <a href="https://github.com/eugenelyj/" target="_blank">Yijin Li</a><sup>1</sup>,
+              <a href="https://github.com/asdiuzd/" target="_blank">Han Zhou</a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+              <a href="https://zhpcui.github.io/" target="_blank">Zhaopeng Cui</a><sup>1</sup>
+            </h6>
+            <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Google
+                <sup>3</sup>The Chinese University of Hong Kong
+            <br>
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <!-- TODO: update to the arXiv paper link. -->
+                  <!-- <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/20000000.pdf" role="button"  target="_blank"> -->
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="http://www.cad.zju.edu.cn/home/gfzhang/papers/object_nerf/object_nerf.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/object_nerf" role="button"  target="_blank">
+                    <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="http://www.cad.zju.edu.cn/home/gfzhang/papers/object_nerf/object_nerf_supp.pdf" role="button">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/teaser.mp4" type="video/mp4">
+              </video>
+              <!-- <br><br> -->
+          <p class="text-left"> Implicit neural rendering techniques have shown promising results for novel view synthesis.  However, existing methods usually encode the entire scene as a whole, which is generally not aware of the object identity and limits the ability to the high-level editing tasks such as moving or adding furniture.  In this paper, we present a novel neural scene rendering system, which learns an object-compositional neural radiance field and produces realistic rendering with editing capability for a clustered and real-world scene.  Specifically, we design a novel two-pathway architecture, in which the scene branch encodes the scene geometry and appearance, and the object branch encodes each standalone object conditioned on learnable object activation codes.  To survive the training in heavily cluttered scenes, we propose a scene-guided training strategy to solve the 3D space ambiguity in the occluded regions and learn sharp boundaries for each object.  Extensive experiments demonstrate that our system not only achieves competitive performance for static scene novel-view synthesis, but also produces realistic rendering for object-level editing.</p> </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+
+  <!-- two branch -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Scene Branch and Object Branch</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/two_branch.mp4" type="video/mp4">
+            </video>
+            <p class="text-justify">
+              We design a two-pathway architecture for object-compositional neural radiance field.
+              The scene branch renders the entire view of the scene, and also render the background for editable scene rendering.
+              The object branch renders each standalone object conditioned on the object activation code.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- editable scene rendering -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Animation Pipeline of Editable Scene Rendering</h3>
+            <hr style="margin-top:0px">
+              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/editable_render.mp4" type="video/mp4">
+              </video>
+            <p class="text-justify">
+              To obtain a view with object manipulation,
+              we jointly render the transformed objects from the conditioned object branch and the surrounding background from the scene branch.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- scene editing toydesk -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Examples on the ToyDesk Dataset</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/edit_toydesk.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- scene editing ScanNet -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Examples on the ScanNet Dataset</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/edit_scannet.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- scene editing comparison -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison of Scene Editing</h3>
+            <hr style="margin-top:0px;">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/edit_compare.mp4" type="video/mp4">
+            </video>
+            <p class="text-justify">
+            * Dai P, Zhang Y, Li Z, et al. Neural Point Cloud Rendering via Multi-Plane Projection[C]//in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020: 7830-7839.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- framework -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Framework Overview</h3>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/framework.jpg" alt="Architechture">
+            <hr>
+            <p class="text-justify">
+            We design a two-pathway architecture for object-compositional neural radiance field.
+            The scene branch takes the spatial coordinate $\mathbf{x}$, the interpolated scene voxel features $\boldsymbol{f}_{scn}$ at $\mathbf{x}$ and the ray direction $\mathbf{d}$ as input, and output the color $\mathbf{c}_{scn}$ and opacity $\sigma_{scn}$ of the scene.
+            The object branch takes additional object voxel features $\boldsymbol{f}_{obj}$ as well a a object activation code $\boldsymbol{l}_{obj}$ to condition the output only contains the color $\mathbf{c}_{obj}$ and opacity $\sigma_{obj}$ for a specific object at its original location with everything else removed.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview Video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/VTEROu-Yz04" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{yang2021objectnerf,
+    title={Learning Object-Compositional Neural Radiance Field for Editable Scene Rendering},
+    author={Yang, Bangbang and Zhang, Yinda and Xu, Yinghao and Li, Yijin and Zhou, Han and Bao, Hujun and Zhang, Guofeng and Cui, Zhaopeng},
+    booktitle = {International Conference on Computer Vision ({ICCV})},
+    month = {October},
+    year = {2021},
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+          We thank Hanqing Jiang, Liyang Zhou and Jiaming Sun for their kind help in scene reconstruction and annotation for the ToyDesk dataset.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-713SR7NR2X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-713SR7NR2X');
+  </script>
+
+</body>
+</html>

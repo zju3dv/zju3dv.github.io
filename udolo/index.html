@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="width=device-width, initial-scale=1">
+    <meta name="description" content="LoFTR can extract high-quality semi-dense matches even in indistinctive regions with low-textures, motion blur, or repetitive patterns. Accepted in CVPR 2021."/>
+    <title>You Don't Only Look Once</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #ffffff no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>You Don't Only Look Once: Constructing Spatial-Temporal Memory <br> for Integrated 3D Object Detection and Tracking</h2>
+            <h4 style="color:#6e6e6e;"> ICCV 2021 </h4>
+            <hr>
+            <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1,2*</sup>, 
+                 <a href="https://ymingxie.github.io/" target="_blank">Yiming Xie</a><sup>1*</sup>, 
+                 <a href="https://scholar.google.com/citations?user=BJrOC4gAAAAJ&hl=en" target="_blank">Siyu Zhang</a><sup>2</sup>, 
+                 <a href="http://f-sky.github.io/" target="_blank">Linghao Chen</a><sup>1</sup>, 
+                <a href="http://www.cad.zju.edu.cn/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>SenseTime Research
+                <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2109.xxxxx.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/UDOLO" role="button" 
+                    target="_blank" disabled>
+                <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/UDOLO-suppmat.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary (Coming soon)</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5" class="text-center"> 
+              TL;DR: By leveraging spatial and temporal information, UDOLO jointly detects and tracks 3D objects without looking for object in each frame from scratch.
+            </h6>
+              <br>
+            <video id="demo" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/udolo-demo-b5.mp4" type="video/mp4">
+            </video>
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+              <br>
+          <p class="text-justify">
+            Humans are able to continuously detect and track surrounding objects by constructing a spatial-temporal memory of the objects when looking around. In contrast, 3D object detectors in existing tracking-by-detection systems often search for objects in every new video frame from scratch, without fully leveraging memory from previous detection results. In this work, we propose a novel system for integrated 3D object detection and tracking, which uses a dynamic object occupancy map and previous object states as spatial-temporal memory to assist object detection in future frames. This memory, together with the ego-motion from back-end odometry, guides the detector to achieve more efficient object proposal generation and more accurate object state estimation. The experiments demonstrate the effectiveness of the proposed system and its performance on the ScanNet and KITTI datasets. Moreover, the proposed system produces stable bounding boxes and pose trajectories over time, while being able to handle occluded and truncated objects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- demo video -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Matches on ScanNet-756</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="scannet_vid">
+              <source src="images/loftr_scene0756_00_slow.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>   -->
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video (5 min)</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9"> -->
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/KrbomIPfhko" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- pipeline -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+            <!-- </div> -->
+                <img class="img-fluid" src="images/udolo-arch.png" alt="UDOLO Architechture">
+            <hr>
+            <p class="text-justify">
+              At each time step, the front-end region proposal network OOM-Guided RPN takes the point cloud as input, extracts current-frame object proposals only in the regions that have high object occupancy scores (red points) given by the object occupancy map, as well as the unobserved regions (blue points) where new objects may appear.
+              These proposals are later fused with back-end object future state predictions from the last frame and passed through the second stage of the detector Fusion R-CNN. 
+              After association with the tracklet, current front-end predictions are fed into the Kalman Filter to produce the fused object states as the final bounding box prediction. 
+              Then the object occupancy map is updated according to the future object states given by the motion prediction module.
+              Solid arrows denote the major data flow. Red arrows denote the feedback mechanism design.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{sun2021udolo,
+  title={{You Don't Only Look Once}: Constructing Spatial-Temporal Memory for Integrated 3D Object Detection and Tracking},
+  author={Sun, Jiaming and Xie, Yiming and Zhang, Siyu and Zhang, Guofeng and Bao, Hujun and Zhou, Xiaowei},
+  journal={ICCV},
+  year={2021}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            We would like to specially thank Reviewer 2 and 3 for the insightful and constructive comments. 
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <!-- rec -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            Welcome to checkout our work on real-time 3D reconstruction (<a href="http://zju3dv.github.io/neuralrecon/">NeuralRecon</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    var demo = document.getElementById("demo");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/loftr/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "images/loftr-homepage-demo.mp4");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

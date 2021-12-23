@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RNIN-VIO: Robust Neural Inertial Navigation Aided Visual-Inertial
+                Odometry in Challenging Scenes. Published in the ISMAR 2021."/>
+    <title>RNIN-VIO: Robust Neural Inertial Navigation Aided Visual-Inertial
+        Odometry in Challenging Scenes</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <body style="background-color: #ffffff">
+  <h1> </h1>
+  </body>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 style="font-size:30px;">RNIN-VIO: Robust Neural Inertial Navigation Aided Visual-Inertial
+                Odometry in Challenging Scenes</h2>
+            <h5 style="color:#6e6e6e;">ISMAR 2021</h5>
+            <hr>
+            <h6> <a target="_blank">Danpeng Chen</a><sup>1,2</sup>,
+                 <a target="_blank">Nan Wang</a><sup>2</sup>,
+                <a target="_blank">Runsen Xu</a><sup>1</sup>,
+                <a target="_blank">Weijian Xie</a><sup>1,2</sup>,
+                <a target="_blank">Hujun Bao</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1*</sup></h6>
+            <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University&nbsp;&nbsp;
+                <sup>2</sup>SenseTime Research and Tetras.AI
+                <br>
+                <sup>*</sup> denotes corresponding author
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/ismar21b-sub2280-cam-i5.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+                <div class="column">
+                    <p class="mb-5"><a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1HfuZYnSdeCiFsqkP57Jn9i_y22kpQ7xp/view?usp=sharing" role="button"  target="_blank">
+                        <i class="fa fa-file"></i> Dataset</a> </p>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px;">
+            <p class="text-justify">
+                In this work, we propose a tightly-coupled EKF framework for
+                visual-inertial odometry with NIN (Neural Inertial Navigation) aided.
+                Traditional VIO systems are fragile in challenging scenes with weak
+                or confusing visual information, such as weak/repeated texture, dynamic environment,
+                fast camera motion with serious motion blur, etc.
+                It is extremely difficult for a vision-based algorithm to handle these
+                problems. So we firstly design a robust deep learning based inertial
+                network (called RNIN), using only IMU measurements as input.
+                RNIN is significantly more robust in challenging scenes than traditional VIO systems.
+                In order to take full advantage of vision-based
+                algorithms in AR/VR areas, we further develop a multi-sensor fusion
+                system RNIN-VIO, which tightly couples the visual, IMU and NIN
+                measurements. Our system performs robustly in extremely challenging conditions,
+                with high precision both in trajectories and AR
+                effects. The experimental results of evaluation on dataset and
+                online AR demo demonstrate the superiority of the proposed
+                system in robustness and accuracy.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Demo -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>RNIN-VIO Demo</h3>
+            <hr style="margin-top:0px">
+            <br>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/demo01.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="col text-center">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/demo02.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br>
+        <br>
+        <p class="text-justify">
+            BVIO is our RNIN-VIO without the neural inertial network constraints.
+            The left video is our offline test on a computer with an i7-6700 CPU and 16G RAM.
+            The right video is an online AR Demo. We take Huawei’s Mate20 pro as the testing device.
+            The inputs are 30Hz images with 512 × 384 resolution and 200 Hz IMU data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- system overview -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>System overview</h3>
+            <hr style="margin-top:0px">
+
+            <img class="img-fluid" src="images/system.png" alt="RNIN-VIO System Overview" width="80%">
+            <br>
+            <br>
+            <p class="text-justify">
+                Our estimation system takes IMU data and image as input and is mainly
+                composed of four modules including preprocessing, initialization,
+                neural network, and filter.
+                <br>
+                <br>
+                The IMU data between two consecutive frames are
+                pre-integrated and sparse features are extracted and tracked from the
+                images. We also maintain the IMU Buffer as the input of the neural
+                network.
+                <br>
+                <br>
+                An initialization phase is necessary to ensure the filter will converge.
+                In order to adapt to a variety of motion situations, when the
+                system detects static motion, we use static initialization, and when
+                the system detects motion, we use motion initialization.
+                <br>
+                <br>
+                The neural network is trained to learn prior motion distribution.
+                The network takes a local window of IMU data as input, without
+                obtaining the initial velocity, and regresses the 3D relative displacement and
+                uncertainty of this window. Regardless of the influence of
+                noise, under the same windowed IMU data, different initial velocities
+                correspond to different motions, which means that motion cannot be
+                estimated by IMU data alone. Since our system is mainly designed
+                for handheld AR, AR glasses, and other applications, our estimated
+                movement is mainly concentrated on human motions. We believe
+                that despite the broad movement distribution, the human movement
+                distribution should be relatively narrow, and the same IMU data
+                corresponding to different motions will rarely appear. Based on this
+                consideration, we believe that such a network can work normally,
+                just like the previous related work.
+                <br>
+                <br>
+                The filter propagates with IMU data and uses sparse features and
+                network outputs for updates, which tightly couples all measurements.
+                In our system, the visual constraints can be removed at any time,
+                and state estimation can also be carried out only based on IMU
+                measurements.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Contributions -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Contributions</h3>
+            <hr style="margin-top:0px">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!--
+  <section>
+    <div class="container">
+      <table width="100%" class="col text-center">
+        <tr>
+          <h5 class="text-left"><b>Visual-Inertial ICP Tracking</b></h5>
+          <br>
+        </tr>
+        <tr>
+          <td width="40%" valign="top">
+            <img class="img-fluid" src="images/vi-icp.png" width="100%">
+            <p class="text-justify" style="color:#8899a5; font-size:13px"> 
+            ICP tracking results on case "David". (a) Original ICP in <a href="http://www.open3d.org/" target="_blank">Open3D</a>. (b) Our VI-ICP approach. (c) (d) VI-ICP combined with LBA and Loop Closure respectively.
+            </p>
+          </td>
+          <td width="5%"></td>
+          <td valign="top">
+            <img class="img-fluid" src="images/vi-icp-energy.png" width="35%">
+              <br>
+              <img class="img-fluid" src="images/imu_energy.png" width="35%">
+              <br><br>
+              <p class="text-justify">
+              Our system localizes the camera by loosely coupled integration of ICP and IMU. The IMU state is initialized and optimized with the ICP tracking result and will provide a pose prediction for current frame.
+              The rotation part <img class="img-fluid" src="images/rotation.png" width="4%"> of the predicted pose and gravity <img class="img-fluid" src="images/gravity.png" width="4%"> will be integrated into our ICP energy term to enhance the tracking robustness.
+              </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+  -->
+  <!--Neural Inertial Network-->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h5 class="text-left"><li><b>Neural Inertial Network</b></li></h5>
+          <br>
+          <img class="img-fluid" src="images/network.png" width="60%">
+          <br>
+          <img class="img-fluid" src="images/loss.png" width="50%">
+          <br>
+          <br>
+          <p class="text-justify">
+              We propose a deep learning based inertial network to learn
+              the regularity of humans’ motion patterns in time series.
+              The overall architecture of our network consists of the 1D version of ResNet18,
+              standard LSTM, and fully
+              connected layers. The ResNet module is used to learn human motion
+              hidden variables. We believe that human motion is continuous and
+              regular, so we use LSTM to fuse the current hidden state with the
+              previous hidden state to estimate the best current hidden state of
+              motion. Finally, two fully connected layers are used to regress the
+              relative position of the window and the corresponding covariance.
+              <br>
+              <br>
+              The designed relative loss and absolute loss can make the network
+              cares about the local accuracy as well as the long-term global
+              accuracy.
+          </p>
+       </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--Multi-Sensor Fusion For Robust 6DoF Tracking-->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h5 class="text-left"><li><b>Multi-Sensor Fusion For Robust 6DoF Tracking</b></li></h5>
+          <br>
+          <p class="text-justify">
+              We try to integrate the robust but low-precision neural network IMU
+              observations with the traditional visual-inertial navigation system,
+              in order to construct a highly robust and precise visual-inertial navigation system.
+              The traditional visual-inertial fusion can estimate
+              high accuracy states, such as pose, velocity, the direction of gravity,
+              and IMU bias. On the one hand, better state estimation can provide
+              better initialization data for the IMU neural network to regress relative translation and
+              covariance, thereby improving the effectiveness
+              of network estimation. On the other hand, the IMU neural network
+              can enhance the robustness of the navigation system.
+          </p>
+          <br>
+          <p class="text-justify">
+              Other modules are similar to traditional VIO. Here we only talk about Neural Inertial Measurement.
+              There are two points needing special
+              attention here. First, the learned movement pattern is yaw angle equivariant.
+              Second, the network predict time are not aligned in time with the estimated states.
+              Cost function of Neural Inertial Measurement is:
+          </p>
+          <img class="img-fluid" src="images/equation00.png" width="30%">
+          <p class="text-justify">
+              The pre-integration is used to propagate Neural Inertial Measurement to the estimated states:
+          </p>
+          <img class="img-fluid" src="images/equation01.png" width="35%">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <br><br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Results</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+                We compare our method against the following baseline algorithms:
+                (a) <a href="https://ronin.cs.sfu.ca/" target="_blank">3D-RoNIN</a>.
+                (b) <a href="https://cathias.github.io/TLIO/" target="_blank">TLIO</a>.
+                (c) Ours (wo AL) is our proposed network without the absolute loss.
+                (d) BVIO is our RNIN-VIO without the neural inertial network constraints.
+                (e) <a href="https://github.com/HKUST-Aerial-Robotics/VINS-Mono">VINS-Mono</a>
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Neural Inertial Network-->
+  <section>
+      <div class="container">
+          <div class="row">
+              <div class="col text-center">
+                  <h5 class="text-left"><li><b>Neural Inertial Network</b></li></h5>
+                  <br>
+                  <img class="img-fluid" src="images/cdf.png" width="70%">
+                  <br>
+                  <br>
+                  <img class="img-fluid" src="images/bd1_know_12.png" width="40%">
+                  <img class="img-fluid" src="images/bd2_know_1.png" width="40%">
+                  <br>
+                  <br>
+                  <img class="img-fluid" src="images/bd3_know_0.png" width="40%">
+                  <img class="img-fluid" src="images/bd3_unknow_0.png" width="40%">
+                  <br>
+                  <br>
+                  <p class="text-justify">
+                      Compare with RoNIN and TLIO, our system achieves higher absolute and relative accuracy.
+                  </p>
+                  <br>
+                  <img class="img-fluid" src="images/table0.png" width="98%">
+                  <br>
+                  <br>
+                  <p class="text-justify">
+                      The NIN can be generalized to different people, different devices, and different environments.
+                      The relative loss and absolute loss can make the network care about the local accuracy and also
+                      pay attention to the long-term global accuracy.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!--RNIN-VIO-->
+  <section>
+      <div class="container">
+          <div class="row">
+              <div class="col text-center">
+                  <h5 class="text-left"><li><b>RNIN-VIO</b></li></h5>
+                  <br>
+                  <img class="img-fluid" src="images/table1.png" width="88%">
+                  <br>
+                  <br>
+                  <p class="text-justify">
+                      The accuracy of RNIN-VIO is close to that of BVIO in normal scenarios.
+                      In challenging scenarios, the accuracy of RNIN-VIO is significantly better than that of VIO.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+  <br>
+
+  <!--Dataset-->
+  <section>
+      <div class="container">
+          <div class="row">
+              <div class="col-12 text-center">
+                  <h3>The NIN Dataset</h3>
+                  <hr style="margin-top:0px;">
+                  <p class="text-justify">
+                      Our dataset is mainly composed of two parts, including IDOL open
+                      source 20 hours of data and 7 hours of data collected by ourselves.
+                      IDOL mainly includes some simple plane movements. To increase the
+                      diversity of sports and equipments, we use multiple smartphones,
+                      such as Huawei, Xiaomi, OPPO, etc., to collect data with cameras
+                      and IMUs. The full dataset was captured by five people and includes
+                      a variety of sports, including walking, running, standing still, going up and down stairs,
+                      and random shaking, etc. We use the BVIO to
+                      provide the positions aligned with gravity
+                      at IMU frequency on the dataset. Part of the data is collected in
+                      the VICON room, so it has high-precision trajectory provided by
+                      VICON.
+                      We release
+                      <a href="https://drive.google.com/file/d/1HfuZYnSdeCiFsqkP57Jn9i_y22kpQ7xp/view?usp=sharing" target="_blank">our dataset</a>
+                      collected by ourselves. The data is stored in <code>SenseINS.csv</code>. The format of files are as follow:
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- The dataset format -->
+  <div class="container">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+        <code>    Data
+            |--data_train
+            |   |--0
+            |     |--SenseINS.csv
+            |   |--...
+            |--data_val
+            |   |--0
+            |     |--SenseINS.csv
+            |   |--...
+            |--data_test
+            |   |--0
+            |     |--SenseINS.csv
+            |   |--...
+            |--Sense_INS_Data.md     // The format description of SenseINS.csv</code></pre>
+  </div>
+
+  <!-- citing -->
+  <br>
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{chen2021rninvio,
+  title={{RNIN-VIO}: Robust Neural Inertial Navigation Aided Visual-Inertial Odometry in Challenging Scenes},
+  author={Danpeng Chen, Nan Wang, Runsen Xu, Weijian Xie, Hujun Bao, and Guofeng Zhang},
+  journal={In Proceedings of 2021 IEEE International Symposium on Mixed and Augmented Reality},
+  year={2021}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+              The authors are very grateful to Shangjin Zhai, Chongshan Sheng,
+              Yuequ Cai, and Kai Sun for their kind help in developing RNIN-VIO
+              system. This work was partially supported by NSF of China (Nos.
+              61822310 and 61932003).
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- rec -->
+  <!-- 
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            Welcome to checkout our work on Transformer-based feature matching (<a href="http://zju3dv.github.io/loftr">LoFTR</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div>
+  -->
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "/videos/web-scene2.m4v");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

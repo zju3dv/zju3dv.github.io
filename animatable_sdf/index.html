@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animatable Neural Implicit Surfaces for Creating Avatars from Videos</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Animatable Neural Implicit Surfaces for Creating Avatars from Videos</h2>
+            <!-- <h5 style="color:#8899a5;"> Under Review </h5> -->
+            <hr>
+            <h6> <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>, 
+                Shangzhan Zhang<sup>1</sup>, 
+                Zhen Xu<sup>1</sup>,
+                Chen Geng<sup>1</sup>,
+                Boyi Jiang<sup>2</sup>,
+                Hujun Bao<sup>1</sup>,
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Image Derivative Inc
+            <br>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+              <!-- <div class="column"> -->
+              <!--     <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank"> -->
+              <!--       <i class="fa fa-github-alt"></i> Code</a> </p> -->
+              <!-- </div> -->
+              <!-- <div class="column"> -->
+              <!--     <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"> -->
+              <!--       <i class="fa fa-database"></i> Data</a> </p> -->
+              <!-- </div> -->
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5"> This paper is an extension of Animatable NeRF, which has better reconstruction and rendering results.</h6>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/teaser.m4v" type="video/mp4">
+              </video>
+              <!-- <br><br> -->
+          <p class="text-left"> This paper aims to reconstruct an animatable human model from a video of very sparse camera views. Some recent works represent human geometry and appearance with neural radiance fields and utilize parametric human models to produce deformation fields for animation, which enables them to recover detailed 3D human models from videos. However, their reconstruction results tend to be noisy due to the lack of surface constraints on radiance fields. Moreover, as they generate the human appearance in 3D space, their rendering quality heavily depends on the accuracy of deformation fields. To solve these problems, we propose Animatable Neural Implicit Surface (AniSDF), which models the human geometry with a signed distance field and defers the appearance generation to the 2D image space with a 2D neural renderer. The signed distance field naturally regularizes the learned geometry, enabling the high-quality reconstruction of human bodies, which can be further used to improve the rendering speed. Moreover, the 2D neural renderer can be learned to compensate for geometric errors, making the rendering more robust to inaccurate deformations. Experiments on several datasets show that the proposed approach outperforms recent human reconstruction and synthesis methods by a large margin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <!-- <section> -->
+  <!--   <div class="container"> -->
+  <!--     <div class="row"> -->
+  <!--       <div class="col-12 text-center"> -->
+  <!--           <h3>Overview video</h3> -->
+  <!--           <hr style="margin-top:0px"> -->
+  <!--           <div class="embed-responsive embed-responsive-16by9"> -->
+  <!--               <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/BPCAMeBCE-8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+  <!--           </div> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </section> -->
+  <!-- <br> -->
+
+  <!-- 3D reconstruction results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Reconstruction results</h3>
+            <hr style="margin-top:0px">
+            <h5 style="color:#838283; margin-top:10px"> Comparison on 3D reconstruction from monocular videos</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" style="margin-top:-5px">
+                <source src="images/3d_reconstruction1.m4v" type="video/mp4">
+            </video>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" style="margin-top:-10px">
+                <source src="images/3d_reconstruction2.m4v" type="video/mp4">
+            </video>
+
+            <h5 style="color:#838283; margin-top:10px"> More reconstruction results</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" style="margin-top:0px">
+                <source src="images/3d_reconstruction3.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- rendering results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Rendering results</h3>
+            <hr style="margin-top:0px">
+            <h5 style="color:#838283; margin-top:10px"> Comparison on novel view synthesis</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/novel_view_synthesis.m4v" type="video/mp4">
+            </video>
+
+            <h5 style="color:#838283; margin-top:10px"> Comparison on novel pose synthesis</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/novel_pose_synthesis.m4v" type="video/mp4">
+            </video>
+
+            <h5 style="color:#838283; margin-top:10px"> Novel pose synthesis under complex human poses</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/novel_pose_synthesis_complex_poses.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- ablation studies -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Ablation studies</h3>
+            <hr style="margin-top:0px">
+            <h5 style="color:#838283; margin-top:10px"> Non-rigid deformations captured by the displacement fields</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/displacement_field.m4v" type="video/mp4">
+            </video>
+
+            <h5 style="color:#838283; margin-top:10px"> Ablation study on canonical-space viewing direction</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/canonical_space_viewing_direction.m4v" type="video/mp4">
+            </video>
+
+            <h5 style="color:#838283; margin-top:10px"> Ablation study on neural feature fields</h5>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="images/neural_feature_field.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{peng2022animatable,
+  title={Animatable Neural Implict Surfaces for Creating Avatars from Videos},
+  author={Peng, Sida and Zhang, Shangzhan and Xu, Zhen and Geng, Chen and Jiang, Boyi and Bao, Hujun and Zhou, Xiaowei},
+  journal={},
+  year={2022}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

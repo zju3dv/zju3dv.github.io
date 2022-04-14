@@ -35,18 +35,18 @@
                   <p class="mb-5"><a class="btn btn-large btn-light" href=" " role="button"  target="_blank">
                     <i class="fa fa-file"></i> Paper</a> </p>
               </div>
-              <!-- <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/neuralbody" role="button"  target="_blank">
-                    <i class="fa fa-github-alt"></i> Code</a> </p>
-              </div> -->
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/invrender" role="button"  target="_blank">
+                  <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1wWWu7EaOxtVq8QNalgs6kDqsiAm7xsRh/view?usp=sharing" role="button">
                     <i class="fa fa-database"></i> Data</a> </p>
               </div>
-              <div class="column">
+              <!-- <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
                     <i class="fa fa-file"></i> Supplementary </a> </p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -62,11 +62,6 @@
         <div class="col-12 text-center">
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
-            <!-- <h6 style="color:#8899a5"> Neural Body can reconstruct a moving human from a monocular video.</h6> -->
-            <!-- <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""> -->
-                  <!-- <source src="images/monocular.m4v" type="video/mp4">
-              </video> -->
-              <!-- <br><br> -->
           <p class="text-left"> Recent advances in implicit neural representations and differentiable rendering make it possible to simultaneously recover the geometry and materials of an object from multi-view RGB images captured under unknown static illumination. Despite the promising results achieved, indirect illumination is rarely modeled in previous methods, as it requires expensive recursive path tracing which makes the inverse rendering computationally intractable. In this paper, we propose a novel approach to efficiently recover spatially-varying indirect illumination. The key insight is that the indirect illumination can be conveniently derived from the neural radiance field learned from input images instead of being estimated jointly with direct illumination and materials. By properly modeling the indirect illumination and visibility of direct illumination, interreflection- and shadow-free albedo can be recovered. The experiments on both synthetic and real data demonstrate the superior performance of our approach compared to previous work and its capability to synthesize realistic renderings under novel viewpoints and illumination. </p>
         </div>
       </div>
@@ -75,19 +70,20 @@
   <br>
 
   <!-- overview video -->
-  <!-- <section>
+<section>
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
             <h3>Overview video</h3>
             <hr style="margin-top:0px">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/2jEPVr2JHh8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div> 
+            
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
   <br>
 
   <!-- citing -->
@@ -97,6 +93,7 @@
           <h3>Citation</h3>
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+
 <code>@inproceedings{zhang2021invrender,
   title={Modeling Indirect Illumination for Inverse Rendering},
   author={Zhang, Yuanqing and Sun, Jiaming and He, Xingyi and Fu, Huan and Jia, Rongfei and Zhou, Xiaowei},

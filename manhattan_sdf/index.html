@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neural 3D Scene Reconstruction with the Manhattan-world Assumption</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Neural 3D Scene Reconstruction with the Manhattan-world Assumption</h2>
+            <h4 style="color:#5a6268;">CVPR 2022 (Oral Presentation)</h4>
+            <hr>
+            <h6> 
+              <a href="https://github.com/ghy0324" target="_blank">Haoyu Guo</a><sup>1*</sup>, 
+              <a href="https://pengsida.net" target="_blank">Sida Peng</a><sup>1*</sup>, 
+              <a href="https://github.com/haotongl" target="_blank">Haotong Lin</a><sup>1</sup>, 
+              <a href="http://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>2</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+              <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+            </h6>
+            <p><sup>1</sup>Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Cornell University
+                <br>
+                <sup>*</sup> denotes equal contribution </p>
+                
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/xxxx.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/manhattan_sdf" role="button"  target="_blank">
+                  <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button">
+                    <i class="fa fa-file"></i> Supplementary </a> </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+          <p class="text-left"> This paper addresses the challenge of reconstructing 3D indoor scenes from multi-view images. Many previous works have shown impressive reconstruction results on textured objects, but they still have difficulty in handling low-textured planar regions, which are common in indoor scenes. An approach to solving this issue is to incorporate planer constraints into the depth map estimation in multi-view stereo-based methods, but the per-view plane estimation and depth optimization lack both efficiency and multi-view consistency. In this work, we show that the planar constraints can be conveniently integrated into the recent implicit neural representation-based reconstruction methods. Specifically, we use an MLP network to represent the signed distance function as the scene geometry. Based on the Manhattan-world assumption, planar constraints are employed to regularize the geometry in floor and wall regions predicted by a 2D semantic segmentation network. To resolve the inaccurate segmentation, we encode the semantics of 3D points with another MLP and design a novel loss that jointly optimizes the scene geometry and semantics in 3D space. Experiments on ScanNet and 7-Scenes datasets show that the proposed method outperforms previous methods by a large margin on 3D reconstruction quality. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/oEE7mK0YQtc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div> 
+            
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- ablation study -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Ablation studies</h3>
+          <hr style="margin-top:0px">
+          <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="https://raw.githubusercontent.com/ghy0324/project_page_assets/main/manhattan_sdf/ablation.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- comparison -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Comparison with state-of-the-art methods</h3>
+          <hr style="margin-top:0px">
+          <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="https://raw.githubusercontent.com/ghy0324/project_page_assets/main/manhattan_sdf/comparison.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+
+<code>@inproceedings{guo2022manhattan,
+  title={Neural 3D Scene Reconstruction with the Manhattan-world Assumption},
+  author={Guo, Haoyu and Peng, Sida and Lin, Haotong and Wang, Qianqian and Zhang, Guofeng and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={CVPR},
+  year={2022}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

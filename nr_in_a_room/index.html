@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neural Rendering in a Room</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2><b>Neural Rendering in a Room: </b><br /> Amodal 3D Understanding and Free-Viewpoint Rendering for the
+            <br /> Closed Scene Composed of Pre-Captured Objects
+          </h2>
+          <h4 style="color:#5a6268;">ACM Transactions on Graphics (SIGGRAPH 2022)</h4>
+          <hr>
+          <h6>
+            <a href="https://github.com/ybbbbt/" target="_blank">Bangbang Yang</a><sup>1</sup>,
+            <a href="https://www.zhangyinda.com/" target="_blank">Yinda Zhang</a><sup>2</sup>,
+            <a href="https://github.com/eugenelyj/" target="_blank">Yijin Li</a><sup>1</sup>,
+            <a href="https://zhpcui.github.io/" target="_blank">Zhaopeng Cui</a><sup>1</sup>
+            <a href="https://www.seanfanello.it/" target="_blank">Sean Fanello</a><sup>2</sup>,
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+          </h6>
+          <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp;
+            <sup>2</sup>Google
+            <br>
+
+          <div class="row justify-content-center">
+            <div class="column">
+              <!-- <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/000000" role="button" -->
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/000000" role="button"
+                  target="_blank">
+                  <i class="fa fa-file"></i> Arxiv (with Supplementary)</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="http://www.cad.zju.edu.cn/home/gfzhang/papers/nr_in_a_room/nr_in_a_room_highres.pdf"
+                  role="button" target="_blank">
+                  <i class="fa fa-file"></i> Paper (High-Res Figures)</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/nr_in_a_room"
+                  role="button" target="_blank">
+                  <i class="fa fa-github-alt"></i> Code (Upcoming)</a> </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+        <hr style="margin-top:0px">
+        <img class="img-fluid"
+          src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/teaser.jpg"
+          alt="Architechture">
+        <hr>
+        <p class="text-left"> We, as human beings, can understand and picture a familiar scene from arbitrary viewpoints
+          given a single image, whereas this is still a grand challenge for computers. We hereby present a novel
+          solution to mimic such human perception capability based on a new paradigm of amodal 3D scene understanding
+          with neural rendering for a closed scene. Specifically, we first learn the prior knowledge of the objects in a
+          closed scene via an offline stage, which facilitates an online stage to understand the room with unseen
+          furniture arrangement. During the online stage, given a panoramic image of the scene in different layouts, we
+          utilize a holistic neural-rendering-based optimization framework to efficiently estimate the correct 3D scene
+          layout and deliver realistic free-viewpoint rendering. In order to handle the domain gap between the offline
+          and online stage, our method exploits compositional neural rendering techniques for data augmentation in the
+          offline training. The experiments on both synthetic and real datasets demonstrate that our two-stage design
+          achieves robust 3D scene understanding and outperforms competing methods by a large margin, and we also show
+          that our realistic free-viewpoint rendering enables various applications, including scene touring and editing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- our solution-->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Motivation & Solution</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/our_solution_crop.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+          We focus on a scenario where a service robot operates in a specific indoor environment (e.g., household,
+          office, or museum). Therefore, it can collect information of the closed scene in an offline stage,
+          then provide effective amodal scene understanding with a single panoramic capture of the room, which
+          facilitates high-level tasks and delivers immersive synchronized free-viewpoint touring with illumination
+          variation and scene editing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- scene touring -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Scene Touring on Fresh-Room Dataset</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/scene_tour_crop_fade.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+          Given a single panoramic image of a real-world closed room, our method optimizes scene lighting and object
+          arrangement, and then enables the capability of free-viewpoint scene touring.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- light swapping -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Illumination Variation</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/light_swap_crop_fade.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+          Thanks to lighting augmentation, our model can adapt to different lighting conditions with only one-time data
+          collection.
+          Then, we can change the rendering between cold and warm lighting by swapping the lighting parameters.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- scene editing -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Scene Editing</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/scene_edit_crop_fade.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+          We can conduct scene editing by inserting virtual object into the real-world and tour in the scene.
+          Note that the piano and the stool are reconstructed from the iG-Synthetic dataset, which have been seamlessly
+          inserted into the Fresh-Room scene.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- iG Touring -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Scene Touring on iG-Synthetic Dataset</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/nr_in_a_room/ig_tour_crop.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+          First, we capture one panoramic image of a synthetic room, and fit the scene arrangement and lighting
+          condition with our optimization.
+          Then, we can conduct free-view scene touring, where the object placement and lighting condition are consistent
+          with the input image.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+
+<!-- overview video -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Overview Video</h3>
+        <hr style="margin-top:0px">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://www.youtube.com/embed/-gPvoZHtuGE" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{yang2022_nr_in_a_room,
+    title={Neural Rendering in a Room: Amodal 3D Understanding and Free-Viewpoint Rendering for the Closed Scene Composed of Pre-Captured Objects},
+    author={Yang, Bangbang and Zhang, Yinda and Li, Yijin and Cui, Zhaopeng and Fanello, Sean and Bao, Hujun and Zhang, Guofeng},
+    journal = {ACM Trans. Graph.},
+    issue_date = {July 2022},
+    volume = {41},
+    number = {4},
+    month = jul,
+    year = {2022},
+    pages = {101:1--101:10},
+    articleno = {101},
+    numpages = {10},
+    url = {https://doi.org/10.1145/3528223.3530163},
+    doi = {10.1145/3528223.3530163},
+    publisher = {ACM},
+    address = {New York, NY, USA}
+}</code></pre>
+      <hr>
+    </div>
+  </div>
+</div>
+
+
+<footer class="text-center" style="margin-bottom:10px">
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+</footer>
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-696KJCB1YX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-696KJCB1YX');
+</script>
+
+</body>
+
+</html>

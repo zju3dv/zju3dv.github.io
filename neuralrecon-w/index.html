@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="description" content="NeuralRecon-W reconstructs 3D scene geometry from a monocular video with known camera poses in real-time. Accepted in CVPR 2021 as oral."/> -->
+    <title>Neural 3D Reconstruction in the Wild</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: rgb(255, 255, 255) no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 style="font-size:30px;">Neural 3D Reconstruction in the Wild</h2>
+            <h4 style="color:#6e6e6e;"> SIGGRAPH 2022 (Conference Track) </h4>
+            <hr>
+            <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1</sup>, 
+                 <a href="https://github.com/Burningdust21" target="_blank">Xi Chen</a><sup>2</sup>, 
+                 <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qiaeqian Wang</a><sup>3</sup>, 
+                 <a href="https://www.cs.cornell.edu/~zl548/" target="_blank">Zhengqi Li</a><sup>3</sup>, 
+                 <a href="https://www.cs.cornell.edu/~hadarelor/" target="_blank">Hadar Averbuch-Elor</a><sup>3</sup>, 
+                 <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>2</sup>,
+                 <a href="https://www.cs.cornell.edu/~snavely/" target="_blank">Noah Snavely</a><sup>3</sup> 
+                 <br>
+                 <br>
+            <p> <sup>1</sup> <a href="https://idr.ai" style="color:#212529">Image Derivative Inc.</a>&nbsp; 
+                <sup>2</sup> Zhejiang University &nbsp;
+                <sup>3</sup> Cornell Tech & Cornell University &nbsp;
+                <br>
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2203.xxxxx.pdf" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Paper (soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/NeuralRecon-W" role="button" target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code (soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://drive.google.com/drive/folders/1ch-RRnC2CrYSeKpbldSwZu5ifKQHS_CU?usp=sharing" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Dataset </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/neuconw-supp.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <!-- <h6 style="color:#8899a5"> TL;DR: NeuralRecon-W reconstructs high-quality 3D scene geometry from Internet image collections.</h6> -->
+<!--             <video poster="images/header-vid-poster.png" width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid"> -->
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                  <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
+            </video>
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+            <br>
+            </div>
+              <!-- <br><br> -->
+          <p class="text-justify">
+            We are witnessing an explosion of neural implicit representations in computer vision and graphics.  Their applicability has recently expanded beyond tasks such as shape generation and image-based rendering to the fundamental problem of image-based 3D reconstruction. However, existing methods typically assume constrained 3D environments with constant illumination captured by a small set of roughly uniformly distributed cameras. We introduce a new method that enables efficient and accurate surface reconstruction from Internet photo collections in the presence of varying illumination.  To achieve this, we propose a hybrid voxel- and surface-guided sampling technique that allows for more efficient ray sampling around surfaces and leads to significant improvements in reconstruction quality. Further, we present a new benchmark and protocol for evaluating reconstruction performance on such in-the-wild scenes. We perform extensive experiments, demonstrating that our approach surpasses both classical and neural reconstruction methods on a wide variety of metrics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- reconstruction showcase -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Reconstruction showcase</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&amp;collection=7a677666689444a68392f4cee950252a" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <br>
+            <p> Zoom in by scrolling. You can Select “Matcap” in Model Inspector to inspect the geometry without the baked vertex colors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+            <h3>AR demo 1</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/ar-1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="col text-center">
+            <h3>AR demo 2</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls autoplay loop="loop" preload="" muted="">
+                <source src="videos/ar-2.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Generalization to the outdoor scene</h3>
+            <p class="text-justify"> 
+              The pretrained model of NeuralRecon can generalize reasonably well to outdoor scenes, which are completely out of the domain of the training dataset ScanNet.
+            </p>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls preload="" muted="">
+                <source src="videos/outdoor-midres-8.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Handling scenes with extremely low texture</h3>
+            <p class="text-justify"> 
+              NeuralRecon can handle homogeneous textures (e.g. white walls and tables), thanks to the learned surface priors.
+            </p>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" controls  loop="loop" preload="" muted="">
+                <source src="videos/textureless-midres-8.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+
+
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>PLACEHODER: Overview video (5 min)</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/wuMPaUTJuO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- Pipeline overview -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/neucon-arch.png" alt="NeuralRecon Architechture">
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              NeuralRecon predicts TSDF with a three-level coarse-to-fine approach that gradually increases the density of sparse voxels.
+              Key-frame images in the local fragment are first passed through the image backbone to extract the multi-level features. 
+              These image features are later back-projected along each ray and aggregated into a 3D feature volume $\mathbf{F}_t^l$, where $l$ represents the level index. 
+              At the first level ($l=1$), a dense TSDF volume $\mathbf{S}_t^{1}$ is predicted.
+              At the second and third levels, the upsampled $\mathbf{S}_t^{l-1}$ from the last level is concatenated with $\mathbf{F}_t^l$ 
+              and used as the input for the GRU Fusion and MLP modules.
+              A feature volume defined in the world frame is maintained at each level as the global hidden state of the GRU.
+              At the last level, the output $\mathbf{S}_t^l$ is used to replace corresponding voxels in the global TSDF volume $\mathbf{S}_t^{g}$, 
+              yielding the final reconstruction at time $t$. 
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Training speed comparison</h3>
+            <!-- <p class="text-justify"> 
+              Data is captured around the working area with an iPhone, and the camera poses are obtained from <a href="https://developer.apple.com/documentation/arkit">ARKit</a>.
+              The model used here is only trained on ScanNet, which indicates that NeuralRecon generalizes well to new domains.
+              The gradual refinement on the reconstruction quality over time (through GRU-Fusion) can also be observed.
+            </p> -->
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="videos/training_fast.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Comparison with state-of-the-art methods -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with baseline methods</h3>
+            <!-- <p class="text-left"> 
+             Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p> -->
+            <hr style="margin-top:0px">
+            <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+                <source src="videos/compare_merged.m4v" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- Comparison with Atlas -->
+    <!-- <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
+              <hr style="margin-top:0px">
+              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
+                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>   -->
+
+  <!-- Comparison with depth-based methods -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with depth-based methods</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/compare-depth-based.png" alt="Comparison with depth-based methods">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgement</h3>
+          <hr style="margin-top:0px">
+          <p>
+            We would like to specially thank to Reviewer 3 for the positive and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{sun2022neuconw,
+  title={Neural {3D} Reconstruction in the Wild},
+  author={Sun, Jiaming and Chen, Xi and Wang, Qianqian and Li, Zhengqi and Averbuch-Elor, Hadar and Zhou, Xiaowei and Snavely, Noah},
+  journal={SIGGRAPH Conference Track},
+  year={2022}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            We would like to specially thank Reviewer 3 for the insightful and constructive comments.
+            We would like to thank Sida Peng , Siyu Zhang and Qi Fang for the proof-reading.
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- rec -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            Welcome to checkout our work on Transformer-based feature matching (<a href="http://zju3dv.github.io/loftr">LoFTR</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "/videos/web-scene2.m4v");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

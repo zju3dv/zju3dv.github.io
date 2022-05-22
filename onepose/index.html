@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OnePose: One-Shot Object Pose Estimation without CAD Models</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: rgb(255, 255, 255) no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 style="font-size:30px;">OnePose: One-Shot Object Pose Estimation without CAD Models</h2>
+            <h4 style="color:#6e6e6e;">CVPR 2022</h4>
+            <!-- <h5 style="color:#6e6e6e;"> (Oral Presentation and Best Paper Candidate)</h5> -->
+            <hr>
+            <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1,2*</sup>, 
+                 <a href="https://github.com/Allen-Wong" target="_blank">Zihao Wang</a><sup>1*</sup>, 
+                 <a href="https://derizsy.github.io/" target="_blank">Siyu Zhang</a><sup>2*</sup>, 
+                <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a><sup>1</sup>,
+                <a href="https://linkedin.com/in/hongcheng-zhao-38a02b219" target="_blank">Hongcheng Zhao</a><sup>3</sup>,
+                <a href="http://www.cad.zju.edu.cn/zhanggf/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+            </h6>
+            <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>SenseTime Research
+                <sup>3</sup>TUM
+                <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2203.xxxxx.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper (soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/OnePose" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code (soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/onepose-supp.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="dataset" href="https://zjueducn-my.sharepoint.com/:f:/g/personal/zihaowang_zju_edu_cn/EqfmbAlPp85FqIRTRHLlXI8B4jnzxxdVjoL1MttwhHCwmA?e=Rdo6MP" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Dataset </a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <!-- <h6 style="color:#8899a5"> TL;DR: NeuralRecon-W reconstructs high-quality 3D scene geometry from Internet image collections.</h6> -->
+<!--             <video poster="images/header-vid-poster.png" width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid"> -->
+            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                  <source src="videos/onepose-teaser.m4v" type="video/mp4">
+            </video>
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+            <br>
+            </div>
+              <!-- <br><br> -->
+          <p class="text-justify">
+            We propose a new method named OnePose for object pose estimation. Unlike existing instance-level or category-level methods, OnePose does not rely on CAD models and can handle objects in arbitrary categories without instance- or category-specific network training. OnePose draws the idea from visual localization and only requires a simple RGB video scan of the object to build a sparse SfM model of the object. Then, this model is registered to new query images with a generic feature matching network. To mitigate the slow runtime of existing visual localization methods, we propose a new graph attention network that directly matches 2D interest points in the query image with the 3D points in the SfM model, resulting in efficient and robust pose estimation. Combined with a feature-based pose tracker, OnePose is able to stably detect and track 6D poses of everyday household objects in real-time. We also collected a large-scale dataset that consists of 450 se- quences of 150 objects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video (5 min)</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/wuMPaUTJuO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+
+  <!-- Pipeline overview -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/onepose-arch.png" alt="NeuralRecon Architechture">
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              $\textbf{Overview of OnePose.}$
+              $\textbf{1.}$ For each object, a video scan with RGB frames $\{\mathbf{I}_i\}$ and camera poses $\{\xi_{i}\}$ are collected together with the annotated 3D object bounding box $\mathbf{B}$.
+              $\textbf{2.}$ Structure from Motion (SfM) reconstructs a sparse point cloud $\{\mathbf{P}_j\}$ of the object.
+              $\textbf{3.}$ The correspondence graphs $\{\mathcal{G}_j\}$  are built during SfM, which represent the 2D-3D correspondences in the SfM map.
+              $\textbf{4.}$ 2D descriptors $\{\mathbf{F}_k^{2D}\}$ are aggregated to 3D descriptors $\{\mathbf{F}_j^{3D}\}$  with the aggregration-attention layer. $\{\mathbf{F}_j^{3D}\}$ are later matched with 2D descriptors from the query image $\{\mathbf{F}_q^{2D}\}$ to generate 2D-3D match predictions $\mathcal{M}_{3D}$.
+              $\textbf{5.}$ Finally, the object pose $\xi_{q}$  is computed by solving the PnP problem with $\mathcal{M}_{3D}$.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- Comparison with Atlas -->
+    <!-- <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
+              <hr style="margin-top:0px">
+              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
+                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>   -->
+
+  <!-- Comparison with depth-based methods -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparison with depth-based methods</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="images/compare-depth-based.png" alt="Comparison with depth-based methods">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgement</h3>
+          <hr style="margin-top:0px">
+          <p>
+            We would like to specially thank to Reviewer 3 for the positive and constructive comments.
+          </p>
+          <hr>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+  @article{sun2022onepose,
+    title={{OnePose}: One-Shot Object Pose Estimation without {CAD} Models},
+    author = {Sun, Jiaming and Wang, Zihao and Zhang, Siyu and He, Xingyi and Zhao, Hongcheng and Zhang, Guofeng and Zhou, Xiaowei},
+    journal={CVPR},
+    year={2022},
+   }
+</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            We would like to specially thank Reviewer 3 for the insightful and constructive comments.
+            We would like to thank Sida Peng , Siyu Zhang and Qi Fang for the proof-reading.
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- rec -->
+  <!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            Welcome to checkout our work on Transformer-based feature matching (<a href="http://zju3dv.github.io/loftr">LoFTR</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>
+

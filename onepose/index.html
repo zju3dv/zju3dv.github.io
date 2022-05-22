@@ -28,16 +28,16 @@
             <!-- <h5 style="color:#6e6e6e;"> (Oral Presentation and Best Paper Candidate)</h5> -->
             <hr>
             <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1,2*</sup>, 
-                 <a href="https://github.com/Allen-Wong" target="_blank">Zihao Wang</a><sup>1*</sup>, 
+                 <a href="https://github.com/Alen-Wong" target="_blank">Zihao Wang</a><sup>1*</sup>, 
                  <a href="https://derizsy.github.io/" target="_blank">Siyu Zhang</a><sup>2*</sup>, 
                 <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a><sup>1</sup>,
                 <a href="https://linkedin.com/in/hongcheng-zhao-38a02b219" target="_blank">Hongcheng Zhao</a><sup>3</sup>,
-                <a href="http://www.cad.zju.edu.cn/zhanggf/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
                 <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
             </h6>
             <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
-                <sup>2</sup>SenseTime Research
-                <sup>3</sup>TUM
+                <sup>2</sup>SenseTime Research &nbsp;&nbsp;
+                <sup>3</sup>TUM &nbsp;&nbsp;
                 <br>
                 <sup>*</sup> denotes equal contribution
             </p>
@@ -79,17 +79,17 @@
         <div class="col-12 text-center">
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
-            <!-- <h6 style="color:#8899a5"> TL;DR: NeuralRecon-W reconstructs high-quality 3D scene geometry from Internet image collections.</h6> -->
+            <h6 style="color:#8899a5"> TL;DR: OnePose can estimate 6D poses of arbitrary household objects without instance/category-specific training or CAD models.</h6>
 <!--             <video poster="images/header-vid-poster.png" width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid"> -->
             <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
-                  <source src="videos/onepose-teaser.m4v" type="video/mp4">
+                  <source src="videos/onepose-teaser.mp4" type="video/mp4">
             </video>
             <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
             <br>
             </div>
               <!-- <br><br> -->
           <p class="text-justify">
-            We propose a new method named OnePose for object pose estimation. Unlike existing instance-level or category-level methods, OnePose does not rely on CAD models and can handle objects in arbitrary categories without instance- or category-specific network training. OnePose draws the idea from visual localization and only requires a simple RGB video scan of the object to build a sparse SfM model of the object. Then, this model is registered to new query images with a generic feature matching network. To mitigate the slow runtime of existing visual localization methods, we propose a new graph attention network that directly matches 2D interest points in the query image with the 3D points in the SfM model, resulting in efficient and robust pose estimation. Combined with a feature-based pose tracker, OnePose is able to stably detect and track 6D poses of everyday household objects in real-time. We also collected a large-scale dataset that consists of 450 se- quences of 150 objects.
+            We propose a new method named OnePose for object pose estimation. Unlike existing instance-level or category-level methods, OnePose does not rely on CAD models and can handle objects in arbitrary categories without instance- or category-specific network training. OnePose draws the idea from visual localization and only requires a simple RGB video scan of the object to build a sparse SfM model of the object. Then, this model is registered to new query images with a generic feature matching network. To mitigate the slow runtime of existing visual localization methods, we propose a new graph attention network that directly matches 2D interest points in the query image with the 3D points in the SfM model, resulting in efficient and robust pose estimation. Combined with a feature-based pose tracker, OnePose is able to stably detect and track 6D poses of everyday household objects in real-time. We also collected a large-scale dataset that consists of 450 sequences of 150 objects.
           </p>
         </div>
       </div>
@@ -124,7 +124,6 @@
             <img class="img-fluid" src="images/onepose-arch.png" alt="NeuralRecon Architechture">
             <hr style="margin-top:0px">
             <p class="text-justify">
-              $\textbf{Overview of OnePose.}$
               $\textbf{1.}$ For each object, a video scan with RGB frames $\{\mathbf{I}_i\}$ and camera poses $\{\xi_{i}\}$ are collected together with the annotated 3D object bounding box $\mathbf{B}$.
               $\textbf{2.}$ Structure from Motion (SfM) reconstructs a sparse point cloud $\{\mathbf{P}_j\}$ of the object.
               $\textbf{3.}$ The correspondence graphs $\{\mathcal{G}_j\}$  are built during SfM, which represent the 2D-3D correspondences in the SfM map.

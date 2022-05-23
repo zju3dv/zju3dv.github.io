@@ -25,11 +25,11 @@
         <div class="row">
           <div class="col">
             <h2 style="font-size:30px;">Neural 3D Reconstruction in the Wild</h2>
-            <h4 style="color:#6e6e6e;"> SIGGRAPH 2022 (Conference Track) </h4>
+            <h4 style="color:#6e6e6e;"> SIGGRAPH 2022 (Conference Proceedings) </h4>
             <hr>
             <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1</sup>, 
                  <a href="https://github.com/Burningdust21" target="_blank">Xi Chen</a><sup>2</sup>, 
-                 <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qiaeqian Wang</a><sup>3</sup>, 
+                 <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>3</sup>, 
                  <a href="https://www.cs.cornell.edu/~zl548/" target="_blank">Zhengqi Li</a><sup>3</sup>, 
                  <a href="https://www.cs.cornell.edu/~hadarelor/" target="_blank">Hadar Averbuch-Elor</a><sup>3</sup>, 
                  <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>2</sup>,
@@ -104,11 +104,10 @@
             <h3>Reconstruction showcase</h3>
             <hr style="margin-top:0px">
             <div class="embed-responsive embed-responsive-16by9">
-
                 <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&amp;collection=7a677666689444a68392f4cee950252a" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             </div>
             <br>
-            <p> Zoom in by scrolling. You can select “Matcap” in Model Inspector to inspect the geometry without the baked ambient occlusion colors.</p>
+            <p> Zoom in by scrolling. You can select “Matcap” in Model Inspector to inspect the geometry without the baked ambient occlusions.</p>
         </div>
       </div>
     </div>
@@ -178,7 +177,7 @@
 
 
   <!-- overview video -->
-  <section>
+  <!-- <section>
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
@@ -191,7 +190,7 @@
       </div>
     </div>
   </section>
-  <br>
+  <br> -->
 
 
   <!-- Pipeline overview -->
@@ -258,6 +257,47 @@
     </div>
   </section>
   <br>
+
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>The Heritage-Recon Benchmark</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify"> 
+              To the best of our knowledge, there is no existing dataset pairing Internet photo collections with ground truth 3D geometry. 
+              Therefore, we introduce <i>Heritage-Recon</i>, a new benchmark dataset with LiDAR scans as ground truth, derived from <a href="https://openheritage3d.org/">Open Heritage 3D</a>.
+              The following GIFs demostrate the alignment quality of the LiDAR scans and the images.
+              <!--Grid row-->
+              <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <img src="images/gt_alignment/pe_1.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                  <img src="images/gt_alignment/pe_2.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                </div>
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+                  <img src="images/gt_alignment/bg_1.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                  <img src="images/gt_alignment/bg_2.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                  <img src="images/gt_alignment/bg_3.gif" class="img-fluid mb-2" alt="" data-wow-delay="0.3s">
+                </div>
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <img src="images/gt_alignment/lm_1.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                  <img src="images/gt_alignment/pba_1.gif" class="img-fluid mb-4" alt="" data-wow-delay="0.3s">
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
 
   <!-- citing -->
   <div class="container">

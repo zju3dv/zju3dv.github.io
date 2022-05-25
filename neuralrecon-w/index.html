@@ -21,7 +21,7 @@
   <!-- cover -->
   <section>
     <div class="jumbotron text-center mt-0">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col">
             <h2 style="font-size:30px;">Neural 3D Reconstruction in the Wild</h2>
@@ -30,7 +30,7 @@
             <h6> <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>1</sup>, 
                  <a href="https://github.com/Burningdust21" target="_blank">Xi Chen</a><sup>2</sup>, 
                  <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>3</sup>, 
-                 <a href="https://www.cs.cornell.edu/~zl548/" target="_blank">Zhengqi Li</a><sup>3</sup>, 
+                 <a href="https://zhengqili.github.io/" target="_blank">Zhengqi Li</a><sup>3</sup>, 
                  <a href="https://www.cs.cornell.edu/~hadarelor/" target="_blank">Hadar Averbuch-Elor</a><sup>3</sup>, 
                  <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>2</sup>,
                  <a href="https://www.cs.cornell.edu/~snavely/" target="_blank">Noah Snavely</a><sup>3</sup> 
@@ -48,11 +48,11 @@
             <div class="row justify-content-center">
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/2203.xxxxx.pdf" role="button" target="_blank">
-                    <i class="fa fa-file"></i> Paper (soon)</a> </p>
+                    <i class="fa fa-file"></i> Paper </a> </p>
               </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/NeuralRecon-W" role="button" target="_blank" disabled=1>
-                <i class="fa fa-github-alt"></i> Code (soon)</a> </p>
+                <i class="fa fa-github-alt"></i> Code </a> </p>
               </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://drive.google.com/drive/folders/1ch-RRnC2CrYSeKpbldSwZu5ifKQHS_CU?usp=sharing" role="button" 
@@ -78,15 +78,23 @@
         <div class="col-12 text-center">
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
-            <!-- <h6 style="color:#8899a5"> TL;DR: NeuralRecon-W reconstructs high-quality 3D scene geometry from Internet image collections.</h6> -->
-<!--             <video poster="images/header-vid-poster.png" width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid"> -->
-            <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
-                  <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
-            </video>
-            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+              <div class="row justify-content-center" style="align-items:center; display:flex;">
+                <div class="col-md-4"> 
+                  <img src="images/neuconw-input.png" alt="input" class="img-responsive" width="100%"/>
+                </div>
+                <div class="col-md-8"> 
+                  <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                        <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            <!-- <div class="col-md-6 img-responsive">
+              <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                    <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
+              </video>
+            </div> -->
             <br>
-            </div>
-              <!-- <br><br> -->
+        </div>
           <p class="text-justify">
             We are witnessing an explosion of neural implicit representations in computer vision and graphics.  Their applicability has recently expanded beyond tasks such as shape generation and image-based rendering to the fundamental problem of image-based 3D reconstruction. However, existing methods typically assume constrained 3D environments with constant illumination captured by a small set of roughly uniformly distributed cameras. We introduce a new method that enables efficient and accurate surface reconstruction from Internet photo collections in the presence of varying illumination.  To achieve this, we propose a hybrid voxel- and surface-guided sampling technique that allows for more efficient ray sampling around surfaces and leads to significant improvements in reconstruction quality. Further, we present a new benchmark and protocol for evaluating reconstruction performance on such in-the-wild scenes. We perform extensive experiments, demonstrating that our approach surpasses both classical and neural reconstruction methods on a wide variety of metrics.
           </p>
@@ -349,48 +357,6 @@
       <hr>
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
   </footer>
-
-  <script type="text/javascript">
-    function changePlaybackSpeed(speed)
-        {
-            document.getElementById('inspect_vid').playbackRate = speed;
-        }
-        // changePlaybackSpeed(0.25)
-
-    var demo = document.getElementById("header_vid");
-    var startTime;
-    var timeout = undefined;
-    demo.addEventListener("loadstart", function() {
-      startTime = Date.now();
-      timeout = setTimeout(function () {
-        var demoWarning = document.getElementById("demo-warning");
-        var giteeLink = document.createElement("a");
-        giteeLink.innerText = "mirror hosted in mainland China";
-        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
-        // var bilibiliLink = document.createElement("a");
-        // var youtubeLink = document.createElement("a");
-        // bilibiliLink.innerText = "BiliBili";
-        // bilibiliLink.href = "";
-        // youtubeLink.innerText = "YouTube";
-        // youtubeLink.href = "";
-
-        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
-        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
-        clearTimeout(timeout);
-        timeout = undefined;
-      }, 6000);
-    });
-    demo.addEventListener("loadeddata", function() {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = undefined;
-      }
-    });
-//     var source = document.createElement("source");
-//     source.setAttribute("src", "/videos/web-scene2.m4v");
-//     source.setAttribute("type", "video/webm");
-//     demo.appendChild(source);
-  </script>
   <script>
     MathJax = {
       tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}

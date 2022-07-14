@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factorized and Controllable Neural Re-Rendering of Outdoor Scene for Photo Extrapolation</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2>Factorized and Controllable Neural Re-Rendering of Outdoor Scene </br> for Photo Extrapolation
+          </h2>
+          <h4 style="color:#5a6268;">ACM Multimedia 2022 (Oral)</h4>
+          <hr>
+          <h6>
+            <a href="https://github.com/BoMingZhao" target="_blank">Boming Zhao</a><sup>1*</sup>,
+            <a href="https://ybbbbt.com" target="_blank">Bangbang Yang</a><sup>1*</sup>,
+            <a href="https://zhenyangli.github.io/" target="_blank">Zhenyang Li</a><sup>2</sup>,
+            <a href="https://people.inf.ethz.ch/zoli/" target="_blank">Zuoyue Li</a><sup>3</sup>,
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>,
+            <a href="https://www.wlu.ca/academics/faculties/faculty-of-science/faculty-profiles/jiashu-zhao/index.html" target="_blank">Jiashu Zhao</a><sup>4</sup>,
+            <a href="http://www.yindawei.com/" target="_blank">Dawei Yin</a><sup>2</sup>,
+            <a href="https://zhpcui.github.io/" target="_blank">Zhaopeng Cui</a><sup>1</sup>,
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>
+          </h6>
+          * denotes equal contribution
+          <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp;
+            <sup>2</sup>Baidu Inc &nbsp;&nbsp;
+            <sup>3</sup>ETH Zürich &nbsp;&nbsp;
+            <sup>4</sup>Wilfrid Laurier University
+            <br>
+
+          <div class="row justify-content-center">
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/0000.00000" role="button"
+                  target="_blank">
+                  <i class="fa fa-file"></i> Arxiv</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="http://www.cad.zju.edu.cn/home/gfzhang/papers/neural_outdoor_rerender/neural_outdoor_rerender.pdf"
+                  role="button" target="_blank">
+                  <i class="fa fa-file"></i> Paper (with Animation)</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="http://www.cad.zju.edu.cn/home/gfzhang/papers/neural_outdoor_rerender/neural_outdoor_rerender_supp.pdf"
+                  role="button" target="_blank">
+                  <i class="fa fa-file"></i> Supplementary</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/neural_outdoor_rerender"
+                  role="button" target="_blank">
+                  <i class="fa fa-github-alt"></i> Code (Upcoming)</a> </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/loop.mp4"
+            type="video/mp4">
+        </video>
+        <hr>
+        <p class="text-left"> Expanding an existing tourist photo from a partially captured scene to a full scene is one of the desired experiences for photography applications. Although photo extrapolation has been well studied, it is much more challenging to extrapolate a photo (i.e., selfie) from a narrow field of view to a wider one while maintaining a similar visual style. In this paper, we propose a factorized neural re-rendering model to produce photorealistic novel views from cluttered outdoor Internet photo collections, which enables the applications including controllable scene re-rendering, photo extrapolation and even extrapolated 3D photo generation. Specifically, we first develop a novel factorized re-rendering pipeline to handle the ambiguity in the decomposition of geometry, appearance and illumination. We also propose a composited training strategy to tackle the unexpected occlusion in Internet images. Moreover, to enhance photo-realism when extrapolating tourist photographs, we propose a novel realism augmentation process to complement appearance details, which automatically propagates the texture details from a narrow captured photo to the extrapolated neural rendered image. The experiments and photo editing examples on outdoor scenes demonstrate the superior performance of our proposed method in both photo-realism and downstream applications.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Overview Video</h3>
+        <hr style="margin-top:0px">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://www.youtube.com/embed/gFwNBqNfqKQ" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+
+<!-- our solution-->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Our Method</h3>
+        <hr style="margin-top:0px">
+        <img class="img-fluid"
+          src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/teaser.jpg"
+          alt="Teaser">
+        <p class="text-justify">
+          Given an Internet photo collection of an outdoor attraction, we learn a novel neural re-rendering model that
+          encodes scenes with several factorized components, which enables the applicabilities of controllable scene re-rendering, photo
+          extrapolation and extrapolated 3D photo generation. All the images are from the IMC-PT dataset. Photos
+          by Flickr users astrobri, soniadal82, Fotero, scriptingnews, Devin Ford, and MikiAnn.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Scene Touring with Mesh Visualization</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" controls autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/scene_tour_mesh.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+  We show scene touring on two outdoor attractions, and also visualize the learned scene mesh.
+  Our model successfully learns detailed shapes of buildings and sculptures, which ensures photorealistic scene re-rendering with external lighting.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Illumination Adaptation & Controlling</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" controls autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/ill_ada_ctrl.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+      We show the network ability of illumination adaptation and controlling.
+      By simply given a captured reference photo or a user-selected HDR map, our model can render novel views of the scene with the target illumination condition.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Extrapolated 3D Photo Generation</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" controls autoplay="autoplay" loop="loop" preload="" muted="">
+          <source 
+            src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/extrapolate_3d.mp4"
+            type="video/mp4">
+        </video>
+        <p class="text-justify">
+  Given a travel photo, our method first segment the foreground person's view and generates the extrapolated background view.
+  By blending these two views, we obtain an extrapolated 3D photo with a vivid camera moving effect.
+  As a comparison, standard 3D photo inpainting methods are not aware of the scene structure, so their results are bounded by the visible area of the given photo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Comparison of Photo Extrapolation</h3>
+        <hr style="margin-top:0px">
+        <img class="img-fluid"
+          src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neural_outdoor_rerender/photo_extrapolation.jpg"
+          alt="Compare">
+        <p class="text-justify">
+          We compare photo extrapolation with Auto-Stitch, PixelSynth and NeRF-W on four outdoor scenes.
+          Photos by Flickr users Hugão Cota, Legalv1, Foster's Lightroom, and stobor.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+@inproceedings{neural_outdoor_rerender,
+    title={Factorized and Controllable Neural Re-Rendering of Outdoor Scene for Photo Extrapolation},
+    author={{Boming Zhao and Bangbang Yang} and Li, Zhenyang and Li, Zuoyue and Zhang, Guofeng and Zhao, Jiashu and Yin, Dawei and Cui, Zhaopeng and Bao, Hujun},
+    booktitle={Proceedings of the 30th ACM International Conference on Multimedia},
+    year={2022}
+}
+</code></pre>
+      <hr>
+    </div>
+  </div>
+</div>
+
+
+<footer class="text-center" style="margin-bottom:10px">
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+</footer>
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F0RRLSYX7V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F0RRLSYX7V');
+</script>
+
+</body>
+
+</html>

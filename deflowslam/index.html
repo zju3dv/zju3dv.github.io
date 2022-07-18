@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DeFlowSLAM: Self-Supervised Scene Motion Decomposition for Dynamic Dense SLAM  "/>
+    <title>DeFlowSLAM: Self-Supervised Scene Motion Decomposition for Dynamic Dense SLAM  </title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <body style="background-color: #ffffff">
+  <h1> </h1>
+  </body>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 style="font-size:30px;">
+              DeFlowSLAM: Self-Supervised Scene Motion Decomposition for Dynamic Dense SLAM  
+            </h2>
+            <h5 style="color:#6e6e6e;">Arxiv 2022</h5>
+            <hr>
+            <h6>
+              <a href="https://ywcmaike.github.io/" target="_blank">Weicai Ye*</a><sup>1</sup>,
+              <a href="" target="_blank">Xinyuan Yu*</a><sup>1,3</sup>,
+              <a href="" target="_blank">Xinyue Lan</a><sup>1</sup>,
+              <a href="" target="_blank">Yuhang Ming</a><sup>2</sup>,
+              <a href="https://jinyu.li" target="_blank">Jinyu Li</Li></a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+              <a href="https://zhpcui.github.io/" target="_blank">Zhaopeng Cui</a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1†</sup>
+            </h6>
+            <p> 
+                <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University&nbsp;&nbsp;
+                <sup>2</sup>Visual Information Laboratory, University of Bristol
+                <sup>3</sup>Wuhan University
+                <br>
+                 * denotes equal contribution
+                 <br> 
+                 † denotes corresponding author
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://zju3dv.github.io/deflowslam/" role="button"
+                    target="_blank">
+                    <i class="fa fa-file"></i> Arxiv (with Supplementary) </a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light"
+                    href="doc/DeFlowSLAM_arxiv.pdf"
+                    role="button" target="_blank">
+                    <i class="fa fa-file"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/DeFlowSLAM"
+                    role="button" target="_blank">
+                    <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid"
+              src="imgs/deflowslam_teaser.jpg"
+              alt="teaser_image">
+            <hr>
+            <p class="text-justify">
+              We present a novel dual-flow representation of scene motion that decomposes the optical flow into a static flow field 
+              caused by the camera motion and another dynamic flow field caused by the objects' movements in the scene. 
+              Based on this representation, we present a dynamic SLAM, dubbed DeFlowSLAM, that exploits both static and dynamic pixels 
+              in the images to solve the camera poses, rather than simply using static background pixels as other dynamic SLAM systems do. 
+              We propose a dynamic update module to train our DeFlowSLAM in a self-supervised manner, where a dense bundle adjustment layer 
+              takes in estimated static flow fields and the weights controlled by the dynamic mask and outputs the residual of the optimized 
+              static flow fields, camera poses, and inverse depths. The static and dynamic flow fields are estimated by warping the current image
+               to the neighboring images, and the optical flow can be obtained by summing the two fields. Extensive experiments demonstrate that 
+               DeFlowSLAM generalizes well to both static and dynamic scenes as it exhibits comparable performance to the state-of-the-art DROID-SLAM 
+               in static and less dynamic scenes while significantly outperforming DROID-SLAM in highly dynamic environments.           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- system overview -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>System overview</h3>
+            <hr style="margin-top:0px">
+
+            <img class="img-fluid" src="imgs/DeFlowSLAM_framework.jpg" alt="DeFlowSLAM System Overview" width="80%">
+            <br>
+            <br>
+            <p class="text-justify">
+              <strong>DeFlowSLAM Architecture</strong>. DeFlowSLAM takes the image sequence as input, extracts features to construct a correlation volume, 
+              and feeds it with the initial static flow, optical flow, and dynamic mask into the dynamic update module to iteratively optimize the residual
+               of the pose, inverse depth, static optical flow and dynamic optical flow, and finally outputs the estimation of the camera pose and 3D 
+               structure. The optimization process is performed by creating a covisibility graph and updating the existing covisibility graph.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Dynamic Update Module</h3>
+            <hr style="margin-top:0px">
+
+            <img class="img-fluid" src="imgs/dynamic_update_module.jpg" alt="DeFlowSLAM System Overview" width="80%">
+            <br>
+            <br>
+            <p class="text-justify">
+              <strong>Dynamic Update Module</strong>The correlation feature of the static optical flow is looked up by correlation volumes. The obtained features will be fed into two convolutional layers together with the optical flow and dynamic mask, resulting in intermediate features. These features will be fed to ConvGRU, followed by two convolution layers with dynamic mask residual and confidence. The iterative dynamic mask residual plus the original mask to obtain the new dynamic mask termed Mask-Agg Operator. In addition, static flow revision and dynamic flow are obtained from the static and dynamic convolution layers. The static revision flow plus the original static flow is fed into the DBA layer that combines the dynamic mask and confidence to optimize the depth and pose. Finally, the new static and dynamic flows from the dynamic convolutional layer are summed to the optical flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Results -->
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Experiments</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              We train DeFlowSLAM from scratch on a larger dataset, TartanAir, and test the generalization of our method on different dynamic datasets, 
+              such as Virtual KITTI2, KITTI, and dynamic sequences of TUM-RGBD. We also test monocular or stereo datasets, such as static scenes of TUM-RGBD and EuRoc.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Neural Inertial Network-->
+  <section>
+      <div class="container">
+          <div class="row">
+              <div class="col text-center">
+                  <h5 class="text-left"><li><b>Dynamic SLAM</b></li></h5>
+                  <br>
+                  <!-- <img class="img-fluid" src="images/cdf.png" width="70%"> -->
+                  <img class="img-fluid" src="imgs/dy_vk.jpg">
+                  <img class="img-fluid" src="imgs/dy_tum.jpg">
+                  <!-- <img class="img-fluid" src="imgs/vo_vkitti2_pose.jpg" width="48%", height="48%">
+                  <img class="img-fluid" src="imgs/vo_kitti.jpg" width="48%", height="48%"> -->
+                  
+                  <br>
+                  <br>
+                  <p class="text-justify">
+                    We test the performance of the proposed DeFlowSLAM on sequences 09 and 10 from KITTI dataset and all sequences from Virtual KITTI2 dataset. 
+                    Compared with DynaSLAM, which uses Mask-RCNN for dynamic environment and DROID-SLAM, our DeFlowSLAM is far more accurate and robust in dynamic scenes, as shown in Tab. III. 
+                    We also perform evaluations on TUM RGB-D dynamic sequences with different dynamic proportions and the comparison results in Tab. IV shows that DeFlowSLAM achieves competitive and even best performance. 
+                    Note that DVO SLAM, ORB-SLAM2 and PointCorr use the RGB-D dataset, while our method and DROID-SLAM only use the monocular RGB dataset.                   </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section>
+      <div class="container">
+          <div class="row">
+              <div class="col text-center">
+                  <h5 class="text-left"><li><b>Monocular SLAM</b></li></h5>
+                  <br>
+                  <img class="img-fluid" src="imgs/mono_tartanair.jpg">
+                  <img class="img-fluid" src="imgs/mono_euroc.jpg">
+                  <img class="img-fluid" src="imgs/mono_tum.jpg" >
+                  <br>
+                  <br>
+                  <p class="text-justify">
+                    In monocular setting, we test our trained DeFlowSLAM on TartanAir test sets, EuRoC, and TUM RGB-D dataset.
+As shown in Tab. V, DeFlowSLAM achieves the best results. 
+Tab.VI and Tab.VII show that our method achieves comparable even better results than the SOTA supervised method, DROID-SLAM in most sequences. 
+The results also demonstrate our DeFlowSLAM is more robust than the classical SLAM algorithms as they failed in many sequences. 
+Specifically, we achieve an average ATE of 0.136m on EuRoC dataset, and an average ATE of 0.114m on TUM-RGBD static sequences, outperforming most supervised methods.                                    </p>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <section>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h5 class="text-left"><li><b>Stereo SLAM</b></li></h5>
+                <br>
+                <img class="img-fluid" src="imgs/stereo.jpg">
+                <!-- <img class="img-fluid" src="imgs/vps_viper.jpg">
+                <img class="img-fluid" src="imgs/vps_vkitti2.jpg" > -->
+                <br>
+                <br>
+                <p class="text-justify">
+                  Under stereo setup, our trained DeFlowSLAM is also tested on TartanAir test dataset and EuRoC stereo dataset. 
+                  Tab. VIII illustrates  DeFlowSLAM achieves comparable results on par with DROID-SLAM, with an average ATE of 1.02m on TartanAir stereo test dataset, outperforming TartanVO. 
+                  Tab. IX shows that DeFlowSLAM exhibits comparable results on EuRoc dataset in the stereo setting with DROID-SLAM, outperforming most supervised methods and traditional SLAM, ORB-SLAM3. 
+                  In most sequences, our method is on the same order of magnitude as DROID-SLAM, which shows the effectiveness of our method.                                    </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+  <div class="container">
+      <div class="row">
+          <div class="col text-center">
+              <h5 class="text-left"><li><b>AR Applications</b></li></h5>
+              <br>
+              <img class="img-fluid" src="imgs/ar.jpg">
+              <!-- <img class="img-fluid" src="imgs/vps_viper.jpg">
+              <img class="img-fluid" src="imgs/vps_vkitti2.jpg" > -->
+              <br>
+              <br>
+              <p class="text-justify">
+                We conduct extensive experiments on AR applications to demonstrate the robustness of DeFlowSLAM. As shown in Fig. 9, we augment the original video with a virtual tree, a car, and a street lamp. Our DeFlowSLAM can deal with the dynamic objects in the scene very well while DROID-SLAM exhibits significant drifts (the red boxes).                                  </p>
+          </div>
+      </div>
+  </div>
+</section>
+
+  <br>
+
+
+<!-- overview video -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Overview Video</h3>
+        <hr style="margin-top:0px">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="videos/DeFlowSLAM_overview.mp4" 
+            type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+  <!-- citing -->
+  <br>
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+  @article{Ye2022DeFlowSLAM,
+    title={DeFlowSLAM: Self-Supervised Scene Motion Decomposition for Dynamic Dense SLAM  },
+    author={Ye, Weicai and Lan, Xinyue and Chen, Shuo and Ming, Yuhang and Yu, Xinyuan and Li, Jinyu and Bao, Hujun and Cui, Zhaopeng and Zhang, Guofeng},
+    booktitle={arxiv}, 
+    year={2022}
+  }
+  </code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ack -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            This work was partially supported by NSF of China (No. 61932003) and ZJU-SenseTime Joint Lab of 3D Vision.
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- rec -->
+  <!-- 
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Recommendations to other works from our group</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+            Welcome to checkout our work on Transformer-based feature matching (<a href="http://zju3dv.github.io/loftr">LoFTR</a>) and human reconstruction (<a href="http://zju3dv.github.io/neuralbody">NeuralBody</a> and <a href="http://zju3dv.github.io/Mirrored-Human">Mirrored-Human</a>) in CVPR 2021.
+          </p>
+      </div>
+    </div>
+  </div>
+  -->
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "/videos/web-scene2.m4v");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

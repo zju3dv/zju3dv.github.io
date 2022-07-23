@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NeuMesh encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.">
+  <meta name="keywords" content="NeuMesh, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <img src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/NeuMesh_logo_v2.jpg" alt="NeuMesh"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Learning Disentangled Neural Mesh-based Implicit Field <br/> for Geometry and Texture Editing
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ECCV 2022 (Oral)</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://ybbbbt.com">Bangbang Yang</a><sup>1*</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/1612190130/">Chong Bao</a><sup>1*</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/LangHiKi/">Junyi Zeng</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          * denotes equal contribution <br>
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Google</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/neural_outdoor_rerender/neural_outdoor_rerender.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/0000.00000"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span> -->
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/neumesh"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/hybrid_edit.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+      <i>NeuMesh</i> encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Very recently neural implicit rendering techniques have been rapidly evolved and shown great advantages in novel view synthesis and 3D scene reconstruction.
+          However, existing neural rendering methods for editing purposes offer limited functionality, e.g., rigid transformation, or not applicable for fine-grained editing for general objects from daily lives.
+          In this paper, we present a novel mesh-based representation by encoding the neural implicit field with disentangled geometry and texture codes on mesh vertices, which facilitates a set of editing functionalities, including mesh-guided geometry editing, designated texture editing with texture swapping, filling and painting operations. To this end, we develop several techniques including learnable sign indicators to magnify spatial distinguishability of mesh-based representation, distillation and fine-tuning mechanism to make a steady convergence, and the spatial-aware optimization strategy to realize precise texture editing.
+          Extensive experiments and editing examples on both real and synthetic data demonstrate the superiority of our method on representation quality and editing ability.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/8Td3Oy7y_Sc"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/framework.jpg"
+             alt="NeuMesh architecture."/>
+      </div>
+      <p>
+        We present a novel representation for neural rendering, which encodes neural implicit field on a mesh-based scaffold. Each mesh vertex possesses a geometry and texture code ${\boldsymbol{l}}^{g}, {\boldsymbol{l}}^{t}$, and a sign indicator $\textbf{n}$ for computing projected distance $h$.
+        For a query point $\boldsymbol{x}$ along a casted camera ray, we retrieve interpolated codes and signed distances from the nearby mesh vertices, and forward to the geometry and radiance decoder to obtain SDF value $s$ and color $\textbf{c}$.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Our Functionalities</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/functions.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        Our representation support a series of editing functionalities, including a mesh-guided geometry editing, designated texture editing with texture swapping of two objects, texture filling with materials from pre-captured objects, and texture painting by transferring user-paints from 2D image to 3D field.
+      </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Geometry Editing</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/geo_edit_with_field.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+      Since the neural implicit field has been tightly aligned to the mesh surface, we simply deform the corresponding mesh, and the change will synchronously take effect on the implicit field and the rendered object.
+      </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Texture Swapping</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/tex_swap.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+      We can transfer the texture from the red area to the yellow area according to user-selected vertices.
+      As shown above, our method successfully exchanges textures while preserving rich details.
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Texture Filling</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/tex_fill.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        We can fill the object textures with texture templates from several pre-captured NeuMesh models.
+        The edited objects exhibit the texture from the templates, and also show rich view-dependent effects, such as shiny plate and golden metals.
+      </p>
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Texture Painting</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/tex_paint.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        We can transfer painting from a single 2D image to the neural implicit field, and allows free preview of painted objects in rendered novel views.</p>
+      </h2>
+    </div>
+
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@inproceedings{neumesh,
+  title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
+  author={Yang, Bangbang and Bao, Chong and Zhang, Yinda and Zeng, Junyi and Bao, Hujun and Cui, Zhaopeng and Zhang, Guofeng},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2022}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

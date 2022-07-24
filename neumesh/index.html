@@ -96,9 +96,9 @@
         <h1 class="title is-size-3" style="color:#5a6268;">ECCV 2022 (Oral)</h1>
         <div class="is-size-5 publication-authors">
           <div class="author-block">
-            <a href="https://ybbbbt.com">Bangbang Yang</a><sup>1*</sup>,</div>
+            [<a href="https://ybbbbt.com">Bangbang Yang</a><sup>1</sup>,</div>
           <div class="author-block">
-            <a href="https://github.com/1612190130/">Chong Bao</a><sup>1*</sup>,</div>
+            <a href="https://github.com/1612190130/">Chong Bao</a><sup>1</sup>]<sup>Co-Authors</sup>,</div>
           <div class="author-block">
             <a href="https://github.com/LangHiKi/">Junyi Zeng</a><sup>1</sup>,</div>
           <div class="author-block">
@@ -116,7 +116,7 @@
         </div>
 
         <div class="is-size-5 publication-authors">
-          * denotes equal contribution <br>
+          <!-- * denotes equal contribution <br> -->
           <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
           <span class="author-block"><sup>2</sup>Google</span>
         </div>
@@ -313,13 +313,22 @@
 <section class="section" id="BibTeX">
   <div class="container content is-max-desktop">
     <h2 class="title">BibTeX</h2>
-    <pre><code>
-@inproceedings{neumesh,
-  title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
-  author={Yang, Bangbang and Bao, Chong and Zhang, Yinda and Zeng, Junyi and Bao, Hujun and Cui, Zhaopeng and Zhang, Guofeng},
-  booktitle={European Conference on Computer Vision (ECCV)},
-  year={2022}
+    <pre><code>@inproceedings{neumesh,
+    title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
+    author={{Chong Bao and Bangbang Yang} and Zhang Yinda and Zeng Junyi and Bao Hujun and Cui Zhaopeng and Zhang Guofeng},
+    booktitle={European Conference on Computer Vision (ECCV)},
+    year={2022}
 }</code></pre>
+  
+  Note: joint first-authorship is not really supported in BibTex; you may need to modify the above if not using CVPR's format. For the SIGGRAPH (or ACM) format you can try the following:
+
+    <pre><code>@inproceedings{neumesh,
+    title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
+    author={{Bao and Yang} and Zhang Yinda and Zeng Junyi and Bao Hujun and Cui Zhaopeng and Zhang Guofeng},
+    booktitle={European Conference on Computer Vision (ECCV)},
+    year={2022}
+}</code></pre>
+
   </div>
 </section>
 

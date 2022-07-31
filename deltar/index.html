@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DELTAR estimate accurate and dense depth map fron a light-weight ToF sensor and RGB image">
+  <meta name="keywords" content="DELTAR, depth estimation, light-weight ToF sensor">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DELTAR: Depth Estimation from a Light-weight ToF Sensor and RGB Image</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div> -->
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+<!-- </nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <!-- <img src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/NeuMesh_logo_v2.jpg" alt="NeuMesh"/> -->
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        DELTAR:
+        <span style="color: #e25959">D</span>epth
+        <span style="color: #e25959">E</span>stimation </br> from a 
+        <span style="color: #e25959">L</span>ight-weight
+        <span style="color: #e25959">T</span>oF Sensor
+        <span style="color: #e25959">A</span>nd
+        <span style="color: #e25959">R</span>GB Image
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ECCV 2022</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/eugenelyj">Yijin Li</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/QsingHuan">Xinyang Liu</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/wqdong8">Wenqi Dong</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/asdiuzd">Han Zhou</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+          <div class="author-block">
+            <a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Google</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/deltar/deltar.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/deltar"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/deltar"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fa fa-database"></i>
+                </span>
+                <span>Data</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="has-text-centered">
+        <img style="width: 80%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/input_output.png"
+             alt="Demonstration of light-weight ToF Sensor"/>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+           Light-weight time-of-flight (ToF) depth sensors are small, cheap, low-energy and have been massively
+           deployed on mobile devices for the purposes like autofocus, obstacle detection, etc. However, due to their
+           specific measurements (depth distribution in a region instead of the depth value at a certain pixel) and
+           extremely low resolution, they are insufficient for applications requiring high-fidelity depth such as 3D
+           reconstruction. In this paper, we propose DELTAR, a novel method to empower light-weight ToF sensors with
+           the capability of measuring high resolution and accurate depth by cooperating with a color image. As the
+           core of DELTAR, a feature extractor customized for depth distribution and an attention-based neural
+           architecture is proposed to fuse the information from the color and ToF domain efficiently. To evaluate
+           our system in real-world scenarios, we design a data collection device and propose a new approach to
+           calibrate the RGB camera and ToF sensor. Experiments show that our method produces more accurate depth
+           than existing frameworks designed for depth completion and depth super-resolution and achieves on par
+           performance with a commodity-level RGB-D sensor
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/8Td3Oy7y_Sc"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>What is the light-weight ToF sensor?</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 95%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/comp_depth_sensor.png"
+             alt="Demonstration of the light-weight ToF Sensor"/>
+      </div>
+      <p>
+        Light-weight ToF sensors like VL53L5CX are designed to be low-cost, small, and low-energy, which have been massively
+        deployed on mobile devices for the purposes like autofocus, obstacle detection, etc.
+        Due to the light-weight electronic design, the depth measured by these sensors has more uncertainty
+        (i.e., in a distribution instead of single depth value) and low spatial resolution (e.g., &#8804; 10×10), and
+        thus cannot support applications like 3D reconstruction or SLAM, that require high-fidelity depth.
+        In this paper, we show how to improve the depth quality to be on par with a commodity-level RGB-D sensor by our
+        DELTAR algorithm.
+      </p>
+      <br/>
+      <br/>
+      <div class="has-text-centered">
+        <img style="width: 95%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/principle.png"
+             alt="Demonstration of the light-weight ToF Sensor"/>
+      </div>
+      <p>
+        Let's use the VL53L5CX as an example to explain the sensing principle of the light-weight ToF sensor.
+        For conventional ToF sensors, the output is typically in a resolution higher than 10 thousand pixels
+        and measures the per-pixel distance along the ray from the optical center to the observed surfaces.
+        In contrast, VL53L5CX (denoted as L5) provides <strong>multiple depth distributions</strong> with an extremely low resolution of 8 × 8 zones,
+        covering 63&#176; diagonal FoV in total. The distribution is originally measured by counting the number of
+        photons returned in each discretized range of time, and then fitted with a Gaussian distribution
+        in order to reduce the broadband load and energy consumption since only mean and variance
+        needs to be transmitted.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Quantitative comparison with RealSense D435i</p></h2>
+      <div class="has-text-centered">
+        <video id="teaser" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/comp_realsense.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <p>
+        The input color image and L5 signals are shown in the
+        left column. According to the status returned by L5, we hide the invalid zones which may receive
+        too few photons or are unstable. Although the raw signals from L5 have extremely low resolution,
+        we can improve its quality and make it even on par with RealSense Depth Sensor, by fully exploiting
+        the capture depth distribution and fusing with color images.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Qualitative comparison on ZJU-L5 dataset</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 70%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/comp.png"
+             alt="Demonstration of light-weight ToF Sensor"/>
+      </div>
+      <p>
+        Since we are the first to utilize signals from the light-weight ToF sensor and color images to
+        predict depth, there is no existing method for a direct comparison. Therefore, we pick three
+        types of existing methods and let them make use of information from L5 as fully as possible.
+        Monocular estimation method tends to make mistakes on some misleading textures. Guided depth
+        super-resolution and completion produce overly blurry depths that are lack of
+        geometry details. In contrast, our method learns to leverage the high resolution color image
+        and low quality L5 reading, and produces the most accurate depths with sharp object boundaries.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+<code>@inproceedings{deltar,
+  title={{DELTAR}: Depth Estimation from a Light-weight ToF Sensor and RGB Image},
+  author={Li Yijin and Liu Xinyang and Dong Wenqi and Zhou han and Bao Hujun and Zhang Guofeng and Zhang Yinda and Cui Zhaopeng},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2022}
+}</code>
+</pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

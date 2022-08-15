@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="Event Camera, GCN, Asynchronous Event Processing, Rapid Object Recognition">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph-based Asynchronous Event Processing for Rapid Object Recognition</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div> -->
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+<!-- </nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <!-- <img src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/NeuMesh_logo_v2.jpg" alt="NeuMesh"/> -->
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title"> Graph-based Asynchronous Event Processing for Rapid Object Recognition </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICCV 2021</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/eugenelyj">Yijin Li</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/asdiuzd">Han Zhou</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://ybbbbt.com/">Bangbang Yang</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="">Ye Zhang</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/ICCV2021_SlideGCN/paper.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/slide_gcn"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/ICCV2021_SlideGCN/supp.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Supplementary</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-forth-fifths">
+        <h2 class="title is-3">Abstract</h2>
+
+        <p>SlideGCN performs incremental graph convolution and can efficiently process data event-by-event.</p>
+        <div class="columns is-centered">
+          <div class="column is-7 has-text-centered">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/slide_gcn/comp.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            Different from traditional video cameras, event cameras capture asynchronous events stream in which each
+            event encodes pixel location, trigger time, and the polarity of the brightness changes. In this paper,
+            we introduce a novel graph-based framework for event cameras, namely SlideGCN. Unlike some recent
+            graph-based methods that use groups of events as input, our approach can efficiently process data
+            event-by-event, unlock the low latency nature of events data while still maintaining the graph’s
+            structure internally. For fast graph construction, we develop a radius search algorithm, which better
+            exploits the partial regular structure of event cloud against k-d tree based generic methods. Experiments
+            show that our method reduces the computational complexity up to 100 times with respect to current
+            graph-based methods while keeping state-of-the-art performance on object recognition. Moreover, we verify
+            the superiority of event-wise processing with our method. When the state becomes stable, we can give a
+            prediction with high confidence, thus making an early recognition.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+
+</section>
+
+<section>
+  <hr/>
+  <div class="container is-max-desktop">
+   <div class="columns is-centered has-text-centered">
+      <div class="column is-forth-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/t_OvtY9Zz3Q"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+<code>@inproceedings{slide_gcn,
+  title={Graph-based Asynchronous Event Processing for Rapid Object Recognition},
+  author={Li Yijin and Zhou Han and Yang Bangbang and Cui Zhaopeng and Bao Hujun and Zhang Guofeng},
+  booktitle={International Conference on Computer Vision (ICCV)},
+  month = {October},
+  year = {2021},
+}</code>
+</pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+* {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+ul.program li {
+    font-size: 17px;
+    padding: 5px;
+}
+
+ul#pc li {
+    font-size: 15px;
+    padding: 2px;
+    color: #666666;
+}
+
+body {
+    margin: 30px 0;
+    padding: 0;
+    background: #EFEFEF;
+    font-size: 12px;
+    color: #6B6B6B;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: #000000;
+}
+
+h2 {
+    border-bottom: 1px solid #F4F4F4;
+    font-size: 26px;
+    padding: 40px 0 0 0;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p, ol, ul, blockquote {
+    line-height: 24px;
+}
+
+a {
+    color: #EC5600;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a.website_link {
+  text-decoration: none;
+}
+
+img {
+    border: none;
+}
+
+
+
+/* Posted */
+
+.posted {
+    height: 33px;
+    margin: 0 0 30px 0;
+    padding: 10px 15px 0 15px;
+    background: url(https://neuralfields.cs.brown.edu/static/css/images/img6.gif) repeat-x;
+    border-bottom: 1px solid #F2F2F2;
+}
+
+.posted p {
+    float: left;
+    margin: 0;
+}
+
+.posted .comments {
+    float: right;
+}
+
+.posted a {
+    color: #717171;
+}
+
+/* Header */
+
+#header {
+    width: 917px;
+	height: 200px;
+    margin: 0 auto;
+}
+
+/* Logo */
+
+#logo {
+    width: 100%;
+    float: left;
+    padding: 0 0 0 0;
+    background: #FFFFFF;
+}
+
+#logo * {
+    text-decoration: none;
+}
+
+#logo h1 {
+    padding: 10px 0 0 0px;
+    font-size: 32px;
+}
+
+#logo h1 a {
+    color: #000000;
+}
+
+#logo h1 span {
+    font-weight: bold;
+}
+
+#logo h2 {
+    padding: 6px 0px 0px 0px;
+    font-size: 19px;
+    border: none;
+}
+
+#logo h2 a {
+    color: #807A7A;
+}
+
+/* Menu */
+#menu {
+    width: 100%;
+    float: left;
+    padding: 10px 0 10px 0px;
+    background: #FFFFFF;
+
+	border-bottom: 1px solid #F4F4F4;
+	border-top: 1px solid #F4F4F4;
+}
+
+
+#menu ul {
+    padding: 0px;;
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu a {
+    padding: 0 15px 0 20px;
+    border-left: 1px solid #DBDBDB;
+    text-transform: lowercase;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    background-color: #EC5600;
+    padding: 8px 48px;
+    border-radius: 8px;
+}
+#menu a:hover{
+	background-color: #ff8742;
+}
+
+#menu .first a {
+    border: none;
+}
+
+/* Splash */
+
+#splash {
+    width: 877px;
+    margin: 0 auto;
+    border-right: 20px solid #FFFFFF;
+    border-left: 20px solid #FFFFFF;
+}
+
+/* Content */
+#content {
+    width: 847px;
+    margin: 0 auto;
+    padding: 0px 35px 0 35px;
+    background: #FFFFFF;
+    font-size: 14px;
+}
+
+#colOne {
+    float: left;
+    width: 620px;
+}
+
+#colTwo {
+    float: right;
+    width: 185px;
+    padding: 5px 0 0 0;
+}
+
+/* Organizer */
+#organizer img {
+    width: 150px;
+/*    height: 170px;*/
+}
+
+/* Footer */
+#footer {
+}
+
+#footer p {
+    text-align: center;
+    color: #777777;
+}
+
+#footer a {
+    color: #5D5D5D;
+}
+
+
+
+div#tz_select {
+    text-align: center;
+    margin: 32px;
+}
+
+
+table.schedule {
+    border-color: #999;
+    border-style: none;
+	text-align: center;
+    border-width: 0 0 1px 1px;
+    border-collapse: collapse;
+    background-color: #FFF;
+    margin: 0 auto;
+	/* width: 100%; */
+	color: #000;
+}
+
+table#program td {
+    padding: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+table#CVPR-program td{
+    padding: 10px;
+    border-width: 0.5px;
+    border-style: solid;
+    border-color: #bbd7e6;
+}
+tr.cvpr_row:nth-child(odd) {
+    background-color: #eeeded;
+}
+/* table#program td:nth-child(2) {
+    text-align: center;
+    width: 110px;
+}
+table#program td:nth-child(1) {
+    text-align: center;
+    width: 110px;
+} */
+
+tr.row_type_A {
+	background-color: #EEE;
+}
+tr.row_type_B {
+	background-color: #FFF;
+}
+tr.block {
+    background-color: #00649b;
+    color: #fff;
+}
+tr.row_type_A td {
+	padding: 10px 10px;
+}
+tr.row_type_B td {
+	padding: 10px 10px;
+}
+td.paper_id {
+    text-align: center;
+    font-size: 16px;
+}
+
+span.author {
+    font-size: 16px;
+    color: #000;
+    display: block;
+    margin-bottom: 8px;
+}
+
+p.poster_title {
+    font-size: 20px;
+    text-align: center;
+    color: #000;
+}
+
+span.hidden {
+    display: none;
+}
+
+button {
+    background-color: #004e79;
+    margin: 0 auto;
+    border: none;
+    color: white;
+    padding: 6px 42px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #00649b;
+}

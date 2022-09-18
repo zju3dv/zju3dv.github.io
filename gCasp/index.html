@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Generative Category-Level Shape and Pose Estimation with Semantic Primitives">
+  <meta name="keywords" content="gCasp, Category-Level Pose Estimation, Pose Estimation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generative Category-Level Shape and Pose Estimation with Semantic Primitives</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div> -->
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+<!-- </nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <!-- <img src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/NeuMesh_logo_v2.jpg" alt="NeuMesh"/> -->
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Generative Category-Level Shape and Pose Estimation with Semantic Primitives
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">CoRL 2022</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/liguanglin">Guanglin Li</a><sup>1,2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/oneLOH">Zhichao Ye</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a>Yifeng Li</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/zqh0253">Qihang Zhang</a><sup>3</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://www.taokong.org/">Tao Kong</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>,
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University   </span>
+          <span class="author-block"><sup>2</sup>ByteDance AI Lab   </span><br>
+          <span class="author-block"><sup>3</sup>Multimedia Laboratory, The Chinese University of Hong Kong</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a  href="https://openreview.net/forum?id=N78I92JIqOJ" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code(Upcoming)</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a  href="https://openreview.net/forum?id=N78I92JIqOJ" target="_blank"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="far fa-comment-dots"></i>
+                </span>
+                <span>Discussion</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Empowering autonomous agents with 3D understanding for daily objects is a grand challenge in robotics applications.
+            When exploring in an unknown environment, existing methods for object pose estimation are still not satisfactory due to the diversity of object shapes.
+            In this paper, we propose a novel framework for category-level object shape and pose estimation from a single RGB-D image.
+            To handle the intra-category variation, we adopt a semantic primitive representation that encodes diverse shapes into a unified latent space, which is the key to establish reliable correspondences between observed point clouds and estimated shapes.
+            Then, by using a SIM(3)-invariant shape descriptor, we gracefully decouple the shape and pose of an object, thus supporting latent shape optimization of target objects in arbitrary poses.
+            Extensive experiments show that the proposed method achieves SOTA pose estimation performance and better generalization in the real-world dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/8Td3Oy7y_Sc"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Pipeline Overview</p></h2>
+    </br></br>
+      <div class="has-text-centered">
+        <img style="width: 95%;" src="https://raw.githubusercontent.com/liguanglin/open_access_assets/master/gCasp/pipeline.png"
+             alt="Demonstration of the light-weight ToF Sensor"/>
+      </div>
+    </br></br>
+      <p>
+        Overview of the proposed method. The input of our method is the point cloud observed from a single-view depth image.
+    (a) Our method first extracts semantic primitives $\tilde{\mathcal{C}}$ from object point cloud $P_0$ by a part segmentation network $\phi$.
+    (b) We calculate a SIM(3)-invariant shape descriptor $f(\tilde{\mathcal{C}})$ from $\tilde{\mathcal{C}}$ and optimize a shape embedding $\hat{z}$ in the latent space by the difference between $f(\tilde{\mathcal{C}})$ and $f(g_c(z))$, where $g_c$ and $g_f$ are the coarse and fine branches of the generative model $g$, detailed in Sec. 3.1.
+    (c) The similarity transformation $\{\tilde{s},\tilde{\boldsymbol{R}},\tilde{\boldsymbol{t}}\}$ is recovered through the semantic correspondences between $\tilde{\mathcal{C}}$ and optimized shape $g_c(\hat{z})$.
+    (d) Further, we can simply apply the transformation $\{\tilde{s},\tilde{\boldsymbol{R}},\tilde{\boldsymbol{t}}\}$ on the fine geometry generated through $g_f(\hat{z})$, and reconstruct the object-level scene as a by-product besides our main results, which is detailed in the Sec. B of the appendix. 
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Visualization of Shape Optimization</p></h2>
+      <div class="has-text-centered">
+        <video id="teaser" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/liguanglin/open_access_assets/master/gCasp/shape_opt.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <p>
+        Visualization of our shape optimization process. The objects in the figure are optimized by 20 iterations (from left to right). As the optimization proceeds, the shape of the objects changes significantly. For example, the lens of the camera is gradually stretched, the angle between the screen and keyboard of the laptop gradually increases, and the handle of the mug becomes rectangular.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- <section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Short Video</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 70%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/comp.png"
+             alt="Demonstration of light-weight ToF Sensor"/>
+      </div>
+      <p>
+        Since we are the first to utilize signals from the light-weight ToF sensor and color images to
+        predict depth, there is no existing method for a direct comparison. Therefore, we pick three
+        types of existing methods and let them make use of information from L5 as fully as possible.
+        Monocular estimation method tends to make mistakes on some misleading textures. Guided depth
+        super-resolution and completion produce overly blurry depths that are lack of
+        geometry details. In contrast, our method learns to leverage the high resolution color image
+        and low quality L5 reading, and produces the most accurate depths with sharp object boundaries.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section> -->
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+<code>@inproceedings{
+  li2022generative,
+  title={Generative Category-Level Shape and Pose Estimation with Semantic Primitives},
+  author={Guanglin Li and Yifeng Li and Zhichao Ye and Qihang Zhang and Tao Kong and Zhaopeng Cui and Guofeng Zhang},
+  booktitle={6th Annual Conference on Robot Learning},
+  year={2022},
+  url={https://openreview.net/forum?id=N78I92JIqOJ}
+}</code>
+</pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

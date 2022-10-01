@@ -88,16 +88,16 @@
       <div class="col-12 text-center">
         <h3>Abstract</h3>
         <hr style="margin-top:0px">
-        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
           <source
-            src="https://youtu.be/RKz2E2yhdgo"
+            src="videos/IntrinsicNeRF_teaser.mp4"
             type="video/mp4">
-        </video> -->
-        <div class="embed-responsive embed-responsive-16by9">
+        </video>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/RKz2E2yhdgo" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div>
+        </div> -->
         <hr>
         <p class="text-left">We present intrinsic neural radiance fields, dubbed IntrinsicNeRF, that introduce intrinsic decomposition into the NeRF-based~\cite{mildenhall2020nerf} neural rendering method and can perform editable novel view synthesis in room-scale scenes while existing inverse rendering combined with neural rendering methods~\cite{zhang2021physg, zhang2022modeling} can only work on object-specific scenes. Given that intrinsic decomposition is a fundamentally ambiguous and under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method that enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in temporally consistent intrinsic decomposition results. To cope with the problem of different adjacent instances of similar reflectance in a scene being incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It enables compelling real-time augmented reality applications such as scene recoloring, material editing, and illumination variation. Extensive experiments on Blender Object and Replica Scene demonstrate that we can obtain high-quality, consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences.
         </p>
@@ -221,16 +221,16 @@
       <div class="col-12 text-center">
         <h3>Applicability: Scene Recoloring</h3>
         <hr style="margin-top:0px">
-        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
           <source
-            src="https://youtu.be/3Xfx0UWGHR8"
+            src="videos/IntrinsicNeRF_Recoloring.mp4"
             type="video/mp4">
-        </video> -->
-        <div class="embed-responsive embed-responsive-16by9">
+        </video>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/3Xfx0UWGHR8" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div>
+        </div> -->
         <p class="text-justify">
           The reflectance predicted by the IntrinsicNeRF network is saved as [Semantic category, reflectance category], 
           and the last iteration of hierarchical iterative clustering method will save the  reflectance categories in all semantic categories of the whole scene. 
@@ -253,16 +253,16 @@
       <div class="col-12 text-center">
         <h3>Applicability: Material Editing</h3>
         <hr style="margin-top:0px">
-        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
           <source
-            src="https://youtu.be/SJFUSXmXJRU"
+            src="videos/IntrinsicNeRF_Material.mp4"
             type="video/mp4">
-        </video> -->
-        <div class="embed-responsive embed-responsive-16by9">
+        </video>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/SJFUSXmXJRU" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div>
+        </div> -->
         <p class="text-justify">
           We can editing the surface materials by manipulating the shading layer, defining a simple mapping function between
            the original and the new shading image. In our video editing software, we use the tone mapping function and 
@@ -286,16 +286,16 @@
       <div class="col-12 text-center">
         <h3>Applicability: Illumination Variation</h3>
         <hr style="margin-top:0px">
-        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
           <source
-            src="https://youtu.be/hIgfuluzKVs"
+            src="videos/IntrinsicNeRF_Illumination.mp4"
             type="video/mp4">
-        </video> -->
-        <div class="embed-responsive embed-responsive-16by9">
+        </video>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/hIgfuluzKVs" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div>
+        </div> -->
         <p class="text-justify">
           Since our IntrinsicNeRF can decompose residual terms besides Lambertian assumptions,
            which may be properties such as specular illumination, we can adjust its overall brightness directly 
@@ -316,15 +316,15 @@
       <div class="col-12 text-center">
         <h3>Applicability: Editable Novel View Synthesis</h3>
         <hr style="margin-top:0px">
-        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-          <source src="https://youtu.be/dZFO4qU3SgE"
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source src="videos/IntrinsicNeRF_nvs.mp4"
             type="video/mp4">
-        </video> -->
-        <div class="embed-responsive embed-responsive-16by9">
+        </video>
+        <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/dZFO4qU3SgE" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div>
+        </div> -->
         <p class="text-justify">
           Our IntrinsicNeRF gives the NeRF the ability to model additional fundamental properties of the scene, 
           and the original novel view synthesis functionality is retained. 
@@ -366,7 +366,7 @@
         <hr style="margin-top:0px">
         <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
-            src="https://youtu.be/91Ce2XbmZ3s" frameborder="0"
+            src="videos/IntrinsicNeRF_overview.mp4" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
         </div>
       </div>

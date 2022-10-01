@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IntrinsicNeRF</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2><b>IntrinsicNeRF: </b>
+          <br /> Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis
+          <br /> 
+          </h2>
+          <h4 style="color:#5a6268;">Arxiv 2022 </h4>
+          <hr>
+          <h6>
+            <a href="https://ywcmaike.github.io/" target="_blank">Weicai Ye*</a>,
+            <!-- <sup>1</sup>, -->
+            <a href="https://github.com/Eric3778" target="_blank">Shuo Chen*</a>,
+            <!-- <sup>2</sup>, -->
+            <a href="https://github.com/1612190130/" target="_blank">Chong Bao</a>,
+            <!-- <sup>1</sup>, -->
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a>,
+            <!-- <sup>1</sup> -->
+            <a href="https://people.inf.ethz.ch/pomarc/" target="_blank">Marc Pollefeys</a>,
+            <a href="https://zhpcui.github.io/" target="_blank">Zhaopeng Cui</a>,
+            <!-- <sup>1</sup>, -->
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang†</a>
+            <!-- <sup>1</sup>, -->
+          </h6>
+          <p> 
+            <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University&nbsp;&nbsp;
+            <sup>2</sup>ETH Zurich&nbsp;&nbsp;
+            <sup>3</sup>Microsoft&nbsp;&nbsp;
+            <br>
+             * denotes equal contribution
+             <br> 
+             † denotes corresponding author
+        </p>
+
+
+          <div class="row justify-content-center">
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://zju3dv.github.io/intrinsic_nerf/" role="button"
+                  target="_blank">
+                  <i class="fa fa-file"></i> Arxiv (with Supplementary)</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="doc/IntrinsicNeRF_arxiv.pdf"
+                  role="button" target="_blank">
+                  <i class="fa fa-file"></i> Paper (High-Res Figures)</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="doc/representation_img.pdf"
+                  role="button" target="_blank">
+                  <i class="fa fa-file"></i> Representation image</a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/IntrinsicNeRF"
+                  role="button" target="_blank">
+                  <i class="fa fa-github-alt"></i> Code</a> </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://youtu.be/RKz2E2yhdgo"
+            type="video/mp4">
+        </video> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/RKz2E2yhdgo" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <hr>
+        <p class="text-left">We present intrinsic neural radiance fields, dubbed IntrinsicNeRF, that introduce intrinsic decomposition into the NeRF-based~\cite{mildenhall2020nerf} neural rendering method and can perform editable novel view synthesis in room-scale scenes while existing inverse rendering combined with neural rendering methods~\cite{zhang2021physg, zhang2022modeling} can only work on object-specific scenes. Given that intrinsic decomposition is a fundamentally ambiguous and under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method that enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in temporally consistent intrinsic decomposition results. To cope with the problem of different adjacent instances of similar reflectance in a scene being incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It enables compelling real-time augmented reality applications such as scene recoloring, material editing, and illumination variation. Extensive experiments on Blender Object and Replica Scene demonstrate that we can obtain high-quality, consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- our method -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Method</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src=""
+            type="video/mp4">
+        </video> -->
+        <img class="img-fluid"
+          src="images/teaser.jpg"
+          alt="method">
+        <hr> 
+        <p class="text-justify">
+          Given a set of multi-view images with camera pose, IntrinsicNeRF is able to factorize the scene into the temporally consistent components: reflectance, shading and residual layers. The decomposition can support real-time augmented video applications such as scene recoloring, material editing, illumination variation, and editable novel view synthesis.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- our framework -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Framework</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src=""
+            type="video/mp4">
+        </video> -->
+        <img class="img-fluid"
+          src="images/framework.jpg"
+          alt="Architechture">
+        <hr> 
+        <p class="text-justify">
+          IntrinsicNeRF takes the sampled spatial coordinate point and direction as input, and outputs the density, reflectance, shading, and  residual term. The semantic branch is optional. Unsupervised Prior and Reflectance Clustering are exploited to train the IntrinsicNeRF in an unsupervised manner.  
+          With the semantic branch, we can obtain the hierarchical clustering and indexing representation which supports real-time editing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- clustering -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Adaptive Reflectance Iterative Clustering</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src=""
+            type="video/mp4">
+        </video> -->
+        <img class="img-fluid"
+          src="images/cluster.jpg"
+          alt="Clustering">
+        <hr> 
+        <p class="text-justify">
+          The color of the reflectance pixels is first converted to better cluster reflectances and then clustered with mean shift algorithms. 
+          The voxel grid filter is performed to accelerate the processing of the cluster operation G, 
+          which considers the category of the nearest anchor points as the category of each point 
+          and saves the category of the center point as the target clustered category.
+                </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- hierarchical -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Hierarchical Reflectance Clustering and Indexing</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src=""
+            type="video/mp4">
+        </video> -->
+        <img class="img-fluid"
+          src="images/hierarchical.jpg"
+          alt="Hierarchical">
+        <hr> 
+        <p class="text-justify">
+          Given the reflectance value of each pixel and the corresponding semantic label, 
+          hierarchical clustering operation first query the semantics of each pixel, 
+          and output the results of the clustering operation. The clustering information of each pixel is stored in a tree structure, 
+          which yields a hierarchical indexing representation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- scene recoloring -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Scene Recoloring</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://youtu.be/3Xfx0UWGHR8"
+            type="video/mp4">
+        </video> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/3Xfx0UWGHR8" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <p class="text-justify">
+          The reflectance predicted by the IntrinsicNeRF network is saved as [Semantic category, reflectance category], 
+          and the last iteration of hierarchical iterative clustering method will save the  reflectance categories in all semantic categories of the whole scene. 
+          Therefore, the [Semantic category, reflectance category] label can be used to quickly find the reflectance value of each pixel point. 
+          Based on this representation, we can perform scene recoloring in real-time, just by simply modifying the color of a certain reflectance category, 
+          the reflectance values of all pixels in the video belonging to that category can be modified at the same time, and then the edited video can be reconstructed using the modified reflectance with the original shading and residual through Equation 2.
+          The edited scene can perform novel view synthesis with the Play button ($\triangleright$).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- material editing -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Material Editing</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://youtu.be/SJFUSXmXJRU"
+            type="video/mp4">
+        </video> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/SJFUSXmXJRU" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <p class="text-justify">
+          We can editing the surface materials by manipulating the shading layer, defining a simple mapping function between
+           the original and the new shading image. In our video editing software, we use the tone mapping function and 
+           the user only needs to choose the ratio by adjusting the slide bar, and the mapping function will work directly on the current shading image, 
+           which will be recombined with the reflectance and residual image to form a new image.
+           We can make the plastic material (such as lego, hotdog),  wooden (such as chair), tile (such as ficus and jugs) to like metallic materials. 
+           We can also make the scene appear shinier or velvet.
+
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- illumination variation -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Illumination Variation</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source
+            src="https://youtu.be/hIgfuluzKVs"
+            type="video/mp4">
+        </video> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/hIgfuluzKVs" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <p class="text-justify">
+          Since our IntrinsicNeRF can decompose residual terms besides Lambertian assumptions,
+           which may be properties such as specular illumination, we can adjust its overall brightness directly 
+           through the sliding buttons of the video editing software. We can enhance the light or diminish it, 
+           to see the effect of different light intensities.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- Editable Novel View Synthesis -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Applicability: Editable Novel View Synthesis</h3>
+        <hr style="margin-top:0px">
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source src="https://youtu.be/dZFO4qU3SgE"
+            type="video/mp4">
+        </video> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/dZFO4qU3SgE" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <p class="text-justify">
+          Our IntrinsicNeRF gives the NeRF the ability to model additional fundamental properties of the scene, 
+          and the original novel view synthesis functionality is retained. 
+          The effects of our video editing application above such as scene recoloring can be applied to the editable novel view synthesis, 
+          maintaining consistency.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Video Editing Software -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Video Editing Software</h3>
+        <hr style="margin-top:0px">
+        <img class="img-fluid"
+          src="images/software.png"
+          alt="Architechture">
+        <hr> 
+        <p class="text-justify">
+          We have also developed a convenient video augmented editing software, to facilitate the user to perform object or scene editing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- overview video -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Overview Video</h3>
+        <hr style="margin-top:0px">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://youtu.be/91Ce2XbmZ3s" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{Ye2022IntrinsicNeRF,
+    title={IntrinsicNeRF: Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis},
+    author={Ye, Weicai and Chen, Shuo and Bao, Chong and Bao, Hujun and Pollefeys, Marc and Cui, Zhaopeng and Zhang, Guofeng},
+    booktitle={arxiv}, 
+    year={2022}
+}</code></pre>
+      <hr>
+    </div>
+  </div>
+</div>
+
+<!-- ack -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+        <h3>Acknowledgements</h3>
+        <hr style="margin-top:0px">
+        <p class="text-justify">
+          The authors thank Yuanqing Zhang for providing us with the pre-trained model of InvRender, 
+          Jiarun Liu for reproducing the results of PhySG and Hai Li, Jundan Luo for proofreading the paper. 
+          This work was partially supported by NSF of China (No. 61932003) and ZJU-SenseTime Joint Lab of 3D Vision. 
+          Weicai Ye was partially supported by China Scholarship Council (No. 202206320316).        </p>
+        <hr>
+    </div>
+  </div>
+</div>
+
+
+<footer class="text-center" style="margin-bottom:10px">
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+</footer>
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-696KJCB1YX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-696KJCB1YX');
+</script>
+
+</body>
+
+</html>

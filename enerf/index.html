@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Efficient Neural Radiance Fields with Learned Depth-Guided Sampling</title>
+    <title>ENeRF</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
@@ -16,12 +16,14 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h2>Efficient Neural Radiance Fields with Learned Depth-Guided Sampling</h2>
+            <h2>Efficient Neural Radiance Fields for Interactive Free-viewpoint Video</h2>
             <!-- <h4 style="color:#5a6268;">CVPR 2021 (Best Paper Candidate)</h4> -->
             <hr>
-            <h6> <a href="https://github.com/haotongl" target="_blank">Haotong Lin</a>*, 
+            <h6> <a href="https://haotongl.github.io" target="_blank">Haotong Lin</a>*, 
                  <a href="https://pengsida.net" target="_blank">Sida Peng</a>*, 
                  <a href="https://github.com/dendenxu" target="_blank">Zhen Xu</a>, 
+                 <a href="https://github.com/YYZmadrid" target="_blank">Yunzhi Yan</a>, 
+                 <a href="https://chingswy.github.io/" target="_blank">Qing Shuai</a>, 
                 Hujun Bao,
                 <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a></h6>
             <p>State Key Lab of CAD & CG, Zhejiang University <br> * denotes equal contribution</p>
@@ -39,17 +41,17 @@
                     <i class="fa fa-github-alt"></i> Code (Coming soon)</a> </p>
               </div> -->
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href=""  target="_blank">
-                    <i class="fa fa-github-alt"></i> Code (Coming soon)</a> </p>
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/ENeRF" role="button" target="_blank">
+                    <i class="fa fa-github-alt"></i> Code </a> </p>
               </div>
               <!-- <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="https://zjueducn-my.sharepoint.com/:f:/g/personal/pengsida_zju_edu_cn/Eo9zn4x_xcZKmYHZNjzel7gBdWf_d4m-pISHhPWB-GZBYw?e=Hf4mz7" role="button">
                     <i class="fa fa-database"></i> Data</a> </p>
               </div> -->
-              <div class="column">
+              <!-- <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/supp.pdf" role="button"  target="_blank">
                     <i class="fa fa-file"></i> Supplementary</a> </p>
-              </div>
+              </div> -->
             </div>
             
           </div>
@@ -67,11 +69,11 @@
           <h3>Abstract</h3>
             <hr style="margin-top:0px">
             <h6 style="color:#8899a5"> ENeRF can synthesize novel views of dynamic scenes in real-time.</h6>
-            <video width="50%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/abstract.mp4" type="video/mp4">
+            <video width="60%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ground_haotong.mp4" type="video/mp4">
               </video>
               <!-- <br><br> -->
-          <p class="text-left">This paper aims to reduce the rendering time of neural radiance fields (NeRF). Some recent works equip NeRF with image encoders and are able to generalize across scenes, which avoids the per-scene optimization. However, their rendering process is generally very slow. A major factor is that they sample lots of points in empty space when inferring radiance fields. In this paper, we present a hybrid scene representation which combines the best of implicit radiance fields and explicit depth maps for efficient rendering. Specifically, we first build the cascade cost volume to efficiently predict the coarse geometry of the scene. The coarse geometry allows us to sample few points near the scene surface and significantly improves the rendering speed. This process is fully differentiable, enabling us to jointly learn the depth prediction and radiance field networks from only RGB images. Experiments show that the proposed approach exhibits state-of-the-art performance on the DTU, Real Forward-facing and NeRF Synthetic datasets, while being at least 50 times faster than previous generalizable radiance field methods. We also demonstrate the capability of our method to synthesize free-viewpoint videos of dynamic human performers in real-time. The code will be released for reproducibility.</p>
+          <p class="text-left">This paper aims to tackle the challenge of efficiently producing interactive free-viewpoint videos. Some recent works equip neural radiance fields with image encoders, enabling them to generalize across scenes. When processing dynamic scenes, they can simply treat each video frame as an individual scene and perform novel view synthesis to generate free-viewpoint videos. However, their rendering process is slow and cannot support interactive applications. A major factor is that they sample lots of points in empty space when inferring radiance fields. We propose a novel scene representation, called ENeRF, for the fast creation of interactive free-viewpoint videos. Specifically, given multi-view images at one frame, we first build the cascade cost volume to predict the coarse geometry of the scene. The coarse geometry allows us to sample few points near the scene surface, thereby significantly improving the rendering speed. This process is fully differentiable, enabling us to jointly learn the depth prediction and radiance field networks from RGB images. Experiments on multiple benchmarks show that our approach exhibits competitive performance while being at least 60 times faster than previous generalizable radiance field methods. </p>
         </div>
       </div>
     </div>
@@ -86,7 +88,7 @@
             <h3>Overview video</h3>
             <hr style="margin-top:0px">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/Q5CjJ5hfMgw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/-qHwpuzFUv0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             </div>
         </div>
       </div>
@@ -99,14 +101,17 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <h3>Interactive free-viewpoint video demo on the ZJU-MoCap and DynamicCap datasets</h3>
+            <h3>Interactive free-viewpoint video demo on the ZJU-MoCap and ST-NeRF datasets</h3>
             <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/zjumocap.mp4" type="video/mp4">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/313_ft_compress.mp4" type="video/mp4">
             </video>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-              <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/dynamiccap.mp4" type="video/mp4">
-          </video
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/stnerf_black.mp4" type="video/mp4">
+            </video>
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/stnerf_taekwondo.mp4" type="video/mp4">
+            </video>
         </div>
       </div>
     </div>
@@ -118,14 +123,14 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-            <h3>Comparison with state-of-the-art methods under the generalization setting</h3>
+            <h3>More results on dynamic scenes</h3>
             <hr style="margin-top:0px">
             <!-- <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of dynamic human</h4> -->
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/gen_scan103.mp4" type="video/mp4">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ground_tianhang.mp4" type="video/mp4">
             </video>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/gen_horns.mp4" type="video/mp4">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ground_shenting.mp4" type="video/mp4">
             </video>
             <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""> -->
                 <!-- <source src="images/4-view-video-2.m4v" type="video/mp4"> -->
@@ -146,47 +151,6 @@
   </section>
   <br>
 
-  <!-- monocular results -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Comparison with state-of-the-art methods under the per-scene optimization setting</h3>
-            <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ft_scan114.mp4" type="video/mp4">
-            </video>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ft_hotdog.mp4" type="video/mp4">
-            </video>
-            <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""> -->
-                <!-- <source src="images/monocular-2.m4v" type="video/mp4"> -->
-            <!-- </video> -->
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Ablation studies on the main proposed components</h3>
-            <hr style="margin-top:0px">
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/ablation.mp4" type="video/mp4">
-            </video>
-            <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""> -->
-                <!-- <source src="images/monocular-2.m4v" type="video/mp4"> -->
-            <!-- </video> -->
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
-
   <!-- citing -->
   <div class="container">
     <div class="row ">
@@ -194,11 +158,11 @@
           <h3>Citation</h3>
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
-<code>@inproceedings{lin2021efficient,
+<code>@inproceedings{lin2022efficient,
   title={Efficient Neural Radiance Fields with Learned Depth-Guided Sampling},
-  author={Lin, Haotong and Peng, Sida and Xu, Zhen and Bao, Hujun and Zhou, Xiaowei},
-  booktitle={arXiv},
-  year={2021}
+  author={Lin, Haotong and Peng, Sida and Xu, Zhen and Yan, Yunzhi and Shuai, Qing and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={SIGGRAPH Asia Conference Proceedings},
+  year={2022}
 }</code></pre>
           <hr>
       </div>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="width=device-width, initial-scale=1">
+    <meta name="description" content="OnePose++ proposes an keypoint-free one-shot object pose estimation method that handles low-textured objects without knowing CAD models. Accepted in NeurIPS 2022."/>
+    <title>OnePose++: Keypoint-Free One-Shot Object Pose Estimation without CAD Models</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>OnePose++: Keypoint-Free One-Shot Object Pose Estimation without CAD Models</h2>
+            <h4 style="color:#6e6e6e;"> NeurIPS 2022 </h4>
+            <hr>
+            <h6> <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a><sup>1*</sup>,
+                 <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>2*</sup>, 
+                 <a href="https://github.com/angshine" target="_blank">Yuang Wang</a><sup>1</sup>, 
+                 <a href="https://github.com/dihuangdh" target="_blank">Di Huang</a><sup>3</sup>, 
+                <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Image Derivative Inc.
+                <sup>3</sup>The University of Sydney
+                <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/main_paper.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/OnePose_plus_plus" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code (comming soon) </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/supp.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5" class="text-center"> 
+              TL;DR: We propose an keypoint-free one-shot object pose estimation method that handles low-textured objects without knowing CAD models.
+            </h6>
+              <br>
+            <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="images/demo_first_page.mp4" type="video/mp4">
+            </video>
+
+            <br>
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" role="button"  onclick="changePlaybackSpeed(0.125)"
+                    target="_blank" disabled=1>
+                <i class="fa "></i> <span style="color:#ffffff;">0.5x speed</span></a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" role="button" onclick="changePlaybackSpeed(0.5)"
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> <span style="color:#ffffff;">2x speed</span></a> </p>
+              </div>
+              <br>
+              <br>
+            </div>
+
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+              <br>
+              <br>
+          <p class="text-justify">
+              We propose a new method for object pose estimation without CAD models.
+              The previous feature-matching-based method OnePose has shown promising results
+              under a one-shot setting which eliminates the need for CAD models or object-specific training.
+              However, OnePose relies on detecting repeatable image keypoints and is thus prone to failure on low-textured objects.
+              We propose a keypoint-free pose estimation pipeline to remove the need for repeatable keypoint detection.
+              Built upon the detector-free feature matching method LoFTR, 
+              we devise a new keypoint-free SfM method to reconstruct a semi-dense point-cloud model for the object.
+              Given a query image for object pose estimation, a 2D-3D matching network directly establishes 2D-3D correspondences between the query image and the reconstructed point-cloud model without first detecting keypoints in the image.
+              Experiments show that the proposed pipeline outperforms existing one-shot CAD-model-free methods by a large margin
+              and is comparable to CAD-model-based methods on LINEMOD even for low-textured objects.
+              We also collect a new dataset composed of 80 sequences of 40 low-textured objects to facilitate future research on one-shot object pose estimation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9"> -->
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://youtu.be/x5CL5JfIHzw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- pipeline -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/overview_more_detail.png" alt="OnePose++ Overview">
+            <hr>
+            <p class="text-justify">
+              OnePose++ has two main components:
+              \textbf{1.} For each object, given a reference image sequence $\{\mathbf{I}_i\}$ with known object poses $\{\boldsymbol{\xi}_i\}$, our keypoint-free SfM framework reconstructs the semi-dense object point cloud in a coarse-to-fine manner.
+              The coarse reconstruction yields the initial point cloud which is then optimized to obtain an accurate point cloud in the refinement phase.
+              \textbf{2.} At test time, our 2D-3D matching network directly matches a reconstructed object point cloud with a query image $\mathbf{I}_q$ to build 2D-3D correspondences $\mathcal{M}_{3D}$, and then the object pose $\boldsymbol{\xi}_q$ is estimated by solving PnP with $\mathcal{M}_{3D}$.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- compare -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Qualitative comparison with <a href="https://zju3dv.github.io/onepose/">OnePose</a></h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              Our method achieves more accurate and stable pose estimation for low-textured objects</p>
+            </p>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/compare_with_onepose.png" alt="Qualitative comparison.">
+            <hr>
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/demo_compare_with_onepose.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- compare -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>More qualitative results.</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              The following figure shows the reconstructed semi-dense object point clouds and the estimated object poses.
+              The ablation part visualizes the 2D and 3D features before and after our 2D-3D attention module.
+              Features become more discriminative as shown by the color contrast. 
+            </p>
+            </p>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/qualtative_results.png" alt="More qualitative results.">
+            <hr>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+@inproceedings{
+    he2022oneposeplusplus,
+    title={OnePose++: Keypoint-Free One-Shot Object Pose Estimation without {CAD} Models},
+    author={Xingyi He and Jiaming Sun and Yuang Wang and Di Huang and Hujun Bao and Xiaowei Zhou},
+    booktitle={Advances in Neural Information Processing Systems},
+    year={2022}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>

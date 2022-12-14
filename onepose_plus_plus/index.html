@@ -52,7 +52,7 @@
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/OnePose_plus_plus" role="button" 
                     target="_blank" disabled=1>
-                <i class="fa fa-github-alt"></i> Code (comming soon) </a> </p>
+                <i class="fa fa-github-alt"></i> Code (coming soon) </a> </p>
               </div>
               <div class="column">
                   <p class="mb-5"><a class="btn btn-large btn-light" href="files/supp.pdf" role="button"  target="_blank">
@@ -76,7 +76,7 @@
             <h6 style="color:#8899a5" class="text-center"> 
               TL;DR: We propose an keypoint-free one-shot object pose estimation method that handles low-textured objects without knowing CAD models.
             </h6>
-              <br>
+            <br>
             <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
                   <source src="images/demo_first_page.mp4" type="video/mp4">
             </video>
@@ -225,5 +225,52 @@
       Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
   </footer>
 
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("demo");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/loftr/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "images/loftr-homepage-demo.mp4");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </body>
 </html>

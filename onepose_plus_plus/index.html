@@ -77,7 +77,7 @@
               TL;DR: We propose an keypoint-free one-shot object pose estimation method that handles low-textured objects without knowing CAD models.
             </h6>
             <br>
-            <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="inspect_vid">
+            <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="inspect_vid">
                   <source src="images/demo_first_page.mp4" type="video/mp4">
             </video>
 
@@ -147,9 +147,9 @@
             <hr>
             <p class="text-justify">
               OnePose++ has two main components:
-              \textbf{1.} For each object, given a reference image sequence $\{\mathbf{I}_i\}$ with known object poses $\{\boldsymbol{\xi}_i\}$, our keypoint-free SfM framework reconstructs the semi-dense object point cloud in a coarse-to-fine manner.
+              $\textbf{1.}$ For each object, given a reference image sequence $\{\mathbf{I}_i\}$ with known object poses $\{\boldsymbol{\xi}_i\}$, our keypoint-free SfM framework reconstructs the semi-dense object point cloud in a coarse-to-fine manner.
               The coarse reconstruction yields the initial point cloud which is then optimized to obtain an accurate point cloud in the refinement phase.
-              \textbf{2.} At test time, our 2D-3D matching network directly matches a reconstructed object point cloud with a query image $\mathbf{I}_q$ to build 2D-3D correspondences $\mathcal{M}_{3D}$, and then the object pose $\boldsymbol{\xi}_q$ is estimated by solving PnP with $\mathcal{M}_{3D}$.
+              $\textbf{2.}$ At test time, our 2D-3D matching network directly matches a reconstructed object point cloud with a query image $\mathbf{I}_q$ to build 2D-3D correspondences $\mathcal{M}_{3D}$, and then the object pose $\boldsymbol{\xi}_q$ is estimated by solving PnP with $\mathcal{M}_{3D}$.
             </p>
         </div>
       </div>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TotalSelfScan: Learning Full-body Avatars from Self-Portrait Videos of Faces, Hands, and Bodies</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>TotalSelfScan: Learning Full-body Avatars from Self-Portrait Videos of Faces, Hands, and Bodies</h2>
+            <h4 style="color:#5a6268;">NeurIPS 2022</h4>
+            <hr>
+            <h6>
+                <a href="https://jtdong.com/" target="_blank">Junting Dong</a><sup>1*</sup>,
+                <a href="https://raypine.github.io/" target="_blank">Qi Fang</a><sup>1*</sup>,
+                <a href="https://yudongguo.github.io/" target="_blank">Yudong Guo</a><sup>2</sup>,
+                <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>,
+                <a href="https://chingswy.github.io/" target="_blank">Qing Shuai</a><sup>1</sup>,
+                <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Image Derivative Inc.
+            <br>
+            <sup>*</sup> denotes equal contribution </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://openreview.net/pdf?id=lgj33-O1Ely" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/TotalSelfScan_supplementary.pdf" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/totalselfscan" role="button"  target="_blank">
+                    <i class="fa fa-github-alt"></i> Code (coming soon)</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/totalselfscan" role="button">
+                    <i class="fa fa-database"></i> Data (coming soon)</a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5"> TotalSelfScan can reconstruct a full-body avatar from self-portrait videos of faces, hands, and bodies.</h6>
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="files/demo.mp4" type="video/mp4">
+              </video>
+              <!-- <br><br> -->
+          <p class="text-left">Recent advances in implicit neural representations make it possible to reconstruct a human-body model from a monocular self-rotation video. While previous works present impressive results of human body reconstruction, the quality of reconstructed face and hands are relatively low. The main reason is that the image region occupied by these parts is very small compared to the body. To solve this problem, we propose a new approach named TotalSelfScan, which reconstructs the full-body model from several monocular self-rotation videos that focus on the face, hands, and body, respectively. Compared to recording a single video, this setting has almost no additional cost but provides more details of essential parts. To learn the full-body model, instead of encoding the whole body in a single network, we propose a multi-part representation to model separate parts and then fuse the part-specific observations into a single unified human model. Once learned, the full-body model enables rendering photorealistic free-viewpoint videos under novel human poses. Experiments show that TotalSelfScan can significantly improve the reconstruction and rendering quality on the face and hands compared to the existing methods. The code is available at https://zju3dv.github.io/TotalSelfScan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/zbNJsqhkees" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- novel pose synthesis results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Rendering comparison</h3>
+            <hr style="margin-top:0px">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="files/rendering_compare.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- reposed geometry results -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Geometry comparisons</h3>
+            <hr style="margin-top:0px">
+            <img class="img-fluid" src="files/geo.png">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{dong2022totalselfscan,
+  title={TotalSelfScan: Learning Full-body Avatars from Self-Portrait Videos of Faces, Hands, and Bodies},
+  author={Dong, Junting and Fang, Qi and Guo, Yudong and Peng, Sida and Shuai, Qing and Zhou, Xiaowei and Bao, Hujun},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2022}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

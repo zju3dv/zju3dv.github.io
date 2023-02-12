@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perceiving Unseen 3D Objects by Poking the Objects</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- cover -->
+<section>
+    <div class="jumbotron text-center mt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Perceiving Unseen 3D Objects by Poking the Objects</h2>
+                    <h4 style="color:#5a6268;">ICRA 2023</h4>
+                    <hr>
+                    <h6> <a href="ootts.github.io/" target="_blank">Linghao Chen</a><sup>1</sup>,
+                        <a href="???" target="_blank">Yunzhou Song</a><sup>1</sup>,
+                        <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+                        <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+                    </h6>
+                    <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp;
+                        <br>
+<!--                        <sup>*</sup> denotes equal contribution </p>-->
+                    <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a>
+                        <a class="btn btn-secondary btn-lg" href="" role="button">Code</a>
+                        <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+                    <div class="row justify-content-center">
+                        <div class="column">
+                            <p class="mb-5"><a class="btn btn-large btn-light" href="_blank" role="button"  target="_blank">
+                                <i class="fa fa-file"></i> Paper</a> </p>
+                        </div>
+                        <div class="column">
+                            <p class="mb-5"><a class="btn btn-large btn-light" href="files/supp.pdf" role="button" target="_blank">
+                                <i class="fa fa-file"></i> Supplementary</a> </p>
+                        </div>
+                        <div class="column">
+                            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/poking_perception" role="button"  target="_blank">
+                                <i class="fa fa-github-alt"></i> Code</a> </p>
+                        </div>
+<!--                        <div class="column">-->
+<!--                            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/animatable_nerf/blob/master/INSTALL.md#zju-mocap-dataset" role="button">-->
+<!--                                <i class="fa fa-database"></i> Data</a> </p>-->
+<!--                        </div>-->
+<!--                        <div class="column">-->
+<!--                            <p class="mb-5"><a class="btn btn-large btn-light" href="https://zju3dv.github.io/animatable_sdf/" role="button">-->
+<!--                                <i class="fa fa-file"></i> Extension</a> </p>-->
+<!--                        </div>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- abstract -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>Abstract</h3>
+                <hr style="margin-top:0px">
+<!--                <h6 style="color:#8899a5"> ????Animatable NeRF can reconstruct an animatable human model from a sparse multi-view video.</h6>-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/teaser.m4v" type="video/mp4">-->
+<!--                </video>-->
+                <!-- <br><br> -->
+                <p class="text-left"> In this paper, we present a novel pipeline for 3D object perception. Unlike previous methods that rely on a known object model or a large amount of annotated training data, we propose a poking-based approach to automatically discover and reconstruct 3D objects. The poking process not only enables our method to discover unseen 3D objects but also provides multi-view observations that are suitable for object reconstruction. The reconstructed object models are then memorized by neural networks with supervised learning and can be recognized on new test images. The experiments on the real-world data show that our system could discover and reconstruct unseen 3D objects with high quality. Moreover, the memorization recognizes the 3D objects accurately on new test images and thus facilitates real-world applications such as robotics grasping. The code will be available at https://zju3dv.github.io/poking_perception/.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<!-- overview video -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>Overview video</h3>
+                <hr style="margin-top:0px">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/watch?v=_PX8s-ZXPWI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<!-- novel pose synthesis results -->
+<!--<section>-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12 text-center">-->
+<!--                <h3>Comparison on novel pose synthesis</h3>-->
+<!--                <hr style="margin-top:0px">-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/novel_pose_synthesis1.m4v" type="video/mp4">-->
+<!--                </video>-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/novel_pose_synthesis2.m4v" type="video/mp4">-->
+<!--                </video>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<br>-->
+
+<!--&lt;!&ndash; novel view synthesis results &ndash;&gt;-->
+<!--<section>-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12 text-center">-->
+<!--                <h3>Comparison on novel view synthesis</h3>-->
+<!--                <hr style="margin-top:0px">-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/novel_view_synthesis1.m4v" type="video/mp4">-->
+<!--                </video>-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/novel_view_synthesis2.m4v" type="video/mp4">-->
+<!--                </video>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<br>-->
+
+<!--&lt;!&ndash; reposed geometry results &ndash;&gt;-->
+<!--<section>-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12 text-center">-->
+<!--                <h3>Reposing the reconstructed geometry</h3>-->
+<!--                <hr style="margin-top:0px">-->
+<!--                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">-->
+<!--                    <source src="images/reposed_geometry.m4v" type="video/mp4">-->
+<!--                </video>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<br>
+
+<!-- citing -->
+<div class="container">
+    <div class="row ">
+        <div class="col-12">
+            <h3>Citation</h3>
+            <hr style="margin-top:0px">
+            <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{chen2023poking,
+  title={Perceiving Unseen 3D Objects by Poking the Objects},
+  author={Chen, Linghao and Song, Yunzhou and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={ICRA},
+  year={2023}
+}</code></pre>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center" style="margin-bottom:10px">
+    Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+</footer>
+
+</body>
+</html>

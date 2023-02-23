@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Learning Neural Volumetric Representations of Dynamic Humans in Minutes</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://chen-geng.com/media/inb.mp4">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chen-geng.com/instant_nvr" />
+    <meta property="og:title" content="Learning Neural Volumetric Representations of Dynamic Humans in Minutes" />
+    <meta property="og:description"
+        content="This paper addresses the challenge of quickly reconstructing free-viewpoint videos of dynamic humans from sparse multi-view videos.
+    Some recent works represent the dynamic human as a canonical neural radiance field (NeRF) and a motion field, which are learned from videos through differentiable rendering. They generally require a lengthy optimization process.
+    Other generalization methods leverage learned prior from datasets and reduce the optimization time by only finetuning on new scenes at the cost of visual fidelity.
+    In this paper, we propose a novel method for creating viewpoint-free human performance synthesis from sparse view videos in minutes with competitive visual quality.
+    Specifically, we leverage the human body prior to define a novel part-based voxelized NeRF representation, which distributes the representational power of the canonical human model efficiently.
+    Furthermore, we propose a novel dimensionality reduction 2D motion parameterization scheme to increase the convergence rate of the human deformation field.
+    Experiments demonstrate that our approach can be trained 100 times faster than prior per-scene optimization methods while being competitive in the rendering quality. We show that given a 512x512 video capturing a human performer of 100 frames, our model typically takes about 5 minutes for training to produce photorealistic free-viewpoint videos on a single RTX 3090 GPU. The code will be released for reproducibility." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Learning Neural Volumetric Representations of Dynamic Humans in Minutes" />
+    <meta name="twitter:description"
+        content="This paper addresses the challenge of quickly reconstructing free-viewpoint videos of dynamic humans from sparse multi-view videos.
+    Some recent works represent the dynamic human as a canonical neural radiance field (NeRF) and a motion field, which are learned from videos through differentiable rendering. They generally require a lengthy optimization process.
+    Other generalization methods leverage learned prior from datasets and reduce the optimization time by only finetuning on new scenes at the cost of visual fidelity.
+    In this paper, we propose a novel method for creating viewpoint-free human performance synthesis from sparse view videos in minutes with competitive visual quality.
+    Specifically, we leverage the human body prior to define a novel part-based voxelized NeRF representation, which distributes the representational power of the canonical human model efficiently.
+    Furthermore, we propose a novel dimensionality reduction 2D motion parameterization scheme to increase the convergence rate of the human deformation field.
+    Experiments demonstrate that our approach can be trained 100 times faster than prior per-scene optimization methods while being competitive in the rendering quality. We show that given a 512x512 video capturing a human performer of 100 frames, our model typically takes about 5 minutes for training to produce photorealistic free-viewpoint videos on a single RTX 3090 GPU. The code will be released for reproducibility." />
+    <meta name="twitter:image" content="https://chen-geng.com/media/inb.mp4" />
+
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://chen-geng.com/instant_nvr/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="https://chen-geng.com/instant_nvr/js/app.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://chen-geng.com/instant_nvr/slick/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://chen-geng.com/instant_nvr/slick/slick/slick-theme.css" />
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+
+        }
+
+        /* .container {
+            margin-left: -100px;
+        } */
+        .image-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-wrapper {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .caption-row {
+            align-items: flex-end;
+        }
+
+        .caption-row .image-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .caption-row .image-wrapper p {
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                Learning Neural Volumetric Representations <br> of Dynamic Humans <b>in Minutes</b>
+                <!-- <b>Mip-NeRF 360</b>: Unbounded <br> Anti-Aliased Neural Radiance Fields</br>  -->
+                <small>
+                    <br>
+                    arXiv 2023
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://chen-geng.com/">
+                            Chen Geng*
+                        </a>
+                        <!-- </br>Zhejiang University -->
+                    </li>
+                    <li>
+                        <a href="https://pengsida.net/">
+                            Sida Peng*
+                        </a>
+                        <!-- </br>Zhejiang University -->
+                    </li>
+                    <li>
+                        <a href="https://github.com/dendenxu">
+                            Zhen Xu*
+                        </a>
+                        <!-- </br>Zhejiang University -->
+                    </li>
+                    <!-- <br> -->
+                    <li>
+                        <a href="http://www.cad.zju.edu.cn/home/bao/">
+                            Hujun Bao
+                        </a>
+                        <!-- </br>Zhejiang University -->
+                    </li>
+                    <li>
+                        <a href="http://xzhou.me/">
+                            Xiaowei Zhou
+                        </a>
+                        <!-- </br>Zhejiang University -->
+                    </li>
+                </ul>
+                (* equal contribution) <br>
+                State Key Laboratory of CAD&CG, Zhejiang University
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="https://chen-geng.com/files/instant_nvr.pdf">
+                            <image src="https://chen-geng.com/instant_nvr/images/inb_img.jpg" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://chen-geng.com/instant_nvr/videos/inb_video.mp4">
+                            <image src="https://chen-geng.com/instant_nvr/images/youtube_icon.png" height="60px">
+                                <h4><strong>Video</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://chen-geng.com/instant_nvr">
+                            <image src="https://chen-geng.com/instant_nvr/images/github.png" height="60px">
+                                <h4><strong>Code(Coming Soon)</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <image src="https://chen-geng.com/instant_nvr/images/teaser.jpg" width="100%"></image>
+                <video id="v0" width="100%" autoplay loop muted>
+                    <source src="https://chen-geng.com/media/inb.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-center">
+                    Comparison of optimization speed between our method and baseline.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    This paper addresses the challenge of quickly reconstructing free-viewpoint videos of dynamic humans
+                    from sparse multi-view videos.
+                    Some recent works represent the dynamic human as a canonical neural radiance field (NeRF) and a
+                    motion field, which are learned from videos through differentiable rendering. They generally require
+                    a lengthy optimization process.
+                    Other generalization methods leverage learned prior from datasets and reduce the optimization time
+                    by only finetuning on new scenes at the cost of visual fidelity.
+                    In this paper, we propose a novel method for creating viewpoint-free human performance synthesis
+                    from sparse view videos in minutes with competitive visual quality.
+                    Specifically, we leverage the human body prior to define a novel part-based voxelized NeRF
+                    representation, which distributes the representational power of the canonical human model
+                    efficiently.
+                    Furthermore, we propose a novel dimensionality reduction 2D motion parameterization scheme to
+                    increase the convergence rate of the human deformation field.
+                    Experiments demonstrate that our approach can be trained 100 times faster than prior per-scene
+                    optimization methods while being competitive in the rendering quality. We show that given a 512x512
+                    video capturing a human performer of 100 frames, our model typically takes about 5 minutes for
+                    training to produce photorealistic free-viewpoint videos on a single RTX 3090 GPU. The code will be
+                    released for reproducibility.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    <!-- Comparison -->
+                </h3>
+                <div class="text-center">
+                    <!-- <div style="position:relative;padding-top:56.25%;"> -->
+                    <div style="position:relative;">
+                        <!-- <iframe src="https://chen-geng.com/instant_nvr/videos/supp.mp4" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe> -->
+                        <!-- <video id="v0" width="100%" loop muted controls>
+                            <source src="https://chen-geng.com/instant_nvr/videos/supp.mp4" type="video/mp4" />
+                        </video> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Method
+                </h3>
+                <div class="text-center">
+                    <!-- <div style="position:relative;padding-top:56.25%;"> -->
+                    <div style="position:relative;">
+                        <!-- <iframe src="https://chen-geng.com/instant_nvr/videos/supp.mp4" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe> -->
+                        <!-- <image id="v0" width="100%" >
+                            <source src="https://chen-geng.com/instant_nvr/images/ppl.png" />
+                        </image> -->
+
+                        <image src="https://chen-geng.com/instant_nvr/images/ppl.jpg" width="100%"></image>
+                        Given a query point $\mathbf{x}$ at frame $t$, we find its nearest surface point on each human
+                        part of the SMPL mesh, which gives the blend weight $\mathbf{w}_k$ and the UV coordinate $(u_k,
+                        v_k)$.
+                        Consider the $k$-th part. The motion field consists of an inverse LBS module and a residual
+                        deformation module. (a) The inverse LBS module takes body pose $\boldsymbol{\rho}$, blend weight
+                        $\mathbf{w}_k$, and query point $\mathbf{x}$ as input and output the transformed point
+                        $\mathbf{x}'$. The residual deformation module applies the multiresolution hash encoding (MHE)
+                        to $(u_k, v_k, t)$ and uses an MLP network to regress the residual translation $\Delta
+                        \mathbf{x}$, which is added to $\mathbf{x}'$ to obtain the canonical point
+                        $\mathbf{x}^{\text{can}}$.
+                        (b) We then feed $\mathbf{x}^{\text{can}}$ to networks of $k$-th human part to predict the
+                        density $\sigma_k$ and color $\mathbf{c}_k$.
+                        With $\{(\sigma_k, \mathbf{c}_k)\}_{k=1}^K$, we select the one with the biggest density as the
+                        density and color of the query point.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Qualitative Comparison
+                </h3>
+                <div class="text-center">
+                    <!-- <div style="position:relative;padding-top:56.25%;"> -->
+                    <div style="position:relative;">
+                        <!-- <div style="display: flex; justify-content: center;">
+                            <div style="display:flex;justify-content: center; width: 35%;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/ours1.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/nb1.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/an1.mp4" type="video/mp4" />
+                                    </video>
+
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: center;">
+                            <div style="display:flex;justify-content: center; width: 35%;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/ours2.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/nb2.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/an2.mp4" type="video/mp4" />
+                                    </video>
+
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: center;">
+                            <div style="display:flex;justify-content: center; width: 35%;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/ours3.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/nb3.mp4" type="video/mp4" />
+                                    </video>
+
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/an3.mp4" type="video/mp4" />
+                                    </video>
+
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: center;">
+                            <div style="display:flex;justify-content: center; width: 130%;">
+                                <div style="margin: 0 10px; text-align: center;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/ours4.mp4" type="video/mp4" />
+                                    </video>
+                                    <p>Ours(5 min)</p>
+                                </div>
+
+                                <div style="margin: 0 10px; text-align: center;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/nb4.mp4" type="video/mp4" />
+                                    </video>
+                                    <p>Neural Body(10 hours)</p>
+                                </div>
+
+                                <div style="margin: 0 10px; text-align: center;">
+                                    <video width="100%" loop muted autoplay>
+                                        <source src="./videos/an4.mp4" type="video/mp4" />
+                                    </video>
+                                    <p>Animatable NeRF(10 hours)</p>
+                                </div>
+
+                            </div>
+                        </div> -->
+
+                        <div class="image-row">
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours1.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/nb1.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/an1.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="image-row">
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours2.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/nb2.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/an2.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="image-row">
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours3.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/nb3.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div class="image-wrapper">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/an3.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <div class="image-row">
+                            <div class="image-wrapper caption-row">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours4.mp4" type="video/mp4" />
+                                </video>
+                                <p><strong>Ours</strong> <br> (trained for ~5 min)</p>
+                            </div>
+
+                            <div class="image-wrapper caption-row">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours4.mp4" type="video/mp4" />
+                                </video>
+                                <p><strong>Neural Body </strong><br> (trained for ~10 hours)</p>
+                            </div>
+
+                            <div class="image-wrapper caption-row">
+                                <video width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/ours4.mp4" type="video/mp4" />
+                                </video>
+                                <p><strong>Animatable NeRF </strong><br> (trained for ~10 hours)</p>
+                            </div>
+                        </div>
+
+                        <!-- <div style="display: flex; justify-content: center;">
+                            <div style="display:flex; justify-content: center; width: 75%;">
+                                <div>Ours(5 min)</div>
+                                <div>Neural Body(10 hours)</div>
+                                <div>Animatable NeRF(10 hours)</div>
+                            </div>
+                        </div> -->
+                        <!-- <div class="slick">
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid1.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid2.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid3.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid4.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid5.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid6.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid7.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                            <div>
+                                <video id="v0" width="100%" loop muted autoplay>
+                                    <source src="https://chen-geng.com/instant_nvr/videos/vid8.mp4" type="video/mp4" />
+                                </video>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;">
+                        <video id="v0" width="100%" loop muted controls>
+                            <source src="https://chen-geng.com/instant_nvr/videos/inb_video.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{geng2023learning,
+    title={Learning Neural Volumetric Representations of Dynamic Humans in Minutes},
+    author={Chen Geng and Sida Peng and Zhen Xu and Hujun Bao and Xiaowei Zhou},
+    journal={arXiv preprint arXiv:2302.xxx},
+    year={2023}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- <p class="text-justify">
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://jonbarron.info/mipnerf360/">Jon Barron</a>.
+                </p> -->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- <h3>
+                    Acknowledgements
+                </h3> -->
+                <p class="text-justify">
+                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a
+                        href="https://jonbarron.info/mipnerf360/">Jon Barron</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://chen-geng.com/instant_nvr/slick/slick/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.slick').slick({
+                // setting-name: setting-value
+                "autoplay": true,
+                dots: true,
+                infinite: true,
+                speed: 10000,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                // centerMode: true,
+                // centerPadding: '60px',
+                // responsive: [
+
+                // ]
+            });
+        });
+    </script>
+</body>
+
+</html>

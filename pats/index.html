@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PATS: Patch Area Transportation with Subdivision for Local Feature Matching">
+  <meta name="keywords" content="PATS, Feature Matching, Optimal Transportation, Patch Area Transportation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PATS: Patch Area Transportation with Subdivision for Local Feature Matching</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        PATS:
+        <span style="color: #e25959">P</span>atch
+        <span style="color: #e25959">A</span>rea
+        <span style="color: #e25959">T</span>ransportation with
+        <span style="color: #e25959">S</span>ubdivision </br> for Local Feature Matching
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">CVPR 2023</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/xuanlanxingkongxia">Junjie Ni</a><sup>1*</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/eugenelyj">Yijin Li</a><sup>1*</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://drinkingcoder.github.io/">Zhaoyang Huang</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://www.ee.cuhk.edu.hk/~hsli/">Hongsheng Li</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University</span>
+          <br>
+          <span class="author-block"><sup>2</sup>Multimedia Laboratory, The Chinese University of Hong Kong</span>
+          <br>
+          <span class="author-block"><sup>*</sup>denotes equal contribution</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2303.07700.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Coming)</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>Supplementary (Coming)</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <hr/>
+        <h6 style="color:#8899a5" class="text-center"> 
+          TL;DR: PATS can extract high-quality semi-dense matches even under severe scale variations </br>
+          and in indistinctive regions with low-textures, repetitive patterns.
+        </h6>
+        </br>
+        <video id="teaser" autoplay controls muted loop playsinline width="75%">
+          <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/pats_page_teaser.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-four-fifths"> -->
+        <div class="content has-text-justified">
+          <p>
+            Local feature matching aims at establishing sparse correspondences between a pair of images.
+            Recently, detectorfree methods present generally better performance but are not satisfactory
+            in image pairs with large scale differences. In this paper, we propose Patch Area Transportation
+            with Subdivision (PATS) to tackle this issue. Instead of building an expensive image pyramid, we
+            start by splitting the original image pair into equal-sized patches and gradually resizing and
+            subdividing them into smaller patches with the same scale. However, estimating scale differences
+            between these patches is non-trivial since the scale differences are determined by both relative
+            camera poses and scene structures, and thus spatially varying over image pairs. Moreover, it is
+            hard to obtain the ground truth for real scenes. To this end, we propose patch area transportation,
+            which enables learning scale differences in a self-supervised manner. In contrast to bipartite
+            graph matching, which only handles one-to-one matching, our patch area transportation can deal
+            with many-to-many relationships. PATS improves both matching accuracy and coverage, and shows
+            superior performance in downstream tasks, such as relative pose estimation, visual localization,and optical flow estimation.
+          </p>
+        </div>
+      </div>
+    <!-- </div> -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Pipeline Overview</p></h2>
+      <hr/>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/pipeline.png"
+             alt="PATS architecture."/>
+      </div>
+      <br/>
+      <p>
+        We a) extract features for patches. Then, we b) formulate the patch area transportation by setting source patches' area $\mathbf a_S$ as $\mathbf 1_N$, regressing target patches' area $\mathbf a_T$, and bound the transportation via visual similarities $\mathbf C$.
+        The feature descriptors $\mathbf f$ that produce $\mathbf C$ and the area regression $\mathbf a_T$ are learned by solving this problem differentially.
+        The solution of this problem $\mathbf P$ also reveals many-to-many patch relationships.
+        Based on $\mathbf P$, we c) find corresponding regions, represented by target patches inside a bounding box $B_i$, for each source patch. The exact patch corresponding position $\hat{\mathbf p}_i$ is the position expectation over $B_i$.
+        After cropping and resizing image contents according to the obtained window sizes, which align the contents to the same scale, we d) subdivide the cropped contents to smaller patches and enter the next iteration.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Qualitative Comparison with <a href="https://github.com/zju3dv/LoFTR">LoFTR</a></p></h2>
+      <hr/>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/202.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/201.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/203.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/204.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Two-view Reconstruction</p></h2>
+      <p>Since PATS achieves high-precision matches that are densely and uniformly distributed in the images,
+        we can obtain semi-dense reconstruction by simply triangulating the matches in a image pair.</p>
+      <hr/>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/recon1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/recon2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/recon3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/recon4.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clevr">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/recon5.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Understanding the Area Transportation in PATS</p></h2>
+      <hr/>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/pats/understand.png"
+             alt="PATS architecture."/>
+      </div>
+      <br/>
+      <p>
+        PATS can detect the related region straightforwardly for patches in the source images and compute accurate areas for them.
+        Therefore, we can generate correct new image pairs after resizing them to the same scale and then match them in more detail
+        in the following iterations, which reduces a big and hard matching problem to many small and simple ones.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+<code>@inproceedings{pats,
+  title={PATS: Patch Area Transportation with Subdivision for Local Feature Matching},
+  author={Junjie Ni, Yijin Li, Zhaoyang Huang, Hongsheng Li, Hujun Bao, Zhaopeng Cui, Guofeng Zhang},
+  booktitle={The IEEE/CVF Computer Vision and Pattern Recognition Conference (CVPR)},
+  year={2023}
+}</code>
+</pre>
+
+  </div>
+</section>
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>DyMap</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DyMap: Representing Volumetric Videos as Dynamic MLP Maps" />
+    <meta property="og:description" content="This paper introduces a novel representation of volumetric videos for real-time view synthesis of dynamic scenes. Recent advances in neural scene representations demonstrate their remarkable capability to model and render complex static scenes, but extending them to represent dynamic scenes is not straightforward due to their slow rendering speed or high storage cost. To solve this problem, our key idea is to represent the radiance field of each frame as a set of shallow MLP networks whose parameters are stored in 2D grids, called MLP maps, and dynamically predicted by a 2D CNN decoder shared by all frames. Representing 3D scenes with shallow MLPs significantly improves the rendering speed, while dynamically predicting MLP parameters with a shared 2D CNN instead of explicitly storing them leads to low storage cost. Experiments show that the proposed approach achieves state-of-the-art rendering quality on the NHR and ZJU-MoCap datasets, while being efficient for real-time rendering with a speed of 41.7 fps for 512x512 images on an RTX 3090 GPU."
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DyMap: Representing Volumetric Videos as Dynamic MLP Maps" />
+    <meta name="twitter:description" content="This paper introduces a novel representation of volumetric videos for real-time view synthesis of dynamic scenes. Recent advances in neural scene representations demonstrate their remarkable capability to model and render complex static scenes, but extending them to represent dynamic scenes is not straightforward due to their slow rendering speed or high storage cost. To solve this problem, our key idea is to represent the radiance field of each frame as a set of shallow MLP networks whose parameters are stored in 2D grids, called MLP maps, and dynamically predicted by a 2D CNN decoder shared by all frames. Representing 3D scenes with shallow MLPs significantly improves the rendering speed, while dynamically predicting MLP parameters with a shared 2D CNN instead of explicitly storing them leads to low storage cost. Experiments show that the proposed approach achieves state-of-the-art rendering quality on the NHR and ZJU-MoCap datasets, while being efficient for real-time rendering with a speed of 41.7 fps for 512x512 images on an RTX 3090 GPU."
+    />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                DyMap: Representing Volumetric Videos as Dynamic MLP Maps<br>
+                <small>
+                        CVPR 2023
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://pengsida.net/">
+                            Sida Peng*
+                        </a>
+                    </li>
+                    <li>
+                        <a href=https://github.com/YYZmadrid>
+                            Yunzhi Yan*
+                        </a>
+                    </li>
+                    <li>
+                        <a href=https://chingswy.github.io> 
+                            Qing Shuai
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.cad.zju.edu.cn/home/bao/ ">
+                            Hujun Bao
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://xzhou.me/ ">
+                            Xiaowei Zhou
+                        </a>
+                    </li>
+                </ul>
+                State Key Lab of CAD & CG, Zhejiang University <br> 
+                * denotes equal contribution
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified" style="margin-top:10px">
+                    <a href="https://zjueducn-my.sharepoint.com/:b:/g/personal/pengsida_zju_edu_cn/EZnHPFkQk-hFoFsHps47uxIBTM0F1uuaPBd2sCVfZZ92iA?e=NuaV0M">
+                            <strong><font size="+1">[Paper]</font></strong>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://github.com/zju3dv/dymap">
+                            <strong><font size="+1">[Code]</font></strong>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://github.com/zju3dv/dymap/INSTALL.md#zju-mocap-dataset">
+                            <strong><font size="+1">[Data]</font></strong>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://zjueducn-my.sharepoint.com/:b:/g/personal/pengsida_zju_edu_cn/EWf3ewr1hlBAp2jZrZxBB9cBAXrIcsw0CcdQ-H7s1pbYuw?e=dUPi8u">
+                            <strong><font size="+1">[Supplementary]</font></strong>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row ">
+            <div class="col-md-8 col-md-offset-2 ">
+                <image src="img/base_idea.png" width="100%">
+                </image>
+            </div>
+            <div class="col-md-8 col-md-offset-2 ">
+                <p class="text-center ">
+                    The basic idea of dynamic MLP maps
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row ">
+            <div class="col-md-8 col-md-offset-2 ">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify ">
+                    This paper introduces a novel representation of volumetric videos for real-time view synthesis of dynamic scenes. Recent advances in neural scene representations demonstrate their remarkable capability to model and render complex static scenes, but extending
+                    them to represent dynamic scenes is not straightforward due to their slow rendering speed or high storage cost. To solve this problem, our key idea is to represent the radiance field of each frame as a set of shallow MLP networks whose
+                    parameters are stored in 2D grids, called MLP maps, and dynamically predicted by a 2D CNN decoder shared by all frames. Representing 3D scenes with shallow MLPs significantly improves the rendering speed, while dynamically predicting
+                    MLP parameters with a shared 2D CNN instead of explicitly storing them leads to low storage cost. Experiments show that the proposed approach achieves state-of-the-art rendering quality on the NHR and ZJU-MoCap datasets, while being
+                    efficient for real-time rendering with a speed of 41.7 fps for 512x512 images on an RTX 3090 GPU.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <div class="text-center">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/8GjEew-iIOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-8 col-md-offset-2 ">
+                <h3>
+                    Real-time volumetric video
+                </h3>
+                <div class="text-center ">
+                    <div style="position:relative">
+                        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video1.mp4" type="video/mp4">
+                        </video>
+                        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video2.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-8 col-md-offset-2 ">
+                <h3>
+                    Comparison on the dataset of Neural Volumes
+                </h3>
+
+                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video7.mp4" type="video/mp4">
+                        </video>
+                <!-- <div class="col-md-8 col-md-offset-2 "> -->
+                <!--     <p class="text-center "> -->
+                <!--         Comparison on NeuralVolume dataset -->
+                <!--     </p> -->
+                <!-- </div> -->
+
+                <h3>
+                    Comparison on the NHR dataset
+                </h3>
+
+                <video width="99.5%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video3.mp4" type="video/mp4">
+                        </video>
+                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video4.mp4" type="video/mp4">
+                        </video>
+                <!-- <div class="col-md-8 col-md-offset-2 "> -->
+                <!--     <p class="text-center "> -->
+                <!--         Comparison on NHR dataset -->
+                <!--     </p><br /> -->
+                <!-- </div> -->
+
+                <h3>
+                    Comparison on the ZJU-MoCap dataset
+                </h3>
+
+                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video5.mp4" type="video/mp4">
+                        </video>
+                <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video6.mp4" type="video/mp4">
+                        </video>
+
+                <!-- <div class="col-md-8 col-md-offset-2 "> -->
+                <!--     <p class="text-center "> -->
+                <!--         Comparison on ZJU-MoCap dataset -->
+                <!--     </p><br /> -->
+                <!-- </div> --> 
+ 
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@inproceedings{peng2023dymap,
+    title={Representing Volumetric Videos as Dynamic MLP Maps},
+    author={Peng, Sida and Yan, Yunzhi and Shuai, Qing and Bao, Hujun and Zhou, Xiaowei},
+    booktitle={CVPR},
+    year={2023}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- <h3>
+                    Acknowledgements
+                </h3> -->
+                <p class="text-justify">
+                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://jonbarron.info/mipnerf360/">Jon Barron</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

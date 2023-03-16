@@ -61,12 +61,12 @@
                   role="button" target="_blank">
                   <i class="fa fa-file"></i> Paper (High-Res Figures)</a> </p>
             </div>
-            <div class="column">
+            <!-- <div class="column">
               <p class="mb-5"><a class="btn btn-large btn-light"
                   href="doc/representation_img.pdf"
                   role="button" target="_blank">
                   <i class="fa fa-file"></i> Representation image</a> </p>
-            </div>
+            </div> -->
             <div class="column">
               <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/IntrinsicNeRF"
                   role="button" target="_blank">
@@ -99,7 +99,8 @@
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
         </div> -->
         <hr>
-        <p class="text-left">We present intrinsic neural radiance fields, dubbed IntrinsicNeRF, that introduce intrinsic decomposition into the NeRF-based~\cite{mildenhall2020nerf} neural rendering method and can perform editable novel view synthesis in room-scale scenes while existing inverse rendering combined with neural rendering methods~\cite{zhang2021physg, zhang2022modeling} can only work on object-specific scenes. Given that intrinsic decomposition is a fundamentally ambiguous and under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method that enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in temporally consistent intrinsic decomposition results. To cope with the problem of different adjacent instances of similar reflectance in a scene being incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It enables compelling real-time augmented reality applications such as scene recoloring, material editing, and illumination variation. Extensive experiments on Blender Object and Replica Scene demonstrate that we can obtain high-quality, consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences.
+        <p class="text-left">
+          Existing inverse rendering combined with neural rendering methods can only perform editable novel view synthesis on object-specific scenes, while we present intrinsic neural radiance fields, dubbed IntrinsicNeRF, which introduce intrinsic decomposition into the NeRF-based neural rendering method and can extend its application to room-scale scenes. Since intrinsic decomposition is a fundamentally under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method, which enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in temporally consistent intrinsic decomposition results. To cope with the problem that different adjacent instances of similar reflectance in a scene are incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It supports compelling real-time augmented applications such as recoloring and illumination variation. Extensive experiments and editing samples on both object-specific/room-scale scenes and synthetic/real-word data demonstrate that we can obtain consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences. 
         </p>
       </div>
     </div>
@@ -124,8 +125,8 @@
           alt="method">
         <hr> 
         <p class="text-justify">
-          Given a set of multi-view images with camera pose, IntrinsicNeRF is able to factorize the scene into the temporally consistent components: reflectance, shading and residual layers. The decomposition can support real-time augmented video applications such as scene recoloring, material editing, illumination variation, and editable novel view synthesis.
-        </p>
+          Given multi-view posed images of static scenes, IntrinsicNeRF can factorize the scene into the temporally consistent components: reflectance, shading, and residual layers. The decomposition can support online applications such as scene recoloring, illumination variation, and novel view synthesis.
+                </p>
       </div>
     </div>
   </div>
@@ -149,7 +150,7 @@
           alt="Architechture">
         <hr> 
         <p class="text-justify">
-          IntrinsicNeRF takes the sampled spatial coordinate point and direction as input, and outputs the density, reflectance, shading, and  residual term. The semantic branch is optional. Unsupervised Prior and Reflectance Clustering are exploited to train the IntrinsicNeRF in an unsupervised manner.  
+          IntrinsicNeRF takes the sampled spatial coordinate point and direction as input, and outputs the density, reflectance, shading, and residual term. The semantic branch is optional. Unsupervised Prior and Reflectance Clustering are exploited to train the IntrinsicNeRF in an unsupervised manner.  
           With the semantic branch, we can obtain the hierarchical clustering and indexing representation which supports real-time editing.
         </p>
       </div>
@@ -175,7 +176,7 @@
           alt="Clustering">
         <hr> 
         <p class="text-justify">
-          The color of the reflectance pixels is first converted to better cluster reflectances and then clustered with mean shift algorithms. 
+          The color of the reflectance pixels is first converted to better cluster reflectances and then clustered with mean shift algorithm. 
           The voxel grid filter is performed to accelerate the processing of the cluster operation G, 
           which considers the category of the nearest anchor points as the category of each point 
           and saves the category of the center point as the target clustered category.
@@ -246,7 +247,7 @@
 <br>
 
 
-<!-- material editing -->
+<!-- material editing
 <section>
   <div class="container">
     <div class="row">
@@ -258,11 +259,11 @@
             src="videos/IntrinsicNeRF_Material.mp4"
             type="video/mp4">
         </video>
-        <!-- <div class="embed-responsive embed-responsive-16by9">
+         <div class="embed-responsive embed-responsive-16by9">
           <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
             src="https://youtu.be/SJFUSXmXJRU" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-        </div> -->
+        </div> 
         <p class="text-justify">
           We can editing the surface materials by manipulating the shading layer, defining a simple mapping function between
            the original and the new shading image. In our video editing software, we use the tone mapping function and 
@@ -277,7 +278,7 @@
   </div>
 </section>
 <br>
-
+-->
 
 <!-- illumination variation -->
 <section>
@@ -400,10 +401,7 @@
         <h3>Acknowledgements</h3>
         <hr style="margin-top:0px">
         <p class="text-justify">
-          The authors thank Yuanqing Zhang for providing us with the pre-trained model of InvRender, 
-          Jiarun Liu for reproducing the results of PhySG and Hai Li, Jundan Luo for proofreading the paper. 
-          This work was partially supported by NSF of China (No. 61932003) and ZJU-SenseTime Joint Lab of 3D Vision. 
-          Weicai Ye was partially supported by China Scholarship Council (No. 202206320316).        </p>
+          The authors thank Yuanqing Zhang for providing us with the pre-trained model of InvRender, Jiarun Liu for reproducing the results of NeRFactor and PhySG. We thank Hai Li and Jundan Luo for proofreading the paper. This work was partially supported by NSF of China (No. 61932003) and ZJU-SenseTime Joint Lab of 3D Vision. Weicai Ye was partially supported by China Scholarship Council (No. 202206320316).       </p>
         <hr>
     </div>
   </div>

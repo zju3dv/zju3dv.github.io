@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>DyMap</title>
+    <title>MLP Maps</title>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
     />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DyMap: Representing Volumetric Videos as Dynamic MLP Maps" />
+    <meta name="twitter:title" content="Representing Volumetric Videos as Dynamic MLP Maps" />
     <meta name="twitter:description" content="This paper introduces a novel representation of volumetric videos for real-time view synthesis of dynamic scenes. Recent advances in neural scene representations demonstrate their remarkable capability to model and render complex static scenes, but extending them to represent dynamic scenes is not straightforward due to their slow rendering speed or high storage cost. To solve this problem, our key idea is to represent the radiance field of each frame as a set of shallow MLP networks whose parameters are stored in 2D grids, called MLP maps, and dynamically predicted by a 2D CNN decoder shared by all frames. Representing 3D scenes with shallow MLPs significantly improves the rendering speed, while dynamically predicting MLP parameters with a shared 2D CNN instead of explicitly storing them leads to low storage cost. Experiments show that the proposed approach achieves state-of-the-art rendering quality on the NHR and ZJU-MoCap datasets, while being efficient for real-time rendering with a speed of 41.7 fps for 512x512 images on an RTX 3090 GPU."
     />
 
@@ -42,7 +42,7 @@
     <div class="container" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                DyMap: Representing Volumetric Videos as Dynamic MLP Maps<br>
+                Representing Volumetric Videos as Dynamic MLP Maps<br>
                 <small>
                         CVPR 2023
                 </small>
@@ -90,11 +90,11 @@
                             <strong><font size="+1">[Paper]</font></strong>
                     </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://github.com/zju3dv/dymap">
+                    <a href="https://github.com/zju3dv/mlp_maps">
                             <strong><font size="+1">[Code]</font></strong>
                     </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://github.com/zju3dv/dymap/INSTALL.md#zju-mocap-dataset">
+                    <a href="https://github.com/zju3dv/mlp_maps/INSTALL.md#zju-mocap-dataset">
                             <strong><font size="+1">[Data]</font></strong>
                     </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -156,10 +156,10 @@
                 <div class="text-center ">
                     <div style="position:relative">
                         <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video1.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video1.mp4" type="video/mp4">
                         </video>
                         <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video2.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video2.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                 </h3>
 
                 <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video7.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video7.mp4" type="video/mp4">
                         </video>
                 <!-- <div class="col-md-8 col-md-offset-2 "> -->
                 <!--     <p class="text-center "> -->
@@ -186,10 +186,10 @@
                 </h3>
 
                 <video width="99.5%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video3.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video3.mp4" type="video/mp4">
                         </video>
                 <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video4.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video4.mp4" type="video/mp4">
                         </video>
                 <!-- <div class="col-md-8 col-md-offset-2 "> -->
                 <!--     <p class="text-center "> -->
@@ -202,10 +202,10 @@
                 </h3>
 
                 <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video5.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video5.mp4" type="video/mp4">
                         </video>
                 <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/dymap/video6.mp4" type="video/mp4">
+                            <source src="https://github.com/pengsida/project_page_assets/raw/gh-pages/mlp_maps/video6.mp4" type="video/mp4">
                         </video>
 
                 <!-- <div class="col-md-8 col-md-offset-2 "> -->
@@ -227,7 +227,7 @@
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
                     <textarea id="bibtex" class="form-control" readonly>
-@inproceedings{peng2023dymap,
+@inproceedings{peng2023representing,
     title={Representing Volumetric Videos as Dynamic MLP Maps},
     author={Peng, Sida and Yan, Yunzhi and Shuai, Qing and Bao, Hujun and Zhou, Xiaowei},
     booktitle={CVPR},

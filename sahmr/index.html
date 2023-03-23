@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="width=device-width, initial-scale=1">
+    <title>Learning Human Mesh Recovery in 3D Scenes</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Learning Human Mesh Recovery in 3D Scenes</h2>
+                <h4 style="color:#6e6e6e;"> CVPR 2023 </h4>
+                <h6> 
+                    <a href="https://zehongs.github.io/" target="_blank">Zehong Shen</a> &nbsp &nbsp
+                    <a href="https://github.com/anitacen" target="_blank">Zhi Cen</a> &nbsp &nbsp
+                    <a href="https://pengsida.net/" target="_blank">Sida Peng</a> &nbsp &nbsp
+                    <a href="https://chingswy.github.io/" target="_blank">Qing Shuai</a> &nbsp &nbsp
+                    <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a> &nbsp &nbsp
+                    <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a>
+                </h6>
+                <h6>
+                    State Key Lab of CAD & CG, Zhejiang University
+                </h6>
+                <h6>
+                    <a href="https://zju3dv.github.io/sahmr/" target="_blank">[Paper]</a> &nbsp
+                    <a href="https://github.com/zju3dv/SA-HMR/" target="_blank">[Code]</a> &nbsp
+                    <a href="https://zju3dv.github.io/sahmr/" target="_blank">[Supplementary]</a> &nbsp
+                </h6>
+            </div>
+        </div>
+    </div>
+  </section>
+  <!-- <br> -->
+
+  <!-- Overview -->
+  <section>
+    <div class="container">
+        <div class="row">
+        <div class="col-12 text-center">
+            <!-- <h3>Overview</h3>
+            <hr style="margin-top:0px"> -->
+            <div class="text-center">
+                <img width="75%" class="img-fluid" src="images/teaser_homepage.jpg" alt="SA-HMR Teaser"><br>
+            </div>
+          <p class="text-justify">
+            Given an input image and pre-scanned scene, SA-HMR utilizes <u>a single forward network pass</u> to estimate the global position (blue ball), contact scene points (colored scene points), and a scene-aware human mesh <u>in 170ms</u>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+        <div class="row">
+        <div class="col-12 text-center">
+            <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+          <p class="text-justify">
+            We present a novel method for recovering the absolute pose and shape of a human in a pre-scanned scene given a single image. Unlike previous methods that perform sceneaware mesh optimization, we propose to ﬁrst estimate absolute position and dense scene contacts with a sparse 3D CNN, and later enhance a pretrained human mesh recovery network by cross-attention with the derived 3D scene cues. Joint learning on images and scene geometry enables our method to reduce the ambiguity caused by depth and occlusion, resulting in more reasonable global postures and contacts. Encoding scene-aware cues in the network also allows the proposed method to be optimization-free, and opens up the opportunity for real-time applications. The experiments show that the proposed network is capable of recovering accurate and physically-plausible meshes by a single forward pass and outperforms state-of-the-art methods in terms of both accuracy and speed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- pipeline -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline</h3>
+            <hr style="margin-top:0px">
+                <img  width="90%" class="img-fluid" src="images/pipeline_homepage.jpg" alt="SAHMR Architechture">
+            <p class="text-justify">
+                \(\textbf{Overview of the proposed SA-HMR.}\)
+                \(\textbf{1.}\) The human root and scene contact estimation module (Sec.3.2) that first predicts the initial root and then refines the root with 3D scene cues using a sparse 3D CNN. 
+                The module also predicts contact labels for each scene point.
+                \(\textbf{2.}\) The scene-aware human mesh recovery module (Sec.3.3) that enhances the pretrained METRO network with a parallel scene network.
+                The scene network takes the predicted contact scene points as input, and uses cross-attention to pass messages to the intermediate features of the METRO network.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- citing -->
+    <div class="container">
+        <div class="row ">
+        <div class="col-12">
+            <h3>Citation</h3>
+            <hr style="margin-top:0px">
+                <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{shen2023sahmr,
+    title={Learning Human Mesh Recovery in 3D Scenes},
+    author={Shen, Zehong and Cen, Zhi and Peng, Sida and Shuai, Qing and Bao, Hujun and Zhou, Xiaowei},
+    journal={CVPR},
+    year={2023}
+}</code></pre>
+            <!-- <hr> -->
+        </div>
+        </div>
+    </div>
+
+    <!-- Acknowledgements -->
+    <!-- <div class="container">
+        <div class="row ">
+          <div class="col-12">
+            <h3>Acknowledgements</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+                We would like to specially thank all reviewers for the insightful and constructive comments. 
+                We would like to thank Hongwei Yi for helping us download the RICH dataset.
+            </p>
+          </div>
+        </div>
+    </div> -->
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("demo");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/loftr/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "images/loftr-homepage-demo.mp4");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SINE: Semantic-driven Image-based NeRF Editing with Prior-guided Editing Field">
+  <meta name="keywords" content="SINE, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>SINE: Semantic-driven Image-based NeRF Editing with Prior-guided Editing Field
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neumesh/">
+            NeuMesh
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5 has-text-centered">
+          <img src="https://github.com/chobao/open_access_assets/raw/main/sine/SINElego.png" alt="SINE"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        <span style="color: #D41876">S</span>emantic-driven <span style="color: #1DB100">I</span>mage-based <span style="color: #0076BA">N</span>eRF <span style="color: #F27200">E</span>diting<br/> with Prior-guided Editing Field
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">CVPR 2023</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            [<a href="https://chobao.github.io/">Chong Bao</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>2</sup>,</div>
+          <div class="author-block">
+            <a href="https://ybbbbt.com">Bangbang Yang</a><sup>1</sup>]<sup>Co-Authors</sup>,</div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=siv1RXUAAAAJ&hl=zh-CN">Tianxing Fan</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/YZsZY">Zesong Yang</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>, </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Google</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href="https://github.com/chobao/open_access_assets/raw/main/sine/paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv(Coming)</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code(Coming)</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://github.com/chobao/open_access_assets/blob/main/sine/teaser.mp4?raw=true"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+<i>SINE</i> is a novel semantic-driven image-based editing approach, which allows users to edit a photo-realistic NeRF with a
+single-view image or with text prompts, and renders edited novel views with vivid details and multi-view consistency.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+Despite the great success in 2D editing using user-friendly tools, such as Photoshop, semantic strokes, or even text prompts, similar capabilities in 3D areas are still limited, either relying on 3D modeling skills or allowing editing within only a few categories.
+In this paper, we present a novel semantic-driven NeRF editing approach, which enables users to edit a neural radiance field with a single image, and faithfully delivers edited novel views with high fidelity and multi-view consistency.
+To achieve this goal, we propose a prior-guided editing field to encode fine-grained geometric and texture editing in 3D space, and develop a series of techniques to aid the editing process, including cyclic constraints with a proxy mesh to facilitate geometric supervision, a color compositing mechanism to stabilize semantic-driven texture editing, and a feature-cluster-based regularization to preserve the irrelevant content unchanged.
+Extensive experiments and editing examples on both real-world and synthetic data demonstrate that our method achieves photo-realistic 3D editing using only a single edited image, pushing the bound of semantic-driven editing in 3D real-world scenes.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/bCovxTtO7vs"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/chobao/open_access_assets/main/sine/framework.png"
+             alt="SINE architecture."/>
+      </div>
+      <p>
+We encode geometric and texture changes over the original template NeRF with a prior-guided editing field, where the geometric modification field $F_{\Delta G}$ transformed the edited space query $\mathbf{x}$ into the template space $\mathbf{x}$, and the texture modification field $F_{\Delta T}$ encodes modification colors $\mathbf{m}'$.
+    Then, we render deformed template image $\hat{I}_{o}$ and color modification image $\hat{I}_{m}$ with all the queries, and use a color compositing layer to blend $\hat{I}_{o}$ and $\hat{I}_{m}$ into the edited view $\hat{I}$.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <!-- <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div id="results-carousel" class="carousel results-carousel">
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+                <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_realcar.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="split-cookie-rgb" autoplay controls muted loop playsinline height="100%">
+                <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_syntheticcar.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+                <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_photoshape.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-three-quarters">
+            <p>
+              Here we show results generated with <i>HyperNeRF</i>. These videos show the input video
+              being
+              played
+              back with a stabilized novel camera path. The right side video shows the depth of the
+              scene.
+              Click on the arrows or drag to see more results.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="container has-text-centered">
+      <h2 class="title is-3 has-text-centered"><p>Geometric Editing with Users’ Target Image</p></h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_realcar.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_syntheticcar.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="split-cookie-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/raw/main/sine/geometry_editing_photoshape.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/blob/main/sine/geometry_editing_generalobject.mp4?raw=true"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered has-text-justified">
+          <p>
+We enables users to edit the neural radiance field with a single image by leveraging geometric prior models, such as neural implicit shape representation or depth prediction.
+          </p>
+      </div>
+    </div>
+  </div>
+    
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="container has-text-centered">
+      <h2 class="title is-3 has-text-centered"><p>Texture Editing with Users’ Target Image</p></h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/blob/main/sine/textureediting_singleview.mp4?raw=true"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/blob/main/sine/textureediting_targetview.mp4?raw=true"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered has-text-justified">
+          <p>
+            We can transfer textures from a single image by assigning new textures on the car with Photoshop, or using a downloaded Internet image with different shapes as a reference. 
+            The texture style of edtied objects match to the target image with correct sematnic meaning.
+          </p>
+      </div>
+    </div>
+  </div>
+    
+  <br/>
+    
+  <div class="container is-max-desktop">
+    <div class="container has-text-centered">
+      <h2 class="title is-3 has-text-centered"><p>Texture Editing with Text-prompts</p></h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/raw/main/sine/textureediting1_edit_text.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/chobao/open_access_assets/raw/main/sine/textureediting2_edit_text.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered has-text-justified">
+          <p>
+we cooperate SINE with off-the-shelf text-prompts editing methods by using the single text-edited
+image as the target, which enables to change the object’s appearance in the 360◦ scene with vivid effects while preserving background unchanged.
+          </p>
+      </div>
+    </div>
+  </div>
+      
+          <br/>
+
+  <div class="container is-max-desktop">
+  <div class="content has-text-justified">
+  <h2 class="title is-3 has-text-centered"><p>SINE Hybrid Editing Examples</p></h2>
+    <video id="functions" autoplay controls muted loop playsinline height="100%">
+      <source src="https://github.com/chobao/open_access_assets/blob/main/sine/hybridediting.mp4?raw=true"
+              type="video/mp4">
+    </video>
+    <p>
+We can combine geometric and texture editing on the same
+object with users’ target images, e.g. the plush toy raises its hands and is
+painted in new textures from a yellow bear, and the airplane
+extends its wings and is painted golden. 
+    </p>
+    </h2>
+  </div>
+    
+
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{bao2023sine,
+    title={SINE: Semantic-driven Image-based NeRF Editing with Prior-guided Editing Field},
+    author={Bao, Chong and Zhang, Yinda and Yang, Bangbang and Fan, Tianxing and Yang, Zesong and Bao, Hujun and Zhang, Guofeng and Cui, Zhaopeng},
+    booktitle={The IEEE/CVF Computer Vision and Pattern Recognition Conference (CVPR)},
+    year={2023}
+}</code></pre>
+  
+  <!-- Note: joint first-authorship is not really supported in BibTex; you may need to modify the above if not using CVPR's format. For the SIGGRAPH (or ACM) format you can try the following:
+
+<pre><code>@inproceedings{neumesh,
+    title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
+    author={{Bao and Yang} and Zeng Junyi and Bao Hujun and Zhang Yinda and Cui Zhaopeng and Zhang Guofeng},
+    booktitle={European Conference on Computer Vision (ECCV)},
+    year={2022}
+}</code></pre> -->
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

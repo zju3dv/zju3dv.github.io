@@ -65,9 +65,15 @@
               </div>
               <div class="column">
                 <p class="mb-5"><a class="btn btn-large btn-light"
-                    href="doc/pvo_arxiv.pdf"
+                    href="doc/pvo.pdf"
                     role="button" target="_blank">
                     <i class="fa fa-file"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light"
+                    href="doc/pvo_poster.pdf"
+                    role="button" target="_blank">
+                    <i class="fa fa-file"></i> Poster </a> </p>
               </div>
               <div class="column">
                 <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/pvo"
@@ -97,6 +103,24 @@
       </div>
     </div>
   </section>
+
+  <!-- overview video -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Overview Video</h3>
+        <hr style="margin-top:0px">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+            src="https://www.youtube.com/embed/j8iJdh_lPH4" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- system overview -->
   <br>
@@ -137,7 +161,7 @@
     </div>
   </section>
 
-  <!--Neural Inertial Network-->
+
   <section>
       <div class="container">
           <div class="row">
@@ -228,23 +252,7 @@
   </section>
   
 
-<!-- overview video -->
-<!-- <section>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h3>Overview Video</h3>
-        <hr style="margin-top:0px">
-        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-          <source
-            src="videos/pvo_overview.mp4" 
-            type="video/mp4">
-        </video>
-      </div>
-    </div>
-  </div>
-</section> -->
-<br>
+  <br>
 
 
   <!-- citing -->
@@ -256,11 +264,13 @@
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>
-  @article{Ye2023PVO,
-    title={PVO: Panoptic Visual Odometry},
-    author={Ye, Weicai and Lan, Xinyue and Chen, Shuo and Ming, Yuhang and Yu, Xinyuan and Bao, Hujun and Cui, Zhaopeng and Zhang, Guofeng},
-    booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
-    year={2023}
+  @InProceedings{Ye2023PVO,
+    author    = {Ye, Weicai and Lan, Xinyue and Chen, Shuo and Ming, Yuhang and Yu, Xingyuan and Bao, Hujun and Cui, Zhaopeng and Zhang, Guofeng},
+    title     = {{PVO: Panoptic Visual Odometry}},
+    booktitle = {{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}},
+    month     = {June},
+    year      = {2023},
+    pages     = {9579-9589}
   }
   </code></pre>
       </div>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NeuSC</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <script src="js/video_comparison.js"></script>
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Neural Scene Chronology</h2>
+            <h4 style="color:#5a6268;">CVPR 2023</h4>
+            <hr>
+            <h6> <a href="https://haotongl.github.io" target="_blank">Haotong Lin</a><sup>1,2</sup>, 
+                 <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>2</sup>, 
+                 <a href="https://www.cs.cornell.edu/~ruojin/" target="_blank">Ruojin Cai</a><sup>2</sup>, 
+                 <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>, 
+                 <a href="https://www.cs.cornell.edu/~hadarelor/" target="_blank">Hadar Averbuch-Elor</a><sup>3</sup>, 
+                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>,
+                <a href="https://www.cs.cornell.edu/~snavely/" target="_blank">Noah Snavely</a><sup>2</sup></h6>
+            <p> <sup>1</sup>Zhejiang University &nbsp;&nbsp; 
+              <sup>2</sup>Cornell University &nbsp;&nbsp; 
+              <sup>3</sup>Tel Aviv University
+            </p>
+            <p>
+              
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2306.07970" role="button"  target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://youtu.be/ak47wEZH1kY" role="button"  target="_blank">
+                    <i class="fa fa-file-video-o"></i> Video </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/NeuSC" role="button" target="_blank">
+                    <i class="fa fa-github"></i> Code </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://zjueducn-my.sharepoint.com/:f:/g/personal/haotongl_zju_edu_cn/EpL9XCKhfRNDmbrjeJC55T8B2XJiwlY_Ag9t9aBL2ULQ6g?e=HSUt9K" role="button" target="_blank">
+                    <i class="fa fa-database"></i> Data </a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/supp.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div> -->
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5"> TL;DR: Our method can reconstruct a time-varying 3D model from Internet photos, <br>
+              and render photo-realistic images with independent control of viewpoint, time and illumination. <br> </h6> 
+              <br>
+              <h6 style="color:#8899a5">The following video shows the reconstruction of <a href="https://www.flickr.com/search/?text=5pointz">5Pointz</a>, a large-scale graffiti landmark in New York City. </h6>
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="https://github.com/haotongl/imgbed/raw/master/neusc/5pointz_space_time.mp4" type="video/mp4">
+            </video>
+          <p class="text-left">In this work, we aim to reconstruct a time-varying 3D model, capable of rendering photo-realistic renderings with independent control of viewpoint, illumination and time, from Internet photos of large-scale landmarks.
+            The core challenges are twofold. First, different types of temporal changes, such as illumination and changes to the underlying scene itself 
+            (such as replacing one graffiti artwork with another) are entangled together in the imagery.
+            Second, scene-level temporal changes are often discrete and sporadic over time, rather than continuous.
+            To tackle these problems, we propose a new scene representation equipped with a novel temporal step function encoding method that 
+            can model discrete scene-level content changes as piece-wise constant functions over time. Specifically, we represent the scene as a space-time radiance field with a per-image illumination embedding, where temporally-varying scene changes are encoded using a set of learned step functions. To facilitate our task of chronology reconstruction from Internet imagery, we also collect a new dataset of four scenes that exhibit various changes over time. We demonstrate that our method exhibits state-of-the-art view synthesis results on this dataset, while achieving independent control of viewpoint, time and illumination. 
+          </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- multiview results -->
+    <br>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Controlling the illumination using a reference image</h3>
+              <hr style="margin-top:0px">
+              <!-- <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of dynamic human</h4> -->
+              <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/5pointz_illumination_control.mp4" type="video/mp4">
+              </video>
+              <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/timessquare_illuminatioon_control.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <br>
+    <br>
+    <section>
+    <section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>More results on Times Square and the Metropolitan Museum of Art</h3>
+              <hr style="margin-top:0px">
+              <!-- <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of dynamic human</h4> -->
+              <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/timessquare.mp4" type="video/mp4">
+              </video>
+              <br>
+              <br>
+              <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/metro.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+              <h3>Ablation on the time step function encoding</h3>
+              <hr style="margin-top:0px">
+              <!-- <h4 style="margin-top:20px; margin-bottom:20px; color:#717980">Novel view synthesis of dynamic human</h4> -->
+              <!-- <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/ablation.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+      <!-- </div> --> 
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>
+              Ablation on the time step function encoding
+            </h3>
+            <div class="video-compare-container" id="woDiv">
+              <video class="video" id="wo" loop="" playsinline="" autoplay="" muted="" src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/wo_out.mp4" onplay="resizeAndPlay(this)" style="height: 0px;"></video>
+              <canvas height="512" class="videoMerge" id="woMerge" width="512"></canvas>
+          </div>
+           <h6> Ours (Step Function Encoding) v.s. Without Encoding. </h6> 
+            <p class="text-center">
+            Step Function Encoding can model abrupt scene-level content changes without <br> overfitting per-image illumination noise. Without Encoding underfits the abrupt <br>scene-level content changes, leading to fade-in/fade-out artifacts.
+            </p>
+            <br>
+            <div class="video-compare-container" id="posDiv">
+                <video class="video" id="pos" loop="" playsinline="" autoplay="" muted="" src="https://raw.githubusercontent.com/haotongl/imgbed/master/neusc/pos_out.mp4" onplay="resizeAndPlay(this)" style="height: 0px;"></video>
+                <canvas height="512" class="videoMerge" id="posMerge" width="512"></canvas>
+            </div>
+            <h6>
+            Ours (Step Function Encoding) v.s. Positional Encoding. </h6>
+            <p class="text-center">
+            Positional encoding overfits the per-image illumination noise, leading to flickering artifacts.
+            </p>
+        </div>
+    </div>
+    </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{lin2023neural,
+  title={Neural Scene Chronology},
+  author={Lin, Haotong and Wang, Qianqian and Cai, Ruojin and Peng, Sida and Averbuch-Elor, Hadar and Zhou, Xiaowei and Snavely, Noah},
+  booktitle={CVPR},
+  year={2023}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

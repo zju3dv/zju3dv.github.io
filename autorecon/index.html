@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoRecon: Automated 3D Object Discovery and Reconstruction</title>
+  
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+
+  <style>
+    body {
+      background: rgb(255, 255, 255) no-repeat fixed top left;
+      font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h2 style="font-size:30px;">AutoRecon: Automated 3D Object Discovery and Reconstruction</h2>
+          <h4 style="color:#6e6e6e;"> CVPR 2023 (Highlight) </h4>
+          <hr>
+          <h6> <a href="https://github.com/angshine" target="_blank">Yuang Wang</a>,
+            <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a>,
+            <a href="https://pengsida.net" target="_blank">Sida Peng</a>,
+            <a href="https://haotongl.github.io" target="_blank">Haotong Lin</a>,
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a>,
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a>
+            <br>
+            <br>
+            <p>
+              State Key Lab of CAD & CG, Zhejiang University
+              <br>
+            </p>
+
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="https://arxiv.org/pdf/2305.08810.pdf" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" id="code"
+                    href="https://github.com/zju3dv/AutoRecon" role="button" target="_blank">
+                    <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light"
+                  href="files/autorecon_supp.pdf" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Supplementary </a> </p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+        <hr style="margin-top:0px">
+        <div class="row justify-content-center" style="align-items:center; display:flex;">
+          <div class="col-md-12">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+              <source src="videos/teaser_video.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <!-- <div class="col-md-6 img-responsive">
+              <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                    <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
+              </video>
+            </div> -->
+        <br>
+      </div>
+      <p class="text-justify">
+        A fully automated object reconstruction pipeline is crucial for digital content creation.
+        While the area of 3D reconstruction has witnessed profound developments, the removal of background
+        to obtain a clean object model still relies on different forms of manual labor, such as bounding box
+        labeling, mask annotations, and mesh manipulations. In this paper, we propose a novel framework named
+        AutoRecon for the automated discovery and reconstruction of an object from multi-view images.
+        We demonstrate that foreground objects can be robustly located and segmented from SfM point clouds by
+        leveraging self-supervised 2D vision transformer features. Then, we reconstruct decomposed neural scene
+        representations with dense supervision provided by the decomposed point clouds, resulting in accurate
+        object reconstruction and segmentation. Experiments on the DTU, BlendedMVS and CO3D-V2 datasets demonstrate
+        the effectiveness and robustness of AutoRecon.
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+<br>
+
+<!-- method overview -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Method Overview</h3>
+        <hr style="margin-top:0px">
+        <div class="row justify-content-center" style="align-items:center; display:flex;">
+          <div class="col-md-12">
+            <img width="80%" src="images/autorecon_teaser_new.jpg" alt="method_overview" class="img-fluid">
+          </div>
+        </div>
+        <br>
+      </div>
+      <p class="text-justify">
+        Given an object-centric video, we achieve coarse decomposition by
+        segmenting the salient foreground object from a semi-dense SfM
+        point cloud, with pointwise-aggregated 2D DINO features. Then
+        we train a decomposed neural scene representation from multi-view
+        images with the help of coarse decomposition results to reconstruct
+        foreground objects and render multi-view consistent high-quality
+        foreground masks.
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+<br>
+
+<!-- qualitative results -->
+<section>
+  <div class="col-md-12 text-center">
+    <h3>Qualitative Results</h2>
+      <hr style="margin-top:0px">
+      <!-- additional notes -->
+      <div style="display: inline-block; text-align: left;">
+        <p style="color: #808080;">
+          * please drag & scroll the "Coarse Decomposition" figure to see surrounding SfM point clouds.<br>
+          * we show reconstructed mesh with baked ambient occlusion.
+        </p>
+      </div>
+      <br>
+      
+      <ul class="nav nav-pills center-pills" id="pills-tab">
+        <li class="nav-item">
+          <a class="nav-link active" id="qual-results-scan1-tab" data-toggle="pill" href="#qual-results-scan1"
+            role="tab" data-url="assets/co3d_chair_380_45214_90438/tab.html" aria-controls="qual-results-scan1"
+            aria-selected="true">scan1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="qual-results-scan2-tab" data-toggle="pill" href="#qual-results-scan2" role="tab"
+            data-url="assets/co3d_chair_108_12859_23648/tab.html" aria-controls="qual-results-scan2" aria-selected="false">scan2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="qual-results-scan3-tab" data-toggle="pill" href="#qual-results-scan3" role="tab"
+            data-url="assets/bmvs_scan6/tab.html" aria-controls="qual-results-scan3"
+            aria-selected="false">scan3</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="qual-results-scan4-tab" data-toggle="pill" href="#qual-results-scan4" role="tab"
+            data-url="assets/bmvs_scan5/tab.html" aria-controls="qual-results-scan4"
+            aria-selected="false">scan4</a>
+        </li>
+      </ul>
+      <br>
+
+      <div class="tab-content" id="pills-tabContent">
+        <!-- scan1 (bmvs) -->
+        <div class="tab-pane fade show active" id="qual-results-scan1" role="tabpanel"
+          aria-labelledby="qual-results-scan1-tab">
+          <div class="loader">loading...</div>
+        </div>
+
+        <!-- scan2 (bmvs) -->
+        <div class="tab-pane fade" id="qual-results-scan2" role="tabpanel" aria-labelledby="qual-results-scan2-tab">
+          <div class="loader">loading...</div>
+        </div>
+
+        <!-- scan3 (co3d) -->
+        <div class="tab-pane fade" id="qual-results-scan3" role="tabpanel" aria-labelledby="qual-results-scan3-tab">
+          <div class="loader">loading...</div>
+        </div>
+
+        <!-- scan4 (co3d) -->
+        <div class="tab-pane fade" id="qual-results-scan4" role="tabpanel" aria-labelledby="qual-results-scan4-tab">
+          <div class="loader">loading...</div>
+        </div>
+      </div>
+  </div>
+</section>
+<br>
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{wang2023autorecon,
+  title={AutoRecon: Automated 3D Object Discovery and Reconstruction},
+  author={Wang, Yuang and He, Xingyi and Peng, Sida and Lin, Haotong and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={CVPR},
+  year={2023}
+}</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ack -->
+<!-- <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Acknowledgements</h3>
+          <hr style="margin-top:0px">
+          <p class="text-justify">
+          </p>
+      </div>
+    </div>
+  </div> -->
+
+
+<footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+  <hr>
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a
+    href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+</footer>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap-4.4.1.js"></script>
+<script src="js/load-tab.js"></script>
+</body>
+
+</html>

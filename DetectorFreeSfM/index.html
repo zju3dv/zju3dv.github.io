@@ -36,13 +36,10 @@
                 <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
                 <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
             <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
-                <sup>2</sup>Image Derivative Inc.
+                <sup>2</sup>Image Derivative Inc. &nbsp;&nbsp; 
                 <sup>3</sup>The University of Texas at Austin
                 <br>
             </p>
-            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
-                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
-                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
 
             <div class="row justify-content-center">
               <div class="column">
@@ -82,8 +79,8 @@
               TL;DR: We propose a detector-free structure from motion framework that eliminates the requirement of keypoint detection and can recover poses even on challenging texture-poor scenes.
             </h6>
             <br>
-            <video id="demo" width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="inspect_vid">
-                  <source src="images/demo_first_page.mp4" type="video/mp4">
+            <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="inspect_vid">
+                  <source src="images/first_page_demo.m4v" type="video/mp4">
             </video>
 
             <br>
@@ -92,7 +89,7 @@
               <br>
               <br>
           <p class="text-justify">
-            We propose a new structure-from-motion framework to recover accurate camera poses and point clouds from unordered images. Traditional SfM systems typically rely on the successful detection of repeatable keypoints across multiple views as the first step, which is difficult for texture-poor scenes, and poor keypoint detection may break down the whole SfM system. We propose a new detector-free SfM framework to draw benefits from the recent success of detector-free matchers to avoid the early determination of keypoints, while solving the multi-view inconsistency issue of detector-free matchers. Specifically, our framework first reconstructs a coarse SfM model from quantized detector-free matches. Then, it refines the model by a novel iterative refinement pipeline, which iterates between an attention-based multi-view matching module to refine feature tracks and a geometry refinement module to improve the reconstruction accuracy. Experiments demonstrate that the proposed framework outperforms existing detector-based SfM systems on common benchmark datasets. We also collect a texture-poor SfM dataset to demonstrate the capability of our framework to reconstruct texture-poor scenes. The submission based on our framework achieves the \textbf{first place} in Image Matching Challenge 2023.
+            We propose a new structure-from-motion framework to recover accurate camera poses and point clouds from unordered images. Traditional SfM systems typically rely on the successful detection of repeatable keypoints across multiple views as the first step, which is difficult for texture-poor scenes, and poor keypoint detection may break down the whole SfM system. We propose a new detector-free SfM framework to draw benefits from the recent success of detector-free matchers to avoid the early determination of keypoints, while solving the multi-view inconsistency issue of detector-free matchers. Specifically, our framework first reconstructs a coarse SfM model from quantized detector-free matches. Then, it refines the model by a novel iterative refinement pipeline, which iterates between an attention-based multi-view matching module to refine feature tracks and a geometry refinement module to improve the reconstruction accuracy. Experiments demonstrate that the proposed framework outperforms existing detector-based SfM systems on common benchmark datasets. We also collect a texture-poor SfM dataset to demonstrate the capability of our framework to reconstruct texture-poor scenes. The submission based on our framework achieves the $\textbf{first place}$ in Image Matching Challenge 2023.
           </p>
         </div>
       </div>
@@ -110,15 +107,15 @@
             <p class="text-justify">
               For the texture-poor scene, detector-based SfM fails due to the poor repeatability of detected keypoints at the beginning:</p>
             </p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
-              <source src="images/motivation.m4v" type="video/mp4">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/motivation.mov" type="video/mp4">
             </video>
 
             <p class="text-justify">
               Our detector-free SfM framework leverages detector-free matching and achieves complete reconstruction with highly accurate camera poses:</p>
             </p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
-              <source src="images/our_solution.m4v" type="video/mp4">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/our_solution.mov" type="video/mp4">
             </video>
 
         </div>
@@ -134,13 +131,13 @@
         <div class="col-12 text-center">
             <h3>Pipeline overview</h3>
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
-              <source src="images/our_pipeline.m4v" type="video/mp4">
+              <source src="images/our_pipeline.mov" type="video/mp4">
             </video>
 
             <p class="text-justify">
               Our framework reconstruct the scene with a coarse-to-fine manner to solve the multi-view inconsistency problem of detector-free matchers.
-              Beginning with a collection of unordered images, the \textbf{Coarse SfM} stage generates an initial SfM model based on multi-view matches from a detector-free matcher.
-              Then, the \textbf{Iterative Refinement} stage improves the accuracy of the SfM model by alternating between the feature track refinement module and the geometry refinement module.
+              Beginning with a collection of unordered images, the $\textbf{Coarse SfM}$ stage generates an initial SfM model based on multi-view matches from a detector-free matcher.
+              Then, the $\textbf{Iterative Refinement}$ stage improves the accuracy of the SfM model by alternating between the feature track refinement module and the geometry refinement module.
             </p>
         </div>
       </div>
@@ -158,7 +155,7 @@
             <p class="text-justify">
               On the scenes collected from internet and with large viewpoint and illumination changes, our framework achieves more accurate poses estimation.</p>
             </p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
               <source src="images/results_imc.m4v" type="video/mp4">
             </video>
         </div>
@@ -178,7 +175,7 @@
               Due to the severe low-textured scenario and viewpoint changes in the Texture-Poor SfM dataset, detector-based methods struggle with poor keypoint detection and lead to failed reconstruction. Thanks to the detector-free design, our framework achieves significantly higher accuracy and more complete reconstructions.
             </p>
             </p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
               <source src="images/results_lowtexture.m4v" type="video/mp4">
             </video>
         </div>
@@ -198,8 +195,8 @@
               The recovered poses by our framework on challenging scenes such as texture-poor objects can benefit the downstream tasks, including novel view synthesis and dense reconstruction.
             </p>
             </p>
-            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
-              <source src="images/results_lowtexture.m4v" type="video/mp4">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/applications.m4v" type="video/mp4">
             </video>
         </div>
       </div>

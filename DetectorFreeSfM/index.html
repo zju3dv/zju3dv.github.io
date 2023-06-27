@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col">
             <h2>Detector-Free Structure from Motion</h2>
-            <h4 style="color:#6e6e6e;"> Arxiv Preprint, 1st of Image Matching Challenge 2023</h4>
+            <h4 style="color:#6e6e6e;"> Arxiv Preprint, 1st in Image Matching Challenge 2023</h4>
             <hr>
             <h6> <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a><sup>1</sup>,
                  <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun</a><sup>2</sup>, 
@@ -43,22 +43,18 @@
 
             <div class="row justify-content-center">
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/main_paper.pdf" role="button"  target="_blank">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/main_paper_with_sup.pdf" role="button"  target="_blank">
                     <i class="fa fa-file"></i> Paper</a> </p>
               </div>
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" id="code (coming soon)" href="https://github.com/zju3dv/DetectorFreeSfM" role="button" 
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code" href="https://github.com/zju3dv/DetectorFreeSfM" role="button" 
                     target="_blank" disabled=1>
-                <i class="fa fa-github-alt"></i> Code</a> </p>
+                <i class="fa fa-github-alt"></i> Code (coming soon)</a> </p>
               </div>
               <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/supp.pdf" role="button"  target="_blank">
-                    <i class="fa fa-file"></i> Supplementary</a> </p>
-              </div>
-              <div class="column">
-                  <p class="mb-5"><a class="btn btn-large btn-light" id="dataset (coming soon)" href="" role="button" 
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="dataset" href="" role="button" 
                     target="_blank" disabled=1>
-                <i class="fa fa-github-alt"></i> Dataset </a> </p>
+                <i class="fa fa-github-alt"></i> Dataset (coming soon) </a> </p>
               </div>
             </div>
             
@@ -89,7 +85,7 @@
               <br>
               <br>
           <p class="text-justify">
-            We propose a new structure-from-motion framework to recover accurate camera poses and point clouds from unordered images. Traditional SfM systems typically rely on the successful detection of repeatable keypoints across multiple views as the first step, which is difficult for texture-poor scenes, and poor keypoint detection may break down the whole SfM system. We propose a new detector-free SfM framework to draw benefits from the recent success of detector-free matchers to avoid the early determination of keypoints, while solving the multi-view inconsistency issue of detector-free matchers. Specifically, our framework first reconstructs a coarse SfM model from quantized detector-free matches. Then, it refines the model by a novel iterative refinement pipeline, which iterates between an attention-based multi-view matching module to refine feature tracks and a geometry refinement module to improve the reconstruction accuracy. Experiments demonstrate that the proposed framework outperforms existing detector-based SfM systems on common benchmark datasets. We also collect a texture-poor SfM dataset to demonstrate the capability of our framework to reconstruct texture-poor scenes. The submission based on our framework achieves the $\textbf{first place}$ in Image Matching Challenge 2023.
+            We propose a new structure-from-motion framework to recover accurate camera poses and point clouds from unordered images. Traditional SfM systems typically rely on the successful detection of repeatable keypoints across multiple views as the first step, which is difficult for texture-poor scenes, and poor keypoint detection may break down the whole SfM system. We propose a new detector-free SfM framework to draw benefits from the recent success of detector-free matchers to avoid the early determination of keypoints, while solving the multi-view inconsistency issue of detector-free matchers. Specifically, our framework first reconstructs a coarse SfM model from quantized detector-free matches. Then, it refines the model by a novel iterative refinement pipeline, which iterates between an attention-based multi-view matching module to refine feature tracks and a geometry refinement module to improve the reconstruction accuracy. Experiments demonstrate that the proposed framework outperforms existing detector-based SfM systems on common benchmark datasets. We also collect a texture-poor SfM dataset to demonstrate the capability of our framework to reconstruct texture-poor scenes. Based on this framework, we take the $\textit{first place}$ in Image Matching Challenge 2023.
           </p>
         </div>
       </div>
@@ -196,8 +192,31 @@
             </p>
             </p>
             <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/application_nvs.m4v" type="video/mp4">
+            </video>
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
               <source src="images/applications.m4v" type="video/mp4">
             </video>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Image Matching Challenge 2023 -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Image Matching Challenge (IMC) 2023</h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              Our framework can be easily integrated with sparse detectors and matchers to perform reconstruction on challenging outdoor scenes. Our solution achieved the $\textit{first place}$ (out of 494 teams) in <a href="https://www.kaggle.com/competitions/image-matching-challenge-2023">IMC 2023</a>, where using detector-free matches and refinement phase in pipeline attributed significantly to the final winning. More details of our solution can be found <a href="https://www.kaggle.com/competitions/image-matching-challenge-2023/discussion/417407">here</a>.
+            </p>
+            </p>
+            <hr style="margin-top:0px">
+                <img class="img-fluid" src="images/imc_2023_results.png" alt="More qualitative results.">
+            <hr>
         </div>
       </div>
     </div>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Mirror-NeRF: Learning Neural Radiance Fields for Mirrors with Whitted-Style Ray Tracing">
+  <meta name="keywords" content="Mirror-NeRF, Neural Rendering, Ray Tracing, Scene Editing, Mirror, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>Mirror-NeRF: Learning Neural Radiance Fields for Mirrors with Whitted-Style Ray Tracing
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/neumesh/">
+            NeuMesh
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/sine/">
+            SINE
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <img src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/logo.png" alt="Mirror-NeRF"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Learning <span style="color: #6495ED">Ne</span>ural <span style="color: #6495ED">R</span>adiance <span style="color: #6495ED">F</span>ields for <span style="color: #87CEFA">Mirror</span>s <br> with Whitted-Style Ray Tracing
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ACM Multimedia 2023</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            [<a href="https://zjy-zju.github.io/">Junyi Zeng</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://chobao.github.io/">Chong Bao</a><sup>1</sup>]<sup>Co-Authors</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/rabbitchenrui">Rui Chen</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=GHOQKCwAAAAJ&hl=en&oi=ao">Zilong Dong</a><sup>2</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>, </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Alibaba Group</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+                <a href="https://arxiv.org/abs/2308.03280"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/mirror-nerf/mirror-nerf.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/mirror-nerf/mirror-nerf_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://github.com/zju3dv/Mirror-NeRF/"
+                 class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                <span>Code(Coming)</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--   <div class="is-size-5 publication-authors">
+    <div class="author-block">
+      <b>Junyi Zeng<sup>1*</sup></b>   </div>
+    <div class="author-block">
+      <b>Chong Bao<sup>1*</sup></b>   </div>
+    <div class="author-block">
+      <b>Rui Chen<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Zilong Dong<sup>2</sup></b>   </div>
+    <div class="author-block">
+      <b>Guofeng Zhang<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Hujun Bao<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Zhaopeng Cui<sup>1✝</sup></b>   </div>
+  </div>
+  <div class="is-size-5 publication-authors">
+    <span class="author-block"><b><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University</b> </span>
+    <span class="author-block"><b><sup>2</sup>Alibaba Group</b></span>
+  </div> -->
+
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://github.com/zjy-zju/open_access_assets/blob/main/Mirror-NeRF/teaser.mp4?raw=true"
+                type="video/mp4">
+      </video>
+      <!-- <h2 class="subtitle has-text-centered"> -->
+      <h2 class="subtitle has-text-justified">
+<i>Mirror-NeRF</i> is a novel neural rendering framework that incorporates Whitted Ray Tracing to achieve photo-realistic novel view synthesis in the scene with the mirror and supports various scene manipulation applications. 
+Given posed images with mirror masks, <i>Mirror-NeRF</i> can learn the correct geometry and reflection of the mirror.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+Recently, Neural Radiance Fields (NeRF) has exhibited significant success in novel view synthesis, surface reconstruction, etc. 
+However, since no physical reflection is considered in its rendering pipeline, NeRF mistakes the reflection in the mirror as a separate virtual scene, leading to the inaccurate reconstruction of the mirror and multi-view inconsistent reflections in the mirror. 
+In this paper, we present a novel neural rendering framework, named MirrorNeRF, which is able to learn accurate geometry and reflection of the mirror and support various scene manipulation applications with mirrors, such as adding new objects or mirrors into the scene and synthesizing the reflections of these new objects in mirrors, controlling mirror roughness, etc. 
+To achieve this goal, we propose a unified radiance field by introducing the reflection probability and tracing rays following the light transport model of Whitted Ray Tracing, and also develop several techniques to facilitate the learning process. 
+Experiments and comparisons on both synthetic and real datasets demonstrate the superiority of our method.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <!-- <h2 class="title is-5">YouTube Source <br> (Alternate Source: <a href="https://b23.tv/y5WbTiF">Bilibili</a>)</h2> -->
+        <h2 class="title is-5"> <a href="https://youtu.be/gyGK9wnU0tc">YouTube</a> | <a href="https://b23.tv/y5WbTiF">Bilibili</a> </h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/gyGK9wnU0tc"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zjy-zju/open_access_assets/main/Mirror-NeRF/framework.png"
+             alt="Mirror-NeRF architecture."/>
+      </div>
+      <p>
+We trace the rays physically in the scene and learn a unified radiance field of the scene with the mirror. 
+The neural field takes as input spatial location $\mathbf{x}$, view direction $\mathbf{d}$, and outputs the volume density $\hat{\sigma}$, radiance $\hat{\mathbf{c}}$, surface normal $\hat{\mathbf{n}}$ and reflection probability $\hat{m}$. 
+The final color is blended by the color of the camera ray and the reflected ray based on the reflection probability.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+
+  <div class="container is-max-desktop">
+    <div class="container has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Applications</p></h2>
+
+      <div>
+        <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+          <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_placing_new_mirrors.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+        <i>Mirror-NeRF</i> supports integrating new mirrors into the original scene by tracing the reflected rays at the mirror recursively.
+        <i>Mirror-NeRF</i> enables the synthesis of novel views involving inter-reflection between the newly positioned mirror and the original mirror.
+        </p>
+      </div>
+
+      <div>
+        <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+          <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflecting_newly_placed_objects.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+        <i>Mirror-NeRF</i> supports the composition of multiple neural radiance fields and synthesizes new reflections of the compositional scenes in the mirror.
+        This application might be of great use in VR and AR.
+        </p>
+      </div>
+
+      <div>
+        <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+          <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflection_substitution.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+        <i>Mirror-NeRF</i> supports reflection substitution by tracing the reflected rays in the new scene.
+        </p>
+      </div>
+
+      <div>
+        <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+          <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_mirror_roughness_control.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+        <i>Mirror-NeRF</i> supports controlling the roughness of the mirror by simulating the microfacets theory, since the geometry of the mirror is learned and ray tracing is supported.
+        </p>
+      </div>
+
+    </div>
+  </div>
+    
+  <br/>
+
+
+<!--   <div class="container is-max-desktop">
+    <div class="container has-text-centered">
+      <h2 class="title is-3 has-text-centered"><p>Applications</p></h2>
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_placing_new_mirrors.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_placing_new_mirrors_intro.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflecting_newly_placed_objects.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflecting_newly_placed_objects_intro.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflection_substitution.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_reflection_substitution_intro.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="espresso-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_mirror_roughness_control.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div>
+          <div class="results-item">
+            <video poster="" id="3dprinter-rgb" autoplay controls muted loop playsinline height="100%">
+              <source src="https://github.com/zjy-zju/open_access_assets/raw/main/Mirror-NeRF/app_mirror_roughness_control_intro.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+    
+  <br/> -->
+
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{zeng2023mirror-nerf,
+    title={Mirror-NeRF: Learning Neural Radiance Fields for Mirrors with Whitted-Style Ray Tracing},
+    author={Zeng, Junyi and Bao, Chong and Chen, Rui and Dong, Zilong and Zhang, Guofeng and Bao, Hujun and Cui, Zhaopeng},
+    booktitle={Proceedings of the 31th ACM International Conference on Multimedia},
+    year={2023}
+}</code></pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFMMMPXL0M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFMMMPXL0M');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

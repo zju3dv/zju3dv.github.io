@@ -119,42 +119,40 @@
 
 
   <!-- Pipeline overview -->
-  <!-- <section>
+  <section>
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
             <h3>Pipeline overview</h3>
             <hr style="margin-top:0px">
-            <img class="img-fluid" src="images/onepose-arch.png" alt="NeuralRecon Architechture">
+            <img class="img-fluid" src="images/pipeline.png" alt="NeuralRecon Architechture">
             <hr style="margin-top:0px">
             <p class="text-justify">
-              $\textbf{1.}$ For each object, a video scan with RGB frames $\{\mathbf{I}_i\}$ and camera poses $\{\xi_{i}\}$ are collected together with the annotated 3D object bounding box $\mathbf{B}$.
-              $\textbf{2.}$ Structure from Motion (SfM) reconstructs a sparse point cloud $\{\mathbf{P}_j\}$ of the object.
-              $\textbf{3.}$ The correspondence graphs $\{\mathcal{G}_j\}$  are built during SfM, which represent the 2D-3D correspondences in the SfM map.
-              $\textbf{4.}$ 2D descriptors $\{\mathbf{F}_k^{2D}\}$ are aggregated to 3D descriptors $\{\mathbf{F}_j^{3D}\}$  with the aggregration-attention layer. $\{\mathbf{F}_j^{3D}\}$ are later matched with 2D descriptors from the query image $\{\mathbf{F}_q^{2D}\}$ to generate 2D-3D match predictions $\mathcal{M}_{3D}$.
-              $\textbf{5.}$ Finally, the object pose $\xi_{q}$  is computed by solving the PnP problem with $\mathcal{M}_{3D}$.
+              $\textbf{1.}$ The method uses an FPN-Lite CNN to extract multi-level features for the current cropped frame $_c\mathit{I}_k$, and represents the local region of the contour by a correspondence line model.
+              $\textbf{2.}$ A contour feature map $_{ct}\mathbf{F}_k^s$ is built by sampling a cycle of correspondence lines upon the image feature map, followed by a boundary prediction module that predicts boundary location probability $_{ct}\mathbf{B}_k^s$.
+              $\textbf{3.}$ A differentiable optimization layer is used to estimate the pose $\mathbf{P}_k^s$ in a coarse-to-fine manner. The superscript `s' refers to various feature levels.
             </p>
         </div>
       </div>
     </div>
   </section>
-  <br> -->
+  <br>
 
     <!-- Comparison with Atlas -->
-    <!-- <section>
+    <section>
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-              <h3>Comparison with <a href="http://zak.murez.com/atlas">Atlas</a> on a large scene (30m x 10m)</h3>
+              <h3> Tracking Results on Public Dataset without Reset </h3>
               <hr style="margin-top:0px">
-              <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
-                <source src="videos/Comparison-atlas.m4v" type="video/mp4">
+              <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="">
+                <source src="videos/new_demo1.mp4" type="video/mp4">
             </video>
           </div>
         </div>
       </div>
     </section>
-    <br>   -->
+    <br>  
 
   <!-- Comparison with depth-based methods -->
   <!-- <section>

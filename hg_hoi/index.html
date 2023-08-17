@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hierarchical Generation of Human-Object Interactions with Diffusion Probabilistic Models</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      background: rgb(255, 255, 255) no-repeat fixed top left;
+      font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2 style="font-size:30px;">Hierarchical Generation of Human-Object Interactions with Diffusion Probabilistic
+            Models</h2>
+          <h4 style="color:#6e6e6e;">ICCV 2023</h4>
+          <!-- <h5 style="color:#6e6e6e;"> (Oral Presentation and Best Paper Candidate)</h5> -->
+          <hr>
+          <h6> <a target="_blank">Huaijin Pi</a><sup>1</sup>,
+            <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>,
+            <a target="_blank">Minghui Yang</a><sup>2</sup>,
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>,
+            <a href="http://www.cad.zju.edu.cn/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+          </h6>
+          <p> <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp;
+            <sup>2</sup>Ant Group &nbsp;&nbsp;
+            <br>
+          </p>
+          <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+          <div class="row justify-content-center">
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                  <i class="fa fa-file"></i> Paper </a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="" role="button" target="_blank"
+                  disabled=1>
+                  <i class="fa fa-github-alt"></i> Code </a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="" role="button" target="_blank"
+                  disabled=1>
+                  <i class="fa fa-github-alt"></i> Video </a> </p>
+            </div>
+            <div class="column">
+              <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                  <i class="fa fa-file"></i> Supplementary </a> </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- abstract -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+        <hr style="margin-top:0px">
+        <div class="text-center">
+          <img width="95%" class="img-fluid" src="images/teaser_web.png" alt="Teaser"><br>
+        </div>
+        <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+          <br>
+        </div>
+        <!-- <br><br> -->
+        <p class="text-justify">
+          This paper presents a novel approach to generating the 3D motion of a human interacting with a target object,
+          with a focus on solving the challenge of synthesizing long-range and diverse motions, which could not be
+          fulfilled by existing auto-regressive models or path planning-based methods. We propose a hierarchical
+          generation framework to solve this challenge. Specifically, our framework first generates a set of
+          milestones and then synthesizes the motion along them. Therefore, the long-range motion generation could be
+          reduced to synthesizing several short motion sequences guided by milestones. The experiments on the NSM,
+          COUCH, and SAMP datasets show that our approach outperforms previous methods by a large margin in both quality
+          and diversity.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Pipeline overview -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Pipeline Overview</h3>
+        <hr style="margin-top:0px">
+        <img class="img-fluid" src="images/overview.png" alt="pipeline">
+        <hr style="margin-top:0px">
+        <p class="text-justify">
+          Our pipeline consists of three components: First, the goal pose is synthesized given the object. Then, a
+          number of milestones with local poses are predicted based on the goal pose. Finally, the trajectory and the
+          full motion sequences are infilled between the milestones.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Acknowledgements -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Acknowledgements</h3>
+      <hr style="margin-top:0px">
+      <p class="text-justify">
+        We thank Jintao Lu, Zhi Cen, Zizhang Li, and Kechun Xu for the valuable discussions.
+        <br>
+        This work was partially supported by the Key Research Project of Zhejiang Lab (No. K2022PG1BB01), NSFC (No.
+        62172364), and Information Technology Center and State Key Lab of CAD&CG, Zhejiang University.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{pi2023hghoi,
+  title={Hierarchical Generation of Human-Object Interactions with Diffusion Probabilistic Models},
+  author={Pi, Huaijin and Peng, Sida and Yang, Minghui and Zhou, Xiaowei and Bao, Hujun},
+  journal={ICCV},
+  year={2023}
+}</code></pre>
+      <!-- <hr> -->
+    </div>
+  </div>
+</div>
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+
+</html>

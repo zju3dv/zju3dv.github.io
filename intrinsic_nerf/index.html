@@ -21,7 +21,7 @@
           <br /> Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis
           <br /> 
           </h2>
-          <h4 style="color:#5a6268;">Arxiv 2022 </h4>
+          <h4 style="color:#5a6268;">ICCV 2023 </h4>
           <hr>
           <h6>
             <a href="https://ywcmaike.github.io/" target="_blank">Weicai Ye*</a>,
@@ -100,7 +100,7 @@
         </div> -->
         <hr>
         <p class="text-left">
-          Existing inverse rendering combined with neural rendering methods can only perform editable novel view synthesis on object-specific scenes, while we present intrinsic neural radiance fields, dubbed IntrinsicNeRF, which introduce intrinsic decomposition into the NeRF-based neural rendering method and can extend its application to room-scale scenes. Since intrinsic decomposition is a fundamentally under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method, which enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in temporally consistent intrinsic decomposition results. To cope with the problem that different adjacent instances of similar reflectance in a scene are incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It supports compelling real-time augmented applications such as recoloring and illumination variation. Extensive experiments and editing samples on both object-specific/room-scale scenes and synthetic/real-word data demonstrate that we can obtain consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences. 
+          Existing inverse rendering combined with neural rendering methods can only perform editable novel view synthesis on object-specific scenes, while we present intrinsic neural radiance fields, dubbed IntrinsicNeRF, which introduce intrinsic decomposition into the NeRF-based neural rendering method and can extend its application to room-scale scenes. Since intrinsic decomposition is a fundamentally under-constrained inverse problem, we propose a novel distance-aware point sampling and adaptive reflectance iterative clustering optimization method, which enables IntrinsicNeRF with traditional intrinsic decomposition constraints to be trained in an unsupervised manner, resulting in multi-view consistent intrinsic decomposition results. To cope with the problem that different adjacent instances of similar reflectance in a scene are incorrectly clustered together, we further propose a hierarchical clustering method with coarse-to-fine optimization to obtain a fast hierarchical indexing representation. It supports compelling real-time augmented applications such as recoloring and illumination variation. Extensive experiments and editing samples on both object-specific/room-scale scenes and synthetic/real-word data demonstrate that we can obtain consistent intrinsic decomposition results and high-fidelity novel view synthesis even for challenging sequences.
         </p>
       </div>
     </div>
@@ -125,8 +125,8 @@
           alt="method">
         <hr> 
         <p class="text-justify">
-          Given multi-view posed images of static scenes, IntrinsicNeRF can factorize the scene into the temporally consistent components: reflectance, shading, and residual layers. The decomposition can support online applications such as scene recoloring, illumination variation, and novel view synthesis.
-                </p>
+          Given multi-view posed images of static scenes, IntrinsicNeRF can factorize them into the multi-view consistent components: reflectance, shading, and residual layers. The decomposition can support online applications such as scene recoloring, illumination variation, and editable novel view synthesis.
+        </p>
       </div>
     </div>
   </div>
@@ -383,12 +383,14 @@
       <h3>Citation</h3>
       <hr style="margin-top:0px">
       <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
-<code>@article{Ye2022IntrinsicNeRF,
-    title={IntrinsicNeRF: Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis},
+<code>
+  @inproceedings{Ye2023IntrinsicNeRF,
+    title={{IntrinsicNeRF: Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis}},
     author={Ye, Weicai and Chen, Shuo and Bao, Chong and Bao, Hujun and Pollefeys, Marc and Cui, Zhaopeng and Zhang, Guofeng},
-    booktitle={arxiv}, 
-    year={2022}
-}</code></pre>
+    booktitle={{Proceedings of the IEEE/CVF International Conference on Computer Vision}},
+    year={2023}
+  }
+</code></pre>
       <hr>
     </div>
   </div>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Multi-Modal Neural Radiance Field for Monocular Dense SLAM with a Light-Weight ToF Sensor">
+  <meta name="keywords" content="Multi-Modal NeRF, Dense SLAM, Light-Weight ToF Sensor">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multi-Modal Neural Radiance Field for Monocular Dense SLAM with a Light-Weight ToF Sensor</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Multi-Modal Neural Radiance Field for Monocular Dense SLAM with a Light-Weight ToF Sensor
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICCV 2023 (Oral)</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://zju3dv.github.io/tof_slam/">Xinyang Liu</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://eugenelyj.github.io/">Yijin Li</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zju3dv.github.io/tof_slam/">Yanbin Teng</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+          <div class="author-block">
+            <a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Google</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2308.14383.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/tof_slam"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code(Coming)</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://drive.google.com/file/d/1wfGKT5z02dCqiZWNYlbPWTBjX5nWMacT/view?usp=sharing"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fa fa-database"></i>
+                </span>
+                <span>Data</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/tof_slam/supp.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>Supplementary</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="has-text-centered">
+        <img style="width: 50%;" src="https://raw.githubusercontent.com/QsingHuan/open_access_assets/main/tof_slam/teaser.png"
+             alt="Demonstration of light-weight ToF Sensor"/>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Light-weight time-of-flight (ToF) depth sensors are compact and cost-efficient, and thus widely used on mobile devices 
+            for tasks such as autofocus and obstacle detection. However, due to the sparse and noisy depth measurements, these sensors 
+            have rarely been considered for dense geometry reconstruction. In this work, we present the first dense SLAM system with a 
+            monocular camera and a light-weight ToF sensor. Specifically, we propose a multi-modal implicit scene representation that 
+            supports rendering both the signals from the RGB camera and light-weight ToF sensor which drives the optimization by comparing 
+            with the raw sensor inputs. Moreover, in order to guarantee successful pose tracking and reconstruction, we exploit a predicted 
+            depth as an intermediate supervision and develop a coarse-to-fine optimization strategy for efficient learning of the implicit 
+            representation. At last, the temporal information is explicitly exploited to deal with the noisy signals from light-weight ToF 
+            sensors to improve the accuracy and robustness of the system. Experiments demonstrate that our system well exploits the signals 
+            of light-weight ToF sensors and achieves competitive results both on camera tracking and dense scene reconstruction. 
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section>
+  <hr/>
+  <div class="container is-max-desktop">
+   <div class="columns is-centered has-text-centered">
+      <div class="column is-forth-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/watch?v=7aJvVG7OLLQ"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>What is the light-weight ToF sensor?</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 80%;" src="https://raw.githubusercontent.com/eugenelyj/open_access_assets/master/deltar/principle.png"
+             alt="Demonstration of the light-weight ToF Sensor"/>
+      </div>
+      <p>
+        Light-weight ToF sensors are designed to be low-cost, small, and low-energy, which have been massively
+        deployed on mobile devices for the purposes like autofocus, obstacle detection, etc.
+        Due to the light-weight electronic design, the depth measured by these sensors has more uncertainty
+        (i.e., in a distribution instead of single depth value) and low spatial resolution (e.g., &#8804; 10×10). 
+        Let's use the VL53L5CX as an example to explain the sensing principle of the light-weight ToF sensor.
+        For conventional ToF sensors, the output is typically in a resolution higher than 10 thousand pixels
+        and measures the per-pixel distance along the ray from the optical center to the observed surfaces.
+        In contrast, VL53L5CX (denoted as L5) provides depth distributions with an extremely low resolution of 8 × 8 zones,
+        covering 63&#176; diagonal FoV in total. 
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <p>
+        Our method uses a monocular camera and a light-weight ToF sensor as input and recovers both camera
+        motion and the scene structures. Through differentiable rendering, our method can render multi-modal signals, including color images,
+        depth images and zone-level L5 signals. Both the scene structure and the camera poses are optimized by minimizing the re-rendering loss.
+      </p>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/QsingHuan/open_access_assets/main/tof_slam/pipeline-final.png"
+             alt="System Pipeline"/>
+      </div>
+      <p>
+        Based on the characteristics of L5's signals, we design the first dense SLAM system with a monocular camera and a
+        light-weight ToF sensor. Specifically, we first propose a multi-modal implicit scene representation
+        which enables rendering L5 signals together with the common RGB image and depth maps. To guarantee
+        successful tracking and mapping, we exploit a depth prediction model DELTAR to predict intermediate per-pixel depth
+        maps as additional supervision. By minimizing the difference between the rendered signals and input/predicted ones,
+        we can simultaneously optimize the camera pose and scene structure in a coarse-to-fine way. Furthermore, since the
+        depth prediction may contain severe artifacts when there is a large portion of missing L5 signals, we propose to refine
+        the L5 signals with temporal filtering techniques to enhance the depth prediction module.
+      </p>
+      <div class="has-text-centered">
+        <video id="demo" autoplay controls muted loop playsinline width="70%">
+          <source src="https://raw.githubusercontent.com/QsingHuan/open_access_assets/main/tof_slam/short_demo.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+  <br/>
+</section>
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Qualitative Reconstruction Results</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/QsingHuan/open_access_assets/main/tof_slam/mesh.png"
+             alt="Demonstration of light-weight ToF Sensor"/>
+      </div>
+      <p>
+        We compare our method with two categories of baselines: (a) learning-based SLAM methods including iMAP and NICE-SLAM; 
+        (b) traditional SLAM methods including KinectFusion, ElasticFusion and BundleFusion. 
+        Since all other methods only support RGB-D input, we use the RGB image and the predicted depth map by DELTAR as the system input.
+        Note that none of these methods can work well with only raw L5 zone-level depths or take it as additional inputs. 
+        Our method is able to produce high-quality 3D models with smooth surfaces and high accuracy. It is easy to notice that our reconstruction result
+        has much fewer artifacts and noisy points. Since NICE-SLAM relies on high-quality depth input, its performance is poor given the 
+        noisy and unreliable depth input.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+      <code>@inproceedings{tofslam,
+      title={Multi-Modal Neural Radiance Field for Monocular Dense SLAM with a Light-Weight ToF Sensor},
+      author={Liu Xinyang and Li Yijin and Teng Yanbin and Bao Hujun and Zhang Guofeng and Zhang Yinda and Cui Zhaopeng},
+      booktitle={International Conference on Computer Vision (ICCV)},
+      year={2023}
+      }</code>
+    </pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

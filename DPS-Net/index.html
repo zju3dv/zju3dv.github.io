@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DPS-Net Deep Polarimetric Stereo Depth Estimation">
+  <meta name="keywords" content="DPS-Net, Stereo Depth Estimation, Polarization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DPS-Net: Deep Polarimetric Stereo Depth Estimation</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div> -->
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+<!-- </nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        DPS-Net: Deep Polarimetric Stereo Depth Estimation
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICCV 2023</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="">Chaoran Tian</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="">Weihong Pan</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="">Zimo Wang</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="">Mao Mao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="">Ping Tan</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>,
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Hong Kong University of Science and Technology</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+              <a href=""
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/Ethereal-Tian/IPS_Generator"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fa fa-database"></i>
+                </span>
+                <span>Data</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>Supplementary</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="has-text-centered">
+        <img style="width: 80%;" src=https://github.com/Ethereal-Tian/open_access_assets/blob/master/DPS-Net/pipeline.png?raw=true"
+             alt="Pipeline overview"/>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Stereo depth estimation usually struggles to deal with textureless scenes for both traditional and learning-based methods due to the inherent dependence on image correspondence matching. In this paper, we propose a novel neural network, i.e., DPS-Net, to exploit both the prior geometric knowledge and polarimetric information for depth estimation with two polarimetric stereo images. Specifically, we construct both RGB and polarization correlation volumes to fully leverage the multi-domain similarity between polarimetric stereo images.
+            Since inherent ambiguities exist in the polarization images, we introduce the iso-depth cost explicitly into the network to solve these ambiguities.
+            Moreover, we design a cascaded dual-GRU architecture to recurrently update the disparity and effectively fuse both the multi-domain correlation features and the iso-depth cost. Besides, we present new synthetic and real polarimetric stereo datasets for evaluation. Experimental results demonstrate that our method outperforms the state-of-the-art stereo depth estimation methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/8Td3Oy7y_Sc"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Cascaded Dual-GRU Architecture</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 70%;" src="https://github.com/Ethereal-Tian/open_access_assets/blob/master/DPS-Net/update_block.png?raw=true"
+             alt="Demonstration of Dual-GRU Architecture"/>
+      </div>
+      <p>
+        We design a cascaded dual-GRU architecture to combine the iso-depth cost with the visual similarity. 
+        The cascaded dual-GRU architecture is composed of a regression GRU and an optimization GRU,
+        which implement a regress-and-optimize recurrently updating paradigm. In the regression GRU,
+        the disparity is regressed intuitively from the multi-domain correlation features of the actual disparity,
+        which leverage the similarity of the RGB and polarization images to produce an initial prediction for the subsequent optimization.
+        In the optimization GRU, the iso-depth cost is injected directly and introduced in an indirect manner by the virtual correlation feature. 
+        The optimization GRU fuses the geometric constraint and further rectifies the disparity.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Qualitative Results</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 70%;" src="https://github.com/Ethereal-Tian/open_access_assets/blob/master/DPS-Net/irs_iccv_0306.png?raw=true"
+             alt="Visualization of Qualitative Results"/>
+        <img style="width: 70%;" src="https://github.com/Ethereal-Tian/open_access_assets/blob/master/DPS-Net/spd_iccv_0306.png?raw=true"
+             alt="Visualization of Qualitative Results"/>
+      </div>
+      <p>
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Video</p></h2>
+      <div class="has-text-centered">
+        <video id="teaser" autoplay controls muted loop playsinline height="100%">
+          <source src="https://github.com/Ethereal-Tian/open_access_assets/raw/master/DPS-Net/09109_video.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <p>
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+<code>@inproceedings{dpsnet,
+  title={DPS-Net: Deep Polarimetric Stereo Depth Estimation},
+  author={Chaoran Tian, Weihong Pan, Zimo Wang, Mao Mao, Guofeng Zhang, Hujun Bao, Ping Tan, Zhaopeng Cui},
+  booktitle={The IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year={2023}}
+</code>
+</pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

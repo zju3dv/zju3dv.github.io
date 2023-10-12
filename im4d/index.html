@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Im4D</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <script src="js/video_comparison.js"></script>
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes</h2>
+            <h4 style="color:#5a6268;">SIGGRAPH Asia 2023 (Conference Track)</h4>
+            <hr>
+            <h6> <a href="https://haotongl.github.io" target="_blank">Haotong Lin</a>,
+                 <a href="https://pengsida.net" target="_blank">Sida Peng</a>*,
+                 <a href="https://github.com/dendenxu" target="_blank">Zhen Xu</a>,
+                 <a href="https://github.com/xbillowy" target="_blank">Tao Xie</a>, 
+                 <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a>,
+                 <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a>,
+                 <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a> 
+                 <br>
+                 <br>
+                 <p>State Key Lab of CAD & CG, Zhejiang University <br> * denotes corresponding author</p>
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1MOixYy-TESDvcoL9Qj4V7tDvafqDmibh/view?usp=sharing" role="button"  target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://youtu.be/pPl1M5jpK4g" role="button"  target="_blank">
+                    <i class="fa fa-file-video-o"></i> Video </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/im4d" role="button" target="_blank">
+                    <i class="fa fa-github"></i> Code </a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://raw.githubusercontent.com/haotongl/imgbed/master/enerf/supp.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary</a> </p>
+              </div> -->
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <h6 style="color:#8899a5">The following video shows our rendering results on the DNA-Rendering dataset. </h6>
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+              <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/final2.mp4" type="video/mp4">
+            </video>
+              <!-- <h6 style="color:#8899a5">The following video shows the reconstruction of <a href="https://www.flickr.com/search/?text=5pointz">5Pointz</a>, a large-scale graffiti landmark in New York City. </h6> -->
+            <!-- <img src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/im4d_pipeline.png" alt="Overview of Im4D" title="Im4D"> -->
+            <!-- <img src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/im4d_pipeline.png" alt="Overview of Im4D" width="1000" title="Im4D"> -->
+            <br>
+            <br>
+          <p class="text-left">This paper aims to tackle the challenge of dynamic view synthesis from multi-view videos. The key observation is that while previous grid-based methods offer consistent rendering, they fall short in capturing appearance details of a complex dynamic scene, a domain where multi-view image-based rendering methods demonstrate the opposite properties. To combine the best of two worlds, we introduce Im4D, a hybrid scene representation that consists of a grid-based geometry representation and a multi-view image-based appearance representation. Specifically, the dynamic geometry is encoded as a 4D density function composed of spatiotemporal feature planes and a small MLP network, which globally models the scene structure and facilitates the rendering consistency. We represent the scene appearance by the original multi-view videos and a network that learns to predict the color of a 3D point from image features, instead of memorizing detailed appearance totally with networks, thereby naturally making the learning of networks easier. Our method is evaluated on five dynamic view synthesis datasets including DyNeRF, ZJU-MoCap, NHR, DNA-Rendering and ENeRF-Outdoor datasets. The results show that Im4D exhibits state-of-the-art performance in rendering quality and can be trained efficiently, while realizing real-time rendering with a speed of 79.8 FPS for 512x512 images, on a single RTX 3090 GPU.
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview Video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/pPl1M5jpK4g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>More rendering results</h3>
+            <hr style="margin-top:0px">
+            <video width="85%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/dna_2_compress.mp4" type="video/mp4">
+            </video>
+            <video width="85%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/dna_1.mp4" type="video/mp4">
+            </video>
+            <video width="85%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/dna_3.mp4" type="video/mp4">
+            </video>
+            <video width="85%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/dna_4_compress.mp4" type="video/mp4">
+            </video>
+            </br>
+            Video results on the DNA-Rendering[Cheng et al., 2023] dataset.
+            </br>
+            </br>
+            <video width="95%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/final1.mp4" type="video/mp4">
+            </video>
+            </br>
+            Video results on the ENeRF-Outdoor[Lin et al., 2022] and DyNeRF[Li et al., 2022] datasets.
+            </br>
+            </br>
+
+            <video width="95%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/final4.mp4" type="video/mp4">
+            </video>
+            </br>
+            Video results on the NHR[Wu et al., 2020] and ZJU-MoCap[Peng et al., 2021] datasets.
+            </br>
+            </br>
+            </br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Comparisions with ENeRF, IBRNet and K-Planes</h3>
+            <hr style="margin-top:0px">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/comp_sota.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>More Rendering Results</h3>
+            <hr style="margin-top:0px">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/additional_results.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{lin2023im4d,
+  title={High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes},
+  author={Lin, Haotong and Peng, Sida and Xu, Zhen and Xie, Tao and He, Xingyi and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={SIGGRAPH Asia Conference Proceedings},
+  year={2023}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

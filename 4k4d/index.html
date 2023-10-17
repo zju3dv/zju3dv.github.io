@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4K4D</title>
+
+  <!-- Bootstrap -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel='stylesheet'
+    href='https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap'>
+  <style>
+    body {
+      font-family: 'Jost';
+    }
+
+    b {
+      font-weight: black;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .qualitative-result-section {
+      padding-top: 50px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 10%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+
+    .renbody-zoom {
+      transform: scale(1.65) translateY(2%);
+    }
+
+    .renbody-zoom-container {
+      width: 80%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+    }
+
+    .video-zoom-container {
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      border-radius: 5px;
+      margin: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.65);
+    }
+
+    .nhr-zoom {
+      transform: scale(1.45);
+    }
+
+    .zjumocap-zoom {
+      transform: scale(1.3);
+    }
+  </style>
+  <script>
+  </script>
+</head>
+
+<body>
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b style="color: #6589bf">4K</b><b style="color: #78aa58">4D</b>:
+              <b style="color: #c68b5b">Real-Time</b>
+              <b style="color: #78aa58">4D</b> View Synthesis
+              at <b style="color: #6589bf">4K</b> Resolution
+            </h1>
+            <!-- <h4 style="color:#5a6268;">SIGGRAPH Asia 2023 (Conference Track)</h4> -->
+            <a href="https://github.com/dendenxu" target="_blank">Zhen Xu<sup>1</sup></a>&nbsp;
+            <a href="https://pengsida.net" target="_blank">Sida Peng<sup>1</sup> </a>&nbsp;
+            <a href="https://haotongl.github.io" target="_blank">Haotong Lin<sup>1</sup> </a>&nbsp;
+            <a href="https://github.com/AlexHe1234" target="_blank">Guangzhao He<sup>1</sup> </a>&nbsp;
+            <a href="https://jiamingsun.ml/" target="_blank">Jiaming Sun<sup>2</sup> </a>&nbsp;
+            <a href="https://shenyujun.github.io/" target="_blank">Yujun Shen<sup>3</sup> </a>&nbsp;
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>1</sup> </a>&nbsp;
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>1</sup>
+            </a>
+            <br />
+            <br />
+            <p>
+              <sup>1</sup>Zhejiang
+              University&nbsp;&nbsp;&nbsp;<sup>2</sup>Image
+              Derivative Inc.&nbsp;&nbsp;&nbsp;<sup>3</sup>Ant
+              Group
+            </p>
+
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light"
+                    href="https://drive.google.com/file/d/1Y-C6ASIB8ofvcZkyZ_Vp-a2TtbiPw1Yx/view?usp=sharing"
+                    role="button" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Paper
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light"
+                    href="https://drive.google.com/file/d/1Y-C6ASIB8ofvcZkyZ_Vp-a2TtbiPw1Yx/view?usp=sharing"
+                    role="button" target="_blank">
+                    <i class="ai ai-arxiv"></i>
+                    arXiv (Coming Soon)
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                    <i class="fa fa-file-video-o"></i>
+                    Video (Coming Soon)
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/4K4D" role="button"
+                    target="_blank">
+                    <i class="fa fa-github"></i>
+                    Code
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 text-center">
+          <h6 style="color: #8899a5">
+            The following recordings show our real-time
+            rendering demo on the DNA-Rendering, ENeRF-Outdoor and Mobile-Stage dataset.
+          </h6>
+
+
+          <div id="bkgdCarousel" class="carousel slide" data-ride="carousel" data-interval="8000">
+            <ol class="carousel-indicators">
+              <li data-target="#bkgdCarousel" data-slide-to="0" class="active">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#bkgdCarousel" data-slide-to="1">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#bkgdCarousel" data-slide-to="2">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#bkgdCarousel" data-slide-to="3">
+                <span class="indicator-dot"></span>
+              </li>
+              <!-- Additional indicators... -->
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                      <source
+                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/dance3/01_crop.mp4"
+                        type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                      <source
+                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor1_4/01_crop.mp4"
+                        type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                      <source
+                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor2_3/01_crop.mp4"
+                        type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                      <source
+                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor5_6/01_crop.mp4"
+                        type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!-- Additional carousel items... -->
+            </div>
+            <a class="carousel-control-prev" href="#bkgdCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#bkgdCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+          <div id="videoCarousel" class="carousel slide" data-ride="carousel" data-interval="8000">
+            <ol class="carousel-indicators">
+              <li data-target="#videoCarousel" data-slide-to="0" class="active">
+                <span class="indicator-dot"></span>
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#videoCarousel" data-slide-to="1">
+                <span class="indicator-dot"></span>
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#videoCarousel" data-slide-to="2">
+                <span class="indicator-dot"></span>
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#videoCarousel" data-slide-to="3">
+                <span class="indicator-dot"></span>
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-target="#videoCarousel" data-slide-to="4">
+                <span class="indicator-dot"></span>
+                <span class="indicator-dot"></span>
+              </li>
+              <!-- Additional indicators... -->
+            </ol>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0008_01/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_01/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_11/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_01/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_09/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_11/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0019_08/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0021_03/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0023_06/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12 zoom-element">
+                      <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                        <source
+                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_03/01_crop.mp4"
+                          type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Additional carousel items... -->
+            </div>
+            <a class="carousel-control-prev" href="#videoCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+          <hr style="margin-top: 0px" />
+          <p class="text-left">
+            This paper targets high-fidelity and real-time view
+            synthesis of <span style="font-weight: bold">dynamic 3D scenes at 4K resolution</span>. Recently, some
+            methods on dynamic view synthesis have shown impressive rendering quality. However, their speed is still
+            limited when rendering high-resolution images. To overcome this problem, we propose <span
+              style="font-weight: bold">4K4D</span>, a 4D point cloud representation that supports hardware
+            rasterization and enables unprecedented rendering speed. Our representation is built on a 4D feature grid so
+            that the points are naturally regularized and can be robustly optimized. In addition, we design a novel
+            hybrid appearance model that significantly boosts the rendering quality while preserving efficiency.
+            Moreover, we develop a differentiable depth peeling algorithm to effectively learn the proposed model from
+            RGB videos. Experiments show that our representation can be rendered at over 400 FPS on the DNA-Rendering
+            dataset at 1080p resolution and 80 FPS on the ENeRF-Outdoor dataset at 4K resolution using an RTX 4090 GPU,
+            which is 30x faster than previous methods and achieves the state-of-the-art rendering quality.
+            <!-- Experiments show that our representation can be rendered at <span style="font-weight: bold">over 400 FPS</span> on the DNA-Rendering dataset at <span style="font-weight: bold">1080p resolution</span> and <span style="font-weight: bold">80 FPS</span> on the ENeRF-Outdoor dataset at <span style="font-weight: bold">4K resolution</span> using an RTX 4090 GPU, which is 30x faster than previous methods and achieves the state-of-the-art rendering quality. -->
+          </p>
+          <!-- <div class="col-md-12">
+            <img src="img/pipeline_fig.svg" width="100%" />
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Overview Video</h3>
+          <hr style="margin-top: 0px" />
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%"
+              src="https://www.youtube.com/embed/pPl1M5jpK4g" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+  </section> -->
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the Mobile-Stage Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-12">
+              <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/dance3/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the ENeRF-Outdoor Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-12">
+              <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor1_4/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-12">
+              <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor2_3/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-12">
+              <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor5_6/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the DNA-Rendering Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0008_01/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_09/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_01/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_06/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="row sm-gutters">
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_01/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_03/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_11/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_03/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="row sm-gutters">
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0019_08/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0021_03/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_04/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-6 renbody-zoom-container zoom-element">
+              <video class="renbody-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                playsinline>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_11/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          </br>
+          </br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the Neural3DV Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-12">
+              <video width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/n3dv/cutbeef/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the NHR Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-12 video-zoom-container">
+              <video class="nhr-zoom" width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport1/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <!-- <div class="col-md-12 video-zoom-container">
+                <video class="nhr-zoom" width="100%" style="border-radius: 5px" autoplay loop muted>
+                  <source
+                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport2/RENDERING.mp4"
+                    type="video/mp4" />
+                </video>
+              </div> -->
+            <div class="col-md-12 video-zoom-container">
+              <video class="nhr-zoom" width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport3/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+            <div class="col-md-12 video-zoom-container">
+              <video class="nhr-zoom" width="100%" style="border-radius: 5px" autoplay loop muted>
+                <source
+                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/basketball/RENDERING.mp4"
+                  type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qualitative-result-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5>More Qualitative Results on the ZJU-MoCap Dataset</h5>
+          <div class="row sm-gutters">
+            <div class="col-md-6">
+              <div class="col-md-12 video-zoom-container zoom-element">
+                <video class="zjumocap-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                  playsinline>
+                  <source
+                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_313/RENDERING.mp4"
+                    type="video/mp4" />
+                </video>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 video-zoom-container zoom-element">
+                <video class="zjumocap-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                  playsinline>
+                  <source
+                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_315/RENDERING.mp4"
+                    type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+          <div class="row sm-gutters">
+            <div class="col-md-6">
+              <div class="col-md-12 video-zoom-container zoom-element">
+                <video class="zjumocap-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                  playsinline>
+                  <source
+                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_377/RENDERING.mp4"
+                    type="video/mp4" />
+                </video>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12 video-zoom-container zoom-element">
+                <video class="zjumocap-zoom" width="100%" style="border-radius: 5px" autoplay loop muted preload
+                  playsinline>
+                  <source
+                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_387/RENDERING.mp4"
+                    type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Comparisions with ENeRF, IBRNet and K-Planes</h3>
+          <hr style="margin-top: 0px" />
+          <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/comp_sota.mp4"
+              type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>More Rendering Results</h3>
+            <hr style="margin-top:0px">
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/additional_results.mp4" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- citing -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        </br>
+        </br>
+        <h3>Citation</h3>
+        <hr style="margin-top: 0px" />
+        <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px">
+<code>@article{xu20234k4d,
+  title={4K4D: Real-Time 4D View Synthesis at 4K Resolution},
+  author={Xu, Zhen and Peng, Sida and Lin, Haotong and He, Guangzhao and Sun, Jiaming and Shen, Yujun and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={arXiv preprint arXiv:2310.XXXXXX},
+  year={2023}
+}</code></pre>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom: 10px">
+    Thanks to
+    <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a>
+    for the website template.
+  </footer>
+
+  <!-- Default Statcounter code for 4K4D: Real-Time 4D View
+Synthesi http://zju3dv.github.io/4k4d -->
+  <script type="text/javascript">
+    var sc_project = 12931644;
+    var sc_invisible = 1;
+    var sc_security = '012c8c76';
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics
+  Made Easy - Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
+          src="https://c.statcounter.com/12931644/0/012c8c76/1/" alt="Web Analytics Made Easy - Statcounter"
+          referrerpolicy="no-referrer-when-downgrade" /></a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+</body>
+
+</html>

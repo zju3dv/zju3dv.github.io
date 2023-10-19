@@ -93,9 +93,7 @@
     <div class="container" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                <p style="font-size: 1.225em;">
-                    <b style="color: #6589bf;">Relightable</b> and <b style="color: #78aa58;">Animatable</b> 
-                </p>
+                <b style="color: #6589bf;">Relightable</b> and <b style="color: #78aa58;">Animatable</b>
                 Neural Avatar from <span style="color: #c68b5b">Sparse-View</span> Video
                 <small>
                     <br>
@@ -132,7 +130,7 @@
                     </li>
                     <li>
                         <a href="https://www.media.mit.edu/people/yzihan/overview/">
-                            Zihan Yan 
+                            Zihan Yan
                         </a>
                         <sup>2</sup>
                     </li>
@@ -166,6 +164,7 @@
                         <sup>3</sup> Image Derivative Inc.
                     </li>
                 </ul>
+
             </div>
         </div>
 
@@ -175,20 +174,20 @@
                 <ul class="nav nav-pills nav-justified">
                     <li>
                         <a href="https://arxiv.org/abs/2308.07903">
-                            <image src="img/paper.png" height="40px">
+                            <image src="img/paper.jpg" height="60px">
                                 <h4><strong>Arxiv</strong></h4>
                         </a>
                     </li>
                     <li>
                         <a href="https://youtu.be/BQ3pL7Uwbdk">
-                            <image src="https://chen-geng.com/instant_nvr/images/youtube_icon.png" height="40px">
+                            <image src="img/youtube.png" height="60px">
                                 <h4><strong>Video</strong></h4>
                         </a>
                     </li>
                     <li>
                         <a href="https://zju3dv.github.com/relightable_avatar">
-                            <image src="https://chen-geng.com/instant_nvr/images/github.png" height="40px">
-                                <h4><strong>Code (Coming)</strong></h4>
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code (Coming Soon)</strong></h4>
                         </a>
                     </li>
                 </ul>
@@ -198,116 +197,144 @@
 
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
                     <source src="https://zhenx.me/relightable_avatar/teaser_video.mp4" type="video/mp4" />
                 </video>
-                <image src="img/teaser.png" width="100%"></image>
+                <image src="img/teaser.jpg" width="100%"></image>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-center">
-                    Reconstructing <b>relightable</b> and <b>animatable</b> neural avatar from sparse-view (or monocular) video.
+                    Reconstructing <b>relightable</b> and <b>animatable</b> neural avatar from sparse-view (or
+                    monocular) video.
                 </p>
             </div>
         </div>
 
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Abstract
                 </h3>
                 <p class="text-justify">
-                    <b>This paper tackles the challenge of creating relightable and animatable neural avatars from sparse-view (or even monocular) videos of dynamic humans under unknown illumination.</b> Compared to studio environments, this setting is more practical and accessible but poses an extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but cannot recover material parameters for relighting. While differentiable inverse rendering-based methods have succeeded in material recovery of static objects, it is not straightforward to extend them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and light visibility on deformed SDFs for inverse rendering. <b>To solve this challenge, we propose a Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human model and compute fine distances by exploiting the local deformation invariance of SDF. </b> Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface intersection and light visibility. This allows us to develop the first system to recover animatable and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that our approach is able to produce superior results compared to state-of-the-art methods. Our code will be released for reproducibility.
+                    <b>This paper tackles the challenge of creating relightable and animatable neural avatars from
+                        sparse-view (or even monocular) videos of dynamic humans under unknown illumination.</b>
+                    Compared to studio environments, this setting is more practical and accessible but poses an
+                    extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to
+                    reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but
+                    cannot recover material parameters for relighting. While differentiable inverse rendering-based
+                    methods have succeeded in material recovery of static objects, it is not straightforward to extend
+                    them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and
+                    light visibility on deformed SDFs for inverse rendering. <b>To solve this challenge, we propose a
+                        Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under
+                        arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human
+                        model and compute fine distances by exploiting the local deformation invariance of SDF. </b>
+                    Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface
+                    intersection and light visibility. This allows us to develop the first system to recover animatable
+                    and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that
+                    our approach is able to produce superior results compared to state-of-the-art methods. Our code will
+                    be released for reproducibility.
                 </p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Introduction Video
                 </h3>
                 <div class="text-center">
-                    <iframe width="100%" height="420" style="border-radius: 5px;" src="https://www.youtube.com/embed/BQ3pL7Uwbdk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="420" style="border-radius: 5px;"
+                        src="https://www.youtube.com/embed/BQ3pL7Uwbdk" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Method
                 </h3>
                 <div class="text-center">
                     <div style="position:relative;">
-                        <image src="img/method.png" width="100%"></image>
+                        <image src="img/method.jpg" width="100%"></image>
                     </div>
                     <p class="text-justify">
-                        <b>Overview of the proposed approach.</b> Given world space camera rays, we perform sphere tracing on the hierarchically queried distances to find surface intersections and canonical correspondences. Light rays generated by an optimizable light probe are also sphere traced with HDQ to compute the closest distances along the ray for soft visibility. Material properties and surface normals are queried on the canonical correspondences and warped to world space. Then, the final pixel colors are computed using the rendering equation.
+                        <b>Overview of the proposed approach.</b> Given world space camera rays, we perform sphere
+                        tracing on the hierarchically queried distances to find surface intersections and canonical
+                        correspondences. Light rays generated by an optimizable light probe are also sphere traced with
+                        HDQ to compute the closest distances along the ray for soft visibility. Material properties and
+                        surface normals are queried on the canonical correspondences and warped to world space. Then,
+                        the final pixel colors are computed using the rendering equation.
                     </p>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Qualitative Results
                 </h3>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
                     <source src="https://zhenx.me/relightable_avatar/sparse_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-center">
-                    Inverse rendering of relightable properties from <b>sparse view videos</b>. Animated with <b>novel poses</b>.
+                    Inverse rendering of relightable properties from <b>sparse view videos</b>. Animated with <b>novel
+                        poses</b>.
                 </p>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
                     <source src="https://zhenx.me/relightable_avatar/monocular_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-center">
-                    Inverse rendering of relightable properties from <b>monocular videos</b>. Animated with <b>novel poses</b>.
+                    Inverse rendering of relightable properties from <b>monocular videos</b>. Animated with <b>novel
+                        poses</b>.
                 </p>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
                     <source src="https://zhenx.me/relightable_avatar/sparse_animation.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-center">
                     Relighting and animation of the reconstructed avatar (from sparse videos) with several light probes.
                 </p>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
                     <source src="https://zhenx.me/relightable_avatar/monocular_animation.mp4" type="video/mp4" />
                 </video>
             </div>
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-center">
-                    Relighting and animation of the reconstructed avatar (from monocular videos) with several light probes.
+                    Relighting and animation of the reconstructed avatar (from monocular videos) with several light
+                    probes.
                 </p>
             </div>
         </div>
 
 
         <!-- <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Qualitative Comparison
                 </h3>
                 <div class="text-center">
                     <div style="position:relative;">
-                        <image src="img/comparison.png" width="100%"></image>
+                        <image src="img/comparison.jpg" width="100%"></image>
                     </div>
                     <p class="text-justify">
                         <b>Qualitative comparison of our method and baselines.</b> The first six columns display the results of synthesizing a character in a novel pose from the MobileStage dataset. The middle six columns depict a character in a training pose from the \textit{MobileStage} dataset. For the last six columns, we show results from SyntheticHuman++, for which we have ground truth as reference. Note that NeRFactor is only trained on 1 frame. Relighting4D* and NeRFactor* denote directly computing normal and visibility using their density MLPs.
@@ -317,7 +344,7 @@
         </div> -->
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h3>
                     Citation
                 </h3>
@@ -334,7 +361,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <p class="text-justify">
                     The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a
                         href="https://jonbarron.info/mipnerf360/">Jon Barron</a>. Last updated: 08/06/2023.
@@ -363,20 +390,20 @@
             });
         });
     </script>
-<!-- Default Statcounter code for Relightable and Animatable Neura
+    <!-- Default Statcounter code for Relightable and Animatable Neura
 http://zju3dv.github.io/relightable_avatar -->
-<script type="text/javascript">
-    var sc_project=12907471; 
-    var sc_invisible=1; 
-    var sc_security="27885473"; 
+    <script type="text/javascript">
+        var sc_project = 12907471;
+        var sc_invisible = 1;
+        var sc_security = "27885473"; 
     </script>
-    <script type="text/javascript"
-    src="https://www.statcounter.com/counter/counter.js" async></script>
-    <noscript><div class="statcounter"><a title="Web Analytics Made Easy -
-    Statcounter" href="https://statcounter.com/" target="_blank"><img
-    class="statcounter" src="https://c.statcounter.com/12907471/0/27885473/1/"
-    alt="Web Analytics Made Easy - Statcounter"
-    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript>
+        <div class="statcounter"><a title="Web Analytics Made Easy -
+    Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
+                    src="https://c.statcounter.com/12907471/0/27885473/1/" alt="Web Analytics Made Easy - Statcounter"
+                    referrerPolicy="no-referrer-when-downgrade"></a></div>
+    </noscript>
     <!-- End of Statcounter Code -->
 </body>
 

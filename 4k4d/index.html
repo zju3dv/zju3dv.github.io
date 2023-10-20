@@ -2,19 +2,24 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="title" content="4K4D">
+  <meta name="description" content="This paper targets high-fidelity and real-time view synthesis of dynamic 3D scenes at 4K resolution.">
+  <meta name="keywords" content="Image Based Rendering, Computer Vision, Computer Graphics, NeRF, 3D Gaussian Splatting, Novel View Synthesis, Freeviewpoint Video">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="author" content="Zhen Xu">
+
   <title>4K4D</title>
 
   <!-- Bootstrap -->
+  <script src="js/video_comparison.js"></script>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap-4.4.1.js"></script>
   <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel='stylesheet'
-    href='https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
@@ -189,6 +194,42 @@
     .zjumocap-zoom {
       transform: scale(1.3);
     }
+
+    video {
+      border-radius: 5px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      padding: 0px;
+      margin: 0px;
+      border-radius: 5px;
+    }
+
+    video.a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    video.a4x3 {
+      aspect-ratio: 1352/1014;
+    }
+
+    video.a1x1 {
+      aspect-ratio: 1;
+    }
+
+    video.a16x9demo {
+      aspect-ratio: 1920/1152;
+    }
+
+    video.a4x3demo {
+      aspect-ratio: 1352/1086;
+    }
+
+    video.a1x1demo {
+      aspect-ratio: 1600/1672;
+    }
   </style>
 
   <script>
@@ -230,9 +271,7 @@
             <div class="row justify-content-center">
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light"
-                    href="https://drive.google.com/file/d/1Y-C6ASIB8ofvcZkyZ_Vp-a2TtbiPw1Yx/view?usp=sharing"
-                    role="button" target="_blank">
+                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1Y-C6ASIB8ofvcZkyZ_Vp-a2TtbiPw1Yx/view?usp=sharing" role="button" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Paper
                   </a>
@@ -240,8 +279,7 @@
               </div>
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/2310.11448" role="button"
-                    target="_blank">
+                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/2310.11448" role="button" target="_blank">
                     <i class="ai ai-arxiv"></i>
                     arXiv
                   </a>
@@ -257,8 +295,7 @@
               </div>
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/4K4D" role="button"
-                    target="_blank">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/4K4D" role="button" target="_blank">
                     <i class="fa fa-github"></i>
                     Code
                   </a>
@@ -301,11 +338,12 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" autoplay muted
-                      preload="none" playsinline>
-                      <source
-                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/dance3/01_crop.mp4"
-                        type="video/mp4" />
+                    <video class="a16x9demo" poster="img/spinner.svg" width="100%" autoplay loop muted playsinline>
+                      <!-- Find this: (\s*<source src=")https://zhenx.me/4k4d.assets/(.*" type=.*) -->
+                      <!-- Replace with this: $0
+$1https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/$2 -->
+                      <source src="https://zhenx.me/4k4d.assets/demo_videos/mobilestage/dance3/01_crop.mp4" type="video/mp4" />
+                      <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/dance3/01_crop.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -313,11 +351,9 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                      playsinline>
-                      <source
-                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor1_4/01_crop.mp4"
-                        type="video/mp4" />
+                    <video class="a16x9demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                      <source src="https://zhenx.me/4k4d.assets/demo_videos/outdoor/actor1_4/01_crop.mp4" type="video/mp4" />
+                      <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor1_4/01_crop.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -325,11 +361,9 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                      playsinline>
-                      <source
-                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor2_3/01_crop.mp4"
-                        type="video/mp4" />
+                    <video class="a16x9demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                      <source src="https://zhenx.me/4k4d.assets/demo_videos/outdoor/actor2_3/01_crop.mp4" type="video/mp4" />
+                      <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor2_3/01_crop.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -337,11 +371,9 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                      playsinline>
-                      <source
-                        src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor5_6/01_crop.mp4"
-                        type="video/mp4" />
+                    <video class="a16x9demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                      <source src="https://zhenx.me/4k4d.assets/demo_videos/outdoor/actor5_6/01_crop.mp4" type="video/mp4" />
+                      <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/outdoor/actor5_6/01_crop.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -387,46 +419,18 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" autoplay muted
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0008_01/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" autoplay loop muted playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0008_01/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0008_01/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" autoplay muted
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_01/01_crop.mp4"
-                          type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row sm-gutters">
-                  <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_11/01_crop.mp4"
-                          type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_01/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" autoplay loop muted playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0012_01/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_01/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
@@ -436,22 +440,18 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_09/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0012_11/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0012_11/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_11/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0013_01/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_01/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
@@ -461,22 +461,18 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0019_08/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0013_09/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_09/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0021_03/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0013_11/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_11/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
@@ -486,22 +482,39 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0023_06/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0019_08/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0019_08/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="col-md-12 zoom-element">
-                      <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                        playsinline>
-                        <source
-                          src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_03/01_crop.mp4"
-                          type="video/mp4" />
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0021_03/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0021_03/01_crop.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-6">
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0023_06/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0023_06/01_crop.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="zoom-element">
+                      <video class="a1x1demo" poster="img/spinner.svg" width="100%" muted loop preload="none" playsinline>
+                        <source src="https://zhenx.me/4k4d.assets/demo_videos/renbody/0013_03/01_crop.mp4" type="video/mp4" />
+                        <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/renbody/0013_03/01_crop.mp4" type="video/mp4" />
                       </video>
                     </div>
                   </div>
@@ -536,8 +549,7 @@
             This paper targets high-fidelity and real-time view
             synthesis of <span style="font-weight: bold">dynamic 3D scenes at 4K resolution</span>. Recently, some
             methods on dynamic view synthesis have shown impressive rendering quality. However, their speed is still
-            limited when rendering high-resolution images. To overcome this problem, we propose <span
-              style="font-weight: bold">4K4D</span>, a 4D point cloud representation that supports hardware
+            limited when rendering high-resolution images. To overcome this problem, we propose <span style="font-weight: bold">4K4D</span>, a 4D point cloud representation that supports hardware
             rasterization and enables unprecedented rendering speed. Our representation is built on a 4D feature grid so
             that the points are naturally regularized and can be robustly optimized. In addition, we design a novel
             hybrid appearance model that significantly boosts the rendering quality while preserving efficiency.
@@ -545,7 +557,6 @@
             RGB videos. Experiments show that our representation can be rendered at over 400 FPS on the DNA-Rendering
             dataset at 1080p resolution and 80 FPS on the ENeRF-Outdoor dataset at 4K resolution using an RTX 4090 GPU,
             which is 30$\times$ faster than previous methods and achieves the state-of-the-art rendering quality.
-            <!-- Experiments show that our representation can be rendered at <span style="font-weight: bold">over 400 FPS</span> on the DNA-Rendering dataset at <span style="font-weight: bold">1080p resolution</span> and <span style="font-weight: bold">80 FPS</span> on the ENeRF-Outdoor dataset at <span style="font-weight: bold">4K resolution</span> using an RTX 4090 GPU, which is 30x faster than previous methods and achieves the state-of-the-art rendering quality. -->
           </p>
         </div>
       </div>
@@ -612,8 +623,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mobilestage-results"
-              aria-expanded="false" aria-controls="mobilestage-results" id="mobilestage-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mobilestage-results" aria-expanded="false" aria-controls="mobilestage-results" id="mobilestage-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>Mobile-Stage</b> Dataset
@@ -624,11 +634,9 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-12">
-              <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" loop muted preload="none"
-                playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/dance3/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a16x9" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/mobilestage/dance3/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/dance3/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -642,8 +650,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#outdoor-results"
-              aria-expanded="false" aria-controls="outdoor-results" id="outdoor-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#outdoor-results" aria-expanded="false" aria-controls="outdoor-results" id="outdoor-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>ENeRF-Outdoor</b> Dataset
@@ -654,27 +661,21 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-12">
-              <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" loop muted preload="none"
-                playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor1_4/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a16x9" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/outdoor/actor1_4/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor1_4/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-12">
-              <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" loop muted preload="none"
-                playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor2_3/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a16x9" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/outdoor/actor2_3/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor2_3/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-12">
-              <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" loop muted preload="none"
-                playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor5_6/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a16x9" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/outdoor/actor5_6/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/outdoor/actor5_6/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -688,8 +689,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#renbody-results"
-              aria-expanded="false" aria-controls="renbody-results" id="renbody-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#renbody-results" aria-expanded="false" aria-controls="renbody-results" id="renbody-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>DNA-Rendering</b> Dataset
@@ -700,105 +700,81 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0008_01/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0008_01/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0008_01/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_09/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0013_09/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_09/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_01/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0012_01/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_01/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_06/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0023_06/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_06/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
 
           <div class="row sm-gutters">
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_01/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0013_01/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_01/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_03/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0013_03/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_03/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_11/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0013_11/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0013_11/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_03/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0012_03/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_03/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
 
           <div class="row sm-gutters">
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0019_08/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0019_08/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0019_08/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0021_03/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0021_03/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0021_03/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_04/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0023_04/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0023_04/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-6 renbody-zoom-container zoom-element">
-              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_11/RENDERING.mp4"
-                  type="video/mp4" />
+              <video poster="img/spinner.svg" class="renbody-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/renbody/0012_11/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/renbody/0012_11/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -814,8 +790,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#n3dv-results"
-              aria-expanded="false" aria-controls="n3dv-results" id="n3dv-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#n3dv-results" aria-expanded="false" aria-controls="n3dv-results" id="n3dv-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>Neural3DV</b> Dataset
@@ -826,11 +801,9 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-12">
-              <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" loop muted preload="none"
-                playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/n3dv/cutbeef/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a4x3" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/n3dv/cutbeef/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/n3dv/cutbeef/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -844,8 +817,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nhr-results"
-              aria-expanded="false" aria-controls="nhr-results" id="nhr-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nhr-results" aria-expanded="false" aria-controls="nhr-results" id="nhr-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>NHR</b> Dataset
@@ -856,27 +828,21 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-12 video-zoom-container">
-              <video poster="img/spinner.svg" class="nhr-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport1/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a1x1" poster="img/spinner.svg" class="nhr-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/nhr/sport1/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport1/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-12 video-zoom-container">
-              <video poster="img/spinner.svg" class="nhr-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport3/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a1x1" poster="img/spinner.svg" class="nhr-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/nhr/sport3/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/sport3/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="col-md-12 video-zoom-container">
-              <video poster="img/spinner.svg" class="nhr-zoom" width="100%" style="border-radius: 5px" loop muted
-                preload="none" playsinline>
-                <source
-                  src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/basketball/RENDERING.mp4"
-                  type="video/mp4" />
+              <video class="a1x1" poster="img/spinner.svg" class="nhr-zoom" width="100%" loop muted preload="none" playsinline>
+                <source src="https://zhenx.me/4k4d.assets/render_videos/nhr/basketball/RENDERING.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/nhr/basketball/RENDERING.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -890,8 +856,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#zjumocap-results"
-              aria-expanded="false" aria-controls="zjumocap-results" id="zjumocap-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#zjumocap-results" aria-expanded="false" aria-controls="zjumocap-results" id="zjumocap-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>ZJU-MoCap</b> Dataset
@@ -903,21 +868,17 @@
           <div class="row sm-gutters">
             <div class="col-md-6">
               <div class="col-md-12 video-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="zjumocap-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline preload playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_313/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="zjumocap-zoom" width="100%" loop muted preload="none" playsinline preload playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/zjumocap/my_313/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_313/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
             <div class="col-md-6">
               <div class="col-md-12 video-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="zjumocap-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline preload playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_315/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="zjumocap-zoom" width="100%" loop muted preload="none" playsinline preload playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/zjumocap/my_315/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_315/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -925,21 +886,17 @@
           <div class="row sm-gutters">
             <div class="col-md-6">
               <div class="col-md-12 video-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="zjumocap-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline preload playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_377/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="zjumocap-zoom" width="100%" loop muted preload="none" playsinline preload playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/zjumocap/my_377/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_377/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
             <div class="col-md-6">
               <div class="col-md-12 video-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="zjumocap-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline preload playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_387/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="zjumocap-zoom" width="100%" loop muted preload="none" playsinline preload playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/zjumocap/my_387/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/zjumocap/my_387/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -955,9 +912,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse"
-              data-target="#mobilestage-single-results" aria-expanded="false" aria-controls="mobilestage-single-results"
-              id="mobilestage-single-results-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mobilestage-single-results" aria-expanded="false" aria-controls="mobilestage-single-results" id="mobilestage-single-results-button">
               Click to Expand
             </button>
             More Qualitative Results on the <b>Mobile-Stage</b> Dataset
@@ -969,21 +924,17 @@
           <div class="row sm-gutters">
             <div class="col-md-6">
               <div class="col-md-12 mobile-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="mobile-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/xuzhen/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="mobile-zoom" width="100%" loop muted preload="none" playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/mobilestage/xuzhen/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/xuzhen/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
             <div class="col-md-6">
               <div class="col-md-12 mobile-zoom-container zoom-element">
-                <video poster="img/spinner.svg" class="mobile-zoom" width="100%" style="border-radius: 5px" loop muted
-                  preload="none" playsinline>
-                  <source
-                    src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/purple/RENDERING.mp4"
-                    type="video/mp4" />
+                <video class="a1x1" poster="img/spinner.svg" class="mobile-zoom" width="100%" loop muted preload="none" playsinline>
+                  <source src="https://zhenx.me/4k4d.assets/render_videos/mobilestage/purple/RENDERING.mp4" type="video/mp4" />
+                  <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/render_videos/mobilestage/purple/RENDERING.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -1010,8 +961,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nhr-demos"
-              aria-expanded="false" aria-controls="nhr-demos" id="nhr-demos-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nhr-demos" aria-expanded="false" aria-controls="nhr-demos" id="nhr-demos-button">
               Click to Expand
             </button>
             More Real-Time Demos on the <b>NHR</b> Dataset
@@ -1039,11 +989,9 @@
             <div class="carousel-item active">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport1/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/nhr/sport1/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport1/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1051,11 +999,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport2/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/nhr/sport2/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport2/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1063,11 +1009,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport3/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/nhr/sport3/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/sport3/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1075,11 +1019,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/basketball/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/nhr/basketball/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/nhr/basketball/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1105,8 +1047,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#zjumocap-demos"
-              aria-expanded="false" aria-controls="zjumocap-demos" id="zjumocap-demos-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#zjumocap-demos" aria-expanded="false" aria-controls="zjumocap-demos" id="zjumocap-demos-button">
               Click to Expand
             </button>
             More Real-Time Demos on the <b>ZJU-MoCap</b> Dataset
@@ -1134,11 +1075,9 @@
             <div class="carousel-item active">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/313/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/zjumocap/313/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/313/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1146,11 +1085,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/315/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/zjumocap/315/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/315/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1158,11 +1095,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/377/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/zjumocap/377/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/377/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1170,11 +1105,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/387/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/zjumocap/387/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/zjumocap/387/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1201,8 +1134,7 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mobilestage-demos"
-              aria-expanded="false" aria-controls="mobilestage-demos" id="mobilestage-demos-button">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mobilestage-demos" aria-expanded="false" aria-controls="mobilestage-demos" id="mobilestage-demos-button">
               Click to Expand
             </button>
             More Real-Time Demos on the <b>MobileStage</b> Dataset
@@ -1224,11 +1156,9 @@
             <div class="carousel-item active">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/xuzhen/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/mobilestage/xuzhen/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/xuzhen/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1236,11 +1166,9 @@
             <div class="carousel-item">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" muted preload="none"
-                    playsinline>
-                    <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/purple/01_crop.mp4"
-                      type="video/mp4" />
+                  <video class="a1x1demo" poster="img/spinner.svg" width="100%" loop muted preload="none" playsinline>
+                    <source src="https://zhenx.me/4k4d.assets/demo_videos/mobilestage/purple/01_crop.mp4" type="video/mp4" />
+                    <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/mobilestage/purple/01_crop.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1285,10 +1213,10 @@
             <div class="carousel-item active">
               <div class="row sm-gutters">
                 <div class="col-md-12">
-                  <video poster="img/spinner.svg" width="100%" style="border-radius: 5px" autoplay loop muted
+                  <video class="a4x3demo" poster="img/spinner.svg" width="100%" autoplay loop muted
                     playsinline>
                     <source
-                      src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/demo_videos/n3dv/cutbeef/01_crop.mp4"
+                      src="https://zhenx.me/4k4d.assets/demo_videos/n3dv/cutbeef/01_crop.mp4"
                       type="video/mp4" />
                   </video>
                 </div>
@@ -1308,35 +1236,115 @@
     </div>
   </section> -->
 
-
   <!-- <section>
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h3>Comparisions with ENeRF, IBRNet and K-Planes</h3>
+        <div class="col-12">
+          <h3>Baseline Comparisons</h3>
           <hr style="margin-top: 0px" />
-          <video poster="img/spinner.svg" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-            <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/comp_sota.mp4"
-              type="video/mp4" />
-          </video>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
-  <!-- <section>
+
+  <section class="results-section">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-            <h3>More Rendering Results</h3>
-            <hr style="margin-top:0px">
-            <video poster="img/spinner.svg" width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
-                <source src="https://raw.githubusercontent.com/haotongl/imgbed/master/im4d/additional_results.mp4" type="video/mp4">
-            </video>
+          <h5>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#kplanes-comparisons" aria-expanded="false" aria-controls="kplanes-comparisons" id="kplanes-comparisons-button">
+              Click to Expand
+            </button>
+            Comparisions with <b><a href="https://sarafridov.github.io/K-Planes/">K-Planes</a></b>
+          </h5>
         </div>
       </div>
+
+      <div class="collapse" id="kplanes-comparisons">
+
+        <div class="row sm-gutters">
+          <div class="col-md-12" id="actor1_4Div">
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor1_4" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" type=" video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" type=" video/mp4" />
+            </video>
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor1_4After" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" type="video/mp4" />
+            </video>
+            <canvas id="actor1_4Merge" class="comparison-canvas" width="100%"></canvas>
+          </div>
+        </div>
+
+        <div class="row sm-gutters">
+          <div class="col-md-12" id="actor1_4DepthDiv">
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor1_4Depth" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" type=" video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" type=" video/mp4" />
+            </video>
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor1_4DepthAfter" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" type="video/mp4" />
+            </video>
+            <canvas id="actor1_4DepthMerge" class="comparison-canvas" width="100%"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#enerf-comparisons" aria-expanded="false" aria-controls="enerf-comparisons" id="enerf-comparisons-button">
+              Click to Expand
+            </button>
+            Comparisions with <b><a href="https://zju3dv.github.io/enerf/">ENeRF</a></b>
+          </h5>
+        </div>
+      </div>
+
+      <div class="collapse" id="enerf-comparisons">
+
+        <div class="row sm-gutters">
+          <div class="col-md-12" id="actor2_3Div">
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor2_3" loop muted preload="none" playsinline oncanplay="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" type="video/mp4" />
+            </video>
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor2_3After" loop muted preload="none" playsinline oncanplay="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" type="video/mp4" />
+            </video>
+            <canvas id="actor2_3Merge" class="comparison-canvas" width="100%"></canvas>
+          </div>
+        </div>
+
+        <div class="row sm-gutters">
+          <div class="col-md-12" id="actor2_3DepthDiv">
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor2_3Depth" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" type=" video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" type=" video/mp4" />
+            </video>
+            <video class="comparison-video a16x9" poster="img/spinner.svg" width="100%" id="actor2_3DepthAfter" loop muted preload="none" playsinline onloadeddata="resizeAndPlay(this)" type="video/mp4">
+              <source src="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/kplanes/RENDERING.mp4" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" type="video/mp4" />
+            </video>
+            <canvas id="actor2_3DepthMerge" class="comparison-canvas" width="100%"></canvas>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </section> -->
+
+
   <!-- citing -->
 
   <div class="container">
@@ -1375,9 +1383,7 @@ Synthesi http://zju3dv.github.io/4k4d -->
   <noscript>
     <div class="statcounter">
       <a title="Web Analytics
-  Made Easy - Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
-          src="https://c.statcounter.com/12931644/0/012c8c76/1/" alt="Web Analytics Made Easy - Statcounter"
-          referrerpolicy="no-referrer-when-downgrade" /></a>
+  Made Easy - Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12931644/0/012c8c76/1/" alt="Web Analytics Made Easy - Statcounter" referrerpolicy="no-referrer-when-downgrade" /></a>
     </div>
   </noscript>
   <!-- End of Statcounter Code -->
@@ -1433,6 +1439,46 @@ Synthesi http://zju3dv.github.io/4k4d -->
       })(i);
     }
 
+    // var compare_button_ids = [
+    //   'enerf-comparisons-button',
+    //   'kplanes-comparisons-button',
+    //  /* ...other button ids... */];
+    // var compare_section_ids = [
+    //   'enerf-comparisons',
+    //   'kplanes-comparisons',
+    //   /* ...other section ids... */];
+    // for (var i = 0; i < compare_button_ids.length; i++) {
+    //   (function (index) {
+    //     var button = document.getElementById(compare_button_ids[index]);
+    //     var section = document.getElementById(compare_section_ids[index]);
+    //     button.addEventListener('click', function () {
+    //       if (section.classList.contains('show')) {
+    //         button.innerText = 'Click to Expand';
+    //         var videos = section.getElementsByTagName('video');
+    //         for (var j = 0; j < videos.length; j++) {
+    //           if (videos[j].readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+    //             videos[j].pause();
+    //           }
+    //         }
+    //         var merge = $(document.getElementById(compare_button_ids[index])).closest("section")[0].getElementsByTagName('canvas')[0];
+    //         if (merge.hasAttribute('animation_id')) {
+    //           cancelAnimationFrame(merge.animation_id)
+    //         }
+    //       } else {
+    //         button.innerText = 'Click to Collapse';
+    //         var videos = section.getElementsByTagName('video');
+    //         for (var j = 0; j < videos.length; j++) {
+    //           videos[j].play();
+    //         }
+    //         var merge = $(document.getElementById(compare_button_ids[index])).closest("section")[0].getElementsByTagName('canvas')[0];
+    //         if (merge.hasAttribute('drawLoop')) {
+    //           requestAnimationFrame(merge.drawLoop)
+    //         }
+    //       }
+    //     });
+    //   })(i);
+    // }
+
     document.addEventListener("DOMContentLoaded", function () {
       renderMathInElement(document.body, {
         delimiters: [
@@ -1450,7 +1496,9 @@ Synthesi http://zju3dv.github.io/4k4d -->
       currentCarousel.find('video').each(function () {
         var isVideoInActiveItem = $(this).closest('.carousel-item').hasClass('active');
         if (isVideoInActiveItem) {
-          this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+          if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+            this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+          }
           this.play();
         } else {
           if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
@@ -1480,19 +1528,13 @@ Synthesi http://zju3dv.github.io/4k4d -->
 
     // fix the element's width and height properties to the current video ones
     $("video").each(function () {
-      $(this).on('loadedmetadata', update_video_shape);
+      if (!this.classList.contains('comparison-video')) {
+        $(this).on('loadeddata', update_video_shape);
+      }
     });
 
   </script>
 
-  <!-- var videos = document.querySelectorAll("video");
-  videos.forEach(function(e) {
-      e.addEventListener('ended', myHandler, false);
-  }); 
-  
-  function myHandler(e) {
-      $("#mediaCarousel").carousel('next');
-  } -->
 </body>
 
 </html>

@@ -6,42 +6,50 @@ function playVids(id) {
     if (id.endsWith('After')) {
         id = id.slice(0, -5); // 'After' has 5 characters
     }
-    leftVideo = document.getElementById(id);
-    rightVideo = document.getElementById(id + 'After');
-    videoMerge = document.getElementById(id + 'Merge');
-    videoContainer = document.getElementById(id + 'Div');
-    mergeContext = videoMerge.getContext('2d');
+    var leftVideo = document.getElementById(id);
+    var rightVideo = document.getElementById(id + 'After');
+    var videoMerge = document.getElementById(id + 'Merge');
+    var videoContainer = document.getElementById(id + 'Div');
+    var videoSpinner = document.getElementById(id + 'Spinner');
+    var mergeContext = videoMerge.getContext('2d');
 
     if (
-        leftVideo.readyState > HTMLMediaElement.HAVE_FUTURE_DATA &&
-        rightVideo.readyState > HTMLMediaElement.HAVE_FUTURE_DATA
+        leftVideo.readyState > HTMLMediaElement.HAVE_CURRENT_DATA &&
+        rightVideo.readyState > HTMLMediaElement.HAVE_CURRENT_DATA
     ) {
-        position = 0.5;
-        vidWidth = $(leftVideo).parent().width();
-        vidHeight = (leftVideo.videoHeight / leftVideo.videoWidth) * vidWidth;
+        videoSpinner.style.display = 'none';
+        // videoSpinner.style.border = 'none';
+        // videoSpinner.style.height = '0px';
 
-        leftVideo.width = vidWidth;
-        leftVideo.height = 0;
-        rightVideo.width = vidWidth;
-        rightVideo.height = 0;
+        var position = 0.5;
+        var vertical = 0.5;
 
-        videoMerge.width = vidWidth;
-        videoMerge.height = vidHeight;
+        var vidWidth = videoMerge.width;
+        var vidHeight = videoMerge.height;
+        var ratio = leftVideo.videoWidth / vidWidth;
 
-        // videoContainer.style.width = videoMerge.width + 'px';
-        // videoContainer.style.height = videoMerge.height + 'px';
+        // leftVideo.removeEventListener('play');
+        // rightVideo.removeEventListener('play');
 
-        // console.log(videoContainer)
+        leftVideo.pause();
+        leftVideo.currentTime = 0;
+        leftVideo.play();
+
+        rightVideo.pause();
+        rightVideo.currentTime = 0;
+        rightVideo.play();
 
         function trackLocation(e) {
             // Normalize to [0, 1]
             bcr = videoMerge.getBoundingClientRect();
-            position = (e.pageX - bcr.x) / bcr.width;
+            position = (e.clientX - bcr.x) / bcr.width;
+            vertical = (e.clientY - bcr.y) / bcr.height;
         }
         function trackLocationTouch(e) {
             // Normalize to [0, 1]
             bcr = videoMerge.getBoundingClientRect();
-            position = (e.touches[0].pageX - bcr.x) / bcr.width;
+            position = (e.touches[0].clientX - bcr.x) / bcr.width;
+            vertical = (e.touches[0].clientY - bcr.y) / bcr.height;
         }
 
         videoMerge.addEventListener('mousemove', trackLocation, false);
@@ -53,8 +61,8 @@ function playVids(id) {
                 leftVideo,
                 0,
                 0,
-                vidWidth,
-                vidHeight,
+                vidWidth * ratio,
+                vidHeight * ratio,
                 0,
                 0,
                 vidWidth,
@@ -67,22 +75,26 @@ function playVids(id) {
             );
             mergeContext.drawImage(
                 rightVideo,
-                colStart,
+                colStart * ratio,
                 0,
-                colWidth,
-                vidHeight,
+                colWidth * ratio,
+                vidHeight * ratio,
                 colStart,
                 0,
                 colWidth,
                 vidHeight
             );
-            videoMerge.animation_id = requestAnimationFrame(drawLoop);
-            videoMerge.darwLoop = drawLoop;
+            // videoMerge.setAttribute(
+            //     'animation_id',
+            //     requestAnimationFrame(drawLoop)
+            // );
+            requestAnimationFrame(drawLoop);
+            // videoMerge.setAttribute('darwLoop', drawLoop);
 
             var arrowLength = 0.09 * vidHeight;
             var arrowheadWidth = 0.025 * vidHeight;
             var arrowheadLength = 0.04 * vidHeight;
-            var arrowPosY = vidHeight / 10;
+            var arrowPosY = 0.075 * vidHeight;
             var arrowWidth = 0.007 * vidHeight;
             var currX = vidWidth * position;
 
@@ -97,8 +109,8 @@ function playVids(id) {
             );
             mergeContext.fillStyle = '#FFD79340';
             mergeContext.fill();
-            //mergeContext.strokeStyle = "#444444";
-            //mergeContext.stroke()
+            // mergeContext.strokeStyle = "#444444";
+            // mergeContext.stroke()
 
             // Draw border
             mergeContext.beginPath();
@@ -108,6 +120,39 @@ function playVids(id) {
             mergeContext.strokeStyle = '#AAAAAA';
             mergeContext.lineWidth = 5;
             mergeContext.stroke();
+
+            // 添加以下代码来绘制文本
+
+            // 保存当前上下文状态
+            mergeContext.save();
+
+            // 设置字体样式
+            var textHeight = 20;
+            mergeContext.font = '800 ' + textHeight + "px 'Jost'"; // 更换字体进行测试
+            mergeContext.fillStyle = '#000000'; // 使用黑色
+
+            // 设定开始的高度
+            var startY = arrowPosY;
+
+            // 在左侧绘制 "4K4D" 文本
+            var text4K4D = '4K4D';
+            var text4K4DWidth = mergeContext.measureText(text4K4D).width;
+            mergeContext.fillText(
+                text4K4D,
+                vidWidth * position - text4K4DWidth - 50,
+                startY + (textHeight / 5) * 2
+            );
+
+            // 在右侧绘制 "ENeRF" 文本
+            var textENeRF = id;
+            mergeContext.fillText(
+                textENeRF,
+                vidWidth * position + 50,
+                startY + (textHeight / 5) * 2
+            );
+
+            // 恢复上下文状态
+            mergeContext.restore();
 
             // Draw arrow
             mergeContext.beginPath();
@@ -166,7 +211,11 @@ function playVids(id) {
             mergeContext.fillStyle = '#AAAAAA';
             mergeContext.fill();
         }
-        videoMerge.animation_id = requestAnimationFrame(drawLoop);
+        // videoMerge.setAttribute(
+        //     'animation_id',
+        //     requestAnimationFrame(drawLoop)
+        // );
+        requestAnimationFrame(drawLoop);
     }
 }
 
@@ -175,5 +224,22 @@ Number.prototype.clamp = function (min, max) {
 };
 
 function resizeAndPlay(video) {
+    var id = video.id;
+    if (id.endsWith('After')) {
+        id = id.slice(0, -5); // 'After' has 5 characters
+    }
+
+    var leftVideo = document.getElementById(id);
+    var rightVideo = document.getElementById(id + 'After');
+    var videoMerge = document.getElementById(id + 'Merge');
+
+    var vidWidth = $(video).parent().width();
+    var vidHeight = (video.videoHeight / video.videoWidth) * vidWidth;
+
+    if (vidWidth > 0) {
+        videoMerge.width = vidWidth;
+        videoMerge.height = vidHeight;
+    }
+
     playVids(video.id);
 }

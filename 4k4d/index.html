@@ -238,16 +238,9 @@
     }
   </style>
   <script>
-    function videoTimeUpdate(video) {
-      if (video.hasAttribute('lastTime') && video.currentTime < video.getAttribute('lastTime')) {
-        onVideoRestart(video);
-      }
-      video.setAttribute('lastTime', video.currentTime);
-    }
 
-    function onVideoRestart(video) {
-      resizeAndPlay(video)
-    }
+
+
   </script>
   </link>
 </head>
@@ -1139,9 +1132,9 @@ $1 -->
         <div class="row sm-gutters">
           <div class="col-md-12 a16x9" id="KPlanesDiv">
             <img id="KPlanesSpinner" src="img/spinner.svg" width="100%" />
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" id="KPlanes" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/4k4d/RENDERING.mp4" id="KPlanes" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" id="KPlanesAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/kplanes/RENDERING.mp4" id="KPlanesAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
             <canvas class="comparison-canvas a16x9" id="KPlanesMerge"></canvas>
           </div>
@@ -1149,9 +1142,9 @@ $1 -->
         <div class="row sm-gutters">
           <div class="col-md-12 a16x9" id="KPlanes DepthDiv">
             <img id="KPlanes DepthSpinner" src="img/spinner.svg" width="100%" />
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" id="KPlanes Depth" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/4k4d/DEPTH.mp4" id="KPlanes Depth" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" id="KPlanes DepthAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor1_4/kplanes/DEPTH.mp4" id="KPlanes DepthAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
             <canvas class="comparison-canvas a16x9" id="KPlanes DepthMerge"></canvas>
           </div>
@@ -1175,9 +1168,9 @@ $1 -->
         <div class="row sm-gutters">
           <div class="col-md-12 a16x9" id="ENeRFDiv">
             <img id="ENeRFSpinner" src="img/spinner.svg" width="100%" />
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" id="ENeRF" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/4k4d/RENDERING.mp4" id="ENeRF" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" id="ENeRFAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/enerf/RENDERING.mp4" id="ENeRFAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
             <canvas class="comparison-canvas a16x9" id="ENeRFMerge"></canvas>
           </div>
@@ -1185,9 +1178,9 @@ $1 -->
         <div class="row sm-gutters">
           <div class="col-md-12 a16x9" id="ENeRF DepthDiv">
             <img id="ENeRF DepthSpinner" src="img/spinner.svg" width="100%" />
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" id="ENeRF Depth" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/4k4d/DEPTH.mp4" id="ENeRF Depth" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
-            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" id="ENeRF DepthAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" ontimeupdate="videoTimeUpdate(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
+            <video class="comparison-video" data-desktop-vid1="https://zhenx.me/4k4d.assets/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/main/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-mobile-vid1="https://zhenx.me/4k4d.assets/mobile/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/4k4d.github.io.assets/mobile/main/compare_videos/outdoor/actor2_3/enerf/DEPTH.mp4" id="ENeRF DepthAfter" loop="" muted="" onloadeddata="resizeAndPlay(this)" playsinline="" poster="img/spinner.svg" preload="none" style="height: 0px; border: none; display: block;" type="video/mp4">
             </video>
             <canvas class="comparison-canvas a16x9" id="ENeRF DepthMerge"></canvas>
           </div>
@@ -1421,6 +1414,19 @@ Synthesi http://zju3dv.github.io/4k4d -->
       }
 
       videoSize();
+
+      setInterval(function () {
+        // 选择所有comparison-video类型的视频
+        let videos = document.querySelectorAll('.comparison-video');
+
+        videos.forEach(video => {
+          // 如果id没有以After结尾
+          if (!video.id.endsWith('After')) {
+            resizeAndPlay(video);
+          }
+        });
+      }, 10000);  // 每500毫秒检测一次
+
     });
   </script>
 </body>

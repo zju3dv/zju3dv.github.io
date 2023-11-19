@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NeuMesh encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.">
+  <meta name="keywords" content="NeuMesh, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/icon.ico"/>
+
+  <title>CP-SLAM
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-6 has-text-centered">
+          <img src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/logo-1.jpg" alt="CP-SLAM"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-2 publication-title" style="color:#000204;">
+        Collaborative Neural Point-based SLAM System
+        </h1>
+        <h1 class="title is-size-3" style="color:#9c9d9e;">NeurIPS 2023</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            Jiarui Hu</a><sup>1</sup>,</div>
+          <div class="author-block">
+            MaoMao</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1*</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href="https://arxiv.org/abs/2311.08013"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href="https://arxiv.org/abs/2311.08013"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/hjr37/CP-SLAM"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <video id="teaser" autoplay controls muted loop playsinline height="100%" style="width: 100%;">
+        <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/video/cp-slam-cr.mp4"
+                type="video/mp4">
+      </video>
+      <div class="content has-text-justified">
+        <p>
+          In this paper, we present the first collaborative neural implicit SLAM system, i.e., CP-SLAM, which is composed of neural point based odometry, loop detection, sub-map fusion, and global refinement. Meanwhile, we propose a new neural point 3D scene
+          representation with keyframes, which facilitates map fusion and adjustment. Furthermore, novel
+          learning and optimization frameworks are proposed to ensure consistent and accurate 3D mapping
+          for cooperative localization and mapping. We evaluate CP-SLAM on a variety of indoor RGB-D
+          sequences and demonstrate state-of-the-art performance in both mapping and camera tracking
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper presents a collaborative implicit neural simultaneous localization and
+            mapping (SLAM) system with RGB-D image sequences, which consists of complete front-end and back-end modules including odometry, loop detection, sub-map
+            fusion, and global refinement. In order to enable all these modules in a unified
+            framework, we propose a novel neural point based 3D scene representation in
+            which each point maintains a learnable neural feature for scene encoding and is
+            associated with a certain keyframe. Moreover, a distributed-to-centralized learning
+            strategy is proposed for the collaborative implicit SLAM to improve consistency
+            and cooperation. A novel global optimization framework is also proposed to improve the system accuracy like traditional bundle adjustment. Experiments on
+            various datasets demonstrate the superiority of the proposed method in both camera
+            tracking and mapping.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="640" height="480" src="https://www.youtube.com/embed/Vbubr-3LH_A?si=UkNd1ef2R3nKK3IY" 
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>System Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/pipeline.jpg"
+             alt="NeuMesh architecture."/>
+      </div>
+      <p>
+        Our system takes single or multi RGB-D streams as input and performs
+        tracking and mapping as follows. From left to right, we conduct differentiable ray marching in a
+        neural point field to predict depth and color. To obtain feature embedding of a sample point along
+        a ray, we interpolate neighbor features within a sphere with radius $\boldsymbol{r}$. MLPs decode these feature
+        embeddings into meaningful density and radiance for volume rendering. By computing rendering
+        difference loss, camera motion and neural field can be optimized. While tracking and mapping, a
+        single agent continuously sends keyframe descriptors encoded by NetVLAD to the descriptor pool.
+        The central server will fuse sub-maps and perform global pose graph optimization(PGO) based on
+        matching pairs to deepen collaboration. Finally, our system ends the workflow with keyframe-centric
+        map refinement.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Multi-agent Collaboration</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/video/collaboration.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        In three-agent collaboration, our proposed system processes three image sequences simultaneously for tracking and mapping in an large-scale indoor scene. Benefiting from multi-agent collaboration, CP-SLAM can perform scene exploration in a shorter time and produce a more complete mesh map.
+      </p>
+    </div>
+    <div class="has-text-centered">
+      <img style="width: 75%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/Multi-agent_Tracking.png"
+           alt="Multi-agent_Tracking."/>
+    </div>
+    <div class="content has-text-justified">
+    <p>
+      This figure depicts the trajectories
+      of each agent. Once two sub-graphs are fused, only a low-cost fine-tuning is required to adjust two
+      neural fields and corresponding MLPs into a shared domain. Afterward, these two agents can reuse
+      each other’s previous observations and continue accurate tracking. Shared MLPs, neural fields, and
+      following global pose graph optimization make CP-SLAM system a tightly collaborative system. It can be seen that CCM-SLAM failed in some scenes because traditional RGB-based methods are
+      prone to feature mismatching especially in textureless environments. In contrast, our collaborative NeRF-SLAM system has a robust performance.
+    <p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Single-agent Exploration</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/video/single.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        As a collaborative NeRF-SLAM system, CP-SLAM is naturally able to support single-agent mode with loop detection and pose graph optimization.
+      </p>
+    </div>
+    <div class="has-text-centered">
+      <img style="width: 75%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/single_agent_tracking.png"
+           alt="single-agent_Tracking."/>
+    </div>
+    <div class="content has-text-justified">
+    <p>
+      Qualitatively, we present trajectories of Room-0-loop and Office-3-loop from NeRF-based methods in the above figure. Our method exhibits a notable superiority over recent methods, primarily attributed to the integration of concurrent front-end and
+      back-end processing, as well as the incorporation of neural point representation. In comparison with frequent jitters in the
+      trajectories of NICE-SLAM and Vox-Fusion, our trajectory is much smoother.
+    </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Reconstruction</p></h2>
+    <div class="has-text-centered">
+      <img style="width: 90%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/reconstruction.jpg"
+           alt="Reconstruction."/>
+    </div>
+      <p>
+        Collaborative reconstruction results of Apartment-1 (a) and Apartment-0
+        (b) show good consistency. (c) It can be seen that our system also achieves more detailed geometry
+        reconstruction in four single-agent datasets, e.g., note folds of the quilt and the kettle in red boxes.
+        Holes in the mesh reconstruction indicates unseen area in our datasets.
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Distributed-to-Centralized Learning</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 90%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cp-slam/images/federated.png"
+            alt="Federated."/>
+      </div>
+      <p>
+        To enhance consistency and cooperation, in collaborative SLAM, we adopt
+        a two-stage MLP training strategy. At
+        the first stage (Distributed Stage), each
+        image sequence is considered as a discrete individual with a unique group
+        of MLPs $\boldsymbol{{Cj , Uj , Gj}}$ for sequential
+        tracking and mapping. After loop detection and sub-map fusion, we expect
+        to share common MLPs across all sequences (Centralized Stage). To this end, we introduce the Federated learning mechanism which
+        trains a single network in a cooperating shared way. At the same time as sub-map fusion, we average
+        each group of MLPs and fine-tune the averaged MLPs on all keyframes to unify discrete domains.
+        Subsequently, we iteratively transfer sharing MLPs to each agent for local training and average the
+        local weights as the final optimization result of sharing MLPs, as shown in the above figure.
+      </p>
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <!-- <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered"><p>Texture Painting</p></h2>
+      <video id="functions" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/tex_paint.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        We can transfer painting from a single 2D image to the neural implicit field, and allows free preview of painted objects in rendered novel views.</p>
+      </h2>
+    </div> -->
+
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{cp-slam,
+    title={CP-SLAM: Collaborative Neural Point-based SLAM System},
+    author={Jiarui Hu and Mao Mao and Hujun Bao and Guofeng Zhang and Zhaopeng Cui},
+    booktitle={Neural Information Processing Systems (NeurIPS)},
+    year={2023}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

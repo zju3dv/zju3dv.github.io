@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SAM-guided Graph Cut for 3D Instance Segmentation</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>SAM-guided Graph Cut for 3D Instance Segmentation</h2>
+            <!-- <h4 style="color:#5a6268;">In submission</h4> -->
+            <hr>
+            <h6> 
+              <a href="https://github.com/ghy0324" target="_blank">Haoyu Guo</a><sup>1*</sup>, 
+              <a href="https://github.com/Ada4321" target="_blank">He Zhu</a><sup>2*^</sup>, 
+              <a href="https://pengsida.net" target="_blank">Sida Peng</a><sup>1</sup>,
+              <a href="https://github.com/angshine" target="_blank">Yuang Wang</a><sup>1</sup>,
+              <a href="https://shenyujun.github.io/" target="_blank">Yujun Shen</a><sup>3</sup>,
+              <a href="https://csse.szu.edu.cn/staff/ruizhenhu/" target="_blank">Ruizhen Hu</a><sup>4</sup>,
+              <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+            </h6>
+            <p><sup>1</sup>Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Beijing Normal University &nbsp;&nbsp; 
+                <sup>3</sup>Ant Group &nbsp;&nbsp; 
+                <sup>4</sup>Shenzhen University
+                <br>
+                <sup>*</sup> Equal contribution.
+                <br>
+                <sup>^</sup> Work done during internship at Zhejiang University. </p>
+                
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://ghy0324.github.io/project_page_assets/sam_graph/paper.pdf" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/sam_graph" role="button"  target="_blank">
+                  <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://ghy0324.github.io/project_page_assets/sam_graph/supp.pdf" role="button">
+                    <i class="fa fa-file"></i> Supplementary </a> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+          <p class="text-left"> This paper addresses the challenge of 3D instance segmentation by simultaneously leveraging 3D geometric and multi-view image information. Many previous works have applied deep learning techniques to 3D point clouds for instance segmentation. However, these methods often failed to generalize to various types of scenes due to the scarcity and low-diversity of labeled 3D point cloud data. Some recent works have attempted to lift 2D instance segmentations to 3D within a bottom-up framework. The inconsistency in 2D instance segmentations among views can substantially degrade the performance of 3D segmentation. In this work, we introduce a novel 3D-to-2D query framework to effectively exploit 2D segmentation models for 3D instance segmentation. Specifically, we pre-segment the scene into several superpoints in 3D, formulating the task into a graph cut problem. The superpoint graph is constructed based on 2D segmentation models, where node features are obtained from multi-view image features and edge weights are computed based on multi-view segmentation results, enabling the better generalization ability. To process the graph, we train a graph neural network using pseudo 3D labels from 2D segmentation models. Experimental results on the ScanNet, ScanNet++ and KITTI-360 datasets demonstrate that our method achieves robust segmentation performance and can generalize across different types of scenes. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/daWiQiFPpZ0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div> 
+            
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- reconstruction showcase -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Segmentation results showcase</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=18b164e0c813435687bcb59908ed3937" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <br>
+            <p> Zoom in by scrolling. You can toggle the “Single Sided” option in Model Inspector (pressing I key) to enable back-face culling (see through walls).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- comparison -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Comparison with state-of-the-art methods</h3>
+          <hr style="margin-top:0px">
+          <img width="100%" src="https://ghy0324.github.io/project_page_assets/sam_graph/comparison.jpg">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+
+<code>@article{guo2023sam-graph,
+  title={SAM-guided Graph Cut for 3D Instance Segmentation},
+  author={Guo, Haoyu and Zhe, He and Peng, Sida and Wang, Yuang and Shen, Yujun and Hu, Ruizhen and Zhou, Xiaowei},
+  journal={arXiv preprint arXiv},
+  year={2023}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the website template.
+  </footer>
+
+</body>
+</html>

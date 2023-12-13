@@ -90,25 +90,6 @@
   </section>
   <br>
 
-  <!-- reconstruction showcase -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-            <h3>Segmentation results showcase</h3>
-            <hr style="margin-top:0px">
-            <div class="embed-responsive embed-responsive-16by9">
-
-                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=18b164e0c813435687bcb59908ed3937" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            </div>
-            <br>
-            <p> Zoom in by scrolling. You can toggle the “Single Sided” option in Model Inspector (pressing I key) to enable back-face culling (see through walls).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
-
   <!-- comparison -->
   <section>
     <div class="container">
@@ -117,7 +98,62 @@
           <h3>Comparisons</h3>
           <hr style="margin-top:0px">
           <div class="column is-full-width">
-            <div id="example1" class="bal-container-small">
+            <div class="tabs">
+              <div class="tab" data-tab-for="example1,example2" onclick="showExamples('example1', 'example2', this)">ScanNet</div>
+              <div class="tab" data-tab-for="example3,example4" onclick="showExamples('example3', 'example4', this)">ScanNet++</div>
+              <div class="tab" data-tab-for="example5,example6" onclick="showExamples('example5', 'example6', this)">KITTI-360</div>
+            </div>
+
+            <div id="example1" class="bal-container-small example">
+    ∂
+              <div class="bal-after">
+                <img src="src/0616-ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+            
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/0616-mask3d.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    Mask3D [Schult 2023]
+                  </div>
+                </div>
+              </div>
+            
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+
+            <div id="example2" class="bal-container-small example" style="display:none;">
+    
+              <div class="bal-after">
+                <img src="src/0549-ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+            
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/0549-sam3d.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    SAM3D [Yang 2023]
+                  </div>
+                </div>
+              </div>
+            
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            
+            </div>
+
+            <div id="example3" class="bal-container-small example">
     
               <div class="bal-after">
                 <img src="src/21d-ours.png">
@@ -141,7 +177,7 @@
               </div>
             </div>
 
-            <div id="example2" class="bal-container-small">
+            <div id="example4" class="bal-container-small example" style="display:none;">
     
               <div class="bal-after">
                 <img src="src/578-ours.png">
@@ -166,7 +202,7 @@
             
             </div>
 
-            <div id="example3" class="bal-container-small">
+            <div id="example5" class="bal-container-small example">
     
               <div class="bal-after">
                 <img src="src/09-ours.png">
@@ -191,7 +227,7 @@
             
             </div>
 
-            <div id="example4" class="bal-container-small">
+            <div id="example6" class="bal-container-small example">
     
               <div class="bal-after">
                 <img src="src/00-ours.png">
@@ -221,6 +257,25 @@
   </section>
   <br>
 
+  <!-- reconstruction showcase -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Segmentation results showcase</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=18b164e0c813435687bcb59908ed3937" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <br>
+            <p> Zoom in by scrolling. You can toggle the “Single Sided” option in Model Inspector (pressing I key) to enable back-face culling (see through walls).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
   <!-- citing -->
   <div class="container">
     <div class="row ">
@@ -230,7 +285,7 @@
             <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
 <code>@article{guo2023sam-graph,
   title={SAM-guided Graph Cut for 3D Instance Segmentation},
-  author={Guo, Haoyu and Zhe, He and Peng, Sida and Wang, Yuang and Shen, Yujun and Hu, Ruizhen and Zhou, Xiaowei},
+  author={Guo, Haoyu and Zhu, He and Peng, Sida and Wang, Yuang and Shen, Yujun and Hu, Ruizhen and Zhou, Xiaowei},
   journal={arXiv preprint arXiv},
   year={2023}
 }</code></pre>
@@ -244,22 +299,6 @@
   </footer>
 
   <script src="js/script.js"></script>
-
-  <script>
-      new BeforeAfter({
-          id: '#example1'
-      });
-      new BeforeAfter({
-          id: '#example2'
-      });
-      new BeforeAfter({
-          id: '#example3'
-      });
-      new BeforeAfter({
-          id: '#example4'
-      });
-
-  </script>
 
 </body>
 </html>

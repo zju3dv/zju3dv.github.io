@@ -51,3 +51,39 @@ class BeforeAfter {
 
     }
 }
+
+function showExamples(exampleId1, exampleId2, tabElement) {
+    var examples = document.getElementsByClassName('example');
+    var tabs = document.getElementsByClassName('tab');
+  
+    // 隐藏所有的example容器
+    for (var i = 0; i < examples.length; i++) {
+      examples[i].style.display = 'none';
+    }
+  
+    // 移除所有标签的active类
+    for (var j = 0; j < tabs.length; j++) {
+      tabs[j].classList.remove('active');
+    }
+  
+    // 显示指定的example容器
+    document.getElementById(exampleId1).style.display = 'block';
+    document.getElementById(exampleId2).style.display = 'block';
+  
+    // 初始化或重新初始化BeforeAfter
+    new BeforeAfter({ id: '#' + exampleId1 });
+    new BeforeAfter({ id: '#' + exampleId2 });
+  
+    // 如果提供了tabElement，则为其添加active类
+    if (tabElement) {
+      tabElement.classList.add('active');
+    }
+  }
+  
+  // 当文档加载完成时，自动显示并激活Tab 2，并初始化BeforeAfter
+  document.addEventListener('DOMContentLoaded', function() {
+    var tab2 = document.querySelector('[data-tab-for="example3,example4"]');
+    showExamples('example3', 'example4', tab2);
+  });
+  
+  

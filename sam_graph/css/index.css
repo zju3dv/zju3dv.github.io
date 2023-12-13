@@ -347,3 +347,35 @@ body {
 .section {
   width: 100%;
 }
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex-grow: 1; /* 使每个标签平均分配可用空间 */
+  text-align: center; /* 文字居中 */
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #f0f0f0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
+
+.tab.active {
+  background-color: #fff;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.example {
+  display: none;
+}

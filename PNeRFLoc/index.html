@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PNeRFLoc: Visual Localization with Point-based Neural Radiance Fields">
+  <meta name="keywords" content="PNeRFLoc, Neural Rendering, Visual Localization, PointNeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>PNeRFLoc: Visual Localization with Point-based Neural Radiance Fields
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/cp-slam/">
+            CP-SLAM
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <img src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/PNeRFLoc/logo_clip.png" alt="PNeRFLoc"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Visual <span style="color: #ecdd08">Loc</span>alization with <span style="color: #0faaf1">P</span>oint-based <span style="color: #f04e5b">Ne</span>ural <span style="color: #f04e5b">R</span>adiance <span style="color: #f04e5b">F</span>ields
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">AAAI 2024</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/BoMingZhao/">Boming Zhao</a><sup>1</sup>,</div>
+          <div class="author-block">
+            Luwei Yang</a>,</div>
+          <div class="author-block">
+            Mao Mao</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>, </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+                <a href="https://arxiv.org/abs/2308.03280"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://zjy-zju.github.io/publications/Mirror-NeRF/mirror-nerf.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://zjy-zju.github.io/publications/Mirror-NeRF/mirror-nerf_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--   <div class="is-size-5 publication-authors">
+    <div class="author-block">
+      <b>Junyi Zeng<sup>1*</sup></b>   </div>
+    <div class="author-block">
+      <b>Chong Bao<sup>1*</sup></b>   </div>
+    <div class="author-block">
+      <b>Rui Chen<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Zilong Dong<sup>2</sup></b>   </div>
+    <div class="author-block">
+      <b>Guofeng Zhang<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Hujun Bao<sup>1</sup></b>   </div>
+    <div class="author-block">
+      <b>Zhaopeng Cui<sup>1✝</sup></b>   </div>
+  </div>
+  <div class="is-size-5 publication-authors">
+    <span class="author-block"><b><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University</b> </span>
+    <span class="author-block"><b><sup>2</sup>Alibaba Group</b></span>
+  </div> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Due to the ability to synthesize high-quality novel views, Neural Radiance Fields (NeRF) has been recently exploited to
+            improve visual localization in a known environment. However,
+            the existing methods mostly utilize NeRF for data augmentation to improve the regression model training, and their
+            performances on novel viewpoints and appearances are still
+            limited due to the lack of geometric constraints. In this paper,
+            we propose a novel visual localization framework, i.e., PNeRFLoc, based on a unified point-based representation. On one
+            hand, PNeRFLoc supports the initial pose estimation by matching 2D and 3D feature points as traditional structure-based
+            methods; on the other hand, it also enables pose refinement
+            with novel view synthesis using rendering-based optimization.
+            Specifically, we propose a novel feature adaption module to
+            close the gaps between the features for visual localization and
+            neural rendering. To improve the efficacy and efficiency of
+            neural rendering-based optimization, we also develop an efficient rendering-based framework with a warping loss function.
+            Extensive experiments demonstrate that PNeRFLoc performs
+            the best on the synthetic dataset when the 3D NeRF model can
+            be well learned, and significantly outperforms all the NeRFboosted localization methods with on-par SOTA performance
+            on the real-world benchmark localization datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zjy-zju/open_access_assets/main/Mirror-NeRF/framework.png"
+             alt="Mirror-NeRF architecture."/>
+      </div>
+      <p>
+        Visual localization with PNeRFLoc. In the proposed framework, we associate raw point clouds with scene-agnostic
+        localization features and train a scene-specific feature adaptation together with the point-based neural radiance fields. Subsequently, PNeRFLoc integrates structure-based localization with novel rendering-based optimization to accurately estimate the
+        6-DOF camera pose of the query image.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <!-- <pre><code>@inproceedings{zeng2023mirror-nerf,
+    title={Mirror-NeRF: Learning Neural Radiance Fields for Mirrors with Whitted-Style Ray Tracing},
+    author={Zeng, Junyi and Bao, Chong and Chen, Rui and Dong, Zilong and Zhang, Guofeng and Bao, Hujun and Cui, Zhaopeng},
+    booktitle={Proceedings of the 31st ACM International Conference on Multimedia},
+    pages={4606--4615},
+    year={2023}
+}</code></pre> -->
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFMMMPXL0M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFMMMPXL0M');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

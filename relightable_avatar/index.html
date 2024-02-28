@@ -58,6 +58,11 @@
 
         }
 
+        video {
+            width: 100%;
+            border-radius: 5px;
+        }
+
         /* .container {
             margin-left: -100px;
         } */
@@ -197,7 +202,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/teaser_video.mp4" type="video/mp4" />
                 </video>
                 <image src="img/teaser.jpg" width="100%"></image>
@@ -278,7 +283,7 @@
                 </h3>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/sparse_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -289,7 +294,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/monocular_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -300,7 +305,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/sparse_animation.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -310,7 +315,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/monocular_animation.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -385,6 +390,12 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function resizeVideo(video) {
+            video.height = video.clientWidth / video.videoWidth * video.videoHeight;
+        }
+    </script>
+
     <!-- Default Statcounter code for Relightable and Animatable Neura
 http://zju3dv.github.io/relightable_avatar -->
     <script type="text/javascript">

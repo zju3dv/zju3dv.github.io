@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Efficient LoFTR: Semi-Dense Local Feature Matching with Sparse-Like Speed</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3>Efficient LoFTR: Semi-Dense Local Feature Matching with Sparse-Like Speed</h3>
+            <h4 style="color:#6e6e6e;">CVPR 2024</h4>
+            <hr>
+            <h6> <a href="https://github.com/wyf2020" target="_blank">Yifan Wang</a><sup>*</sup>, 
+                 <a href="https://github.com/hxy-123" target="_blank">Xingyi He</a><sup>*</sup>, 
+                 <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup></sup>, 
+                <a href="https://github.com/Cuistiano" target="_blank">Dongli Tan</a><sup></sup>,
+                <a href="http://xzhou.me" target="_blank">Xiaowei Zhou</a><sup></sup></h6>
+            <p> State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <br>
+                <sup>*</sup> denotes equal contribution
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://zju3dv.github.io/efficientloftr" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://github.com/zju3dv/efficientloftr" role="button" 
+                    target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+
+            <div class="media-container" style="display: flex; justify-content: center; align-items: center;">
+              <video id="demo" width="100%" playsinline autoplay loop preload muted>
+                <source src="images/realtime_demo.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <h6 style="color:#8899a5" class="text-center"> 
+              Our interactive real-time demo matching images at 640$\times$480 resolution on RTX 4090.
+            </h6>
+
+            <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
+              <br>
+              <!-- <br> -->
+
+            <p class="text-justify">
+              <img src="images/teaser.png" alt="Descriptive text about the image" style="float: right; margin-left: 20px; margin-bottom: 5px; width: 330px;">
+              We present a novel method for efficiently producing semi-dense matches across images.
+              Previous detector-free matcher LoFTR has shown remarkable matching capability in handling large-viewpoint change and texture-poor scenarios but suffers from low efficiency.
+              We revisit its design choices and derive multiple improvements for both efficiency and accuracy.
+              One key observation is that performing the transformer over the entire feature map is redundant due to shared local information, therefore we propose an aggregated attention mechanism with adaptive token selection for efficiency.
+              Furthermore, we find spatial variance exists in LoFTR's fine correlation module, which is adverse to matching accuracy.
+              A novel two-stage correlation layer is proposed to achieve accurate subpixel correspondences for accuracy improvement.
+              Our efficiency optimized model is $\sim 2.5\times$ faster than LoFTR which can even surpass state-of-the-art efficient sparse matching pipeline SuperPoint + LightGlue. 
+              Moreover, extensive experiments show that our method can achieve higher accuracy compared with competitive semi-dense matchers, with considerable efficiency benefits.
+              This opens up exciting prospects for large-scale or latency-sensitive applications such as image retrieval and 3D reconstruction.
+                          </p>
+            
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- pipeline -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Pipeline overview</h3>
+            <hr style="margin-top:0px">
+            <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+                <!-- <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://www.youtube.com/embed/EpmnpwwaR14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> -->
+            <!-- </div> -->
+                <img class="img-fluid" src="images/main_figure.png" alt="LoFTR Architechture">
+            <hr>
+            <p class="text-justify">
+              \(\textbf{Pipeline Overview.}\) 
+              \((\textbf{1})\) Given an image pair, a CNN network extracts coarse feature maps $\tilde{\textbf{F}}_A$ and $\tilde{\textbf{F}}_B$, as well as fine features.
+              \((\textbf{2})\) Then, we transform coarse features for more discriminative feature maps by interleaving our aggregated self- and cross-attention $N$ times, where adaptively feature aggregation is performed to reduce token size before each attention for efficiency.
+              \((\textbf{3})\) Transformed coarse features are correlated for the score matrix $\mathcal{S}$. Mutual-nearest-neighbor~(MNN) searching is followed to establish coarse matches $\{\mathcal{M}_c\}$.
+              % Simple version
+              \((\textbf{4})\) To refine coarse matches, discriminative fine features $\hat{\textbf{F}}_A^t$, $\hat{\textbf{F}}_B^t$ in full resolution are obtained by fusing transformed coarse features $\tilde{\textbf{F}}_A^t$, $\tilde{\textbf{F}}_B^t$ with backbone features.
+              Feature patches are then cropped centered at each coarse match $\mathcal{M}_c$.
+              A two-stage refinement is followed to obtain sub-pixel correspondence $\mathcal{M}_f$.
+          
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- compare -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Qualitative comparison with <a href="https://aspanformer.github.io/">ASpanFormer</a> and <a href="https://psarlin.com/superglue">SuperGlue</a></h3>
+            <hr style="margin-top:0px">
+            <p class="text-justify">
+              Data is captured using an iPhone, color indicates the match confidence.
+            </p>
+            <video width="75%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+              <source src="images/demo_comparison.mp4" type="video/mp4">
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{wang2024eloftr,
+  title={{Efficient LoFTR}: Semi-Dense Local Feature Matching with Sparse-Like Speed},
+  author={Wang, Yifan and He, Xingyi and Peng, Sida and Tan, Dongli and Zhou, Xiaowei},
+  booktitle={CVPR},
+  year={2024}
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+  
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

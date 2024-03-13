@@ -75,6 +75,7 @@
               TL;DR: We propose a detector-free structure from motion framework that eliminates the requirement of keypoint detection and can recover poses even on challenging texture-poor scenes.
             </h6>
             <br>
+            <!-- <br>
             <video id="demo" width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="inspect_vid">
                   <source src="images/first_page_demo.m4v" type="video/mp4">
             </video>
@@ -83,7 +84,7 @@
 
             <div><b style="color:#fd5638; font-size:large" id="demo-warning"></b>
               <br>
-              <br>
+              <br> -->
           <p class="text-justify">
             We propose a new structure-from-motion framework to recover accurate camera poses and point clouds from unordered images. Traditional SfM systems typically rely on the successful detection of repeatable keypoints across multiple views as the first step, which is difficult for texture-poor scenes, and poor keypoint detection may break down the whole SfM system. We propose a new detector-free SfM framework to draw benefits from the recent success of detector-free matchers to avoid the early determination of keypoints, while solving the multi-view inconsistency issue of detector-free matchers. Specifically, our framework first reconstructs a coarse SfM model from quantized detector-free matches. Then, it refines the model by a novel iterative refinement pipeline, which iterates between an attention-based multi-view matching module to refine feature tracks and a geometry refinement module to improve the reconstruction accuracy. Experiments demonstrate that the proposed framework outperforms existing detector-based SfM systems on common benchmark datasets. We also collect a texture-poor SfM dataset to demonstrate the capability of our framework to reconstruct texture-poor scenes. Based on this framework, we take the $\textit{first place}$ in Image Matching Challenge 2023.
           </p>
@@ -191,9 +192,9 @@
               The recovered poses by our framework on challenging scenes such as texture-poor objects can benefit the downstream tasks, including novel view synthesis and dense reconstruction.
             </p>
             </p>
-            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
+            <!-- <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
               <source src="images/application_nvs.m4v" type="video/mp4">
-            </video>
+            </video> -->
             <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls="" id="compare_vid">
               <source src="images/applications.m4v" type="video/mp4">
             </video>

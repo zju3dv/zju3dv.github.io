@@ -184,11 +184,8 @@
   </div>
 </section>
 
-
-
 <section class="section">
   <div class="container is-max-desktop">
-
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-fifth-sixths">
@@ -266,7 +263,7 @@
 
     <br/>
 
-    <div class="container is-max-desktop">
+    <!-- <div class="container is-max-desktop">
       <div class="content has-text-justified">
       <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Tracking Accuracy Evaluation</p></h2>
         
@@ -277,7 +274,7 @@
         25%~75%. In the real-world TUM and ScanNet datasets, despite being affected by noisy and sparse depth information, our method can still achieve better or competitive performance, which further demonstrates its generalization and superiority.
         </h2>
       </div>
-      </div>
+      </div> -->
 
     <!-- <div class="container is-max-desktop">
       <div class="content has-text-justified">
@@ -318,14 +315,14 @@
     <div class="content has-text-justified">
     <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Reconstruction Evaluation</p></h2>
       <div class="has-text-centered">
-        <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/reconstruction.jpg"
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/reconstruction.png"
         alt="tracking-accuracy."/>
       </div>
       <p>
-        It can be observed that our method outperforms all baselines on mapping accuracy.
-        We achieve state-of-the-art reconstruction in observed areas. <u><strong>It is worth noting that the Gaussian-based method neither has a global MLP nor a fully covered
-        feature grid, as in Co-SLAM.</strong></u> Consequently, such a system exhibits a slightly weaker hole-filling ability compared to the NeRF-based method, which explains
-        why our system is slightly worse in the <em>Completion metric</em>.
+        It can be observed that our method can reconstruct a detailed mesh map while ensuring efficiency. 
+        CG-slam has demonstrated competitive performance in mapping compared to the state-of-the-art NeRF-based PointSLAM, far surpassing other NeRF-based methods.
+        It is worth noting that the Gaussian-based method neither has a global MLP nor a fully covered
+        feature grid, as in Co-SLAM. Consequently, such a system exhibits a slightly weaker hole-filling ability in unobserved areas.
       </h2>
     </div>
     </div>
@@ -342,12 +339,12 @@
       <p>
         <strong><font size="4">Annotations:</font></strong> We show our rendering results on Replica scenes. We can observe that our rendered images closely resemble the ground truth ones, demonstrating that CG-SLAM is capable of achieving extremely photorealistic rendering performance.
       </p>
-      <div class="has-text-centered">
+      <!-- <div class="has-text-centered">
         <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/rendering.jpg"
         alt="rendering."/>
-      </div>
+      </div> -->
       <p>
-        Results in the above table show that our method can yield more photorealistic rendering images than those of the existing NeRF-SLAM and concurrent Gaussian-based works.
+        CG-SLAM can yield more photorealistic rendering images than those of the existing NeRF-SLAM and concurrent Gaussian-based works.
         We require fewer optimization iterations, than the most photorealistic NeRF-based Point-SLAM and concurrent methods, to achieve better rendering performance. Additionally, 
         relying on the 3D Gaussian rasterization, our method can render at an extremely higher speed of 770 FPS in the test.
       </p>
@@ -371,6 +368,8 @@
       </p>
       </h2>
     </div>
+
+    
 
 
 </section>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NeuMesh encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.">
+  <meta name="keywords" content="NeuMesh, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/icon.png"/>
+
+  <title>Efficient Dense RGB-D SLAM in a Consistent Uncertainty-aware 3D Gaussian Field
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/cp-slam">
+            CP-SLAM
+          </a>
+          <!-- <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a> -->
+          <!-- <a class="navbar-item" href="https://zju3dv.github.io/latent_human">
+            LatentHuman
+          </a> -->
+          <!-- <a class="navbar-item" href="https://zju3dv.github.io/sine">
+            SINE
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5 has-text-centered">
+          <img style="width: 95%; transform: translate(-15%, 0%);" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/title.png" alt="CG-SLAM"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Efficient Dense RGB-D SLAM in a Consistent Uncertainty-aware 3D Gaussian Field
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">Arxiv 2024</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/hjr37">Jiarui Hu</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/CXavireH">Xianhao Chen</a><sup>2</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/JSUISLA">Boyin Feng</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/liguanglin">Guanglin Li</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://person.zju.edu.cn/ylj">Liangjing Yang</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>ZJU-UIUC Institute, International Campus, Zhejiang University</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/hybrid_edit.mp4"
+                type="video/mp4">
+      </video> -->
+      <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/teaser.jpg"
+             alt="NeuMesh architecture."/>
+      <!-- <h2 class="subtitle has-text-centered"> -->
+      <div class="content has-text-justified">
+        <p>
+        <i>CG-SLAM</i>, which adopts a well-designed 3D Gaussian field, can simultaneously achieve state-of-the-art performance in localization, reconstruction and rendering. Benefiting from 3D Gaussian representation and a new GPU-accelerated framework that is developed from a thorough derivative analysis of camera pose in 3D Gaussian Splatting, CG-SLAM can perform extremely fast rendering and solve the <strong><u>long-standing efficiency bottleneck</u></strong> suffered by previous rendering-based SLAM methods. 
+        </p>
+      </div>
+      <!-- </h2> -->
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fifth-sixths">
+        <h2 class="title is-3" style="color:#3e91d0;">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recently neural radiance fields (NeRF) have been widely exploited as 3D representations for dense simultaneous localization and mapping (SLAM). Despite their notable successes in surface modeling 
+            and novel view synthesis, existing NeRF-based methods are hindered by their computationally intensive and time-consuming volume rendering pipeline. This paper presents an efficient dense RGB-D SLAM system, 
+            i.e., CG-SLAM, based on a novel uncertainty-aware 3D Gaussian field with high consistency and geometric stability. Through an in-depth analysis of Gaussian Splatting, we propose several techniques to construct a 
+            consistent and stable 3D Gaussian field suitable for tracking and mapping. Additionally, a novel depth uncertainty model is proposed to ensure the selection of valuable Gaussian primitives during optimization, 
+            thereby improving tracking efficiency and accuracy. Experiments on various datasets demonstrate that CG-SLAM achieves superior tracking and mapping performance with a notable tracking speed of up to 15 Hz. We 
+            will make our source code publicly available.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2" style="color:#3e91d0;">Video</h2>
+        <!-- <h2 class="title is-5">YouTube Source</h2> -->
+        <div class="publication-video">
+          <!-- <iframe width="640" height="480" src="./video/cg-slam-show.mp4"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe> -->
+          <video id="functions" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/cg-slam-show.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/pipeline.png"
+             alt="CG-SLAM Overview."/>
+      </div>
+      <p>
+        In a 3D Gaussian field constructed from an RGB-D sequence, we can render color, depth, opacity, and uncertainty maps through a GPU-accelerated rasterizer. Additionally, we attach a new uncertainty property to each Gaussian primitive to filter informative primitives. In the mapping process, we utilize multiple rendering results to design effective loss functions towards a consistent and stable Gaussian field. Subsequently, we employ apperance and geometry cues to perform accurate and efficient tracking.
+        <!-- We present a novel representation for neural rendering, which encodes neural implicit field on a mesh-based scaffold. Each mesh vertex possesses a geometry and texture code ${\boldsymbol{l}}^{g}, {\boldsymbol{l}}^{t}$, and a sign indicator $\textbf{n}$ for computing projected distance $h$.
+        For a query point $\boldsymbol{x}$ along a casted camera ray, we retrieve interpolated codes and signed distances from the nearby mesh vertices, and forward to the geometry and radiance decoder to obtain SDF value $s$ and color $\textbf{c}$. -->
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Tracking and Online Third-person View Rendering </p></h2>
+      <div class="has-text-centered">
+        <video style="width: 80%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/rviz.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <p>
+        <strong><font size="4">  Annotations:</font> (1)</strong> Camera tracking is performed with a 340*600 image sequence and we played this video at &times;3.5 speed. <strong>(2)</strong> Following the moving camera, CG-SLAM allows a real-time third-person view rendering.
+      </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Tracking Accuracy Evaluation</p></h2>
+        
+        <img style="width: 70%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/tracking-accuracy-new.jpg"
+        alt="tracking-accuracy."/>
+        <p>
+        We report the localization accuracy of our proposed CG-SLAM across different datasets. In the synthetic Replica dataset, e surpass all other methods by a notable margin around
+        25%~75%. In the real-world TUM and ScanNet datasets, despite being affected by noisy and sparse depth information, our method can still achieve better or competitive performance, which further demonstrates its generalization and superiority.
+        </h2>
+      </div>
+      </div>
+
+    <!-- <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <h2 class="title is-3 has-text-centered"><p>Dense Reconstruction </p></h2>
+        <video id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="./video/office1-full.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+          Our representation support a series of editing functionalities, including a mesh-guided geometry editing, designated texture editing with texture swapping of two objects, texture filling with materials from pre-captured objects, and texture painting by transferring user-paints from 2D image to 3D field.
+        </p>
+      </div>
+      </div> -->
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Dense Reconstruction</p></h2>
+      <div class="has-text-centered">
+        <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/office1-full.mp4"
+                  type="video/mp4">
+        </video>
+        <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/room1-full.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong> Room touring in dense reconstruction meshes from CG-SLAM and Co-SLAM. It can be clearly seen that CG-SLAM can recover a finer-grained mesh map. 
+      </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Reconstruction Evaluation</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/reconstruction.jpg"
+        alt="tracking-accuracy."/>
+      </div>
+      <p>
+        It can be observed that our method outperforms all baselines on mapping accuracy.
+        We achieve state-of-the-art reconstruction in observed areas. <u><strong>It is worth noting that the Gaussian-based method neither has a global MLP nor a fully covered
+        feature grid, as in Co-SLAM.</strong></u> Consequently, such a system exhibits a slightly weaker hole-filling ability compared to the NeRF-based method, which explains
+        why our system is slightly worse in the <em>Completion metric</em>.
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Rendering Evaluation</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/supp_rendering.jpg"
+        alt="rendering."/>
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong> We show our rendering results on Replica scenes. We can observe that our rendered images closely resemble the ground truth ones, demonstrating that CG-SLAM is capable of achieving extremely photorealistic rendering performance.
+      </p>
+      <div class="has-text-centered">
+        <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/rendering.jpg"
+        alt="rendering."/>
+      </div>
+      <p>
+        Results in the above table show that our method can yield more photorealistic rendering images than those of the existing NeRF-SLAM and concurrent Gaussian-based works.
+        We require fewer optimization iterations, than the most photorealistic NeRF-based Point-SLAM and concurrent methods, to achieve better rendering performance. Additionally, 
+        relying on the 3D Gaussian rasterization, our method can render at an extremely higher speed of 770 FPS in the test.
+      </p>
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Efficiency Evaluation</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/efficiency.jpg"
+        alt="rendering."/>
+      </div>
+      <p>
+        We reported the tracking and mapping efficiency in terms of per-iteration time consumption and the total number of optimization iterations.
+        The GPU-accelerated rasterizer and carefully designed pipeline allow our system to expand to a lightweight version, which can work with half-resolution images and perform tracking twice as fast as the full version at the
+        cost of a slight decrease in accuracy. In addition, our lightweight version effectively alleviates the memory consumption while maintaining accuracy, which is a common problem in other concurrent works.
+      </p>
+      </h2>
+    </div>
+
+
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <!-- <pre><code>@inproceedings{neumesh,
+    title={NeuMesh: Learning Disentangled Neural Mesh-based Implicit Field for Geometry and Texture Editing},
+    author={{Chong Bao and Bangbang Yang} and Zeng Junyi and Bao Hujun and Zhang Yinda and Cui Zhaopeng and Zhang Guofeng},
+    booktitle={European Conference on Computer Vision (ECCV)},
+    year={2022}
+} -->
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

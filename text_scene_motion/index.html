@@ -11,6 +11,10 @@
   <meta content="English" name="language" />
   <meta content="Zhi Cen" name="author" />
   <title>Generating Human Motion in 3D Scenes from Text Descriptions</title>
+  <!-- Bootstrap -->
+  <script src="js/video_comparison.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
 
   <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
@@ -77,7 +81,7 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      bottom: 10%;
+      bottom: 0%;
       left: 90%;
 
       /* Adjust vertical position */
@@ -277,9 +281,17 @@
             <div class="row justify-content-center">
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1ZqJdvObz87CwuOlmUnYZNei54tieMZpZ/view?usp=sharing" role="button" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     <b>Paper</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="" role="button" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Supp Mat</b>
                   </a>
                 </p>
               </div>
@@ -305,6 +317,7 @@
       </div>
     </div>
   </section>
+  <!-- abstract -->
   <section>
     <div class="container">
       <div class="row">
@@ -319,6 +332,7 @@
       </div>
     </div>
   </section>
+  <!-- method -->
   <section>
     <div class="container">
       <div class="row">
@@ -335,6 +349,7 @@
       </div>
     </div>
   </section>
+  <!-- stage one -->
   <section>
     <div class="container">
       <div class="row">
@@ -351,6 +366,7 @@
       </div>
     </div>
   </section>
+  <!-- stage two -->
   <section>
     <div class="container">
       <div class="row">
@@ -367,6 +383,217 @@
       </div>
     </div>
   </section>
+
+  <!-- qual -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Qualitative Results</h3>
+          <hr style="margin-top: 0px" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <div class="carousel slide" data-interval="10000" data-ride="carousel" id="bkgdCarousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#bkgdCarousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#bkgdCarousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#bkgdCarousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <!-- <li data-slide-to="3" data-target="#bkgdCarousel">
+                <span class="indicator-dot"></span>
+              </li> -->
+              <!-- Additional indicators... -->
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Stand up from the end table that is far away from the door.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/qual/stand.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Sit on the toilet that is farthest from the paper towel dispenser</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/qual/sit.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Walk to the bed.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/qual/walk.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Lie on the bed.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/qual/lie.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div> -->
+              <!-- Additional carousel items... -->
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#bkgdCarousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#bkgdCarousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- generalize -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Generalization on the PROX Dataset</h3>
+          <hr style="margin-top: 0px" />
+          <p> Our method can work on the unseen scenes without fine-tuning. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <div class="carousel slide" data-interval="10000" data-ride="carousel" id="bkgdCarousel1">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#bkgdCarousel1">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#bkgdCarousel1">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#bkgdCarousel1">
+                <span class="indicator-dot"></span>
+              </li>
+              <!-- <li data-slide-to="3" data-target="#bkgdCarousel1">
+                <span class="indicator-dot"></span>
+              </li> -->
+              <!-- Additional indicators... -->
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Sit on the table that is near the shelf.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/prox/sit.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Walk to the chair that is near the bed.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/prox/walk.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Stand up from the armchair.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/prox/stand.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <p>Lie on the sofa.</p>
+                    <video width="60%" controls="controls">
+                      <source src="video/prox/lie.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div> -->
+              <!-- Additional carousel items... -->
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#bkgdCarousel1" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#bkgdCarousel1" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- diverse -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Diverse Results</h3>
+          <hr style="margin-top: 0px" />
+          <p>With the same text and scene inputs, our method can generate diverse motions.</p>
+          <p style="text-align:center;">Walk to the coffee table.</p>
+          <p style="text-align:center;">
+          <video autoplay width="70%" controls="controls" >
+            <source src="video/diverse_video.mp4" type="video/mp4">
+          </video>
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Supp Video -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3>Supplementary Video</h3>
+            <hr style="margin-top: 0px" />
+            <p style="text-align:center;">
+            <video autoplay width="90%" controls="controls" >
+              <source src="video/supplementary_video.mp4" type="video/mp4">
+            </video>
+          </p>
+          </div>
+        </div>
+      </div>
 
   <!-- citing -->
   <div class="container">

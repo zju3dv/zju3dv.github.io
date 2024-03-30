@@ -1,0 +1,408 @@
+body{
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+img{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    display: block;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: 'Google Sans', sans-serif;
+}
+
+h1{
+    font-size: 2.5em;
+}
+
+a {
+    color: #1772d0;
+    text-decoration: none;
+}
+
+@keyframes rowup {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.video-box{
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+
+.video-column{
+    width: auto;
+}
+
+.video-column video {
+    width: auto; /* Adjust width automatically */
+    height: 100%; /* Take full height of the video-column */
+}
+
+
+.rowup{
+    -webkit-animation: 16s rowup linear infinite normal;
+    animation: 16s rowup linear infinite normal;
+    position: relative;
+    display: flex;
+}
+
+.title-mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    text-shadow: 0.05em -0.05em rgba(255, 200, 160, 0.634);
+}
+
+#button-list{
+    /* margin: 20px auto 80px auto; */
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+}
+
+.link-button{
+    border-radius: 290486px;
+    padding-left: calc(1em + 0.25em);
+    padding-right: calc(1em + 0.25em);
+    background-color: white;
+    border-color: transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: black;
+    margin: 0 10px 0 10px;
+}
+
+.link-button-content{
+    color: black;
+}
+
+svg:not(:root).svg-inline--fa{
+    overflow: visible;
+}
+
+.svg-inline--fa.fa-w-12 {
+    width: 0.75em;
+}
+
+.root-content{
+    text-align: center;
+    width: 1020px;
+    margin-right: auto;
+    margin-left: auto;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+.section-name{
+    color: #4a4a4a;
+    font-size: 35px;
+}
+
+.section-content-text{
+    /* font-family: 'Noto Sans', sans-serif; */
+    color: #555;
+    text-align: justify;
+    /* font-size: 17px; */
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+    line-height: 1.5; /* Adjust the value as needed */
+
+}
+
+.section-content{
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-row img{
+    width: 85%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.result-row td{
+    border: 10px;
+}
+
+.prompt-row{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.bibtex{
+    text-align: left;
+    font-size: 14px;
+    font-family: monospace;
+    background-color: rgb(245,245,245);
+    overflow-x: auto;
+    padding: 5px 15px 15px 15px;
+}
+
+.circle-breath {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 0 0 0 rgb(255, 255, 255);
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    animation: donghua 2.4s infinite;
+    cursor: pointer;
+    scroll-behavior: smooth;
+}
+
+.circle-breath:hover{
+    animation: donghua 0.4s infinite;
+
+}
+
+@keyframes donghua {
+    0% {
+        transform: scale(0.60);
+        /* 注意rgba中的a的设置 */
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 60%);
+    }
+
+    60% {
+        transform: scale(1);
+        box-shadow: 0 0 0 36px rgba(255, 255, 255, 0%);
+    }
+
+    100% {
+        transform: scale(0.60);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0%);
+    }
+}
+
+.click{
+    position: absolute;
+    bottom: 10%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 22px;
+}
+
+.teaser .hero-body {
+    padding-top: 0;
+    padding-bottom: 3rem;
+  }
+  
+  .teaser {
+    font-family: 'Google Sans', sans-serif;
+  }
+  
+  
+  .publication-title {
+  }
+  
+  .publication-banner {
+    max-height: parent;
+  
+  }
+  
+  .publication-banner video {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    object-fit: fit;
+  }
+  
+  .publication-header .hero-body {
+  }
+  
+  .publication-title {
+      font-family: 'Google Sans', sans-serif;
+  }
+  
+  .publication-authors {
+      font-family: 'Google Sans', sans-serif;
+  }
+  
+  .publication-venue {
+      color: #555;
+      width: fit-content;
+      font-weight: bold;
+  }
+  
+  .publication-awards {
+      color: #ff3860;
+      width: fit-content;
+      font-weight: bolder;
+  }
+  
+  .publication-authors {
+    font-size: 18px;
+  }
+  
+  .publication-authors a {
+     /* color: #aaa !important; */
+      /* color: hsl(204, 86%, 53%) !important; */
+      color: MintCream !important;
+     text-decoration: underline;
+  }
+  
+  .publication-authors a:hover {
+      text-decoration: none;
+  }
+  
+  .author-block {
+    display: inline-block;
+  }
+  
+  .publication-banner img {
+  }
+  
+  .publication-authors {
+    /*color: #4286f4;*/
+  }
+  
+  .publication-video {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+  
+      overflow: hidden;
+      border-radius: 10px !important;
+  }
+  
+  .publication-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+  
+  .publication-body img {
+  }
+
+  .pixart-alpha-icon::before {
+    background-image: url(./assests/gene.png);
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em; 
+    height: 1em;
+    content:"";
+  }
+
+  .icon-arxiv {
+    background-image: url(./assests/arxiv-logomark-small.svg);
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em; 
+    height: 1em;
+    content:"";
+  }
+
+.title-gradient-text {
+    /* background: linear-gradient(to right, red, blue); */
+    background: linear-gradient(to right, rgb(0, 0, 255), rgb(255, 0, 0));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline;
+}
+
+.geo-gradient-text {
+    background: linear-gradient(to right, rgb(0, 141, 223), rgb(0, 77, 128));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline;
+}
+
+.tex-gradient-text {
+    background: linear-gradient(to right, rgb(255, 188, 78), rgb(181, 23, 0));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline;
+}
+
+.navbar-start .navbar-link:first-child {
+    color: #aaa !important;
+    /* text-decoration: underline; */
+ }
+ .navbar-start .navbar-link:first-child:hover,
+ .navbar-start .navbar-link:first-child:focus {
+    color: #aaa !important;
+    /* text-decoration: underline; */
+ }
+
+ /* Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: #aaa;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: transparent;
+    color: DodgerBlue;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(255,255,255);
+    min-width: 180px;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    font-size: 12px;
+    padding: 6px 6px;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}

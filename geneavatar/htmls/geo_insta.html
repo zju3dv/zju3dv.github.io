@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>GeneAvatar</title>
+  
+  <meta name="author" content="Chong Bao">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/png" href="../assests/gene.png">
+
+  <link rel="stylesheet" type="text/css" href="../css/slick.css">
+  <link rel="stylesheet" type="text/css" href="../css/slick-theme.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <!-- <link rel="stylesheet" href="../css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="../css/codemirror.min.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/glide.core.min.css">
+  <link rel="stylesheet" href="../css/glide.theme.min.css">
+  <link rel="stylesheet" href="../css/glide-custom.css">
+  <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+  <script src="../js/handlers.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/codemirror.min.js"></script>
+  <script src="../js/clipboard.min.js"></script>
+  <script src="../js/video_comparison.js"></script>
+  <script src="../js/bulma-slider.min.js"></script>
+  <script src="../js/bulma-carousel.min.js"></script>
+  <script src="../js/main.js"></script>
+  <!-- <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script> -->
+
+  <script src="../js/glide.min.js"></script>
+  <script>
+      window.onload = function () {
+          new Glide("#dynamic-carousel-geometry-insta", {
+              type: "slider",
+              perView: 3.0,
+              focusAt: "center",
+              autoplay: 20000,
+              hoverpause: true
+          }).mount();
+      };
+  </script>
+
+<link rel="stylesheet" type="text/css" href="../index.css">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+    rel="stylesheet">
+
+</head>
+
+<body style="width: 100%;">
+
+<div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <a name="geometry"></a>
+    <div class="root-content" style="padding-top: 10px; width: 80%;">
+    <div class="row" id="geometry_editing">
+            <h1>
+                <center>
+                    <!-- <b><span class="geo-gradient-text">Geometry Editing</span> on <font style="color: rgb(0, 118, 186);">INSTA</font> Avatars</b> -->
+                    <span class="geo-gradient-text">Geometry Editing</span> on <font style="color: rgb(0, 118, 186);">INSTA</font> Avatars
+                </center>
+            </h1>
+
+            <div class="glide" id="dynamic-carousel-geometry-insta" style="background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 15px">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+
+
+                        <li class="glide__slide">
+                            <div id="geo_malte_1" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/malte_1.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/malte_1_edit.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Eye, Hair++, Mouse--
+                                    </span>
+                                </center>
+
+                                <video class="video" id="geo_malte_1_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/insta/malte_1.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_malte_1_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_obama" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/obama_edit.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Ear++ </span>
+                                </center>
+
+                                <video class="video" id="geo_obama_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/insta/obama.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_obama_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_wojtek_1" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/wojtek_1.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/wojtek_1_edit.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Lip++, Nose-- </span>
+                                </center>
+
+                                <video class="video" id="geo_wojtek_1_" loop="" playsinline="" autoplay="" muted="" width="80%" src="../geneavatar/geometry/normal_show/wojtek_1.mp4"
+                                    onplay="resizeAndPlay_4(this)">
+                                </video>
+                                <canvas class="videoMerge_4" id="geo_wojtek_1_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_bala" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/bala.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/bala_edit.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Ear++, Brow++ </span>
+                                </center>
+
+                                <video class="video" id="geo_bala_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/normal_show/bala.mp4" onplay="resizeAndPlay_4(this)">
+                                </video>
+                                <canvas class="videoMerge_4" id="geo_bala_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_biden" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/biden.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/insta/biden_edit.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Hair++, Eye++, Nose-- </span>
+                                </center>
+
+                                <video class="video" id="geo_biden_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/insta/biden.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_biden_Merge"></canvas>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <span class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../assests/arrow-left-circle-fill.svg" /></span>
+                    <span class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../assests/arrow-right-circle-fill.svg" /></span>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <span class="glide__bullet" data-glide-dir="=0"></span>
+                    <span class="glide__bullet" data-glide-dir="=1"></span>
+                    <span class="glide__bullet" data-glide-dir="=2"></span>
+                    <span class="glide__bullet" data-glide-dir="=3"></span>
+                    <span class="glide__bullet" data-glide-dir="=4"></span>
+                </div>
+            </div>
+            <p>
+                <span style="text-decoration: underline;">Click</span> left or right arrow for more examples. 
+                <span style="text-decoration: underline;">Drag</span> the sliders on below videos to see more of different renderings. 
+                <span style="text-decoration: underline;">Refresh</span> the page if some videos are missing. 
+            </p>
+
+            <center>
+                <a href="../index.html#geo_insta">
+                    <button style="width:50%; background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 5px">
+                        <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> Back to Main Page </span>
+                    </button>
+                </a>
+            </center>
+
+
+            
+
+    </div>
+        </div>
+</div>
+</body>

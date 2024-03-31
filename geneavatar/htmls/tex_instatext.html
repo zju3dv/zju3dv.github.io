@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>GeneAvatar</title>
+  
+  <meta name="author" content="Chong Bao">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/png" href="../assests/gene.png">
+
+  <link rel="stylesheet" type="text/css" href="../css/slick.css">
+  <link rel="stylesheet" type="text/css" href="../css/slick-theme.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <!-- <link rel="stylesheet" href="../css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="../css/codemirror.min.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/glide.core.min.css">
+  <link rel="stylesheet" href="../css/glide.theme.min.css">
+  <link rel="stylesheet" href="../css/glide-custom.css">
+  <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+  <script src="../js/handlers.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/codemirror.min.js"></script>
+  <script src="../js/clipboard.min.js"></script>
+  <script src="../js/video_comparison.js"></script>
+  <script src="../js/bulma-slider.min.js"></script>
+  <script src="../js/bulma-carousel.min.js"></script>
+  <script src="../js/main.js"></script>
+  <!-- <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script> -->
+  <script src="../js/glide.min.js"></script>
+  <script>
+        window.onload = function () {
+          new Glide("#dynamic-carousel-appearance-insta", {
+              type: "slider",
+              perView: 3.0,
+              focusAt: "center",
+              autoplay: 20000,
+              hoverpause: true
+          }).mount();
+          new Glide("#dynamic-carousel-appearance-text2-insta", {
+              type: "slider",
+              perView: 3.0,
+              focusAt: "center",
+              autoplay: 20000,
+              hoverpause: true
+          }).mount();
+        };
+  </script>
+
+<link rel="stylesheet" type="text/css" href="../index.css">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+    rel="stylesheet">
+
+</head>
+
+<body style="width: 100%;">
+
+<div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <a name="geometry"></a>
+    <div class="root-content" style="padding-top: 10px; width: 80%;">
+    <div class="row" id="texture_editing">
+            <h1>
+                <center>
+                    <span class="tex-gradient-text">Texture Editing</span> on <font style="color: rgb(0, 118, 186);">INSTA</font> Avatars
+                </center>
+            </h1>
+          <h2><font style="color: #4a4a4a;"><center>Text-driven (1)</center></font></h2>
+
+            <div class="glide" id="dynamic-carousel-appearance-insta" style="background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 15px">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+
+
+                        <li class="glide__slide">
+                            <div id="app_justin_halloween" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix</span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin_halloween.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a halloween makeup" </span>
+                                </center>
+
+                                <video class="video" id="app_justin_halloween_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/justin_halloween.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_justin_halloween_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_justin_clown" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin_clown.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a clown makeup"
+                                    </span>
+                                </center>
+
+                                <video class="video" id="app_justin_clown_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/justin_clown.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_justin_clown_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_justin_blonde" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin_blonde.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make his hair <br/> blonde" </span>
+                                </center>
+
+                                <video class="video" id="app_justin_blonde_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/justin_blonde.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_justin_blonde_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_justin_young" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/justin_young.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "Make him <br/> young" </span>
+                                </center>
+
+                                <video class="video" id="app_justin_young_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/justin_young.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_justin_young_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_person_0004_clown" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004_clown.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a clown makeup" </span>
+                                </center>
+
+                                <video class="video" id="app_person_0004_clown_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/person_0004_clown.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_person_0004_clown_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_person_0004_halloween" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004_halloween.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a halloween makeup" </span>
+                                </center>
+
+                                <video class="video" id="app_person_0004_halloween_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/person_0004_halloween.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_person_0004_halloween_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_person_0004_old" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004_old.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him <br/> old" </span>
+                                </center>
+
+                                <video class="video" id="app_person_0004_old_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/person_0004_old.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_person_0004_old_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_person_0004_disney" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004_disney.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "turn him into a Disney cartoon character" </span>
+                                </center>
+
+                                <video class="video" id="app_person_0004_disney_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/person_0004_disney.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_person_0004_disney_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_person_0004_beard" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/person_0004_beard.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "add beard to <br/> the face" </span>
+                                </center>
+
+                                <video class="video" id="app_person_0004_beard_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/person_0004_beard.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_person_0004_beard_Merge"></canvas>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <span class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../assests/arrow-left-circle-fill.svg" /></span>
+                    <span class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../assests/arrow-right-circle-fill.svg" /></span>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <span class="glide__bullet" data-glide-dir="=0"></span>
+                    <span class="glide__bullet" data-glide-dir="=1"></span>
+                    <span class="glide__bullet" data-glide-dir="=2"></span>
+                    <span class="glide__bullet" data-glide-dir="=3"></span>
+                    <span class="glide__bullet" data-glide-dir="=4"></span>
+                    <span class="glide__bullet" data-glide-dir="=5"></span>
+                    <span class="glide__bullet" data-glide-dir="=6"></span>
+                    <span class="glide__bullet" data-glide-dir="=7"></span>
+                    <span class="glide__bullet" data-glide-dir="=8"></span>
+                </div>
+            </div>
+            <p>
+                <span style="text-decoration: underline;">Click</span> left or right arrow for more examples. 
+                <span style="text-decoration: underline;">Drag</span> the sliders on below videos to see more of different renderings. 
+                <span style="text-decoration: underline;">Refresh</span> the page if some videos are missing. 
+            </p>
+            <br />
+
+            <h1>
+                <center>
+                    <span class="tex-gradient-text">Texture Editing</span> on <font style="color: rgb(0, 118, 186);">INSTA</font> Avatars
+                </center>
+            </h1>
+          <h2><font style="color: #4a4a4a;"><center>Text-driven (2)</center></font></h2>
+
+            <div class="glide" id="dynamic-carousel-appearance-text2-insta" style="background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 15px">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+
+                        <li class="glide__slide">
+                            <div id="app_obama_clown" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_clown.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a clown makeup" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_clown_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_clown.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_clown_Merge"></canvas>
+                            </div>
+                        </li>
+
+
+                        <li class="glide__slide">
+                            <div id="app_obama_old" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_old.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him <br/> old" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_old_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_old.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_old_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_obama_young" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_young.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him <br/> young" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_young_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_young.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_young_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_obama_disney" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_disney.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "turn him into a Disney cartoon character" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_disney_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_disney.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_disney_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_obama_beard" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_beard.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "add beard to<br/> the face" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_beard_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_beard.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_beard_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_obama_blonde" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/obama_blonde.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make his hair<br/> blonde" </span>
+                                </center>
+
+                                <video class="video" id="app_obama_blonde_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/obama_blonde.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_obama_blonde_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_nf_03_clown" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03_clown.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him wear <br/> a clown makeup" </span>
+                                </center>
+
+                                <video class="video" id="app_nf_03_clown_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/nf_03_clown.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_nf_03_clown_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_nf_03_moustache" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03_moustache.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "add moustache <br/> to the face" </span>
+                                </center>
+
+                                <video class="video" id="app_nf_03_moustache_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/nf_03_moustache.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_nf_03_moustache_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="app_nf_03_old" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by InstructPix2Pix </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/appearance/insta/nf_03_old.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> "make him<br/> old" </span>
+                                </center>
+
+                                <video class="video" id="app_nf_03_old_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/appearance/insta/nf_03_old.mp4" onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="app_nf_03_old_Merge"></canvas>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <span class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../assests/arrow-left-circle-fill.svg" /></span>
+                    <span class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../assests/arrow-right-circle-fill.svg" /></span>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <span class="glide__bullet" data-glide-dir="=0"></span>
+                    <span class="glide__bullet" data-glide-dir="=1"></span>
+                    <span class="glide__bullet" data-glide-dir="=2"></span>
+                    <span class="glide__bullet" data-glide-dir="=3"></span>
+                    <span class="glide__bullet" data-glide-dir="=4"></span>
+                    <span class="glide__bullet" data-glide-dir="=5"></span>
+                    <span class="glide__bullet" data-glide-dir="=6"></span>
+                    <span class="glide__bullet" data-glide-dir="=7"></span>
+                    <span class="glide__bullet" data-glide-dir="=8"></span>
+                </div>
+            </div>
+            <p>
+                <span style="text-decoration: underline;">Click</span> left or right arrow for more examples. 
+                <span style="text-decoration: underline;">Drag</span> the sliders on below videos to see more of different renderings. 
+                <span style="text-decoration: underline;">Refresh</span> the page if some videos are missing. 
+            </p>
+            <br />
+
+            <center>
+                <a href="../index.html#tex_instatext">
+                    <button style="width:50%; background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 5px">
+                        <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> Back to Main Page </span>
+                    </button>
+                </a>
+            </center>
+
+
+            
+
+    </div>
+        </div>
+</div>
+</body>

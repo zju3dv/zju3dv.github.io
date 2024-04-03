@@ -365,11 +365,11 @@ sample_points = sample_points + genavatar.forward_geo(vertices_3DMM, sample_poin
 ...
 
 # avatar rendering
-density, color = avatar_model(sample_points)
+density, template_color = avatar_model(sample_points)
 ...
 
 # (GeneAvatar addition) color blendering
-color = genavatar.forward_color(vertices_3DMM, sample_points)
+color = genavatar.forward_color(vertices_3DMM, sample_points, template_color)
 ...
                     </code></pre>
                 <li>Use a PTI-inversion paradigm <code style="color: rgb(235,88,87); background-color: rgb(237,237, 235);">project.py</code> to edit your <code style="color: rgb(235,88,87); background-color: rgb(237,237, 235);">avatar_model</code> with a single edited image where avatar rendering function should be overwritten by your own avatar method:</li>

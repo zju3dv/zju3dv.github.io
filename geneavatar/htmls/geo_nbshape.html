@@ -1,0 +1,427 @@
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <title>GeneAvatar</title>
+  
+  <meta name="author" content="Chong Bao">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/png" href="../assests/gene.png">
+
+  <link rel="stylesheet" type="text/css" href="../css/slick.css">
+  <link rel="stylesheet" type="text/css" href="../css/slick-theme.css">
+  <link rel="stylesheet" href="../css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../css/bulma-carousel.min.css">
+  <!-- <link rel="stylesheet" href="../css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="../css/codemirror.min.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="../css/glide.core.min.css">
+  <link rel="stylesheet" href="../css/glide.theme.min.css">
+  <link rel="stylesheet" href="../css/glide-custom.css">
+  <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+  <script src="../js/handlers.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/codemirror.min.js"></script>
+  <script src="../js/clipboard.min.js"></script>
+  <script src="../js/video_comparison.js"></script>
+  <script src="../js/bulma-slider.min.js"></script>
+  <script src="../js/bulma-carousel.min.js"></script>
+  <script src="../js/main.js"></script>
+  <!-- <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script> -->
+
+  <script src="../js/glide.min.js"></script>
+  <script>
+      window.onload = function () {
+          new Glide("#dynamic-carousel-geometry-nerfblendshape", {
+              type: "slider",
+              perView: 3.0,
+              focusAt: "center",
+              autoplay: 20000,
+              hoverpause: true
+          }).mount();
+      };
+  </script>
+
+<link rel="stylesheet" type="text/css" href="../index.css">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+    rel="stylesheet">
+
+</head>
+
+<body style="width: 100%;">
+
+<div style="background-color: white; margin-right: auto; margin-left: auto;">
+    <a name="geometry"></a>
+    <div class="root-content" style="padding-top: 10px; width: 80%;">
+    <div class="row" id="geometry_editing">
+            <h1>
+                <center>
+                    <span class="geo-gradient-text">Geometry Editing</span> on <font style="color: rgb(29, 177, 0);">NBShape </font>Avatars
+                </center>
+            </h1>
+
+            <div class="glide" id="dynamic-carousel-geometry-nerfblendshape" style="background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 15px">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+
+                        <li class="glide__slide">
+                            <div id="geo_id4_smalljaw" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4_smalljaw.png" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Eyes++, Jaw--
+                                    </span>
+                                </center>
+
+                                <video class="video" id="geo_id4_smalljaw_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id4_smalljaw.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id4_smalljaw_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id4_bignose" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4_bignose.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Nose++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id4_bignose_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id4_bignose.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id4_bignose_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id4_smalleye" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id4_smalleye.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Eye-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id4_smalleye_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id4_smalleye.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id4_smalleye_Merge"></canvas>
+                            </div>
+                        </li>
+
+
+                        <li class="glide__slide">
+                            <div id="geo_id5_bigeye" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5_bigeye.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Eye++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id5_bigeye_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id5_bigeye.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id5_bigeye_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id5_bigface" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5_bigface.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Face++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id5_bigface_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id5_bigface.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id5_bigface_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id5_smallface" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id5_smallface.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Face-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id5_smallface_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id5_smallface.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id5_smallface_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id6_bigeye" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6_bigeye.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Eye-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id6_bigeye_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id6_bigeye.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id6_bigeye_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id6_bigmouth" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6_bigmouth.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Mouth++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id6_bigmouth_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id6_bigmouth.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id6_bigmouth_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id6_bignose" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6_bignose.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Nose++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id6_bignose_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id6_bignose.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id6_bignose_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id6_smallforehead" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id6_smallforehead.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Forehead-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id6_smallforehead_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id6_smallforehead.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id6_smallforehead_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id8_bignose" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8_bignose.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Nose++ </span>
+                                </center>
+
+                                <video class="video" id="geo_id8_bignose_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id8_bignose.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id8_bignose_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id8_smallforehead" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8_smallforehead.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Forehead-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id8_smallforehead_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id8_smallforehead.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id8_smallforehead_Merge"></canvas>
+                            </div>
+                        </li>
+
+                        <li class="glide__slide">
+                            <div id="geo_id8_smalljaw" style="width: 100%; padding: 15px">
+                                <center>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Edit on 2D by Photoshop </span>
+                                </center>
+                                <div style="float: left; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <div style="float: right; width: 45%; padding: 5px">
+                                    <img src="../geneavatar/images/geometry/nerfblendshape/id8_smalljaw.jpg" width="100%" style="border-radius: 5px;">
+                                </div>
+                                <center>
+                                    <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> &rarr;
+                                    </span>
+                                    <span style="font-size: 18px; font-family:'Courier New', Courier, monospace; color: white;"> Jaw-- </span>
+                                </center>
+
+                                <video class="video" id="geo_id8_smalljaw_" loop="" playsinline="" autoplay="" muted="" src="../geneavatar/geometry/nerfblendshape/id8_smalljaw.mp4"
+                                    onplay="resizeAndPlay(this)">
+                                </video>
+                                <canvas class="videoMerge" id="geo_id8_smalljaw_Merge"></canvas>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <span class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../assests/arrow-left-circle-fill.svg" /></span>
+                    <span class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../assests/arrow-right-circle-fill.svg" /></span>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <span class="glide__bullet" data-glide-dir="=0"></span>
+                    <span class="glide__bullet" data-glide-dir="=1"></span>
+                    <span class="glide__bullet" data-glide-dir="=2"></span>
+                    <span class="glide__bullet" data-glide-dir="=3"></span>
+                    <span class="glide__bullet" data-glide-dir="=4"></span>
+                    <span class="glide__bullet" data-glide-dir="=5"></span>
+                    <span class="glide__bullet" data-glide-dir="=6"></span>
+                    <span class="glide__bullet" data-glide-dir="=7"></span>
+                    <span class="glide__bullet" data-glide-dir="=8"></span>
+                    <span class="glide__bullet" data-glide-dir="=9"></span>
+                    <span class="glide__bullet" data-glide-dir="=10"></span>
+                    <span class="glide__bullet" data-glide-dir="=11"></span>
+                    <span class="glide__bullet" data-glide-dir="=12"></span>
+                </div>
+            </div>
+            <p>
+                <span style="text-decoration: underline;">Click</span> left or right arrow for more examples. 
+                <span style="text-decoration: underline;">Drag</span> the sliders on below videos to see more of different renderings. 
+                <span style="text-decoration: underline;">Refresh</span> the page if some videos are missing. 
+            </p>
+
+            <center>
+                <a href="../index.html#geo_nbshape">
+                    <button style="width:50%; background-image: linear-gradient(90deg, rgb(0, 176, 240), rgb(211, 24, 118)); border-radius: 5px">
+                        <span style="font-size: 32px; font-family:'Courier New', Courier, monospace; color: white;"> Back to Main Page </span>
+                    </button>
+                </a>
+            </center>
+
+
+            
+
+    </div>
+        </div>
+</div>
+</body>

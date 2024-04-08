@@ -17,18 +17,15 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://zhenx.me/relightable_avatar" />
     <meta property="og:title" content="Relightable and Animatable Neural Avatar from Sparse-View Video" />
-    <meta property="og:description"
-        content="This paper tackles the challenge of creating relightable and animatable neural avatars from sparse-view (or even monocular) videos of dynamic humans under unknown illumination. Compared to studio environments, this setting is more practical and accessible but poses an extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but cannot recover material parameters for relighting. While differentiable inverse rendering-based methods have succeeded in material recovery of static objects, it is not straightforward to extend them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and light visibility on deformed SDFs for inverse rendering. To solve this challenge, we propose a Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human model and compute fine distances by exploiting the local deformation invariance of SDF. Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface intersection and light visibility. This allows us to develop the first system to recover animatable and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that our approach is able to produce superior results compared to state-of-the-art methods. Our code will be released for reproducibility." />
+    <meta property="og:description" content="This paper tackles the challenge of creating relightable and animatable neural avatars from sparse-view (or even monocular) videos of dynamic humans under unknown illumination. Compared to studio environments, this setting is more practical and accessible but poses an extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but cannot recover material parameters for relighting. While differentiable inverse rendering-based methods have succeeded in material recovery of static objects, it is not straightforward to extend them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and light visibility on deformed SDFs for inverse rendering. To solve this challenge, we propose a Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human model and compute fine distances by exploiting the local deformation invariance of SDF. Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface intersection and light visibility. This allows us to develop the first system to recover animatable and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that our approach is able to produce superior results compared to state-of-the-art methods. Our code will be released for reproducibility." />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Relightable and Animatable Neural Avatar from Sparse-View Video" />
-    <meta name="twitter:description"
-        content="This paper tackles the challenge of creating relightable and animatable neural avatars from sparse-view (or even monocular) videos of dynamic humans under unknown illumination. Compared to studio environments, this setting is more practical and accessible but poses an extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but cannot recover material parameters for relighting. While differentiable inverse rendering-based methods have succeeded in material recovery of static objects, it is not straightforward to extend them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and light visibility on deformed SDFs for inverse rendering. To solve this challenge, we propose a Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human model and compute fine distances by exploiting the local deformation invariance of SDF. Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface intersection and light visibility. This allows us to develop the first system to recover animatable and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that our approach is able to produce superior results compared to state-of-the-art methods. Our code will be released for reproducibility." />
+    <meta name="twitter:description" content="This paper tackles the challenge of creating relightable and animatable neural avatars from sparse-view (or even monocular) videos of dynamic humans under unknown illumination. Compared to studio environments, this setting is more practical and accessible but poses an extremely challenging ill-posed problem. Previous neural human reconstruction methods are able to reconstruct animatable avatars from sparse views using deformed Signed Distance Fields (SDF) but cannot recover material parameters for relighting. While differentiable inverse rendering-based methods have succeeded in material recovery of static objects, it is not straightforward to extend them to dynamic humans as it is computationally intensive to compute pixel-surface intersection and light visibility on deformed SDFs for inverse rendering. To solve this challenge, we propose a Hierarchical Distance Query (HDQ) algorithm to approximate the world space distances under arbitrary human poses. Specifically, we estimate coarse distances based on a parametric human model and compute fine distances by exploiting the local deformation invariance of SDF. Based on the HDQ algorithm, we leverage sphere tracing to efficiently estimate the surface intersection and light visibility. This allows us to develop the first system to recover animatable and relightable neural avatars from sparse view (or monocular) inputs. Experiments demonstrate that our approach is able to produce superior results compared to state-of-the-art methods. Our code will be released for reproducibility." />
     <meta name="twitter:image" content="https://zhenx.me/relightable_avatar/teaser_video.mp4" />
 
 
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🌓</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🌓</text></svg>">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -59,6 +56,11 @@
         .slick-next:before {
             color: black;
 
+        }
+
+        video {
+            width: 100%;
+            border-radius: 5px;
         }
 
         /* .container {
@@ -95,9 +97,11 @@
             <h2 class="col-md-12 text-center">
                 <b style="color: #6589bf;">Relightable</b> and <b style="color: #78aa58;">Animatable</b>
                 Neural Avatar from <span style="color: #c68b5b">Sparse-View</span> Video
+                <!-- <h4 class="text-center" style="color:#5a6268;">CVPR 2024</h4>
+                <hr> -->
                 <small>
                     <br>
-                    Arxiv 2023
+                    CVPR 2024 (Highlight)
                 </small>
             </h2>
         </div>
@@ -120,7 +124,7 @@
                         <a href="https://chen-geng.com/">
                             Chen Geng
                         </a>
-                        <sup>1</sup>
+                        <sup>1, 2</sup>
                     </li>
                     <li>
                         <a href="https://scholar.google.com/citations?user=cIXq7Z4AAAAJ">
@@ -132,13 +136,13 @@
                         <a href="https://www.media.mit.edu/people/yzihan/overview/">
                             Zihan Yan
                         </a>
-                        <sup>2</sup>
+                        <sup>3</sup>
                     </li>
                     <li>
                         <a href="https://jiamingsun.ml/">
                             Jiaming Sun
                         </a>
-                        <sup>3</sup>
+                        <sup>1</sup>
                     </li>
                     <li>
                         <a href="http://www.cad.zju.edu.cn/home/bao/">
@@ -158,10 +162,10 @@
                         <sup>1</sup> Zhejiang University
                     </li>
                     <li>
-                        <sup>2</sup> MIT Media Lab
+                        <sup>2</sup> Stanford University
                     </li>
                     <li>
-                        <sup>3</sup> Image Derivative Inc.
+                        <sup>3</sup> University of Illinois Urbana-Champaign
                     </li>
                 </ul>
 
@@ -175,7 +179,7 @@
                     <li>
                         <a href="https://arxiv.org/abs/2308.07903">
                             <image src="img/paper.jpg" height="60px">
-                                <h4><strong>Arxiv</strong></h4>
+                                <h4><strong>arXiv</strong></h4>
                         </a>
                     </li>
                     <li>
@@ -185,9 +189,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://zju3dv.github.com/relightable_avatar">
+                        <a href="https://github.com/zju3dv/RelightableAvatar">
                             <image src="img/github.png" height="60px">
-                                <h4><strong>Code (Coming Soon)</strong></h4>
+                                <h4><strong>Code</strong></h4>
                         </a>
                     </li>
                 </ul>
@@ -198,7 +202,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/teaser_video.mp4" type="video/mp4" />
                 </video>
                 <image src="img/teaser.jpg" width="100%"></image>
@@ -245,10 +249,7 @@
                     Introduction Video
                 </h3>
                 <div class="text-center">
-                    <iframe width="100%" height=640 style="border-radius: 5px;"
-                        src="https://www.youtube.com/embed/BQ3pL7Uwbdk" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                    <iframe width="100%" height=640 style="border-radius: 5px;" src="https://www.youtube.com/embed/BQ3pL7Uwbdk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -282,7 +283,7 @@
                 </h3>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/sparse_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -293,7 +294,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/monocular_reconstruction.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -304,7 +305,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/sparse_animation.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -314,7 +315,7 @@
                 </p>
             </div>
             <div class="col-md-12">
-                <video id="v0" width="100%" style="border-radius: 5px;" autoplay loop muted>
+                <video autoplay loop muted playsinline poster="img/spinner.svg" onloadeddata=resizeVideo(this)>
                     <source src="https://zhenx.me/relightable_avatar/monocular_animation.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -350,11 +351,11 @@
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
                     <textarea id="bibtex" class="form-control" readonly>
-@inproceedings{zhen2023relightable,
+@inproceedings{xu2024relightable,
     title={Relightable and Animatable Neural Avatar from Sparse-View Video},
     author={Xu, Zhen and Peng, Sida and Geng, Chen and Mou, Linzhan and Yan, Zihan and Sun, Jiaming and Bao, Hujun and Zhou, Xiaowei},
-    booktitle={arXiv preprint arXiv:2308.07903},
-    year={2023}
+    booktitle={CVPR},
+    year={2024}
 }</textarea>
                 </div>
             </div>
@@ -363,8 +364,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p class="text-justify">
-                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a
-                        href="https://jonbarron.info/mipnerf360/">Jon Barron</a>. Last updated: 08/06/2023.
+                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://jonbarron.info/mipnerf360/">Jon Barron</a>. Last updated: 08/06/2023.
                 </p>
             </div>
         </div>
@@ -390,6 +390,12 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function resizeVideo(video) {
+            video.height = video.clientWidth / video.videoWidth * video.videoHeight;
+        }
+    </script>
+
     <!-- Default Statcounter code for Relightable and Animatable Neura
 http://zju3dv.github.io/relightable_avatar -->
     <script type="text/javascript">
@@ -400,9 +406,7 @@ http://zju3dv.github.io/relightable_avatar -->
     <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
     <noscript>
         <div class="statcounter"><a title="Web Analytics Made Easy -
-    Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
-                    src="https://c.statcounter.com/12907471/0/27885473/1/" alt="Web Analytics Made Easy - Statcounter"
-                    referrerPolicy="no-referrer-when-downgrade"></a></div>
+    Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12907471/0/27885473/1/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade"></a></div>
     </noscript>
     <!-- End of Statcounter Code -->
 </body>

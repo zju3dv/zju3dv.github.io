@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Animatable Neural Implicit Surfaces for Creating Avatars from Videos</title>
+    <title>Animatable Implicit Neural Representations for Creating Realistic Avatars from Videos</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
@@ -16,18 +16,22 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h2>Animatable Neural Implicit Surfaces for Creating Avatars from Videos</h2>
+            <h3>Animatable Implicit Neural Representations for Creating Realistic Avatars from Videos</h3>
             <!-- <h5 style="color:#8899a5;"> Under Review </h5> -->
+            <h4 style="color:#5a6268;">TPAMI 2024, ICCV 2021</h4>
             <hr>
-            <h6> <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>, 
-                Shangzhan Zhang<sup>1</sup>, 
-                Zhen Xu<sup>1</sup>,
-                Chen Geng<sup>1</sup>,
-                Boyi Jiang<sup>2</sup>,
-                Hujun Bao<sup>1</sup>,
-                <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
-            <p><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
-                <sup>2</sup>Image Derivative Inc
+            <h6> 
+              <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>, 
+              <a href="https://zhenx.me/" target="_blank">Zhen Xu</a><sup>1</sup>,
+              <a href="https://jtdong.com/" target="_blank">Junting Dong</a><sup>1</sup>, 
+              <a href="https://www.cs.cornell.edu/~qqw/" target="_blank">Qianqian Wang</a><sup>2</sup>, 
+              <a href="https://zhanghe3z.github.io/" target="_blank">Shangzhan Zhang</a><sup>1</sup>, 
+              <a href="https://chingswy.github.io/" target="_blank">Qing Shuai</a><sup>1</sup>, 
+              <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1</sup>,
+              <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup></h6>
+            <p>
+              <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Cornell University
             <br>
 
             <div class="row justify-content-center">
@@ -68,7 +72,9 @@
                   <source src="https://raw.githubusercontent.com/pengsida/project_page_assets/master/animatable_sdf/teaser.m4v" type="video/mp4">
               </video>
               <!-- <br><br> -->
-          <p class="text-left"> This paper aims to reconstruct an animatable human model from a video of very sparse camera views. Some recent works represent human geometry and appearance with neural radiance fields and utilize parametric human models to produce deformation fields for animation, which enables them to recover detailed 3D human models from videos. However, their reconstruction results tend to be noisy due to the lack of surface constraints on radiance fields. Moreover, as they generate the human appearance in 3D space, their rendering quality heavily depends on the accuracy of deformation fields. To solve these problems, we propose Animatable Neural Implicit Surface (AniSDF), which models the human geometry with a signed distance field and defers the appearance generation to the 2D image space with a 2D neural renderer. The signed distance field naturally regularizes the learned geometry, enabling the high-quality reconstruction of human bodies, which can be further used to improve the rendering speed. Moreover, the 2D neural renderer can be learned to compensate for geometric errors, making the rendering more robust to inaccurate deformations. Experiments on several datasets show that the proposed approach outperforms recent human reconstruction and synthesis methods by a large margin.</p>
+          <p class="text-left">
+            This paper addresses the challenge of reconstructing an animatable human model from a multi-view video. Some recent works have proposed to decompose a non-rigidly deforming scene into a canonical neural radiance field and a set of deformation fields that map observation-space points to the canonical space, thereby enabling them to learn the dynamic scene from images. However, they represent the deformation field as translational vector field or SE(3) field, which makes the optimization highly under-constrained. Moreover, these representations cannot be explicitly controlled by input motions. Instead, we introduce a pose-driven deformation field based on the linear blend skinning algorithm, which combines the blend weight field and the 3D human skeleton to produce observation-to-canonical correspondences. Since 3D human skeletons are more observable, they can regularize the learning of the deformation field. Moreover, the pose-driven deformation field can be controlled by input skeletal motions to generate new deformation fields to animate the canonical human model. Experiments show that our approach significantly outperforms recent human modeling methods.
+          </p>
         </div>
       </div>
     </div>
@@ -177,12 +183,21 @@
           <h3>Citation</h3>
           <hr style="margin-top:0px">
               <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
-<code>@article{peng2022animatable,
-  title={Animatable Neural Implicit Surfaces for Creating Avatars from Videos},
-  author={Peng, Sida and Zhang, Shangzhan and Xu, Zhen and Geng, Chen and Jiang, Boyi and Bao, Hujun and Zhou, Xiaowei},
-  journal={arXiv preprint arXiv:2203.08133},
-  year={2022}
-}</code></pre>
+<code>
+@article{peng2024animatable,
+    title={Animatable Implicit Neural Representations for Creating Realistic Avatars from Videos},
+    author={Peng, Sida and Xu, Zhen and Dong, Junting and Wang, Qianqian and Zhang, Shangzhan and Shuai, Qing and Bao, Hujun and Zhou, Xiaowei},
+    journal={TPAMI},
+    year={2024},
+    publisher={IEEE}
+}
+@inproceedings{peng2021animatable,
+  title={Animatable Neural Radiance Fields for Modeling Dynamic Human Bodies},
+  author={Peng, Sida and Dong, Junting and Wang, Qianqian and Zhang, Shangzhan and Shuai, Qing and Zhou, Xiaowei and Bao, Hujun},
+  booktitle={ICCV},
+  year={2021}
+}
+</code></pre>
           <hr>
       </div>
     </div>

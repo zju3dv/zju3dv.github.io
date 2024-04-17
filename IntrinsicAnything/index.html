@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IntrinsicAnything</title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/jquery.event.move.js"></script>
+  <script src="js/jquery.twentytwenty.js"></script>
+
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <!-- <script src="js/fontawesome.all.min.js"></script> -->
+
+  <link href="css/bulma.min.css" rel="stylesheet">
+  <link href="css/bulma-slider.min.css" rel="stylesheet">
+  <link href="css/bulma-carousel.min.css" rel="stylesheet">
+  <link href="css/twentytwenty.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="css/index.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      background: rgb(255, 255, 255) no-repeat fixed top left;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .twentytwenty-container {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .twentytwenty-wrapper {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cmpcontent {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slider_img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* .twentytwenty-container {
+      height: 200px;
+    } */
+  </style>
+
+<!-- <style>
+
+  img {
+    height: 200px; /* Set the desired width */
+    width: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure image is block-level element */
+    margin-bottom: 0px; /* Add some spacing between images */
+  }
+</style> -->
+
+</head>
+
+<!-- cover -->
+<section>
+  <div class="jumbotron text-center mt-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h2 style="font-size:30px;">IntrinsicAnything: Learning Diffusion Priors for Inverse Rendering </br> Under an Unknown Illumination</h2>
+          <!-- <h4 style="color:#6e6e6e;"> Arxiv (Preprint) </h4> -->
+          <hr>
+          <h6>
+            <a href="https://github.com/Burningdust21" target="_blank">Xi Chen</a><sup>1</sup>,
+            <a href="https://pengsida.net/" target="_blank">Sida Peng</a><sup>1</sup>,
+            <a href="https://dongchen-yang.github.io/" target="_blank">Dongchen Yang</a><sup>1</sup>,
+            <a href="https://liuyuan-pal.github.io/" target="_blank">Yuan Liu</a><sup>2</sup>,
+            <a href="https://o0helloworld0o-ustc.github.io/" target="_blank">Bowen Pan</a><sup>3</sup>,
+            <a href="https://www.mnn.zone/m/0.3/" target="_blank">Chengfei Lv</a><sup>3</sup>,
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+            <br>
+            <br>
+            <p> <sup>1</sup> Zhejiang University &nbsp;
+              <sup>2</sup> The University of Hong Kong &nbsp;
+              <sup>3</sup> Tao Technology Department, Alibaba Group &nbsp;
+              <br>
+            </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+            <br>
+
+            <div class="row justify-content-center">
+              <div>
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/pdf/xxxx" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Paper </a> </p>
+              </div>
+              <div>
+                <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://burningdust21.github.io/IntrinsicAnything/" role="button" target="_blank" disabled=1>
+                    <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- abstract -->
+<section>
+  <div class="container" style="width: 60%">
+    <!-- <div class="col-12">
+      <img src="images/intro.png" alt="input" class="img-responsive" width="300%" />
+    </div> -->
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Abstract</h3>
+          <hr style="margin-top:0px">
+          <!-- <div class="col-12">
+            <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+                        <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
+                  </video>
+          </div> -->
+          <p class="text-justify">
+            This paper aims to recover object materials from posed images captured under an unknown static lighting condition. Recent methods solve this task by representing materials using neural networks and optimizing model parameters through differentiable physically based rendering. However, due to the coupling between object geometry, materials, and environment lighting, there is inherent ambiguity during the inverse rendering process, preventing previous methods from obtaining accurate results. To overcome this ill-posed problem, our key idea is to learn the material prior with a generative model for regularizing the optimization process. We observe that the general rendering equation can be split into diffuse and specular shading terms, and thus formulate the material prior as diffusion models of albedo and specular. Thanks to this design, our model can be trained using the existing abundant 3D object data, and naturally acts as a versatile tool to resolve the ambiguity when recovering many material representations from RGB images. In addition, we develop a coarse-to-fine training strategy that leverages estimated materials to guide diffusion models to produce multi-view consistent constraints, leading to more stable and accurate results. Extensive experiments on real-world and synthetic datasets demonstrate that our approach achieves state-of-the-art performance on material recovery.
+          </p>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+</section>
+<br>
+
+
+
+<!-- Results on Real-worlds -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center", id="comparasion">
+        <h3>Comparasion with SOTA Methods</h3>
+        <hr style="margin-top:0px">
+          <script>
+           // Function to create the HTML structure for a slider item with different images
+                var loadedImagesCount = 0;
+              function createSliderItem(imageUrls, container_type, idx, type) {
+                // Create a new slider item div
+                var sliderItem = document.createElement("div");
+                sliderItem.className = "slider-item-" + type;
+                sliderItem.setAttribute("data-slider-index", idx);
+
+                // Create a div for the two items inside the slider item
+                var twoItemDiv = document.createElement("div");
+                twoItemDiv.className = "twoitem";
+
+                var twentyTwentyContainer = document.createElement("div");
+                // <!-- twentyTwentyContainer.className = "twentytwenty-container twentytwenty-container-depth-right"; -->
+                twentyTwentyContainer.className = "twentytwenty-container " + container_type;
+
+                let loadedImages = 0;
+
+                // Loop through each image URL
+                imageUrls.forEach(function(imageUrl) {
+                  // Create the twentytwenty container
+
+                  // Create the cmpcontent div and its image
+                  var cmpcontent = document.createElement("div");
+                  cmpcontent.className = "cmpcontent";
+                  
+                  // var text = document.createElement("p");
+                  // text.style.fontSize = "10px";
+                  // text.textContent = "hello world";
+                  // cmpcontent.appendChild(text);
+                  
+                  if (type == "compare_name") {
+                    var text = document.createElement("p");
+                    text.textContent = imageUrl;
+                    // text.style.fontSize = "1em";
+                    cmpcontent.appendChild(text);
+                    // cmpcontent.style.backgroundColor = "white";
+                    twoItemDiv.style.backgroundColor = "white";
+                  } else {
+                    var image = document.createElement("img");
+                    image.src = imageUrl;
+                    image.className = "slider_img";
+                    cmpcontent.appendChild(image);
+                  }
+
+                  // Append the cmpcontent div to the twentytwenty container
+                  twentyTwentyContainer.appendChild(cmpcontent);
+
+                  // Append the twentytwenty container to the twoitem div
+                });
+                twoItemDiv.appendChild(twentyTwentyContainer);
+                // Append the twoitem div to the slider item
+                sliderItem.appendChild(twoItemDiv);
+
+                return sliderItem;
+              }
+
+              // Function to add slider items with different images to a container
+              function addSliderItems(imageArrays, container_type, amp_container, type, outertype) {
+                amp_container.className = "carousel results-carousel";
+                amp_container.setAttribute("id", outertype);
+
+                // Loop through each array of image URLs
+                // <!-- imageArrays.forEach(function(imageArray) { -->
+                  for (let i = 0; i < imageArrays.length; i++) { 
+                    imageArray = imageArrays[i]
+                  // Create a slider item for the array of image URLs
+                  var sliderItem = createSliderItem(imageArray, container_type, i, type);
+                  // Append the slider item to the container
+                  amp_container.appendChild(sliderItem);
+                };
+
+
+              }
+
+              function addUrls(addrs) {
+                res = addrs[0]
+                for (let i = 1; i < addrs.length; i++) {
+                  res = res + "/" + addrs[i];
+              }
+              return res
+            }
+
+            function createCompNames(containerId, methods_vs_texts, container_type) {
+              var container = document.getElementById(containerId);
+              var amp_container = document.createElement("div");
+              // Create the twentytwenty container
+              for (let i = 0; i < methods_vs_texts.length; i++) {
+                // Access the element at index i
+                methods_vs_text = methods_vs_texts[i];
+                amp_container.className = "carousel results-carousel";
+                amp_container.setAttribute("id", "results-carousel-horizontal");
+
+                var sliderItem = createSliderItem([methods_vs_text], container_type, i, 'compare_name');
+                amp_container.appendChild(sliderItem);
+              }
+              container.appendChild(amp_container);
+            }
+
+            function createCompars(image_list_, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path) {
+              var container = document.getElementById(containerId);
+
+              image_list_.forEach(function(imageUrl) {
+                var amp_container = document.createElement("div");
+
+                // Create the twentytwenty container
+                for (let i = 0; i < methods_id.length; i++) {
+                  // Access the element at index i
+                  if (i == 0) {
+                    var imageArrays = [
+                      [addUrls([demo_image_path, methods_id[i], attr_id[i], imageUrl])]
+                    ];
+                  } else {
+                    var imageArrays = [
+                      [addUrls([demo_image_path, methods_id[i], attr_id[i], imageUrl]), 
+                      addUrls([demo_image_path, "ours", target_ours[i], imageUrl])
+                      ]
+                    ];
+                  }
+                  addSliderItems(imageArrays, container_type[i], amp_container, 'compare', "results-carousel-horizontal");
+                }
+                container.appendChild(amp_container);
+              });
+            }
+
+
+
+          containerId = "comparasion"
+          methods_id = ["input",   "inv",   "iir",    "iid",    "inv"];
+          methods_vs_texts = ["Input Image", "Yi et al. vs. Ours", "IIR vs. Ours", "IID vs. Ours", "Yi et al. vs. Ours (Specular)"];
+          attr_id =    ["",      "albedo",  "albedo", "albedo", "specular"];
+          target_ours = ["../input", "albedo", "albedo", "albedo", "specular"];
+          container_type = ["twentytwenty-container-depth-before", 
+                            "twentytwenty-container-albedo-inv", "twentytwenty-container-albedo-iir", "twentytwenty-container-albedo-iid",
+                            "twentytwenty-container-specular-inv"];
+          
+          // get image list 
+          image_list = ['AdobeStock_5889655.jpeg', 'AdobeStock_79809038.jpeg'];
+          demo_image_path = "images/demo/adobe_stock_hq";
+
+          createCompNames(containerId, methods_vs_texts, containerId[0]);
+          createCompars(image_list, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path);
+          demo_image_path = "images/demo/objects_anything_fg_5"
+
+          createCompars(['c42655f739f0d687a4704d8213492493.png'], containerId, methods_id, attr_id, target_ours, container_type, demo_image_path)
+          createCompars(['001d15cacc774fce2b1d119180b43010.png'], containerId, methods_id, attr_id, target_ours, container_type, demo_image_path)
+          createCompars(["897e8a0a749a6e68c78f112655ba8b18.png"], containerId, methods_id, attr_id, target_ours, container_type, demo_image_path)
+          createCompars(["Screenshot 2024-03-28 232607.png"], containerId, methods_id, attr_id, target_ours, container_type, demo_image_path)
+
+          </script>
+
+          <!-- ours v.s. IIR -->
+          <!-- <div class="slider-item" data-slider-index="0">
+            <div class="twoitem">
+              <div class="twentytwenty-container twentytwenty-container-depth-right">
+                <div class="cmpcontent">
+                  <img src="images/demos/scene/ours/AdobeStock_5889655.jpeg">
+                </div>
+                <div class="cmpcontent">
+                  <img src="images/demos/scene/IIR/AdobeStock_5889655.jpeg">
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- Results on Real-worlds -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center", id="obj-delighting">
+        <h3>More Delighting Results</h3>
+        <hr style="margin-top:0px">
+          <script>
+            // get image list 
+            
+
+            function createDelightings(image_list_, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, type, outertype) {
+              image_list_.forEach(function(imageUrl) {
+                // Create the twentytwenty container
+                for (let i = 0; i < methods_id.length; i++) {
+                  // Access the element at index i
+                  var imageArrays = [
+                  [addUrls([demo_image_path, methods_id[i], attr_id[i], imageUrl]), 
+                  addUrls([demo_image_path, "ours", target_ours[i], imageUrl])
+                  ]
+                ];
+                addSliderItems(imageArrays, container_type[i], amp_container, type, outertype);
+                }
+              });
+              
+          }
+
+          methods_id = ["input"];
+          attr_id =    [""];
+          target_ours = ["albedo"];
+          container_type = ["twentytwenty-container-delight"];
+          containerId = "obj-delighting"
+          slider_type='delighting'
+          outertype = "results-carousel-horizontal"
+          var container = document.getElementById(containerId);
+
+          image_list_female = ['2491ca9b6488b09ba4e4b1b3cfa2d052.png', 'cbaf0b51beba2e66ca2833f6225646c1.png', 
+          'ea1decfa-6a5e-40a4-be75-38542d4caca6.png', 'c7a62a2086288926922d6acef7758230.png', 
+          'f4966c2c4c7697a36fd33b79e45a3d5c.png',
+         'df100209d99adaeb71741091cdb14e92.png', 
+          // '75de04dd04ce76cdbe77fc0acd6f7acf.png', 
+          '851fcfd175cb88588e2946bc57d2da04.png'];
+          demo_image_path = "images/demo/faces_fg_2"
+          var amp_container = document.createElement("div");
+          createDelightings(image_list_female, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype) 
+
+          human_list_male = ['94a666d648af0de5adb025828cd998a0.png', 
+          'b291e5babc29ac1a2b6740e7466b7c58.png', 'e607ace61c3fd81653b2f05d79ec1e42.png', 
+          'c5bb18a13abee7f6fd8688225034ca8b.png']
+          demo_image_path = "images/demo/objects_anything_fg_5"
+          createDelightings(human_list_male, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype)   
+
+          container.appendChild(amp_container);
+          vertical_iamges = ['43c73ce43d7a192932db0dda073016ca.png', '317f19c58f5f32b86d4be74990935c07.png', 
+          '9d727aaa81882ed5b9792a827aece242.png', 'e8ba19155aa8207485bf00866a874517.png', 
+          '871c5a9a19cf76f6b3e9e1e0140bee41.png', '0568623907622933bbac240fc906ce06.png',
+          'e77b133e93a5a08f30c580ef88c666ad.png', '4a1fd087a5e1c32c42f2dc28ba4ce102.png', 
+           '381230d5949b9088b66b1643edd1dec2.png',
+
+          'cropped_9bd3de1f75af1abbce8d1f6f863388f9.png', '808638ac5c5fb7340d3da740bb6d653f.png', 
+          'e8022efefd7a20ff4ef2be757d498ddf.png', '9935aedc3cfd91f1a5e7f28afc2684bc.png',
+          'fc7bf49a74cdbeb131d4db98ab10e9d0.png', '18af855f167137530374310abffd8172.png', 
+          '496aad6753e634854e03ed350d31b72a.png', '5896faf8f2b0dbdf3127a72ad829f6c5.png',  
+          '6f56557ab4ca9cb08bc1dcdf64e3e4d7.png', 'ff3563c75cf255dd36be3a8e8cb67999.png', 
+        ]
+        
+        demo_image_path = "images/demo/objects_anything_fg_5"
+        img_per_row = 10
+        for (let i = 0; i < vertical_iamges.length; i+=img_per_row) {
+          var amp_container = document.createElement("div");
+
+            createDelightings(vertical_iamges.slice(i, i+img_per_row), containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype) 
+            container.appendChild(amp_container);
+          }
+
+        // horizontal obj
+        slider_type = 'horidelight'
+        outertype = "results-carousel-horizontal-wide"
+        var amp_container = document.createElement("div");
+        
+        image_list = ['13345778183_327c5d7517_o.png', '6665045_6f527c2288_o.png', 
+                    ]
+        demo_image_path = "images/demo/megadepth_test_fg_3"
+        createDelightings(image_list, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype) 
+        
+        horizontal_images = ['f18dcd32b9ccc456332aa66fcc2b23b8.png', 'sora_flowers.png',
+        'ac0e4e91f8c2006c74b7e95c9611a8c3.png', '02e0a334db49c14e7138f528e72fb950.png', 'c77d316e09f702b689a27fcae6e73ce0.png',
+        'fbd67befa7403ed573bae89447c16635.png'
+        ]
+        demo_image_path = "images/demo/objects_anything_fg_5"
+
+        createDelightings(horizontal_images, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype)  
+        container.appendChild(amp_container);
+
+        // Vertical Scene
+        outertype = "results-carousel-horizontal"
+        slider_type='delighting'
+        container_type = ["twentytwenty-container-delight"];
+
+        image_list = ['7076961_2512d5f2bf_o.png', 
+                    '5106938_4f196ed138_o.png', 
+                    ]
+        demo_image_path = "images/demo/megadepth_test_fg_3"
+        
+        var amp_container = document.createElement("div");
+        createDelightings(image_list, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype) 
+        
+        image_list = ['945151f6db52baf968b265fe13f93c76.png', "1aa5fe395096f6e6f146eae2e195589a.png", "cropped_ebded44d7cbdaded345fe1915623cccb.png"]
+        demo_image_path = "images/demo/objects_anything_fg_5"
+        createDelightings(image_list, containerId, methods_id, attr_id, target_ours, container_type, demo_image_path, amp_container, slider_type, outertype) 
+        container.appendChild(amp_container);
+
+          </script>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+  
+<!-- Comparison with state-of-the-art methods -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center", id="single-relighting">
+        <h3>Single View Image Relighting </h3>
+        <!-- <p class="text-left"> 
+             Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p> -->
+        <hr style="margin-top:0px">
+        <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="Recon-relighting">
+                <source src="videos/Recon.mp4" type="video/mp4">
+        </video>
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="objects-relighting">
+          <source src="videos/Objects.mp4" type="video/mp4">
+        </video>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Comparison with state-of-the-art methods -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>3D Inverse Rendering Pipeline</h3>
+        <hr style="margin-top:0px">
+        <!-- <p class="text-left"> 
+              
+            <hr style="margin-top:0px">
+            <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+        <div class="col-12">
+          <img src="images/pipeline.png" style="width: 80%;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Comparison with state-of-the-art methods -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Comparison with baseline methods (Comming Soon...) </h3>
+        <!-- <p class="text-left"> 
+             Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p> -->
+        <hr style="margin-top:0px">
+        <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+                <source src="videos/compare_merged.m4v" type="video/mp4">
+            </video> -->
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<!-- Results on Real-worlds -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Real-world results  (Comming Soon...) </h3>
+        <!-- <p class="text-left"> 
+              Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p> -->
+        <hr style="margin-top:0px">
+        <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+        <!-- <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+                <source src="videos/compare_merged.m4v" type="video/mp4">
+            </video> -->
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+
+<!-- citing -->
+<div class="container">
+  <div class="row ">
+    <div class="col-12">
+      <h3>Citation</h3>
+      <hr style="margin-top:0px">
+      <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@inproceedings{chen2024intrinsicAnything,
+  title={IntrinsicAnything: Learning Diffusion Priors for Inverse Rendering Under an Unknown Illumination},
+  author={Xi, Chen and Sida, Peng and Dongchen, Yang and Yuan, Liu and Bowen, Pan and Chengfei, Lv and Xiaowei, Zhou.},
+  booktitle={Arxiv},
+  year={2024}
+}</code></pre>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+  <hr>
+  Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>. Thanks to <a href="https://zhenx.me/" target="_blank">Zhen Xu</a> for implementing the image comparison feature in the website.
+</footer>
+<style>
+  /* .twoitem {
+    object-fit: cover;
+    background-color: white;
+  } */
+
+  .slider-item-compare {
+    /* height: 400px; */
+    /* width: auto; */
+    object-fit: cover;
+  }
+
+  .slider-item-delighting {
+    /* height: auto; */
+    height: 400px;
+    /* width: auto; */
+    /* object-fit: cover */
+  }
+
+  .slider-item-horidelight {
+    /* height: auto; */
+    height: 300px;
+    /* width: auto; */
+    object-fit: fit
+  }
+
+  .twentytwenty-container {
+      /* height: 300px; */
+      /* width: 100%; */
+      object-fit: cover
+  }
+
+  .slider_img {
+    /* height: 300px; */
+    /* height: 100%; */
+    width: 100%;
+    object-fit: cover
+    /* display: block;
+    margin-bottom: 0px; */
+  }
+</style>
+<script>
+  
+  bulmaCarousel.attach('#results-carousel-horizontal', {
+    slidesToScroll: 1,
+    slidesToShow: 5,
+    loop: false,
+    autoplay: false,
+  });
+
+  bulmaCarousel.attach('#results-carousel-horizontal-wide', {
+    slidesToScroll: 1,
+    slidesToShow: 3,
+    loop: false,
+    autoplay: false,
+  });
+
+  // 通用函数来初始化twentytwenty插件
+  function initializeTwentyTwenty(selector, labels) {
+    $(selector).each(function() {
+      var images = $(this).find('img');
+      var imagesLoaded = 0; // 已加载图片的计数器
+
+      if (images.length >= 2) { // 确保至少有两张图片
+        images.each(function(index, element) {
+          var src = element.src;
+          var img = new Image();
+          img.onload = () => {
+            imagesLoaded++;
+            if (imagesLoaded === images.length) { // 当所有图片都加载完成
+              $(this).twentytwenty({
+                after_label: labels.afterLabel,
+                before_label: labels.beforeLabel,
+                default_offset_pct: 0.5,
+              });
+            }
+          };
+          img.src = src;
+        }.bind(this));
+      }
+    });
+  }
+
+  // 对每个容器类调用initializeTwentyTwenty
+  initializeTwentyTwenty(".twentytwenty-container-albedo-iid", { afterLabel: 'Ours Albedo', beforeLabel: 'IID Albedo' });
+  initializeTwentyTwenty(".twentytwenty-container-albedo-inv", { afterLabel: 'Ours Albedo', beforeLabel: 'Yi et al. Albedo' });
+  initializeTwentyTwenty(".twentytwenty-container-albedo-iir", { afterLabel: 'Ours Albedo', beforeLabel: 'IIR Albedo' });
+  initializeTwentyTwenty(".twentytwenty-container-specular-inv", { afterLabel: 'Ours Specular', beforeLabel: 'Yi et al. Specular' });
+  initializeTwentyTwenty(".twentytwenty-container-delight", { afterLabel: 'Ours', beforeLabel: 'Input' });
+
+
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+
+</html>

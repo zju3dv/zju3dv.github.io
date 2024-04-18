@@ -129,12 +129,25 @@
     <div class="row">
       <div class="col-12 text-center">
         <h3>Abstract</h3>
-          <hr style="margin-top:0px">
+<!--           <hr style="margin-top:0px"> -->
           <!-- <div class="col-12">
             <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
                         <source src="videos/neuconw-teaser-bg.m4v" type="video/mp4">
                   </video>
           </div> -->
+        
+          <hr style="margin-top:0px">
+          <h6 style="color:#8899a5; margin-bottom: 10px; margin-top: -10px"> Our approach can recover object materials from any images and enable single-view image relighting.</h6>
+          <!-- </br> -->
+          <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
+          <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="Recon-relighting">
+                  <source src="videos/Recon.mp4" type="video/mp4">
+          </video>
+          <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="objects-relighting">
+            <source src="videos/Objects.mp4" type="video/mp4">
+          </video>
+          </br>
+        
           <p class="text-justify">
             This paper aims to recover object materials from posed images captured under an unknown static lighting condition. Recent methods solve this task by representing materials using neural networks and optimizing model parameters through differentiable physically based rendering. However, due to the coupling between object geometry, materials, and environment lighting, there is inherent ambiguity during the inverse rendering process, preventing previous methods from obtaining accurate results. To overcome this ill-posed problem, our key idea is to learn the material prior with a generative model for regularizing the optimization process. We observe that the general rendering equation can be split into diffuse and specular shading terms, and thus formulate the material prior as diffusion models of albedo and specular. Thanks to this design, our model can be trained using the existing abundant 3D object data, and naturally acts as a versatile tool to resolve the ambiguity when recovering many material representations from RGB images. In addition, we develop a coarse-to-fine training strategy that leverages estimated materials to guide diffusion models to produce multi-view consistent constraints, leading to more stable and accurate results. Extensive experiments on real-world and synthetic datasets demonstrate that our approach achieves state-of-the-art performance on material recovery.
           </p>
@@ -446,20 +459,20 @@
     </div>
   </div>
 </section>
-<br>
+<!-- <br> -->
 
   
 <!-- Comparison with state-of-the-art methods -->
-<section>
+<!-- <section>
   <div class="container">
     <div class="row">
       <div class="col-12 text-center", id="single-relighting">
-        <h3>Single View Image Relighting </h3>
+        <h3>Single View Image Relighting </h3> -->
         <!-- <p class="text-left"> 
              Only the inference time on key frames is computed. Back-face culling is enabled during rendering. Ground-truth is captured using the LiDAR sensor on iPad Pro.</p> -->
-        <hr style="margin-top:0px">
+<!--         <hr style="margin-top:0px"> -->
         <!-- <p class="text-left" style="color:#646464"> B5-Scene 1:</p> -->
-        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="Recon-relighting">
+<!--         <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="Recon-relighting">
                 <source src="videos/Recon.mp4" type="video/mp4">
         </video>
         <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="objects-relighting">
@@ -470,7 +483,7 @@
     </div>
   </div>
 </section>
-<br>
+<br> -->
 
 <!-- Comparison with state-of-the-art methods -->
 <section>

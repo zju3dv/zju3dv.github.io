@@ -1,0 +1,17 @@
+// Define variables
+$primary-color: #000000;
+
+// Use the variables
+body {
+    font-family: 'Arial', sans-serif;
+    color: $primary-color;
+    background-color: #f4f4f4;
+
+    h1 {
+        font-size: 2em;
+    }
+
+    p {
+        margin: 0;
+    }
+}

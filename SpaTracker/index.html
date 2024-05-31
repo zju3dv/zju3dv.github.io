@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MR2GCZR4');</script>
+  <!-- End Google Tag Manager -->
+
+<head lang="en">
+  <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+
+  <!-- <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
+
+  <title>SpatialTracker</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- mirror: F0%9F%AA%9E&lt -->
+
+  <link rel="stylesheet" type="text/css" href="./SpatialTracker_files/slick.css">
+  <link rel="stylesheet" type="text/css" href="./SpatialTracker_files/slick-theme.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/bulma.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/bulma-slider.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/font-awesome.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/codemirror.min.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/app.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/index.css">
+  <link rel="stylesheet" href="./SpatialTracker_files/select.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="resources/glide.core.min.css">
+  <link rel="stylesheet" href="resources/glide.theme.min.css">
+  <link rel="stylesheet" href="resources/glide-custom.css">
+  <script src="resources/handlers.js"></script>
+  <script src="./SpatialTracker_files/jquery.min.js"></script>
+  <script src="./SpatialTracker_files/bootstrap.min.js"></script>
+  <script src="./SpatialTracker_files/codemirror.min.js"></script>
+  <script src="./SpatialTracker_files/clipboard.min.js"></script>
+  <script src="./SpatialTracker_files/video_comparison.js"></script>
+  <script src="./SpatialTracker_files/select.js"></script>
+  <script src="./SpatialTracker_files/bulma-slider.min.js"></script>
+  <script src="./SpatialTracker_files/bulma-carousel.min.js"></script>
+  <script src="./SpatialTracker_files/index.js"></script>
+
+  <script src="resources/glide.min.js"></script>
+  <script>
+    window.onload = function () {
+      new Glide("#dynamic-carousel", {
+        type: "carousel",
+        perView: 1,
+        focusAt: "center",
+        autoplay: false,
+        hoverpause: true
+      }).mount();
+      new Glide("#static-carousel", {
+        type: "carousel",
+        perView: 1,
+        focusAt: "center",
+        autoplay: false,
+        hoverpause: true
+      }).mount();
+      new Glide("#realtime-carousel", {
+        type: "carousel",
+        perView: 1,
+        focusAt: "center",
+        autoplay: false,
+        hoverpause: true
+      }).mount();
+    };
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+  </script>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-31164F034G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-31164F034G');
+</script>
+
+<body>
+  <div class="container" id="header" style="text-align: center; margin: auto;">
+    <div class="row" id="title-row" style="max-width: 100%; margin: 0 auto; display: inline-block">
+      <h2 class="col-md-12 text-center" id="title">
+        <b>SpatialTracker</b>: Tracking Any 2D Pixels in 3D Space
+      </h2>
+      <h3 class="col-md-12 text-center" id="title">
+        <b>CVPR</b> 2024 (<span style="color: red;">Highlight</span>)<br>
+      </h3>
+    </div>
+  </div>
+  <script>
+  </script>
+  <div class="container" id="main">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1 text-center">
+        <ul class="list-inline">
+          <li> <a href="https://henry123-boy.github.io/">Yuxi Xiao<sup>1,3*</sup></a> </li>
+          <li> <a href="https://qianqianwang68.github.io/">Qianqian Wang<sup>2*</sup></a> </li>
+          <li> <a href="https://zhanghe3z.github.io/">Shangzhan Zhang<sup>1,3</sup></a> </li>
+          <li> <a href="https://xuenan.net">Nan Xue<sup>3</sup></a> </li>
+          <li> <a href="https://pengsida.net">Sida Peng<sup>1</sup></a> </li>
+          <li> <a href="https://shenyujun.github.io/">Yujun Shen<sup>3</sup></a> </li>
+          <li> <a href="https://xzhou.me">Xiaowei Zhou<sup>1</sup></a> </li>
+        </ul>
+        <ul class="list-inline">
+          <li> <sup>1</sup>Zhejiang University </li>
+          <li> <sup>2</sup>UC Berkeley</li>
+          <li> <sup>3</sup>Ant Group</li>
+          <br />
+          <li> <sup>*</sup>Equal Contribution</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <span class="link-block">
+          <a href="SpatialTracker_files/pdf/spatracker.pdf" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+                data-fa-i2svg="">
+                <path fill="currentColor"
+                  d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z">
+                </path>
+              </svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+            </span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://arxiv.org/abs/2404.04319" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+                data-fa-i2svg="">
+                <path fill="currentColor"
+                  d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z">
+                </path>
+              </svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+            </span>
+            <span>arxiv</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/henry123-boy/SpaTracker"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab"
+                data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg="">
+                <path fill="currentColor"
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                </path>
+              </svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
+            </span>
+            <span>Code</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    
+    <div class="row">
+    <div class="glide" id="dynamic-carousel">
+      <div class="glide__track" data-glide-el="track">
+        <div class="glide__slides">
+          <div class="glide__slide">
+<div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 1px;">
+              <video id="butterfly-2d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/butterfly/butterfly-2d-tracks.mp4" type="video/mp4">
+              </video>
+              <video id="butterfly-3d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/butterfly/butterfly-3d-tracks.mp4" type="video/mp4">
+              </video>
+</div>
+          </div>
+          <div class="glide__slide">
+<div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 1px;">
+              <video id="robot-2d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/robot/robot-2d-tracks.mp4" type="video/mp4">
+              </video>
+              <video id="robot-3d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/robot/robot-3d-tracks.mp4" type="video/mp4">
+              </video>
+</div>
+          </div>
+          <div class="glide__slide">
+<div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 1px;">
+              <video id="dolphins-2d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/dolphins/dolphins-2d-tracks.mp4" type="video/mp4">
+              </video>
+              <video id="dolphins-3d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/dolphins/dolphins-3d-tracks.mp4" type="video/mp4">
+              </video>
+</div>
+          </div>
+          <div class="glide__slide">
+<div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 1px;">
+              <video id="pillow-2d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/pillow/pillow_2d_track.mp4" type="video/mp4">
+              </video>
+              <video id="pillow-3d" width="48%" playsinline="" autoplay="" loop="" muted=""
+                poster="SpatialTracker_files/loading.gif">
+                <source src="SpatialTracker_files/pillow/pillow_3d_track.mp4" type="video/mp4">
+              </video>
+</div>
+          </div>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <span class="glide__arrow glide__arrow--left" data-glide-dir="<"><img
+            src="resources/arrow-left-circle-fill.svg" /></span>
+        <span class="glide__arrow glide__arrow--right" data-glide-dir=">"><img
+            src="resources/arrow-right-circle-fill.svg" /></span>
+      </div>
+      <div class="glide__bullets" data-glide-el="controls[nav]">
+        <button class="glide__bullet" data-glide-dir="=0">
+          <img src="SpatialTracker_files/butterfly/butterfly-thumbnail.png" class="w-100" alt="">
+        </button>
+        <button class="glide__bullet" data-glide-dir="=1">
+          <img src="SpatialTracker_files/robot/thumbnail.png" class="w-100" alt="">
+        </button>
+        <button class="glide__bullet" data-glide-dir="=2">
+          <img src="SpatialTracker_files/dolphins/thumbnail.png" class="w-100" alt="">
+        </button>
+        <button class="glide__bullet" data-glide-dir="=3">
+          <img src="SpatialTracker_files/pillow/thumbnail.png" class="w-100" alt="">
+        </button>
+</div>
+      
+      </div>
+    </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>
+          Abstract
+        </h3>
+        <div class="text-justify">
+          Recovering dense and long-range pixel motion in videos is a challenging problem. Part of the difficulty arises from the 3D-to-2D projection process, leading to occlusions and discontinuities in the 2D motion domain. While 2D motion can be intricate, we posit that the underlying 3D motion can often be simple and low-dimensional. In this work, we propose to estimate point trajectories in 3D space to mitigate the issues caused by image projection. Our method, named <b>SpatialTracker</b>, lifts 2D pixels to 3D using monocular depth estimators, represents the 3D content of each frame efficiently using a triplane representation, and performs iterative updates using a transformer to estimate 3D trajectories. Tracking in 3D allows us to leverage as-rigid-as-possible (ARAP) constraints while simultaneously learning a rigidity embedding that clusters pixels into different rigid parts. Extensive evaluation shows that our approach achieves state-of-the-art tracking performance both qualitatively and quantitatively, particularly in challenging scenarios such as out-of-plane rotation. 
+        </div>
+        <p></p>
+        <center>
+          <img src="./SpatialTracker_files/images/pipeline.png" class="img-responsive" alt="overview" width="80%"
+            style="max-height: 450px;margin:auto;">
+        </center>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>Qualitative Comparisons for 2D Tracking</h3>
+        <div class="text-justify">
+          We compare our method with TAPIR [1] and CoTracker [2] for 2D tracking. Our method can handle challenging scenarios such as out-of-plane rotation and occlusions.
+        </div>
+
+        <table width="100%">
+          <tbody>
+            <tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/car-query.png" class="img-responsive" alt="overview" width="100%">
+                                  Queried points in the first frame
+                </td> -->
+                <td align="center"  width="33%">
+                  <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                    <source src="SpatialTracker_files/comparisons/crossroads_tapir_pred_track.mp4" type="video/mp4">
+                  </video>
+                  TAPIR [1]
+                </td>
+                <td align="center"  width="33%">
+                  <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                    <source src="SpatialTracker_files/comparisons/crossroads_cotracker_pred_track.mp4 " type="video/mp4">
+                  </video>
+                  CoTracker [2]
+                </td>
+                <td align="center"  width="33%">
+                  <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                    <source src="SpatialTracker_files/comparisons/crossroads_spatracker_pred_track.mp4" type="video/mp4">
+                  </video>
+                  SpatialTracker (Ours)
+                </td>
+              </tr>
+<tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/cr7-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cr7_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cr7_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cr7_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>              
+            </tr>
+            <tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/break_dancer-querypng.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/break_dancer_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/break_dancer_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/break_dancer_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr>
+            <tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/butterfly-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/butterfly_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/butterfly_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/butterfly_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr>
+            <tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/butterfly-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/dance-twirl_tapir_pred_track.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/dance-twirl_cotracker_pred_track.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/dance-twirl_spatracker_pred_track.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr>
+            <tr>
+              <!-- <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/car-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/car_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/car_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/car_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>              
+            </tr>
+            <!-- <tr>
+              <td align="center"  width="25%">
+                <img src="SpatialTracker_files/comparisons/scooter-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td>
+              <td align="center"  width="25%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/scooter_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="25%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/scooter_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="25%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/scooter_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr> -->
+            <tr>
+              <!-- <td align="center"  width="33%">
+                <img src="SpatialTracker_files/comparisons/squirrel-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/squirrel_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/squirrel_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/squirrel_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr>
+            <tr>
+              <!-- <td align="center"  width="33%">
+                <img src="SpatialTracker_files/comparisons/cable_car-query.png" class="img-responsive" alt="overview" width="100%">
+                Queried points in the first frame
+              </td> -->
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cable_car_tapir.mp4" type="video/mp4">
+                </video>
+                TAPIR [1]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cable_car_cotracker.mp4" type="video/mp4">
+                </video>
+                CoTracker [2]
+              </td>
+              <td align="center"  width="33%">
+                <video width="100%" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/comparisons/cable_car_spatracker.mp4" type="video/mp4">
+                </video>
+                SpatialTracker (Ours)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+          
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>Rigid Part Segmentation from Videos</h3>
+        <div class="text-justify">
+          Our method identifies the different rigid parts in the scene by clustering their 3D trajectories. In the following, the rigid parts estimated by our method are shown in different colors.
+        </div>
+        <table width="100%">
+          <tbody>
+            <tr>
+              <td align="center" width="33%">
+                <img src="SpatialTracker_files/rigid-parts/owls_spatracker_query.png" class="img-responsive" alt="overview" width="100%">
+                The first reference image
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/owls_spatracker_pred_track.mp4" type="video/mp4">
+                </video>
+                Tracking Results
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/owls_spatracker_pred_parts.mp4" type="video/mp4">
+                </video>
+                Estimated Rigid Parts
+              </td>
+            </tr>
+            <tr>
+              <td align="center" width="33%">
+                <img src="SpatialTracker_files/rigid-parts/newton.png" class="img-responsive" alt="overview" width="100%">
+                The first reference image
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/newton_spatracker_pred_track.mp4" type="video/mp4">
+                </video>
+                Tracking Results
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/newton_parts.mp4" type="video/mp4">
+                </video>
+                Estimated Rigid Parts
+              </td>
+            </tr>
+            <tr>
+              <td align="center" width="33%">
+                <img src="SpatialTracker_files/rigid-parts/robot.png" class="img-responsive" alt="overview" width="100%">
+                The first reference image
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/robot_spatracker_pred_track.mp4" type="video/mp4">
+                </video>
+                Tracking Results
+              </td>
+              <td align="center" width="33%">
+                <video id="rigid-parts-owls" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/rigid-parts/robot.mp4" type="video/mp4">
+                </video>
+                Estimated Rigid Parts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>Application</h2>
+        <h4>Camera Pose Estimation in Dynamic Scenes</h3>
+
+        <div class="text-justify">
+          We manually identify the static parts and estimate the camera poses from wild videos. 
+          We first estimate the 3D trajectories of pixels in the video using our SpatialTracker, decompose the scene into different rigid parts, and finally estimate the camera poses using PnP for the static part.
+        </div>
+
+        <table width="100%">
+          <tbody>
+            <tr>
+              <td align="center"  width="50%">
+                <video id="pose-running-input" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/3d/running.mp4" type="video/mp4">
+                </video>
+              </td>
+              <td align="center"  width="50%">
+                <object data="SpatialTracker_files/3d/running.html" type="text/html", height="256px" width="384px" style="border: 2px solid black;"></object>
+              </td>
+            </tr>
+            <tr>
+              <td align="center"  width="50%">
+                <video id="pose-running-input" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/3d/running_kid.mp4" type="video/mp4">
+                </video>
+              </td>
+              <td align="center"  width="50%">
+                <object data="SpatialTracker_files/3d/running_kid.html" type="text/html", height="256px" width="384px" style="border: 2px solid black;"></object>
+              </td>
+            </tr>
+            <tr>
+              <td align="center"  width="50%">
+                <video id="pose-running-input" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/3d/swing.mp4" type="video/mp4">
+                </video>
+              </td>
+              <td align="center"  width="50%">
+                <object data="SpatialTracker_files/3d/swing.html" type="text/html", height="256px" width="384px" style="border: 2px solid black;"></object>
+              </td>
+            </tr>
+            <tr>
+              <td align="center"  width="50%">
+                <video id="pose-running-input" height="256px" width="auto" playsinline="" autoplay="" loop="" muted="">
+                  <source src="SpatialTracker_files/3d/car.mp4" type="video/mp4">
+                </video>
+              </td>
+              <td align="center"  width="50%">
+                <object data="SpatialTracker_files/3d/car.html" type="text/html", height="256px" width="384px" style="border: 2px solid black;"></object>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>
+          References
+        </h3>
+        <ol>
+          <li>
+            Carl Doersch, Yi Yang, Mel Vecerík, Dilara Gokay, Ankush Gupta, Yusuf Aytar, João Carreira, Andrew Zisserman.
+            TAPIR: Tracking Any Point with per-frame Initialization and temporal Refinement. ICCV 2023
+          </li>
+          <li>
+            Nikita Karaev, Ignacio Rocco, Benjamin Graham, Natalia Neverova, Andrea Vedaldi, Christian Rupprecht.
+            CoTracker: It is Better to Track Together. <a href="https://arxiv.org/abs/2307.07635">CoRR abs/2307.07635</a> 2023
+          </li>         
+        </ol>
+      </div>
+    </div>
+    <style>
+      ul {
+          list-style-type: disc;
+      }
+  </style>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>
+          Concurrent Works
+        </h3>
+        <ul>
+          <li>Wang Bo and Li Jian and Yu Yang and Liu Li and Sun Zhenping and Hu Dewen.
+            SceneTracker: Long-term Scene Flow Estimation Network. <a href="https://arxiv.org/pdf/2403.19924">CoRR abs/2403.19924</a> 2024
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>
+          Citation
+        </h3>
+        If you find our project useful, please consider citing:
+        <br />
+
+        <div class="CodeMirror cm-s-default CodeMirror-wrap">
+          <div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 38.28px; left: 647px;">
+            <textarea autocorrect="off" autocapitalize="off" spellcheck="false"
+              style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;"
+              tabindex="0"></textarea>
+          </div>
+          <div class="CodeMirror-vscrollbar" cm-not-content="true">
+            <div style="min-width: 1px; height: 0px;"></div>
+          </div>
+          <div class="CodeMirror-hscrollbar" cm-not-content="true">
+            <div style="height: 100%; min-height: 1px; width: 0px;"></div>
+          </div>
+          <div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div>
+          <div class="CodeMirror-gutter-filler" cm-not-content="true"></div>
+          <div class="CodeMirror-scroll" tabindex="-1">
+            <div class="CodeMirror-sizer"
+              style="margin-left: 0px; margin-bottom: -15px; border-right-width: 15px; min-height: 111px; padding-right: 0px; padding-bottom: 0px;">
+              <div style="position: relative; top: 0px;">
+                <div class="CodeMirror-lines">
+                  <div style="position: relative; outline: none;">
+                    <div class="CodeMirror-measure">AخA</div>
+                    <div class="CodeMirror-measure"></div>
+                    <div style="position: relative; z-index: 1;"></div>
+                    <div class="CodeMirror-cursors">
+                      <div class="CodeMirror-cursor" style="left: 647px; top: 34.28px; height: 17.1406px;">&nbsp;</div>
+                    </div>
+                    <div class="CodeMirror-code" style="">
+                      <pre
+                        class=" CodeMirror-line "><span style="padding-right: 0.1px;">@inproceedings{SpatialTracker,</span></pre>
+                      <pre
+                        class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  title={SpatialTracker: Tracking Any 2D Pixels in 3D Space},</span></pre>
+                      <pre
+                        class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  author={Xiao, Yuxi and Wang, Qianqian and Zhang, Shangzhan and Xue, Nan and Peng, Sida and Shen, Yujun and Zhou, Xiaowei},</span></pre>
+                      <pre
+                        class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},</span></pre>
+                      <pre
+                        class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  year={2024}</span></pre>
+                      <pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="position: absolute; height: 15px; width: 1px; top: 111px;"></div>
+            <div class="CodeMirror-gutters" style="display: none; height: 126px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3>
+          Acknowledgements
+        </h3>
+        <div class="text-justify">
+          This work was partially supported by National Key Research and Development Program of China (No. 2020AAA0108900), Ant Group, and Information Technology Center and State Key Lab of CAD&CG, Zhejiang University.
+        </div>
+        
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="content">
+          <p>
+            The website template was borrowed from <a href="https://climatenerf.github.io/">ClimateNeRF</a>,<a href="http://mgharbi.com/">Michaël Gharbi</a>, <A
+            href="https://dorverbin.github.io/refnerf/index.html">RefNeRF</a> , <A
+            href="https://nerfies.github.io/">Nerfies</A> and <A
+            href="https://hhsinping.github.io/svs/supp/visual_comparison.html">Semantic View Synthesis</a>.   
+          </p>
+        </div>
+      </div>
+    
+  </div>
+</body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR2GCZR4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+</html>

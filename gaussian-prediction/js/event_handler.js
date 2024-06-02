@@ -38,16 +38,16 @@ document.addEventListener('DOMContentLoaded', domReady);
                 let image = sections[i].getElementsByClassName('b-dics__image-container')[0].getElementsByClassName('b-dics__image')[0]
                 switch (idx) {
                     case 0:
-                        image.src = 'assets/video/dnerf/bouncingballs/';
+                        image.src = 'https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianPredictions/video/dnerf/bouncingballs/';
                         break;
                     case 1:
-                        image.src = 'assets/video/dnerf/trex/';
+                        image.src = 'https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianPrediction/video/dnerf/trex/';
                         break;
                     case 2:
-                        image.src = 'assets/video/dnerf/hellwarrior/';
+                        image.src = 'https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianPrediction/video/dnerf/hellwarrior/';
                         break;
                     case 3:
-                        image.src = 'assets/video/dnerf/jumpingjacks/';
+                        image.src = 'https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianPrediction/video/dnerf/jumpingjacks/';
                         break;
                     // case 4:
                     //     image.src = 'assets/video/dnerf/Courthouse/';

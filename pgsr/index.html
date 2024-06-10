@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PGSR: Planar-based Gaussian Splatting for Efficient and High-Fidelity Surface Reconstruction</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="css/css2" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1>PGSR: Planar-based Gaussian Splatting for Efficient and High-Fidelity Surface Reconstruction</h1>
+            <!-- <h4 style="color:#5a6268;">In submission</h4> -->
+            <hr>
+            <h5> 
+              <a target="_blank">Danpeng Chen</a><sup>12</sup>, 
+              <a target="_blank">Hi Li</a><sup>1</sup>, 
+              <a target="_blank">Weicai Ye</a><sup>13</sup>,
+              <a target="_blank">Yifan Wang</a><sup>3</sup>,
+              <a target="_blank">Weijian Xie</a><sup>14</sup>,
+              <a target="_blank">Shangjin Zhai</a><sup>4</sup>,<br />
+              <a target="_blank">Nan Wang</a><sup>4</sup>,
+              <a target="_blank">Haomin Liu</a><sup>4</sup>,
+              <a target="_blank">Hujun Bao</a><sup>1</sup>,
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>1</sup>
+            </h5>
+            <p><sup>1</sup>Zhejiang University &nbsp;&nbsp; 
+                <sup>2</sup>Tetras.AI. &nbsp;&nbsp;
+                <sup>3</sup>Shanghai AI Laboratory &nbsp;&nbsp; 
+                <sup>4</sup>SenseTime Research </p>
+                
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/zju3dv/pgsr" role="button"  target="_blank">
+                  <i class="fa fa-github-alt"></i> Code</a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://ghy0324.github.io/project_page_assets/sam_graph/supp.pdf" role="button">
+                    <i class="fa fa-file"></i> Supplementary </a> </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+              <p class="text-left"> Recently, 3D Gaussian Splatting (3DGS) has attracted widespread attention due to its high-quality rendering, and ultra-fast training and rendering speed. However, due to the unstructured and irregular nature of Gaussian point clouds, it is difficult to guarantee geometric reconstruction accuracy and multi-view consistency simply by relying on image reconstruction loss. Although many studies on surface reconstruction based on 3DGS have emerged recently, the quality of their meshes is generally unsatisfactory. To address this problem, we propose a fast planar-based Gaussian splatting reconstruction representation (PGSR) to achieve high-fidelity surface reconstruction while ensuring high-quality rendering. Specifically, we first introduce an unbiased depth rendering method, which directly renders the distance from the camera origin to the Gaussian plane and the corresponding normal map based on the Gaussian distribution of the point cloud, and divides the two to obtain the unbiased depth. We then introduce single-view geometric, multi-view photometric, and geometric regularization to preserve global geometric accuracy. We also propose a camera exposure compensation model to cope with scenes with large illumination variations. Experiments on indoor and outdoor scenes show that our method achieves fast training and rendering while maintaining high-fidelity rendering and geometric reconstruction, outperforming 3DGS-based and NeRF-based methods. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- overview video -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Overview video</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="950" height="534" src="https://www.youtube.com/embed/oTDeNoGtXbY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div> 
+        </div>
+      </div>
+    </div>
+  </section>
+  <br> -->
+
+  <!--/ Paper video. -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Ours Method</h3>
+        <hr style="margin-top:0px">
+        <img style="width: 80%;" src="src/system.png"/>
+        </div>
+        <p class="text-left">
+          Compared to 3DGS, we achieve global consistency in geometry reconstruction while
+          maintaining similar rendering quality. Initially, we improve
+          the modeling of scene geometry attributes by compressing
+          3D Gaussians into a 2D flat plane representation, which
+          is used to generate plane distance and normal maps, and
+          subsequently converted into unbiased depth maps. We then
+          introduce single-view geometric, multi-view photometric, and
+          geometric consistency loss to ensure global geometry consistency. Additionally, the exposure compensation model further
+          improves reconstruction accuracy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>DTU Results</h3>
+        <hr style="margin-top:0px">
+        <img style="width: 80%;" src="src/dtu_table.png"/>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>TnT Results</h3>
+        <hr style="margin-top:0px">
+        <img style="width: 80%;" src="src/tnt_table.png"/>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- comparison -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Comparisons on the DTU</h3>
+          <hr style="margin-top:0px">
+          <div class="column is-full-width">
+            <div class="tabs">
+              <div class="tab" data-tab-for="example1" onclick="showExamples('example1', this)">scan_37</div>
+              <div class="tab" data-tab-for="example2" onclick="showExamples('example2', this)">scan_63</div>
+              <div class="tab" data-tab-for="example3" onclick="showExamples('example3', this)">scan_65</div>
+              <div class="tab" data-tab-for="example4" onclick="showExamples('example4', this)">scan_110</div>
+              <div class="tab" data-tab-for="example5" onclick="showExamples('example5', this)">scan_114</div>
+            </div>
+
+            <div id="example1" class="bal-container-small example">
+              <div class="bal-after">
+                <img src="src/37_ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/37_2dgs.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    2DGS
+                  </div>
+                </div>
+              </div>
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+
+            <div id="example2" class="bal-container-small example">
+              <div class="bal-after">
+                <img src="src/63_ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/63_2dgs.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    2DGS
+                  </div>
+                </div>
+              </div>
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+
+            <div id="example3" class="bal-container-small example">
+              <div class="bal-after">
+                <img src="src/65_ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/65_2dgs.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    2DGS
+                  </div>
+                </div>
+              </div>
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+
+            <div id="example4" class="bal-container-small example">
+              <div class="bal-after">
+                <img src="src/110_ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/110_2dgs.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    2DGS
+                  </div>
+                </div>
+              </div>
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+
+            <div id="example5" class="bal-container-small example">
+              <div class="bal-after">
+                <img src="src/114_ours.png">
+                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                  Ours
+                </div>
+              </div>
+              <div class="bal-before" style="width:1.910828025477707%;">
+                <div class="bal-before-inset" style="width: 628px;">
+                <img src="src/114_2dgs.png">
+                  <div class="bal-beforePosition beforeLabel">
+                    2DGS
+                  </div>
+                </div>
+              </div>
+              <div class="bal-handle" style="left:1.910828025477707%;">
+                <span class=" handle-left-arrow"></span>
+                <span class="handle-right-arrow"></span>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>More DTU Results</h3>
+        <!-- <hr style="margin-top:0px"> -->
+        <img style="width: 90%;" src="src/all_dtu.png"/>
+        </object>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="container2">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Comparisons on the Mip360 & TnT</h3>
+        <hr style="margin-top:0px">
+        <div class="column is-full-width">
+          <div class="tabs">
+            <div class="tab" data-tab-for="s_exa1" onclick="showExamples('s_exa1', this)">Bonsai</div>
+            <div class="tab" data-tab-for="s_exa2" onclick="showExamples('s_exa2', this)">Caterpillar</div>
+            <div class="tab" data-tab-for="s_exa3" onclick="showExamples('s_exa3', this)">Counter</div>
+          </div>
+
+          <div id="s_exa1" class="bal-container-small exa">
+            <div class="bal-after">
+              <img src="src/bonsai_ours.png">
+              <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                Ours
+              </div>
+            </div>
+            <div class="bal-before" style="width:1.910828025477707%;">
+              <div class="bal-before-inset" style="width: 628px;">
+              <img src="src/bonsai_2dgs.png">
+                <div class="bal-beforePosition beforeLabel">
+                  2DGS
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left:1.910828025477707%;">
+              <span class=" handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+
+          <div id="s_exa2" class="bal-container-small exa">
+            <div class="bal-after">
+              <img src="src/Caterpillar_ours.png">
+              <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                Ours
+              </div>
+            </div>
+            <div class="bal-before" style="width:1.910828025477707%;">
+              <div class="bal-before-inset" style="width: 628px;">
+              <img src="src/Caterpillar_2dgs.png">
+                <div class="bal-beforePosition beforeLabel">
+                  2DGS
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left:1.910828025477707%;">
+              <span class=" handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+
+          <div id="s_exa3" class="bal-container-small exa">
+            <div class="bal-after">
+              <img src="src/counter_ours.png">
+              <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                Ours
+              </div>
+            </div>
+            <div class="bal-before" style="width:1.910828025477707%;">
+              <div class="bal-before-inset" style="width: 628px;">
+              <img src="src/counter_2dgs.png">
+                <div class="bal-beforePosition beforeLabel">
+                  2DGS
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left:1.910828025477707%;">
+              <span class=" handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+  <br />
+  <div class="container3">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Ours More Results</h3>
+        <!-- <hr style="margin-top:0px"> -->
+        <img style="width: 90%;" src="src/more_results.png"/>
+        </object>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <br>
+  <br />
+  
+  <!-- reconstruction showcase -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h3>Segmentation results showcase</h3>
+            <hr style="margin-top:0px">
+            <div class="embed-responsive embed-responsive-16by9">
+
+                <iframe style="clip-path: inset(1px 1px)" width="100%" height="100%" src="https://sketchfab.com/playlists/embed?autostart=1&autospin=0.25&amp;collection=18b164e0c813435687bcb59908ed3937" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+            <br>
+            <p> Zoom in by scrolling. You can toggle the “Single Sided” option in Model Inspector (pressing I key) to enable back-face culling (see through walls).</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+            <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{chen2024,
+  title={PGSR: Planar-based Gaussian Splatting for Efficient and High-Fidelity Surface Reconstruction},
+}</code></pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>

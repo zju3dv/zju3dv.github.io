@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="soon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/comparison.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- 导航bar -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Homepage
+        </a>
+        <div class="navbar-dropdown">
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/pgsr/">
+              PGSR
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://open3dvlab.github.io/NeuRodin/">
+              NeuRodin
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/intrinsic_nerf//">
+              IntrinsicNeRF
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/pvo/">
+              PVO
+            </a>
+          </ui>
+          
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- authors -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="">Ziyu Tang</a><sup>1</sup></span>&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="https://ywcmaike.github.io/">Weicai Ye</a><sup>1,2,&#9993;</sup></span>&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="">Yifan Wang</a><sup>2</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Di Huang</a><sup>2</sup>&nbsp;&nbsp;
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="">Hujun Bao</a><sup>1</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Tong He</a><sup>2,&#9993;</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Guofeng Zhang</a><sup>1</sup>&nbsp;&nbsp;
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>State Key Lab of CAD&CG, Zhejiang University</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Shanghai AI Laboratory</span>
+            <br>
+            <span class="email-link">
+              <!-- <a href="mailto:maikeyeweicai@gmail.com">maikeyeweicai@gmail.com</a> -->
+              &nbsp;&nbsp;
+              <!-- <a href="mailto:tonghe90@gmail.com">tonghe90@gmail.com</a> -->
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zju3dv/ND-SDF"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- teaser.png -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" height="100%" src="./static/images/teaser.png" alt="ND-SDF teaser."/>
+      <p>
+        We present <b>ND-SDF</b>, a framework for high-fidelity 3D indoor surface reconstruction from multi-views. Shown above is an extracted mesh from ScanNet++.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 添加水平线 -->
+<hr>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Neural implicit reconstruction via volume rendering has proven its effectiveness in recovering dense 3D surfaces.
+            Nevertheless, it is nontrivial to simultaneously satisfy the need for detail and maintain smoothness across areas with differing characteristics. 
+            To address the aforementioned challenge, previous methods commonly employ geometric priors, 
+            which are often constrained by the performance of the prior models.
+            In this paper, we propose <b>ND-SDF</b>, which learns a <b>N</b>ormal <b>D</b>eflection field to represent the angle deviation between the scene normals
+            and the prior normals. Previous methods typically apply geometric priors uniformly across all samples,
+            which introduces significant biases in accuracy. In contrast,
+            our proposed normal deflection field dynamically learns and adapts the utilization of samples based on their specific characteristics,
+            thereby improving the precision and effectiveness of the model.
+            In doing so, our method not only smooths areas like walls and floors but also preserves the geometric features of complex structures.
+            In addition, we also introduce a novel ray sampling strategy based on the deflection angle.
+            It facilitates the unbiased rendering process, thereby substantially enhancing the quality of detailed surfaces,
+            with improved accuracy, particularly on thin structures.
+            We conduct comprehensive experiments on various challenging datasets, the consistent improvement demonstrates the superiority of our proposed ND-SDF.
+            All codes and models will be made public upon acceptance.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <hr>
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/framework.png"
+               class="framework-image"
+               alt="ND-SDF overview."/>
+          
+          <p>
+            <b>Overview of our method.</b> We utilize multi-resolution hash grids <code class="code-latex">&#947;<sub>L</sub></code> as scene representation.
+            The core of ND-SDF is the normal deflection field. We represent deflection with quaternions,
+            which are predicted by the deflection network (denoted as <code class="code-latex">f<sub>d</sub></code>).
+            We align the deflected normals with the prior normals to learn the deviation between the scene and the priors.
+            To distinctly supervise high and low-frequency areas, we employ an adaptive deflection angle prior loss, ensuring both smoothness and detail.
+            Furthermore, we utilize the deflection angle <code class="code-latex">&#916;&#952;</code> to distinguish complex structures,
+            enabling angle-guided sampling and color loss to facilitate intricate surface details. Lastly,
+            we combine the unbiased rendering method <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_Towards_Unbiased_Volume_Rendering_of_Neural_Implicit_Surfaces_With_Geometry_CVPR_2023_paper.pdf" class="quote">(TUVR)</a>  to promote the generation of extremely thin structures indoors.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Our method. -->
+    <!-- Paper video. -->
+    
+    <!--/ Paper video. -->
+  </div>
+</section>
+<hr>
+<!-- Comparisons -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="text-align: center;">Videos</h2>
+    <h2 class="title is-4">ScanNet</h2>
+    <div class="video-row-container">
+      <video controls src="./static/videos/scannet_omni_384-21-2_3_512_latest_rgb.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+      <video controls src="./static/videos/scannet_omni_384-21-2_4_512_latest_rgb.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+    </div>
+
+    <h2 class="title is-4">ScanNet++</h2>
+    <video controls width="100%" height="100%" src="./static/videos/e0_notop_rgb.mp4" type="video/mp4" autoplay muted loop playsinline></video> 
+
+    <h2 class="title is-4">T&T Ballroom</h2>
+    <video controls width="100%" height="100%" src="./static/videos/tnt3_4_2048_latest_cat.mp4" type="video/mp4" autoplay muted loop playsinline></video> 
+  </div>
+
+  <div class="container is-max-desktop">
+    <h2 class="title is-3" style="text-align: center;">Comparisons</h2>
+      <!-- ScanNet -->
+      <div class="content">
+        
+        <h2 class="title is-4">ScanNet</h2>
+        <div class="button-container" id="btn1">
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_1.png', './static/images/cmp/ours/scannet_1.png')" class="cmp-button cmp-btn-checked">scan1</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_2.png', './static/images/cmp/ours/scannet_2.png')" class="cmp-button">scan2</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_3.png', './static/images/cmp/ours/scannet_3.png')" class="cmp-button">scan3</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_4.png', './static/images/cmp/ours/scannet_4.png')" class="cmp-button">scan4</button>
+        </div>
+        <div class="cmp-container" id="cmp1">
+            <div class="bottom">
+                <img src="./static/images/cmp/ours/scannet_1.png"/>
+            </div>
+            <div class="top">
+                <img src="./static/images/cmp/monosdf/scannet_1.png"/>
+            </div>
+            <div class="cmp-slider"></div>
+        </div>
+        
+      </div>
+      
+      <!-- scannet++ -->
+      <div class="content">
+        <h2 class="title is-4">ScanNet++</h2>
+
+        <div class="button-container" id="btn2">
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_1.png', './static/images/cmp/ours/scannetpp_1.png')" class="cmp-button cmp-btn-checked">036bce3393</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_2.png', './static/images/cmp/ours/scannetpp_2.png')" class="cmp-button">0e75f3c4d9</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_3.png', './static/images/cmp/ours/scannetpp_3.png')" class="cmp-button">108ec0b806</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_4.png', './static/images/cmp/ours/scannetpp_4.png')" class="cmp-button">7f4d173c9c</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_5.png', './static/images/cmp/ours/scannetpp_5.png')" class="cmp-button">ab11145646</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_6.png', './static/images/cmp/ours/scannetpp_6.png')" class="cmp-button">e050c15a8d</button>
+        </div>
+        <div class="cmp-container" id="cmp2">
+            <div class="bottom">
+                <img src="./static/images/cmp/ours/scannetpp_1.png"/>
+            </div>
+            <div class="top">
+                <img src="./static/images/cmp/monosdf/scannetpp_1.png"/>
+            </div>
+            <div class="cmp-slider"></div>
+        </div>
+        
+      </div>
+
+      <!-- TnT -->
+      <div class="content">
+        <h2 class="title is-4">Tanks and Temples</h2>
+        <div class="button-container" id="btn3">
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_1.png', './static/images/cmp/ours/tnt_1.png')" class="cmp-button cmp-btn-checked">Courtroom</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_2.png', './static/images/cmp/ours/tnt_2.png')" class="cmp-button">Auditorium</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_3.png', './static/images/cmp/ours/tnt_3.png')" class="cmp-button">Museum</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_4.png', './static/images/cmp/ours/tnt_4.png')" class="cmp-button">Ballroom</button>
+        </div>
+        <div class="cmp-container" id="cmp3">
+            <div class="bottom">
+                <img src="./static/images/cmp/ours/tnt_1.png"/>
+            </div>
+            <div class="top">
+                <img src="./static/images/cmp/monosdf/tnt_1.png"/>
+            </div>
+            <div class="cmp-slider"></div>
+        </div>
+      </div>
+
+      <!-- TnT -->
+      <div class="content">
+        <h2 class="title is-4">T&T extracted at 2048 resolution</h2>
+        <p>
+          The mesh extracted at 2048 resolution on T&T demonstrates that our method significantly enhances the generation of small and complex structures.
+        </p>
+        <div class="button-container" id="btn4">
+          <button onclick="changeImages(event, 'cmp4', './static/images/cmp/tnt_normal/tnt2048_normal_1.png','./static/images/cmp/tnt_2048/tnt2048_1.png')" class="cmp-button cmp-btn-checked">Courtroom</button>
+          <button onclick="changeImages(event, 'cmp4', './static/images/cmp/tnt_normal/tnt2048_normal_2.png','./static/images/cmp/tnt_2048/tnt2048_2.png')" class="cmp-button">Auditorium</button>
+          <button onclick="changeImages(event, 'cmp4', './static/images/cmp/tnt_normal/tnt2048_normal_3.png','./static/images/cmp/tnt_2048/tnt2048_3.png')" class="cmp-button">Museum</button>
+          <button onclick="changeImages(event, 'cmp4', './static/images/cmp/tnt_normal/tnt2048_normal_4.png','./static/images/cmp/tnt_2048/tnt2048_4.png')" class="cmp-button">Ballroom</button>
+        </div>
+        <div class="cmp-container" id="cmp4">
+            <div class="bottom">
+                <img src="./static/images/cmp/tnt_2048/tnt2048_1.png"/>
+            </div>
+            <div class="top">
+                <img src="./static/images/cmp/tnt_normal/tnt2048_normal_1.png"/>
+            </div>
+            <div class="cmp-slider"></div>
+        </div>
+        <script src="./static/js/comparison.js"></script>
+      </div>
+    </div>
+
+
+
+    <!-- Concurrent Work. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{tang2024ndsdf,
+  author    = {Ziyu Tang and Weicai Ye and  Yifan Wang and  Di Huang and Hujun Bao and Tong He and  Guofeng Zhang},
+  title     = {ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction},
+  journal   = {arxiv preprint},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a> for their amazing template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

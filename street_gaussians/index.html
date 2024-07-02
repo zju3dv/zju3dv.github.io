@@ -16,62 +16,31 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Street Gaussians for Modeling Dynamic Urban Scenes" />
     <meta property="og:description" content="     
-    This paper aims to tackle the problem of modeling dynamic
-    urban street scenes from monocular videos. Recent
-    methods extend NeRF by incorporating tracked vehicle
-    poses to animate vehicles, enabling photo-realistic view
-    synthesis of dynamic urban street scenes. However, significant
-    limitations are their slow training and rendering speed,
-    coupled with the critical need for high precision in tracked
-    vehicle poses. We introduce Street Gaussians, a new explicit
-    scene representation that tackles all these limitations.
-    Specifically, the dynamic urban street is represented as a
-    set of point clouds equipped with semantic logits and 3D
-    Gaussians, each associated with either a foreground vehicle
-    or the background. To model the dynamics of foreground
-    object vehicles, each object point cloud is optimized with
-    optimizable tracked poses, along with a dynamic spherical
-    harmonics model for the dynamic appearance. The explicit
-    representation allows easy composition of object vehicles
-    and background, which in turn allows for scene editing
-    operations and rendering at 133 FPS (1066×1600 resolution)
-    within half an hour of training. The proposed method
-    is evaluated on multiple challenging benchmarks, 
-    including KITTI and Waymo Open datasets. Experiments show
-    that the proposed method consistently outperforms state-of-the-art methods across all datasets. 
-    Furthermore, the proposed representation delivers performance on par with
-    that achieved using precise ground-truth poses, despite relying only on poses from an off-the-shelf tracker. "
+    This paper aims to tackle the problem of modeling dynamic urban streets for autonomous driving scenes.
+    Recent methods extend NeRF by incorporating tracked vehicle poses to animate vehicles, enabling photo-realistic view synthesis of dynamic urban street scenes. 
+    However, significant limitations are their slow training and rendering speed.
+    We introduce Street Gaussians, a new explicit scene representation that tackles these limitations. 
+    Specifically, the dynamic urban scene is represented as a set of point clouds equipped with semantic logits and 3D Gaussians, each associated with either a foreground vehicle or the background. 
+    To model the dynamics of foreground object vehicles, each object point cloud is optimized with optimizable tracked poses, along with a 4D spherical harmonics model for the dynamic appearance. 
+    The explicit representation allows easy composition of object vehicles and background, which in turn allows for scene editing operations and rendering at 135 FPS (1066 * 1600 resolution) within half an hour of training. 
+    The proposed method is evaluated on multiple challenging benchmarks, including KITTI and Waymo Open datasets. Experiments show that the proposed method consistently outperforms state-of-the-art methods across all datasets."
     />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Street Gaussians for Modeling Dynamic Urban Scenes" />
     <meta name="twitter:description" content="     
-    This paper aims to tackle the problem of modeling dynamic
-    urban street scenes from monocular videos. Recent
-    methods extend NeRF by incorporating tracked vehicle
-    poses to animate vehicles, enabling photo-realistic view
-    synthesis of dynamic urban street scenes. However, significant
-    limitations are their slow training and rendering speed,
-    coupled with the critical need for high precision in tracked
-    vehicle poses. We introduce Street Gaussians, a new explicit
-    scene representation that tackles all these limitations.
-    Specifically, the dynamic urban street is represented as a
-    set of point clouds equipped with semantic logits and 3D
-    Gaussians, each associated with either a foreground vehicle
-    or the background. To model the dynamics of foreground
-    object vehicles, each object point cloud is optimized with
-    optimizable tracked poses, along with a dynamic spherical
-    harmonics model for the dynamic appearance. The explicit
-    representation allows easy composition of object vehicles
-    and background, which in turn allows for scene editing
-    operations and rendering at 133 FPS (1066×1600 resolution)
-    within half an hour of training. The proposed method
-    is evaluated on multiple challenging benchmarks, 
-    including KITTI and Waymo Open datasets. Experiments show
-    that the proposed method consistently outperforms state-of-the-art methods across all datasets. 
-    Furthermore, the proposed representation delivers performance on par with
-    that achieved using precise ground-truth poses, despite relying only on poses from an off-the-shelf tracker. "
+    This paper aims to tackle the problem of modeling dynamic urban streets for autonomous driving scenes.
+    Recent methods extend NeRF by incorporating tracked vehicle poses to animate vehicles, enabling photo-realistic view synthesis of dynamic urban street scenes. 
+    However, significant limitations are their slow training and rendering speed.
+    We introduce Street Gaussians, a new explicit scene representation that tackles these limitations. 
+    Specifically, the dynamic urban scene is represented as a set of point clouds equipped with semantic logits and 3D Gaussians, each associated with either a foreground vehicle or the background. 
+    To model the dynamics of foreground object vehicles, each object point cloud is optimized with optimizable tracked poses, along with a 4D spherical harmonics model for the dynamic appearance. 
+    The explicit representation allows easy composition of object vehicles and background, which in turn allows for scene editing operations and rendering at 135 FPS (1066 * 1600 resolution) within half an hour of training. 
+    The proposed method is evaluated on multiple challenging benchmarks, including KITTI and Waymo Open datasets. Experiments show that the proposed method consistently outperforms state-of-the-art methods across all datasets."
     />
+    <!-- <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;%E2%9C%A8&lt;/text&gt;&lt;/svg&gt;"> -->
+    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛐</text></svg>"> -->
+    <link rel="icon" href="./img/bot-driving-car.png">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -125,8 +94,12 @@
     <div class="container" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                Street Gaussians for Modeling Dynamic Urban Scenes
+                <b>Street Gaussians:</b> Modeling <br> Dynamic Urban Scenes with Gaussian Splatting </br>            
+            <small>
+                ECCV 2024
+            </small>
             </h2>
+
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
@@ -230,31 +203,14 @@
                     Abstract
                 </h3>
                 <p class="text-justify ">
-                    This paper aims to tackle the problem of modeling dynamic
-                    urban street scenes from monocular videos. Recent
-                    methods extend NeRF by incorporating tracked vehicle
-                    poses to animate vehicles, enabling photo-realistic view
-                    synthesis of dynamic urban street scenes. However, significant
-                    limitations are their slow training and rendering speed,
-                    coupled with the critical need for high precision in tracked
-                    vehicle poses. We introduce Street Gaussians, a new explicit
-                    scene representation that tackles all these limitations.
-                    Specifically, the dynamic urban street is represented as a
-                    set of point clouds equipped with semantic logits and 3D
-                    Gaussians, each associated with either a foreground vehicle
-                    or the background. To model the dynamics of foreground
-                    object vehicles, each object point cloud is optimized with
-                    optimizable tracked poses, along with a dynamic spherical
-                    harmonics model for the dynamic appearance. The explicit
-                    representation allows easy composition of object vehicles
-                    and background, which in turn allows for scene editing
-                    operations and rendering at 133 FPS (1066×1600 resolution)
-                    within half an hour of training. The proposed method
-                    is evaluated on multiple challenging benchmarks, 
-                    including KITTI and Waymo Open datasets. Experiments show
-                    that the proposed method consistently outperforms state-of-the-art methods across all datasets. 
-                    Furthermore, the proposed representation delivers performance on par with
-                    that achieved using precise ground-truth poses, despite relying only on poses from an off-the-shelf tracker.
+                    This paper aims to tackle the problem of modeling dynamic urban streets for autonomous driving scenes.
+                    Recent methods extend NeRF by incorporating tracked vehicle poses to animate vehicles, enabling photo-realistic view synthesis of dynamic urban street scenes. 
+                    However, significant limitations are their slow training and rendering speed.
+                    We introduce Street Gaussians, a new explicit scene representation that tackles these limitations. 
+                    Specifically, the dynamic urban scene is represented as a set of point clouds equipped with semantic logits and 3D Gaussians, each associated with either a foreground vehicle or the background. 
+                    To model the dynamics of foreground object vehicles, each object point cloud is optimized with optimizable tracked poses, along with a 4D spherical harmonics model for the dynamic appearance. 
+                    The explicit representation allows easy composition of object vehicles and background, which in turn allows for scene editing operations and rendering at 135 FPS (1066 * 1600 resolution) within half an hour of training. 
+                    The proposed method is evaluated on multiple challenging benchmarks, including KITTI and Waymo Open datasets. Experiments show that the proposed method consistently outperforms state-of-the-art methods across all datasets. 
                 </p>
             </div>
         </div>
@@ -479,10 +435,13 @@
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
                     <textarea id="bibtex" class="form-control" readonly>
-@article{yan2023streetgaussians,
-    title={Street Gaussians for Modeling Dynamic Urban Scenes},
-    author={Yan, Yunzhi and Lin, Haotong and Zhou, Chenxu and Wang, Weijie and Sun, Haiyang and Zhan, Kun and Lang, Xianpeng and Zhou, Xiaowei and Peng, Sida},
-    year={2023}
+@misc{yan2024street,
+    title={Street Gaussians for Modeling Dynamic Urban Scenes}, 
+    author={Yunzhi Yan and Haotong Lin and Chenxu Zhou and Weijie Wang and Haiyang Sun and Kun Zhan and Xianpeng Lang and Xiaowei Zhou and Sida Peng},
+    year={2024},
+    eprint={2401.01339},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
 }</textarea>
                 </div>
             </div>

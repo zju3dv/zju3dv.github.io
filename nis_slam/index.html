@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 不知道这里是干嘛的，还没改? -->
+  <meta name="description"
+        content="NeuMesh encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.">
+  <meta name="keywords" content="NeuMesh, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <!--这里是链接图表的icon-->
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/sun.png"/>
+
+  <title>Neural Implicit Semantic RGB-D SLAM for 3D Consistent Scene Understanding
+    </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <!-- <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/cp-slam">
+            CP-SLAM
+          </a>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-9 has-text-centered">
+          <img style="width: 200%; transform: translate(0%, 0%);" src="./static/images/NIS-SLAM.png" alt="NIS-SLAM"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          Neural Implicit Semantic RGB-D SLAM for 3D Consistent Scene Understanding
+        </h1>
+        <!-- * huanggan师兄的Github还没改 ? <br> -->
+        <h1 class="title is-size-3" style="color:#5a6268;">TVCG 2024 (ISMAR Journal Track)</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/zhaihongjia">Hongjia Zhai</a>,</div>
+          <div class="author-block">
+            <a href="https://github.com/huanggan52">Gan Huang</a>,</div>
+          <div class="author-block">
+            <a href="https://github.com/QiruiH">Qirui Hu</a>,</div>
+            <div class="author-block">
+            <a href="https://github.com/liguanglin">Guanglin Li</a>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block">State Key Lab of CAD & CG, Zhejiang University</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <!-- 目前这几个链接都没有，都没放 -->
+            <span class="link-block">
+                <a href="https://github.com/zju3dv"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming Soon)</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href="https://github.com/zju3dv"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming Soon)</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Coming Soon)</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/ybbbbt/open_access_assets/main/neumesh/hybrid_edit.mp4"
+                type="video/mp4">
+      </video> -->
+      <img style="width: 100%;" src="./static/images/teaser.jpg"
+             alt="NIS-SLAM architecture."/>
+      <!-- <h2 class="subtitle has-text-centered"> -->
+      <div class="content has-text-justified">
+        <p>
+        <i>NIS-SLAM</i>, a neural implicit semantic RGB-D SLAM system that incrementally reconstructs the environment with 3D
+        consistent scene understanding. As shown in the figure, taking continuous RGB-D frames and 2D noise segmentation results as input,
+        our system can reconstruct high-fidelity surface and geometry, learn 3D consistent semantic field and recover the objects in the scene.
+        </p>
+      </div>
+      <!-- </h2> -->
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fifth-sixths">
+        <h2 class="title is-3" style="color:#ff9c7b;">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In recent years, the paradigm of neural implicit representations has gained substantial attention in the field of Simultaneous Localization and Mapping (SLAM). However, a notable gap exists in the existing approaches when it comes to scene understanding. In this paper, we introduce NIS-SLAM, an efficient neural semantic RGB-D SLAM system, that leverages a pre-trained 2D segmentation network to learn consistent semantic representations. Specifically, we use high-frequency multi-resolution tetrahedron-based features and low-frequency positional encoding to perform scene reconstruction and understanding. The combination ensures both memory efficiency and spatial consistency. Besides, to address the inconsistency of 2D segmentation results from multiple views, we propose a fusion strategy that integrates the semantic probabilities from previous non-keyframes into keyframes to achieve consistent semantic learning. Furthermore, we implement a confidence-based pixel sampling and progressive optimization weight function for robust camera tracking. Extensive experimental results on various datasets show the better or more competitive performance of our system when compared to other existing neural dense implicit RGB-D SLAM approaches. Besides, we also show that our approach can be used in augmented reality applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2" style="color:#ff9c7b;">Supplemental Video</h2>
+          <video id="functions" autoplay controls muted loop playsinline weight="100%">
+            <source src="./static/videos/ismar24b-sub1174-i8.mp4"
+                    type="video/mp4">
+          </video>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+<!-- Framework Overview -->
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#ff9c7b;"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/slam_pipeline.png"
+             alt="NIS-SLAM Overview."/>
+      </div>
+      <p>
+        Our system takes RGB-D frames as input to perform camera tracking and mapping via volume rendering and models 3D semantics with the noise 2D segmentation results from Mask2Former. 
+Based on the hybrid implicit representation of multi-resolution tetrahedron feature $\theta$ and positional encoding $\texttt{PE}(p)$, we decode the SDF $\sigma$, latent feature $h$, color $c$, and semantic probability $s$ with three MLPs {$\mathcal{M}_{geo}$, $\mathcal{M}_{color}$, and $\mathcal{M}_{sem}$}.
+To model consistent semantic property, we fuse multi-view semantics of nearby non-keyframes for learning 3D consistent representation.
+        <!-- In a 3D Gaussian field constructed from an RGB-D sequence, we can render color, depth, opacity, and uncertainty maps through a GPU-accelerated rasterizer. Additionally, we attach a new uncertainty property to each Gaussian primitive to filter informative primitives. In the mapping process, we utilize multiple rendering results to design effective loss functions towards a consistent and stable Gaussian field. Subsequently, we employ apperance and geometry cues to perform accurate and efficient tracking. -->
+        <!-- We present a novel representation for neural rendering, which encodes neural implicit field on a mesh-based scaffold. Each mesh vertex possesses a geometry and texture code ${\boldsymbol{l}}^{g}, {\boldsymbol{l}}^{t}$, and a sign indicator $\textbf{n}$ for computing projected distance $h$.
+        For a query point $\boldsymbol{x}$ along a casted camera ray, we retrieve interpolated codes and signed distances from the nearby mesh vertices, and forward to the geometry and radiance decoder to obtain SDF value $s$ and color $\textbf{c}$. -->
+      </p>
+    </div>
+  </div>
+
+    <!-- <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#3e91d0;"><p>Tracking Accuracy Evaluation</p></h2>
+        
+        <img style="width: 70%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/tracking-accuracy-new.jpg"
+        alt="tracking-accuracy."/>
+        <p>
+        We report the localization accuracy of our proposed CG-SLAM across different datasets. In the synthetic Replica dataset, e surpass all other methods by a notable margin around
+        25%~75%. In the real-world TUM and ScanNet datasets, despite being affected by noisy and sparse depth information, our method can still achieve better or competitive performance, which further demonstrates its generalization and superiority.
+        </h2>
+      </div>
+      </div> -->
+
+    <!-- <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <h2 class="title is-3 has-text-centered"><p>Dense Reconstruction </p></h2>
+        <video id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="./video/office1-full.mp4"
+                  type="video/mp4">
+        </video>
+        <p>
+          Our representation support a series of editing functionalities, including a mesh-guided geometry editing, designated texture editing with texture swapping of two objects, texture filling with materials from pre-captured objects, and texture painting by transferring user-paints from 2D image to 3D field.
+        </p>
+      </div>
+      </div> -->
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#ff9c7b;"><p>Dense Reconstruction</p></h2>
+    <h3 class="title is-5 has-text-centered" style="color:#f55d26;"><p>Reconstruction Results on ScanNet</p></h3>
+      <div class="has-text-centered">
+        <!-- <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/office1-full.mp4"
+                  type="video/mp4">
+        </video> -->
+        <img style="width: 100%;" src="./static/images/scannet_mesh_tmp.png"
+             alt="Reconstruction Result."/>
+        <!-- <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/room1-full.mp4"
+                  type="video/mp4">
+        </video> -->
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong> Compared to the baselines, our method can reconstruct more accurate detailed geometry and
+        generate more complete, smoother mesh. 
+      </p>
+    
+      <h3 class="title is-5 has-text-centered" style="color:#f55d26;"><p>Object Reconstruction of Replica</p></h3>
+      <div class="has-text-centered">
+        <!-- <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/office1-full.mp4"
+                  type="video/mp4">
+        </video> -->
+        <img style="width: 100%;" src="./static/images/replica.png"
+             alt="Reconstruction Result."/>
+        <!-- <video style="width: 70%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/video/room1-full.mp4"
+                  type="video/mp4">
+        </video> -->
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong> We show some selected objects for comparison with vMAP.
+      </p>
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#ff9c7b;"><p>Semantic Segmentation</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/semantic.png"
+        alt="semantic segmentation."/>
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong>Semantic Segmentation Results on Replica. We show the multi-view segmentation results of different approaches. The top, middle,
+        and bottom parts show the segmentation results of Mask2Former, our approach without semantic fusion, and our approach with semantic
+        fusion respectively. Comparing the segmentation results from different views, we can see that our method can learn more consistent semantic
+        representation.
+      </h2>
+    </div>
+    </div>
+
+    <br/>
+
+    <!-- <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#ff9c7b;"><p>Rendering Evaluation</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/supp_rendering.jpg"
+        alt="rendering."/>
+      </div>
+      <p>
+        <strong><font size="4">Annotations:</font></strong> We show our rendering results on Replica scenes. We can observe that our rendered images closely resemble the ground truth ones, demonstrating that CG-SLAM is capable of achieving extremely photorealistic rendering performance.
+      </p> -->
+      <!-- <div class="has-text-centered">
+        <img style="width: 55%;" src="https://raw.githubusercontent.com/hjr37/open_access_assets/main/cg-slam/images/rendering.jpg"
+        alt="rendering."/>
+      </div> -->
+      <!-- <p>
+        CG-SLAM can yield more photorealistic rendering images than those of the existing NeRF-SLAM and concurrent Gaussian-based works.
+        We require fewer optimization iterations, than the most photorealistic NeRF-based Point-SLAM and concurrent methods, to achieve better rendering performance. Additionally, 
+        relying on the 3D Gaussian rasterization, our method can render at an extremely higher speed of 770 FPS in the test.
+      </p>
+      </h2>
+    </div>
+    </div> -->
+
+    <br/>
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2" style="color:#ff9c7b;">Supplemental Video</h2>
+          <video id="functions" autoplay controls muted loop playsinline weight="100%">
+            <source src="./static/videos/ismar24b-sub1174-i8.mp4"
+                    type="video/mp4">
+          </video>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+
+</section>
+
+<hr/>
+<!-- 引用还没有改? -->
+<!-- <section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{hu2024cg,
+    title={CG-SLAM: Efficient Dense RGB-D SLAM in a Consistent Uncertainty-aware 3D Gaussian Field},
+    author={Hu, Jiarui and Chen, Xianhao and Feng, Boyin and Li, Guanglin and Yang, Liangjing and Bao, Hujun and Zhang, Guofeng and Cui, Zhaopeng},
+    journal={arXiv preprint arXiv:2403.16095},
+    year={2024}
+}
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

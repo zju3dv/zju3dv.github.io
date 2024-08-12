@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="soon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DiffPano: Scalable and Consistent Text to Panorama
+    Generation with Spherical Epipolar-Aware Diffusion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/comparison.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- 导航bar -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Homepage
+        </a>
+        <div class="navbar-dropdown">
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/pgsr/">
+              PGSR
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://open3dvlab.github.io/NeuRodin/">
+              NeuRodin
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/intrinsic_nerf//">
+              IntrinsicNeRF
+            </a>
+          </ui>
+          <ui>
+            <a class="navbar-item" href="https://zju3dv.github.io/pvo/">
+              PVO
+            </a>
+          </ui>
+          
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- authors -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">DiffPano: Scalable and Consistent Text to Panorama
+            Generation with Spherical Epipolar-Aware Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ywcmaike.github.io/">Weicai Ye</a><sup>1,3*</sup></span>&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="">Chenhao Ji</a><sup>2*</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Zheng Chen</a><sup>4</sup></span>&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="">Junyao Gao</a><sup>2</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Xiaoshui Huang</a><sup>3</sup>&nbsp;&nbsp;
+            </span><br>
+            <span class="author-block">
+              <a href="">Song-Hai Zhang</a><sup>4</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Wanli Ouyang</a><sup>3</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Tong He</a><sup>3,&#9993;</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Cairong Zhao</a><sup>2,&#9993;</sup>&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="">Guofeng Zhang</a><sup>1,&#9993;</sup>&nbsp;&nbsp;
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>State Key Lab of CAD&CG, Zhejiang University</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Tongji University</span><br>
+            <span class="author-block"><sup>3</sup>Shanghai AI Laboratory</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>4</sup>Tsinghua Univerisity</span>
+            <br>
+            <span class="email-link">
+              <!-- <a href="mailto:maikeyeweicai@gmail.com">maikeyeweicai@gmail.com</a> -->
+              &nbsp;&nbsp;
+              <!-- <a href="mailto:tonghe90@gmail.com">tonghe90@gmail.com</a> -->
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zju3dv/DiffPano"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- teaser.png -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" height="100%" src="./static/images/teaser.png" alt="ND-SDF teaser."/>
+      <p>
+        <b>DiffPano allows scalable and consistent panorama generation (i.e. room switching) with given unseen text descriptions and camera poses.</b> 
+        Each column represents the generated multi-view panoramas, switching from one room to another.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 添加水平线 -->
+<hr>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion-based methods have achieved remarkable achievements in 2D image or 3D object generation. 
+            However, the generation of 3D scenes and even $360^{\circ}$ images remains constrained, due to the limited number of scene datasets, 
+            the complexity of 3D scenes themselves, and the difficulty of generating consistent multi-view images. 
+            To address these issues, we first establish a large-scale panoramic video-text dataset 
+            containing millions of consecutive panoramic keyframes with corresponding panoramic depths, 
+            camera poses, and text descriptions. Then, we propose a novel text-driven panoramic generation framework, termed DiffPano, 
+            to achieve scalable, consistent, and diverse panoramic scene generation. Specifically, 
+            benefiting from the powerful generative capabilities of stable diffusion, 
+            we fine-tune a single-view text-to-panorama diffusion model with LoRA on the established panoramic video-text dataset. 
+            We further design a spherical epipolar-aware multi-view diffusion model to ensure the multi-view consistency of the generated panoramic images. 
+            Extensive experiments demonstrate that DiffPano can generate scalable, consistent, and diverse panoramic images with given unseen text descriptions and camera poses.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <hr>
+    <!-- dataset. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Panoramic Video-Text Dataset Pipeline</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/dataset_pipeline.jpg"
+               class="framework-image"
+               alt="DiffPano dataset."/>
+          
+          <p>
+            <b>Panoramic Video Construction and  Caption Pipeline.</b> 
+            We utilize the Habitat Simulator to randomly select positions within the scenes of the Habitat Matterport 3D(HM3D) dataset 
+            and render cubic six-face maps. These maps are then interpolated and stitched together to form panoramas. 
+            We can obtain panoramas with clear tops and bottoms. 
+            To generate more precise text descriptions for the panoramas, we first use Blip2 to generate corresponding text descriptions for each of the obtained cube maps, 
+            and then employ LLM to summarize and obtain accurate and complete text descriptions. 
+            Furthermore, the Habitat Simulator allows us to render images based on camera trajectories within the HM3D scenes, 
+            enabling the creation of a dataset that simultaneously includes camera poses, panoramas, panoramic depths and their corresponding text descriptions.          
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Panoramic Video-Text Dataset</h2>
+        <div class="video-row-container">
+          <video controls src="./static/videos/dataset/00819-6D36GQHuP8H_0.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+          <video controls src="./static/videos/dataset/00899-58NLZxWBSpk_0.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+        </div>
+      </div> 
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparison of Dataset and Text description</h2>
+        
+          <img src="./static/images/dataset_comparisons.jpg"
+               class="dataset_comparisons"
+               alt="DiffPano dataset_comparisons."/>
+          
+        <p>
+          <b>Comparisons between PanFusion and Ours.
+          </b> PanFusion uses BLIP2 to directly generate text descriptions for panoramas, which only has <b>four or five words and is very concise</b>. 
+          The CLIP Score (CS) cannot reflect the accuracy of the text description, and the PanFusion dataset has the problem of <b>blurry top and bottom</b>. 
+          In contrast, our panoramic video dataset construction pipeline first generates text descriptions for perspective images using BLIP2, 
+          then uses LLM to summarize, which can obtain <b>more detailed text descriptions</b>. 
+          At the same time, <b>the top and bottom of our panoramas are clear, and the dataset is larger (millions of panoramic keyframes).</b>
+           We also provide the camera pose of each panorama, the corresponding panoramic depth map, etc. 
+        </p>
+      </div>
+    </div>
+    
+    <hr>
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/framework.png"
+               class="framework-image"
+               alt="ND-SDF overview."/>
+          
+          <p>
+            <b>DiffPano Framework.</b> 
+            The DiffPano framework consists of a single-view panoramic diffusion model and a multi-view diffusion model based on panoramic epipolar aware attention. 
+            It can support text-to-panorama or multi-view panoramas generation.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Text to Single-View Panorama</h2>
+        <h2 class="title is-4">Comparisons</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/text2pano.jpg"
+               class="framework-image"
+               alt="DiffPano comparison."/>
+          
+          <p>
+            <b>Text to Panorama Comparison between Ours vs PanFusion vs TextLight.</b> 
+            Compared with PanFusion, our method can generate panoramas with clear top and bottom, 
+            while the top and bottom of panfusion's generation are blurred. 
+            Compared with Text2Light, our method has better left-right consistency.
+          </p>
+        </div>
+        <h2 class="title is-4">Diversity</h2>
+        <div class="content has-text-justified">
+          <div class="video-row-container">
+            <video controls src="./static/videos/text2pano/Diversity/diversity0.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+            <video controls src="./static/videos/text2pano/Diversity/diversity1.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="video-row-container">
+            <video controls src="./static/videos/text2pano/Diversity/diversity2.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+            <video controls src="./static/videos/text2pano/Diversity/diversity7.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+          </div>
+          <p>
+            <b>Diversity of Text to Panorama Generation with Our Method.</b> 
+            Given the same text prompt like "A cozy living room with wooden floors and a couch", 
+            our method can generate diverse and consistent panoramas.
+            
+          </p>
+        </div>
+
+        <h2 class="title is-4">Generalizability</h2>
+        <div class="content has-text-justified">
+          <div class="video-row-container">
+            <video controls src="./static/videos/text2pano/Generalizability/generalizability1.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+            <video controls src="./static/videos/text2pano/Generalizability/generalizability4.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="video-row-container">
+            <video controls src="./static/videos/text2pano/Generalizability/generalizability6.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+            <video controls src="./static/videos/text2pano/Generalizability/generalizability8.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+          </div>
+          
+          <p>
+            <b>Generalizability of Text to Panorama Generation with Our Method.</b> Despite our method is only trained on indoor scene datasets, 
+            it can still generate outdoor panoramas scenes conditoned on text, which shows that our method has a certain degree of generalization. 
+            In the future, we can explore outdoor scene reconstruction to increase the diversity of training data and further improve the generalization of our method.
+            
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Text to Multi-View Panorama</h2>
+        <h2 class="title is-4">Comparisons</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/text2mvpano_comp.jpg"
+               class="framework-image"
+               alt="DiffPano mv comparison."/>
+          
+          <p>
+            <b>Text to Multi-View Panorama Comparison between Ours vs Modified MVDream.</b> 
+            Experiments show that DiffPano is easier to converge than MVDream and can generate more consistent multi-view panoramas.
+            "MVDream×2" denotes MVDream is trained with twice iteration number relative to DiffPano. 
+          </p>
+        </div>
+        <h2 class="title is-4">Qualitative Results</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/text2mvpano1.jpg"
+               class="framework-image"
+               alt="DiffPano mv comparison."/>
+          <img src="./static/images/text2mvpano2.jpg"
+               class="framework-image"
+               alt="DiffPano mv comparison."/>
+          <img src="./static/images/text2mvpano3.jpg"
+               class="framework-image"
+               alt="DiffPano mv comparison."/>
+          <p>
+            <b>Text to Multi-View Panorama of Our Method.</b> 
+            DiffPano allows scalable and consistent panorama generation (i.e. room switching) with given unseen text descriptions and camera poses. 
+            Each column represents the generated multi-view panoramas, switching from one room to another.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+<!-- Comparisons -->
+<section class="section">
+  <div class="container is-centered has-text-centered is-max-desktop">
+    <h2 class="title is-3" style="text-align: center;">Text to Panoramic Video Generation</h2>
+    <h2 class="title is-4">Scalability</h2>
+    <div class="video-row-container">
+      <video controls src="./static/videos/pano_video/video1.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+      <video controls src="./static/videos/pano_video/video2.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+    </div>
+    <div class="video-row-container">
+      <video controls src="./static/videos/pano_video/video3.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+      <video controls src="./static/videos/pano_video/video4.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+    </div>
+    <p>
+      <b>Text to Panoramic Video Generation of Our Method.</b> 
+      Our method can generate longer panoramic videos with image-based panorama generation which demonstrate scalability.
+      To generate panoramic videos, we can first generate multi-view panoramas of different rooms with large pose changes conditioned on the text, 
+      and then run the image-to-multi-view panorama generation conditioned on the generated multi-view panoramas, 
+      so that it can be expanded to generate longer panoramic videos.
+    </p>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{Ye2024DiffPano,
+          title={DiffPano: Scalable and Consistent Text to Panorama Generation with Spherical Epipolar-Aware Diffusion},
+          author={Weicai Ye and Chenhao Ji and Zheng Chen and Junyao Gao and Xiaoshui Huang and Song-Hai Zhang and Wanli Ouyang and Tong He and Cairong Zhao and Guofeng Zhang},
+          booktitle={arxiv preprint},
+          year={2024},
+      }
+      </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a> for their amazing template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

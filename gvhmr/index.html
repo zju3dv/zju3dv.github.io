@@ -713,13 +713,11 @@
       .catch(error => console.error('Error fetching video list:', error));
 
 
-    const videoAppContainer = document.getElementById('video-application-modules-container');
+    // Add RL demos
     fetch('video_lists.json')
       .then(response => response.json())
       .then(video_lists => {
-        // Manually create button (id+text); Assign each folder to a button
-        videoAppContainer.appendChild(createVideoModule('va_rl', 'Humanoid Robot Imitation Learning (Physics Simulation)', video_lists["app_humanoid"], { "ratioTemplate": "a4x3demo" }));
-        // videoAppContainer.appendChild(createVideoModule('va_aigc', 'AIGC (Animate Anyone)', video_lists["web_sports"]));
+        createVideoCarousel(video_lists["app_humanoid"], "video-application-modules-container", { "ratioTemplate": "a4x3demo" });
       })
       .catch(error => console.error('Error fetching video list:', error));
 

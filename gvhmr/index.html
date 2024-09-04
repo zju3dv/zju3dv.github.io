@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="GVHMR" name="title" />
+  <meta content="This paper recoveries world-grouned global human motion via Gravity-View coordinates."
+    name="description" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Zehong Shen" name="author" />
+  <title>GVHMR</title>
+  <!-- Bootstrap -->
+  <!-- <script src="js/video_comparison.js"></script> -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+  <!-- <link href="img/favicon.svg" rel="icon" sizes="any" type="image/svg+xml" /> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    body {
+      font-family: 'Jost';
+    }
+
+    b {
+      font-weight: black;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .col-12>h3 {
+      padding-top: 5px;
+    }
+
+    .results-section {
+      padding-bottom: 30px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-4 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .renbody-zoom-container {
+      width: 80%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+    }
+
+    .mobile-zoom-container {
+      width: 100%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+      margin: 5px
+    }
+
+    .video-zoom-container {
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      border-radius: 5px;
+      margin: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.);
+    }
+
+    .nhr-zoom {
+      transform: scale(1.45);
+    }
+
+    .renbody-zoom {
+      transform: scale(1.65) translateY(2%);
+      border-radius: 5px;
+    }
+
+    .mobile-zoom {
+      transform: scale(1.65);
+      border-radius: 5px;
+    }
+
+    .zjumocap-zoom {
+      transform: scale(1.3);
+    }
+
+    video {
+      border-radius: 5px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      padding: 0px;
+      margin: 0px;
+      border-radius: 5px;
+    }
+
+    .a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    .a4x3 {
+      aspect-ratio: 1352/1014;
+    }
+
+    .a1x1 {
+      aspect-ratio: 1;
+    }
+
+    .a16x9demo {
+      aspect-ratio: 3.05;
+    }
+
+    .a4x3demo {
+      aspect-ratio: 2.0;
+    }
+
+    .a1x1demo {
+      aspect-ratio: 1600/1672;
+    }
+  </style>
+  <script>
+
+
+
+  </script>
+  </link>
+</head>
+
+<body>
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b>
+                World-Grounded Human Motion Recovery via<br>
+                <span style="color: #78aa58">Gravity</span>-<span style="color: #6589bf">View</span> <span
+                  style="color: #c68b5b">Coordinates</span>
+                <!-- Gravity-View Coordinates -->
+              </b>
+            </h1>
+            <h4 style="color:#5a6268;">SIGGRAPH Asia 2024</h4>
+            <hr>
+            <a href="https://zehongs.github.io" target="_blank">Zehong Shen<sup>1*</sup> </a> 
+            <a href="https://phj128.github.io" target="_blank">Huaijin Pi<sup>1,2*</sup> </a> 
+            <a href="https://isshikihugh.github.io/scholar" target="_blank">Yan Xia<sup>1</sup> </a> 
+            <a href="https://scholar.google.com/citations?user=Xyy-uFMAAAAJ" target="_blank">Zhi Cen<sup>1</sup> </a> 
+            <a href="https://pengsida.net" target="_blank">Sida Peng<sup>1&dagger;</sup> </a> 
+            <a href="https://zju3dv.github.io/gvhmr" target="_blank">Zecen Hu<sup>3</sup> </a> 
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>1</sup> </a> 
+            <a href="https://csse.szu.edu.cn/staff/ruizhenhu" target="_blank">Ruizhen Hu<sup>4</sup> </a> 
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>1</sup>
+            </a>
+            <p>
+              <sup>1</sup>Zhejiang University   <sup>2</sup>The University of Hong Kong   <sup>3</sup>Deep
+              Glint   <sup>4</sup>Shenzhen University
+            </p>
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/xxxx.xxxxx" role="button"
+                    target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Paper</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/GVHMR" role="button"
+                    target="_blank">
+                    <i class="fa fa-github"></i>
+                    <b>Code</b>
+                  </a>
+                </p>
+              </div>
+              <!-- <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://www.youtube.com/watch?v=s8bzdZ63kx8" role="button" target="_blank">
+                    <i class="fa fa-file-video-o"></i>
+                    <b>Overview Video</b>
+                  </a>
+                </p>
+              </div> -->
+              <!-- <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/EasyVolcap" role="button" target="_blank">
+                    <i class="fa fa-github"></i>
+                    <b>EasyVolcap Framework</b>
+                  </a>
+                </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>TL;DR</h3>
+          <hr style="margin-top: 0px" />
+          <p class="text-left">
+            (1) This paper focuses on recovering world-grounded global human motion from monocular videos. 💃 <br>
+            (2) The key idea is predicting human pose in a novel <strong>
+              <!-- Gravity-View coordinates -->
+              <span style="color: #78aa58">Gravity</span>-<span style="color: #6589bf">View</span> <span
+                style="color: #c68b5b">Coordinates</span>
+            </strong>, which can be
+            <strong>naturally</strong> and <strong>uniquely</strong> inferred from each image using <strong>
+              <!-- gravity direction -->
+              <span style="color: #78aa58">gravity direction</span>
+              and
+              <span style="color: #6589bf">camera-view direction</span>.
+              <!-- camera-view direction -->
+            </strong>
+            Therefore, it helps alleviate error accumulation in estimating global motion for long videos. 💪<br>
+            (3) The model is trained on AMASS, BEDLAM, H36M, and 3DPW. <strong>All codes and weights are publicly
+              available.</strong> 🎉
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="BkgdVideos"></section>
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Overview Video</h3>
+          <hr style="margin-top: 0px" />
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="100%" height=640 style="border-radius: 10px;" src="https://www.youtube.com/embed/s8bzdZ63kx8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Abstract</h3>
+          <hr style="margin-top: 0px" />
+          <img src="img/teaser_v1.png" width="100%" />
+          <p style="font-size: small;">The proposed network, excluding preprocessing (2D tracking, feature
+            extraction, relative camera rotation estimation), takes 280 ms to process a 1430-frame (~45 seconds)
+            video on an RTX 4090 GPU.</p>
+          <p class="text-left">
+            We present a novel method for recovering world-grounded human motion from monocular video.
+            The main challenge of this problem stems from the ambiguity of defining the world coordinate system that
+            varies from sequence to sequence. Previous approaches attempt to alleviate this issue by predicting relative
+            motion between frames in an autoregressive manner, but being prone to accumulative errors.
+            Instead, we propose to solve this challenge by estimating human poses in a novel Gravity-View (GV)
+            coordinate system, which is defined by the world gravity and the camera view direction.
+            The proposed GV system is naturally gravity-aligned and uniquely defined for each video frame, largely
+            decreasing the ambiguity of learning image-pose mapping.
+            The estimated poses in the GV frame can be transformed back to a world coordinate system given camera
+            motions to form a global motion sequence.
+            Also, the per-frame estimation avoids the error accumulation in the autoregressive methods.
+            Experimental results on in-the-wild benchmarks demonstrate that our method can recover more realistic motion
+            in both the camera space and world-grounded settings, outperforming state-of-the-art methods in both
+            accuracy and speed. <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Method</h3>
+          <hr style="margin-top: 0px" />
+          <div style="display: flex; justify-content: center;">
+            <img src="img/method_gv.png" width="80%" />
+          </div>
+          <p>
+            <strong>GV Coordinates</strong>:
+            (1) Naturally considers gravity.
+            (2) Uniquely defined for each image.
+            (3) Avoids error accumulation along gravity direction for consecutive images.
+          </p>
+        </div>
+        <div class="col-12">
+          <div style="display: flex; justify-content: center;">
+            <img src="img/pipeline_v4_png.png" width="80%" />
+          </div>
+          <p>
+            <strong>Pipeline</strong>.
+            Given a monocular video (left), GVHMR preprocesses the video by tracking the human bounding box, detecting
+            2D keypoints, extracting image features, and estimating camera relative rotation using visual odometry (VO)
+            or a gyroscope.
+            GVHMR then fuses these features into per-frame tokens, which are processed with a relative transformer and
+            multitask MLPs.
+            The outputs include: (1) intermediate representations (middle), i.e. human orientation in the Gravity-View
+            coordinate system, root velocity in the SMPL coordinate system, and the stationary probability for
+            predefined joints; and (2) camera frame SMPL parameters (right-top).
+            Finally, the global trajectory (right-bottom) is recovered by transforming the intermediate representations
+            to the world coordinate system, as described in Sec. 3.1.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Training & Evaluation Metrics</h3>
+          <hr style="margin-top: 0px" />
+          <p><strong>Training</strong>:
+            GVHMR is trained on a mixed dataset consisting of AMASS, BEDLAM, H36M, and 3DPW.
+            The model is trained from scratch and converges after 420 epochs with a batch size of 256.
+            Training takes 13 hours on 2 RTX 4090 GPUs.
+          </p>
+          <p><strong>World-grounded Metrics</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/table1.png" width="80%" />
+          </div>
+          </p>
+          <p><strong>Camera-space Metrics</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/table2.png" width="70%" />
+          </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>More results</h3>
+          <hr style="margin-top: 0px" />
+        </div>
+      </div>
+    </div>
+    <!-- Auto Added in the script -->
+    <div id="video-modules-container"></div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Applications</h3>
+          <hr style="margin-top: 0px" />
+        </div>
+      </div>
+    </div>
+    <!-- Auto Added in the script -->
+    <div id="video-application-modules-container"></div>
+  </section>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        </br>
+        </br>
+        <h3>Citation</h3>
+        <hr style="margin-top: 0px" />
+        <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px">
+<code>@inproceedings{shen2024gvhmr,
+  title={World-Grounded Human Motion Recovery via Gravity-View Coordinates},
+  author={Shen, Zehong and Pi, Huaijin and Xia, Yan and Cen, Zhi and Peng, Sida and Hu, Zechen and Bao, Hujun and Hu, Ruizhen and Zhou, Xiaowei},
+  booktitle={SIGGRAPH Asia Conference Proceedings},
+  year={2024}
+}</code></pre>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom: 10px">
+    Thanks to
+    <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a>
+    for the website template.<br>
+    Thanks to the
+    <a href="https://zju3dv.github.io/4k4d/" target="_blank">4K4D project page</a>
+    for the useful add-ons.
+  </footer>
+
+  <!-- Default Statcounter code for 4K4D: Real-Time 4D View Synthesi http://zju3dv.github.io/4k4d -->
+  <!-- <script type="text/javascript">
+    var sc_project = 12931644;
+    var sc_invisible = 1;
+    var sc_security = '012c8c76';
+  </script>
+  <script async src="https://www.statcounter.com/counter/counter.js" type="text/javascript"></script>
+  <noscript>
+    <div class="statcounter">
+      <a href="https://statcounter.com/" target="_blank" title="Web Analytics
+  Made Easy - Statcounter"><img alt="Web Analytics Made Easy - Statcounter" class="statcounter"
+          referrerpolicy="no-referrer-when-downgrade" src="https://c.statcounter.com/12931644/0/012c8c76/1/" /></a>
+    </div>
+  </noscript> -->
+  <!-- End of Statcounter Code -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Math
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: "$$", right: "$$", display: true }
+        ]
+      });
+
+    });
+
+    // Add a carousel to the page
+    function createVideoCarousel(videos, targetId, options = {}) {
+      const section = document.getElementById(targetId);
+      if (!section) {
+        console.error(`Element with id '${targetId}' not found.`);
+        return;
+      }
+
+      const { controls = true, interval = 10000, ratioTemplate = "a16x9demo" } = options;
+
+      const container = document.createElement('div');
+      container.className = 'container';
+
+      const row = document.createElement('div');
+      row.className = 'row justify-content-center';
+
+      const col = document.createElement('div');
+      col.className = 'col-md-12 text-center';
+
+      const carousel = document.createElement('div');
+      carousel.className = 'carousel slide';
+      carousel.id = targetId + 'Carousel';
+      carousel.setAttribute('data-ride', 'carousel');
+      carousel.setAttribute('data-interval', interval);
+
+      const indicators = document.createElement('ol');
+      indicators.className = 'carousel-indicators';
+
+      const carouselInner = document.createElement('div');
+      carouselInner.className = 'carousel-inner';
+
+      videos.forEach((video, index) => {
+        const indicator = document.createElement('li');
+        indicator.setAttribute('data-target', `#${targetId}Carousel`);
+        indicator.setAttribute('data-slide-to', index.toString());
+        if (index === 0) indicator.className = 'active';
+        indicator.innerHTML = `<span class="indicator-dot"></span>`;
+        indicators.appendChild(indicator);
+
+        const carouselItem = document.createElement('div');
+        carouselItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+
+        const innerRow = document.createElement('div');
+        innerRow.className = 'row sm-gutters';
+
+        const innerCol = document.createElement('div');
+        innerCol.className = 'col-md-12';
+
+        const videoElement = document.createElement('video');
+        videoElement.className = ratioTemplate;
+        videoElement.setAttribute('width', '100%');
+        videoElement.setAttribute('autoplay', '');
+        // related issue: https://6a00999f-abaa-379e-ae7a-6c126b9833cb.kunlun-6swnhz2o-dotu.xyz/link/rfFXnT7NvfEtXoRp?list=shadowrocket
+        // videoElement.setAttribute('muted', '');
+        videoElement.muted = true;
+        videoElement.setAttribute('playsinline', '');
+        videoElement.setAttribute('loop', '');
+        if (controls) videoElement.setAttribute('controls', '');
+        videoElement.setAttribute('poster', video.poster || 'img/spinner.svg');
+
+        const source = document.createElement('source');
+        source.src = video.src;
+        source.type = 'video/mp4';
+        videoElement.appendChild(source);
+
+        innerCol.appendChild(videoElement);
+        innerRow.appendChild(innerCol);
+        carouselItem.appendChild(innerRow);
+        carouselInner.appendChild(carouselItem);
+      });
+
+      const prevControl = document.createElement('a');
+      prevControl.className = 'carousel-control-prev';
+      prevControl.setAttribute('href', `#${targetId}Carousel`);
+      prevControl.setAttribute('role', 'button');
+      prevControl.setAttribute('data-slide', 'prev');
+      const prevIcon = document.createElement('span');
+      prevIcon.className = 'carousel-control-prev-icon';
+      prevIcon.setAttribute('aria-hidden', 'true');
+      const prevText = document.createElement('span');
+      prevText.className = 'sr-only';
+      prevText.textContent = 'Previous';
+      prevControl.appendChild(prevIcon);
+      prevControl.appendChild(prevText);
+
+      const nextControl = document.createElement('a');
+      nextControl.className = 'carousel-control-next';
+      nextControl.setAttribute('href', `#${targetId}Carousel`);
+      nextControl.setAttribute('role', 'button');
+      nextControl.setAttribute('data-slide', 'next');
+      const nextIcon = document.createElement('span');
+      nextIcon.className = 'carousel-control-next-icon';
+      nextIcon.setAttribute('aria-hidden', 'true');
+      const nextText = document.createElement('span');
+      nextText.className = 'sr-only';
+      nextText.textContent = 'Next';
+      nextControl.appendChild(nextIcon);
+      nextControl.appendChild(nextText);
+
+      carousel.appendChild(indicators);
+      carousel.appendChild(carouselInner);
+      col.appendChild(carousel);
+      col.appendChild(prevControl);
+      col.appendChild(nextControl);
+      row.appendChild(col);
+      container.appendChild(row);
+      section.appendChild(container);
+
+    }
+
+    //
+    const bkgd_videos = [
+      { src: "video/federer1_3_incam_global_horiz.mp4" },
+      { src: "video/dance_kpop_iam_3_incam_global_horiz.mp4" },
+      { src: "video/beckham2_3_incam_global_horiz.mp4" },
+      { src: "video/skate_chy_1_3_incam_global_horiz.mp4" },
+      { src: "video/golden_standard_kun_1_3_incam_global_horiz.mp4" }
+    ];
+
+    createVideoCarousel(bkgd_videos, 'BkgdVideos', { controls: false, interval: 10000 });
+
+
+    ///////////////////////// More results /////////////////////
+    function createVideoModule(targetId, text, videos, options = {}) {
+      const container = document.createElement('div');
+      container.className = 'container';
+
+      const header = document.createElement('h5');
+      const button = document.createElement('button');
+      button.id = `${targetId}-button`;
+      button.className = 'btn btn-primary';
+      button.type = 'button';
+      button.textContent = text;
+
+      header.appendChild(button);
+      container.appendChild(header);
+
+      const section = document.createElement('section');
+      section.id = targetId;
+      container.appendChild(section);
+
+      // Add click event to the button
+      button.addEventListener('click', function () {
+        createVideoCarousel(videos, targetId, options);
+        this.disabled = true;
+      });
+
+      return container;
+    }
+
+    // Fetch the video lists JSON file, add to the page
+    const videoContainer = document.getElementById('video-modules-container');
+    fetch('video_lists.json')
+      .then(response => response.json())
+      .then(video_lists => {
+        // Manually create button (id+text); Assign each folder to a button
+        videoContainer.appendChild(createVideoModule('v_3dpw', 'Testset (3DPW)', video_lists["3dpw"]));
+        videoContainer.appendChild(createVideoModule('v_rich', 'Testset (RICH)', video_lists["rich"]));
+        videoContainer.appendChild(createVideoModule('v_emdb', 'Testset (EMDB)', video_lists["emdb"]));
+        videoContainer.appendChild(createVideoModule('v_w1', 'Web Videos (Mocap Actor)', video_lists["web_mocapactor"]));
+        videoContainer.appendChild(createVideoModule('v_w2', 'Web Videos (Dance)', video_lists["web_dance"]));
+        videoContainer.appendChild(createVideoModule('v_w3', 'Web Videos (Random)', video_lists["web_random"]));
+        videoContainer.appendChild(createVideoModule('v_w4', 'Web Videos (Sports)', video_lists["web_sports"]));
+      })
+      .catch(error => console.error('Error fetching video list:', error));
+
+
+    const videoAppContainer = document.getElementById('video-application-modules-container');
+    fetch('video_lists.json')
+      .then(response => response.json())
+      .then(video_lists => {
+        // Manually create button (id+text); Assign each folder to a button
+        videoAppContainer.appendChild(createVideoModule('va_rl', 'Humanoid Robot Imitation Learning (Physics Simulation)', video_lists["app_humanoid"], { "ratioTemplate": "a4x3demo" }));
+        // videoAppContainer.appendChild(createVideoModule('va_aigc', 'AIGC (Animate Anyone)', video_lists["web_sports"]));
+      })
+      .catch(error => console.error('Error fetching video list:', error));
+
+  </script>
+</body>
+
+</html>

@@ -40,13 +40,84 @@
           <h3>Introduction</h3>
             <hr style="margin-top:0px;">
             <p class="text-justify">
-            
+            <p>
+              This is a dataset for image target detection and tracking. We use the motion trackin device 'VICON' to record the groundtruth pose of camrera. And we collect 10 different types of motion data to evaluation the performance of algorithm of image target. We think it would benifit to the area of image target AR.
+            <br><br>
+            You can download our dataset from <a href="">here</a>.
+          </p>
           </p>
         </div>
       </div>
     </div>
   </section>
   <br>
+
+    <!--Format-->
+    <br>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h5 class="text-left" id="dior_format"><li>Devices Info</li></h5>
+            <hr style="margin-top:0px">
+            <p>
+              We use the phone of 'OPPO R17 Pro', with the resolution of 1280 x 960 and 30Hz rolling shutter camera.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!--Format-->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="dior_format"><li>Dataset format</li></h5>
+          <hr style="margin-top:0px">
+          <p>
+            The format of files are as follow:
+There are 10 types of data with different motions. Each is in a separate folder. 'MarkerImage' is the pattern image.
+          </p>
+<pre class="text-left">
+<code>
+|--MarkerImage                      |
+|   `-- 1.png                       |
+|                                   |
+|--Sequences                        | 
+|       |--1-static                 |
+|       |--2-fast-move              |
+|       |--3-scale                  | 
+|       |--4-large-rotation         |
+|       |--5-pure-rotatin           | 
+|       |--6-surrounding-mobile     |
+|       |--7-blur                   |
+|       |--8-distortion             |
+|       |--9-dynamic                |
+        `--10-illumination          |
+
+</code>
+</pre>
+<p>
+  The following is an example of test data, including image and IMU data and calibration parameters, as well as the groundtruth from the 'VICON'.
+</p>
+<pre class="text-left">
+<code>
+|--Sequence                        |
+|   |--annotation.csv              |
+|   |--camera.yaml                 |
+|   |--data.csv                    |
+|   |--vicon.csv                   |
+|   |--imu                         |
+|   |--images                      |
+    `--MarkerID
+
+</code>
+</pre>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 

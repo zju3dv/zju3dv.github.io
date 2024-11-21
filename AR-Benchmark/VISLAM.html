@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="3DR Dataset"/>
+    <title>ZJU 3DR Dataset</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 style="font-size:30px;">ZJU VISLAM Dataset</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <br>
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Introduction</h3>
+            <hr style="margin-top:10px;">
+            <p class="text-justify">
+              We provide a visual-inertial dataset as well as a series of evaluation criteria for AR.
+              <br><br>
+              Download from: OneDrive or <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/ISMAR2019-SLAM-Challenge/train/">Lab Server</a>.</li>
+            </p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <br>
+
+   <!-- GroundTruth -->
+   <br>
+   <section>
+     <div class="container">
+       <div class="row">
+         <div class="col-12">
+           <h3>Groundtruth</h3>
+             <hr style="margin-top:0px;">
+             <p class="text-justify">
+              Ground truth data is obtained from a VICON motion capture system. 
+              It provides 6D pose measurements of the phone at 400Hz. 
+              The body frame of the phone is determined from a set of special markers. 
+              The phone is rigidly attached to a marker object for VICON localization.
+             </p>
+             <div class="col-12 text-center">
+             <img class="image center max-width-400 add-top-margin-small" src="images/VISLAM/device_setup.png">
+            </div>
+          </div>
+       </div>
+     </div>
+   </section>
+   <br>
+
+  <!-- Mobile 3d reconstruction -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <h3>Dataset Preview</h3>
+            <hr style="margin-top:0px">
+            <p>
+              Video source from YouTube:
+            </p>
+            <div class="col-12 text-center">
+              <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="640" height="480" src="https://www.youtube.com/embed/VJcJwIYVo4A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            </div>
+            <div class="table center add-top-margin-small">
+              <table class="table">
+                <thead>
+                  <tr class="bg-color-gray">
+                    <th>Device</th>
+                    <th>Sequence</th>
+                    <th>Motion</th>
+                    <th>Scene</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+              <tr>
+                  <td rowspan="8">Xiaomi MI8 </td>
+                  <td>A0</td>
+                  <td>inspect+patrol</td>
+                  <td>floor</td>
+                  <td>Walking and looking around the glossy floor.</td>
+              </tr>
+              <tr>
+                  <td>A1</td>
+                  <td>inspect+patrol</td>
+                  <td>clean</td>
+                  <td>Walking around some texture-less areas.</td>
+              </tr>
+              <tr>
+                  <td>A2</td>
+                  <td>inspect+patrol</td>
+                  <td>mess</td>
+                  <td>Walking around some random objects.</td>
+              </tr>
+              <tr>
+                  <td>A3</td>
+                  <td>aiming+inspect</td>
+                  <td>mess+floor</td>
+                  <td>Random objects first, and then glossy floor.</td>
+              </tr>
+              <tr>
+                  <td>A4</td>
+                  <td>aiming+inspect</td>
+                  <td>desktop+clean</td>
+                  <td>From a small scene to a texture-less area.</td>
+              </tr>
+              <tr>
+                  <td>A5</td>
+                  <td>wave+inspect</td>
+                  <td>desktop+mess</td>
+                  <td>From a small scene to a texture-rich area.</td>
+              </tr>
+              <tr>
+                  <td>A6</td>
+                  <td>hold+inspect</td>
+                  <td>desktop</td>
+                  <td>Looking at a small desktop scene.</td>
+              </tr>
+              <tr>
+                  <td>A7</td>
+                  <td>inspect+aiming</td>
+                  <td>desktop</td>
+                  <td>Looking at a small desktop scene.</td>
+              </tr>
+              <tr>
+                  <td rowspan="9"> iPhone X </td>
+                  <td>B0</td>
+                  <td>rapid-rotation</td>
+                  <td>desktop</td>
+                  <td>Rotating the phone rapidly at some time.</td>
+              </tr>
+              <tr>
+                  <td>B1</td>
+                  <td>rapid-translation</td>
+                  <td>desktop</td>
+                  <td>Moving the phone rapidly at some time.</td>
+              </tr>
+              <tr>
+                  <td>B2</td>
+                  <td>rapid-shaking</td>
+                  <td>desktop</td>
+                  <td>Shaking the phone violently at some time.</td>
+              </tr>
+              <tr>
+                  <td>B3</td>
+                  <td>inspect</td>
+                  <td>moving people</td>
+                  <td>A person walks in and out.</td>
+              </tr>
+              <tr>
+                  <td>B4</td>
+                  <td>inspect</td>
+                  <td>covering camera</td>
+                  <td>An object occasionally occluding the camera.</td>
+              </tr>
+              <tr>
+                  <td>B5</td>
+                  <td>inspect</td>
+                  <td>desktop</td>
+                  <td>Similar to A6 but with black frames.</td>
+              </tr>
+              <tr>
+                  <td>B6</td>
+                  <td>inspect</td>
+                  <td>desktop</td>
+                  <td>Similar to A6 but with black frames.</td>
+              </tr>
+              <tr>
+                  <td>B7</td>
+                  <td>inspect</td>
+                  <td>desktop</td>
+                  <td>Similar to A6 but with black frames.</td>
+              </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+  <!--Format-->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="dior_format"><li>Dataset format</li></h5>
+          <hr style="margin-top:0px">
+          <p>
+            Each sequence would provide several &lsquo;sensors&rsquo; along with their &ensp;<code>sensor.yaml</code>&ensp; file that specifies sensor type, intrinsic and extrinsic parameters. 
+            The sensor measurements(or measurement indices, for camera) is stored in &ensp;<code>data.csv</code>&ensp;. 
+            In our case, both camera and IMU data would be provided. 
+            The vicon and groundtruth is also treated like a &lsquo;sensor&rsquo;.
+          </p>
+<pre class="text-left">
+<code>
+Example sequence: A01
+
+A01
+|--camera                         |
+|   |--sensor.yaml                |
+|   |--data.csv                   |
+|   |--data                       |
+|       |--771812250517066.png    |
+|       |--771812283849357.png    |
+|       `--...                    | 
+|                                 |
+|--imu                            | 
+|   |--sensor.yaml                |
+|   `--data.csv                   |
+|                                 |
+|--vicon                          |
+|   |--sensor.yaml                |
+|   `--data.csv                   |
+|                                 |
+`--groundtruth                    |
+    |--sensor.yaml                |
+    `--data.csv                   
+</code>
+</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="3DR Dataset"/>
+    <title>ZJU 3DR Dataset</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 style="font-size:30px;">ZJU 3DR Dataset</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Introduction</h3>
+            <hr style="margin-top:0px;">
+            <p class="text-justify">
+            We introduce a new dataset of 3D reconstruction, including the monocular data and large-scale city data captured by mobile device and drone respectively.
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Mobile 3d reconstruction -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <h3>Mobile 3D Reconstruction</h3>
+            <hr style="margin-top:0px">
+            <p>
+              The mobile 3d reconstruction dataset includes the cases of <a href='#scenes'>Scenes</a> and <a href='#objects'>Objects</a> captured by middle-range mobile phones.
+              All the mobile data cases follow <a href='#dior_format'>dior format</a>. For each case, we also provide a <a href='#gt_mobile_scenes'>texture model</a> generated 
+              by SenseAtlas platform as reference ground-truth (GT).
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  
+  <!-- Scenes -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5 class="text-left" id="scenes"><li>Scenes</li></h5>
+          <hr style="margin-top:0px">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <img class="img-fluid" src="images/3DR/Office_sofa.png">
+          <p class="text-center" style="margin-top:10px;font-size:15px">
+            Sofa1
+            <br>
+            Source: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/sofa1.zip" target="_blank">sofa1.zip</a>
+            <br>
+            GT model: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/model_sofa1.zip" target="_blank">model_sofa1.zip</a>
+            <br>
+            GT CAD: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/cad_sofa1.obj" target="_blank">cad_sofa1.obj</a>
+          </p>
+        </div>
+        <div class="col text-center">
+          <img class="img-fluid" src="images/3DR/B5_sofa.png">
+          <p class="text-center" style="margin-top:10px;font-size:15px">
+            Sofa2:
+            <br>
+            Source: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/sofa2.zip" target="_blank">sofa2.zip</a>
+            <br>
+            GT model: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/model_sofa2.zip" target="_blank">model_sofa2.zip</a>
+            <br>
+            GT CAD: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/cad_sofa2.obj" target="_blank">cad_sofa2.obj</a>
+          </p>
+        </div>
+        <div class="col text-center">
+          <img class="img-fluid" src="images/3DR/B5_outdoor.png">
+          <p class="text-center" style="margin-top:10px;font-size:15px">
+            Outdoor steps:
+            <br>
+            Source: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/outdoor_steps.zip" target="_blank">outdoor_steps.zip</a>
+            <br>
+            GT model: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/model_outdoor_steps.zip" target="_blank">model_outdoor_steps.zip</a>
+            <br>
+            GT CAD: <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/3DR_Dataset/Mobile3DReconstruction/Scenes/cad_outdoor-steps.obj" target="_blank">cad_outdoor-steps.obj</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <!-- scenes showcase -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe width="640" height="480" src="https://sketchfab.com/playlists/embed?collection=547e902212d94a819c42e1a4e9377bef&autostart=1"
+                  title="3DRMobileScenes"
+                  frameborder="0"
+                  allowfullscreen
+                  mozallowfullscreen="true"
+                  webkitallowfullscreen="true"
+                  allow="autoplay; fullscreen; xr-spatial-tracking"
+                  xr-spatial-tracking
+                  execution-while-out-of-viewport
+                  execution-while-not-rendered
+                  web-share
+                  id="gt_mobile_scenes"
+              ></iframe>          
+            </div>
+            <p class="text-center" style="margin-top:20px">
+              The texture models of <a href='#scenes'>Scenes dataset</a> reconstructed by SenseAtlas platform as GT. 
+            </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!--Objects-->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="objects"><li>Objects</li></h5>
+          <hr style="margin-top:0px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Format-->
+  <br><br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="dior_format"><li>Dior format</li></h5>
+          <hr style="margin-top:0px">
+          <p>
+            Each sequence would provide the gray image data and sensor data as follows:
+          </p>
+<pre class="text-left">
+<code>
+Example sequence: sofa1.zip
+
+|--attitude                       |
+|   |--sensor.yaml                |
+|   |--data.csv                   | >> the aligned gravity and rotation vectors, where the rotation vectors are interpolated according to the timestamp of gravity 
+|   |--raw_gravity.csv            | >> the raw gravity data
+|   |--raw_rotation_vector.csv    | >> the raw rotation data
+|   |--game_rotation_vector.csv   | >> the raw game rotation data
+|                                 |
+|--camera                         |
+|   |--sensor.yaml                | >> the camera parameters and device information
+|   |--data.csv                   |
+|   |--data_sequence.csv          |
+|   |--exposure_time.csv          |
+|   |--rolling_shutter.csv        | 
+|   |--images                     |
+|       |--9029325486000.png      |
+|       |--9029359099000.png      |
+|       `--...                    | 
+|                                 |
+|--imu                            | 
+|   |--sensor.yaml                |
+|   |--data.csv                   | >> the aligned acceleration and gyroscop data, where the gyroscope data is interpolated according to the timestamp of acceleration
+|   |--raw_acceleration.csv       | >> the raw acceleration data
+|   |--raw_gyroscope.csv          | >> the raw gyroscope data
+|                                 |
+|--position                       |
+|   |--sensor.yaml                |
+|   |--magnetic_field.csv         |
+|   |--pressure.csv               |
+</code>
+</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Large-scale 3D Reconstruction -->
+  <br><br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <h3>Large-scale 3D Reconstruction</h3>
+            <hr style="margin-top:0px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "/videos/web-scene2.m4v");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

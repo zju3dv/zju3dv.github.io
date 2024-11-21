@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="3DR Dataset"/>
+    <title>ZJU 3DR Dataset</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: #fdfcf9 no-repeat fixed top left;
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 style="font-size:30px;">ZJU LSFB Dataset</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Introduction</h3>
+            <hr style="margin-top:0px;">
+            <p class="text-justify">
+            We propose LSFB, a novel low-cost and scalable framework to build localization benchmark in large-scale indoor and outdoor environments.
+            <br><br>
+            Download from: <a href="https://pan.baidu.com/s/1W1KluP2V77j5HAQwblh0vQ?pwd=n985">Baidu Yunpan</a>.</li>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- Video -->
+    <br>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3>Video</h3>
+              <hr style="margin-top:0px;">
+              
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+
+  <!--Format-->
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="dior_format"><li>Dataset format</li></h5>
+          <hr style="margin-top:0px">
+          <p>
+            Various types of environments in the dataset:
+          </p>
+          <div class="col-12">
+          <img class="image" src="images/LSFB/motions.png">
+          </div>
+          <p>
+            Various types of motions in the dataset:
+          </p>
+          <div class="col-12">
+          <img class="image" src="images/LSFB/environments.png">
+          </div>
+          <p>
+            The format for Android phone / iPhone is:
+          </p>
+          <pre class="text-left">
+          <code>
+          eg: data/Android phone/A0/android.tar.gz
+
+          A0
+          |--camera                               |
+          |   |--sensor.yaml                      |
+          |   |--data.csv                         |
+          |   |--images                           |
+          |       |--17896609415000.png           |
+          |       |--17896643028000.png           |
+          |       `--...                          | 
+          |                                       |
+          |--imu                                  |
+          |   |--sensor.yaml                      |
+          |   `--data.csv                         |
+          |                                       |
+          |--attitude                             |
+          |   |--sensor.yaml                      |
+          |   `--data.csv                         |
+          |                                       |
+          `--sensor                               |
+              |--bluetooth.csv                    |
+              |--mf.csv                           |
+              |--gps.csv                          |
+              `--...                 
+          </code>
+          </pre>
+
+          <p>
+            The format for AR glasses is:
+          </p>
+          <pre class="text-left">
+          <code>
+          eg: data/AR glasses/A0/glass.tar.gz
+
+          A0
+          |--cam0                                 |
+          |   |--sensor.yaml                      |
+          |   |--data.csv                         |
+          |   |--data                             |
+          |       |--00000001709367764079.png     |
+          |       |--00000001709401349068.png     |
+          |       `--...                          | 
+          |                                       |
+          |--cam1                                 |
+          |   |--sensor.yaml                      |
+          |   |--data.csv                         |
+          |   |--data                             |
+          |       |--00000001709367764079.png     |
+          |       |--00000001709401349068.png     |
+          |       `--...                          | 
+          |                                       |
+          `--imu0                                 | 
+              |--sensor.yaml                      |
+              `--data.csv                                  
+          </code>
+          </pre>
+
+          <p>
+            The format for GT is:
+          </p>
+          <pre class="text-left">
+          <code>
+          eg: groundturth/Android phone/A0/
+
+          A0
+          `--groundturth                          | 
+              `--data.csv                              
+          </code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+
+  <script type="text/javascript">
+    function changePlaybackSpeed(speed)
+        {
+            document.getElementById('inspect_vid').playbackRate = speed;
+        }
+        // changePlaybackSpeed(0.25)
+
+    var demo = document.getElementById("header_vid");
+    var startTime;
+    var timeout = undefined;
+    demo.addEventListener("loadstart", function() {
+      startTime = Date.now();
+      timeout = setTimeout(function () {
+        var demoWarning = document.getElementById("demo-warning");
+        var giteeLink = document.createElement("a");
+        giteeLink.innerText = "mirror hosted in mainland China";
+        giteeLink.href = "https://project-pages-1255496016.cos-website.ap-shanghai.myqcloud.com/neuralrecon/";
+        // var bilibiliLink = document.createElement("a");
+        // var youtubeLink = document.createElement("a");
+        // bilibiliLink.innerText = "BiliBili";
+        // bilibiliLink.href = "";
+        // youtubeLink.innerText = "YouTube";
+        // youtubeLink.href = "";
+
+        demoWarning.append("Loading the videos took too long, you can optionally visit this site in the ", giteeLink, ".");
+        // demoWarning.append("Loading the video took too long, you can optionally watch it on Bilibili", bilibiliLink, " or YouTube", youtubeLink, ".");
+        clearTimeout(timeout);
+        timeout = undefined;
+      }, 6000);
+    });
+    demo.addEventListener("loadeddata", function() {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = undefined;
+      }
+    });
+//     var source = document.createElement("source");
+//     source.setAttribute("src", "/videos/web-scene2.m4v");
+//     source.setAttribute("type", "video/webm");
+//     demo.appendChild(source);
+  </script>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>

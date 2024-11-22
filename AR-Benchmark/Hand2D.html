@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="3DR Dataset"/>
-    <title>ZJU 3DR Dataset</title>
+    <meta name="description" content="Hand2D Dataset"/>
+    <title>ZJU Hand2D Dataset</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
@@ -24,7 +24,7 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <h1 style="font-size:30px;">ZJU 2D Hand Dataset</h1>
+            <h1 style="font-size:30px;">ZJU Hand2D Dataset</h1>
           </div>
         </div>
       </div>
@@ -40,7 +40,9 @@
           <h3>Introduction</h3>
             <hr style="margin-top:0px;">
             <p class="text-justify">
-            
+            We introduce a new dataset for testing hand keypoints detection, including different postures of the left and right hands.
+            <br><br>
+            You can download our dataset from <a href="http://www.cad.zju.edu.cn/home/gfzhang/dataset/AR_Benchmark/Hand2D.zip">here</a>.
           </p>
         </div>
       </div>
@@ -48,6 +50,59 @@
   </section>
   <br>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>examples</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <img src="./images/Hand2D/example.png" alt="examples" width="600" />
+</div>
+</body>
+
+  <!--Format-->
+  <br><br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-left" id="dior_format"><li>Dior format</li></h5>
+          <hr style="margin-top:0px">
+          <p>
+            The dataset was collected using binocular cameras, with folders 0 and 1 representing the data corresponding to each camera. The "_left" and "_right" suffixes represent the left and right hands, and the ground truths of each image are saved in a JSON file with the same subdirectories and name:
+          </p>
+<pre class="text-left">
+<code>
+Example
+
+|--images                       
+|   |--0                
+|   |   |--xxxxxx_left.png
+|   |   |--xxxxxx_right.png
+|   |   |--......
+|   |--1
+|   |   |--......
+|                               
+|--annots                         
+|   |--0                
+|   |   |--xxxxxx_left.json
+|   |   |--xxxxxx_right.json
+|   |   |--......
+|   |--1
+|   |   |--......
+
+</code>
+</pre>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <footer class="text-center" style="margin-bottom:10px; font-size: medium;">

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta name="description" content="">
+
+<meta name="keywords" content="StreetCrafter, Street View Synthesis">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+<title>StreetCrafter: Street View Synthesis with Controllable Video Diffusion Models</title>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+<link rel="stylesheet" href="./static/css/bulma.min.css">
+
+<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+
+<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+
+<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link rel="stylesheet" href="./static/css/index.css">
+
+<!-- <link rel="icon" href="./static/images/lidar_icon.webp"> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+
+<script defer src="./static/js/fontawesome.all.min.js"></script>
+
+<script src="./static/js/bulma-carousel.min.js"></script>
+
+<script src="./static/js/bulma-slider.min.js"></script>
+
+<script src="./static/js/index.js"></script>
+
+<script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+
+<div class="navbar-brand">
+
+<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+
+<span aria-hidden="true"></span>
+
+<span aria-hidden="true"></span>
+
+<span aria-hidden="true"></span>
+
+</a>
+
+</div>
+
+<div class="navbar-menu">
+
+<div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+<a class="navbar-item" href="https://github.com/yunzhiy">
+
+<span class="icon">
+
+<i class="fas fa-home"></i>
+
+</span>
+
+</a>
+
+<div class="navbar-item has-dropdown is-hoverable">
+
+<a class="navbar-link">
+
+More Research
+
+</a>
+
+<div class="navbar-dropdown">
+
+<a class="navbar-item" href="https://zju3dv.github.io/street_gaussians/">
+
+Street Gaussians
+
+</a>
+
+<a class="navbar-item" href="https://zju3dv.github.io/4k4d/">
+
+4K4D
+
+</a>
+
+<a class="navbar-item" href="https://haian-jin.github.io/projects/LVSM/">
+
+LVSM
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-body">
+
+<div class="container is-max-desktop">
+
+<div class="columns is-centered">
+
+<div class="column has-text-centered">
+
+<h1 class="title is-1 publication-title">
+
+<span class="dnerf">StreetCrafter: Street View Synthesis  <br /> with Controllable Video Diffusion Models</span>
+
+</h1>
+
+<div class="is-size-5 publication-authors">
+
+<span class="author-block">
+
+<a href="https://github.com/yunzhiy">Yunzhi Yan</a><sup>1,2</sup>*,</span>
+
+<span class="author-block">
+
+<a href="https://zhenx.me/">Zhen Xu</a><sup>1</sup>*,</span>
+
+<span class="author-block">
+
+<a href="https://haotongl.github.io/">Haotong Lin</a><sup>1</sup>,</span>
+
+<span class="author-block">
+
+<a href="https://haian-jin.github.io/">Haian Jin</a><sup>3</sup>,</span>
+
+<span class="author-block">
+
+<a href="https://github.com/ghy0324">Haoyu Guo</a><sup>1</sup>,</span>
+
+<br>
+
+<span class="author-block">
+
+<a href="https://wangyida.github.io/">Yida Wang</a><sup>3</sup>,</span>
+
+<span class="author-block">
+
+<a href="https://scholar.google.com/citations?user=1J061HIAAAAJ&hl=zh-CN&oi=sra">Kun Zhan</a><sup>2</sup>,</span>
+
+<span class="author-block">
+
+<a href="">Xianpeng Lang</a><sup>2</sup>,</span>
+
+<span class="author-block">
+
+<a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,</span>
+
+<span class="author-block">
+
+<a href="https://www.xzhou.me/">Xiaowei Zhou</a><sup>1</sup>,</span>
+
+<span class="author-block">
+
+<a href="https://pengsida.net/">Sida Peng</a><sup>1</sup>
+
+</div>
+
+<div class="is-size-5 publication-authors">
+
+<span class="author-block"><sup>1</sup>Zhejiang University &nbsp&nbsp</span>
+
+<span class="author-block"><sup>2</sup>Li Auto &nbsp&nbsp</span>
+
+<span class="author-block"><sup>3</sup>Cornell University &nbsp&nbsp</span>
+
+<br>
+
+* denotes equal contribution
+
+<p><br></p>
+
+<div class="column has-text-centered">
+
+<div class="publication-links">
+
+<span class="link-block">
+
+<a href="https://arxiv.org/abs/2403.14621" class="external-link button is-normal is-rounded is-dark">
+
+<span class="icon">
+
+<i class="ai ai-arxiv"></i>
+
+</span>
+
+<span>Paper</span>
+
+</a>
+
+</span>
+
+<!-- Video Link.
+
+<span class="link-block">
+
+<a href="" class="external-link button is-normal is-rounded is-dark">
+
+<span class="icon">
+
+<i class="fab fa-youtube"></i>
+
+</span>
+
+<span>Demo Video</span>
+
+</a>
+
+</span>
+
+<span class="link-block">
+
+<a href="https://huggingface.co/spaces/GRM-demo/GRM" target="_blank"
+
+class="external-link button is-normal is-rounded is-dark">
+
+<span class="icon" style="margin-bottom: 0.35em">&#129303;</span>
+
+<span>HF Demo</span>
+
+</a>
+
+</span> -->
+
+<!-- Code Link. -->
+
+<span class="link-block">
+
+<a href="https://github.com/zju3dv/street_crafter"
+
+class="external-link button is-normal is-rounded is-dark">
+
+<span class="icon">
+
+<i class="fab fa-github"></i>
+
+</span>
+
+<span>Code</span>
+
+</a>
+
+</span>
+
+<span class="link-block">
+
+<a href="./#BibTeX" class="external-link button is-normal is-rounded is-dark">
+
+<span class="icon">
+
+<i class="fa fa-quote-left"></i>
+
+</span>
+
+<span>Cite</span>
+
+</a>
+
+<span>
+
+</div>
+
+</div>
+
+<!-- <span class="author-block"> -->
+
+<!-- <hr style="width:100%;height:0.7px;background-color:rgba(0, 0, 0, 0.665);margin-top:1em"> -->
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="hero teaser">
+
+<div class="container is-max-desktop">
+
+<div class="hero-body">
+
+<h1 class="subsubtitle has-text-centered"> </h1>
+
+<div class="columns is-1 is-multiline is-mobile">
+
+<div class="column pb-0 mb-0 is-full">
+
+<img src="static/images/teaser.png" width="100%" >
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="container is-max-desktop">
+
+<!-- Abstract. -->
+
+<div class="columns is-centered has-text-centered">
+
+<div class="column is-four-fifths">
+
+<h2 class="title is-3">Abstract</h2>
+
+<div class="content has-text-justified">
+
+<p>
+
+This paper aims to tackle the problem of photorealistic view synthesis from vehicle sensors data.
+
+Recent advancements in neural scene representation have achieved notable success in rendering high-quality autonomous driving scenes, but the performance significantly degrades as the viewpoint deviates from the training trajectory.
+
+To mitigate this problem, we introduce <strong>StreetCrafter</strong>, a novel controllable video diffusion model that utilizes LiDAR point cloud renderings as pixel-level conditions, which fully exploits the generative prior for novel view synthesis, while preserving precise camera control. Moreover, the utilization of pixel-level LiDAR condition allows us to make accurate pixel-level edits to target scenes.
+
+In addition, the generative prior of <strong>StreetCrafter</strong> can be effectively incorporated into dynamic scene representations to achieve real-time rendering.
+
+Experiments on Waymo Open and Pandaset datasets demonstrate that our model enables flexible control over viewpoint changes, enlarging the view synthesis regions for satisfying rendering, which outperforms existing methods.
+
+<br><br>
+
+</p>
+
+</div>
+
+</object>
+
+</div>
+
+</div>
+
+<div class="columns is-centered has-text-centered">
+
+<div class="column is-four-fifths">
+
+<h2 class="title is-3">Pipeline</h2>
+
+</object>
+
+</div>
+
+</div>
+
+<img src="static/images/pipeline_small.png">
+
+<p> (a) We process the LiDAR using calibrated images and object tracklets to obtain a colorized point
+
+cloud, which can be rendered to image space as pixel-level conditions. (b) Given observed images and reference image embedding,
+
+we optimize the video diffusion model conditioned on the LiDAR renderings to perform controllable video generation. (c) Starting from
+
+the rendered images and LiDAR conditions under novel trajectory, we use the pretrained controllable video diffusion model to guide the
+
+optimization of the dynamic 3DGS representation by generating novel views as extra supervision signals.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ar environment-image="shared-assets/environments/moon_1k.hdr"
+
+poster="shared-assets/models/NeilArmstrong.webp"  -->
+
+<section class="hero is-small">
+
+<!-- <section class="section"> -->
+
+<div class="hero-body">
+
+<div class="container is-max-desktop">
+
+<h2 class="title is-3 has-text-centered">Results on Waymo dataset</h2>
+
+<hr>
+
+<div id="results-carousel" class="carousel results-carousel">
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source  src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_result/049_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_result/090_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source  src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_result/096_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item item-york">
+
+<video class='single_image_video' controls loading="lazy"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_result/121_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item item-berliner">
+
+<video class='single_image_video' controls loading="lazy"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_result/173_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="hero is-small">
+
+<!-- <section class="section"> -->
+
+<div class="hero-body">
+
+<div class="container is-max-desktop">
+
+<h2 class="title is-3 has-text-centered">Results on Pandaset dataset</h2>
+
+<hr>
+
+<div id="results-carousel" class="carousel results-carousel">
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/pandaset_result/053_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/pandaset_result/001_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/pandaset_result/028_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item item-york">
+
+<video class='single_image_video' controls loading="lazy"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/pandaset_result/123_visualization_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="hero is-small">
+
+<!-- <section class="section"> -->
+
+<div class="hero-body">
+
+<div class="container is-max-desktop">
+
+<h2 class="title is-3 has-text-centered">Visual Comparisons</h2>
+
+<hr>
+
+<div id="results-carousel" class="carousel results-carousel">
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_comparison/176_compare_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_comparison/062_compare_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_comparison/067_compare_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_comparison/079_compare_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_comparison/101_compare_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="hero is-small">
+
+<!-- <section class="section"> -->
+
+<div class="hero-body">
+
+<div class="container is-max-desktop">
+
+<h2 class="title is-3 has-text-centered">Scene Editings</h2>
+
+<hr>
+
+<div id="results-carousel" class="carousel results-carousel">
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_288_000000_1_replacement_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_346_000000_0_removal_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_788_000040_0_translation_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_002_000000_0_replacement_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_016_000020_1_removal_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+<div class="item">
+
+<video class='single_image_video' controls preload="metadata"  muted loop playsinline >
+
+<source src="https://yunzhiy.github.io/project_page_assets/street_crafter/waymo_editing/sample_718_000135_0_translation_caption.mp4" type="video/mp4">
+
+</video>
+
+<h2 class="subtitle has-text-justified is-6">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="BibTeX">
+
+<div class="container is-max-desktop content">
+
+<h2 class="title">BibTeX</h2>
+
+<pre><code>@article{yan2024streetcrafter,
+title={StreetCrafter: Street View Synthesis with Controllable Video Diffusion Models},
+author={Yan Yunzhi and Xu Zhen and Lin Haotong and Jin Haian and Guo Haoyu and Wang Yida and Zhan Kun and Lang Xianpeng and Bao Hujun and Zhou Xiaowei and Peng Sida},
+year={2024},
+}
+
+</code></pre>
+
+</div>
+
+</section>
+
+<!--
+
+<section class="section" id="BibTeX">
+
+<div class="container is-max-desktop content">
+
+<h2 class="title">Acknowledgements</h2>
+
+</div>
+
+</section> -->
+
+<footer class="footer">
+
+<div class="container">
+
+</div>
+
+<div class="columns is-centered">
+
+<div class="column is-8">
+
+<div class="content">
+
+<p>
+
+We borrow the source code of this website <a href="https://github.com/nerfies/nerfies.github.io">from here
+
+(Nerfies)</a> which is licensed
+
+under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+
+Commons Attribution-ShareAlike 4.0 International License</a>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>

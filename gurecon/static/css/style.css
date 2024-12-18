@@ -1,0 +1,195 @@
+body {
+    font-family: IBM Plex Sans, sans-serif;
+    padding-bottom: 50px;
+    font-size: 100%;
+    line-height: 1.3em;
+    letter-spacing: -0.1pt;
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+a {
+    color: #11a1c0;
+    font-weight: 500;
+}
+a:hover {
+    color: #006d85;
+    font-style: normal;
+}
+
+#banner {
+    padding: 30px 0 0 0;
+    background-image: linear-gradient(#000000, #414d28);
+    box-shadow: 0 0 15px 30px #414d28;
+}
+
+.jumbotron {
+    color: #dddddd;
+}
+.jumbotron a {
+    color: #41c793;
+}
+.jumbotron a:hover {
+    color: #00ff9c;
+}
+
+#main a:hover {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+p {
+    text-align: justify;
+}
+
+hr {
+    background: #80808083;
+    margin: 30px 0 20px 0;
+    padding: 1px 0 0 0;
+    max-width: 900px;
+}
+
+.jumbotron .btn-primary {
+    font-size: 110%;
+    color: #fff;
+    background-color: #4a6a0c;
+    border-color: #7b953b;
+    border-width: 3px;
+    margin: 0 5px 0 0;
+}
+.jumbotron .btn-primary:hover {
+    color: #fff;
+    background-color: #5c7f17;
+    border-color: #c7dc94;
+    font-weight: 500;
+}
+.jumbotron .btn-primary:active:hover {
+    background-color: #78a130;
+    border-color: #caff6e;
+}
+
+h2 {
+    font-size: 170%;
+    font-weight: 600;
+    padding: 0 20px 0 20px;
+}
+#name {
+    font-size: 120%;
+    font-weight: 700;
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h5 {
+    text-align: center;
+    font-size: 150%;
+    font-weight: 600;
+    padding: 10px 0 10px 0;
+}
+.author {
+    font-size: 110%;
+    font-weight: 500;
+    margin: 0 0 3px 0;
+    padding: 0 0 0 0;
+}
+.row-author {
+    margin: 0 20px 0 20px;
+}
+h9 {
+    font-size: 90%;
+    color: #999999;
+}
+
+.container {
+    max-width: 900px;
+    padding: 0 20px 0 20px;
+}
+
+.all-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+
+#title {
+    font-size: 105%;
+    padding: 0 0 10px 0;
+}
+#affiliation {
+    font-weight: 400;
+    font-size: 110%;
+    color: #96d428;
+    padding: 15px 0 5px 0;
+}
+#venue {
+    font-weight: 400;
+    font-size: 110%;
+    color: #ff5e00;
+    margin: 10px auto 10px auto;
+    padding: 0 20px 0 20px;
+}
+#venue b { font-weight: 600; }
+#highlight {
+    line-height: 1.5em;
+    font-weight: 600;
+    font-size: 110%;
+    color: #FFF;
+    text-shadow: 0px 0px 10px #FFF;
+}
+
+
+.navigation{
+    /*
+	position: absolute;
+	padding: 1px;
+	bottom: 5%;
+	height: 90px;
+	width: 160px;
+	left: 50%;
+	z-index: 100;
+    */
+	padding: 1px;
+	bottom: 5%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navigation li{
+	list-style: none;
+	cursor: pointer;
+	border-radius: 4px;
+	margin: 1px;
+	border: 1px solid #fff;
+	opacity: 0.7;
+}
+
+.navigation li img{
+	transition: 0.5s;
+}
+.navigation li img:hover{
+
+	height: 135px;
+	width: 240px;
+	border: 2px solid #fff;
+}
+
+.model-container {
+    display: flex;              /* 使用 flex 布局 */
+    justify-content: space-between;  /* 在两者之间创建间隔（可根据需要调整） */
+    gap: 10px;                  /* 设置间隔，可以根据需要调整 */
+}
+
+.column {
+    flex: 1;                    /* 每个模型占据相同的宽度 */
+    height: 400px;              /* 可以设置模型的高度，确保它们显示完整 */
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+}
+

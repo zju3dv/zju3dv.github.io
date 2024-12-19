@@ -14,7 +14,6 @@ function domReady() {
 }
 
 
-
 function objectSceneEvent(idx) {
     let dics = document.querySelectorAll('.b-dics')[0];
     let sections = dics.getElementsByClassName('b-dics__section');
@@ -26,16 +25,16 @@ function objectSceneEvent(idx) {
 }
 
 function updateMesh(idx, sliderType) {
-    let meshFolder   = getImageFolder(idx, sliderType);
+    let meshFolder = getImageFolder(idx, sliderType);
 
     let model_viewer = document.getElementById('model-viewer-mesh');
     let meshFileName = "mesh.glb";
-    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/${meshFileName}`;
+    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/mesh.glb`;
     // https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/Barn/mesh.glb
 
     model_viewer = document.getElementById('model-viewer-uc');
     meshFileName = "colored_mesh.glb";
-    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/${meshFileName}`;
+    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/colored_mesh.glb`;
 }
 
 function updateImages(sections, idx, imagesLength, sliderType) {
@@ -45,7 +44,7 @@ function updateImages(sections, idx, imagesLength, sliderType) {
         if (imageContainer) {
             let image = imageContainer.getElementsByClassName('b-dics__image')[0];
             if (image) {
-                let imageFolder   = getImageFolder(idx, sliderType);
+                let imageFolder = getImageFolder(idx, sliderType);
                 let imageFileName = getImageFileName(i, sliderType);
                 image.src = `sources/images/compare/${imageFolder}/${imageFileName}`;
                 if (image.src.endsWith('.gif')) {
@@ -64,15 +63,15 @@ function updateImages(sections, idx, imagesLength, sliderType) {
     });
 }
 
-function getImageFolder(idx, sliderType=false) {
+function getImageFolder(idx, sliderType = false) {
     // let folders = ['stump', 'bicycle', 'treehill', 'flowers', 'caterpillar', 'barn', 'playground', 'train', 'truck', 'm60'];
     let folders = ['Barn', 'Caterpillar', 'Truck'];
     return folders[idx];
 }
 
-function getImageFileName(imageIndex, sliderType=false) {
+function getImageFileName(imageIndex, sliderType = false) {
     // let filenames = ['3dgs.png', 'ours.png', 'gt.png'];
     // let filenames = ['gt.png', 'ours.png', 'sugar.png', 'neus.png', 'neuralangelo.png'];
-    let filenames = ['gt_normal.gif', 'pred_normal.gif', 'gt_unc.gif', 'bayes_unc.gif',"ours_unc.gif"];
+    let filenames = ['gt_normal.gif', 'pred_normal.gif', 'gt_unc.gif', 'bayes_unc.gif', "ours_unc.gif"];
     return filenames[imageIndex];
 }

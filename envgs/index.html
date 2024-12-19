@@ -140,10 +140,24 @@
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Abstract. -->
-      <h2 class="title is-3">Abstract</h2>
+      <h2 class="title is-4">Abstract</h2>
       <div class="content has-text-justified">
           <p>
             Reconstructing complex reflections in real-world scenes from 2D images is essential for achieving photorealistic novel view synthesis. Existing methods that utilize environment maps to model reflections from distant lighting often struggle with high-frequency reflection details and fail to account for near-field reflections. In this work, we introduce EnvGS, a novel approach that employs a set of Gaussian primitives as an explicit 3D representation for capturing reflections of environments. These environment Gaussian primitives are incorporated with base Gaussian primitives to model the appearance of the whole scene. To efficiently render these environment Gaussian primitives, we developed a ray-tracing-based renderer that leverages the GPU's RT core for fast rendering. This allows us to jointly optimize our model for high-quality reconstruction while maintaining real-time rendering speeds. Results from multiple real-world and synthetic datasets demonstrate that our method produces significantly more detailed reflections, achieving the best rendering quality in real-time novel view synthesis.
+          </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Pipeline. -->
+      <h2 class="title is-4">Method</h2>
+      <img src="static/img/pipeline.png">
+      <div class="content has-text-justified">
+          <p>
+            Overview of EnvGS. The rendering process begins by rasterizing the base Gaussian to obtain per-pixel normals, base colors, and blending weights. Next, we render the environment Gaussian in the reflection direction using our ray-tracing-based Gaussian renderer to capture the reflection colors. Finally, we combine the reflection and base colors for the final output. We jointly optimize the environment Gaussian and base Gaussian using monocular normals and ground truth images for supervision.
           </p>
       </div>
     </div>
@@ -627,7 +641,7 @@
 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop">
-    <h2 class="title">Citation</h2>
+    <h2 class="title is-4">Citation</h2>
     <pre><code>
 @article{xie2024envgs,
     title={{EnvGS}: Modeling View-Dependent Appearance with Environment Gaussian},

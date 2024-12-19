@@ -152,7 +152,7 @@ Dics.prototype._build = function() {
 
 
   let initialImagesContainerWidth = dics.container.getBoundingClientRect()[dics.config.sizeField] / imagesLength;
-
+  let gifs = [];
   for (let i = 0; i < imagesLength; i++) {
     let image = dics.images[i];
     let section = dics._createElement("div", "b-dics__section");
@@ -180,12 +180,22 @@ Dics.prototype._build = function() {
     dics.container.appendChild(section);
 
     image.style[this.config.positionField] = `${i * -initialImagesContainerWidth}px`;
-
+    if (image.src.endsWith('.gif')) {
+      gifs.push(image);
+    }
+    image.style.width = '1080px';
+    image.style.objectFit = 'cover';
+    image.style.objectPosition = 'center';
 
   }
 
   this.sections = this._getSections();
   this._setOpacityContainerForLoading(1);
+  gifs.forEach(gif => {
+    let src = gif.src;
+    gif.src = '';
+    gif.src = src;
+});
 };
 
 

@@ -21,10 +21,25 @@ function objectSceneEvent(idx) {
     let imagesLength = 5; // TODO
 
     updateImages(sections, idx, imagesLength, 'object');
+    updateMesh(idx, 'object');
     // updateTabStates('object-scale-recon', idx);
 }
 
+function updateMesh(idx, sliderType) {
+    let meshFolder   = getImageFolder(idx, sliderType);
+
+    let model_viewer = document.getElementById('model-viewer-mesh');
+    let meshFileName = "mesh.glb";
+    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/${meshFileName}`;
+    // https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/Barn/mesh.glb
+
+    model_viewer = document.getElementById('model-viewer-uc');
+    meshFileName = "colored_mesh.glb";
+    model_viewer.src = `https://raw.githubusercontent.com/zju3dv/GURecon/main/assets/meshes/${meshFolder}/${meshFileName}`;
+}
+
 function updateImages(sections, idx, imagesLength, sliderType) {
+    let gifs = [];
     for (let i = 0; i < imagesLength; i++) {
         let imageContainer = sections[i].getElementsByClassName('b-dics__image-container')[0];
         if (imageContainer) {
@@ -33,9 +48,20 @@ function updateImages(sections, idx, imagesLength, sliderType) {
                 let imageFolder   = getImageFolder(idx, sliderType);
                 let imageFileName = getImageFileName(i, sliderType);
                 image.src = `sources/images/compare/${imageFolder}/${imageFileName}`;
+                if (image.src.endsWith('.gif')) {
+                    gifs.push(image);
+                }
+                image.style.width = '1080px';
+                image.style.objectFit = 'cover';
+                image.style.objectPosition = 'center';
             }
         }
     }
+    gifs.forEach(gif => {
+        let src = gif.src;
+        gif.src = '';
+        gif.src = src;
+    });
 }
 
 function getImageFolder(idx, sliderType=false) {

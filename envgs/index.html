@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html>
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="EnvGS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EnvGS</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/video_comparison.js" defer></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+</head>
+
+
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="title is-1 publication-title">
+                EnvGS: Modeling View-Dependent Appearance with Environment Gaussian
+            </h1>
+            <br>
+
+            <!-- <div class="is-size-4 publication-authors">
+              <span class="author-block">Anonymous Author(s)</span>
+            </div> -->
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://github.com/xbillowy">Tao Xie<sup>1</sup><sup>*</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://github.com/Burningdust21">Xi Chen<sup>1</sup><sup>*</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://zhenx.me">Zhen Xu<sup>1</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://zju3dv.github.io/envgs">Yiman Xie<sup>1</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://github.com/krahets">Yudong Jin<sup>1</sup></a>,</span>
+
+              <br>
+
+              <span class="author-block">
+                <a href="https://shenyujun.github.io">Yujun Shen<sup>2</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://pengsida.net">Sida Peng<sup>1</sup></a>, </span>
+              <span class="author-block">
+                <a href="http://www.cad.zju.edu.cn/home/bao">Hujun Bao<sup>1</sup></a>, </span>
+              <span class="author-block">
+                <a href="https://www.xzhou.me">Xiaowei Zhou<sup>1</sup></a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block is-size-5"><sup>1</sup>Zhejiang University</span>
+              <span class="author-block is-size-5"><sup>2</sup>Ant Group</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="column has-text-centered">
+    <div class="publication-links">
+      <span class="link-block">
+        <a href="https://arxiv.org/abs/2412.15215" class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+            <i class="fas fa-file-pdf"></i>
+          </span>
+          <span>arXiv</span>
+        </a>
+      </span>
+
+      <span class="link-block">
+        <a href="https://github.com/zju3dv/EnvGS" class="external-link button is-normal is-rounded is-dark" title="Code">
+          <span class="icon">
+              <i class="fab fa-github"></i>
+          </span>
+          <span>Code</span>
+          </a>
+      </span>
+
+      <!-- <span class="link-block">
+        <a href="https://github.com/zju3dv/EnvGS" class="external-link button is-normal is-rounded is-dark" title="Renderer">
+          <span class="icon">
+              <i class="fab fa-github"></i>
+          </span>
+          <span>Renderer</span>
+          </a>
+      </span>
+
+      <span class="link-block">
+        <a href="https://github.com/zju3dv/EasyVolcap" class="external-link button is-normal is-rounded is-dark" title="Framework">
+          <span class="icon">
+              <i class="fab fa-github"></i>
+          </span>
+          <span>Framework</span>
+          </a>
+      </span>
+
+    </div>
+  </div> -->
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <video id="teaser" width="100%" playsinline controls autoplay loop muted>
+          <source src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/teaser.mp4" type="video/mp4" />
+      </video>
+      <script>
+        document.getElementById('teaser').play();
+      </script>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <h2 class="title is-4">Abstract</h2>
+      <div class="content has-text-justified">
+          <p>
+            Reconstructing complex reflections in real-world scenes from 2D images is essential for achieving photorealistic novel view synthesis. Existing methods that utilize environment maps to model reflections from distant lighting often struggle with high-frequency reflection details and fail to account for near-field reflections. In this work, we introduce EnvGS, a novel approach that employs a set of Gaussian primitives as an explicit 3D representation for capturing reflections of environments. These environment Gaussian primitives are incorporated with base Gaussian primitives to model the appearance of the whole scene. To efficiently render these environment Gaussian primitives, we developed a ray-tracing-based renderer that leverages the GPU's RT core for fast rendering. This allows us to jointly optimize our model for high-quality reconstruction while maintaining real-time rendering speeds. Results from multiple real-world and synthetic datasets demonstrate that our method produces significantly more detailed reflections, achieving the best rendering quality in real-time novel view synthesis.
+          </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Pipeline. -->
+      <h2 class="title is-4">Method</h2>
+      <img src="static/img/pipeline.png">
+      <div class="content has-text-justified">
+          <p>
+            Overview of EnvGS. The rendering process begins by rasterizing the base Gaussian to obtain per-pixel normals, base colors, and blending weights. Next, we render the environment Gaussian in the reflection direction using our ray-tracing-based Gaussian renderer to capture the reflection colors. Finally, we combine the reflection and base colors for the final output. We jointly optimize the environment Gaussian and base Gaussian using monocular normals and ground truth images for supervision.
+          </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Results and Comparisons</h2>
+      <p>
+        Here we demostrate side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
+        Select a scene and a baseline method below:
+      </p>
+      <br>
+
+      <div class="tabs-widget">
+        <div class="tabs is-centered">
+          <ul class="is-marginless">
+            <li><a><b>hatchback</b></a></li>
+            <li><a><b>toaster</b></a></li>
+            <li><a><b>sedan</b></a></li>
+            <li><a><b>spheres</b></a></li>
+            <li><a><b>dog</b></a></li>
+            <li><a><b>audi</b></a></li>
+            <li><a><b>compact</b></a></li>
+            <li><a><b>grinder</b></a></li>
+          </ul>
+        </div>
+        <div class="content has-text-centered is-size-7-mobile">
+          Interactive visualization. Hover or tap to move the split.
+        </div>
+        <div class="tabs-content">
+          <!-- Begin hatchback. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Notice how our method synthesizes accurate reflections of the houses and plants that smoothly move over the car's surface, while baseline methods produce fuzzy reflections that fade in and out depending on the viewpoint.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End hatchback. -->
+
+          <!-- Begin toaster. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Our method renders high-quality reflections of the distant scene beyond the windows as well as near-field reflections of the nearby paintings and bowl.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End toaster. -->
+
+          <!-- Begin sedan. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                  Our method synthesizes accurate reflections of trees and lamppost that move smoothly across the car surface and windows, which are not directly visible in the training images, and are not captured by the baseline methods.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End sedan. -->
+
+          <!-- Begin spheres. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Our method better captures high-frequency reflection details, and is able to render convincing reflections of near-field content. Notice the accurate interreflections of the shiny spheres and statue head.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End spheres. -->
+
+          <!-- Begin dog. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Our method renders high-quality reflections of the surrounding mall environment, including the ceiling lights and the nearby buildings, while baseline methods fail to capture these details.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End dog. -->
+
+          <!-- Begin audi. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Observe how our method synthesizes accurate and smooth reflections of the surrounding houses on the car's surface, as well as the near-field reflections of the parking lines on the car's side door. In contrast, baseline methods produce blurry reflections that fade in and out depending on the viewpoint and fail to accurately capture near-field reflections.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End audi. -->
+
+          <!-- Begin compact. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Although semi-transparent but reflective surfaces (such as windows) can be challenging for our method, it is able to simulate convincing reflections across the body and windshield of the car.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End compact. -->
+
+          <!-- Begin grinder. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                  
+                <ul class="is-marginless">
+                  <li><a>3DGS vs. Ours</a></li>
+                  <li><a>2DGS vs. Ours</a></li>
+                  <li><a>GaussianShader vs. Ours</a></li>
+                  <li><a>3DGS-DR vs. Ours</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Notice the black reflective surface and the window light reflected on the tabletop. Our method is able to maintain consistent specular highlights across different viewpoints, rather than appearing and disappearing depending on the viewing angle.
+                <div class="video-comparison" data-label="3DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/2dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="2DGS" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/gaussianshader_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs-dr_ours_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End grinder. -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Ablation Studies</h2>
+      <p>
+        Here we demostrate side-by-side videos comparing our full method to versions of our method where key components have been ablated on the scene gardenspheres. See more details in the paper.<br><br>
+        Select an ablation below:
+      </p>
+      <br>
+      <div class="tabs-widget">
+        <div class="tabs is-centered">
+          <ul class="is-marginless">
+            <li><a><b>Render</b></a></li>
+            <li><a><b>Normal</b></a></li>
+          </ul>
+        </div>
+
+        <div class="content has-text-centered is-size-7-mobile">
+          Interactive visualization. Hover or tap to move the split.
+        </div>
+        <div class="tabs-content">
+
+          <!-- Begin spheres render. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                <ul class="is-marginless">
+                  <li><a>w/o joint optimization</a></li>
+                  <li><a>w/o monocular normal loss</a></li>
+                  <li><a>w/ environment map</a></li>
+                  <li><a>w/o color sabotage</a></li>
+                  <li><a>w/o normal propagation</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                The "w/o joint optimization" ablation detaches the joint optimization of the base Gaussian and the environment Gaussian from the reflection rendering step, this variant fails to recover accurate geometry, leading to inferior reflection reconstruction and rendering quality. The "w/o monocular normal loss" variant removes the monocular normal constraint, training may become trapped in largely incorrect geometry, resulting in inaccurate reflection reconstruction. The "w/ environment map" variant replaces our core Gaussian environment representation with an environment map representation while keeping all other components unchanged, the result illustrates that while it effectively captures smooth distant reflections, it has difficulty modeling near-field and high-frequency reflections, and produces more bumpy geometry. The "w/o color sabotage" and "w/o normal propagation" ablations remove the color sabotage and normal propagation components, respectively, both variants result in reduced rendering quality.
+                <div class="video-comparison" data-label="w/o joint optimization" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_joint_optimization_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o monocular normal loss" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_monocular_normal_loss_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/ environment map" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/w_envmap_256_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o color sabotage" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_color_sabotage_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o normal propagation" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_normal_propagation_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End spheres render. -->
+
+          <!-- Begin spheres normal. -->
+          <div>
+            <div class="tabs-widget">
+              <div class="tabs is-centered is-toggle is-small">
+                <ul class="is-marginless">
+                  <li><a>w/o joint optimization</a></li>
+                  <li><a>w/o monocular normal loss</a></li>
+                  <li><a>w/ environment map</a></li>
+                  <li><a>w/o color sabotage</a></li>
+                  <li><a>w/o normal propagation</a></li>
+                </ul>
+              </div>
+              <div class="tabs-content">
+                Using the G-buffer instead of Sph-Mip (i.e. w/o color sabotage) or without joint optimization (i.e., w/o joint optimization), sharp details, such as tree branches reflected in the sphere, are not accurately reconstructed. 
+                It is necessary to use multi-level spherical feature grid strategies (i.e., w/ environment map), otherwise rough surfaces will fail to be reconstructed and artifacts will appear during rendering. 
+                Additionally, monocular normal loss (i.e., w/o monocular normal loss) is essential for modeling near-field inter-reflections.
+                <div class="video-comparison" data-label="w/o joint optimization" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_joint_optimization_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o monocular normal loss" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_monocular_normal_loss_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/ environment map" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/w_envmap_256_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o color sabotage" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_color_sabotage_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+                <div class="video-comparison" data-label="w/o normal propagation" data-label2="Ours">
+                  <video class="video" width=100% loop playsinline muted
+                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_normal_propagation_full_30fps.mp4"></video>
+                  <canvas></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End spheres normal. -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4"> Related Works</h2>
+      <p>
+        <li><a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering</a></li>
+        <li><a href="https://surfsplatting.github.io/">2D Gaussian Splatting for Geometrically Accurate Radiance Fields</a></li>
+        <li><a href="https://dorverbin.github.io/refnerf/">Ref-NeRF: Structured View-Dependent Appearance for Neural Radiance Fields</a></li>
+        <li><a href="https://dorverbin.github.io/nerf-casting/">NeRF-Casting: Improved View-Dependent Appearance with Consistent Reflections</a></li>
+        <li><a href="https://asparagus15.github.io/GaussianShader.github.io/">GaussianShader: 3D Gaussian Splatting with Shading Functions for Reflective Surfaces</a></li>
+        <li><a href="https://gapszju.github.io/3DGS-DR/">3D Gaussian Splatting with Deferred Reflection</a></li>
+      </p>
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop">
+    <h2 class="title is-4">Citation</h2>
+    <pre><code>
+@misc{xie2024envgsmodelingviewdependentappearance,
+    title={EnvGS: Modeling View-Dependent Appearance with Environment Gaussian}, 
+    author={Tao Xie and Xi Chen and Zhen Xu and Yiman Xie and Yudong Jin and Yujun Shen and Sida Peng and Hujun Bao and Xiaowei Zhou},
+    year={2024},
+    eprint={2412.15215},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2412.15215}, 
+}
+    </code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+                This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the <a
+                href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+
+
+</html>

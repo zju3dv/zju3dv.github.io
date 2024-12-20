@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta name="description" content="">
+
+<meta name="keywords" content="Hierarchy UGP, Large Scale Dynamic Scenes Reconstruction">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+<title>Hierarchy UGP: Hierarchy Unified Gaussian Primitive for Large-Scale Dynamic Scene Reconstruction</title>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+<link rel="stylesheet" href="./static/css/bulma.min.css">
+<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="./static/css/index.css">
+
+<!-- <link rel="icon" href="./static/images/lidar_icon.webp"> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+<script defer src="./static/js/fontawesome.all.min.js"></script>
+<script src="./static/js/bulma-carousel.min.js"></script>
+<script src="./static/js/bulma-slider.min.js"></script>
+<script src="./static/js/index.js"></script>
+<link rel="stylesheet" href="./static/css/dics.original.css">
+<script src="./static/js/event_handler.js"></script>
+<script src="./static/js/dics.original.js"></script>
+<!-- <script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script> -->
+
+</head>
+
+<body>
+
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Hierarchy UGP: Hierarchy Unified Gaussian Primitive for Large-Scale Dynamic Scene Reconstruction
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/SunHongyang10">Hongyang Sun</a><sup>*1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/seasideGargantua">Qinglin Yang</a><sup>*1</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/PLUS-WAVE">Jiawei Wang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zhenx.me/">Zhen Xu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Chen Liu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://wangyida.github.io/resume_yida_cn.pdf">Yida Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Kun Zhan</a><sup>2</sup>
+            </span>
+            <span class="author-block"></span>
+              <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>
+            </span>
+            <span class="author-block"></span>
+              <a href="https://pengsida.net/">Sida Peng</a><sup>1</sup>
+            </span>
+            <span class="author-block"></span>
+              <a href="https://www.xzhou.me/">Xiaowei Zhou</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="margin-right: 30px;"><sup>1</sup>Zhejiang University,</span>
+            <span class="author-block" style="margin-right: 30px;"><sup>2</sup>Li Auto</span>
+            <span class="author-block" style="margin-right: 30px;"><sup>3</sup>UESTC</span>
+            <br>
+            <span class="author-block">* denotes equal contribution</span>
+          </div>
+
+
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv, Coming Soon</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video Coming Soon</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zju3dv/Hierarchy_UGP"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png" alt="Teaser Image" style="width: 100%; height: auto;">
+      <div class="content" style="margin-top: 1rem; text-align: center;">
+        <p style="display: inline-block; text-align: justify; max-width: 800px;">
+          Overview of the Reconstruction Improvement of Our Hierarchy UGP on Large-Scale and Large-Motion Scenarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in differentiable rendering have significantly improved dynamic street scene reconstruction. 
+            However, the complexity of large-scale scenarios and dynamic elements such as vehicles and pedestrians remains a substantial challenge. 
+            Existing methods often struggle to scale to large scenes or accurately model arbitrary dynamics.
+          </p>
+          <p> 
+            To address these limitations, we propose Hierarchy UGP, 
+            with the key idea of constructing a hierarchical structure consisting of a root level, sub-scenes level, and primitive level, 
+            using Unified Gaussian Primitive (UGP) defined in 4D space as the representation. 
+            The root level serves as the entry point for the hierarchy. 
+            At the sub-scenes level, the scene is spatially divided into multiple sub-scenes, where various elements are extracted. 
+            At the primitive level, each element is modeled with UGPs, and its global pose is controlled by a motion prior related to time. 
+            This hierarchical design greatly enhances the model's capacity, enabling our method to model large-scale scenes. 
+            Additionally, our UGP allows for the reconstruction of arbitrary dynamic elements. 
+          </p>
+          <p>
+            We conducted experiments on Dynamic City, our proprietary large-scale dynamic street scene dataset, as well as the public Waymo dataset. 
+            Experimental results demonstrate that our method achieves state-of-the-art performance. 
+            We plan to release the accompanying code and the Dynamic City dataset as open resources to further research within the community.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Pipeline -->
+    <div class="container is-max-desktop has-text-centered">
+      <h2 class="title is-3" style="margin-bottom: 1rem;">Pipeline</h2>
+      <div class="hero-body">
+        <img src="./static/images/method_white_bkgd.png" 
+             alt="Method Image" 
+             style="display: block; margin: 0 auto; width: 100%; height: auto;">
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            Method Overview. The large-scale dynamic scene is constructed as a hierarchical tree structure, where both static and dynamic elements are represented using Unified Gaussian Primitives, enabling efficient large-scale dynamic scene reconstruction. As shown in (a), the scene hierarchy consists of the Root Level, Sub-scenes Level, and Primitive Level. The Root Level serves as the entry point for managing the entire structure. The scene is spatially divided into multiple sub-scenes at the Sub-scenes Level, which are further categorized into Sky, Background, Rigid Objects, and Non-Rigid Objects. As depicted in (b), at the Primitive Level, each element is modeled using Unified Gaussian Primitives with distinct properties.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Pipeline -->
+
+  </div>
+</section>
+
+
+
+<!-- <section class="section"> -->
+
+  <!-- <div class="hero-body">
+    <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Visual Comparisons</h2>
+    <hr>
+    <div id="results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <video class='waymo_compare' autoplay controls preload="metadata"  muted loop playsinline >
+          <source src="https://raw.githubusercontent.com/yunzhiy/project_page_assets/main/street_crafter/waymo_comparison/176_compare_caption.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="item">
+        <video class='waymo_compare' autoplay controls preload="metadata"  muted loop playsinline >
+          <source src="https://raw.githubusercontent.com/yunzhiy/project_page_assets/main/street_crafter/waymo_comparison/062_compare_caption.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="item">
+        <video class='waymo_compare' autoplay controls preload="metadata"  muted loop playsinline >
+          <source src="https://raw.githubusercontent.com/yunzhiy/project_page_assets/main/street_crafter/waymo_comparison/067_compare_caption.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="item">
+        <video class='waymo_compare' autoplay controls preload="metadata"  muted loop playsinline >
+          <source src="https://raw.githubusercontent.com/yunzhiy/project_page_assets/main/street_crafter/waymo_comparison/079_compare_caption.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="item">
+        <video class='waymo_compare' autoplay controls preload="metadata"  muted loop playsinline >
+          <source src="https://raw.githubusercontent.com/yunzhiy/project_page_assets/main/street_crafter/waymo_comparison/101_compare_caption.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  
+    <div class="container" style="display: flex; justify-content: space-between; gap: 20px; margin-top: 30px;">
+      <div class="b-dics" style="width: 1600px; font-weight: 600; display: flex; align-items: center;">
+        <img src="static/images/comparison/121_123_emernerf.png" alt="EmerNeRF">
+        <img src="static/images/comparison/121_123_ours.png" alt="Ours-G">
+        <img src="static/images/comparison/121_123_streetgs.png" alt="Street Gaussians">
+      </div>
+      <div class="b-dics" style="width: 1600px; font-weight: 600; display: flex; align-items: center;">
+        <img src="static/images/comparison/090_190_emernerf.png" alt="EmerNeRF">
+        <img src="static/images/comparison/090_190_ours.png" alt="Ours-G">
+        <img src="static/images/comparison/090_190_streetgs.png" alt="Street Gaussians">
+      </div>
+    </div>
+  
+  </div>
+  
+  </section>
+  
+  <section class="hero is-small"> -->
+  
+  <!-- <section class="section"> -->
+  
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+        <!-- Demo_one_minites. -->
+        <div class="content has-text-centered">
+          <h3 class="title is-3">Demo Video</h3>
+          <div class="content has-text-centered">
+            <video id="replay-video"
+                   autoplay
+                   muted
+                   controls
+                   preload
+                   playsinline
+                   width="75%">
+                   <source src="static/videos/Demo_Video.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const video = document.getElementById("replay-video");
+              video.addEventListener("loadedmetadata", function () {
+                video.currentTime = 3; // 跳过前3秒
+                video.play();
+              });
+            });
+          </script>
+
+          <section class="hero is-small">
+            <h3 class="title is-3">Visual Comparisons</h3>
+            <!-- <section class="section"> -->
+                        
+              <div class="container" style="display: flex; justify-content: space-between; gap: 20px; margin-top: 30px;">
+                <div class="b-dics" style="width: 900px; font-weight: 600; display: flex; align-items: center;">
+                  <img src="static/images/omnire214.png" alt="OmniRe">
+                  <img src="static/images/ours_9th_5_214.png" alt="Ours">
+                  <img src="static/images/gt_214.png" alt="GT">
+                </div>
+
+              </div>
+            
+            </div>
+            
+            </section>
+            
+            <section class="hero is-small">
+
+
+              <section class="hero is-small">
+                <!-- <section class="section"> -->
+                            
+                  <div class="container" style="display: flex; justify-content: space-between; gap: 20px; margin-top: 30px;">
+                    <div class="b-dics" style="width: 900px; font-weight: 600; display: flex; align-items: center;">
+                      <img src="static/images/9th_6_omnire_598.png" alt="OmniRe">
+                      <img src="static/images/ours_9th_6_598.png" alt="Ours">
+                      <img src="static/images/9th_6_gt_598.png" alt="GT">
+                    </div>
+    
+                  </div>
+                
+                </div>
+                
+                </section>
+                
+                <section class="hero is-small">
+
+                  <section class="hero is-small">
+
+                    <!-- <section class="section"> -->
+                    
+                    <div class="hero-body">
+                      <div class="container is-max-desktop">
+                      <h2 class="title is-3 has-text-centered">More Results On Dynamic City Dataset</h2>
+
+                      <hr>
+                        <div id="results-carousel" class="carousel results-carousel">
+                          <div class="item">
+                            <video class='waymo_result' autoplay controls preload="metadata"  muted loop playsinline >
+                              <source  src="static/videos/Demo9th_1_Blured.mp4" type="video/mp4">
+                            </video>
+                          </div>
+                          <div class="item">
+                            <video class='waymo_result' autoplay controls preload="metadata"  muted loop playsinline >
+                              <source  src="static/videos/Demo9th_2_Blured.mp4" type="video/mp4">
+                            </video>
+                          </div>
+                          <div class="item">
+                            <video class='waymo_result' autoplay controls preload="metadata"  muted loop playsinline >
+                              <source  src="static/videos/Demo9th_6_Blured.mp4" type="video/mp4">
+                            </video>
+                          </div>
+                          <div class="item">
+                            <video class='waymo_result' autoplay controls preload="metadata"  muted loop playsinline >
+                              <source  src="static/videos/Demo9th_7_Blured.mp4" type="video/mp4">
+                            </video>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+                  
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{shyyql2024HierarchyUGP,
+  title     = {Hierarchy UGP: Hierarchy Unified Gaussian Primitive for Large-Scale Dynamic Scene Reconstruction},
+  author    = {Sun Hongyang and Yang Qinglin and Wang Jiawei and Xu Zhen and Liu Chen and Wang Yida and Zhan Kun and Bao Hujun and Peng Sida and Zhou Xiaowei},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            We borrow the source code of this website from <a
+            href="https://github.com/nerfies/nerfies.github.io">nerfies</a> which is licensed under a <a
+            href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
+
+
+

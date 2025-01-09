@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="MatchAnything" name="title" />
+  <meta content="This paper proposes method to match image pairs from various modalities."
+    name="description" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Xingyi He" name="author" />
+  <title>MatchAnything</title>
+  <!-- Bootstrap -->
+  <!-- <script src="js/video_comparison.js"></script> -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    body {
+      font-family: 'Jost';
+    }
+
+    b {
+      font-weight: black;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .col-12>h3 {
+      padding-top: 5px;
+    }
+
+    .results-section {
+      padding-bottom: 30px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-4 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .renbody-zoom-container {
+      width: 80%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+    }
+
+    .mobile-zoom-container {
+      width: 100%;
+      /* Or whatever size you want */
+      aspect-ratio: 0.75;
+      /* Or whatever size you want */
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      /* Center the video */
+      border-radius: 5px;
+      margin: 5px
+    }
+
+    .video-zoom-container {
+      overflow: hidden;
+      /* Hide the parts of the video outside the container */
+      object-fit: cover;
+      /* Make sure the video covers the container without stretching */
+      object-position: center;
+      border-radius: 5px;
+      margin: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.);
+    }
+
+    .nhr-zoom {
+      transform: scale(1.45);
+    }
+
+    .renbody-zoom {
+      transform: scale(1.65) translateY(2%);
+      border-radius: 5px;
+    }
+
+    .mobile-zoom {
+      transform: scale(1.65);
+      border-radius: 5px;
+    }
+
+    .zjumocap-zoom {
+      transform: scale(1.3);
+    }
+
+    video {
+      border-radius: 5px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      padding: 0px;
+      margin: 0px;
+      border-radius: 5px;
+    }
+
+    .a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    .a4x3 {
+      aspect-ratio: 1352/1014;
+    }
+
+    .a1x1 {
+      aspect-ratio: 1;
+    }
+
+    .a16x9demo {
+      aspect-ratio: 3.05;
+    }
+
+    .a4x3demo {
+      aspect-ratio: 2.0;
+    }
+
+    .a1x1demo {
+      aspect-ratio: 1600/1672;
+    }
+  </style>
+  <script>
+
+
+
+  </script>
+  </link>
+</head>
+
+<body>
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b>
+                <span style="color: #78aa58">MatchAnything</span>: Universal <span style="color: #6589bf">Cross-Modality</span> Image Matching with <span style="color: #c68b5b">Large-Scale Pre-Training</span><br>
+              </b>
+            </h1>
+            <h4 style="color:#5a6268;">Arxiv 2025</h4>
+            <hr>
+            <a href="https://hxy-123.github.io/" target="_blank">Xingyi He<sup>1</sup> </a> 
+            <a href="https://ritianyu.github.io/" target="_blank">Hao Yu<sup>1,2</sup> </a> 
+            <a href="https://pengsida.net" target="_blank">Sida Peng<sup>1</sup> </a> 
+            <a href="https://github.com/Cuistiano" target="_blank">Dongli Tan<sup>1</sup> </a> 
+            <a href="https://zehongs.github.io" target="_blank">Zehong Shen<sup>1</sup> </a> 
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>1&dagger;</sup> </a> 
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>1&dagger;</sup>
+            </a>
+            <p>
+              <sup>1</sup>State Key Lab of CAD&CG, Zhejiang University   <sup>2</sup>Shandong University
+            </p>
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/2409.06662" role="button"
+                    target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Paper</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/matchanything" role="button"
+                    target="_blank">
+                    <i class="fa fa-github"></i>
+                    <b>Code (coming soon)</b>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>TL;DR</h3>
+          <hr style="margin-top: 0px" />
+          <p class="text-left">
+            (1) The paper focuses on finding pixel correspondences for image pairs from different imaging principles.<br>
+            (2) We propose a large-scale pre-training framework that utilizes <span style="color: #6589bf">synthetic cross-modal</span> training signals, incorporating diverse data from <span
+                style="color: #c68b5b">various sources</span>, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. <br>
+            (3) The pre-trained models achieve significant boost on various unseen cross-modality image registration tasks, demonstrating strong generalizabilities. 
+            <!-- <strong>All codes and weights are publicly available.</strong> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Abstract</h3>
+          <hr style="margin-top: 0px" />
+
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Image and Video Side by Side</title>
+            <style>
+                .media-section {
+                    display: flex;
+                    align-items: center; /* 保证高度对齐 */
+                    transform: translateX(-6%);
+                }
+                .media-section img,
+                .media-section video {
+                    height: 400px;
+                    width: auto; /* 保持宽高比 */
+                }
+            </style>
+          </head>
+          <body>
+              <div class="media-section">
+                  <!-- 图片 -->
+                  <img src="img/teaser_video_train_part.png" alt="Example Image">
+                  <!-- 视频 -->
+                  <video controls playsinline autoplay loop preload muted>
+                      <source src="img/teaser_v0.mov" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+              </div>
+          </body>
+
+          <!-- <div class="media-container" style="display: flex; justify-content: center; align-items: center;">
+            <video id="demo" width="90%" playsinline autoplay loop preload muted>
+              <source src="img/teaser_v0.mov" type="video/mp4">
+            </video>
+          </div> -->
+
+          <p style="font-size: small;">
+            <strong>Capabilities</strong> of the image matching model pre-trained by our framework. Green lines indicate the identified corresponding pixel localizations between images. Using the same network weight, our model exhibits impressive generalization abilities across extensive unseen real-world cross-modality matching tasks, benefiting diverse applications in
+            disciplines such as (a) medical image analysis, (b) histopathology, (c) remote sensing, autonomous systems including (d) UAV positioning,
+            (e) autonomous driving, and more.
+            </p>
+          <br>
+          <p class="text-left">
+              Image matching, which aims to identify corresponding pixel locations between images, is crucial in a wide range of scientific disciplines, aiding in image registration, fusion, and analysis. In recent years, deep learning-based image matching algorithms have dramatically outperformed humans in rapidly and accurately finding large amounts of correspondences. However, when dealing with images captured under different imaging modalities that result in significant appearance changes, the performance of these algorithms often deteriorates due to the scarcity of annotated cross-modal training data. This limitation hinders applications in various fields that rely on multiple image modalities to obtain complementary information. To address this challenge, we propose a large-scale pre-training framework that utilizes synthetic cross-modal training signals, incorporating diverse data from various sources, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. Our key finding is that the matching model trained with our framework achieves remarkable generalizability across more than eight unseen cross-modality registration tasks using the same network weight, substantially outperforming existing methods, whether designed for generalization or tailored for specific tasks. This advancement significantly enhances the applicability of image matching technologies across various scientific disciplines and paves the way for new applications in multi-modality human and artificial intelligence (AI) analysis and beyond. <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Method</h3>
+          <hr style="margin-top: 0px" />
+          <div style="display: flex; justify-content: center;">
+            <img src="img/proj_page_a.png" width="95%" />
+          </div>
+          <p>
+            <strong>Preliminary</strong>:
+            We first introduce two types of transformer-based detector-free matching architectures, including dense and semi-dense, serving as base models for our pre-training framework.
+          </p>
+        </div>
+        <div class="col-12">
+          <div style="display: flex; justify-content: center;">
+            <img src="img/proj_page_b.png" width="95%" />
+          </div>
+          <p>
+            <strong>Pipeline</strong>.
+            The proposed large-scale universal cross-modality pre-training framework consists of (1) a multi-resource dataset mixture engine designed to generate image pairs with ground truth matches by integrating the strengths of various data types. This engine is composed of (i) multi-view images with known geometry datasets that obtain ground truth matches by warping pixels using depth maps to other images; (ii) video sequences by leveraging the continuity inherent in video frames to construct point trajectories in a coarse-to-fine manner, and then build training pairs with pseudo ground truth matches between distant frames;
+            (iii) image warping that sample transformations to construct synthetic image pairs with perspective changes for large-scale single image datasets.
+            (2) Subsequently, cross-modality training pairs are generated to train matching models in learning fundamental image structure and geometric information, which is achieved by using image generation models to obtain pixel-aligned images in other modalities, and then substituted for the original image in the training pairs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Training & Evaluation Metrics</h3>
+          <hr style="margin-top: 0px" />
+          <p><strong>Training</strong>:
+              Our data engine comprises a mixture of datasets, including MegaDepth, ScanNet++, BlendedMVS, DL3DV, SA-1B, and Google Landmark, as well as synthetic cross-modality pairs, including visible-depth, visible-thermal, and day-night. Pre-training is performed on 16 NVIDIA A100-80G GPUs with a batch size of 64. Models are trained from scratch, with training taking approximately 4.3 days for ELoFTR and 6 days for ROMA. For all experiments in this paper, we use the same pre-trained weights for each method during evaluation.
+          </p>
+          <p><strong>Quantative and Qualtative Comparisons</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/results_a.png" width="90%" />
+          </div>
+          </p>
+          <p>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/results_b.png" width="90%" />
+          </div>
+          </p>
+          <p>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/results_c.png" width="90%" />
+          </div>
+          </p>
+
+          <p><strong>More Statistics Comparisons</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/statistics.png" width="90%" />
+          </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        </br>
+        </br>
+        <h3>Citation</h3>
+        <hr style="margin-top: 0px" />
+        <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px">
+<code>@inproceedings{he2025matchanything,
+  title={MatchAnything: Universal Cross-Modality Image Matching with Large-Scale Pre-Training},
+  author={He, Xingyi and Yu, Hao and Peng, Sida and Tan, Dongli and Shen, Zehong and Bao, Hujun and Zhou, Xiaowei},
+  booktitle={Arxiv},
+  year={2025}
+}</code></pre>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom: 10px">
+    Thanks to
+    <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a>
+    for the website template.<br>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Math
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: "$$", right: "$$", display: true }
+        ]
+      });
+
+    });
+  </script>
+</body>
+
+</html>

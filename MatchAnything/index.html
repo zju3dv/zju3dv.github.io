@@ -242,8 +242,6 @@
   </style>
   <script>
 
-
-
   </script>
   </link>
 </head>
@@ -288,7 +286,7 @@
                   <a class="btn btn-large btn-light" href="https://github.com/zju3dv/matchanything" role="button"
                     target="_blank">
                     <i class="fa fa-github"></i>
-                    <b>Code (coming soon)</b>
+                    <b>Code (TBD)</b>
                   </a>
                 </p>
               </div>
@@ -307,8 +305,7 @@
           <hr style="margin-top: 0px" />
           <p class="text-left">
             (1) The paper focuses on finding pixel correspondences for image pairs from different imaging principles.<br>
-            (2) We propose a large-scale pre-training framework that utilizes <span style="color: #6589bf">synthetic cross-modal</span> training signals, incorporating diverse data from <span
-                style="color: #c68b5b">various sources</span>, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. <br>
+            (2) We propose a large-scale pre-training framework that utilizes <span style="color: #6589bf"><strong>cross-modal</strong> </span> training signals, incorporating diverse data from <span style="color: #c68b5b"><strong>various sources</strong></span>, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. <br>
             (3) The pre-trained models achieve significant boost on various unseen cross-modality image registration tasks, demonstrating strong generalizabilities. 
             <!-- <strong>All codes and weights are publicly available.</strong> -->
           </p>
@@ -352,6 +349,7 @@
                   </video>
               </div>
           </body>
+          <br>
 
           <!-- <div class="media-container" style="display: flex; justify-content: center; align-items: center;">
             <video id="demo" width="90%" playsinline autoplay loop preload muted>
@@ -366,7 +364,10 @@
             </p>
           <br>
           <p class="text-left">
-              Image matching, which aims to identify corresponding pixel locations between images, is crucial in a wide range of scientific disciplines, aiding in image registration, fusion, and analysis. In recent years, deep learning-based image matching algorithms have dramatically outperformed humans in rapidly and accurately finding large amounts of correspondences. However, when dealing with images captured under different imaging modalities that result in significant appearance changes, the performance of these algorithms often deteriorates due to the scarcity of annotated cross-modal training data. This limitation hinders applications in various fields that rely on multiple image modalities to obtain complementary information. To address this challenge, we propose a large-scale pre-training framework that utilizes synthetic cross-modal training signals, incorporating diverse data from various sources, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. Our key finding is that the matching model trained with our framework achieves remarkable generalizability across more than eight unseen cross-modality registration tasks using the same network weight, substantially outperforming existing methods, whether designed for generalization or tailored for specific tasks. This advancement significantly enhances the applicability of image matching technologies across various scientific disciplines and paves the way for new applications in multi-modality human and artificial intelligence (AI) analysis and beyond. <br>
+              Image matching, which aims to identify corresponding pixel locations between images, is crucial in a wide range of scientific disciplines, aiding in image registration, fusion, and analysis. In recent years, deep learning-based image matching algorithms have dramatically outperformed humans in rapidly and accurately finding large amounts of correspondences. However, when dealing with images captured under different imaging modalities that result in significant appearance changes, the performance of these algorithms often deteriorates due to the scarcity of annotated cross-modal training data. This limitation hinders applications in various fields that rely on multiple image modalities to obtain complementary information. 
+              <!-- <br> -->
+              To address this challenge, we propose a large-scale pre-training framework that utilizes synthetic cross-modal training signals, incorporating diverse data from various sources, to train models to recognize and match fundamental structures across images. This capability is transferable to real-world, unseen cross-modality image matching tasks. Our key finding is that the matching model trained with our framework achieves remarkable generalizability across more than eight unseen cross-modality registration tasks using the same network weight, substantially outperforming existing methods, whether designed for generalization or tailored for specific tasks.
+              This advancement significantly enhances the applicability of image matching technologies across various scientific disciplines and paves the way for new applications in multi-modality human and artificial intelligence (AI) analysis and beyond. <br>
           </p>
         </div>
       </div>
@@ -382,15 +383,18 @@
           <div style="display: flex; justify-content: center;">
             <img src="img/proj_page_a.png" width="95%" />
           </div>
+          <br>
           <p>
             <strong>Preliminary</strong>:
             We first introduce two types of transformer-based detector-free matching architectures, including dense and semi-dense, serving as base models for our pre-training framework.
           </p>
         </div>
+        <br>
         <div class="col-12">
           <div style="display: flex; justify-content: center;">
             <img src="img/proj_page_b.png" width="95%" />
           </div>
+          <br>
           <p>
             <strong>Pipeline</strong>.
             The proposed large-scale universal cross-modality pre-training framework consists of (1) a multi-resource dataset mixture engine designed to generate image pairs with ground truth matches by integrating the strengths of various data types. This engine is composed of (i) multi-view images with known geometry datasets that obtain ground truth matches by warping pixels using depth maps to other images; (ii) video sequences by leveraging the continuity inherent in video frames to construct point trajectories in a coarse-to-fine manner, and then build training pairs with pseudo ground truth matches between distant frames;

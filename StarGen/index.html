@@ -104,9 +104,24 @@
           </div>
 
           <div class="column has-text-centered">
-            <div class="publication-links">
-            </div>
-
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
           </div>
         </div>
       </div>
@@ -119,7 +134,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
+        <div class="column is-full-width">
           <!-- <h2 class="title is-3">Video</h2> -->
           <video id="teaser" autoplay controls muted loop playsinline height="100%">
               <source src="./static/videos/StarGen.mp4"
@@ -133,6 +148,75 @@
 
 <hr>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in large reconstruction and generative models have
+            significantly improved scene reconstruction and novel view generation.
+            However, due to compute limitations, each inference with these large
+            models is confined to a small area, making long-range consistent scene
+            generation challenging. To address this, we propose <b>StarGen</b>, a novel
+            framework that employs a pre-trained video diffusion model in an autoregressive
+            manner for long-range scene generation. The generation of each video clip
+            is conditioned on the 3D warping of spatially adjacent images and the 
+            temporally overlapping image from previously generated clips, 
+            improving spatiotemporal consistency in long-range scene generation with 
+            precise pose control. The spatiotemporal condition is compatible with various
+            input conditions, facilitating diverse tasks, including sparse view interpolation,
+            perpetual view generation, and layout-conditioned city generation. Quantitative
+            and qualitative evaluations demonstrate StarGen's superior scalability, fidelity,
+            and pose accuracy compared to state-of-the-art methods. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3"><span
+          style="color: #000000 ;font-weight: bolder;">Method Overview</span></h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/teaser.png">
+            <p>
+              (a) We introduce a spatiotemporal autoregression framework for long-range scene generation.
+              The generated scene is represented as a set of sparsely sampled posed images.
+              The generation of the current sliding window of images (blue dotted box) is conditioned
+                on spatially adjacent images that are generated previously (green frustums) and
+                temporally overlapping image (blue solid box) from the preceding window.
+            </p>
+            <p>
+              (b) The spatial conditioning images are processed by a large reconstruction model, which 
+              extracts the 3D information and renders the reconstructed latent features to each novel view.
+              These spatial features, together with the temporal conditioning image, are used to condition
+              the generation of the current window through a video diffusion model and a ControlNet.
+            </p>
+            <p>
+              (c) The framework is used to implement three downstream tasks, including sparse view interpolation,
+              perpetual view generation, and layout-conditioned city generation.
+            </p>
+              </ol>
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+<hr>
 <!-- Experience Sections -->
 <section class="section">
   <div class="container is-max-desktop">
@@ -172,16 +256,37 @@
           <span
         style="color: #000000 ;font-weight: bolder;">Quantitative Comparisons</span>
         </h2>
+        <span style="color: #000000 ;font-weight: bolder;">Accuracy comparison on datasets RealEstate-10K and ACID</span>
+        <div class="content has-text-justified">
+          <img src="./static/images/svi.png">
+        </div>
+
         <span style="color: #000000 ;font-weight: bolder;">Accuracy comparison on datasets RealEstate-10K and Tanks&Templates</span>
         <div class="content has-text-justified">
           <img src="./static/images/pvg.png">
         </div>
+
         <span style="color: #000000 ;font-weight: bolder;">Scalability comparison on long-range videos on the dataset RealEstate-10K</span>
         <div class="content has-text-justified">
           <img src="./static/images/scalability.png">
         </div>
       </div>
     </div>
+
+<hr>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{StarGen,
+  author    = {Shangjin Zhai, Zhichao Ye, Jialin Liu, Weijian Xie, Jiaqi Hu, Zhen Peng, Hua Xue,
+    Danpeng Chen, Xiaomeng Wang, Lei Yang, Nan Wang, Haomin Liu, Guofeng Zhang},
+  title     = {StarGen: A Spatiotemporal Autoregression Framework with Video Diffusion Model
+    for Scalable and Controllable Scene Generation},
+  journal   = {arXiv},
+  year      = {2025},
+  }</code></pre>
+ </div>
 
 <hr>
 

@@ -163,14 +163,14 @@
             generation challenging. To address this, we propose <b>StarGen</b>, a novel
             framework that employs a pre-trained video diffusion model in an autoregressive
             manner for long-range scene generation. The generation of each video clip
-            is conditioned on the 3D warping of spatially adjacent images and the 
-            temporally overlapping image from previously generated clips, 
-            improving spatiotemporal consistency in long-range scene generation with 
+            is conditioned on the 3D warping of spatially adjacent images and the
+            temporally overlapping image from previously generated clips,
+            improving spatiotemporal consistency in long-range scene generation with
             precise pose control. The spatiotemporal condition is compatible with various
             input conditions, facilitating diverse tasks, including sparse view interpolation,
             perpetual view generation, and layout-conditioned city generation. Quantitative
             and qualitative evaluations demonstrate StarGen's superior scalability, fidelity,
-            and pose accuracy compared to state-of-the-art methods. 
+            and pose accuracy compared to state-of-the-art methods.
           </p>
         </div>
       </div>
@@ -196,7 +196,7 @@
                 temporally overlapping image (blue solid box) from the preceding window.
             </p>
             <p>
-              (b) The spatial conditioning images are processed by a large reconstruction model, which 
+              (b) The spatial conditioning images are processed by a large reconstruction model, which
               extracts the 3D information and renders the reconstructed latent features to each novel view.
               These spatial features, together with the temporal conditioning image, are used to condition
               the generation of the current window through a video diffusion model and a ControlNet.

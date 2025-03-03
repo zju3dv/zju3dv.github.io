@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NeuraLoc: Visual Localization in Neural Implicit Map with Dual Complementary Features">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuraLoc: Visual Localization in Neural Implicit Map with Dual Complementary Features</title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/zju3dv/Vox-Surf"> Vox-Surf</a>
+            <a class="navbar-item" href="https://github.com/zju3dv/Vox-Fusion"> Vox-Fusion</a>
+            <a class="navbar-item" href="https://zju3dv.github.io/nis_slam"> NIS-SLAM</a>
+            <a class="navbar-item" href="https://zju3dv.github.io/splatloc"> SplatLoc</a>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          NeuraLoc: Visual Localization in Neural Implicit Map with Dual Complementary Features
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICRA 2025</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=alXpF8wAAAAJ&hl=en">Hongjia Zhai</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=krMWXqMAAAAJ&hl=en">Boming Zhao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=vn89ztQAAAAJ&hl=zh-CN">Hai Li</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zju3dv.github.io/neuraloc/">Xiaokun Pan</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=_0lKGnkAAAAJ&hl=en">Yijia He</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=vwIRwDUAAAAJ&hl=zh-CN">Zhaopeng Cui</a><sup>1</sup>
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup>,
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>RayNeo</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2308.14383.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recently, neural radiance fields (NeRF) have gained significant attention in the field of visual localization. 
+            However, existing NeRF-based approaches either lack geometric constraints or require extensive storage for feature matching, 
+            limiting their practical applications. To address these challenges, we propose an efficient and novel visual localization 
+            approach based on the neural implicit map with complementary features. Specifically, to enforce geometric constraints and 
+            reduce storage requirements, we implicitly learn a 3D keypoint descriptor field, avoiding the need to explicitly store 
+            point-wise features. To further address the semantic ambiguity of descriptors, we introduce additional semantic contextual 
+            feature fields, which enhance the quality and reliability of 2D-3D correspondences. Besides, we propose descriptor similarity 
+            distribution alignment to minimize the domain gap between 2D and 3D feature spaces during matching. 
+            Finally, we construct the matching graph using both complementary descriptors and contextual features to establish accurate 
+            2D-3D correspondences for 6-DoF pose estimation. Compared with the recent NeRF-based approach, our method achieves a 3$\times$ 
+            faster training speed and a 45$\times$ reduction in model storage. Extensive experiments on two widely used datasets demonstrate 
+            that our approach outperforms or is highly competitive with other state-of-the-art NeRF-based visual localization methods.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Framework Overview</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/NeuraLoc/images/pipeline.png"
+             alt="System Pipeline"/>
+      </div>
+      <p>
+        The whole pipeline of our system. (1) Reconstruction: We employ different parametric encodings ($\mathcal{T}_{geo}$ and $\mathcal{T}_{sem}$) 
+        for geometry and semantic branches. Scene properties, including color $c$, SDF $\sigma$, semantic contextual feature $f^{3D}$, 
+        and keypoint descriptor $g^{3D}$ are produced by separated shadow decoders ($\mathcal{M}_{geo}$ and $\mathcal{M}_{sem}$). 
+        We use pre-trained CNN models (SuperPoint and SAM) to generate 2D feature maps for the optimization 
+        of the semantic branch. (2) Localization: We extract 2D descriptors and semantic contextual features for the query image to build 
+        the matching graph between 3D points. Then, we estimate the 6-DoF pose based on the 2D-3D correspondence.
+      </p>
+    </div>
+  </div>
+  <br/>
+</section>
+
+<section class="section">
+  <hr/>
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered"><p>Qualitative and Quantitative Results</p></h2>
+
+      <h3 class="title is-5 has-text-centered"><p>Visual Localization</p></h3>
+      <div class="has-text-centered">
+        <img style="width: 90%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/NeuraLoc/images/replica.png"
+             alt="Visual Localization."/>
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/NeuraLoc/images/12scenes.png"
+             alt="Visual Localization."/>
+      </div>
+      <p>
+        Visual localization results on Replica and 12-Scenes datasets. We report median translation and rotation errors (cm, degree)
+      </p>
+
+      <h3 class="title is-5 has-text-centered"><p>Matching and 3D Trajectory</p></h3>
+      <div class="has-text-centered">
+        <img style="width:100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/NeuraLoc/images/match.png"
+             alt="Visual Localization."/>
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/NeuraLoc/images/traj.png"
+             alt="Visual Localization."/>
+      </div>
+      <p>
+        Qualitative results of feature matching and 3D trajectory. 
+        We show some matching and 3D results of our method on Replica and 12-Scenes datasets.
+      </p>
+
+    </div>
+  </div>
+  <br/>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <hr/>
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre style="padding: 1.25em 1.5em">
+      <code>@inproceedings{neuraloc,
+        title={NeuraLoc: Visual Localization in Neural Implicit Map with Dual Complementary Features},
+        author={Zhai, Hongjia and Zhao, boming and Li, Hai and Pan, Xiaokun and He, Yijia and Cui, Zhaopeng and Bao, Hujun and Zhang, Guofeng},
+        booktitle={IEEE International Conference on Robotics and Automation},
+        year={2025}
+      }
+    </code>
+    </pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

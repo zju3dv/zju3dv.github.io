@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="MotionStreamer: Streaming Motion Generation via Diffusion-based Autoregressive Model in Causal Latent Space">
+  <meta name="keywords" content="MotionStreamer">
+  <meta name="google-site-verification" content="ciQsol-i_rwd2kkpVI_G-EFX4g72KA2HF-cDUi52lIo" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <!-- <meta property="og:image" content="static/images/teaser.pdf"/> -->
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <title>MotionStreamer: Streaming Motion Generation via Diffusion-based Autoregressive Model in Causal Latent Space</title>
+  <link rel="icon" type="image/x-icon" href="static/images/motion.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title"><strong><span style="color:#5e7dbd";>MotionStreamer</span></strong>: <span style="color:#EE822F";>Streaming Motion Generation </span> <br> via <span style="color:#069b1c";>Diffusion-based Autoregressive Model</span> <br> in <span style="color:#a50c07";>Causal Latent Space</span></h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://github.com/tryhiseyyysum/" target="_blank">Lixing Xiao<sup>1</sup></a>,&nbsp</span>
+                <span class="author-block">
+                  <a href="https://shunlinlu.github.io/" target="_blank">Shunlin Lu<sup>2</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://phj128.github.io/" target="_blank">Huaijin Pi<sup>3</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://vankouf.github.io/" target="_blank">Ke Fan<sup>4</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://liangpan99.github.io/" target="_blank">Liang Pan<sup>3</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=EWC3UGYAAAAJ/" target="_blank">Yueer Zhou<sup>1</sup></a>,&nbsp</span>
+                  <br>
+                  <span class="author-block">
+                    <a href="https://dblp.org/pid/120/4362.html/" target="_blank">Ziyong Feng<sup>5</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://www.xzhou.me/" target="_blank">Xiaowei Zhou<sup>1</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://pengsida.net/" target="_blank">Sida Peng<sup>1</sup></a>,&nbsp</span>
+                  <span class="author-block">
+                    <a href="https://wangjingbo1219.github.io/" target="_blank">Jingbo Wang<sup>6</sup></a></span>
+                    
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block" style="margin-right: 20px;"><sup>1</sup> Zhejiang University </span>
+                    <span class="author-block" style="margin-right: 20px;"><sup>2</sup> The Chinese University of Hong Kong, Shenzhen </span>
+                    <span class="author-block" style="margin-right: 20px;"><sup>3</sup> The University of Hong Kong </span>
+                    <span class="author-block" style="margin-right: 20px;"><sup>4</sup> Shanghai Jiao Tong University </span>
+                    <span class="author-block" style="margin-right: 20px;"><sup>5</sup> DeepGlint </span>
+                    <span class="author-block"><sup>6</sup> Shanghai AI Lab </span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      
+                    <!-- ArXiv abstract Link -->
+                      <span class="link-block">
+                      <a
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                      </a>
+                    </span>
+                    
+                      <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary PDF link
+                    <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/tryhiseyyysum/SMPL-to-Rotation-Representation" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Motion Representation</span>
+                    </a>
+                  </span>
+
+                  <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Full Code (Coming Soon)</span>
+                    </a>
+                  </span>
+
+
+                  <!-- Supplementary PDF link -->
+                  <!-- <span class="link-block">
+                    <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-video"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <img src="static/images/teaser.png" width="100%" style="height:auto;" alt="teaser">
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero ">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper addresses the challenge of text-conditioned streaming motion generation, which requires us to predict the next-step human pose based on variable-length historical motions and incoming texts. Existing methods struggle to achieve streaming motion generation, e.g., diffusion models are constrained by pre-defined motion lengths, while GPT-based methods suffer from delayed response and error accumulation problem due to discretized non-causal tokenization. To solve these problems, we propose MotionStreamer, a novel framework that incorporates a continuous causal latent space into a probabilistic autoregressive model. The continuous latents mitigate information loss caused by discretization and effectively reduce error accumulation during long-term autoregressive generation. In addition, by establishing temporal causal dependencies between current and historical motion latents, our model fully utilizes the available information to achieve accurate online motion decoding. Experiments show that our method outperforms existing approaches while offering more applications, including multi-round generation, long-term generation, and dynamic motion composition. The code will be released for the reproducibility.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Paper method
+<section class="section hero">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Diagnosis</h2>
+        <div class="container is-centered" style="max-width: 55vw; overflow: hidden;">
+          <img src="static/images/architecture.png" style="width: 100%; height: auto;" scrolling="no" frameborder="0">
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Paper method -->
+<section class="section hero">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Pipeline Overview</h2>
+        <div class="columns is-centered" style="gap: -20px;">
+          <div class="column is-4">
+            <div class="container is-centered" style="max-width: 100%; height: 350px; overflow: hidden;">
+              <img src="static/images/recon.png" style="width: 100%; height: 100%; object-fit: contain; margin-left: 0%;">
+            </div>
+            <p class="has-text-centered" style="margin-top: 10px; font-size: 1.3em;">
+              <span style="color:#5e7dbd; font-weight:bold;">Motion reconstruction</span> in <span style="color:#a50c07; font-weight:bold;">causal latent space</span>
+            </p>
+          </div>
+          <div class="column is-7">
+            <div class="container is-centered" style="max-width: 100%; height: 350px; overflow: hidden;">
+              <img src="static/images/pipeline.png" style="width: 100%; height: 100%; object-fit: contain; margin-left: 0%;">
+            </div>
+            <p class="has-text-centered" style="margin-top: 10px; font-size: 1.3em;">
+              <span style="color:#EE822F; font-weight:bold;">Streaming motion generation </span>framework
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!---           Gallery       -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Text-to-motion Generation</h2>
+    </div>
+    <!-- <div class="columns is-centered has-text-centered">
+      <h2 class="title is-5"><i>(Our method is capable of generating high-quality, textual instruction-following 3D human motions)</i></h2>
+    </div>     -->
+    <br>
+    <div class="container">
+      <!-- First row -->
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> A man is <span style="color:#5e7dbd";>jogging</span> around</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/jog.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> person is <span style="color:#5e7dbd";>dancing</span> eloquently</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/dance.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> he is <span style="color:#5e7dbd";>moving back and forth</span> <br> while practing his <span style="color:#EE822F";>kick boxing</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/boxing.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second row -->
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> A person <span style="color:#5e7dbd";>spins</span> 360 degrees clockwise</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/spin.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> a person is <span style="color:#5e7dbd";> walking </span> like a mummy</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/mummy.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> a man is <span style="color:#5e7dbd";> walks up and down </span>from either stairs, rocks, or some unlevel <br> terrain requiring a step.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/walk_stairs.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> a person is doing <span style="color:#5e7dbd";> star jumps</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/star_jump.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> A man is performing a <span style="color:#5e7dbd";> somersault</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/somersault.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> a man is <span style="color:#5e7dbd";> walking forward </span>, <span style="color:#EE822F";> stumbles </span> <br> and <span style="color:#f11008";> lose balance</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/stumble.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> a man <span style="color:#5e7dbd";> walks sideways </span> like a crab.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/crab.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> the person is doing a <span style="color:#5e7dbd";> punch karate kick</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/kick.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content has-text-centered">
+            <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> a man <span style="color:#5e7dbd";> crawls forward </span> like a zombie <br> and then <span style="color:#EE822F";> stands up</span>.</i></h2>
+            <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/crawl_stand.mkv" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Streaming <span style="color:#ec0404";>Long-term</span> Motion Generation</h2>
+    </div>
+    <!-- <div class="columns is-centered has-text-centered">
+      <h2 class="title is-5"><i>(Our method is capable of generating high-quality, textual instruction-following 3D human motions)</i></h2>
+    </div>     -->
+    <br>
+    <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <!-- <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> A man is <span style="color:#5e7dbd";>jogging</span> around</span>.</i></h2> -->
+          <div class="videobox">
+          <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+            <source src="./static/images/gallery/long.mp4"
+                    type="video/mp4">
+          </video>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </div>
+    
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <br>
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3"><span style="color:#ec0404";> Multi-round </span> Text-to-motion Generation</h2>
+      <br>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> We build an <span style="color:#069b1c";>interactive </span> <span style="color:#EE822F";>Blender Add-on </span> for <span style="color:#5e7dbd";> multi-round generation </span> supported in our work </span>.</i></h2>
+      </div> 
+      
+      <div class="container">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content has-text-centered">
+            <!-- <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> A man is <span style="color:#5e7dbd";>jogging</span> around</span>.</i></h2> -->
+            <div class="videobox">
+            <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+              <source src="./static/images/gallery/multi.mp4"
+                      type="video/mp4">
+            </video>
+            </div>
+          </div>
+        </div>
+        </div>
+  
+      </div>
+      
+    </section>
+
+
+    <section class="hero is-small">
+      <div class="hero-body">
+        <br>
+        <div class="columns is-centered has-text-centered">
+          <h2 class="title is-3">Dynamic Motion Composition</h2>
+        
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> We support <span style="color:#069b1c";>regenerating</span> subsequent motions by <span style="color:#EE822F";>altering textual conditions</span> while <span style="color:#f11008";>preserving the initially generated prefix motion</span>.</i></h2>
+        </div>
+        <!-- <div class="columns is-centered has-text-centered">
+          <h2 class="title is-5"><i>(Our method is capable of generating high-quality, textual instruction-following 3D human motions)</i></h2>
+        </div>     -->
+        
+        <div class="container">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> <span style="color:#5e7dbd";> "walk forward" </span>,<span style="color:#EE822F";> "jump forward" </span></span>.</i></h2>
+              <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/walk_jump.mkv"
+                        type="video/mp4">
+              </video>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> <span style="color:#5e7dbd";> "walk forward" </span>,<span style="color:#EE822F";> "sit down" </span></span>.</i></h2>
+              <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/walk_sit.mkv"
+                        type="video/mp4">
+              </video>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> <br> <span style="color:#5e7dbd";> "walk forward" </span>,<span style="color:#EE822F";> "turn around" </span></span>.</i></h2>
+              <div class="videobox">
+              <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                <source src="./static/images/gallery/walk_turn.mkv"
+                        type="video/mp4">
+              </video>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <div class="videobox">
+                <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                  <source src="./static/images/gallery/compose.mkv"
+                          type="video/mp4">
+                </video>
+              </div>
+              <p class="has-text-centered" style="margin-top: 10px; font-size: 1.3em;">
+                Overall visualization: <span style="color:#069b1c;font-weight:bold;">Dynamic Motion Composition</span> of <span style="color:#EE822F;font-weight:bold;">3 additional motions</span> after the initial motion <span style="color:#5e7dbd;font-weight:bold;">"walk forward"</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!---           Comparisions        -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <br>
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3">Comparison with Text-to-motion Models</h2>
+      </div>
+    
+      <div class="columns is-centered has-text-centered">
+      </div>    
+      <div class="container">
+
+      <div style="height: 7px;"></div>
+
+
+      <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+      <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                <i>a man <span style="color:#EE822F;"> jumps </span><span style="color:#f11008;">on one leg</span>.</i>
+              </p>
+            </div>
+            <div class="content has-text-centered">
+              <div class="videobox">
+                <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                  <source src="./static/images/comparison/compare_short.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+              
+            </div>
+  
+          </div>
+      </div>
+
+      <section class="hero is-small">
+        <div class="hero-body">
+          <br>
+          <div class="columns is-centered has-text-centered">
+            <h2 class="title is-3">Comparison with Long-term Text-to-motion Models</h2>
+          </div>
+        
+          <div class="columns is-centered has-text-centered">
+          </div>    
+          <div class="container">
+          
+          <div style="height: 7px;"></div>
+          
+    
+          <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+          <div class="columns is-centered">
+              <div class="column">
+                <div class="content has-text-centered">
+                  <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                    <i>"a man <span style="color:#5e7dbd;"> walks </span>forward with arms swinging."</i>
+                    <br>
+                    <i class="fas fa-arrow-right" style="margin: 0 10px; color: #05999c; animation: flowingArrow 2s infinite;"></i>
+                    <i>"then he<span style="color:#EE822F;"> jumps up</span>."</i>
+                    <i class="fas fa-arrow-right" style="margin: 0 10px; color: #05999c; animation: flowingArrow 2s infinite;"></i>
+                    <i>"he <span style="color:#f11008;">turns around</span>."</i>
+                    <i class="fas fa-arrow-right" style="margin: 0 10px; color: #05999c; animation: flowingArrow 2s infinite;"></i>
+                    <i>"he <span style="color:#069b1c;">faces</span> another side."</i>
+                  </p>
+                </div>
+                <div class="content has-text-centered">
+                  <div class="videobox">
+                    <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                      <source src="./static/images/comparison/compare_long.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  
+                </div>
+      
+              </div>
+          </div>
+        
+        <!-- ---- -->
+        <section class="hero is-small">
+          <div class="hero-body">
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <h2 class="title is-3">Ablation Study on Causal property of motion Encoder</h2>
+            </div>
+          
+            <div class="columns is-centered has-text-centered">
+            </div>    
+            <div class="container">
+
+            <div style="height: 7px;"></div>
+
+      
+            <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+            <div class="columns is-centered">
+                <div class="column">
+                  <div class="content has-text-centered">
+                    <!-- <br/><br/><br/><br/><br/><br/> -->
+                    <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                      <i>"A man <span style="color:#5e7dbd;"> is walking forward </span>, favoring his left leg and shifting his walk. He is possibly drunk."</i>
+                      <br>
+                      <i class="fas fa-arrow-right" style="margin: 0 10px; color: #05999c; animation: flowingArrow 2s infinite;"></i>
+                      <i>"He<span style="color:#EE822F;"> turns around</span>."</i>
+                    </p>
+                    <!-- <br/><br/><br/><br/><br/><br/><div style="height: 33px;"></div> -->
+                  </div>
+                  <div class="content has-text-centered">
+                    <div class="videobox">
+                      <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                        <source src="./static/images/ablations/ablation_causal.mp4"
+                                type="video/mp4">
+                      </video>
+                    </div>
+                    <p class="has-text-centered" style="margin-top: 10px; font-size: 1.1em;">
+                      <span style="color:#5e7dbd;font-weight:bold;">Causal motion Encoder</span> explicitly models the <span style="color:#f11008;font-weight:bold;">temporal causal structures</span> in the latent space, enabling <span style="color:#EE822F;font-weight:bold;">streaming generation</span> of <span style="color:#069b1c;font-weight:bold;">unseen motions</span></span>.
+                    </p>
+                  </div>
+        
+                </div>
+            </div>
+
+        <!-- ---- -->
+        <section class="hero is-small">
+          <div class="hero-body">
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <h2 class="title is-3">Ablation Study on Two-Forward Strategy</h2>
+            </div>
+          
+            <div class="columns is-centered has-text-centered">
+            </div>    
+            <div class="container">
+
+            <div style="height: 7px;"></div>
+
+      
+            <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+            <div class="columns is-centered">
+                <div class="column">
+                  <div class="content has-text-centered">
+                    <!-- <br/><br/><br/><br/><br/><br/> -->
+                    <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                      <i>"A man <span style="color:#5e7dbd;"> is walking forward </span>, favoring his left leg and shifting his walk. He is possibly drunk."</i>
+                      <br>
+                      <i class="fas fa-arrow-right" style="margin: 0 10px; color: #05999c; animation: flowingArrow 2s infinite;"></i>
+                      <i>"He<span style="color:#EE822F;"> turns around</span>."</i>
+                    </p>
+                    <!-- <br/><br/><br/><br/><br/><br/><div style="height: 33px;"></div> -->
+                  </div>
+                  <div class="content has-text-centered">
+                    <div class="videobox">
+                      <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                        <source src="./static/images/ablations/ablation_2_forward.mp4"
+                                type="video/mp4">
+                      </video>
+                    </div>
+                    <!-- <p class="has-text-centered" style="margin-top: 10px; font-size: 1.1em;">
+                      <i>Causal motion Encoder explicitly models the <span style="color:#f11008;font-weight:bold;">temporal causal structures</span> in the latent space, enabling streaming generation of <span style="color:#f11008;font-weight:bold;">unseen motions</span></span>.</i>
+                    </p> -->
+                  </div>
+        
+                </div>
+            </div>
+
+            <section class="hero is-small">
+              <div class="hero-body">
+                <br>
+                <div class="columns is-centered has-text-centered">
+                  <h2 class="title is-3">Ablation Study on QK Normalization Technique</h2>
+                </div>
+              
+                <div class="columns is-centered has-text-centered">
+                </div>    
+                <div class="container">
+
+                <div style="height: 7px;"></div>
+
+          
+                <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+                <div class="columns is-centered">
+                    <div class="column">
+                      <div class="content has-text-centered">
+                        <!-- <br/><br/><br/><br/><br/><br/> -->
+                        <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                          <i>A man <span style="color:#5e7dbd;"> walks </span> in a circular path, with his torso slightly <span style="color:#EE822F;">leaned back</span>.</i>
+                    
+                        </p>
+                        <!-- <br/><br/><br/><br/><br/><br/><div style="height: 33px;"></div> -->
+                      </div>
+                      <div class="content has-text-centered">
+                        <div class="videobox">
+                          <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                            <source src="./static/images/ablations/ablation_qknorm.mp4"
+                                    type="video/mp4">
+                          </video>
+                        </div>
+                        
+                      </div>
+            
+                      </div>
+                  </div>
+
+                  <section class="hero is-small">
+                    <div class="hero-body">
+                      <br>
+                      <div class="columns is-centered has-text-centered">
+                        <h2 class="title is-3">Ablation Study on Text Tokenizer</h2>
+                      </div>
+                    
+                      <div class="columns is-centered has-text-centered">
+                      </div>    
+                      <div class="container">
+
+                      <div style="height: 7px;"></div>
+
+                
+                      <div class="has-text-centered" style="margin-bottom: 10px;"> </div>
+                      <div class="columns is-centered">
+                          <div class="column">
+                            <div class="content has-text-centered">
+                              <!-- <br/><br/><br/><br/><br/><br/> -->
+                              <p class="subtitle handwriting" style="font-weight: 300; font-size: 1.75rem;">
+                                <i>A person <span style="color:#5e7dbd;"> jumps </span> repeatedly, <span style="color:#EE822F;">throwing</span> their arms above their head <br> and <span style="color:#069b1c;"> stretching </span> their legs with each jump.</i>
+                        
+                              </p>
+                              <!-- <br/><br/><br/><br/><br/><br/><div style="height: 33px;"></div> -->
+                            </div>
+                            <div class="content has-text-centered">
+                              <div class="videobox">
+                                <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                                  <source src="./static/images/ablations/ablation_clip.mp4"
+                                          type="video/mp4">
+                                </video>
+                              </div>
+                              
+                            </div>
+                  
+                            </div>
+                        </div>
+
+
+                        <section class="hero is-small">
+                          <div class="hero-body">
+                            <br>
+                            <div class="columns is-centered has-text-centered">
+                              <h2 class="title is-3">Generation Diversity</h2>
+                            
+                            </div>
+                            <div class="subtitle is-5 handwriting" style="text-align: center;">
+                              <i><br> a person <span style="color:#5e7dbd;"> walks </span>in a circle.</i>
+                            </div>
+
+                            
+                            <div class="container">
+                            <div class="columns is-centered">
+                              <div class="column">
+                                <div class="content has-text-centered">
+                                    <div class="videobox">
+                                    <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                                      <source src="./static/images/diversity/diversity_1.mkv"
+                                              type="video/mp4">
+                                    </video>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="column">
+                                <div class="content has-text-centered">
+                                  <div class="videobox">
+                                  <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                                    <source src="./static/images/diversity/diversity_2.mkv"
+                                            type="video/mp4">
+                                  </video>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="column">
+                                <div class="content has-text-centered">
+                                  <div class="videobox">
+                                  <video poster="" id="pelvis" autoplay controls muted loop height="100%">
+                                    <source src="./static/images/diversity/diversity_3.mkv"
+                                            type="video/mp4">
+                                  </video>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                    <section class="hero is-small">
+                      <div class="hero-body"></div>
+                      <div class="columns is-centered has-text-centered">
+                        <h2 class="title is-3">Modified 272-dim Motion Representation</h2>
+                      <br>
+                      </div>
+                      <div class="columns is-centered has-text-centered">
+                        <h2 class="subtitle is-5 handwriting" style="height: 40px; margin: left 5px; margin: right 5px"><i> The widely used 263-dimensional motion representation in HumanML3D dataset [Guo et al. (2022)] <br> suffers from post-processing (<span style="color:#f11008">Inverse Kinematics operation</span>) artifacts.</i></h2>
+                      </div> 
+                      <br>
+                      
+
+                        </div>
+
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="videobox" style="height: 300px;">
+            <video poster="" autoplay controls muted loop style="object-fit: cover;">
+              <source src="./static/images/ik/jog_ik.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="column is-half">
+          <div class="videobox" style="height: 300px;">
+            <video poster="" autoplay controls muted loop style="object-fit: cover;">
+              <source src="./static/images/ik/spin_ik.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- 添加共同的caption -->
+      <div class="columns is-centered" style="margin-top: 0.1px;">
+        <div class="column is-full">
+          <p class="has-text-centered" style="margin-top: 0.1px; font-size: 1.1em;">
+            We refine the <span style="color:#069b1c;font-weight:bold;">motion representation</span> to enable <strong><span style="color:#f11008">directly conversion</span></strong> from the <strong><span style="color:#EE822F">predicted joint rotations</span></strong> to <strong><span style="color:#5e7dbd">SMPL body parameters</span></strong>.</p>
+            <p class="has-text-centered" style="margin-top: 0.1px; font-size: 1.1em;">
+              (Processing scripts of the modified 272-dim motion representation are available at <a href="https://github.com/tryhiseyyysum/272-dim-Motion-Representation" target="_blank" style="color:#069b1c;font-weight:bold;">here</a>.)
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!---          Diversity       -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{xiaoxiao2025motionstreamer,
+      title={MotionStreamer: Streaming Motion Generation via Diffusion-based Autoregressive Model in Causal Latent Space},
+      author={Xiao, Lixing and Lu, Shunlin and Pi, Huaijin and Fan, Ke and Pan, Liang and Zhou, Yueer and Feng, Ziyong and Zhou, Xiaowei and Peng, Sida and Wang, Jingbo},
+      journal={arXiv preprint arXiv:xxxx},
+      year={2025}
+    }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+
+
+
+<style>
+@keyframes flowingArrow {
+  0% {
+    opacity: 0.4;
+    transform: translateX(-3px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateX(-3px);
+  }
+}
+
+.videobox {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.videobox video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: transparent;
+}
+
+.fixed-height {
+  height: 300px;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.fixed-height video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none;
+  background-color: transparent;
+}
+
+video {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+</style>
+
+</body>
+</html>

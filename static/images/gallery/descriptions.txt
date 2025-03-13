@@ -1,0 +1,15 @@
+Jog: a man is jogging around
+1: a man slowing walking forward
+2: the toon is standing, swaying a bit, then raising their left wrist as to check the time on a watch.
+3: a man walks forward before stumbling backwards and the continues walking forward.
+4: the person fell down and is crawling away from someone.
+5: the sim reaches to their left and right, grabbing an object and appearing to clean it.
+6: the man takes 4 steps backwards.
+7: she jumps up and down, kicking her heels in the air.
+8: a person who is standing lifts his hands and claps them four times.
+9: a person who is running, stops, bends over and looks down while taking small steps, then resumes running.
+10: a person walks slowly forward holding handrail with left hand.
+11: the person kick his left foot up and both hands up in counterclockwise circle and stop.
+12: a person steps to the left sideways.
+13: a person is walking across a narrow beam.
+14: a person does a drumming movement with both hands.

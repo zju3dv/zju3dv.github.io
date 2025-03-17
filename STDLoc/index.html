@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from Feature Gaussian Splatting">
+  <meta name="keywords" content="visual localization, 3DGS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from Feature Gaussian Splatting
+  </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/stdloc_icon1.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <!-- <script src="./static/js/index.js"></script> -->
+  <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+</head>
+
+<body>
+
+  <!-- Title Section -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <img src="static/images/logo.jpg" style="height:80px"></img> <br>
+              From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from Feature Gaussian Splatting
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="">Zhiwei Huang</a><sup>1,2</sup><sup>*</sup>,</span>
+              <span class="author-block">
+                <a href="">Hailin Yu</a><sup>2</sup><sup>*</sup><sup>&dagger;</sup>,</span>
+              <span class="author-block">
+                <a href="">Yichun Shentu</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Jin Yuan</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Guofeng Zhang</a><sup>1,2</sup><sup>&dagger;</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>State Key Lab of CAD&CG, Zhejiang University</span>
+              <span class="author-block"><sup>2</sup>Sensetime Research</span>
+              <br>
+              <sup>*</sup> Equal Contribution
+              <sup>&dagger;</sup> Corresponding Authors
+            </div>
+
+            <!-- cvpr2025 -->
+            <div class="column has-text-centered">
+              <strong style="font-size: 30px; color:rgb(219, 39, 119);"> CVPR2025 </strong>
+            </div>
+
+            <div class="column has-text-centered">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2501.05763" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2501.05763" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/zju3dv/STDLoc" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <!-- Video Section -->
+  <section class="hero">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Feature Gaussian Scene Representation</h2>
+            <video id="teaser" autoplay controls muted playsinline loop height="100%">
+              <source src="./static/videos/map.mp4" type="video/mp4">
+            </video>
+            <h3 class="title is-4">Radiance Field & Feature Field & Landmarks</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div> -->
+
+  <hr>
+
+  <!-- <section class="section">
+  <div class="container is-max-desktop">
+    The following section presents the method description and results from the <a href="https://arxiv.org/abs/2501.05763">arXiv</a> paper.
+</section> -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              This paper presents a novel camera relocalization method, <b>STDLoc</b>, which leverages Feature GS as
+              scene representation. STDLoc is a full relocalization pipeline that can achieve accurate relocalization
+              without relying on any pose prior. Unlike previous coarse-to-fine localization methods that require image
+              retrieval first and then feature matching, we propose a novel sparse-to-dense localization paradigm. Based
+              on this scene representation, we introduce a novel matching-oriented Gaussian sampling strategy and a
+              scene-specific detector to achieve efficient and robust initial pose estimation. Furthermore, based on the
+              initial localization results, we align the query feature map to the Gaussian feature field by dense
+              feature matching to enable accurate localization. The experiments on indoor and outdoor datasets show that
+              STDLoc outperforms current state-of-the-art localization methods in terms of localization accuracy and
+              recall.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3"><span style="color: #000000 ;font-weight: bolder;">Overview</span></h2>
+
+          <div class="columns">
+            <div class="column is-half">
+              <h3 class="title is-4 is-centered">Matching-Oriented Sampling</h2>
+                <div class="content has-text-justified">
+
+                  <img src="./static/images/stdloc_mo.png">
+                  <!-- <p>
+                    Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+                    would be impossible without nerfies since it would require going through a wall.
+                  </p> -->
+                </div>
+            </div>
+            <div class="column">
+              <h3 class="title is-4 is-centered">Scene-Specific Detector</h2>
+                <div class="content has-text-justified">
+
+                  <img src="./static/images/stdloc_ssd_vis.png">
+                  <!-- <p>
+                    As a byproduct of our method, we can also solve the matting problem by ignoring
+                    samples that fall outside of a bounding box during rendering.
+                  </p> -->
+                </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-half">
+              <!-- <h3 class="title is-4 is-centered">Matching-Oriented Sampling</h2> -->
+                <div class="content has-text-justified">
+                  <p>
+                    Each Gaussian is assigned with a matching score, followed by anchor sampling. For each anchor, the k nearest Gaussians are identified based on spatial distance, and the highest-scoring Gaussian is selected. 
+                    <!-- The number of Gaussians sampled through this method is significantly reduced compared to the original, resulting in a set of Gaussians that are both evenly distributed and highly recognizable from various perspectives. -->
+                  </p>
+                </div>
+            </div>
+            <div class="column">
+              <!-- <h3 class="title is-4 is-centered">Scene-Specific Detector</h2> -->
+                <div class="content has-text-justified">
+                  <p>
+                    We train our scene-specific detector independently for each scene. The image above presents the detected keypoints obtained from both the SuperPoint detector and our scene-specific detector. 
+                    <!-- Notably, our detector captures a greater number of points on buildings while significantly reducing points in the sky. This distribution more accurately reflects the actual Gaussian distribution, resulting in a higher recall rate. -->
+                  </p>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-4 is-centered">STDLoc Pipeline</h2>
+            <div class="content has-text-justified">
+              <img src="./static/images/stdloc_pipeline.png">
+              <p>
+                <strong>(a) Sparse Stage:</strong> Sparse feature matching is conducted among the sampled landmarks and detected keypoint features. Based on the 2D-3D correspondences obtained from the sparse matching, the initial pose can be estimated.
+              </p>
+              <p>
+                <strong>(b) Dense Stage:</strong> Based on initial pose, a dense feature map and a depth map are rendered from the full Feature Gaussian, followed by coarse-to-fine dense feature matching to get dense correspondences. This stage can be iterated to refine the pose.
+              </p>
+              </ol>
+              </p>
+            </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3"><span style="color: #000000 ;font-weight: bolder;">Visualization</span></h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column">
+              <h3 class="title is-4 is-centered">Indoor</h3>
+              <video id="indoor" autoplay controls muted playsinline loop height="300px">
+                <source src="./static/videos/stdloc_stairs2.mp4" type="video/mp4">
+              </video>
+              <!-- <strong>7-Scenes Stairs.</strong> -->
+            </div>
+
+            <div class="column ">
+              <h3 class="title is-4 is-centered">Outdoor</h3>
+              <video id="indoor" autoplay controls muted playsinline loop height="100px">
+                <source src="./static/videos/stdloc_church2.mp4" type="video/mp4">
+              </video>
+              <!-- <strong>Cambridge Landmarks St.Mary's Church.</strong> -->
+            </div>
+          </div>
+          <p>
+            <strong>Note:</strong> Since ACE and HLoc lack novel view synthesis capabilities, we utilize our Feature GS for visualization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <hr> -->
+
+  <!-- <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">
+            <span style="color: #000000 ;font-weight: bolder;">Qualitative comparison</span>
+          </h2>
+          <span style="color: #000000 ;font-weight: bolder;"></span>
+          <div class="content has-text-justified">
+            <img src="./static/images/svi.png">
+          </div>
+
+          <span style="color: #000000 ;font-weight: bolder;">Accuracy comparison on datasets RealEstate-10K and
+            Tanks&Templates</span>
+          <div class="content has-text-justified">
+            <img src="./static/images/pvg.png">
+          </div>
+
+          <span style="color: #000000 ;font-weight: bolder;">Scalability comparison on long-range videos on the dataset
+            RealEstate-10K</span>
+          <div class="content has-text-justified">
+            <img src="./static/images/scalability.png">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <hr> -->
+  <!-- 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">
+            <span style="color: #000000 ;font-weight: bolder;">Ablation Study</span>
+          </h2>
+          <span style="color: #000000 ;font-weight: bolder;">Ablation on spatial and temporal conditions
+            of perpetual view generation.</span>
+          <div class="content has-text-justified">
+            <img src="./static/images/ablation.png">
+          </div>
+          <span style="color: #000000 ;font-weight: bolder;">Video of Ablation on Spatial and Temporal Conditions</span>
+          <video class="video" loop playsinline autoPlay muted src="static/videos/Ablation.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+      @misc{zhai2025stargen,
+        title={StarGen: A Spatiotemporal Autoregression Framework with Video Diffusion Model for Scalable and Controllable Scene Generation}, 
+        author={Shangjin Zhai and Zhichao Ye and Jialin Liu and Weijian Xie and Jiaqi Hu and Zhen Peng and Hua Xue and Danpeng Chen and Xiaomeng Wang and Lei Yang and Nan Wang and Haomin Liu and Guofeng Zhang},
+        year={2025},
+        eprint={2501.05763},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2501.05763},
+    } -->
+  <!-- </code></pre>
+  </div> -->
+
+  <hr>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            We thank the authors of <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+            that kindly open sourced the template of this website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

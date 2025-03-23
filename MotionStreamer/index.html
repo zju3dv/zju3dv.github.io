@@ -78,71 +78,53 @@
                   </div>
 
                   <div class="column has-text-centered">
-                    <div class="publication-links">
-                      
-                    <!-- ArXiv abstract Link -->
+                    <div class="publication-links" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                      <!-- ArXiv abstract Link -->
                       <span class="link-block">
-                      <a href="https://arxiv.org/abs/2503.15451" class="external-link button is-normal is-rounded is-dark" target="_blank">               
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
+                        <a href="https://arxiv.org/abs/2503.15451" class="external-link button is-normal is-rounded is-dark" target="_blank">               
+                          <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                          </span>
+                          <span>arXiv</span>
+                        </a>
                       </span>
-                      <span>arXiv</span>
-                      </a>
-                    </span>
-                    
+                      
                       <!-- Arxiv PDF link -->
                       <span class="link-block">
                         <a href="https://arxiv.org/pdf/2503.15451" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- Supplementary PDF link
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
+                          <span class="icon">
+                            <i class="fas fa-file-pdf"></i>
+                          </span>
+                          <span>Paper</span>
+                        </a>
                       </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span> -->
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/tryhiseyyysum/SMPL-to-Rotation-Representation" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Motion Representation</span>
-                    </a>
-                  </span>
 
-                  <span class="link-block">
-                    <a class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Full Code (Coming Soon)</span>
-                    </a>
-                  </span>
+                      <!-- Github link -->
+                      <span class="link-block" style="display: flex; align-items: center; gap: 10px;">
+                        <a href="https://github.com/Li-xingXiao/272-dim-Motion-Representation" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                          <span class="icon">
+                            <i class="fab fa-github"></i>
+                          </span>
+                          <span>Motion Representation</span>
+                        </a>
+                        <a href="https://github.com/Li-xingXiao/272-dim-Motion-Representation" target="_blank" class="github-badge" style="background: #24292e; color: white; padding: 5px 10px; border-radius: 15px; text-decoration: none; font-size: 0.9em; display: flex; align-items: center; gap: 5px;">
+                          <i class="fas fa-star" style="color: #f1e05a;"></i>
+                          <span class="github-stars"></span>
+                        </a>
+                      </span>
 
-
-                  <!-- Supplementary PDF link -->
-                  <!-- <span class="link-block">
-                    <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-video"></i>
-                    </span>
-                    <span>Video</span>
-                  </a>
-                </span> -->
-
-                </a>
-              </span>
+                      <span class="link-block">
+                        <a class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fab fa-github"></i>
+                          </span>
+                          <span>Full Code (Coming Soon)</span>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -918,6 +900,15 @@ video {
   background-color: transparent;
 }
 </style>
+
+<script>
+// 添加到页面的script部分
+fetch('https://api.github.com/repos/Li-xingXiao/272-dim-Motion-Representation')
+  .then(response => response.json())
+  .then(data => {
+    document.querySelector('.github-stars').textContent = data.stargazers_count;
+  });
+</script>
 
 </body>
 </html>

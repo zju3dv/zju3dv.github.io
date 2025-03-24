@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- 不知道这里是干嘛的，还没改? -->
+  <meta name="description"
+        content="NeuMesh encodes the neural implicit field with disentangled geometry and texture features on a mesh scaffold, thereby enables mesh-guided geometry deformation, texture swapping, filling and painting.">
+  <meta name="keywords" content="NeuMesh, Neural Rendering, Scene Editing, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <!--这里是链接图表的icon-->
+  <!-- <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/sun.png"/> -->
+
+  <!-- This shown in top of the window-->
+  <title>
+    PanoGS
+  </title>
+
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/zju3dv/Vox-Surf"> Vox-Surf</a>
+          <a class="navbar-item" href="https://github.com/zju3dv/Vox-Fusion"> Vox-Fusion</a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nis_slam"> NIS-SLAM</a>
+          <a class="navbar-item" href="https://zju3dv.github.io/splatloc/"> SplatLoc</a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neuraloc"> NeuraLoc</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          PanoGS: Gaussian-based Panoptic Segmentation for 3D Open Vocabulary Scene Understanding
+        </h1>
+        <!-- confrence or journal -->
+        <h1 class="title is-size-3" style="color:#db2909;">CVPR 2025</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=alXpF8wAAAAJ&hl=en">Hongjia Zhai</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=vn89ztQAAAAJ&hl=zh-CN">Hai Li</a><sup>2</sup>,</div>
+          <div class="author-block">
+            <a href="https://zju3dv.github.io/panogs">Zhenzhe Li</a><sup>1</sup>,</div>
+            <div class="author-block">
+            <a href="https://zju3dv.github.io/panogs">Xiaokun Pan</a><sup>1</sup>,</div>
+            <div class="author-block">
+              <a href="https://scholar.google.com/citations?user=_0lKGnkAAAAJ&hl=en">Yijia He</a><sup>2</sup>,</div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup></div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <!-- * denotes equal contribution <br> -->
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>RayNeo</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+                <a href="https://github.com/zhaihongjia/PanoGS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href="https://github.com/zhaihongjia/PanoGS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zhaihongjia/PanoGS"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/PanoGS/images/teaser.png" alt="PanoGS Results."/>
+      <div class="content has-text-justified">
+        <p>
+          We propose PanoGS, a novel and effective 3D panoptic open vocabulary scene understanding approach. 
+          Our PanoGS can achieve more accurate segmentation results and generate 3D instance-level results for open-vocabulary text queries, 
+          unlike previous methods that generate heatmaps between scene features and text queries
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fifth-sixths">
+        <h2 class="title is-3" style="color:#0f0f0e;">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recently, 3D Gaussian Splatting (3DGS) has shown encouraging performance for open vocabulary scene understanding tasks. 
+            However, previous methods cannot distinguish 3D instance-level information, which usually predicts a heatmap between the scene feature and text query. 
+            In this paper, we propose PanoGS, a novel and effective 3D panoptic open vocabulary scene understanding approach. 
+            Technically, to learn accurate 3D language features that can scale to large indoor scenarios, 
+            we adopt the pyramid tri-plane to model the latent continuous parametric feature space and use a 3D feature decoder to regress 
+            the multi-view fused 2D feature cloud. 
+            Besides, we propose language-guided graph cuts that synergistically leverage reconstructed geometry and learned language cues 
+            to group 3D Gaussian primitives into a set of super-primitives.
+            To obtain 3D consistent instance, we perform graph clustering based segmentation with SAM-guided edge affinity computation 
+            between different super-primitives. Extensive experiments on widely used datasets show better or more competitive performance on 
+            3D panoptic open vocabulary scene understanding. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<hr/>
+
+<section class="section">
+<!-- Framework Overview -->
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered" style="color:#0f0f0e;"><p>Method</p></h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/PanoGS/images/pipeline.png"
+             alt="PanoGS."/>
+      </div>
+      <p>
+        <b>Overview of our approach.</b> 
+        (a) Given posed RGB-D images, we reconstruct the scene with 3D Gaussian primitives, 
+        and each primitive is associated with additional latent language code $g$ generated from a latent continuous pyramid tri-plane feature space. 
+        (b) After the geometry reconstruction, we obtain 2D fused primitive-level features and confidences via back projection, 
+        which is used for efficient 3D language feature regression and latent pyramid tri-plane and 3D decoder optimization. 
+        (c) We perform a language-guided graph cuts algorithm to construct super-primitive and use the 2D instance mask generated by SAM to conduct 
+        progressive graph clustering.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+    <h2 class="title is-3 has-text-centered" style="color:#ff9c7b;"><p>Experiments</p></h2>
+    <h3 class="title is-5 has-text-centered" style="color:#f55d26;"><p>3D Semantic Segmentation of ScanNetV2 dataset</p></h3>
+    <div class="has-text-centered">
+      <img style="width: 100%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/PanoGS/images/scannet_sem.png" alt="Visual Localization."/>
+    </div>
+
+    <h3 class="title is-5 has-text-centered" style="color:#f55d26;"><p>3D Panoptic Segmentation of ScanNetV2 dataset</p></h3>
+    <div class="has-text-centered">
+      <img style="width: 70%;" src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/PanoGS/images/scannet_ins.png" alt="Novel view synthesis."/>
+    </div>
+
+    <h3 class="title is-5 has-text-centered" style="color:#f55d26;"><p>Video Results</p></h3>
+      <!-- <div class="has-text-centered"> -->
+        <video style="width: 100%;" id="functions" autoplay controls muted loop playsinline height="100%">
+          <source src="https://raw.githubusercontent.com/zhaihongjia/open_access_assets/main/PanoGS/video/demo-video.mp4" type="video/mp4">
+        </video>
+
+    <br/>
+
+</section>
+
+<hr/>
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{panogs,
+      title={{PanoGS}: Gaussian-based Panoptic Segmentation for 3D Open Vocabulary Scene Understanding},
+      author={Zhai, Hongjia and Li, Hai and Li, Zhenzhe and Pan, Xiaokun and He, Yijia and Zhang, Guofeng},
+      booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+      year={2025},
+    }
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5RT7HMEN2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5RT7HMEN2');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

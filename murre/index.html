@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Multi-view Reconstruction via SfM-guided Monocular Depth Estimation">
+  <meta name="keywords" content="multi-view reconstruction, diffusion model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image:src" content="http://marigoldmonodepth.github.io/images/marigold_logo_square.jpg">
+  <meta name="twitter:title" content="Murre">
+  <meta name="twitter:description" content="Multi-view Reconstruction via SfM-guided Monocular Depth Estimation">
+  <meta name="twitter:creator" content="@jiahaoshao1">
+
+  <title>Murre: Multi-view Reconstruction via SfM-guided Monocular Depth Estimation</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FWSVCGZTG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-1FWSVCGZTG');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/twentytwenty.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="icon" href="./images/favicon.png">
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/jquery.event.move.js"></script>
+  <script src="./js/jquery.twentytwenty.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/fontawesome.all.min.js"></script>
+
+  <!--MathJax-->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Multi-view Reconstruction via SfM-guided Monocular Depth Estimation</h1>
+          <h3 class="title has-text-centered">CVPR 2025</h3>
+          <div class="is-size-5 publication-authors">
+            
+            <a href="https://github.com/ghy0324" target="_blank">Haoyu Guo</a><sup>1*</sup>, 
+            <a href="https://ada4321.github.io/" target="_blank">He Zhu</a><sup>2*^</sup>, 
+            <a href="https://pengsida.net" target="_blank">Sida Peng</a><sup>1</sup>,
+            <a href="https://haotongl.github.io/" target="_blank">Haotong Lin</a><sup>1</sup>,
+            <a href="https://yunzhiy.github.io/" target="_blank">Yunzhi Yan</a><sup>1</sup>,
+            <a href="https://github.com/xbillowy" target="_blank">Tao Xie</a><sup>1</sup>,
+            <br>
+            <a href="https://sites.google.com/view/wenguanwang" target="_blank">Wenguan Wang</a><sup>1</sup>,
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou</a><sup>1</sup>
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao</a><sup>1†</sup>,
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <p><sup>1</sup>Zhejiang University &nbsp;&nbsp; 
+              <sup>2</sup>Beijing Normal University &nbsp;&nbsp;
+              <br>
+              <sup>*</sup> Equal contribution.
+              <br>
+              <sup>^</sup> Work done during internship at Zhejiang University. 
+              <br>
+              <sup>†</sup> Corresponding author. </p>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2503.14483" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf" style="color: orangered"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zju3dv/Murre" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://ghy0324.github.io/project_page_assets/murre/supp.pdf" target="_blank" rel="noopener noreferrer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf" style="color: orangered"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" width="100%" src="./images/teaser.png" alt="Teaser"/>
+      <!-- <h2 class="subtitle has-text-centered">
+        <span class="methodname">Marigold</span> is the new state-of-the-art depth estimator for images in the wild.
+      </h2> -->
+    </div>
+  </div>
+</section> -->
+
+<section class="section pt-0">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <!-- <hr style="margin-top:0px"> -->
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <source src="https://ghy0324.github.io/project_page_assets/murre/demo.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+            In this paper, we present a new method for multi-view geometric reconstruction. In recent years, large vision models have rapidly developed, performing excellently across various tasks and demonstrating remarkable generalization capabilities. Some works use large vision models for monocular depth estimation, which have been applied to facilitate multi-view reconstruction tasks in an indirect manner. Due to the ambiguity of the monocular depth estimation task, the estimated depth values are usually not accurate enough, limiting their utility in aiding multi-view reconstruction. We propose to incorporate SfM information, a strong multi-view prior, into the depth estimation process, thus enhancing the quality of depth prediction and enabling their direct application in multi-view geometric reconstruction. Experimental results on public real-world datasets show that our method significantly improves the quality of depth estimation compared to previous monocular depth estimation works. Additionally, we evaluate the reconstruction quality of our approach in various types of scenes including indoor, streetscape, and aerial views, surpassing state-of-the-art MVS methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="hero teaser is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="section-title has-text-centered" style="margin-top: 10px; margin-bottom: 20px;">
+        <h2 class="title is-3">Depth Map Visualization and Comparison</h2>
+      </div>
+      <!-- <div class="section-title has-text-centered" style="margin-top: 10px; margin-bottom: 20px;">
+        <h2 class="title is-3">Comparison with Marigold</h2>
+      </div> -->
+      <div id="results-carousel-horizontal" class="carousel results-carousel">
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0660/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0660/ours.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0660/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0660/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static">
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC50495/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC50495/ours.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC50495/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC50495/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0070/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0070/ours.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0070/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0070/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static">
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC10099/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC10099/ours.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC10099/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/hospital-DSC10099/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0760/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0760/ours.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0760/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/campus-117MEDIA-DJI_0760/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static-gt">
+            <div class="cmpcontent">
+              <img src="./images/office_0-0320/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/office_0-0320/gt.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/office_0-0320/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/office_0-0320/ours.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top-static-gt">
+            <div class="cmpcontent">
+              <img src="./images/room_1-1560/rgb.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/room_1-1560/gt.png">
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom-static">
+            <div class="cmpcontent">
+              <img src="./images/room_1-1560/marigold.png">
+            </div>
+            <div class="cmpcontent">
+              <img src="./images/room_1-1560/ours.png">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  $(window).on('load', function() {
+    bulmaCarousel.attach('#results-carousel-horizontal', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      autoplay: false,
+    });
+
+    bulmaCarousel.attach('#results-carousel-vertical', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+      loop: true,
+      autoplay: true,
+    });
+
+    $(".twentytwenty-container-top-static").twentytwenty({
+      before_label: 'Input',
+      after_label: 'Ours',
+      default_offset_pct: 0.75,
+    });
+    $(".twentytwenty-container-top-static-gt").twentytwenty({
+      before_label: 'Input',
+      after_label: 'GT',
+      default_offset_pct: 0.75,
+    });
+    $(".twentytwenty-container-bottom-static").twentytwenty({
+      before_label: 'Marigold',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+  });
+</script>
+
+
+<section class="hero teaser is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- <div class="section-title has-text-centered" style="margin-top: 10px; margin-bottom: 20px;">
+        <h2 class="title is-3">Comparison with ChronoDepth</h2>
+      </div> -->
+      <div id="results-carousel-horizontal" class="carousel results-carousel">
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-3/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-3/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-3/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-3/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-4/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-4/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-4/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/019-4/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/226-3/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/226-3/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/226-3/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/226-3/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/157-4/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/157-4/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/157-4/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/157-4/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0050/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0050/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0050/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0050/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0084/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0084/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0084/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0084/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="twoitem">
+          <div class="twentytwenty-container twentytwenty-container-top">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0616/rgb.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0616/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+          <div class="twentytwenty-container twentytwenty-container-bottom">
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0616/chrono.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="cmpcontent">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+              <source src="./videos/0616/ours.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  $(window).on('load', function() {
+    bulmaCarousel.attach('#results-carousel-horizontal', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      autoplay: false,
+    });
+
+    bulmaCarousel.attach('#results-carousel-vertical', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+      loop: true,
+      autoplay: true,
+    });
+
+    $(".twentytwenty-container-top").twentytwenty({
+      before_label: 'Input',
+      after_label: 'Ours',
+      default_offset_pct: 0.75,
+    });
+    $(".twentytwenty-container-bottom").twentytwenty({
+      before_label: 'ChronoDepth',
+      after_label: 'Ours',
+      default_offset_pct: 0.5,
+    });
+  });
+</script>
+
+
+<section class="section pt-0">
+  <div class="container">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="title is-3">Framework</h2>
+        <div class="content has-text-justified">
+          <div class="hero-body" style="margin-top: 0px; margin-bottom: -30px;">
+            <img id="method_train" width="100%" src="./images/pipeline.png" alt="training pipeline"/>
+          </div>
+
+          <p>
+            Given multi-view images, we first employ a Structure from Motion (SfM) method to derive sparse 3D scene structures (a). These 3D structures are then encoded into an intermediate explicit representation (b), which is used as a condition for depth estimation (c). Finally, we conduct a TSDF fusion to achieve the final reconstruction (d).
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+<!-- reconstruction showcase -->
+<section class="section pt-0">
+  <div class="container">
+    <!-- Reconstruction showcase. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Reconstruction Showcase</h2>
+        <div class="content has-text-justified">
+          <div class="embed-responsive embed-responsive-16by9" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://sketchfab.com/playlists/embed?collection=49f85c36f2d14c4790696be72e4b7931&autostart=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+          
+          <p class="mt-4">We present the reconstruction results on UrbanScene3D. Due to file size limitation of sketchfab, the models displayed are of relatively low resolution. You may download <a href="https://drive.google.com/file/d/1fiswd3dA_p86CfVZIDGhsk9Gp94NwZ1_/view?usp=sharing">the models</a> with higher resolution geometry and texture if you are interested.</p>
+        </div>
+      </div>
+    </div>
+    <!--/ Reconstruction showcase. -->
+  </div>
+</section>
+<br>
+
+<section class="section pt-0">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Combination with Gaussian Splatting</h2>
+        <div class="content has-text-justified">
+        <!-- <hr style="margin-top:0px"> -->
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <source src="https://ghy0324.github.io/project_page_assets/murre/gs.mp4" type="video/mp4">
+        </video>
+
+        <p>
+          We run <a href="https://github.com/nerfstudio-project/gsplat" target="_blank">gsplat</a> and compare the results with and without our method for initialization and supervision. Our method effectively constrains the Gaussian positions, particularly in textureless and reflective regions such as the lakes.
+        </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section pt-0" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Citation</h2>
+    <pre class="selectable"><code>@inproceedings{guo2025murre,
+  title={Multi-view Reconstruction via SfM-guided Monocular Depth Estimation},
+  author={Guo, Haoyu and Zhu, He and Peng, Sida and Lin, Haotong and Yan, Yunzhi and Xie, Tao and Wang, Wenguan and Zhou, Xiaowei and Bao, Hujun},
+  booktitle={CVPR},
+  year={2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer pt-4 pb-0">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            Website template based on
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a>
+            and licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              CC-BY-SA-4.0
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

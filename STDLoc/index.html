@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="description"
     content="From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from Feature Gaussian Splatting">
-  <meta name="keywords" content="visual localization, 3DGS">
+  <meta name="keywords" content="camera relocalization, visual localization, gaussian splatting, feature matching">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from Feature Gaussian Splatting
   </title>
@@ -57,9 +57,9 @@
             </h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="">Zhiwei Huang</a><sup>1,2</sup><sup>*</sup>,</span>
+                <a href="">Zhiwei Huang</a><sup>1,2</sup>,</span>
               <span class="author-block">
-                <a href="">Hailin Yu</a><sup>2</sup><sup>*</sup><sup>&dagger;</sup>,</span>
+                <a href="">Hailin Yu</a><sup>2</sup><sup>&dagger;</sup>,</span>
               <span class="author-block">
                 <a href="">Yichun Shentu</a><sup>2</sup>,
               </span>
@@ -67,15 +67,15 @@
                 <a href="">Jin Yuan</a><sup>2</sup>,
               </span>
               <span class="author-block">
-                <a href="">Guofeng Zhang</a><sup>1,2</sup><sup>&dagger;</sup>
+                <a href="">Guofeng Zhang</a><sup>1</sup><sup>&dagger;</sup>
               </span>
             </div>
 
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>State Key Lab of CAD&CG, Zhejiang University</span>
-              <span class="author-block"><sup>2</sup>Sensetime Research</span>
+              <span class="author-block"><sup>2</sup>SenseTime Research</span>
               <br>
-              <sup>*</sup> Equal Contribution
+              <!-- <sup>*</sup> Equal Contribution -->
               <sup>&dagger;</sup> Corresponding Authors
             </div>
 
@@ -86,7 +86,7 @@
 
             <div class="column has-text-centered">
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/abs/2503.19358" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
@@ -94,7 +94,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/pdf/2503.19358" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
@@ -164,16 +164,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              This paper presents a novel camera relocalization method, <b>STDLoc</b>, which leverages Feature GS as
-              scene representation. STDLoc is a full relocalization pipeline that can achieve accurate relocalization
-              without relying on any pose prior. Unlike previous coarse-to-fine localization methods that require image
-              retrieval first and then feature matching, we propose a novel sparse-to-dense localization paradigm. Based
-              on this scene representation, we introduce a novel matching-oriented Gaussian sampling strategy and a
-              scene-specific detector to achieve efficient and robust initial pose estimation. Furthermore, based on the
-              initial localization results, we align the query feature map to the Gaussian feature field by dense
-              feature matching to enable accurate localization. The experiments on indoor and outdoor datasets show that
-              STDLoc outperforms current state-of-the-art localization methods in terms of localization accuracy and
-              recall.
+              This paper presents a novel camera relocalization method, <b>STDLoc</b>, which leverages Feature Gaussian as scene representation. STDLoc is a full relocalization pipeline that can achieve accurate relocalization without relying on any pose prior.  Unlike previous coarse-to-fine localization methods that require image retrieval first and then feature matching, we propose a novel sparse-to-dense localization paradigm. Based on this scene representation, we introduce a novel matching-oriented Gaussian sampling strategy and a scene-specific detector to achieve efficient and robust initial pose estimation. Furthermore, based on the initial localization results, we align the query feature map to the Gaussian feature field by dense feature matching to enable accurate localization. The experiments on indoor and outdoor datasets show that STDLoc outperforms current state-of-the-art localization methods in terms of localization accuracy and recall.
             </p>
           </div>
         </div>
@@ -264,7 +255,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3"><span style="color: #000000 ;font-weight: bolder;">Visualization</span></h2>
+          <h2 class="title is-3"><span style="color: #000000 ;font-weight: bolder;">Qualitative Comparison</span></h2>
           <div class="columns is-centered has-text-centered">
             <div class="column">
               <h3 class="title is-4 is-centered">Indoor</h3>
@@ -283,14 +274,14 @@
             </div>
           </div>
           <p>
-            <strong>Note:</strong> Since ACE and HLoc lack novel view synthesis capabilities, we utilize our Feature GS for visualization.
+            <strong>Note:</strong> Since ACE and HLoc do not support novel view synthesis, we use our Feature Gaussian for visualization.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- <hr> -->
+  <hr>
 
   <!-- <section class="section">
     <div class="container is-max-desktop">
@@ -342,21 +333,18 @@
     </div>
   </section> -->
 
-  <!-- <section class="section" id="BibTeX">
+  <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>
-      @misc{zhai2025stargen,
-        title={StarGen: A Spatiotemporal Autoregression Framework with Video Diffusion Model for Scalable and Controllable Scene Generation}, 
-        author={Shangjin Zhai and Zhichao Ye and Jialin Liu and Weijian Xie and Jiaqi Hu and Zhen Peng and Hua Xue and Danpeng Chen and Xiaomeng Wang and Lei Yang and Nan Wang and Haomin Liu and Guofeng Zhang},
-        year={2025},
-        eprint={2501.05763},
-        archivePrefix={arXiv},
-        primaryClass={cs.CV},
-        url={https://arxiv.org/abs/2501.05763},
-    } -->
-  <!-- </code></pre>
-  </div> -->
+<pre><code>@inproceedings{huang2025stdloc,
+  title={From Sparse to Dense: Camera Relocalization with Scene-Specific Detector from {Feature Gaussian Splatting}},
+  author={Huang, Zhiwei and Yu, Hailin and Shentu, Yichun and Yuan, Jin and Zhang, Guofeng},
+  booktitle={CVPR},
+  pages={},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
 
   <hr>
 

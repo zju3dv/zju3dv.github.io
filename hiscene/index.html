@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Creating Hierarchical 3D Scenes with Isometric View Generation.">
+  <meta name="keywords" content="Scene Generation, Hierarchical Generation, Object Completion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HiScene: Creating Hierarchical 3D Scenes with Isometric View Generation.</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/square.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/coin3d/">
+            Coin3D
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span style="color: #FF8C64">H</span><span style="color: #FF8765">i</span><span style="color: #FF8266">S</span><span style="color: #FE7A64">c</span><span style="color: #ff7265e9">e</span><span style="color: #fe6d63f7">n</span><span style="color: #FD7575">e</span>: Creating <span style="color: #FF8C64">H</span><span style="color: #FF8765">i</span>erarchical 3D <span style="color: #FF8266">S</span><span style="color: #FE7A64">c</span><span style="color: #ff7265e9">e</span><span style="color: #fe6d63f7">n</span><span style="color: #FD7575">e</span><span style="color: #f26363">s</span> with Isometric View Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/wqdong8">Wenqi Dong</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://ybbbbt.com/">Bangbang Yang</a><sup>2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/YZsZY">Zesong Yang</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://y-u-a-n-l-i.github.io/">Yuan Li</a><sup>1</sup>,
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://tau-yihouxiang.github.io/">Tao Hu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=VG_cdLAAAAAJ">Yuewen Ma</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1†</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Zhejiang University,</span>
+            <span class="author-block"><sup>2</sup>ByteDance</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://raw.githubusercontent.com/wqdong8/open_access_assets/main/hiscene/hiscene.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/XXXX"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/0B-nSTxYBOs?si=bqVbTN_B53eT3Fee"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/wqdong8/XXXX"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code(Coming Soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/highlight.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <!-- We treat a scene as hierarchical level “objects”. -->
+        Hierarchical scene generation with <span style="font-weight: bold;">HiScene</span>.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Scene-level 3D generation represents a critical frontier in multimedia and computer graphics, yet existing approaches either suffer from limited object categories or lack editing flexibility for interactive applications. In this paper, we present HiScene, a novel hierarchical framework that bridges the gap between 2D image generation and 3D object generation and delivers high-fidelity scenes with compositional identities and aesthetic scene content. Our key insight is treating scenes as hierarchical "objects" under isometric views, where a room functions as a complex object that can be further decomposed into manipulatable items. This hierarchical approach enables us to generate 3D content that aligns with 2D representations while maintaining compositional structure. To ensure completeness and spatial alignment of each decomposed instance, we develop a video-diffusion-based amodal completion technique that effectively handles occlusions and shadows between objects, and introduce shape prior injection to ensure spatial coherence within the scene. Experimental results demonstrate that our method produces more natural object arrangements and complete object instances suitable for interactive applications, while maintaining physical plausibility and alignment with user inputs.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/0B-nSTxYBOs?si=buLQQw0-6wKwTGAV"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+            <h2 class="title is-3">Pipeline</h2>
+            <img src="./static/images/pipeline.png" alt="piepline" style="height: 100%;">
+            <p>
+              Our hierarchical framework generates 3D scenes with compositional identities through three main stages. First, we create a 3D scene from a generated isometric view.
+              Next, we perform scene parsing to obtain precise object segmentation, followed by multi-view rendering and detailed occlusion analysis for each identified instance.
+              Finally, we apply our video-diffusion-based amodal completion to generate complete views of each instance, which serve as guidance for regenerating intact objects with proper spatial alignment in the scene.
+              The resulting 3D scene features fully compositional identities, facilitating user-directed modifications like interactive scene editing.
+            </p>
+        </div>
+    </div>
+    </div>
+    <!--/ Pipeline. -->
+
+    <!-- Hierarchical scene parsing. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Hierarchical scene parsing</h2>
+        <!-- 2D&3D-Segment. -->
+        <div class="content has-text-justified">
+          <p>
+            HiScene first initialize a 3D Gaussian Splatting scene from a generated isometric view, then perform hierarchical scene parsing with semantic segmentation to identify distinct objects and obtain each object’ multi-view rendering and occlusion analysis.
+          </p>
+        </div>
+        <h4 class="title is-4">2D & 3D Segmentation</h3>
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay muted loop playsinline
+                 width="75%">
+            <source src="./static/videos/segment.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!--/ 2D&3D-Segment. -->
+        <!-- ObjectMVR&Occlusion. -->
+        <h4 class="title is-4">Object-Centric Multiview Rendering & Occlusion Analysis</h3>
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay muted loop playsinline
+                  width="75%">
+            <source src="./static/videos/objmvrender.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!--/ ObjectMVR&Occlusion. -->
+
+        <h2 class="title is-3">Video-diffusion-based Amodal Completion</h2>
+        <div class="content has-text-justified">
+          <p>
+            A key challenge during identity refinement is that the rendered instance views often exhibit significant occlusions. Despite advances in 3D object generation, reconstructing complete objects from occluded views remains ill-posed. To tackle this problem, we reformulate the instance refinement as a 2D amodal completion and 3D regeneration task, and propose a video-diffusion-based completion framework to handle it. Our method treats the amodal completion process as a temporal transition video effect, where occlusions gradually dissolve to reveal the complete object.
+          </p>
+        </div>
+        <!-- amodal_pipeline. -->
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay muted loop playsinline
+                  width="100%">
+            <source src="./static/videos/amodal.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!--/ amodal_pipeline. -->
+        
+        <!-- amodal_dataset. -->
+        <h4 class="title is-4">Dataset curation</h3>
+          <div class="content has-text-justified">
+            <p>
+              During object completion, apart from filling occluded parts, we need to remove notable visual artifacts caused by occlusion, such as shadows. To create training data with realistic shadow effects, we combined carefully filtered Objaverse 3D objects (181K) with rigid body simulation and path-tracing rendering in Blender, generating 468K synthetic images. This synthetic dataset was then integrated with existing data, resulting in a comprehensive collection of 1.32 million image pairs. These pairs were converted to video format using linear blending, transitioning from foreground objects to their complete versions.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <video id="replay-video" autoplay muted loop playsinline
+                    width="100%">
+              <source src="./static/videos/dataset.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        <!--/ amodal_dataset. -->
+
+        <!-- Spatial Aligned Generation. -->
+        <h2 class="title is-3">Spatial Aligned Generation</h2>
+        <div class="content has-text-justified">
+          <p>
+            After obtaining objects’ occlusion-free views, we aim to regenerate each object to achieve intact instances while preserving their original scale and poses. To accomplish this, we design a spatial alignment mechanism with shape prior injection that ensures refined objects maintain proper geometric alignment with the original scene context.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img src="./static/images/spatial_aligned.png" alt="piepline" style="height: 100%;">
+        </div>
+        <!--/ Spatial Aligned Generation. -->
+
+        <!-- more_examples. -->
+        <h2 class="title is-3">More Examples</h2>
+        <div class="content has-text-justified">
+          <p>
+            We show more examples of interactive 3D scene generation and scene editing.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video" autoplay muted loop playsinline
+                  width="100%">
+            <source src="./static/videos/more_example.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ more_examples. -->
+  </div>
+</section>  
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{dong2025hiscene,
+  author    = {Dong, Wenqi and Yang, Bangbang and Yang, Zesong and Li, Yuan and Hu, Tao and Bao, Hujun and Ma, Yuewen and Cui, Zhaopeng},
+  title     = {HiScene: Creating Hierarchical 3D Scenes with Isometric View Generation},
+  journal   = {arxiv},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://raw.githubusercontent.com/wqdong8/open_access_assets/main/hiscene/hiscene.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/wqdong8" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This page is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">the Nerfies website</a> . We thank the authors for sharing it. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

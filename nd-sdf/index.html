@@ -98,7 +98,7 @@
           <h1 class="title is-1 publication-title">ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="">Ziyu Tang</a><sup>1</sup></span>&nbsp;&nbsp;
+              <a href="https://github.com/dawnzyt">Ziyu Tang</a><sup>1</sup></span>&nbsp;&nbsp;
             <span class="author-block">
               <a href="https://ywcmaike.github.io/">Weicai Ye</a><sup>1,2,&#9993;</sup></span>&nbsp;&nbsp;
             <span class="author-block">
@@ -134,7 +134,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/pdf/2408.12598"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -143,7 +143,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2408.12598"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -193,7 +193,7 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img id="teaser" height="100%" src="./static/images/teaser.png" alt="ND-SDF teaser."/>
+      <img id="teaser" height="100%" src="./static/images/teaser2.png" alt="ND-SDF teaser."/>
       <p>
         We present <b>ND-SDF</b>, a framework for high-fidelity 3D indoor surface reconstruction from multi-views. Shown above is an extracted mesh from ScanNet++.
       </p>
@@ -211,21 +211,15 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Neural implicit reconstruction via volume rendering has proven its effectiveness in recovering dense 3D surfaces.
-            Nevertheless, it is nontrivial to simultaneously satisfy the need for detail and maintain smoothness across areas with differing characteristics. 
-            To address the aforementioned challenge, previous methods commonly employ geometric priors, 
-            which are often constrained by the performance of the prior models.
-            In this paper, we propose <b>ND-SDF</b>, which learns a <b>N</b>ormal <b>D</b>eflection field to represent the angle deviation between the scene normals
-            and the prior normals. Previous methods typically apply geometric priors uniformly across all samples,
-            which introduces significant biases in accuracy. In contrast,
-            our proposed normal deflection field dynamically learns and adapts the utilization of samples based on their specific characteristics,
-            thereby improving the precision and effectiveness of the model.
-            In doing so, our method not only smooths areas like walls and floors but also preserves the geometric features of complex structures.
-            In addition, we also introduce a novel ray sampling strategy based on the deflection angle.
-            It facilitates the unbiased rendering process, thereby substantially enhancing the quality of detailed surfaces,
-            with improved accuracy, particularly on thin structures.
-            We conduct comprehensive experiments on various challenging datasets, the consistent improvement demonstrates the superiority of our proposed ND-SDF.
-            All codes and models will be made public upon acceptance.
+			Neural implicit reconstruction via volume rendering has demonstrated its effectiveness in recovering dense 3D surfaces. 
+			However, it is non-trivial to simultaneously recover meticulous geometry and preserve smoothness across regions with differing characteristics. 
+			To address this issue, previous methods typically employ geometric priors, which are often constrained by the performance of the prior models. 
+			In this paper, we propose <b>ND-SDF</b>, which learns a <b>N</b>ormal <b>D</b>eflection field to represent the angular deviation between the scene normal and the prior normal. 
+			Unlike previous methods that uniformly apply geometric priors on all samples, introducing significant bias in accuracy, our proposed normal deflection 
+			field dynamically learns and adapts the utilization of samples based on their specific characteristics, thereby improving both the accuracy and effectiveness of the model. 
+			Our method not only obtains smooth weakly textured regions such as walls and floors but also preserves the geometric details of complex structures. 
+			In addition, we introduce a novel ray sampling strategy based on the deflection angle to facilitate the unbiased rendering process, which significantly improves the quality and accuracy of intricate surfaces, 
+			especially on thin structures. Consistent improvements on various challenging datasets demonstrate the superiority of our method.
           </p>
         </div>
       </div>
@@ -279,23 +273,24 @@
   </div>
 
   <div class="container is-max-desktop">
+    <br>
     <h2 class="title is-3" style="text-align: center;">Comparisons</h2>
       <!-- ScanNet -->
       <div class="content">
         
         <h2 class="title is-4">ScanNet</h2>
         <div class="button-container" id="btn1">
-          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_1.png', './static/images/cmp/ours/scannet_1.png')" class="cmp-button cmp-btn-checked">scan1</button>
-          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_2.png', './static/images/cmp/ours/scannet_2.png')" class="cmp-button">scan2</button>
-          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_3.png', './static/images/cmp/ours/scannet_3.png')" class="cmp-button">scan3</button>
-          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/monosdf/scannet_4.png', './static/images/cmp/ours/scannet_4.png')" class="cmp-button">scan4</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/debsdf/scannet_1.png', './static/images/cmp/ours_new/scannet_1.png')" class="cmp-button cmp-btn-checked">scan1</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/debsdf/scannet_2.png', './static/images/cmp/ours_new/scannet_2.png')" class="cmp-button">scan2</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/debsdf/scannet_3.png', './static/images/cmp/ours_new/scannet_3.png')" class="cmp-button">scan3</button>
+          <button onclick="changeImages(event, 'cmp1','./static/images/cmp/debsdf/scannet_4.png', './static/images/cmp/ours_new/scannet_4.png')" class="cmp-button">scan4</button>
         </div>
         <div class="cmp-container" id="cmp1">
             <div class="bottom">
-                <img src="./static/images/cmp/ours/scannet_1.png"/>
+                <img src="./static/images/cmp/ours_new/scannet_1.png"/>
             </div>
             <div class="top">
-                <img src="./static/images/cmp/monosdf/scannet_1.png"/>
+                <img src="./static/images/cmp/debsdf/scannet_1.png"/>
             </div>
             <div class="cmp-slider"></div>
         </div>
@@ -307,19 +302,19 @@
         <h2 class="title is-4">ScanNet++</h2>
 
         <div class="button-container" id="btn2">
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_1.png', './static/images/cmp/ours/scannetpp_1.png')" class="cmp-button cmp-btn-checked">036bce3393</button>
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_2.png', './static/images/cmp/ours/scannetpp_2.png')" class="cmp-button">0e75f3c4d9</button>
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_3.png', './static/images/cmp/ours/scannetpp_3.png')" class="cmp-button">108ec0b806</button>
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_4.png', './static/images/cmp/ours/scannetpp_4.png')" class="cmp-button">7f4d173c9c</button>
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_5.png', './static/images/cmp/ours/scannetpp_5.png')" class="cmp-button">ab11145646</button>
-          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/monosdf/scannetpp_6.png', './static/images/cmp/ours/scannetpp_6.png')" class="cmp-button">e050c15a8d</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_1.png', './static/images/cmp/ours_new/scannetpp_1.png')" class="cmp-button cmp-btn-checked">036bce3393</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_2.png', './static/images/cmp/ours_new/scannetpp_2.png')" class="cmp-button">0e75f3c4d9</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_3.png', './static/images/cmp/ours_new/scannetpp_3.png')" class="cmp-button">108ec0b806</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_4.png', './static/images/cmp/ours_new/scannetpp_4.png')" class="cmp-button">7f4d173c9c</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_5.png', './static/images/cmp/ours_new/scannetpp_5.png')" class="cmp-button">ab11145646</button>
+          <button onclick="changeImages(event, 'cmp2','./static/images/cmp/debsdf/scannetpp_6.png', './static/images/cmp/ours_new/scannetpp_6.png')" class="cmp-button">e050c15a8d</button>
         </div>
         <div class="cmp-container" id="cmp2">
             <div class="bottom">
-                <img src="./static/images/cmp/ours/scannetpp_1.png"/>
+                <img src="./static/images/cmp/ours_new/scannetpp_1.png"/>
             </div>
             <div class="top">
-                <img src="./static/images/cmp/monosdf/scannetpp_1.png"/>
+                <img src="./static/images/cmp/debsdf/scannetpp_1.png"/>
             </div>
             <div class="cmp-slider"></div>
         </div>
@@ -330,24 +325,24 @@
       <div class="content">
         <h2 class="title is-4">Tanks and Temples</h2>
         <div class="button-container" id="btn3">
-          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_1.png', './static/images/cmp/ours/tnt_1.png')" class="cmp-button cmp-btn-checked">Courtroom</button>
-          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_2.png', './static/images/cmp/ours/tnt_2.png')" class="cmp-button">Auditorium</button>
-          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_3.png', './static/images/cmp/ours/tnt_3.png')" class="cmp-button">Museum</button>
-          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/monosdf/tnt_4.png', './static/images/cmp/ours/tnt_4.png')" class="cmp-button">Ballroom</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/debsdf/tnt_1.png', './static/images/cmp/ours_new/tnt_1.png')" class="cmp-button cmp-btn-checked">Courtroom</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/debsdf/tnt_2.png', './static/images/cmp/ours_new/tnt_2.png')" class="cmp-button">Auditorium</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/debsdf/tnt_3.png', './static/images/cmp/ours_new/tnt_3.png')" class="cmp-button">Museum</button>
+          <button onclick="changeImages(event, 'cmp3','./static/images/cmp/debsdf/tnt_4.png', './static/images/cmp/ours_new/tnt_4.png')" class="cmp-button">Ballroom</button>
         </div>
         <div class="cmp-container" id="cmp3">
             <div class="bottom">
-                <img src="./static/images/cmp/ours/tnt_1.png"/>
+                <img src="./static/images/cmp/ours_new/tnt_1.png"/>
             </div>
             <div class="top">
-                <img src="./static/images/cmp/monosdf/tnt_1.png"/>
+                <img src="./static/images/cmp/debsdf/tnt_1.png"/>
             </div>
             <div class="cmp-slider"></div>
         </div>
       </div>
 
-      <!-- TnT -->
-      <div class="content">
+      <!-- TnT 2048-->
+      <!-- <div class="content">
         <h2 class="title is-4">T&T extracted at 2048 resolution</h2>
         <p>
           The mesh extracted at 2048 resolution on T&T demonstrates that our method significantly enhances the generation of small and complex structures.
@@ -367,9 +362,38 @@
             </div>
             <div class="cmp-slider"></div>
         </div>
-        <script src="./static/js/comparison.js"></script>
+      </div> -->
+
+    <br>
+    <h2 class="title is-3" style="text-align: center;">Textured mesh</h2>
+    <!-- scannet++ with texture -->
+    <div class="content">
+      <h2 class="title is-4">ScanNet++</h2>
+      <p>
+        We further demonstrate the textured mesh generated by our method on ScanNet++.
+      </p>
+      <div class="button-container" id="btn2">
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_1.png', './static/images/cmp/pp_textured/scannetpp_1.png')" class="cmp-button cmp-btn-checked">036bce3393</button>
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_2.png', './static/images/cmp/pp_textured/scannetpp_2.png')" class="cmp-button">0e75f3c4d9</button>
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_3.png', './static/images/cmp/pp_textured/scannetpp_3.png')" class="cmp-button">108ec0b806</button>
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_4.png', './static/images/cmp/pp_textured/scannetpp_4.png')" class="cmp-button">7f4d173c9c</button>
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_5.png', './static/images/cmp/pp_textured/scannetpp_5.png')" class="cmp-button">ab11145646</button>
+        <button onclick="changeImages(event, 'cmp5','./static/images/cmp/pp_mesh/scannetpp_6.png', './static/images/cmp/pp_textured/scannetpp_6.png')" class="cmp-button">e050c15a8d</button>
       </div>
+      <div class="cmp-container" id="cmp5">
+          <div class="bottom">
+              <img src="./static/images/cmp/pp_textured/scannetpp_1.png"/>
+          </div>
+          <div class="top">
+              <img src="./static/images/cmp/pp_mesh/scannetpp_1.png"/>
+          </div>
+          <div class="cmp-slider"></div>
+      </div>
+      
     </div>
+    <script src="./static/js/comparison.js"></script>
+  <!-- end -->
+  </div>
 
 
 
@@ -408,13 +432,13 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-      @article{tang2024ndsdf,
-          title={ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction},
-          author={Ziyu Tang and Weicai Ye and Yifan Wang and Di Huang and Hujun Bao and Tong He and Guofeng Zhang},
-          booktitle== {arxiv preprint},
-          year={2024}
-      }
-      ```</code></pre>
+@article{tang2024ndsdf,
+    title={ND-SDF: Learning Normal Deflection Fields for High-Fidelity Indoor Reconstruction},
+    author={Ziyu Tang and Weicai Ye and Yifan Wang and Di Huang and Hujun Bao and Tong He and Guofeng Zhang},
+    booktitle== {arxiv preprint},
+    year={2024}
+}
+      </code></pre>
   </div>
 </section>
 

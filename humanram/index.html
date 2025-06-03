@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="HumanRAM" name="title" />
+  <meta content="This paper proposes a feed-forward human reconstruction and animation model using transformers."
+    name="description" />
+  <meta content="Computer Vision, Computer Graphics, NeRF, 3D Gaussian Splatting, Reconstruction, Animation, Avatar, Large Reconstruction Model" name="keywords" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Zhiyuan Yu, Zhe Li" name="author" />
+  <title>HumanRAM</title>
+  <!-- Bootstrap -->
+  <script src="js/video_comparison.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/brands.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/solid.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+  <!-- <link href="img/favicon.svg" rel="icon" sizes="any" type="image/svg+xml" /> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    body {
+      font-family: 'Jost';
+      font-weight: 500;
+      font-size: 1.25em;
+    }
+
+    h1 {
+      font-size: 2.25em;
+    }
+
+    h2 {
+      font-size: 1.75em;
+    }
+
+    h3 {
+      font-size: 1.5em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: bolder;
+    }
+
+    b {
+      font-weight: black;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .col-12>h3 {
+      padding-top: 5px;
+    }
+
+    .results-section {
+      padding-bottom: 30px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-4 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.25);
+    }
+
+    video,
+    iframe {
+      border-radius: 10px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      padding: 10px;
+      margin: 0px;
+      border-radius: 0px;
+    }
+
+    .a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    .a4x3 {
+      aspect-ratio: 1352/1014;
+    }
+
+    .a1x1 {
+      aspect-ratio: 1;
+    }
+
+    .a16x9demo {
+      aspect-ratio: 3.05;
+    }
+
+    .a4x3demo {
+      aspect-ratio: 2.0;
+    }
+
+    .a1x1demo {
+      aspect-ratio: 1600/1672;
+    }
+  </style>
+  <script>
+
+  </script>
+  </link>
+</head>
+
+<body>
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b>
+                Human<span style="color: #6589bf">R</span><span style="color: #78aa58">A</span><span style="color: #c68b5b">M</span>: Feed-forward Human <span style="color: #6589bf">Reconstruction</span> and <span style="color: #78aa58">Animation</span> <span style="color: #c68b5b">Model</span> using Transformers
+              </b>
+            </h1>
+            <h4 style="color:#5a6268;">SIGGRAPH 2025</h4>
+            <hr>
+            <a href="https://github.com/fishfishson" target="_blank">Zhiyuan Yu<sup>1*</sup> </a> 
+            <a href="https://lizhe00.github.io/" target="_blank">Zhe Li<sup>1*</sup> </a> 
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>3</sup> </a> 
+            <a href="https://sites.google.com/site/eeyangc/" target="_blank">Can Yang<sup>1x</sup> </a> 
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>3x</sup> </a> 
+            <p>
+              <sup>1</sup>Mathematics, HKUST   <sup>2</sup>Huawei   <sup>3</sup>State Key Lab of CAD&CG, Zhejiang University<br>
+              <sup>*</sup> Equal contribution&nbsp;&nbsp;&nbsp;&nbsp;
+              <sup>x</sup> Corresponding authors
+            </p>
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://zju3dv.github.io/humanram/" role="button"
+                    target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>ArXiv</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="files/paper.pdf" role="button"
+                    target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Paper</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="files/supp.pdf" role="button"
+                    target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Supplementary</b>
+                  </a>
+                </p>
+              </div>
+              <!-- <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://www.youtube.com/watch?v=s8bzdZ63kx8" role="button" target="_blank">
+                    <i class="fa fa-file-video-o"></i>
+                    <b>Overview Video</b>
+                  </a>
+                </p>
+              </div> -->
+              <!-- <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://github.com/zju3dv/EasyVolcap" role="button" target="_blank">
+                    <i class="fa fa-github"></i>
+                    <b>EasyVolcap Framework</b>
+                  </a>
+                </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Abstract</h3>
+          <hr style="margin-top: 0px" />
+          <video src="video/teaser.mp4" width="100%" autoplay muted loop preload></video>
+          <p style="font-size: small;">We propose HumanRAM, a novel approach for feed-forward novel view synthesis (reconstruction) and novel pose synthesis (animation) from sparse/single-view human image(s). 
+            The animation poses are from ActorsHQ and AMASS datasets.</p>
+          <p class="text-align: justify; text-justify: inter-word;">
+            3D human reconstruction and animation are long-standing topics in computer graphics and vision. 
+            However, existing methods typically rely on sophisticated dense-view capture and/or time-consuming per-subject optimization procedures. 
+            To address these limitations, we propose HumanRAM, <strong>a novel feed-forward approach for generalizable human reconstruction and animation from monocular or sparse human images</strong>.
+            Our approach integrates human reconstruction and animation into a unified framework by introducing explicit pose conditions, parameterized by a shared SMPL-X neural texture, into transformer-based large reconstruction models (LRM).
+            Given monocular or sparse input images with associated camera parameters and SMPL-X poses, our model employs scalable transformers and a DPT-based decoder to synthesize realistic human renderings under novel viewpoints and novel poses. 
+            By leveraging the explicit pose conditions, our model simultaneously enables high-quality human reconstruction and high-fidelity pose-controlled animation.
+            Experiments show that HumanRAM significantly surpasses previous methods in terms of reconstruction accuracy, animation fidelity, and generalization performance on real-world datasets. <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Sparse-view Results</h3>
+          <hr style="margin-top: 0px" />
+          <div class="carousel slide" data-interval="100000" data-ride="carousel" id="sparse-view-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="3" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="4" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="5" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="6" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="7" data-target="#sparse-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub00/sparse00-recon.mp4" data-desktop-vid2="./video/sparse-view/sub00/sparse00-recon.mp4" data-mobile-vid1="./video/sparse-view/sub00/sparse00-recon.mp4" data-mobile-vid2="./video/sparse-view/sub00/sparse00-recon.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub00/sparse00-anim00.mp4" data-desktop-vid2="./video/sparse-view/sub00/sparse00-anim00.mp4" data-mobile-vid1="./video/sparse-view/sub00/sparse00-anim00.mp4" data-mobile-vid2="./video/sparse-view/sub00/sparse00-anim00.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub00/sparse00-anim01.mp4" data-desktop-vid2="./video/sparse-view/sub00/sparse00-anim01.mp4" data-mobile-vid1="./video/sparse-view/sub00/sparse00-anim01.mp4" data-mobile-vid2="./video/sparse-view/sub00/sparse00-anim01.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub00/sparse00-anim02.mp4" data-desktop-vid2="./video/sparse-view/sub00/sparse00-anim02.mp4" data-mobile-vid1="./video/sparse-view/sub00/sparse00-anim02.mp4" data-mobile-vid2="./video/sparse-view/sub00/sparse00-anim02.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub01/sparse01-recon.mp4" data-desktop-vid2="./video/sparse-view/sub01/sparse01-recon.mp4" data-mobile-vid1="./video/sparse-view/sub01/sparse01-recon.mp4" data-mobile-vid2="./video/sparse-view/sub01/sparse01-recon.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub01/sparse01-anim00.mp4" data-desktop-vid2="./video/sparse-view/sub01/sparse01-anim00.mp4" data-mobile-vid1="./video/sparse-view/sub01/sparse01-anim00.mp4" data-mobile-vid2="./video/sparse-view/sub01/sparse01-anim00.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub01/sparse01-anim01.mp4" data-desktop-vid2="./video/sparse-view/sub01/sparse01-anim01.mp4" data-mobile-vid1="./video/sparse-view/sub01/sparse01-anim01.mp4" data-mobile-vid2="./video/sparse-view/sub01/sparse01-anim01.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/sparse-view/sub01/sparse01-anim02.mp4" data-desktop-vid2="./video/sparse-view/sub01/sparse01-anim02.mp4" data-mobile-vid1="./video/sparse-view/sub01/sparse01-anim02.mp4" data-mobile-vid2="./video/sparse-view/sub01/sparse01-anim02.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#sparse-view-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#sparse-view-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Single-view Results</h3>
+          <hr style="margin-top: 0px" />
+          <div class="carousel slide" data-interval="100000" data-ride="carousel" id="single-view-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#single-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#single-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#single-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="3" data-target="#single-view-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/single-view/mono00-recon.mp4" data-desktop-vid2="./video/single-view/mono00-recon.mp4" data-mobile-vid1="./video/single-view/mono00-recon.mp4" data-mobile-vid2="./video/single-view/mono00-recon.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/single-view/mono00-anim01.mp4" data-desktop-vid2="./video/single-view/mono00-anim01.mp4" data-mobile-vid1="./video/single-view/mono00-anim01.mp4" data-mobile-vid2="./video/single-view/mono00-anim01.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/single-view/mono00-anim02.mp4" data-desktop-vid2="./video/single-view/mono00-anim02.mp4" data-mobile-vid1="./video/single-view/mono00-anim02.mp4" data-mobile-vid2="./video/single-view/mono00-anim02.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/single-view/mono00-anim03.mp4" data-desktop-vid2="./video/single-view/mono00-anim03.mp4" data-mobile-vid1="./video/single-view/mono00-anim03.mp4" data-mobile-vid2="./video/single-view/mono00-anim03.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#single-view-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#single-view-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Method</h3>
+          <hr style="margin-top: 0px" />
+          <div style="display: flex; justify-content: center;">
+            <img src="img/neutex.jpg" width="45%" />
+          </div>
+          <p>
+            <strong>Pose Image</strong>.
+            We first render position maps with canonical SMPL-X as vertex colors, and then the position maps are used to sample triplane-based neural texture.
+          </p>
+        </div>
+        <div class="col-12">
+          <div style="display: flex; justify-content: center;">
+            <img src="img/overview.jpg" width="80%" />
+          </div>
+          <p>
+            <strong>Pipeline</strong>.
+            HumanRAM adopts transformers for human reconstruction and animation from sparse view images in a feed-forward manner.
+            We first patchify and project spare-view RGB images and their corresponding Plücker rays and pose images into input tokens through a linear layer.
+            The pose images are acquired by rasterizing the SMPL-X neural texture onto the input views.
+            Similarly, given the target novel view under the same or another novel pose, the target tokens are created from the target Plücker rays and pose images through another linear layer. 
+            Then both input tokens and target tokens are fed into transformer blocks. 
+            Finally, a DPT-based decoder regresses the intermediate target tokens to a high-fidelity human image under the target view and target pose.
+            Overall, HumanRAM realizes feed-forward reconstruction and animation by controlling the target views and target poses at the input end.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Applications on Volumetric Video</h3>
+          <hr style="margin-top: 0px" />
+          <div class="carousel slide" data-interval="100000" data-ride="carousel" id="demo-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#demo-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#demo-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/volvid/volvid_sub00.mp4" data-desktop-vid2="./video/volvid/volvid_sub00.mp4" data-mobile-vid1="./video/volvid/volvid_sub00.mp4" data-mobile-vid2="./video/volvid/volvid_sub00.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./video/volvid/volvid_sub01.mp4" data-desktop-vid2="./video/volvid/volvid_sub01.mp4" data-mobile-vid1="./video/volvid/volvid_sub01.mp4" data-mobile-vid2="./video/volvid/volvid_sub01.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#demo-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#demo-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <br>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Full Demo Video</h3>
+          <hr style="margin-top: 0px" />
+          <div class="pt-4" style="filter: none">
+            <div class="w-full overflow-hidden"
+              style="position: relative; padding-top: 56.25%; border-radius: 0.5rem;">
+              <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                src="https://www.youtube.com/embed/aNIqDUA53wM?si=BXJI_2B4RMdk2J80&amp;controls=0"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Training & Evaluation Metrics</h3>
+          <hr style="margin-top: 0px" />
+          <p><strong>Training</strong>:
+            GVHMR is trained on a mixed dataset consisting of AMASS, BEDLAM, H36M, and 3DPW.
+            The model is trained from scratch and converges after 420 epochs with a batch size of 256.
+            Training takes 13 hours on 2 RTX 4090 GPUs.
+          </p>
+          <p><strong>World-grounded Metrics</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/table1.png" width="80%" />
+          </div>
+          </p>
+          <p><strong>Camera-space Metrics</strong>
+          <div style="display: flex; justify-content: center;">
+            <img src="img/table2.png" width="70%" />
+          </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        </br>
+        </br>
+        <h3>Citation</h3>
+        <hr style="margin-top: 0px" />
+        <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px">
+        <code>@inproceedings{yu2025humanram,
+          title={HumanRAM: Feed-forward Human Reconstruction and Animation Model using Transformers},
+          author={Yu, Zhiyuan and Li, Zhe and Bao, Hujun and Yang, Can and Zhou, Xiaowei},
+          booktitle={SIGGRAPH Conference Proceedings},
+          year={2025}
+        }</code>
+        </pre>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom: 10px">
+    Thanks to
+    <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a>
+    for the website template.<br>
+    Thanks to the
+    <a href="https://github.com/zju3dv/zju3dv.github.io/tree/master/longvolcap" target="_blank">LongVolCap project page</a>
+    for the useful add-ons.
+  </footer>
+
+  <script type="text/javascript">
+    var sc_project=13140674; 
+    var sc_invisible=1; 
+    var sc_security="64aa968e"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics"
+    href="https://statcounter.com/" target="_blank"><img class="statcounter"
+    src="https://c.statcounter.com/13140674/0/64aa968e/1/" alt="Web Analytics"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
+  <!-- End of Statcounter Code -->
+  <script>
+    // var buttonIds = [
+    //   'vr-demos-button',
+    //   'comp-render-button'
+    // ];
+    // var sectionIds = [
+    //   'vr-demos',
+    //   'comp-render'
+    // ];
+    // for (var i = 0; i < buttonIds.length; i++) {
+    //   (function (index) {
+    //     var button = document.getElementById(buttonIds[index]);
+    //     var section = document.getElementById(sectionIds[index]);
+    //     button.addEventListener('click', function () {
+    //       if (section.classList.contains('show')) {
+    //         button.innerText = '\u00a0Click to Expand\u00a0';
+    //         var videos = section.getElementsByTagName('video');
+    //         for (var j = 0; j < videos.length; j++) {
+    //           if (videos[j].readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+    //             videos[j].pause();
+    //           }
+    //         }
+    //       } else {
+    //         button.innerText = 'Click to Collapse';
+    //         var videos = section.getElementsByTagName('video');
+    //         for (var j = 0; j < videos.length; j++) {
+    //           videos[j].play();
+    //         }
+    //       }
+    //     });
+    //   })(i);
+    // }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: "$$", right: "$$", display: true }
+        ]
+      });
+    });
+
+
+    function handleCarouselSlide(event) {
+      // Reference to the current carousel
+      var currentCarousel = $(event.target);
+
+      // Check each video in the current carousel
+      currentCarousel.find('video').each(function () {
+        var isVideoInActiveItem = $(this).closest('.carousel-item').hasClass('active');
+        if (isVideoInActiveItem) {
+          if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+            this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+          }
+          this.play();
+        } else {
+          if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+            this.pause();
+          }
+        }
+      });
+    }
+
+    $('.carousel').on('slid.bs.carousel', handleCarouselSlide);
+
+    $(document).ready(function () {
+      $('video').each(function () {
+        var $video = $(this);
+        var $carousel = $video.closest('.carousel');
+        if ($carousel.length > 0) {
+          $video.on('ended', function () {
+            $carousel.carousel('next');
+          });
+        }
+      });
+    });
+
+    function updateVideoShape() {
+      this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+    }
+
+    // fix the element's width and height properties to the current video ones
+    $("video").each(function () {
+      if (!this.classList.contains('comparison-video')) {
+        $(this).on('loadeddata', updateVideoShape);
+      }
+    });
+
+    // $("#renbody-results-button").click()
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get all videos
+      var videos = document.querySelectorAll('video');
+
+      // Add source to video tag
+      function addSourceToVideo(element, src) {
+        var source = document.createElement('source');
+        source.src = src;
+        source.type = 'video/mp4';
+        element.appendChild(source);
+      }
+
+      // Determine screen size and select appropriate videos
+      function whichSizeVideo(element) {
+        var windowWidth = window.innerWidth || window.innerWidth;
+        var prefix = windowWidth > 1200 ? "desktop" : "mobile";
+
+        // Get all data attributes for the given prefix (e.g., data-mobile-vid1, data-mobile-vid2, ...)
+        var i = 1;
+        while (element.dataset[prefix + "Vid" + i]) {
+          addSourceToVideo(element, element.dataset[prefix + "Vid" + i]);
+          i++;
+        }
+      }
+
+      // Initialize only if the page has videos
+      function videoBandwidth() {
+        if (videos) {
+          videos.forEach(whichSizeVideo);
+        }
+      }
+      videoBandwidth();
+
+      // FIXME: this is not working yet
+      function videoSize() {
+        if (videos) {
+          videos.forEach(updateVideoShape);
+        }
+      }
+      // Listen to window resize
+      window.onresize = videoSize;
+
+      setInterval(function () {
+        // Select all comparison-video type videos
+        let videos = document.querySelectorAll('.comparison-video');
+
+        videos.forEach(video => {
+          // If the id does not end with After
+          if (!video.id.endsWith('After')) {
+            resizeAndPlay(video);
+          }
+        });
+      }, 10000);  // 每500毫秒检测一次
+
+    });
+  </script>
+</body>
+
+</html>

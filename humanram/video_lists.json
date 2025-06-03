@@ -1,0 +1,123 @@
+{
+    "sparse-": [
+        {
+            "src": "video/web_dance/dance_robot_2_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_kungfufighting_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_kpop_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_aist_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_ballet_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_hudiebu_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_dance/dance_kpop_dy_1_3_incam_global_horiz.mp4"
+        }
+    ],
+    "emdb": [
+        {
+            "src": "video/emdb/P4_37_outdoor_run_circle_540p_cut_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/emdb/51_outdoor_dancing_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/emdb/76_outdoor_sitting_1_720p_3_incam_global_horiz_downsample.mp4"
+        }
+    ],
+    "web_random": [
+        {
+            "src": "video/web_random/golden_standard_kun_2_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/aigc_sora1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/ysjf_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/ysjf_3_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/drum_3_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/dance_selfie_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_random/funny_vp_tesla_3_incam_global_horiz.mp4"
+        }
+    ],
+    "web_mocapactor": [
+        {
+            "src": "video/web_mocapactor/mocap_xxy4_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_mocapactor/mocap_xxy5_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_mocapactor/mocap_xxy3_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_mocapactor/mocap_xxy2_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_mocapactor/mocap_xxy6_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_mocapactor/mocap_xxy1_3_incam_global_horiz.mp4"
+        }
+    ],
+    "rich": [
+        {
+            "src": "video/rich/test@Gym_011_burpee2@cam_03.mp4"
+        },
+        {
+            "src": "video/rich/test@ParkingLot2_009_overfence1@cam_00.mp4"
+        },
+        {
+            "src": "video/rich/test@Gym_010_cooking1@cam_01.mp4"
+        }
+    ],
+    "web_sports": [
+        {
+            "src": "video/web_sports/lebron_practice2_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_sports/cartwheel1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_sports/pushup_1_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/web_sports/basketball_high_jump_1_3_incam_global_horiz.mp4"
+        }
+    ],
+    "3dpw": [
+        {
+            "src": "video/3dpw/downtown_enterShop_00_720_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/3dpw/downtown_cafe_00_540p_cut2_3_incam_global_horiz.mp4"
+        },
+        {
+            "src": "video/3dpw/outdoors_fencing_01_540p_3_incam_global_horiz.mp4"
+        }
+    ],
+    "volvid": [
+        {
+            "src": "video/volvid/volvid_sub00.mp4"
+        },
+        {
+            "src": "video/volvid/volvid_sub01.mp4"
+        }
+    ]
+}

@@ -14,6 +14,7 @@
   <!-- Bootstrap -->
   <script src="js/video_comparison.js"></script>
   <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="js/bootstrap-4.4.1.js"></script>
 
   <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
@@ -195,6 +196,10 @@
       aspect-ratio: 4/3;
     }
 
+    .a1932 {
+      aspect-ratio: 1932/1276;
+    }
+
     .a1x1 {
       aspect-ratio: 1;
     }
@@ -280,7 +285,7 @@
                 <p class="mb-5">
                   <a class="btn btn-large btn-light" href="https://youtu.be/y7e0YRNNmXw" role="button" target="_blank">
                     <i class="fa fa-youtube-play"></i>
-                    <b>YouTube</b> -->
+                    <b>&nbsp;YouTube</b> -->
                     <!-- <i class="fa fa-file-video-o"></i> -->
                     <!-- <img src="img/youtube.svg" style="width: 16px; height: 16px;"></i> -->
                     <!-- <b>&nbsp;YouTube</b> -->
@@ -326,7 +331,7 @@
               </div>
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://www.4dv.ai/" role="button" target="_blank">
+                  <a class="btn btn-large btn-light" href="https://www.4dv.ai/viewer/salmon_10s?showdemo=4dv" role="button" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Laptop / Mobile / VR supported (except Flame Salmon scene)">
                     <img src="img/3d-product-animation-demonstration.svg" style="width: 20px; height: 20px;">
                     <b>Interactive Demo</b>
                   </a>
@@ -353,7 +358,7 @@
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">
           <b style="color: #8899a5">
-            Real-Time rendering of dynamic 3D scenes with large and complex motions, on the <span style="font-style: italic">SelfCap</span> dataset.
+            Real-Time rendering of dynamic 3D scenes with large and complex motions.
           </b>
 
 
@@ -368,13 +373,13 @@
               <li data-slide-to="2" data-target="#demo-carousel">
                 <span class="indicator-dot"></span>
               </li>
-              <!-- <li data-slide-to="3" data-target="#demo-carousel">
+              <li data-slide-to="3" data-target="#demo-carousel">
                 <span class="indicator-dot"></span>
               </li>
               <li data-slide-to="4" data-target="#demo-carousel">
                 <span class="indicator-dot"></span>
               </li>
-              <li data-slide-to="5" data-target="#demo-carousel">
+              <!-- <li data-slide-to="5" data-target="#demo-carousel">
                 <span class="indicator-dot"></span>
               </li> -->
               <!-- Additional indicators... -->
@@ -385,7 +390,7 @@
                   <div class="col-md-12">
                     <!-- <video autoplay class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/yoga_6000_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/yoga_6000_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/yoga_6000_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo_x0.5/yoga_6000_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                     </video> -->
-                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo1.mp4" data-desktop-vid2="./demo/demo1.mp4" data-mobile-vid1="./demo/demo1.mp4" data-mobile-vid2="./demo/demo1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo_f1.mp4" data-desktop-vid2="./demo/demo_f1.mp4" data-mobile-vid1="./demo/demo_f1.mp4" data-mobile-vid2="./demo/demo_f1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                     </video>
                   </div>
                 </div>
@@ -395,14 +400,32 @@
                   <div class="col-md-12">
                     <!-- <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/hair_200_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/hair_200_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/hair_200_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo_x0.5/hair_200_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                     </video> -->
-                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo2.mp4" data-desktop-vid2="./demo/demo2.mp4" data-mobile-vid1="./demo/demo2.mp4" data-mobile-vid2="./demo/demo2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo_f2.mp4" data-desktop-vid2="./demo/demo_f2.mp4" data-mobile-vid1="./demo/demo_f2.mp4" data-mobile-vid2="./demo/demo_f2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo3.mp4" data-desktop-vid2="./demo/demo3.mp4" data-mobile-vid1="./demo/demo3.mp4" data-mobile-vid2="./demo/demo3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo_f3.mp4" data-desktop-vid2="./demo/demo_f3.mp4" data-mobile-vid1="./demo/demo_f3.mp4" data-mobile-vid2="./demo/demo_f3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo_f4.mp4" data-desktop-vid2="./demo/demo_f4.mp4" data-mobile-vid1="./demo/demo_f4.mp4" data-mobile-vid2="./demo/demo_f4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video autoplay class="a16x9" data-desktop-vid1="./demo/demo_f5.mp4" data-desktop-vid2="./demo/demo_f5.mp4" data-mobile-vid1="./demo/demo_f5.mp4" data-mobile-vid2="./demo/demo_f5.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                    </video>
                   </div>
                 </div>
               </div>
@@ -557,11 +580,11 @@
     </div>
   </section>
 
-  <!-- <section>
+  <section>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3>Real-Time Demos</h3>
+          <h3>More Demos</h3>
           <hr style="margin-top: 0px" />
         </div>
       </div>
@@ -572,56 +595,69 @@
       <div class="row">
         <div class="col-md-12">
           <h5>
-            <button aria-controls="dnarendering-demos" aria-expanded="false" class="btn btn-primary" data-target="#dnarendering-demos" data-toggle="collapse" id="dnarendering-demos-button" type="button">
+            <button aria-controls="slowmotion-demos" aria-expanded="false" class="btn btn-primary" data-target="#slowmotion-demos" data-toggle="collapse" id="slowmotion-demos-button" type="button">
               &nbsp;Click to Expand&nbsp;
             </button>
-            More Real-Time Demos on the <i><b><a href="https://dna-rendering.github.io/">DNA-Rendering</a></b></i> Dataset
+            More Real-Time Demos with <span data-toggle="tooltip" data-placement="top" title="Ultra slow motion (>10×) creates 600+ fps high-speed visuals from smartphone footage (60fps)." style="text-decoration: underline dotted; cursor: help;">slow motion playback</span>.
+            <!-- More Real-Time Demos on the <i><b><a href="https://dna-rendering.github.io/">DNA-Rendering</a></b></i> Dataset -->
           </h5>
         </div>
       </div>
-      <div class="collapse" id="dnarendering-demos">
+      <div class="collapse" id="slowmotion-demos">
         <div class="col-md-12">
           <div class="row sm-gutters">
+            <div class="col-md-6 zoom-element text-center">
+              <video class="a085" data-desktop-vid1="./demo/demo1.mp4" data-desktop-vid2="./demo/demo1.mp4" data-mobile-vid1="./demo/demo1.mp4" data-mobile-vid2="./demo/demo1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+              <div style="margin-top: 10px;">
+                <a class="btn btn-large btn-light" href="https://www.4dv.ai/viewer/hair_3s?showdemo=none" role="button" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Press 'M' for slow motion playback in the viewer">
+                  <img src="img/3d-product-animation-demonstration.svg" style="width: 20px; height: 20px;">
+                  <b>Interactive Demo</b>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 zoom-element text-center">
+              <video class="a085" data-desktop-vid1="./demo/demo2.mp4" data-desktop-vid2="./demo/demo2.mp4" data-mobile-vid1="./demo/demo2.mp4" data-mobile-vid2="./demo/demo2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+              <div style="margin-top: 10px;">
+                <a class="btn btn-large btn-light" href="https://www.4dv.ai/viewer/corgi_5s?showdemo=none" role="button" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Press 'M' for slow motion playback in the viewer">
+                  <img src="img/3d-product-animation-demonstration.svg" style="width: 20px; height: 20px;">
+                  <b>Interactive Demo</b>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+  <br>
+
+
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="street-demos" aria-expanded="false" class="btn btn-primary" data-target="#street-demos" data-toggle="collapse" id="street-demos-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            More Street Reconstruction on the Waymo Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="street-demos">
+        <div class="col-md-12">
+          <div class="row sm-gutters">
+
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/0008_01_150_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/0008_01_150_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/0008_01_150_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/0008_01_150_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video class="a1932" data-desktop-vid1="./demo/static_street.mp4" data-desktop-vid2="./demo/static_street.mp4" data-mobile-vid1="./demo/static_street.mp4" data-mobile-vid2="./demo/static_street.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
+
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/0013_01_150_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/0013_01_150_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/0013_01_150_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/0013_01_150_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-            <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/0013_09_150_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/0013_09_150_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/0013_09_150_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/0013_09_150_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-            <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/0023_06_150_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/0023_06_150_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/0023_06_150_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/0023_06_150_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
-
-
-  <section class="results-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5>
-            <button aria-controls="sports-demos" aria-expanded="false" class="btn btn-primary" data-target="#sports-demos" data-toggle="collapse" id="sports-demos-button" type="button">
-              &nbsp;Click to Expand&nbsp;
-            </button>
-            More Real-Time Demos on the <i><b><a href="https://zju3dv.github.com/longvolcap/">Sports</a></b></i> Dataset
-          </h5>
-        </div>
-      </div>
-      <div class="collapse" id="sports-demos">
-        <div class="col-md-12">
-          <div class="row sm-gutters">
-
-            <div class="col-md-12 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/final_1000_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/final_1000_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/final_1000_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/final_1000_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video class="a1932" data-desktop-vid1="./demo/demo_f3.mp4" data-desktop-vid2="./demo/demo_f3.mp4" data-mobile-vid1="./demo/demo_f3.mp4" data-mobile-vid2="./demo/demo_f3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
 
@@ -631,126 +667,6 @@
     </div>
   </section>
 
-
-
-  <section class="results-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5>
-            <button aria-controls="mobilestage-demos" aria-expanded="false" class="btn btn-primary" data-target="#mobilestage-demos" data-toggle="collapse" id="mobilestage-demos-button" type="button">
-              &nbsp;Click to Expand&nbsp;
-            </button>
-            More Real-Time Demos on the <i><b><a href="https://github.com/zju3dv/4K4D?tab=readme-ov-file#mobile-stage-dataset">MobileStage</a></b></i> Dataset
-          </h5>
-        </div>
-      </div>
-      <div class="collapse" id="mobilestage-demos">
-        <div class="col-md-12">
-          <div class="row sm-gutters">
-
-            <div class="col-md-12 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/dance3_1600_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/dance3_1600_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/dance3_1600_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/dance3_1600_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="results-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5>
-            <button aria-controls="panoptic-demos" aria-expanded="false" class="btn btn-primary" data-target="#panoptic-demos" data-toggle="collapse" id="panoptic-demos-button" type="button">
-              &nbsp;Click to Expand&nbsp;
-            </button>
-            More Real-Time Demos on the <i><b><a href="http://domedb.perception.cs.cmu.edu/">CMU-Panoptic</a></b></i> Dataset
-          </h5>
-        </div>
-      </div>
-      <div class="collapse" id="panoptic-demos">
-        <div class="col-md-12">
-          <div class="row sm-gutters">
-
-            <div class="col-md-12 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/boxes_999_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/boxes_999_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/boxes_999_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/boxes_999_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <section class="results-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5>
-            <button aria-controls="n3dv-demos" aria-expanded="false" class="btn btn-primary" data-target="#n3dv-demos" data-toggle="collapse" id="n3dv-demos-button" type="button">
-              &nbsp;Click to Expand&nbsp;
-            </button>
-            More Real-Time Demos on the <i><b><a href="https://github.com/facebookresearch/Neural_3D_Video">Neural3DV</a></b></i> Dataset
-          </h5>
-        </div>
-      </div>
-      <div class="collapse" id="n3dv-demos">
-        <div class="col-md-12">
-          <div class="row sm-gutters">
-
-            <div class="col-md-12 zoom-element">
-              <video class="a133" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/flame_salmon_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/flame_salmon_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/flame_salmon_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/flame_salmon_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-  <section class="results-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5>
-            <button aria-controls="enerfoutdoor-demos" aria-expanded="false" class="btn btn-primary" data-target="#enerfoutdoor-demos" data-toggle="collapse" id="enerfoutdoor-demos-button" type="button">
-              &nbsp;Click to Expand&nbsp;
-            </button>
-            More Real-Time Demos on the <i><b><a href="https://github.com/zju3dv/ENeRF/blob/master/docs/enerf_outdoor.md">ENeRF-Outdoor</a></b></i> Dataset
-          </h5>
-        </div>
-      </div>
-      <div class="collapse" id="enerfoutdoor-demos">
-        <div class="col-md-12">
-          <div class="row sm-gutters">
-
-            <div class="col-md-12 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/actor1_4_1200_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/actor1_4_1200_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/actor1_4_1200_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/actor1_4_1200_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-
-            <div class="col-md-12 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/actor2_3_1200_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/actor2_3_1200_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/actor2_3_1200_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/actor2_3_1200_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <section>
     <div class="container">
@@ -848,20 +764,20 @@
               <video class="a1x1" data-desktop-vid1="./demo/comp1.mp4" data-desktop-vid2="./demo/comp1.mp4" data-mobile-vid1="./demo/comp1.mp4" data-mobile-vid2="./demo/comp1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
-
-            <div class="col-md-6 zoom-element">
-                <video class="a1x1" data-desktop-vid1="./demo/comp2.mp4" data-desktop-vid2="./demo/comp2.mp4" data-mobile-vid1="./demo/comp2.mp4" data-mobile-vid2="./demo/comp2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-                </video>
-              </div>
-            <div class="col-md-6 zoom-element">
-                <video class="a1x1" data-desktop-vid1="./demo/comp3.mp4" data-desktop-vid2="./demo/comp3.mp4" data-mobile-vid1="./demo/comp3.mp4" data-mobile-vid2="./demo/comp3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-                </video>
-              </div>
             <div class="col-md-6 zoom-element">
                 <video class="a1x1" data-desktop-vid1="./demo/comp4.mp4" data-desktop-vid2="./demo/comp4.mp4" data-mobile-vid1="./demo/comp4.mp4" data-mobile-vid2="./demo/comp4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
                 </video>
               </div>
-  
+
+            <div class="col-md-6 zoom-element">
+                <video class="a1x1" data-desktop-vid1="./demo/comp3.mp4" data-desktop-vid2="./demo/comp3.mp4" data-mobile-vid1="./demo/comp3.mp4" data-mobile-vid2="./demo/comp3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                </video>
+              </div>
+              <div class="col-md-6 zoom-element">
+                <video class="a1x1" data-desktop-vid1="./demo/comp2.mp4" data-desktop-vid2="./demo/comp2.mp4" data-mobile-vid1="./demo/comp2.mp4" data-mobile-vid2="./demo/comp2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                </video>
+              </div>
+
 <!-- 
             <div class="col-md-12 zoom-element">
               <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/comp/actor1_4_compare_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/comp/actor1_4_compare_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/comp_x0.5/actor1_4_compare_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/comp_x0.5/actor1_4_compare_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
@@ -936,7 +852,7 @@ http://zju3dv.github.io/longvolcap -->
   </noscript> -->
 <!-- Default Statcounter code for freetimegs
 https://zju3dv.github.io/freetimegs/ -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var sc_project=13140674; 
     var sc_invisible=1; 
     var sc_security="64aa968e"; 
@@ -946,13 +862,27 @@ https://zju3dv.github.io/freetimegs/ -->
     <noscript><div class="statcounter"><a title="Web Analytics"
     href="https://statcounter.com/" target="_blank"><img class="statcounter"
     src="https://c.statcounter.com/13140674/0/64aa968e/1/" alt="Web Analytics"
-    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript> -->
     <!-- End of Statcounter Code -->
   <!-- End of Statcounter Code -->
+<!-- Default Statcounter code for FreeTimeGs
+https://zju3dv.github.io/freetimegs/ -->
+<script type="text/javascript">
+    var sc_project=13141873; 
+    var sc_invisible=1; 
+    var sc_security="63e27315"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js" async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics"
+    href="https://statcounter.com/" target="_blank"><img class="statcounter"
+    src="https://c.statcounter.com/13141873/0/63e27315/1/" alt="Web Analytics"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    <!-- End of Statcounter Code -->
   <script>
     var buttonIds = [
-    //   'dnarendering-demos-button',
-    //   'sports-demos-button',
+      'slowmotion-demos-button',
+      'street-demos-button',
     //   'mobilestage-demos-button',
     //   'n3dv-demos-button',
     //   'panoptic-demos-button',
@@ -961,8 +891,8 @@ https://zju3dv.github.io/freetimegs/ -->
       'comp-render-button',
      /* ...other button ids... */];
     var sectionIds = [
-    //   'dnarendering-demos',
-    //   'sports-demos',
+      'slowmotion-demos',
+      'street-demos',
     //   'mobilestage-demos',
     //   'n3dv-demos',
     //   'panoptic-demos',
@@ -1027,6 +957,7 @@ https://zju3dv.github.io/freetimegs/ -->
     $('.carousel').on('slid.bs.carousel', handleCarouselSlide);
 
     $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip({delay: { "show": 200, "hide": 0 }});
       $('video').each(function () {
         var $video = $(this);
         var $carousel = $video.closest('.carousel');

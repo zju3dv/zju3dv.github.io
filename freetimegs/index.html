@@ -29,6 +29,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
   <style>
     code {
@@ -395,7 +396,7 @@
                 <div class="row sm-gutters">
                   <div class="col-md-12">
                     <div class="carousel-video-container">
-                      <video autoplay class="" data-desktop-vid1="./demo/demo_f1.mp4" data-desktop-vid2="./demo/demo_f1.mp4" data-mobile-vid1="./demox05/demo_f1.mp4" data-mobile-vid2="./demox05/demo_f1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      <video autoplay class="" data-desktop-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/41f7ac5415c5ea8833e3cfe9f6e186e7/manifest/video.m3u8" data-desktop-vid2="./demo/demo_f1.mp4" data-mobile-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/bd29d09086b711e0cf179e9df68f5de3/manifest/video.m3u8" data-mobile-vid2="./demox05/demo_f1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                       </video>
                     </div>
                   </div>
@@ -405,7 +406,7 @@
                 <div class="row sm-gutters">
                   <div class="col-md-12">
                     <div class="carousel-video-container">
-                      <video autoplay class="" data-desktop-vid1="./demo/demo_f3.mp4" data-desktop-vid2="./demo/demo_f3.mp4" data-mobile-vid1="./demox05/demo_f3.mp4" data-mobile-vid2="./demox05/demo_f3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      <video autoplay class="" data-desktop-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/d70366f1915c989bf2472cdd9deb12f8/manifest/video.m3u8" data-desktop-vid2="./demo/demo_f3.mp4" data-mobile-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/c3b21873daecec21bb9c7c5e63051dbd/manifest/video.m3u8" data-mobile-vid2="./demox05/demo_f3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                       </video>
                     </div>
                   </div>
@@ -415,7 +416,7 @@
                 <div class="row sm-gutters">
                   <div class="col-md-12">
                     <div class="carousel-video-container">
-                      <video autoplay class="" data-desktop-vid1="./demo/demo_f4.mp4" data-desktop-vid2="./demo/demo_f4.mp4" data-mobile-vid1="./demox05/demo_f4.mp4" data-mobile-vid2="./demox05/demo_f4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      <video autoplay class="" data-desktop-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/73d622a3e20d85c9b95381ac1bf43e9e/manifest/video.m3u8" data-desktop-vid2="./demo/demo_f4.mp4" data-mobile-vid1="https://customer-mu24dfhn38f7iz25.cloudflarestream.com/66ec4db6d276eefadea8e10a92f00677/manifest/video.m3u8" data-mobile-vid2="./demox05/demo_f4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
                       </video>
                     </div>
                   </div>
@@ -527,20 +528,6 @@
             is assigned with a motion function to to model its movement. And its opacity is modulated by the temporal opacity function which control
             the impact of the Gaussian primitive over time. With this 4D representation, we further regularize the Gaussians with a 4D regularization
             loss and optimize the rasterization result with rendering loss for reconstructing a dynamic 3D scene from multi-view videos.
-            <!-- Given a long multi-view video sequence, our method can generate a compact volumetric video with minimal training
-            and memory usage while maintaining real-time rendering with state-of-the-art quality. -->
-          <!-- <ul>
-            <li>
-              (a) We propose a hierarchical structure where each level consists of
-              multiple temporal segments. Each segment stores a set of 4D Gaussians [Yang et al. 2023b] to parametrize scenes. As shown at the bottom, the 4D Gaussians
-              in different segments represent different granularities of motions,
-              <b>efficiently and effectively modeling video dynamics.</b>
-            </li>
-            <li>
-              (b) The appearance model leverages
-              gradient thresholding to obtain sparse Spherical Harmonics coefficients, resulting in very <b>compact storage while still maintaining view-dependent effects well.</b>
-            </li>
-          </ul> -->
           </p>
         </div>
       </div>
@@ -682,11 +669,6 @@
               </video>
             </div>
 
-            <!-- <div class="col-md-6 zoom-element">
-              <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/demo/quest3_vr_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/demo/quest3_vr_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/demo_x0.5/quest3_vr_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/demo_x0.5/quest3_vr_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video>
-            </div> -->
-
           </div>
         </div>
       </div>
@@ -724,8 +706,6 @@
           <div class="row sm-gutters">
 
             <div class="col-md-6 zoom-element">
-              <!-- <video class="a16x9" data-desktop-vid1="https://vultr.zhenx.me/longvolcap.assets/comp/flamesalmon_compare_comp.mp4" data-desktop-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/main/comp/flamesalmon_compare_comp.mp4" data-mobile-vid1="https://vultr.zhenx.me/longvolcap.assets/comp_x0.5/flamesalmon_compare_comp.mp4" data-mobile-vid2="https://raw.githubusercontent.com/dendenxu/longvolcap.assets/mobile/mai/comp_x0.5/flamesalmon_compare_comp.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
-              </video> -->
               <video class="a1x1" data-desktop-vid1="./demo/comp1.mp4" data-desktop-vid2="./demo/comp1.mp4" data-mobile-vid1="./demox05/comp1.mp4" data-mobile-vid2="./demox05/comp1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
@@ -804,46 +784,6 @@
     for the website template, which can be found
     <a href="https://github.com/zju3dv/zju3dv.github.io/tree/master/longvolcap" target="_blank">here</a>.
   </footer>
-  <!-- Default Statcounter code for Long Volumetric Video
-http://zju3dv.github.io/longvolcap -->
-  <!-- <script type="text/javascript">
-    var sc_project = 13068940;
-    var sc_invisible = 1;
-    var sc_security = "a17e5a49"; 
-  </script>
-  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-  <noscript>
-    <div class="statcounter"><a title="web statistics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13068940/0/a17e5a49/1/" alt="web statistics" referrerPolicy="no-referrer-when-downgrade"></a></div>
-  </noscript> -->
-<!-- Default Statcounter code for freetimegs
-https://zju3dv.github.io/freetimegs/ -->
-<!-- <script type="text/javascript">
-    var sc_project=13140674; 
-    var sc_invisible=1; 
-    var sc_security="64aa968e"; 
-    </script>
-    <script type="text/javascript"
-    src="https://www.statcounter.com/counter/counter.js" async></script>
-    <noscript><div class="statcounter"><a title="Web Analytics"
-    href="https://statcounter.com/" target="_blank"><img class="statcounter"
-    src="https://c.statcounter.com/13140674/0/64aa968e/1/" alt="Web Analytics"
-    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript> -->
-    <!-- End of Statcounter Code -->
-  <!-- End of Statcounter Code -->
-<!-- Default Statcounter code for FreeTimeGs
-https://zju3dv.github.io/freetimegs/ -->
-<!-- <script type="text/javascript">
-    var sc_project=13141873; 
-    var sc_invisible=1; 
-    var sc_security="63e27315"; 
-    </script>
-    <script type="text/javascript"
-    src="https://www.statcounter.com/counter/counter.js" async></script>
-    <noscript><div class="statcounter"><a title="Web Analytics"
-    href="https://statcounter.com/" target="_blank"><img class="statcounter"
-    src="https://c.statcounter.com/13141873/0/63e27315/1/" alt="Web Analytics"
-    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript> -->
-    <!-- End of Statcounter Code -->
 <!-- Default Statcounter code for FTGS https://zju3dv.github.io/freetimegs/ -->
 <script type="text/javascript">
     var sc_project=13141888; 
@@ -960,42 +900,77 @@ https://zju3dv.github.io/freetimegs/ -->
 
     // $("#renbody-results-button").click()
     document.addEventListener("DOMContentLoaded", function () {
-      // Get all videos
       var videos = document.querySelectorAll('video');
 
-      // Add source to video tag
-      function addSourceToVideo(element, src) {
-        var source = document.createElement('source');
-        source.src = src;
-        source.type = 'video/mp4';
-        element.appendChild(source);
-      }
-
-      // Determine screen size and select appropriate videos
-      function whichSizeVideo(element) {
-        var windowWidth = window.innerWidth || window.innerWidth;
+      function loadVideoForElement(video) {
+        var windowWidth = window.innerWidth;
         var prefix = windowWidth > 1200 ? "desktop" : "mobile";
+        
+        var primarySrc = video.dataset[prefix + 'Vid1'];
+        var fallbackSrc = video.dataset[prefix + 'Vid2'];
 
-        // Get all data attributes for the given prefix (e.g., data-mobile-vid1, data-mobile-vid2, ...)
-        var i = 1;
-        while (element.dataset[prefix + "Vid" + i]) {
-          addSourceToVideo(element, element.dataset[prefix + "Vid" + i]);
-          i++;
+        var hlsSrc = null;
+        var mp4Srcs = [];
+
+        if (primarySrc) {
+            primarySrc.endsWith('.m3u8') ? hlsSrc = primarySrc : mp4Srcs.push(primarySrc);
+        }
+        if (fallbackSrc) {
+            (fallbackSrc.endsWith('.m3u8') && !hlsSrc) ? hlsSrc = fallbackSrc : mp4Srcs.push(fallbackSrc);
+        }
+
+        // Check if browser natively supports HLS
+        function canPlayHLS() {
+            var video = document.createElement('video');
+            return video.canPlayType('application/vnd.apple.mpegurl') || 
+                   video.canPlayType('application/x-mpegURL');
+        }
+
+        if (hlsSrc && Hls.isSupported()) {
+            // Use hls.js for browsers that don't natively support HLS
+            const hls = new Hls();
+            hls.loadSource(hlsSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.ERROR, function(event, data) {
+                if (data.fatal && mp4Srcs.length > 0) {
+                    console.error('HLS.js error, trying MP4 fallback.');
+                    hls.destroy();
+                    // Clear existing sources
+                    video.innerHTML = '';
+                    mp4Srcs.forEach(src => {
+                        const source = document.createElement('source');
+                        source.src = src; source.type = 'video/mp4';
+                        video.appendChild(source);
+                    });
+                    video.load();
+                    video.play();
+                }
+            });
+        } else if (hlsSrc && canPlayHLS()) {
+            // Use native HLS support (Safari/iOS)
+            const source = document.createElement('source');
+            source.src = hlsSrc; 
+            source.type = 'application/vnd.apple.mpegurl';
+            video.appendChild(source);
+            // video.load(); // Explicitly tell Safari to load the new source to prevent black screens
+        } else {
+            // Fallback to MP4 sources
+            mp4Srcs.forEach(src => {
+                const source = document.createElement('source');
+                source.src = src; source.type = 'video/mp4';
+                video.appendChild(source);
+            });
         }
       }
 
-      // Initialize only if the page has videos
-      function videoBandwidth() {
-        if (videos) {
-          videos.forEach(whichSizeVideo);
-        }
+      if (videos) {
+        videos.forEach(loadVideoForElement);
       }
-      videoBandwidth();
 
       // FIXME: this is not working yet
       function videoSize() {
         if (videos) {
-          videos.forEach(updateVideoShape);
+            videos.forEach(function(v) { if(typeof updateVideoShape !== 'undefined') {updateVideoShape.call(v);} });
         }
       }
       // Listen to window resize

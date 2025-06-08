@@ -138,14 +138,44 @@
   <section class="section">
     <div class="container is-max-desktop">
       <video id="teaser" width="100%" playsinline controls autoplay loop muted>
-          <source src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/teaser.mp4" type="video/mp4" />
+          <source src="teaser.mp4" type="video/mp4" />
       </video>
       <script>
         document.getElementById('teaser').play();
       </script>
+      <p class="has-text is-size-6 mt-2">
+        Comparison of EnvGS and other baselines on complex real-world scenes with highly specular reflections.
+      </p>
     </div>
   </section>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <video id="teaser" style="width:100%; height:auto; display:block; margin:0 auto;" playsinline controls autoplay loop muted>
+          <source src="real-time_gui.mp4" type="video/mp4" />
+      </video>
+      <script>
+        document.getElementById('real-time_gui').play();
+      </script>
+      <p class="has-text is-size-6 mt-2">
+        Real-time GUI demonstration, we provide a real-time GUI for users to interact with the EnvGS model, users can check the final color, reflection color, base color, depth map and normal maps of the scene from arbitrary viewpoints in real-time.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <video id="teaser" style="width:60%; height:auto; display:block; margin:0 auto;" playsinline controls autoplay loop muted>
+          <source src="highly_specular_indoor_scene_reconstruction.mp4" type="video/mp4" />
+      </video>
+      <script>
+        document.getElementById('highly_specular_indoor_scene_reconstruction').play();
+      </script>
+      <p class="has-text is-size-6 mt-2">
+        EnvGS performs well on highly specular indoor scenes reconstruction, check the specular light reflections on the desk, we also provide decomposition results (base color and reflection color only) and normal maps visualization.
+      </p>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container is-max-desktop">

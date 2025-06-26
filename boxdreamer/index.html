@@ -12,14 +12,18 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
+    
     <style>
+        
         :root {
             --primary-color: #ee8080;
-            --secondary-color: #5391e0;
+            --secondary-color: #3881e0;
             --bg-color: #fdfcf9;
             --text-color: #000000;
             --light-gray: #f5f5f5;
             --dark-gray: #6e6e6e;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.3);
         }
         
         body {
@@ -30,12 +34,19 @@
         }
         
         .jumbotron {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             padding: 2rem;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            top: 0;
         }
+        
+
         
         h2, h3, h4 {
             font-weight: 700;
@@ -46,6 +57,39 @@
             margin-top: 2rem;
             padding-bottom: 0.5rem;
         }
+
+        h2 {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
         
         hr {
             border-top: 2px solid var(--light-gray);
@@ -54,41 +98,68 @@
         
         .btn {
             border-radius: 30px;
-            padding: 0.5rem 1.5rem;
-            transition: all 0.3s ease;
+            padding: 0.7rem 2rem;
+            transition: all 0.4s ;
             font-weight: 600;
             margin: 0 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-light {
-            background-color: #fff;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            background-size: 200% 200%;
         }
         
         .btn-light:hover {
-            background-color: var(--primary-color);
+            background-position: right center;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
-        .section {
-            padding: 2rem 0;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-            margin-bottom: 2rem;
+        .btn-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-light:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
         
         .img-fluid {
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
         }
         
         .img-fluid:hover {
-            transform: scale(1.01);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .text-justify {
@@ -117,29 +188,86 @@
             line-height: 1.8;
         }
         
-        /* Video grid for in-the-wild examples */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin: 2rem 0;
+            perspective: 1000px;
         }
         
         .video-item {
-            border-radius: 8px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background: #f8f9fa;
         }
         
-        .video-item:hover {
-            transform: translateY(-5px);
+        .video-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(248, 249, 250, 0.95);
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .progress-bar {
+            width: 80%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .loading-text {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            font-weight: 500;
         }
         
         .video-item video {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 15px;
             display: block;
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+        
+        .video-item video.loaded {
+            opacity: 1;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-item:hover video {
+            transform: scale(1.05);
         }
         
         /* Animations */
@@ -173,20 +301,56 @@
             }
         }
 
+        .conference-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 0.4rem 1.2rem; /* 减小内边距 */
+            border-radius: 20px; /* 减小圆角 */
+            margin: 0.5rem 0; /* 减小外边距 */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* 减小阴影 */
+            animation: pulse 2s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conference-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
     </style>
 </head>
 
 <body>
     <!-- Cover -->
     <section>
-        <div class="jumbotron text-center mt-4">
+        <div class="jumbotron text-center ">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <h2>BoxDreamer: Dreaming Box Corners for Generalizable Object Pose Estimation</h2>
-                        <h4 style="color:var(--dark-gray);"> Arxiv 2025 </h4>
+                        <div class="conference-badge">
+                            <h4 style="color: white; margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-size: 1.4rem;">ICCV 2025</h4>
+                        </div>
                         <hr>
-                        <div class="author-list">
+                        <div class="author-list" style="font-size: 1.1rem; font-weight: 500;">
                             <a href="https://yuanhongyu.xyz/">Yuanhong Yu</a><sup>1,2</sup> &bull;
                             <a href="https://github.com/hxy-123">Xingyi He</a><sup>1</sup> &bull;
                             <a href="https://sailor-z.github.io/">Chen Zhao</a><sup>3</sup> &bull;
@@ -218,7 +382,7 @@
                             <div class="column">
                                 <p class="mb-3">
                                     <a class="btn btn-light" id="code" href="https://github.com/zju3dv/BoxDreamer" role="button" target="_blank">
-                                        <i class="fab fa-github"></i> Code (Coming Soon)
+                                        <i class="fab fa-github"></i> Code
                                     </a>
                                 </p>
                             </div>
@@ -323,21 +487,45 @@
                     <div class="video-grid">
                         <!-- Row 1 -->
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/2.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/3.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/4.mp4" type="video/mp4">
                             </video>
@@ -345,21 +533,45 @@
                         
                         <!-- Row 2 -->
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/5.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/6.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/7.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/8.mp4" type="video/mp4">
                             </video>
@@ -367,21 +579,45 @@
                         
                         <!-- Row 3 -->
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/9.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/10.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/11.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="video-item">
+                            <div class="video-loader">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="loading-text">Loading...</span>
+                            </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/12.mp4" type="video/mp4">
                             </video>
@@ -400,10 +636,10 @@
                     <h3>Citation</h3>
                     <hr style="margin-top:0px">
                     <pre><code>@article{yu2025boxdreamer,
-    title={BoxDreamer: Dreaming Box Corners for Generalizable Object Pose Estimation},
-    author={Yu, Yuanhong and He, Xingyi and Zhao, Chen and Yu, Junhao and Yang, Jiaqi and Hu, Ruizhen and Shen, Yujun and Zhu, Xing and Zhou, Xiaowei and Peng, Sida},
-    journal={arXiv preprint arXiv:2504.07955},
-    year={2025}
+  title={BoxDreamer: Dreaming Box Corners for Generalizable Object Pose Estimation},
+  author={Yu, Yuanhong and He, Xingyi and Zhao, Chen and Yu, Junhao and Yang, Jiaqi and Hu, Ruizhen and Shen, Yujun and Zhu, Xing and Zhou, Xiaowei and Peng, Sida},
+  journal={arXiv preprint arXiv:2504.07955},
+  year={2025}
 }</code></pre>
                 </div>
             </div>
@@ -434,6 +670,134 @@
         
         // Initialize after page load
         document.addEventListener('DOMContentLoaded', function() {
+            function initVideoLoaders() {
+                const videoItems = document.querySelectorAll('.video-item');
+                
+                videoItems.forEach((item, index) => {
+                    const video = item.querySelector('video');
+                    const loader = item.querySelector('.video-loader');
+                    const progressFill = item.querySelector('.progress-fill');
+                    const loadingText = item.querySelector('.loading-text');
+                    
+                    if (!video || !loader) return;
+                    
+                    // 模拟加载进度（因为无法准确获取视频加载进度）
+                    let progress = 0;
+                    const progressInterval = setInterval(() => {
+                        progress += Math.random() * 15;
+                        if (progress > 90) progress = 90;
+                        
+                        progressFill.style.width = progress + '%';
+                        loadingText.textContent = `Loading... ${Math.round(progress)}%`;
+                    }, 200);
+                    
+                    // 视频加载完成事件
+                    video.addEventListener('loadeddata', function() {
+                        clearInterval(progressInterval);
+                        progressFill.style.width = '100%';
+                        loadingText.textContent = 'Complete!';
+                        
+                        setTimeout(() => {
+                            loader.classList.add('hidden');
+                            video.classList.add('loaded');
+                        }, 500);
+                    });
+                    
+                    // 视频加载错误处理
+                    video.addEventListener('error', function() {
+                        clearInterval(progressInterval);
+                        progressFill.style.background = '#dc3545';
+                        progressFill.style.width = '100%';
+                        loadingText.textContent = 'Error loading video';
+                        loadingText.style.color = '#dc3545';
+                        
+                        setTimeout(() => {
+                            loader.classList.add('hidden');
+                        }, 2000);
+                    });
+                    
+                    // 预加载视频
+                    video.load();
+                });
+            }
+            
+            // 使用Intersection Observer优化性能
+            function initLazyVideoLoading() {
+                const videoItems = document.querySelectorAll('.video-item');
+                
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const video = entry.target.querySelector('video');
+                            if (video && !video.getAttribute('data-loaded')) {
+                                video.setAttribute('data-loaded', 'true');
+                                // 开始加载进度条逻辑
+                                initSingleVideoLoader(entry.target);
+                            }
+                            videoObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { 
+                    threshold: 0.1,
+                    rootMargin: '50px'
+                });
+                
+                videoItems.forEach(item => {
+                    videoObserver.observe(item);
+                });
+            }
+            
+            function initSingleVideoLoader(item) {
+                const video = item.querySelector('video');
+                const loader = item.querySelector('.video-loader');
+                const progressFill = item.querySelector('.progress-fill');
+                const loadingText = item.querySelector('.loading-text');
+                
+                if (!video || !loader) return;
+                
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += Math.random() * 12 + 3; // 更真实的加载速度
+                    if (progress > 95) progress = 95;
+                    
+                    progressFill.style.width = progress + '%';
+                    loadingText.textContent = `Loading... ${Math.round(progress)}%`;
+                }, 150);
+                
+                // 检查视频是否已经缓存
+                if (video.readyState >= 3) {
+                    clearInterval(progressInterval);
+                    progressFill.style.width = '100%';
+                    loadingText.textContent = 'Complete!';
+                    loader.classList.add('hidden');
+                    video.classList.add('loaded');
+                    return;
+                }
+                
+                video.addEventListener('loadeddata', function() {
+                    clearInterval(progressInterval);
+                    progressFill.style.width = '100%';
+                    loadingText.textContent = 'Complete!';
+                    
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        video.classList.add('loaded');
+                    }, 300);
+                });
+                
+                video.addEventListener('error', function() {
+                    clearInterval(progressInterval);
+                    progressFill.style.background = '#dc3545';
+                    progressFill.style.width = '100%';
+                    loadingText.textContent = 'Failed to load';
+                    loadingText.style.color = '#dc3545';
+                });
+                
+                video.load();
+            }
+            
+            // 初始化懒加载
+            initLazyVideoLoading();
             // Set video playback speed
             changePlaybackSpeed(1.0);
             

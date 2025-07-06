@@ -1,0 +1,511 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="InstaScene: Towards Complete 3D Instance Decomposition and Reconstruction from Cluttered Scenes">
+    <meta name="keywords" content="instascene,InstaScene,3dgs,3d segmentation,instance decomposition,3d generation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InstaScene: Towards Complete 3D Instance Decomposition and Reconstruction from Cluttered Scenes</title>
+
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css"><!-- 提供响应式布局 -->
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css"><!-- 用于图像和视频的轮播 -->
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"><!-- 用于图标展示 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!-- 提供与学术相关的图标 -->
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <!--如下是实现对比的效果-->
+    <script src="static/js/video_comparison.js"></script>
+    <script src="static/js/app.js"></script>
+    <link rel="stylesheet" href="static/css/dics.original.css">
+    <script src="static/js/event_handler.js"></script>
+    <script src="static/js/dics.original.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap-4.4.1.css">
+
+
+    <style>
+        .title-image {
+            width: 40%;  /* 继承父容器宽度 */
+            height: auto;  /* 保持图片比例 */
+            display: inline-block; /* 避免额外空白 */
+            object-fit: contain; /* 确保图片完整显示 */
+        }
+        
+        .title-text {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px; /* 图片与文字之间添加适当间距 */
+        }
+    </style>
+
+    <style>
+        .video-margin {
+            margin-bottom: 20px;
+        }
+    </style>
+    <style>
+        .reduce-space {
+            margin-bottom: 0px;
+        }
+        .subtitle strong, p strong, .subtitle b, p b, .content b, .content strong {
+            font-weight: 700 !important;
+        }
+    </style>
+
+    <style>
+        /* 只作用于这个 navigation 列表里的图片 */
+        ul.navigation img {
+            height: 90px;
+            width: auto;
+            object-fit: cover;  /* 保持填满而不变形，可根据需要改为 contain 或 fill */
+            display: block;     /* 去掉可能的行内间隙 */
+        }
+    </style>
+
+    <style>
+        .video-container {
+            display: flex;
+            align-items: stretch;
+            gap: 16px;
+            height: 400px; /* 统一高度，根据需要设置 */
+            }
+
+            /* 左视频：固定或自适应宽度 */
+        .video-left {
+            width: 69%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+
+            /* 右视频：占据剩余空间 */
+        .video-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+
+            /* 每个轮播项也需居中视频 */
+        .video-right .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            }
+
+            /* 视频自适应缩放（不裁剪） */
+        video {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            background-color: #000; /* 防止黑边与页面颜色混淆 */
+            }
+    </style>
+
+</head>
+
+<body>
+    <!-- Title + Authors + Links -->
+    <section class="hero">
+        <!--div class="reduce-space"-->
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered"> <!---->
+                        <div class="column has-text-centered"><!---->
+                            <h1 class="title is-2 publication-title">
+                                <span style="white-space: nowarp;"><img src="./sources/images/instascene_logo.png" alt="InstaScene Logo" class="title-image"></span>
+                                <span class="title-text">Towards Complete 3D 
+                                    <span style="color: rgb(235, 78, 67)">Insta</span>nce
+                                    Decomposition and Reconstruction from Cluttered 
+                                    <span style="color: rgb(250, 156, 61)">Scene</span>s
+                                </span>
+                            </h1>
+
+                            <h1 class="title is-size-3" style="color:#5a6268;">ICCV 2025</h1>
+
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block">
+                                    <a href="https://github.com/YZsZY">Zesong Yang</a><sup>1,2</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://ybbbbt.com">Bangbang Yang</a><sup>2</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://github.com/wqdong8">Wenqi Dong</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://github.com/NEWWORLDCCX">Chenxuan Cao</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://github.com/cuiliyuan121">Liyuan Cui</a><sup>1</sup>,
+                                </span>
+
+                                <br>
+                                <span class="author-block">
+                                    <a href="https://scholar.google.com/citations?user=VG_cdLAAAAAJ">Yuewen Ma</a><sup>2</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://zhpcui.github.io">Zhaopeng Cui</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="http://www.cad.zju.edu.cn/home/bao">Hujun Bao†</a><sup>1</sup>,
+                                </span>
+                            </div>
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang
+                                    University,</span>
+                                <span class="author-block"><sup>2</sup>ByteDance</span>
+                                <br>
+                                <span class="author-block"><sup>†</sup>Corresponding Authors</span>
+                            </div>
+
+                            <div class="column has-text-centered">
+                                <div class="publication-links">
+                                    <span class="link-block">
+                                        <a href="sources/pdf/arxiv_paper.pdf" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </span>
+                                            <span>Paper</span>
+                                        </a>
+                                    </span>
+
+
+                                    <span class="link-block"><!-- Arixv -->
+                                        <a href="sources/pdf/arxiv_paper.pdf"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="ai ai-arxiv"></i>
+                                            </span>
+                                            <span>ArXiv</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
+                                        <a href="sources/pdf/supp_mat.pdf"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </span>
+                                            <span>Supplementary</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
+                                        <a href="index.html"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fab fa-github"></i>
+                                            </span>
+                                            <span>Code(Coming Soon)</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
+                                        <a href="https://www.youtube.com/watch?v=PUb4l_Ttf3I" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fab fa-youtube"></i>
+                                            </span>
+                                            <span>Video</span>
+                                        </a>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
+    </section>
+
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <h2 class="subtitle has-text-centered" style="margin-top: 50px; margin-bottom: -10px;">
+            TL;DR: 
+            <strong>InstaScene</strong> integrates <strong>spatial contrastive learning</strong> for precise instance-aware decomposition and
+            <strong>in-situ generative priors</strong> for complete 3D reconstruction from cluttered and partially observed complex scenes.
+          </h2>
+          <!-- <br> -->
+          <br>
+            <div class="columns is-centered">
+              <video id="teaser" autoplay muted loop height="100%" controls>
+                <source src="./sources/video/teaser/teaser.mp4" type="video/mp4">
+              </video>
+            </div>
+            
+            <div class="content has-text-justified">
+                <b>InstaScene</b> allows users to pick up and decompose arbitrary instances from <b>cluttered environments</b>, while automatically reconstructing them into complete objects with intact geometry and appearance that align with the physical world.
+            </div>
+
+            <img src="./sources/images/teaser.png" alt="" style="margin-top: -15px;">
+            <br><br>
+          </div>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Abstract</h2>
+                </div>
+            </div>
+            <br>
+            <div class="content has-text-justified">
+                    <p>
+                    Humans can naturally identify and mentally complete occluded objects in cluttered environments.
+                    However, imparting similar cognitive ability to robotics remains challenging even with advanced reconstruction techniques, which models scenes as undifferentiated wholes and fails to recognize complete object from partial observations.
+                    In this paper, we propose <b>InstaScene</b>, a new paradigm towards holistic 3D perception of complex scenes with a primary goal: decomposing arbitrary instances while ensuring complete reconstruction.
+                    To achieve precise decomposition, we develop a novel spatial contrastive learning by tracing rasterization of each instance across views, significantly enhancing semantic supervision in cluttered scenes.
+                    To overcome incompleteness from limited observations, we introduce in-situ generation that harnesses valuable observations and geometric cues, effectively guiding 3D generative models to reconstruct complete instances that seamlessly align with the real world.
+                    Experiments on scene decomposition and object completion across complex real-world and synthetic scenes demonstrate that our method achieves superior decomposition accuracy while producing geometrically faithful and visually intact objects.
+                    </p>
+            </div>
+
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                  <div class="publication-video">
+                    <iframe src="https://www.youtube.com/embed/PUb4l_Ttf3I"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" style="margin-top: 100px;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Pipeline</h2>
+                </div>
+            </div>
+            <br>
+
+            <div class="content has-text-justified">
+                <video id="method" autoplay muted loop height="100%" controls>
+                    <source src="./sources/video/pipeline/pipeline.mp4" type="video/mp4">
+                </video>
+                <br>
+                <div class="content has-text-justified" style="margin-top: 20px;">
+                    <p>
+                    Given a reconstructed Gaussian Splatting scene, our method first clusters and filters 2D segmentation masks by tracing the rasterization of Gaussian Splatting, which yields 2D and 3D instance masks.
+                    Then, we use spatial contrastive learning with mask supervision to train a feature field that achieves high-quality scene decomposition.
+                    Finally, for each decomposed incomplete object, we conduct an in-situ generation pipeline that takes all known observations and geometric cues as omni-conditions to the 3D generative model to obtain supplemented views, which will be jointly fine-tuned with source training views to obtain a complete object.
+                    </p>
+                </div>
+                <!-- <img src="./images/method.png" alt=""> -->
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" style="margin-top: -50px;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Fine-grained Instance-level Scene Decomposition</h2>
+            </div>
+            <div class="content has-text-justified">
+                Examples from ZipNeRF and LERF dataset show that the baselines yield highly noisy segmentation results in such complex scenes, while our method achieves fine-grained instance-level segmentation
+            </div>
+
+            <div class="row">
+                <div class="container is-max-desktop">
+                    <div class="container">
+                        <ul class="navigation">
+                            <li onclick="objectSceneEvent(0)">
+                                <img src="sources/images/compare/alameda/ref.png" height="90px" width="160px">
+                            </li>
+
+                            <li onclick="objectSceneEvent(1)">
+                                <img src="sources/images/compare/berlin/ref.png" height="90px" width="160px">
+                            </li>
+
+                            <li onclick="objectSceneEvent(2)">
+                                <img src="sources/images/compare/nyc/ref.png" height="90px" width="160px">
+                            </li>
+
+                            <li onclick="objectSceneEvent(3)">
+                                <img src="sources/images/compare/figurines/ref.png" height="90px" width="160px">
+                            </li>
+
+                            <li onclick="objectSceneEvent(4)">
+                                <img src="sources/images/compare/teatime/ref.png" height="90px" width="160px">
+                            </li>
+
+                            <li onclick="objectSceneEvent(5)">
+                                <img src="sources/images/compare/waldo/ref.png" height="90px" width="160px">
+                            </li>
+                        </ul>
+
+                        <div class="b-dics" style="width: 768px; margin: 0 auto; text-align: center;">
+                            <img src="sources/images/compare/alameda/gsgroup_feat.png" alt="GSGroup Feat.">
+                            <!--style="max-width: 100%; height: auto;"-->
+                            <img src="sources/images/compare/alameda/gsgroup_mask.png" alt="GSGroup Mask">
+                            <!--style="max-width: 100%; height: auto;"-->
+                            <img src="sources/images/compare/alameda/langsplat_feat.png" alt="LangSplat Feat.">
+                            <!--style="max-width: 100%; height: auto;"-->
+                            <img src="sources/images/compare/alameda/langsplat_mask.png" alt="LangSplat Mask">
+                            <!--style="max-width: 100%; height: auto;"-->
+                            <img src="sources/images/compare/alameda/ours_feat.png" alt="Ours Feat.">
+                            <!--style="max-width: 100%; height: auto;"-->
+                            <img src="sources/images/compare/alameda/ours_mask.png" alt="Ours Mask">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <h3 class="title is-4" style="margin-top: 25px;">Fine-Grained & Interactive Decomposition</h3>
+            <div class="content has-text-justified" style="margin-top: -10px;">
+                <p>
+                    Our method learns a highly distinguishable feature field, enabling fine-grained and real-time interactive segmentation.
+                </p>
+                <div class="video-container" style="margin-top: -50px;">
+                    <!-- 左侧视频 -->
+                    <div class="video-left">
+                      <video id="style" autoplay muted loop controls>
+                        <source src="sources/video/segmentation/figurines.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  
+                    <!-- 右侧轮播视频 -->
+                    <div class="video-right carousel results-carousel" id="results-carousel">
+                      <div class="item">
+                        <video poster="" id="nyc" autoplay controls muted loop playsinline>
+                          <source src="sources/video/segmentation/nyc.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                      <div class="item">
+                        <video poster="" id="alameda" autoplay controls muted loop playsinline>
+                          <source src="sources/video/segmentation/alameda.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop" style="margin-top: -100px;">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">In-situ Generation with Generative Diffusion Prior</h2>
+            </div>
+            <div class="content has-text-justified">
+                We propose a novel in-situ generation pipeline, which tames the generic 3D generative model with all known information (e.g., partial observations and incomplete reconstructed geometry) to achieve realistic and complete instance reconstruction even with occlusions and limited observations.
+            </div>
+            <div class="columns is-centered">
+                <div style="height: calc(100% - 100px); overflow: hidden; position: relative;">
+                  <video id="teaser"
+                         autoplay muted loop controls
+                         style="display: block; transform: translateY(-50px);">
+                    <source src="./sources/video/Generation/insitu.mp4" type="video/mp4">
+                  </video>
+                </div>
+            </div>
+              
+        
+            <h3 class="title is-4" style="margin-top: -20px;">In-situ Generation VS. Generic Image-to-3D</h3>
+            <div class="content has-text-justified">
+                <p>
+                    We put the reconstructed instance back into the original scene. Compared to generic image-to-3D methods, our in-situ generation ensures both appearance and geometric consistency with the original scene while faithfully completing the unseen regions. 
+                </p>
+                <div class="columns is-centered">
+                    <video id="teaser" autoplay muted loop height="100%" controls>
+                      <source src="./sources/video/Generation/compare.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+
+            <h3 class="title is-4" style="margin-top: 50px;">More Results & Interactive Manipulation</h3>
+            <div class="content has-text-justified">
+                <div class="columns is-centered">
+                    <video id="teaser" autoplay muted loop height="100%" controls>
+                    <source src="./sources/video/Generation/results.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="content has-text-justified">
+                    <p>
+                        We present the application of interactive manipulation on instances reconstructed using our in-situ generation method, including object duplication, translation, and rotation. The naive extraction of instances without in-situ generation results in significant incompleteness, and hinders the application in simulated environments.
+                    </p>
+                </div>
+
+                <div class="columns is-centered">
+                    <video id="teaser" autoplay muted loop height="100%" controls>
+                    <source src="./sources/video/Generation/manipulation.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="related-work">
+        <div class="container is-max-desktop content">
+          <h2 class="title" style="margin-bottom: 5px;">Related Work</h2>
+            <ul style="margin-left: 40px;">
+                <li><a href="https://arxiv.org/abs/2401.07745" target="_blank">MaskClustering: View Consensus based Mask Graph Clustering for Open-Vocabulary 3D Instance Segmentation</a></li>
+                <li><a href="https://arxiv.org/abs/2503.14830" target="_blank">Decompositional Neural Scene Reconstruction with Generative Diffusion Prior</a></li>
+                <li><a href="https://arxiv.org/abs/2311.11666" target="_blank">OmniSeg3D: Omniversal 3D Segmentation via Hierarchical Contrastive Learning</a></li>
+            </ul>
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@inproceedings{yang2025instascene,
+    title={InstaScene: Towards Complete 3D Instance Decomposition and Reconstruction from Cluttered Scenes},
+    author={Yang, Zesong and Yang, Bangbang and Dong, Wenqi and Cao, Chenxuan and Cui, Liyuan and Ma, Yuewen and Cui, Zhaopeng and Bao, Hujun},
+    booktitle=ICCV,
+    year={2025}
+}</code></pre>
+        </div>
+    </section>
+  
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <!-- <div class="column is-8"> -->
+                <div class="content has-text-centered">
+                    <p>
+                        This website page is sourced from <a href="https://github.com/nerfies/nerfies.github.io"
+                            style="color: #3498db;">Nerfies</a>.
+                    </p>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+
+</html>

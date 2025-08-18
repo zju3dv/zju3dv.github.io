@@ -186,6 +186,14 @@
       transform: scale(1.25);
     }
 
+    #teaser-carousel .carousel-inner.zoom-element:hover {
+      transform: scale(1.25);
+    }
+
+    #teaser-carousel .carousel-inner.zoom-element:hover:has(.carousel-item.active.no-zoom) {
+      transform: none;
+    }
+
     video,
     iframe {
       border-radius: 10px;
@@ -290,10 +298,6 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">
-          <!-- Single image replacing video
-          <div class="zoom-element">
-            <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 100%; height: auto;" />
-          </div> -->
           <div class="carousel slide" data-interval="5000" data-ride="carousel" id="teaser-carousel">
             <ol class="carousel-indicators">
               <li class="active" data-slide-to="0" data-target="#teaser-carousel">
@@ -310,12 +314,10 @@
               </li>
             </ol>
             <div class="carousel-inner zoom-element">
-              <div class="carousel-item active">
+              <div class="carousel-item active no-zoom">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <div class="zoom-element">
-                      <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 100%; height: auto;" />
-                    </div>
+                    <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 75%; height: auto;" />
                   </div>
                 </div>
               </div>

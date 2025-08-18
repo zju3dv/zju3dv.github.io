@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<!-- python .\scripts\tools\compress_videos.py --data_root "C:\Users\56295\OneDrive - xudenden\418\Long Volumetric Video\Long Volumetric Video Materials\videos" --videos_dir demo --output_dir demo_x0.5 --vcodec libx264 --pix_fmt yuv420p --tag "" --preset "" --crf 28 --resize 0.5 -->
+<html lang="en">
+
+<head>
+  <meta content="VAP" name="title" />
+  <meta content="VAP harnesses subject renderings as action proxies for interactive video generation, striking an balance between precision and generality in action representation." name="description" />
+  <meta content="Video Generation, Simulation, Animation" name="keywords" />
+  <meta content="index, follow" name="robots" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Yuang Wang" name="author" />
+  <title>VAP</title>
+  <link rel="icon" type="image/x-icon" href="static/VAP_icon.png">
+  <meta property="og:image" content="https://zju3dv.github.io/VAP/VAP_icon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:type" content="website">
+  
+  <!-- Bootstrap -->
+  <script src="js/video_comparison.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/brands.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/solid.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+  <link href="img/favicon.svg" rel="icon" sizes="any" type="image/svg+xml" />
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    body {
+      font-family: 'Jost';
+      font-weight: 500;
+      font-size: 1.25em;
+    }
+
+    h1 {
+      font-size: 2.25em;
+    }
+
+    h2 {
+      font-size: 1.75em;
+    }
+
+    h3 {
+      font-size: 1.5em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: bolder;
+    }
+
+    b {
+      font-weight: bolder;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    section>h5 {
+      padding-bottom: 30px;
+    }
+
+    .col-12>h3 {
+      padding-top: 30px;
+    }
+
+    .results-section {
+      padding-bottom: 30px;
+    }
+
+    .body-text {
+      font-family: 'Noto Sans', 'sans-serif';
+      font-weight: 300;
+      font-size: 1.1rem; /* Use root-based units to avoid being scaled by body */
+      /* line-height: 1.6; */
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+      left: 25px;
+    }
+
+    .carousel-control-next {
+      right: 25px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 10%;
+      left: 90%;
+
+      /* Adjust vertical position */
+      text-align: center;
+      /* Center the content horizontally */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .carousel-indicators li {
+      background-color: transparent;
+      /* Hide the default Bootstrap indicators */
+      border: none;
+      /* Remove border */
+      margin: 0 25px;
+      display: inline-block;
+    }
+
+    .indicator-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      text-indent: -999px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .row.sm-gutters {
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-4 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-6 {
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .row.sm-gutters>.col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .zoom-element {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoom-element:hover {
+      transform: scale(1.25);
+    }
+
+    video,
+    iframe {
+      border-radius: 10px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .comparison-canvas {
+      border-radius: 10px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .a16x9 {
+      aspect-ratio: 16/9;
+    }
+
+    .a4x3 {
+      aspect-ratio: 4/3;
+    }
+
+    .a1x1 {
+      aspect-ratio: 1;
+    }
+
+    .a085 {
+      aspect-ratio: 1430/1678;
+    }
+
+    .a133 {
+      aspect-ratio: 1352/1014;
+    }
+
+    .a1875 {
+      aspect-ratio: 1920/1024;
+    }
+  </style>
+  <script>
+
+  </script>
+  </link>
+</head>
+
+<body>
+  <!-- -------- -->
+  <!--   cover  -->
+  <!-- -------- -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-weight: bold">
+              <b>
+                VAP: Precise <span style="color: #57c2ff">Action-to-Video Generation</span>
+                <br />
+                through <span style="color: #ff968f">Visual Action Prompts</span>
+              </b>
+            </h1>
+            <h4 style="color:#5a6268; font-weight: bold;">ICCV 2025</h4>
+            <hr>
+            <a href="https://scholar.google.com/citations?user=uLTRoSsAAAAJ&hl=en" target="_blank">Yuang Wang<sup>2<sup>*</sup></sup></a>
+            <a href="https://walsvid.github.io/" target="_blank">Chao Wen<sup>3<sup>*</sup></sup></a>
+            <a href="https://scholar.google.com/citations?user=56yI64J5Ot8C&hl=en" target="_blank">Haoyu Guo<sup>2<sup>*</sup></sup></a>
+            <a href="https://pengsida.net" target="_blank">Sida Peng<sup>2</sup></a>
+            <a href="https://minghanqin.github.io/" target="_blank">Minghan Qin<sup>4</sup></a>
+            <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank">Hujun Bao<sup>2</sup>
+            <a href="https://xzhou.me" target="_blank">Xiaowei Zhou<sup>2</sup></a>
+            <a href="https://csse.szu.edu.cn/staff/ruizhenhu/" target="_blank">Ruizhen Hu<sup>1,5<sup>x</sup></sup></a>
+            <p>
+              <sup>1</sup>Xiangjiang Lab&nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>ZJU&nbsp;&nbsp;&nbsp;&nbsp;<sup>3</sup>FDU&nbsp;&nbsp;&nbsp;&nbsp;<sup>4</sup>THU&nbsp;&nbsp;&nbsp;&nbsp;<sup>5</sup>SZU
+              <br />
+              <span style="color: #5a6268;">
+                <sup>*</sup>Equal Contribution&nbsp;&nbsp;&nbsp;&nbsp;<sup>x</sup>Corresponding Author
+              </span>
+            </p>
+            <div class="row justify-content-center">
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1Ub2AiO1N98SpfzUcBGbnA06F-5NhKopq/view?usp=sharing" role="button" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <b>Paper</b>
+                  </a>
+                </p>
+              </div>
+              <div class="column">
+                <p class="mb-5">
+                  <a class="btn btn-large btn-light" href="https://arxiv.org/abs/#TODO" role="button" target="_blank">
+                    <i class="ai ai-arxiv"></i>
+                    <b>arXiv</b>
+                  </a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <!-- Single image replacing video
+          <div class="zoom-element">
+            <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 100%; height: auto;" />
+          </div> -->
+          <div class="carousel slide" data-interval="5000" data-ride="carousel" id="teaser-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#teaser-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#teaser-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#teaser-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="3" data-target="#teaser-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <div class="zoom-element">
+                      <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 100%; height: auto;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#teaser-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#teaser-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <!-- <br> -->
+          <b class="my-4 d-block" style="color: #8899a5">
+            TL;DR: VAP harnesses subject renderings as action proxies for interactive video generation, striking an balance between precision and generality in action representation.
+          </b>
+          <!-- <br> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Video: TBD -->
+  <!-- <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Overview Video</h3>
+          <hr style="margin-top: 0px" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="container">
+      <div class="row sm-gutters">
+        <div class="col-md-12 zoom-element">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="100%" height=640 src="#TODO: YouTube video link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </section> -->
+
+  <!-- ---------- -->
+  <!--  Abstract  -->
+  <!-- ---------- -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Abstract</h3>
+          <hr style="margin-top: 0px" />
+          <div class="zoom-element text-center mb-4">
+            <img src="static/precision-generality-tradeoff.png" width="75%" />
+          </div>
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+            We present <b>visual action prompts</b> (VAP), a unified action representation for <b>action-to-video generation of complex high-DoF interactions</b> while maintaining transferable visual dynamics across domains. Action-driven video generation faces a <b>precision-generality tradeoff</b>: existing methods using text, primitive actions, or coarse masks offer generality but lack precision, while agent-centric action signals provide precision at the cost of cross-domain transferability. To balance action precision and dynamic transferability, we propose to <b>"render" actions into precise visual prompts as domain-agnostic representations</b> that preserve both geometric precision and cross-domain adaptability for complex actions; specifically, we choose visual skeletons for their generality and accessibility. We propose <b>robust pipelines to construct skeletons</b> from two interaction-rich data sources — human-object interactions (HOI) and dexterous robotic manipulation — enabling cross-domain training of action-driven generative models. By integrating visual skeletons into pretrained video generation models via lightweight fine-tuning, we enable precise action control of complex interaction while preserving the learning of cross-domain dynamics. Experiments on EgoVid, RT-1 and DROID demonstrate the effectiveness of our proposed approach.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -------- -->
+  <!--  Method  -->
+  <!-- -------- -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Method</h3>
+          <hr style="margin-top: 0px" />
+          <div class="zoom-element mb-4">
+            <img src="static/pipeline.png" width="100%" />
+          </div>
+          <p class="body-text my-4" style="text-align: justify; text-justify: inter-word;">
+            <!-- We project action-induced 3D structural dynamics of diverse agents into 2D visual action prompts, primarily 2D skeletons, establishing a unified control signal for action-conditioned video generation. We design data creation pipelines for HOI and robot videos to robustly recover their 2D skeletons. The constructed visual action prompts are injected into a pretrained video generation model for fine-tuning and generating plausible interaction-driven visual dynamics. -->
+            VAP encodes the action-induced structural dynamics of humans and robots as 2D visual action prompts — sequences of 2D skeletons — providing a unified control signal for action-conditioned video generation. We develop robust pipelines to extract these skeletons from human-object interaction (HOI) and robot videos, then condition and fine-tune a pretrained video generator to synthesize interaction-driven visual dynamics consistent with the prompt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------- -->
+  <!-- Agent-specific Control -->
+  <!-- ---------------------- -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Agent-specific Control</h3>
+          <hr style="margin-top: 0px" />
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+            <!-- We first demonstrate the performance of models trained independently on each dataset.
+            Agent-centric action signals (e.g., 7-DoF end-effector actions in IRA-Sim) perform well on a single embodiment with fixed viewpoints (e.g., RT-1), 
+            but struggle with datasets featuring random viewpoints (e.g., DROID).
+            In contrast, VAP effectively handle random viewpoints and complex interactions. -->
+            We first train a separate model on each dataset. 
+            Agent-centric action signals (e.g., 7-DoF end-effector poses in IRA-Sim) work well for a single embodiment with fixed viewpoints (e.g., RT-1) 
+            but degrade on datasets with randomized cameras (e.g., DROID). 
+            In contrast, VAP's 2D skeleton prompts are robust, maintaining performance under random viewpoints and contact-rich interactions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Agent-specific Control / RT-1 -->
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="agent-specific-rt1" aria-expanded="false" class="btn btn-primary" data-target="#agent-specific-rt1" data-toggle="collapse" id="agent-specific-rt1-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Agent-specific Control on <i><b><a href="https://robotics-transformer1.github.io/">RT-1</a></b></i> Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="agent-specific-rt1">
+        <div class="col-md-12">
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+          </p>
+          <div class="row sm-gutters">
+            <div class="col-md-6 zoom-element">
+              <video class="a085" data-desktop-vid1="videos/agent_specific/rt1-1.mp4" data-desktop-vid2="videos/agent_specific/rt1-1.mp4" data-mobile-vid1="videos/agent_specific/rt1-1.mp4" data-mobile-vid2="videos/agent_specific/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+            </div>
+            <div class="col-md-6 zoom-element">
+              <video class="a085" data-desktop-vid1="videos/agent_specific/rt1-2.mp4" data-desktop-vid2="videos/agent_specific/rt1-2.mp4" data-mobile-vid1="videos/agent_specific/rt1-2.mp4" data-mobile-vid2="videos/agent_specific/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!-- Agent-specific Control / DROID -->
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="agent-specific-droid" aria-expanded="false" class="btn btn-primary" data-target="#agent-specific-droid" data-toggle="collapse" id="agent-specific-droid-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Agent-specific Control on <i><b><a href="https://droid-dataset.github.io/">DROID</a></b></i> Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="agent-specific-droid">
+        <div class="col-md-12">
+          <div class="row sm-gutters">
+            <div class="col-md-6 zoom-element">
+              <video class="a085" data-desktop-vid1="videos/agent_specific/droid-1.mp4" data-desktop-vid2="videos/agent_specific/droid-1.mp4" data-mobile-vid1="videos/agent_specific/droid-1.mp4" data-mobile-vid2="videos/agent_specific/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+            </div>
+            <div class="col-md-6 zoom-element">
+              <video class="a085" data-desktop-vid1="videos/agent_specific/droid-2.mp4" data-desktop-vid2="videos/agent_specific/droid-2.mp4" data-mobile-vid1="videos/agent_specific/droid-2.mp4" data-mobile-vid2="videos/agent_specific/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ---------------------- -->
+  <!-- Agent-agnostic Control -->
+  <!-- ---------------------- -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Agent-agnostic Control</h3>
+          <hr style="margin-top: 0px" />
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+            <!-- We further demonstrate the effectiveness of <b>a single VAP model</b> in simultaneously <b>modeling multiple embodiments</b>. -->
+            <!-- VAP enables interactive video generation for both hand-object interactions and robotic manipulation scenarios. -->
+            We then train <b>a single VAP model</b> jointly across datasets.
+            A single set of VAPs supports interactive video generation for both hand-object interactions and robotic manipulation, 
+            demonstrating <b>generalization across embodiments</b>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Agent-agnostic Control / HOI -->
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="agent-agnostic-hoi" aria-expanded="false" class="btn btn-primary" data-target="#agent-agnostic-hoi" data-toggle="collapse" id="agent-agnostic-hoi-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Agent-agnostic Control on <i><b><a href="https://egovid.github.io/">EgoVid</a></b></i> Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="agent-agnostic-hoi">
+        <div class="col-md-12">
+          <!-- for each video: Image, Control Signal, Overlaid Results -->
+          <!-- Carousel slide for videos -->
+          <div class="carousel slide" data-interval="15000" data-ride="carousel" id="agent-agnostic-hoi-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#agent-agnostic-hoi-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#agent-agnostic-hoi-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-2.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#agent-agnostic-hoi-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#agent-agnostic-hoi-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Agent-agnostic Control / RT-1 -->
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="agent-agnostic-rt1" aria-expanded="false" class="btn btn-primary" data-target="#agent-agnostic-rt1" data-toggle="collapse" id="agent-agnostic-rt1-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Agent-agnostic Control on <i><b><a href="https://robotics-transformer1.github.io/">RT-1</a></b></i> Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="agent-agnostic-rt1">
+        <div class="col-md-12">
+          <!-- for each video: Image, Control Signal, Overlaid Results -->
+          <!-- Carousel slide for videos -->
+          <div class="carousel slide" data-interval="15000" data-ride="carousel" id="agent-agnostic-rt1-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#agent-agnostic-rt1-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#agent-agnostic-rt1-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-2.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#agent-agnostic-rt1-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#agent-agnostic-rt1-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Agent-agnostic Control / DROID -->
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="agent-agnostic-droid" aria-expanded="false" class="btn btn-primary" data-target="#agent-agnostic-droid" data-toggle="collapse" id="agent-agnostic-droid-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Agent-agnostic Control on <i><b><a href="https://droid-dataset.github.io/">DROID</a></b></i> Dataset
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="agent-agnostic-droid">
+        <div class="col-md-12">
+          <!-- for each video: Image, Control Signal, Overlaid Results -->
+          <!-- <div class="row sm-gutters">
+            <div class="col-md-12 zoom-element">
+                <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                </video>
+            </div>
+            <div class="col-md-12 zoom-element">
+                <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                </video>
+            </div>
+          </div> -->
+          <!-- Carousel slide for videos -->
+          <div class="carousel slide" data-interval="15000" data-ride="carousel" id="agent-agnostic-droid-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#agent-agnostic-droid-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#agent-agnostic-droid-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#agent-agnostic-droid-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#agent-agnostic-droid-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ---------------------- -->
+  <!-- VAP Variants -->
+  <!-- ---------------------- -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Variants of VAP</h3>
+          <hr style="margin-top: 0px" />
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+          <!-- Visual action prompts can take various forms, such as skeletons, mesh renderings, depth maps, and more, all of which enable fine-grained action control. -->
+          Visual action prompts are a flexible control interface. We can instantiate them as 2D skeletons, mesh renderings, depth maps, etc.; all serve as effective action surrogates, enabling fine-grained, temporally coherent control of motion and interaction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="vap-variants" aria-expanded="false" class="btn btn-primary" data-target="#vap-variants" data-toggle="collapse" id="vap-variants-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Variants of Visual Action Prompts
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="vap-variants">
+        <div class="col-md-12">
+          <!-- for each video: Image, Control Signal, Overlaid Results -->
+          <!-- Carousel slide for videos -->
+          <div class="carousel slide" data-interval="15000" data-ride="carousel" id="vap-variants-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#vap-variants-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#vap-variants-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#vap-variants-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="3" data-target="#vap-variants-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-1.mp4" data-desktop-vid2="videos/vap_variants/droid-1.mp4" data-mobile-vid1="videos/vap_variants/droid-1.mp4" data-mobile-vid2="videos/vap_variants/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-2.mp4" data-desktop-vid2="videos/vap_variants/droid-2.mp4" data-mobile-vid1="videos/vap_variants/droid-2.mp4" data-mobile-vid2="videos/vap_variants/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-3.mp4" data-desktop-vid2="videos/vap_variants/droid-3.mp4" data-mobile-vid1="videos/vap_variants/droid-3.mp4" data-mobile-vid2="videos/vap_variants/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-4.mp4" data-desktop-vid2="videos/vap_variants/droid-4.mp4" data-mobile-vid1="videos/vap_variants/droid-4.mp4" data-mobile-vid2="videos/vap_variants/droid-4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#vap-variants-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#vap-variants-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ------------------------- -->
+  <!-- Action variant simulation -->
+  <!-- ------------------------- -->
+   <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3>Visual Simulation of Different Actions</h3>
+          <hr style="margin-top: 0px" />
+          <p class="body-text" style="text-align: justify; text-justify: inter-word;">
+          By altering the visual action prompt, VAP modulates the output video to simulate different actions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5>
+            <button aria-controls="vap-simulation" aria-expanded="false" class="btn btn-primary" data-target="#vap-simulation" data-toggle="collapse" id="vap-simulation-button" type="button">
+              &nbsp;Click to Expand&nbsp;
+            </button>
+            Visual Simulation of Different Actions
+          </h5>
+        </div>
+      </div>
+      <div class="collapse" id="vap-simulation">
+        <div class="col-md-12">
+          <!-- for each video: Image, Control Signal, Overlaid Results -->
+          <!-- Carousel slide for videos -->
+          <div class="carousel slide" data-interval="15000" data-ride="carousel" id="vap-simulation-carousel">
+            <ol class="carousel-indicators">
+              <li class="active" data-slide-to="0" data-target="#vap-simulation-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="1" data-target="#vap-simulation-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+              <li data-slide-to="2" data-target="#vap-simulation-carousel">
+                <span class="indicator-dot"></span>
+              </li>
+            </ol>
+            <div class="carousel-inner zoom-element">
+              <div class="carousel-item active">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-1.mp4" data-desktop-vid2="videos/action_simulation/droid-1.mp4" data-mobile-vid1="videos/action_simulation/droid-1.mp4" data-mobile-vid2="videos/action_simulation/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-2.mp4" data-desktop-vid2="videos/action_simulation/droid-2.mp4" data-mobile-vid1="videos/action_simulation/droid-2.mp4" data-mobile-vid2="videos/action_simulation/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row sm-gutters">
+                  <div class="col-md-12">
+                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-3.mp4" data-desktop-vid2="videos/action_simulation/droid-3.mp4" data-mobile-vid1="videos/action_simulation/droid-3.mp4" data-mobile-vid2="videos/action_simulation/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" data-slide="prev" href="#vap-simulation-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" data-slide="next" href="#vap-simulation-carousel" role="button">
+              <span aria-hidden="true" class="carousel-control-next-icon"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- -------- -->
+  <!--  citing  -->
+  <!-- -------- -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        </br>
+        </br>
+        <h3>Citation</h3>
+        <hr style="margin-top: 0px" />
+        <pre style="background-color: #e9eeef; padding: 1.5em 1.5em; border-radius: 20px; font-size: 0.75em;">
+<code>@InProceedings{VAP_2025_ICCV,
+    author    = {Wang, Yuang and Wen, Chao and Guo, Haoyu and Peng, Sida and Qin, Minghan and Bao, Hujun and Zhou, Xiaowei and Hu, Ruizhen},
+    title     = {Precise Action-to-Video Generation Through Visual Action Prompts},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {10},
+    year      = {2025}
+}</code></pre>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom: 10px">
+    Thanks to
+    <a href="https://zhenx.me/" target="_blank">Zhen Xu</a>
+    for the website template, which can be found
+    <a href="https://github.com/zju3dv/zju3dv.github.io/tree/master/longvolcap" target="_blank">here</a>.
+  </footer>
+  <!-- Default Statcounter code for VAP Project Page https://zju3dv.github.io/VAP/ -->
+  <script type="text/javascript">
+  var sc_project=13159701; 
+  var sc_invisible=1; 
+  var sc_security="d16c965a"; 
+  </script>
+  <script type="text/javascript"
+  src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics"
+  href="https://statcounter.com/" target="_blank"><img class="statcounter"
+  src="https://c.statcounter.com/13159701/0/d16c965a/1/" alt="Web Analytics"
+  referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+  <script>
+    var buttonIds = [
+      'agent-specific-rt1-button',
+      'agent-specific-droid-button',
+      'agent-agnostic-hoi-button',
+      'agent-agnostic-rt1-button',
+      'agent-agnostic-droid-button',
+      'vap-variants-button',
+      'vap-simulation-button',
+     /* ...other button ids... */];
+    var sectionIds = [
+      'agent-specific-rt1',
+      'agent-specific-droid',
+      'agent-agnostic-hoi',
+      'agent-agnostic-rt1',
+      'agent-agnostic-droid',
+      'vap-variants',
+      'vap-simulation',
+     /* ...other section ids... */];
+    for (var i = 0; i < buttonIds.length; i++) {
+      (function (index) {
+        var button = document.getElementById(buttonIds[index]);
+        var section = document.getElementById(sectionIds[index]);
+        button.addEventListener('click', function () {
+          if (section.classList.contains('show')) {
+            button.innerText = '\u00a0Click to Expand\u00a0';
+            var videos = section.getElementsByTagName('video');
+            for (var j = 0; j < videos.length; j++) {
+              if (videos[j].readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                videos[j].pause();
+              }
+            }
+          } else {
+            button.innerText = 'Click to Collapse';
+            var videos = section.getElementsByTagName('video');
+            for (var j = 0; j < videos.length; j++) {
+              videos[j].play();
+            }
+          }
+        });
+      })(i);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: "$$", right: "$$", display: true }
+        ]
+      });
+    });
+
+
+    function handleCarouselSlide(event) {
+      // Reference to the current carousel
+      var currentCarousel = $(event.target);
+
+      // Check each video in the current carousel
+      currentCarousel.find('video').each(function () {
+        var isVideoInActiveItem = $(this).closest('.carousel-item').hasClass('active');
+        if (isVideoInActiveItem) {
+          if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+            this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+          }
+          this.play();
+        } else {
+          if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+            this.pause();
+          }
+        }
+      });
+    }
+
+    $('.carousel').on('slid.bs.carousel', handleCarouselSlide);
+
+    $(document).ready(function () {
+      $('video').each(function () {
+        var $video = $(this);
+        var $carousel = $video.closest('.carousel');
+        if ($carousel.length > 0) {
+          $video.on('ended', function () {
+            $carousel.carousel('next');
+          });
+        }
+      });
+    });
+
+    function updateVideoShape() {
+      this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
+    }
+
+    // fix the element's width and height properties to the current video ones
+    $("video").each(function () {
+      if (!this.classList.contains('comparison-video')) {
+        $(this).on('loadeddata', updateVideoShape);
+      }
+    });
+
+    // $("#renbody-results-button").click()
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get all videos
+      var videos = document.querySelectorAll('video');
+
+      // Add source to video tag
+      function addSourceToVideo(element, src) {
+        var source = document.createElement('source');
+        source.src = src;
+        source.type = 'video/mp4';
+        element.appendChild(source);
+      }
+
+      // Determine screen size and select appropriate videos
+      function whichSizeVideo(element) {
+        var windowWidth = window.innerWidth || window.innerWidth;
+        var prefix = windowWidth > 1200 ? "desktop" : "mobile";
+
+        // Get all data attributes for the given prefix (e.g., data-mobile-vid1, data-mobile-vid2, ...)
+        var i = 1;
+        while (element.dataset[prefix + "Vid" + i]) {
+          addSourceToVideo(element, element.dataset[prefix + "Vid" + i]);
+          i++;
+        }
+      }
+
+      // Initialize only if the page has videos
+      function videoBandwidth() {
+        if (videos) {
+          videos.forEach(whichSizeVideo);
+        }
+      }
+      videoBandwidth();
+
+      // FIXME: this is not working yet
+      function videoSize() {
+        if (videos) {
+          videos.forEach(updateVideoShape);
+        }
+      }
+      // Listen to window resize
+      window.onresize = videoSize;
+
+      setInterval(function () {
+        // Select all comparison-video type videos
+        let videos = document.querySelectorAll('.comparison-video');
+
+        videos.forEach(video => {
+          // If the id does not end with After
+          if (!video.id.endsWith('After')) {
+            resizeAndPlay(video);
+          }
+        });
+      }, 10000);  // 每500毫秒检测一次
+
+    });
+  </script>
+</body>
+
+</html>

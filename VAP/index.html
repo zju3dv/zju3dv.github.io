@@ -215,6 +215,14 @@
       aspect-ratio: 4/3;
     }
 
+    .a3x2 {
+      aspect-ratio: 3/2;
+    }
+
+    .a6x1 {
+      aspect-ratio: 6;
+    }
+
     .a1x1 {
       aspect-ratio: 1;
     }
@@ -229,6 +237,18 @@
 
     .a1875 {
       aspect-ratio: 1920/1024;
+    }
+
+    .a225 {
+      aspect-ratio: 2160/960;
+    }
+
+    .carousel-video-container {
+      /* aspect-ratio: 1932 / 1276; */
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
   <script>
@@ -273,7 +293,7 @@
             <div class="row justify-content-center">
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/16NowbdeyUlojIUr2huKnaspHCE7yq9Ll/view?usp=sharing" role="button" target="_blank">
+                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/16NowbdeyUlojIUr2huKnaspHCE7yq9Ll/view?usp=drive_link" role="button" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     <b>Paper</b>
                   </a>
@@ -315,6 +335,7 @@
             </ol>
             <div class="carousel-inner zoom-element">
               <div class="carousel-item active no-zoom">
+              <!-- <div class="carousel-item active"> -->
                 <div class="row sm-gutters">
                   <div class="col-md-12">
                     <img class="a16x9" src="static/teaser.png" alt="Teaser image" style="width: 75%; height: auto;" />
@@ -324,24 +345,30 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
-                    </video>
+                    <div class="carousel-video-container">
+                      <video autoplay class="" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      </video>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
-                    </video>
+                    <div class="carousel-video-container">
+                      <video autoplay class="" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      </video>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
-                    </video>
+                    <div class="carousel-video-container">
+                      <video autoplay class="" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" width="100%">
+                      </video>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -472,11 +499,11 @@
           </p>
           <div class="row sm-gutters">
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="videos/agent_specific/rt1-1.mp4" data-desktop-vid2="videos/agent_specific/rt1-1.mp4" data-mobile-vid1="videos/agent_specific/rt1-1.mp4" data-mobile-vid2="videos/agent_specific/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video autoplay class="a3x2" data-desktop-vid1="videos/agent_specific/rt1-1.mp4" data-desktop-vid2="videos/agent_specific/rt1-1.mp4" data-mobile-vid1="videos/agent_specific/rt1-1.mp4" data-mobile-vid2="videos/agent_specific/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="videos/agent_specific/rt1-2.mp4" data-desktop-vid2="videos/agent_specific/rt1-2.mp4" data-mobile-vid1="videos/agent_specific/rt1-2.mp4" data-mobile-vid2="videos/agent_specific/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video autoplay class="a3x2" data-desktop-vid1="videos/agent_specific/rt1-2.mp4" data-desktop-vid2="videos/agent_specific/rt1-2.mp4" data-mobile-vid1="videos/agent_specific/rt1-2.mp4" data-mobile-vid2="videos/agent_specific/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
           </div>
@@ -500,11 +527,11 @@
         <div class="col-md-12">
           <div class="row sm-gutters">
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="videos/agent_specific/droid-1.mp4" data-desktop-vid2="videos/agent_specific/droid-1.mp4" data-mobile-vid1="videos/agent_specific/droid-1.mp4" data-mobile-vid2="videos/agent_specific/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video autoplay class="a3x2" data-desktop-vid1="videos/agent_specific/droid-1.mp4" data-desktop-vid2="videos/agent_specific/droid-1.mp4" data-mobile-vid1="videos/agent_specific/droid-1.mp4" data-mobile-vid2="videos/agent_specific/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
             <div class="col-md-6 zoom-element">
-              <video class="a085" data-desktop-vid1="videos/agent_specific/droid-2.mp4" data-desktop-vid2="videos/agent_specific/droid-2.mp4" data-mobile-vid1="videos/agent_specific/droid-2.mp4" data-mobile-vid2="videos/agent_specific/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+              <video autoplay class="a3x2" data-desktop-vid1="videos/agent_specific/droid-2.mp4" data-desktop-vid2="videos/agent_specific/droid-2.mp4" data-mobile-vid1="videos/agent_specific/droid-2.mp4" data-mobile-vid2="videos/agent_specific/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
               </video>
             </div>
           </div>
@@ -562,7 +589,7 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video autoplay class="a6x1" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -570,7 +597,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-2.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="a6x1" data-desktop-vid1="videos/agent_agnostic/egovid-2.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-2.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -619,7 +646,7 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video autoplay class="a6x1" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -627,7 +654,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-2.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="" data-desktop-vid1="videos/agent_agnostic/rt1-2.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-2.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -664,11 +691,11 @@
           <!-- for each video: Image, Control Signal, Overlaid Results -->
           <!-- <div class="row sm-gutters">
             <div class="col-md-12 zoom-element">
-                <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                <video autoplay class="" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                 </video>
             </div>
             <div class="col-md-12 zoom-element">
-                <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                <video autoplay class="" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                 </video>
             </div>
           </div> -->
@@ -686,7 +713,7 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video autoplay class="a6x1" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -694,7 +721,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="a6x1" data-desktop-vid1="videos/agent_agnostic/droid-2.mp4" data-desktop-vid2="videos/agent_agnostic/droid-2.mp4" data-mobile-vid1="videos/agent_agnostic/droid-2.mp4" data-mobile-vid2="videos/agent_agnostic/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -766,7 +793,7 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-1.mp4" data-desktop-vid2="videos/vap_variants/droid-1.mp4" data-mobile-vid1="videos/vap_variants/droid-1.mp4" data-mobile-vid2="videos/vap_variants/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video autoplay class="a3x2" data-desktop-vid1="videos/vap_variants/droid-1.mp4" data-desktop-vid2="videos/vap_variants/droid-1.mp4" data-mobile-vid1="videos/vap_variants/droid-1.mp4" data-mobile-vid2="videos/vap_variants/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -774,7 +801,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-2.mp4" data-desktop-vid2="videos/vap_variants/droid-2.mp4" data-mobile-vid1="videos/vap_variants/droid-2.mp4" data-mobile-vid2="videos/vap_variants/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="" data-desktop-vid1="videos/vap_variants/droid-2.mp4" data-desktop-vid2="videos/vap_variants/droid-2.mp4" data-mobile-vid1="videos/vap_variants/droid-2.mp4" data-mobile-vid2="videos/vap_variants/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -782,7 +809,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-3.mp4" data-desktop-vid2="videos/vap_variants/droid-3.mp4" data-mobile-vid1="videos/vap_variants/droid-3.mp4" data-mobile-vid2="videos/vap_variants/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="" data-desktop-vid1="videos/vap_variants/droid-3.mp4" data-desktop-vid2="videos/vap_variants/droid-3.mp4" data-mobile-vid1="videos/vap_variants/droid-3.mp4" data-mobile-vid2="videos/vap_variants/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -790,7 +817,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/vap_variants/droid-4.mp4" data-desktop-vid2="videos/vap_variants/droid-4.mp4" data-mobile-vid1="videos/vap_variants/droid-4.mp4" data-mobile-vid2="videos/vap_variants/droid-4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="" data-desktop-vid1="videos/vap_variants/droid-4.mp4" data-desktop-vid2="videos/vap_variants/droid-4.mp4" data-mobile-vid1="videos/vap_variants/droid-4.mp4" data-mobile-vid2="videos/vap_variants/droid-4.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -858,7 +885,7 @@
               <div class="carousel-item active">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-1.mp4" data-desktop-vid2="videos/action_simulation/droid-1.mp4" data-mobile-vid1="videos/action_simulation/droid-1.mp4" data-mobile-vid2="videos/action_simulation/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video autoplay class="a225" data-desktop-vid1="videos/action_simulation/droid-1.mp4" data-desktop-vid2="videos/action_simulation/droid-1.mp4" data-mobile-vid1="videos/action_simulation/droid-1.mp4" data-mobile-vid2="videos/action_simulation/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -866,7 +893,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-2.mp4" data-desktop-vid2="videos/action_simulation/droid-2.mp4" data-mobile-vid1="videos/action_simulation/droid-2.mp4" data-mobile-vid2="videos/action_simulation/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="a225" data-desktop-vid1="videos/action_simulation/droid-2.mp4" data-desktop-vid2="videos/action_simulation/droid-2.mp4" data-mobile-vid1="videos/action_simulation/droid-2.mp4" data-mobile-vid2="videos/action_simulation/droid-2.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -874,7 +901,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/action_simulation/droid-3.mp4" data-desktop-vid2="videos/action_simulation/droid-3.mp4" data-mobile-vid1="videos/action_simulation/droid-3.mp4" data-mobile-vid2="videos/action_simulation/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="none" width="100%">
+                    <video class="a225" data-desktop-vid1="videos/action_simulation/droid-3.mp4" data-desktop-vid2="videos/action_simulation/droid-3.mp4" data-mobile-vid1="videos/action_simulation/droid-3.mp4" data-mobile-vid2="videos/action_simulation/droid-3.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -969,10 +996,41 @@
             }
           } else {
             button.innerText = 'Click to Collapse';
-            var videos = section.getElementsByTagName('video');
-            for (var j = 0; j < videos.length; j++) {
-              videos[j].play();
-            }
+
+            // Wait for collapse to expand, then reinitialize videos
+            setTimeout(function() {
+              var videos = section.getElementsByTagName('video');
+              for (var j = 0; j < videos.length; j++) {
+                var video = videos[j];
+
+                // Check if video has sources, if not, add them
+                if (video.children.length === 0) {
+                  // Re-run the video initialization for this specific video
+                  var windowWidth = window.innerWidth || window.innerWidth;
+                  var prefix = windowWidth > 1200 ? "desktop" : "mobile";
+
+                  var i = 1;
+                  while (video.dataset[prefix + "Vid" + i]) {
+                    var source = document.createElement('source');
+                    source.src = video.dataset[prefix + "Vid" + i];
+                    source.type = 'video/mp4';
+                    video.appendChild(source);
+                    i++;
+                  }
+                }
+
+                // Force video to load and play
+                video.load();
+                setTimeout(function() {
+                  var playPromise = video.play();
+                  if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                      console.log('Video play failed:', error);
+                    });
+                  }
+                }, 100);
+              }
+            }, 350); // Wait for Bootstrap collapse animation
           }
         });
       })(i);
@@ -999,13 +1057,7 @@
           if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
             this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
           }
-          // Enhanced play method for mobile compatibility
-          var playPromise = this.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(function(error) {
-              console.log('Carousel video play failed:', error);
-            });
-          }
+          this.play();
         } else {
           if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
             this.pause();
@@ -1052,42 +1104,6 @@
         element.appendChild(source);
       }
 
-      // Mobile video playback enhancement
-      function enhanceMobileVideoPlayback() {
-        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        if (isMobile) {
-          videos.forEach(function(video) {
-            // Add additional mobile-specific attributes
-            video.setAttribute('webkit-playsinline', 'true');
-            video.setAttribute('x-webkit-airplay', 'allow');
-
-            // Handle play promise for mobile devices
-            video.addEventListener('play', function() {
-              var playPromise = video.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(function(error) {
-                  console.log('Video play failed:', error);
-                  // Fallback: try to play again after user interaction
-                  video.addEventListener('click', function() {
-                    video.play().catch(function(e) {
-                      console.log('Manual play failed:', e);
-                    });
-                  }, { once: true });
-                });
-              }
-            });
-
-            // Ensure video loads properly on mobile
-            video.addEventListener('loadstart', function() {
-              if (video.readyState === 0) {
-                video.load();
-              }
-            });
-          });
-        }
-      }
-
       // Determine screen size and select appropriate videos
       function whichSizeVideo(element) {
         var windowWidth = window.innerWidth || window.innerWidth;
@@ -1108,9 +1124,6 @@
         }
       }
       videoBandwidth();
-
-      // Initialize mobile video enhancements
-      enhanceMobileVideoPlayback();
 
       // FIXME: this is not working yet
       function videoSize() {

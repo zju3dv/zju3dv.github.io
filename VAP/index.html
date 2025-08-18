@@ -28,6 +28,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
   <link href="img/favicon.svg" rel="icon" sizes="any" type="image/svg+xml" />
 
@@ -40,9 +41,11 @@
     }
 
     body {
-      font-family: 'Jost';
+      font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       font-weight: 500;
       font-size: 1.25em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1 {
@@ -67,11 +70,42 @@
     }
 
     b {
-      font-weight: bolder;
+      font-weight: 700 !important;
     }
 
     strong {
-      font-weight: bold;
+      font-weight: 700 !important;
+    }
+
+    /* Ensure bold text in body-text also uses proper weight */
+    .body-text b,
+    .body-text strong {
+      font-weight: 600 !important;
+    }
+
+    /* Mobile-specific font optimizations */
+    @media (max-width: 768px) {
+      body {
+        font-size: 1.1em;
+        line-height: 1.5;
+      }
+
+      .body-text {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* Ensure bold text is visible on mobile */
+      b, strong {
+        font-weight: 700 !important;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .body-text b,
+      .body-text strong {
+        font-weight: 600 !important;
+        -webkit-font-smoothing: antialiased;
+      }
     }
 
     section>h5 {
@@ -87,10 +121,12 @@
     }
 
     .body-text {
-      font-family: 'Noto Sans', 'sans-serif';
+      font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       font-weight: 300;
       font-size: 1.1rem; /* Use root-based units to avoid being scaled by body */
-      /* line-height: 1.6; */
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .carousel-control-prev,

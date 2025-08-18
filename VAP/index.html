@@ -273,7 +273,7 @@
             <div class="row justify-content-center">
               <div class="column">
                 <p class="mb-5">
-                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1Ub2AiO1N98SpfzUcBGbnA06F-5NhKopq/view?usp=sharing" role="button" target="_blank">
+                  <a class="btn btn-large btn-light" href="https://drive.google.com/file/d/16NowbdeyUlojIUr2huKnaspHCE7yq9Ll/view?usp=sharing" role="button" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     <b>Paper</b>
                   </a>
@@ -324,7 +324,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/egovid-1.mp4" data-desktop-vid2="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid1="videos/agent_agnostic/egovid-1.mp4" data-mobile-vid2="videos/agent_agnostic/egovid-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -332,7 +332,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/droid-1.mp4" data-desktop-vid2="videos/agent_agnostic/droid-1.mp4" data-mobile-vid1="videos/agent_agnostic/droid-1.mp4" data-mobile-vid2="videos/agent_agnostic/droid-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -340,7 +340,7 @@
               <div class="carousel-item">
                 <div class="row sm-gutters">
                   <div class="col-md-12">
-                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls aria-controls poster="img/spinner.svg" preload="auto" width="100%">
+                    <video class="a085" data-desktop-vid1="videos/agent_agnostic/rt1-1.mp4" data-desktop-vid2="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid1="videos/agent_agnostic/rt1-1.mp4" data-mobile-vid2="videos/agent_agnostic/rt1-1.mp4" loop muted playsinline controls webkit-playsinline poster="img/spinner.svg" preload="metadata" width="100%">
                     </video>
                   </div>
                 </div>
@@ -999,7 +999,13 @@
           if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
             this.height = (this.videoHeight / this.videoWidth) * $(this).parent().width();
           }
-          this.play();
+          // Enhanced play method for mobile compatibility
+          var playPromise = this.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(function(error) {
+              console.log('Carousel video play failed:', error);
+            });
+          }
         } else {
           if (this.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
             this.pause();
@@ -1046,6 +1052,42 @@
         element.appendChild(source);
       }
 
+      // Mobile video playback enhancement
+      function enhanceMobileVideoPlayback() {
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+          videos.forEach(function(video) {
+            // Add additional mobile-specific attributes
+            video.setAttribute('webkit-playsinline', 'true');
+            video.setAttribute('x-webkit-airplay', 'allow');
+
+            // Handle play promise for mobile devices
+            video.addEventListener('play', function() {
+              var playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                  console.log('Video play failed:', error);
+                  // Fallback: try to play again after user interaction
+                  video.addEventListener('click', function() {
+                    video.play().catch(function(e) {
+                      console.log('Manual play failed:', e);
+                    });
+                  }, { once: true });
+                });
+              }
+            });
+
+            // Ensure video loads properly on mobile
+            video.addEventListener('loadstart', function() {
+              if (video.readyState === 0) {
+                video.load();
+              }
+            });
+          });
+        }
+      }
+
       // Determine screen size and select appropriate videos
       function whichSizeVideo(element) {
         var windowWidth = window.innerWidth || window.innerWidth;
@@ -1066,6 +1108,9 @@
         }
       }
       videoBandwidth();
+
+      // Initialize mobile video enhancements
+      enhanceMobileVideoPlayback();
 
       // FIXME: this is not working yet
       function videoSize() {

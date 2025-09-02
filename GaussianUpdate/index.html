@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="GaussianUpdate: Continual 3D Gaussian Splatting Update for Changing Environments">
+  <meta name="keywords" content="GaussianUpdate, Neural Rendering, Continual learning, Change detection, 3D Gaussian Splatting, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>GaussianUpdate: Continual 3D Gaussian Splatting Update for Changing Environments
+    </title>
+
+  </script>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  
+
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  
+  
+  <script src="js/dics/dics.original.js"></script>
+  <script src="js/event_handler.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" href="js/dics/dics.original.css">
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender/">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/PNeRFLoc/">
+            PNeRFLoc
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/gaussian-prediction/">
+            GaussianPrediction
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <div style="width:100%; height:100px; 
+                      background:url('https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/GaussianUpdate_lego.png') 
+                                 center/cover no-repeat;">
+          </div>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          Continual 3D Gaussian Splatting Update for Changing Environments 
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICCV 2025</h1>
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://github.com/zl264">Lin Zeng</a><sup>*</sup>, </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com.hk/citations?hl=zh-CN&user=krMWXqMAAAAJ">Boming Zhao</a><sup>*</sup>, </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=0CJPK3IAAAAJ&hl=zh-CN">Jirui Hu</a><sup></sup>, </div>
+          <div class="author-block">
+            <a href="https://github.com/fishcrap/">Xujie Shen</a><sup></sup>, </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=SsN-risAAAAJ&hl=zh-CN">Ziqiang Dang</a><sup></sup>, </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup></sup>, </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui†</a><sup></sup>          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          
+          <span class="author-block"><sup></sup>State Key Lab of CAD & CG, Zhejiang University</span>
+          <br>
+          <br>
+          <span class="author-block"><sup>*</sup>Equal Contribution</span>
+          <br>
+          <span class="author-block"><sup>†</sup>Corresponding Authors</span>
+          
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+                <a href="https://www.arxiv.org/abs/2508.08867"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/UpdateGaussian2025ICCV_cameraReady.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/UpdateGaussian2025ICCV_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <img src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/teaser.png" alt="" style="margin-top: -15px;">
+      <br><br>
+    <!-- ↓↓↓ 插入到 TL;DR 下方或箭头处 ↓↓↓ -->
+  <!-- 改进版 Task settings 卡片 -->
+<section style="
+margin:20px 0;
+border:1px solid #d0d7de;
+border-left:6px solid #007acc;
+background:#ffffff;
+border-radius:10px;
+padding:18px 20px;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+color:#24292f;
+line-height:1.6;
+">
+<span style="display:inline-block;font-size:12px;text-transform:uppercase;
+             letter-spacing:.1em;color:#22863a;margin-bottom:6px">Task settings</span>
+<dl style="margin:0">
+  <dt style="margin-top:12px;font-weight:600">What do we have?</dt>
+  <dd style="margin:6px 0 0 0">
+    <ol style="margin:6px 0 0 1.2em">
+      <li>Previous reconstruction model</li>
+      <li>Newly collected images</li>
+    </ol>
+  </dd>
+
+  <dt style="margin-top:12px;font-weight:600">What do we want to do?</dt>
+  <dd style="margin:6px 0 0 0">Reconstruct the entire scene based on the new images.</dd>
+
+  <dt style="margin-top:12px;font-weight:600">What are the characteristics of the model?</dt>
+  <dd style="margin:6px 0 0 0">
+    <ol style="margin:6px 0 0 1.2em">
+      <li>Retain information from various times</li>
+      <li>Real-time and high-quality rendering</li>
+      <li>Efficient storage</li>
+    </ol>
+  </dd>
+
+  <dt style="margin-top:14px;font-weight:600">GaussianUpdate — Insights</dt>
+  <dd style="margin:6px 0 0 0">
+    <ul style="margin:6px 0 0 1.2em">
+      <li>Reuse existing 3D Gaussians as much as possible to reduce storage consumption.</li>
+      <li>Improve rendering quality by explicitly adding and removing 3D Gaussians.</li>
+      <li>Provide a replay mechanism to prevent catastrophic forgetting.</li>
+    </ul>
+  </dd>
+</dl>
+</section>
+      
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Novel view synthesis with neural models has advanced rapidly in recent years, yet adapting these models to scene
+            changes remains an open problem. Existing methods are either labor-intensive, requiring extensive model retraining, 
+            or fail to capture detailed types of changes over time. In this paper, we present GaussianUpdate, a novel approach
+            that combines 3D Gaussian representation with continual learning to address these challenges. Our method effectively 
+            updates the Gaussian radiance fields with current data while preserving information from past scenes. Unlike existing 
+            methods, GaussianUpdate explicitly models different types of changes through a novel multi-stage update strategy. 
+            Additionally, we introduce a visibility-aware continual learning approach with generative replay, enabling self-aware 
+            updating without the need to store images. The experiments on the benchmark dataset demonstrate our method achieves 
+            superior and real-time rendering with the capability of visualizing changes over different times.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <!-- <h2 class="title is-5">YouTube Source</h2> -->
+          <div class="publication-video">
+            <!-- <iframe width="640" height="480" src="./video/cg-slam-show.mp4"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe> -->
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/main_video_compress.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+    <!--/ Paper video. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">GUI Visualization of Scene Changes Over Time</h2>
+        <div class="has-text-centered">
+          <video id="functions" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/iccv25_op_compress.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- DNeRF More Results. -->
+    <div class="hero-body">
+      <div class="columns is-centered has-text-centered">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3">Novel View Synthesis Results</h2>
+            <div id="results-carousel" class="carousel results-carousel">
+                <div class="item item-coffee">
+                    <video poster="" id="coffee" autoplay controls muted loop playsinline>
+                      <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/ours_0.mp4" 
+                      type="video/mp4">
+                    </video>
+                </div>
+                <div class="item item-chicken">
+                  <video poster="" id="chicken" autoplay controls muted loop playsinline>
+                    <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/ours_1.mp4" 
+                    type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-cookie">
+                  <video poster="" id="cookie" autoplay controls muted loop playsinline>
+                    <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/ours_3.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-3dprinter">
+                  <video poster="" id="3dprinter" autoplay controls muted loop playsinline>
+                    <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/ours_5.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="item item-kitchen">
+                  <video poster="" id="kitchen" autoplay controls muted loop playsinline>
+                    <source src="https://raw.githubusercontent.com/BoMingZhao/open_access_assets/main/GaussianUpdate/ours_4.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <hr/>
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{2405.19745,
+        Author = {Boming Zhao and Yuan Li and Ziyu Sun and Lin Zeng and Yujun Shen and Rui Ma and Yinda Zhang and Hujun Bao and Zhaopeng Cui},
+        Title = {GaussianPrediction: Dynamic 3D Gaussian Prediction for Motion Extrapolation and Free View Synthesis},
+        Year = {2024},
+        Eprint = {arXiv:2405.19745},
+        Doi = {10.1145/3641519.3657417},
+        }
+    </code></pre>
+
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>, 
+      <a href="https://ingra14m.github.io/Deformable-Gaussians/" target="_blank">Deformable-GS</a> and <a href="https://research.nvidia.com/labs/dir/neuralangelo/" target="_blank">Neuralangelo</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFMMMPXL0M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFMMMPXL0M');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

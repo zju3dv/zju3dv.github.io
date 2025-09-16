@@ -1,16 +1,27 @@
+:root {
+  --dark-bg: #000;
+  --dark-bg-light: #1C1C1E;
+  --dark-bg-hover: #222;
+  --dark-border: #404042;
+  --dark-border-hover: #3274D8;
+  --dark-link: #3274D8;
+  --dark-text: #fff;
+  --dark-text-light: #eee;
+}
+
 body {
   font-family: 'Noto Sans', sans-serif;
 }
 
 
 .footer .icon-link {
-    font-size: 25px;
-    color: #000;
+  font-size: 25px;
+  color: #000;
 }
 
 .link-block a {
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .teaser .hero-body {
@@ -54,8 +65,7 @@ body {
   border-top: 1px solid #000;
 }
 
-.publication-title {
-}
+.publication-title {}
 
 .publication-banner {
   max-height: parent;
@@ -70,70 +80,66 @@ body {
   object-fit: fit;
 }
 
-.publication-header .hero-body {
-}
+.publication-header .hero-body {}
 
 .publication-title {
-    font-family: 'Google Sans', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-authors {
-    font-family: 'Google Sans', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-venue {
-    margin-top: 0.5em;
-    font-family: 'Google Sans', sans-serif;
+  margin-top: 0.5em;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-awards {
-    color: #ff3860;
-    width: fit-content;
-    font-weight: bolder;
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
 }
 
-.publication-authors {
-}
+.publication-authors {}
 
 .publication-authors a {
-   color: hsl(204, 86%, 53%) !important;
+  color: hsl(204, 86%, 53%) !important;
 }
 
 .publication-authors a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .author-block {
   display: inline-block;
 }
 
-.publication-banner img {
-}
+.publication-banner img {}
 
 .publication-authors {
   /*color: #4286f4;*/
 }
 
 .publication-video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
 
-    overflow: hidden;
-    border-radius: 10px !important;
+  overflow: hidden;
+  border-radius: 10px !important;
 }
 
 .publication-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.publication-body img {
-}
+.publication-body img {}
 
 .results-carousel {
   overflow: hidden;
@@ -163,8 +169,7 @@ body {
   border-radius: 5px;
 }
 
-.interpolation-video-column {
-}
+.interpolation-video-column {}
 
 .interpolation-panel .slider {
   margin: 0 !important;
@@ -177,6 +182,7 @@ body {
 #interpolation-image-wrapper {
   width: 100%;
 }
+
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
@@ -185,12 +191,78 @@ body {
   font-size: 0;
 }
 
-.label-columns > .column {
+.label-columns>.column {
   padding: 0.1em;
   padding-bottom: 0.5em;
   font-size: 1.3em;
 }
 
-.tabs-widget > .tabs-content > div {
+.tabs-widget>.tabs-content>div {
   display: hidden;
+}
+
+/* > Comparisons */
+.scene-pill {
+  cursor: pointer;
+  width: 16rem;
+  height: 9rem;
+  border: 4px solid var(--dark-border);
+  border-radius: 8px;
+  margin: 0.3rem;
+  display: inline-block;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.scene-pill:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.scene-pill.active {
+  border-color: var(--dark-border-hover);
+}
+
+.scene-pill img {
+  opacity: 1.0;
+  transition: opacity 0.3s ease;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+.scene-pill:hover img {
+  opacity: 0.5;
+}
+
+.scene-pill.active img {
+  opacity: 1.0;
+}
+
+/* video wrapper for comparisons */
+.comparisons-video-wrapper {
+  width: 100%;
+  /* 16:9 高度占位 */
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
+  /* 新增：为绝对定位子元素建立参照 */
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 1rem auto;
+  background: var(--dark-bg);
+}
+
+.comparisons-video-wrapper video {
+  position: absolute;
+  /* 绝对定位填充容器 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 关键：保持原始比例完整显示 */
+  border-radius: inherit;
+}
+
+.teaser-caption-container {
+  margin: 1rem 0;
 }

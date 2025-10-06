@@ -878,7 +878,8 @@
             display: flex;
             justify-content: center;
             gap: 6px;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;   
         }
 
         .ref-indicator {
@@ -1699,6 +1700,35 @@
                 await loadCarousel();
             }
         }
+
+        async function urlExists(url) {
+            try {
+              const res = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+              return res.ok;
+            } catch {
+              return false;
+            }
+          }
+          
+          async function buildReferenceImages(folderName, maxReferenceCount = 10) {
+            const results = await Promise.all(
+              Array.from({ length: maxReferenceCount }, (_, idx) => {
+                const j = idx + 1;
+                const imgNum = String(j).padStart(3, '0');
+                const imgPath = `files/${folderName}/reference_images/reference_${imgNum}.png`;
+                return urlExists(imgPath).then(ok => ({ ok, j, imgPath }));
+              })
+            );
+          
+            const existing = results.filter(r => r.ok);
+            const html = existing.map(({ j, imgPath }) => `
+              <div class="reference-image" data-img-path="${imgPath}">
+                <img src="${imgPath}" alt="Reference ${j}" loading="lazy">
+              </div>
+            `).join('');
+          
+            return { html, count: existing.length };
+          }
         
         // Function to load carousel slides
         async function loadCarousel() {
@@ -1723,20 +1753,9 @@
                 // 检测实际存在的reference images
                 let referenceImagesHTML = '';
                 const maxReferenceCount = 10;
+                 const { html, count } = await buildReferenceImages(folderName, maxReferenceCount);
+                referenceImagesHTML = html;
                 
-                for (let j = 1; j <= maxReferenceCount; j++) {
-                    const imgNum = String(j).padStart(3, '0');
-                    const imgPath = `files/${folderName}/reference_images/reference_${imgNum}.png`;
-                    
-                    referenceImagesHTML += `
-                        <div class="reference-image" data-img-path="${imgPath}">
-                            <img src="${imgPath}" 
-                                 alt="Reference ${j}"
-                                 loading="lazy"
-                                 onerror="this.parentElement.style.display='none';">
-                        </div>
-                    `;
-                }
                 
                 slide.innerHTML = `
                     <div class="carousel-content">

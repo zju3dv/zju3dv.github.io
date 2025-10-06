@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T23:13:13.876148",
+  "input_video": "./toilet-water-bottle.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 6,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 442,
+  "average_inference_fps": 58.73579520576511,
+  "checkpoint": null,
+  "huggingface_model": true
+}

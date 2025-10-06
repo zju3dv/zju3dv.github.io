@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T20:56:32.823885",
+  "input_video": "./Electric-fan.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 5,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 452,
+  "average_inference_fps": 59.171869849099714,
+  "checkpoint": null,
+  "huggingface_model": true
+}

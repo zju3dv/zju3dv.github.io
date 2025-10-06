@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T23:07:55.545864",
+  "input_video": "./figure-toy.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 6,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 407,
+  "average_inference_fps": 58.737439082179066,
+  "checkpoint": null,
+  "huggingface_model": true
+}

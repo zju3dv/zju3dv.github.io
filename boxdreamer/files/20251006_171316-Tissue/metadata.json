@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T17:15:31.783100",
+  "input_video": "./Tissue.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 5,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 267,
+  "average_inference_fps": 59.11135532365217,
+  "checkpoint": null,
+  "huggingface_model": true
+}

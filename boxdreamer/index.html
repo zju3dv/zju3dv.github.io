@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
-    
     <style>
         
         :root {
@@ -44,8 +43,19 @@
             position: relative;
             overflow: hidden;
             top: 0;
+            animation: fadeInDown 0.8s ease-out;
         }
         
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         
         h2, h3, h4 {
@@ -77,6 +87,7 @@
             margin-top: 2rem;
             padding-bottom: 0.5rem;
             position: relative;
+            animation: fadeInUp 0.6s ease-out;
         }
         
         h3::after {
@@ -89,17 +100,38 @@
             height: 3px;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             border-radius: 2px;
+            animation: expandWidth 0.6s ease-out 0.3s backwards;
+        }
+        
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 50px;
+            }
         }
         
         hr {
             border-top: 2px solid var(--light-gray);
             margin: 1.5rem 0;
+            animation: scaleX 0.8s ease-out;
+            transform-origin: center;
+        }
+        
+        @keyframes scaleX {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
         }
         
         .btn {
             border-radius: 30px;
             padding: 0.7rem 2rem;
-            transition: all 0.4s ;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: 600;
             margin: 0 0.5rem;
             position: relative;
@@ -111,13 +143,19 @@
             border: none;
             color: white;
             background-size: 200% 200%;
+            animation: fadeInUp 0.6s ease-out backwards;
         }
+        
+        .column:nth-child(1) .btn-light { animation-delay: 0.1s; }
+        .column:nth-child(2) .btn-light { animation-delay: 0.2s; }
+        .column:nth-child(3) .btn-light { animation-delay: 0.3s; }
+        .column:nth-child(4) .btn-light { animation-delay: 0.4s; }
         
         .btn-light:hover {
             background-position: right center;
             color: white;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         
         .btn-light::before {
@@ -154,38 +192,173 @@
         .img-fluid {
             border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: zoomIn 0.8s ease-out;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
         .img-fluid:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
         }
         
         .text-justify {
             text-align: justify;
+            animation: fadeIn 0.8s ease-out 0.2s backwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Citation 区域样式 */
+        .citation-container {
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         pre {
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            padding: 1.25em 1.5em;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5em;
+            position: relative;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        pre:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        
+        .copy-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .copy-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        .copy-button.copied {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+        
+        .copy-button i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .copy-button:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* 毛玻璃效果的视频容器 */
+        .glass-video-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out;
+            transition: all 0.4s ease;
+        }
+        
+        .glass-video-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
         }
         
         video {
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             margin: 1rem auto;
             max-width: 100%;
+            transition: all 0.4s ease;
+        }
+        
+        video:hover {
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
         
         footer {
             padding: 1.5rem 0;
             color: var(--dark-gray);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        footer a {
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            display: inline-block;
         }
         
         .author-list {
             line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+        
+        .author-list a {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .author-list a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+        
+        .author-list a:hover::after {
+            width: 100%;
         }
         
         .video-grid {
@@ -202,7 +375,34 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             position: relative;
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: fadeInScale 0.6s ease-out backwards;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.1s; }
+        .video-item:nth-child(2) { animation-delay: 0.15s; }
+        .video-item:nth-child(3) { animation-delay: 0.2s; }
+        .video-item:nth-child(4) { animation-delay: 0.25s; }
+        .video-item:nth-child(5) { animation-delay: 0.3s; }
+        .video-item:nth-child(6) { animation-delay: 0.35s; }
+        .video-item:nth-child(7) { animation-delay: 0.4s; }
+        .video-item:nth-child(8) { animation-delay: 0.45s; }
+        .video-item:nth-child(9) { animation-delay: 0.5s; }
+        .video-item:nth-child(10) { animation-delay: 0.55s; }
+        .video-item:nth-child(11) { animation-delay: 0.6s; }
+        .video-item:nth-child(12) { animation-delay: 0.65s; }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
         .video-loader {
@@ -271,19 +471,32 @@
         }
         
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .section {
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         /* Highlight color for important text */
         .highlight {
             color: var(--secondary-color);
             font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .text-justify:hover .highlight::before {
+            transform: scaleX(1);
         }
         
         /* Responsive adjustments */
@@ -299,15 +512,21 @@
             .video-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            
+            .copy-button {
+                position: static;
+                margin-top: 1rem;
+                display: inline-flex;
+            }
         }
 
         .conference-badge {
             display: inline-block;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            padding: 0.4rem 1.2rem; /* 减小内边距 */
-            border-radius: 20px; /* 减小圆角 */
-            margin: 0.5rem 0; /* 减小外边距 */
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* 减小阴影 */
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            margin: 0.5rem 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
             animation: pulse 2s ease-in-out infinite alternate;
             position: relative;
             overflow: hidden;
@@ -335,7 +554,719 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
+        /* Carousel Styles - 毛玻璃效果 */
+        .demo-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            margin: 3rem auto;
+            padding: 0 80px;
+            min-height: 750px;
+        }
+
+        .carousel-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: 2rem 1rem 2rem 1rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            min-height: 650px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .carousel-slides-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            min-height: 750px;
+        }
+
+        .carousel-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 2.5rem;
+        }
+
+        .carousel-videos {
+            flex: 0 0 65%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .carousel-video-wrapper {
+            width: 100%;
+            height: 340px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            background: #000;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .carousel-video-wrapper:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .carousel-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
+
+        /* 视频加载状态 */
+        .carousel-video-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            color: white;
+            z-index: 5;
+        }
+
+        .carousel-video-loading.hidden {
+            display: none;
+        }
+
+        .carousel-video-loading .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .video-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            animation: slideInFromTop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+        }
+        
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* FPS Badge */
+        .fps-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            color: #4ecdc4;
+            padding: 0.6rem 1.3rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            animation: slideInFromBottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s backwards;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fps-badge .fps-value {
+            font-size: 1.1rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+        
+        .fps-badge .fps-icon {
+            width: 20px;
+            height: 20px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 3px rgba(78, 205, 196, 0.8));
+            }
+            50% {
+                opacity: 0.7;
+                filter: drop-shadow(0 0 8px rgba(78, 205, 196, 1));
+            }
+        }
+
+        /* Reference Images 区域 - 纵向排布 */
+        .carousel-references {
+            flex: 0 0 30%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .references-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.5rem;
+            animation: slideInFromRight 0.6s ease-out 0.2s backwards;
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .references-scroll-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            height: 640px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeInScale 0.6s ease-out 0.3s backwards;
+        }
+
+        .references-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            padding: 0.5rem;
+            flex: 1;
+        }
+
+        .reference-image {
+            flex: 0 0 auto;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            aspect-ratio: 1;
+        }
+
+        .reference-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .reference-image:hover {
+            transform: scale(1.08) rotate(1deg);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        }
+        
+        .reference-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Reference Navigation Arrows - 上下箭头 */
+        .ref-nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--primary-color);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+            outline: none;
+        }
+
+        .ref-nav:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: translateX(-50%) scale(1.2) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .ref-nav:focus {
+            outline: none;
+            background: rgba(200, 200, 200, 0.95);
+            color: var(--dark-gray);
+        }
+
+        .ref-nav:active {
+            background: rgba(180, 180, 180, 0.95);
+            color: var(--dark-gray);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .ref-nav.ref-prev {
+            top: 8px;
+        }
+
+        .ref-nav.ref-next {
+            bottom: 8px;
+        }
+
+        /* Reference Indicators */
+        .ref-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 1rem;
+        }
+
+        .ref-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .ref-indicator:hover {
+            transform: scale(1.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .ref-indicator.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: scale(1.5);
+            box-shadow: 0 2px 8px rgba(238, 128, 128, 0.4);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: var(--primary-color);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            outline: none;
+        }
+
+        .carousel-nav:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-nav:focus {
+            outline: none;
+            background: rgba(200, 200, 200, 0.95);
+            color: var(--dark-gray);
+        }
+
+        .carousel-nav:active {
+            background: rgba(180, 180, 180, 0.95);
+            color: var(--dark-gray);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .carousel-nav.prev {
+            left: 0;
+        }
+
+        .carousel-nav.next {
+            right: 0;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 2rem; 
+            margin-bottom: 1rem;   
+        }
+
+        .carousel-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: scale(1.3);
+        }
+
+        .carousel-indicator.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: scale(1.5);
+            box-shadow: 0 3px 12px rgba(238, 128, 128, 0.5);
+        }
+
+        .carousel-indicator.active::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: ripple 1.5s ease-out infinite;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* 水平滑动动画 */
+        .carousel-slide {
+            display: none;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            position: relative;
+            animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .carousel-slide.slide-out-left {
+            display: block;
+            position: absolute;
+            animation: slideOutToLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .carousel-slide.slide-out-right {
+            display: block;
+            position: absolute;
+            animation: slideOutToRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .carousel-slide.slide-in-from-left {
+            display: block;
+            position: absolute;
+            animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .carousel-slide.slide-in-from-right {
+            display: block;
+            position: absolute;
+            animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutToLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes slideOutToRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .demo-carousel {
+                max-width: 1400px;
+                padding: 0 70px;
+            }
+
+            .carousel-slides-wrapper {
+                min-height: 700px;
+            }
+
+            .carousel-video-wrapper {
+                height: 300px;
+            }
+
+            .references-scroll-container {
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .demo-carousel {
+                padding: 0 60px;
+            }
+            
+            .carousel-slides-wrapper {
+                min-height: 680px;
+            }
+
+            .carousel-videos {
+                flex: 0 0 60%;
+            }
+            
+            .carousel-references {
+                flex: 0 0 35%;
+            }
+
+            .carousel-video-wrapper {
+                height: 280px;
+            }
+
+            .references-scroll-container {
+                height: 580px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .demo-carousel {
+                padding: 0 50px;
+                min-height: auto;
+            }
+
+            .carousel-slides-wrapper {
+                min-height: auto;
+            }
+
+            .carousel-slide {
+                position: relative;
+            }
+
+            .carousel-slide.active {
+                position: relative;
+            }
+            
+            .carousel-content {
+                flex-direction: column;
+            }
+
+            .carousel-videos {
+                flex: 1 1 auto;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .carousel-video-wrapper {
+                height: 320px;
+            }
+
+            .carousel-references {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+
+            .references-scroll-container {
+                height: 400px;
+            }
+
+            .references-slider {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+
+            .reference-image {
+                flex: 0 0 calc(50% - 0.5rem);
+            }
+
+            .ref-nav.ref-prev {
+                left: 8px;
+                top: 50%;
+                transform: translate(0, -50%);
+            }
+
+            .ref-nav.ref-prev:hover {
+                transform: translate(0, -50%) scale(1.2) rotate(5deg);
+            }
+
+            .ref-nav.ref-prev:focus,
+            .ref-nav.ref-prev:active {
+                transform: translate(0, -50%) scale(1.05);
+            }
+
+            .ref-nav.ref-next {
+                right: 8px;
+                left: auto;
+                bottom: auto;
+                top: 50%;
+                transform: translate(0, -50%);
+            }
+
+            .ref-nav.ref-next:hover {
+                transform: translate(0, -50%) scale(1.2) rotate(5deg);
+            }
+
+            .ref-nav.ref-next:focus,
+            .ref-nav.ref-next:active {
+                transform: translate(0, -50%) scale(1.05);
+            }
+
+            .carousel-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .demo-carousel {
+                padding: 0 40px;
+            }
+            
+            .carousel-container {
+                padding: 1.5rem;
+            }
+
+            .carousel-video-wrapper {
+                height: 280px;
+            }
+
+            .carousel-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+            }
+            
+            .reference-image {
+                flex: 0 0 calc(100% - 1rem);
+            }
+
+            .references-header {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+
+            .references-scroll-container {
+                height: 350px;
+            }
+            
+            .fps-badge {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.75rem;
+            }
+            
+            .fps-badge .fps-value {
+                font-size: 0.95rem;
+            }
+        }
+
     </style>
+
 </head>
 
 <body>
@@ -351,24 +1282,25 @@
                         </div>
                         <hr>
                         <div class="author-list" style="font-size: 1.1rem; font-weight: 500;">
-                            <a href="https://yuanhongyu.xyz/">Yuanhong Yu</a><sup>1,2</sup> &bull;
-                            <a href="https://github.com/hxy-123">Xingyi He</a><sup>1</sup> &bull;
-                            <a href="https://sailor-z.github.io/">Chen Zhao</a><sup>3</sup> &bull;
-                            <a href="https://openreview.net/profile?id=~Junhao_Yu3">Junhao Yu</a><sup>4</sup> &bull;
-                            <a href="https://yangjiaqihomepage.github.io/">Jiaqi Yang</a><sup>5</sup> &bull;
-                            <a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>6</sup> &bull;
-                            <a href="https://shenyujun.github.io/">Yujun Shen</a><sup>2</sup> &bull;
-                            <a href="https://openreview.net/profile?id=~Xing_Zhu2">Xing Zhu</a><sup>2</sup> &bull;
+                            <a href="https://yuanhongyu.xyz/">Yuanhong Yu</a><sup>1,3</sup> &bull;
+                            <a href="https://github.com/hxy-123">Xingyi He</a><sup>1,3</sup> &bull;
+                            <a href="https://sailor-z.github.io/">Chen Zhao</a><sup>4</sup> &bull;
+                            <a href="https://openreview.net/profile?id=~Junhao_Yu3">Junhao Yu</a><sup>5</sup> &bull;
+                            <a href="https://yangjiaqihomepage.github.io/">Jiaqi Yang</a><sup>6</sup> &bull;
+                            <a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>7</sup> &bull;
+                            <a href="https://shenyujun.github.io/">Yujun Shen</a><sup>3</sup> &bull;
+                            <a href="https://openreview.net/profile?id=~Xing_Zhu2">Xing Zhu</a><sup>3</sup> &bull;
                             <a href="https://www.xzhou.me/">Xiaowei Zhou</a><sup>1</sup> &bull;
-                            <a href="https://pengsida.net/">Sida Peng</a><sup>1</sup>
+                            <a href="https://pengsida.net/">Sida Peng</a><sup>1,2</sup>
                         </div>
                         <p> 
                             <sup>1</sup>State Key Lab of CAD & CG, Zhejiang University &nbsp;&nbsp; 
-                            <sup>2</sup>Ant Group &nbsp;&nbsp;
-                            <sup>3</sup>EPFL &nbsp;&nbsp;
-                            <sup>4</sup>Chongqing University &nbsp;&nbsp;
-                            <sup>5</sup>Northwestern Polytechnical University &nbsp;&nbsp;
-                            <sup>6</sup>Shenzhen University &nbsp;&nbsp;
+                            <sup>2</sup>Xiangjiang Laboratory &nbsp;&nbsp; 
+                            <sup>3</sup>Ant Group &nbsp;&nbsp;
+                            <sup>4</sup>EPFL &nbsp;&nbsp;
+                            <sup>5</sup>Chongqing University &nbsp;&nbsp;
+                            <sup>6</sup>Northwestern Polytechnical University &nbsp;&nbsp;
+                            <sup>7</sup>Shenzhen University &nbsp;&nbsp;
                         </p>
                         
                         <div class="row justify-content-center">
@@ -449,9 +1381,11 @@
                     <p class="text-justify">
                         BoxDreamer shows impressive generalization capabilities on the YCB-Video and Occluded LINEMOD datasets <span class="highlight">with only 5 reference views</span>.
                     </p>
-                    <video width="90%" playsinline autoplay loop preload muted controls id="compare_vid">
-                        <source src="files/dataset-demo/dataset-demo-1.mp4" type="video/mp4">
-                    </video>
+                    <div class="glass-video-container">
+                        <video width="100%" playsinline autoplay loop preload muted controls id="compare_vid">
+                            <source src="files/dataset-demo/dataset-demo-1.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>
@@ -473,12 +1407,47 @@
         </div>
     </section>
 
-    <!-- In the Wild Examples -->
+    <!-- Real Demo Carousel -->
     <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3>In the Wild Examples</h3>
+                    <h3>Real World Demo</h3>
+                    <hr style="margin-top:0px">
+                    <p class="text-justify">
+                        BoxDreamer achieves impressive performance on real-world scenarios. Below are demonstrations showing query videos, point cloud visualizations, and reference images.
+                    </p>
+                    
+                    <div class="demo-carousel">
+                        <button class="carousel-nav prev" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="carousel-container">
+                            <div class="carousel-slides-wrapper" id="carouselSlides">
+                                <!-- Slides will be dynamically loaded here -->
+                            </div>
+                            
+                            <div class="carousel-indicators" id="carouselIndicators">
+                                <!-- Indicators will be dynamically loaded here -->
+                            </div>
+                        </div>
+                        
+                        <button class="carousel-nav next" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More In the Wild Examples -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>More Results</h3>
                     <hr style="margin-top:0px">
                     <p class="text-justify">
                       Try <a href="https://huggingface.co/spaces/LittleFrog/BoxDreamer" target="_blank">BoxDreamer</a> demo on Hugging Face Spaces with your own images! &nbsp;&nbsp; (<span class="highlight">The bouding box is not aligned on the semantic level</span>)
@@ -594,7 +1563,7 @@
                                 <div class="progress-bar">
                                     <div class="progress-fill"></div>
                                 </div>
-                                <span class="loading-text">Loading...</span>
+                                <span class="loading-text">loading...</span>
                             </div>
                             <video playsinline autoplay loop muted controls>
                                 <source src="files/real_demo/10.mp4" type="video/mp4">
@@ -635,12 +1604,18 @@
                 <div class="col-12">
                     <h3>Citation</h3>
                     <hr style="margin-top:0px">
-                    <pre><code>@article{yu2025boxdreamer,
+                    <div class="citation-container">
+                        <button class="copy-button" onclick="copyCitation()" id="copyBtn">
+                            <i class="fas fa-copy"></i>
+                            <span id="copyText">Copy</span>
+                        </button>
+                        <pre id="citationText"><code>@article{yu2025boxdreamer,
   title={BoxDreamer: Dreaming Box Corners for Generalizable Object Pose Estimation},
   author={Yu, Yuanhong and He, Xingyi and Zhao, Chen and Yu, Junhao and Yang, Jiaqi and Hu, Ruizhen and Shen, Yujun and Zhu, Xing and Zhou, Xiaowei and Peng, Sida},
   journal={arXiv preprint arXiv:2504.07955},
   year={2025}
 }</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -663,65 +1638,353 @@
             tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
         };
         
+        // Copy citation function
+        function copyCitation() {
+            const citationText = document.getElementById('citationText').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            const copyText = document.getElementById('copyText');
+            
+            navigator.clipboard.writeText(citationText).then(() => {
+                // Change button appearance
+                copyBtn.classList.add('copied');
+                copyText.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyText.innerHTML = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        
+        // Carousel functionality
+        let currentSlide = 0;
+        let demoFolders = [];
+        let currentRefIndex = {};
+        let isTransitioning = false;
+        let metadataCache = {};
+        
+        // Function to load metadata
+        async function loadMetadata(folderName) {
+            if (metadataCache[folderName]) {
+                return metadataCache[folderName];
+            }
+            
+            try {
+                const response = await fetch(`files/${folderName}/metadata.json`);
+                const metadata = await response.json();
+                metadataCache[folderName] = metadata;
+                return metadata;
+            } catch (error) {
+                console.error(`Failed to load metadata for ${folderName}:`, error);
+                return null;
+            }
+        }
+        
+        // Function to get all demo folders
+        async function getDemoFolders() {
+            demoFolders = [
+                '20251006_144437-mode1-4',
+                '20251006_170750-Toy-Pendant-compressed',
+                '20251006_171316-Tissue',
+                '20251006_205246-Electric-fan',
+                '20251006_210835-Box',
+                '20251006_230410-figure-toy',
+                '20251006_230946-toilet-water-bottle'
+            ];
+            
+            if (demoFolders.length > 0) {
+                await loadCarousel();
+            }
+        }
+        
+        // Function to load carousel slides
+        async function loadCarousel() {
+            const slidesContainer = document.getElementById('carouselSlides');
+            const indicatorsContainer = document.getElementById('carouselIndicators');
+            
+            for (let i = 0; i < demoFolders.length; i++) {
+                const folderName = demoFolders[i];
+                currentRefIndex[folderName] = 0;
+                
+                // Load metadata
+                const metadata = await loadMetadata(folderName);
+                const fps = metadata && metadata.average_inference_fps 
+                    ? metadata.average_inference_fps.toFixed(1) 
+                    : 'N/A';
+                
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = `carousel-slide ${i === 0 ? 'active' : ''}`;
+                slide.dataset.folder = folderName;
+                
+                // 检测实际存在的reference images
+                let referenceImagesHTML = '';
+                const maxReferenceCount = 10;
+                
+                for (let j = 1; j <= maxReferenceCount; j++) {
+                    const imgNum = String(j).padStart(3, '0');
+                    const imgPath = `files/${folderName}/reference_images/reference_${imgNum}.png`;
+                    
+                    referenceImagesHTML += `
+                        <div class="reference-image" data-img-path="${imgPath}">
+                            <img src="${imgPath}" 
+                                 alt="Reference ${j}"
+                                 loading="lazy"
+                                 onerror="this.parentElement.style.display='none';">
+                        </div>
+                    `;
+                }
+                
+                slide.innerHTML = `
+                    <div class="carousel-content">
+                        <div class="carousel-videos">
+                            <div class="carousel-video-wrapper">
+                                <div class="video-label">Query Video</div>
+                                ${fps !== 'N/A' ? `
+                                <div class="fps-badge">
+                                    <svg class="fps-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class="fps-value">${fps}</span> FPS on RTX4090
+                                </div>
+                                ` : ''}
+                                <div class="carousel-video-loading">
+                                    <div class="spinner"></div>
+                                    <span>Loading video...</span>
+                                </div>
+                                <video playsinline loop muted preload="metadata">
+                                    <source src="files/${folderName}/query_video_large.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="carousel-video-wrapper">
+                                <div class="video-label">Rendered Point Cloud</div>
+                                <div class="carousel-video-loading">
+                                    <div class="spinner"></div>
+                                    <span>Loading video...</span>
+                                </div>
+                                <video playsinline loop muted preload="metadata">
+                                    <source src="files/${folderName}/point_cloud_video_large.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="carousel-references">
+                            <div class="references-header">
+                                <i class="fas fa-images"></i> Reference Images
+                            </div>
+                            <div class="references-scroll-container">
+                                <button class="ref-nav ref-prev" onclick="changeRefImage('${folderName}', -1)">
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                                <div class="references-slider" id="refSlider-${folderName}">
+                                    ${referenceImagesHTML}
+                                </div>
+                                <button class="ref-nav ref-next" onclick="changeRefImage('${folderName}', 1)">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="ref-indicators" id="refIndicators-${folderName}">
+                                <!-- Will be filled dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                slidesContainer.appendChild(slide);
+                
+                // Create main carousel indicator
+                const indicator = document.createElement('div');
+                indicator.className = `carousel-indicator ${i === 0 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide(i);
+                indicatorsContainer.appendChild(indicator);
+                
+                // Initialize reference indicators after slide is added
+                setTimeout(() => initRefIndicators(folderName), 100);
+            }
+            
+            // Initialize video loading for active slide
+            initCarouselVideos();
+        }
+        
+        function initRefIndicators(folderName) {
+            const slider = document.getElementById(`refSlider-${folderName}`);
+            const indicatorsContainer = document.getElementById(`refIndicators-${folderName}`);
+            
+            if (!slider || !indicatorsContainer) return;
+            
+            const images = slider.querySelectorAll('.reference-image:not([style*="display: none"])');
+            indicatorsContainer.innerHTML = '';
+            
+            images.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = `ref-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => goToRefImage(folderName, index);
+                indicatorsContainer.appendChild(indicator);
+            });
+        }
+        
+        function changeRefImage(folderName, direction) {
+            const slider = document.getElementById(`refSlider-${folderName}`);
+            const images = slider.querySelectorAll('.reference-image:not([style*="display: none"])');
+            const indicators = document.querySelectorAll(`#refIndicators-${folderName} .ref-indicator`);
+            
+            if (images.length === 0) return;
+            
+            indicators[currentRefIndex[folderName]].classList.remove('active');
+            currentRefIndex[folderName] = (currentRefIndex[folderName] + direction + images.length) % images.length;
+            indicators[currentRefIndex[folderName]].classList.add('active');
+            
+            const imageHeight = images[0].offsetHeight + 16; // image height + gap
+            slider.scrollTo({
+                top: imageHeight * currentRefIndex[folderName],
+                behavior: 'smooth'
+            });
+        }
+        
+        function goToRefImage(folderName, index) {
+            const slider = document.getElementById(`refSlider-${folderName}`);
+            const images = slider.querySelectorAll('.reference-image:not([style*="display: none"])');
+            const indicators = document.querySelectorAll(`#refIndicators-${folderName} .ref-indicator`);
+            
+            indicators[currentRefIndex[folderName]].classList.remove('active');
+            currentRefIndex[folderName] = index;
+            indicators[currentRefIndex[folderName]].classList.add('active');
+            
+            const imageHeight = images[0].offsetHeight + 16;
+            slider.scrollTo({
+                top: imageHeight * index,
+                behavior: 'smooth'
+            });
+        }
+        
+        function initCarouselVideos() {
+            const activeSlide = document.querySelector('.carousel-slide.active');
+            if (!activeSlide) return;
+            
+            const videos = activeSlide.querySelectorAll('video');
+            videos.forEach(video => {
+                const wrapper = video.parentElement;
+                const loadingDiv = wrapper.querySelector('.carousel-video-loading');
+                
+                video.addEventListener('loadeddata', function handler() {
+                    if (loadingDiv) {
+                        loadingDiv.classList.add('hidden');
+                    }
+                    video.play().catch(e => {
+                        console.log('Auto-play prevented (click to play):', e.message);
+                    });
+                    video.removeEventListener('loadeddata', handler);
+                }, { once: true });
+                
+                video.addEventListener('error', function handler(e) {
+                    console.error('Video loading error:', video.querySelector('source').src);
+                    if (loadingDiv) {
+                        loadingDiv.innerHTML = `
+                            <span style="color: #ff6b6b; font-size: 0.9rem;">
+                                Failed to load video
+                            </span>
+                        `;
+                    }
+                    video.removeEventListener('error', handler);
+                }, { once: true });
+                
+                video.load();
+            });
+        }
+        
+        function changeSlide(direction) {
+            if (isTransitioning) return;
+            
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            if (slides.length === 0) return;
+            
+            isTransitioning = true;
+            
+            const oldSlide = slides[currentSlide];
+            indicators[currentSlide].classList.remove('active');
+            
+            // Pause videos in current slide
+            oldSlide.querySelectorAll('video').forEach(video => {
+                video.pause();
+            });
+            
+            // Calculate new slide index
+            const newSlideIndex = (currentSlide + direction + slides.length) % slides.length;
+            const newSlide = slides[newSlideIndex];
+            
+            // Remove all animation classes first
+            slides.forEach(slide => {
+                slide.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-from-left', 'slide-in-from-right');
+            });
+            
+            // Set animation classes
+            if (direction > 0) {
+                // Next slide
+                oldSlide.classList.remove('active');
+                oldSlide.classList.add('slide-out-left');
+                newSlide.style.display = 'block';
+                newSlide.classList.add('slide-in-from-right');
+            } else {
+                // Previous slide
+                oldSlide.classList.remove('active');
+                oldSlide.classList.add('slide-out-right');
+                newSlide.style.display = 'block';
+                newSlide.classList.add('slide-in-from-left');
+            }
+            
+            // Update current slide
+            currentSlide = newSlideIndex;
+            indicators[currentSlide].classList.add('active');
+            
+            // After animation completes
+            setTimeout(() => {
+                oldSlide.style.display = 'none';
+                oldSlide.classList.remove('slide-out-left', 'slide-out-right');
+                newSlide.classList.remove('slide-in-from-left', 'slide-in-from-right');
+                newSlide.classList.add('active');
+                
+                // Load and play videos in new slide
+                initCarouselVideos();
+                
+                isTransitioning = false;
+            }, 600); // Match animation duration
+        }
+        
+        function goToSlide(index) {
+            if (isTransitioning || index === currentSlide) return;
+            
+            const direction = index > currentSlide ? 1 : -1;
+            const steps = Math.abs(index - currentSlide);
+            
+            // For direct jump, use the direction
+            changeSlide(direction);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+        
         // Video loading handler
         function changePlaybackSpeed(speed) {
-            document.getElementById('compare_vid').playbackRate = speed;
+            const vid = document.getElementById('compare_vid');
+            if (vid) vid.playbackRate = speed;
         }
         
         // Initialize after page load
         document.addEventListener('DOMContentLoaded', function() {
-            function initVideoLoaders() {
-                const videoItems = document.querySelectorAll('.video-item');
-                
-                videoItems.forEach((item, index) => {
-                    const video = item.querySelector('video');
-                    const loader = item.querySelector('.video-loader');
-                    const progressFill = item.querySelector('.progress-fill');
-                    const loadingText = item.querySelector('.loading-text');
-                    
-                    if (!video || !loader) return;
-                    
-                    // 模拟加载进度（因为无法准确获取视频加载进度）
-                    let progress = 0;
-                    const progressInterval = setInterval(() => {
-                        progress += Math.random() * 15;
-                        if (progress > 90) progress = 90;
-                        
-                        progressFill.style.width = progress + '%';
-                        loadingText.textContent = `Loading... ${Math.round(progress)}%`;
-                    }, 200);
-                    
-                    // 视频加载完成事件
-                    video.addEventListener('loadeddata', function() {
-                        clearInterval(progressInterval);
-                        progressFill.style.width = '100%';
-                        loadingText.textContent = 'Complete!';
-                        
-                        setTimeout(() => {
-                            loader.classList.add('hidden');
-                            video.classList.add('loaded');
-                        }, 500);
-                    });
-                    
-                    // 视频加载错误处理
-                    video.addEventListener('error', function() {
-                        clearInterval(progressInterval);
-                        progressFill.style.background = '#dc3545';
-                        progressFill.style.width = '100%';
-                        loadingText.textContent = 'Error loading video';
-                        loadingText.style.color = '#dc3545';
-                        
-                        setTimeout(() => {
-                            loader.classList.add('hidden');
-                        }, 2000);
-                    });
-                    
-                    // 预加载视频
-                    video.load();
-                });
-            }
+            getDemoFolders();
             
-            // 使用Intersection Observer优化性能
             function initLazyVideoLoading() {
                 const videoItems = document.querySelectorAll('.video-item');
                 
@@ -731,7 +1994,6 @@
                             const video = entry.target.querySelector('video');
                             if (video && !video.getAttribute('data-loaded')) {
                                 video.setAttribute('data-loaded', 'true');
-                                // 开始加载进度条逻辑
                                 initSingleVideoLoader(entry.target);
                             }
                             videoObserver.unobserve(entry.target);
@@ -757,14 +2019,13 @@
                 
                 let progress = 0;
                 const progressInterval = setInterval(() => {
-                    progress += Math.random() * 12 + 3; // 更真实的加载速度
+                    progress += Math.random() * 12 + 3;
                     if (progress > 95) progress = 95;
                     
                     progressFill.style.width = progress + '%';
                     loadingText.textContent = `Loading... ${Math.round(progress)}%`;
                 }, 150);
                 
-                // 检查视频是否已经缓存
                 if (video.readyState >= 3) {
                     clearInterval(progressInterval);
                     progressFill.style.width = '100%';
@@ -796,19 +2057,15 @@
                 video.load();
             }
             
-            // 初始化懒加载
             initLazyVideoLoading();
-            // Set video playback speed
             changePlaybackSpeed(1.0);
             
-            // Lazy load videos for better performance
-            const videos = document.querySelectorAll('video');
+            const videos = document.querySelectorAll('.video-item video');
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const video = entry.target;
-                        video.play();
-                        videoObserver.unobserve(video);
+                        video.play().catch(e => console.log('Auto-play prevented:', e));
                     }
                 });
             }, { threshold: 0.1 });
@@ -817,7 +2074,6 @@
                 videoObserver.observe(video);
             });
             
-            // Warning for slow loading videos
             var startTime;
             var timeout = undefined;
             var demoVid = document.getElementById("compare_vid");

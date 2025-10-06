@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T14:47:57.208952",
+  "input_video": "/home/yyh/lab/zju3dv-online-projects/BoxDreamer/src/demo/examples/mode1/mode1-4.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 5,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 507,
+  "average_inference_fps": 59.26556182428865,
+  "checkpoint": null,
+  "huggingface_model": true
+}

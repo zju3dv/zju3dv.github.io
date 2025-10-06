@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-10-06T17:11:34.606062",
+  "input_video": "./Toy-Pendant-compressed.mp4",
+  "query_video": null,
+  "reference_path": null,
+  "num_references": 5,
+  "reconstructor": "DUSt3R",
+  "layout": "academic",
+  "output_fps": 24,
+  "show_point_cloud": true,
+  "use_original_resolution": true,
+  "num_frames_processed": 618,
+  "average_inference_fps": 58.63403095727149,
+  "checkpoint": null,
+  "huggingface_model": true
+}

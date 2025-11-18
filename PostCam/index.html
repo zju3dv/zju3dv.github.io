@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>PostCam: Camera-Controllable Novel-View Video Generation with Query-Shared Cross-Attention</title>
+  <link rel="icon" type="image/x-icon" href="">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">PostCam: Camera-Controllable Novel-View Video Generation
+              with Query-Shared Cross-Attention</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="" target="_blank">Yipeng Chen<sup>2</sup><sup>*</sup></a>,</span>
+                <span class="author-block">
+                  <a href="" target="_blank">Zhichao Ye<sup>1</sup><sup>*</sup></a>,</span>
+                  <span class="author-block">
+                    <a href="" target="_blank">Zhenzhou Fang<sup>2</sup></a>,</span>
+                    <span class="author-block">
+                      <a href="" target="_blank">Xinyu Chen<sup>2</sup></a>,</span>
+                      <span class="author-block">
+                        <a href="" target="_blank">Xiaoyu Zhang<sup>1</sup></a>,</span>
+                        <span class="author-block">
+                          <a href="" target="_blank">Jialing Liu<sup>1</sup></a>,</span>
+                          <span class="author-block">
+                            <a href="" target="_blank">Nan Wang<sup>1</sup></a>,</span>
+                            <span class="author-block">
+                              <a href="" target="_blank">Haomin Liu<sup>1</sup></a>,</span>
+                              <span class="author-block">
+                                <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang<sup>2</sup></a>,</span>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">
+                      <sup>1</sup>ViTracing
+                      <sup>2</sup>State Key Lab of CAD&CG, Zhejiang University
+                    </span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary PDF link -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+       <div style="margin-top: 15px;"></div>
+       <h2 class="subtitle has-text-centered">
+       We present <strong>PostCam</strong>, a framework for novel-view video
+       generation that <br> enables post-capture editing of camera trajectories in dynamic scenes.
+       </h2>
+       <div style="margin-top: 30px;"></div>
+       <img id="teaser" 
+     src="static/images/teazer_01.png" 
+     alt="PostCam Teaser" 
+     style="max-width: 120%; height: auto; position: relative; left: 50%; transform: translateX(-50%);">
+       </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We propose PostCam, a framework for novel-view video generation that enables post-capture editing of camera trajectories in dynamic scenes.
+            Existing methods either rely solely on camera parameters, leading to imprecise motion control, or utilize rendered proxy videos that are vulnerable to depth estimation errors.
+            In contrast, PostCam integrates both modalities via a novel query-shared cross-attention module that effectively aligns 6-DoF camera poses with 2D rendered frames in a shared feature space.
+            To further enhance generation quality, we introduce a two-stage training strategy: the model first learns coarse camera control from pose inputs, then incorporates visual information to refine motion accuracy and visual fidelity.
+            Experiments on both real-world and synthetic datasets show that PostCam outperforms state-of-the-art methods by over 20% in camera control precision and achieves the highest video quality.
+            Our code will be released publicly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+  <!-- Paper poster -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-">
+            <h2 class="title is-2">Method</h2>
+            <div class="columns is-centered has-text-justified">
+              <td colspan="3">
+                <img src="static/images/framework.png" width="100%" />
+              </td>
+            </div>
+            <div class="content has-text-justified my_link">
+              <td colspan="3">
+                <p>
+                  The model stacks multiple transformer blocks along three parallel pathways. (a) The source
+                  video is first encoded into latent space and then concatenated with noised latents before entering the transformer blocks. (b) the
+                  camera parameters are processed by a lightweight encoder and injected into every block via query-shared cross-attention. (c)
+                  the rendered video iis similarly encoded into latent space; within each block, it undergoes self-attention to extract high-level
+                  visual features. An exploded view (bottom right) depicts the internal structure of a transformer block.
+                </p>
+              </td>
+            </div>
+            <p><br></p>
+          </div>
+  </section>
+  <!--End paper poster -->
+
+
+<section class="hero is-small is-light" style="margin-top: -50px;">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-">
+          <br>
+          <br>
+          <h2 class="title is-2 has-text-centered">Demos</h2>
+          <h2 class="title is-6">(All videos are generated based on the Wan2.1 1.3B model)</h2>
+          <h1 class="title is-5 has-text-centered">Arc Right Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                  <source src="static/videos/right.mp4" type="video/mp4">
+                </video>
+              </div>
+            </td>
+          </div>
+          <p><br></p>
+          <h1 class="title is-5 has-text-centered">Arc Left Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                  <source src="static/videos/left.mp4" type="video/mp4">
+                </video>
+              </div>
+            </td>
+          </div>
+          <p><br></p>
+          <h1 class="title is-5 has-text-centered">Translation Up Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                  <source src="static/videos/up.mp4" type="video/mp4">
+                </video>
+              </div>
+            </td>
+          </div>
+          <p><br></p> 
+          <h1 class="title is-5 has-text-centered">Translation Down Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+              <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                <source src="static/videos/down.mp4" type="video/mp4">
+              </video>
+              </div>
+            </td>
+          </div>
+          <p><br></p>
+          <h1 class="title is-5 has-text-centered">Zoom in Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+              <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                <source src="static/videos/zoomin.mp4" type="video/mp4">
+              </video>
+            </div>
+            </td>
+          </div>
+          <p><br></p>
+          <h1 class="title is-5 has-text-centered">Zoom out Trajectories</h1>
+          <div class="columns is-centered has-text-justified">
+            <td colspan="3">
+              <div style="text-align: center; width: 100%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b></span>
+                  <span><b>Source Videos</b></span>
+                  <span><b>Synthesized Videos</b>&nbsp;</span>
+                </div>
+              <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                <source src="static/videos/zoomout.mp4" type="video/mp4">
+              </video>
+            </div>
+            </td>
+          </div>
+          <p><br></p>
+</section>
+
+
+  <!-- Video grid single ref -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column custom-width">
+            <h2 class="title is-2">Comparisons</h2>
+
+            <div class="content has-text-justified my_link">
+              <td colspan="3">
+                <p>
+                  We compare the proposed PostCam with state-of-the-art camera-controlled video-to-video generation methods including DaS <a href="#ref-das">[1]</a>, TrajectoryCrafter <a href="#ref-trajcrafter">[2]</a>, and ReCamMaster <a href="#ref-recamaster">[3]</a>.
+                </p>
+                <!-- <p><br></p> -->
+              </td>
+
+            <div class="columns is-centered has-text-justified">
+              <td colspan="3">
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls poster="">
+                  <source src="static/videos/compare.mp4" type="video/mp4">
+                </video>
+              </td>
+            </div>
+            <p><br></p>
+        </div>
+  </section>
+
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column custom-width">
+            <!-- <h2 class="title is-2"></h2> -->
+            <div class="content has-text-justified" style="margin-top: -0px;">
+              
+              <b>Reference:</b> <br>
+                <a name="ref-das" id="ref-das"></a>
+                [1] Gu Z, Yan R, Lu J, et al. Diffusion as shader: 3d-aware video diffusion for versatile video generation control[C]//Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Conference Papers. 2025: 1-12.<br>
+                <a name="ref-trajcrafter" id="ref-trajcrafter"></a>
+                [2] YU M, Hu W, Xing J, et al. Trajectorycrafter: Redirecting camera trajectory for monocular videos via diffusion models[J]. arXiv preprint arXiv:2503.05638, 2025.<br>
+                <a name="ref-recamaster" id="ref-recamaster"></a>
+                [3] Bai J, Xia M, Fu X, et al. Recammaster: Camera-controlled generative rendering from a single video[J]. arXiv preprint arXiv:2503.11647, 2025.<br>
+                <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

@@ -1,0 +1,77 @@
+{
+  "project": {
+    "title": "Your Project Title",
+    "subtitle": "A Brief Description of Your Research",
+    "conference": "Conference/Journal Name Year"
+  },
+  "authors": [
+    {
+      "name": "Author Name 1",
+      "website": "https://author1-website.com",
+      "affiliation": 1,
+      "isFirstAuthor": true
+    },
+    {
+      "name": "Author Name 2", 
+      "website": "https://author2-website.com",
+      "affiliation": 2,
+      "isFirstAuthor": true
+    },
+    {
+      "name": "Author Name 3",
+      "website": "https://author3-website.com", 
+      "affiliation": 1,
+      "isCorresponding": true
+    }
+  ],
+  "affiliations": [
+    {
+      "id": 1,
+      "name": "Institution Name 1",
+      "logo": "static/images/logo/institution1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Institution Name 2", 
+      "logo": "static/images/logo/institution2.jpg"
+    }
+  ],
+  "links": {
+    "paper": "https://arxiv.org/pdf/your-paper.pdf",
+    "code": "https://github.com/your-username/your-repo",
+    "data": "https://huggingface.co/your-dataset",
+    "supplementary": "https://your-supplement-url.com"
+  },
+  "images": {
+    "teaser": "static/images/teaser.jpg",
+    "method": "static/images/method.jpg",
+    "results": [
+      "static/images/result1.jpg",
+      "static/images/result2.jpg"
+    ],
+    "comparisons": [
+      {
+        "image": "static/images/compare/ours.jpg",
+        "label": "Ours"
+      },
+      {
+        "image": "static/images/compare/baseline1.jpg", 
+        "label": "Baseline 1"
+      },
+      {
+        "image": "static/images/compare/baseline2.jpg",
+        "label": "Baseline 2"
+      }
+    ]
+  },
+  "bibtex": {
+    "entryType": "inproceedings",
+    "key": "YourPaper2024",
+    "author": "Author, Name and Author, Name and Author, Name",
+    "title": "Your Paper Title",
+    "publisher": "Publisher Name", 
+    "booktitle": "Conference/Journal Name",
+    "year": "2024",
+    "pages": "1--10"
+  }
+}

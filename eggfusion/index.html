@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="EggFusion: Advanced AI model for computer vision and machine learning applications">
+  <meta property="og:title" content="EggFusion: Revolutionary AI Model for Computer Vision"/>
+  <meta property="og:description" content="EggFusion: Advanced AI model for computer vision and machine learning applications"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/images/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:title" content="EggFusion: Revolutionary AI Model">
+  <meta name="twitter:description" content="EggFusion: Advanced AI model for computer vision and machine learning applications">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="artificial intelligence, computer vision, machine learning, EggFusion, AI research">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>EGG-Fusion: Efficient 3D Reconstruction with Geometry-aware Gaussian Surfel On the Fly</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-3 publication-title">EGG-Fusion: Efficient 3D Reconstruction with Geometry-aware Gaussian Surfel On the Fly</h1>
+          <!-- <div class="notification is-warning is-light" style="margin-bottom: 1em;">
+            <strong>Notice:</strong> This website is currently under construction.
+          </div> -->
+          <div class="is-size-6 publication-authors">
+            <!-- Paper authors -->
+            <span class="author-block">
+              <a href="https://github.com/panxkun" target="_blank">Xiaokun Pan</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Zhenzhe Li<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/oneLOH" target="_blank">Zhichao Ye</a><sup>†,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zhaihongjia.github.io/" target="_blank">Hongjia Zhai</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>†,1</sup>
+            </span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>State Key Lab of CAD&amp;CG, Zhejiang University<br>
+                <sup>2</sup>SenseTime Research<br>
+                
+              <span style="font-weight:bold; color:#53615f; font-size:1.0em;">SIGGRAPH ASIA 2025 (Conference track)</span>
+              </span>
+              </span>
+            </div>
+
+            <em><sup>†</sup> Corresponding authors</em>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Arxiv PDF link -->
+              <span class="link-block">
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/eggfusion/eggfusion.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="http://www.cad.zju.edu.cn/home/gfzhang/papers/eggfusion/eggfusion_supp.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
+              
+
+              <!-- ArXiv abstract Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+              <span class="link-block">
+                <a href="https://github.com/panxkun/eggfusion" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-code"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <!-- Dataset link -->
+              <!-- <span class="link-block">
+                <a href="#" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div style="text-align: center;">
+        <img src="assets/teaser.png" alt="EggFusion Banner" style="max-width:100%; height:auto;">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Real-time 3D reconstruction is a fundamental task in computer graphics. Recently, differentiable-rendering-based SLAM system has demonstrated significant potential, enabling photorealistic scene rendering through learnable scene representations such as Neural Radiance Fields (NeRF) and 3D Gaussian Splatting (3DGS). Current differentiable rendering methods face dual challenges in real-time computation and sensor noise sensitivity, leading to degraded geometric fidelity in scene reconstruction and limited practicality. To address these challenges, we propose a novel real-time system EGG-Fusion, featuring robust sparse-to-dense camera tracking and a geometry-aware Gaussian surfel mapping module, introducing an information filter-based fusion method that explicitly accounts for sensor noise to achieve high-precision surface reconstruction. The proposed differentiable Gaussian surfel mapping effectively models multi-view consistent surfaces while enabling efficient parameter optimization. Extensive experimental results demonstrate that the proposed system achieves a surface reconstruction error of 0.6 cm on standardized benchmark datasets including Replica and ScanNet++, representing over 20% accuracy improvement compared to state-of-the-art (SOTA) GS-based methods. Notably, the system maintains real-time processing capabilities at 24 FPS, establishing it as one of the most accurate differentiable-rendering-based real-time reconstruction systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-4">Method Overview</h2>
+
+      <div style="text-align: center;">
+        <img src="assets/overview.gif" alt="xxx" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Realtime Capture and Reconstruction with EGG-Fusion</strong> </p>
+
+      <div style="text-align: center;">
+        <img src="assets/framework.png" alt="Method Framework" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Framework of EGG-Fusion.</strong> 
+        Our framework is divided into two integral components. 
+        In the scene mapping module, Gaussian surfels are utilized as the fundamental primitives for scene representation and can achieve high-quality real-time reconstruction. 
+        The camera tracking module employs a sparse-to-dense strategy to ensure robust estimation of camera poses.</p>
+
+    </div>
+    </div>
+  </section>
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-4">Results</h2>
+
+      <div style="text-align: center;">
+        <img src="assets/recon-mesh.png" alt="xxx" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Mesh Reconstruction results on Replica Datasts</strong> </p>
+
+      <div style="text-align: center;">
+        <img src="assets/recon-pc.png" alt="xxx" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Point Cloud Reconstruction results on Replica Datasts</strong> </p>
+
+      <div style="text-align: center;">
+        <img src="assets/render.png" alt="xxx" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Render Results on Replica Datasts</strong> </p>
+
+      <div style="text-align: center;">
+        <img src="assets/fusion.png" alt="xxx" style="max-width:100%; height:auto;">
+      </div>
+      <p style="text-align: center;">
+        <strong>Fusion Results on TUM-RGBD Datasts</strong> </p>
+
+      </div>
+    </div>
+  </section>
+
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-4">BibTeX</h2>
+    <pre>
+@inproceedings{eggfusion2025,
+  title     = {{EGG-Fusion}: Efficient 3D Reconstruction with Geometry-aware Gaussian Surfel on the Fly},
+  author    = {Pan, Xiaokun and Li, Zhenzhe and Ye, Zhichao and Zhai, Hongjia and Zhang, Guofeng},
+  booktitle = {SIGGRAPH Asia 2025 Conference Papers},
+  year      = {2025},
+  month     = dec,
+  address   = {Hong Kong, Hong Kong},
+  publisher = {ACM},
+  pages     = {1--11},
+  doi       = {10.1145/3757377.3763878},
+</pre>
+</div>
+</section>
+<!--End BibTex citation -->
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="content">
+      <p>
+        © 2025 Me. Adapted from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a> (CC BY-SA 4.0). Modified with GPT-4.0.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

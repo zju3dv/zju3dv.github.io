@@ -1,0 +1,366 @@
+/* 阿里字体定义 */
+@font-face {
+  font-family: 'AlibabaSans';
+  src: url('../../fonts/AlibabaSans-Regular.363c6ef6.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaSans';
+  src: url('../../fonts/AlibabaSans-Bold.baf5a34e.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaSans';
+  src: url('../../fonts/AlibabaSans-Medium.6b8c902b.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaSans';
+  src: url('../../fonts/AlibabaSans-Light.95662480.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 全局字体设置 */
+body {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* 页面主要内容容器 */
+.main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 页面布局 */
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 100%;
+}
+
+/* 容器宽度限制 */
+.container {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+.container.is-max-desktop {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+.column.is-four-fifths {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.hero .container {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+/* 标题样式 */
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.publication-title {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.publication-awards {
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+/* 等贡献作者标记 */
+.eql-cntrb {
+  font-size: smaller;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+/* 视频容器 */
+.publication-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.publication-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 轮播样式 */
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+/* 图片样式 */
+.interpolation-image {
+  width: 100%;
+  height: auto;
+}
+
+.hero.teaser img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* 插值面板 */
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+/* 链接样式 */
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* 页脚 */
+.footer {
+  background-color: #fafafa !important;
+  padding: 3rem 0 6rem 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.footer .footer-content {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  position: relative !important;
+}
+
+.footer .content {
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.footer a {
+  color: hsl(204, 86%, 53%);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* 排版改进 */
+.title.is-1 {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.title.is-3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.title.is-4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.content p {
+  margin-bottom: 1rem;
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.content a {
+  color: hsl(204, 86%, 53%);
+  text-decoration: none;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+/* 按钮样式 */
+.button.is-normal.is-rounded.is-dark {
+  background-color: #363636;
+  border-color: #363636;
+  color: #fff;
+  margin: 0.25rem;
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+.button.is-normal.is-rounded.is-dark:hover {
+  background-color: #292929;
+  border-color: #292929;
+}
+
+/* 副标题 */
+.subtitle {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+/* BibTeX 代码块 */
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+pre code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #333;
+}
+
+/* BibTeX 区域标题 */
+#BibTeX .title {
+  font-family: 'AlibabaSans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .title.is-1 {
+    font-size: 2rem;
+  }
+  
+  .interpolation-panel {
+    padding: 1rem;
+  }
+  
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .container, .container.is-max-desktop, .hero .container {
+    padding: 0 10px !important;
+  }
+}
+
+/* 响应式设计 - 大屏幕 */
+@media screen and (max-width: 1240px) {
+  .container, .container.is-max-desktop, .hero .container {
+    padding: 0 20px !important;
+  }
+}
+
+/* 通用链接格式 */
+.custom-link {
+  color: #3273dc;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.custom-link:hover {
+  color: #2366d1;
+  text-decoration: underline;
+}
+
+.custom-link:visited {
+  color: #5a67d8;
+}

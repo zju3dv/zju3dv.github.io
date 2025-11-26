@@ -1,0 +1,106 @@
+/*! bulma-carousel - v4.0.24 | MIT License | github.com/Wikiki/bulma-carousel */
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel .carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.carousel .carousel-item {
+  position: relative;
+  width: 100%;
+  flex: 0 0 100%;
+  overflow: hidden;
+}
+
+.carousel .carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.carousel-navigation-previous,
+.carousel-navigation-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.carousel-navigation-previous:hover,
+.carousel-navigation-next:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.carousel-navigation-previous {
+  left: 10px;
+}
+
+.carousel-navigation-next {
+  right: 10px;
+}
+
+.carousel-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.carousel-page {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-page.is-active {
+  background: rgba(255, 255, 255, 1);
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.results-carousel .item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.results-carousel .item video {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

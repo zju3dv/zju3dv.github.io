@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 142.3 105.9">
+  <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: #b9d3ed;
+        stroke: #b9d3ed;
+      }
+
+      .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8 {
+        stroke-miterlimit: 10;
+      }
+
+      .st1, .st2, .st8 {
+        stroke-width: .8px;
+      }
+
+      .st2, .st3, .st4, .st5 {
+        fill: #6589bf;
+        stroke: #6589bf;
+      }
+
+      .st4, .st7 {
+        stroke-width: .8px;
+      }
+
+      .st5 {
+        stroke-width: .8px;
+      }
+
+      .st6, .st7, .st8 {
+        fill: #d8d8d8;
+        isolation: isolate;
+        opacity: .6;
+        stroke: #d8d8d8;
+      }
+    </style>
+  </defs>
+  <rect class="st5" x=".4" y=".4" width="141.4" height="22.3" rx="3.3" ry="3.3"/>
+  <rect class="st7" x="1.2" y="27.9" width="65.9" height="22.3" rx="2.5" ry="2.5"/>
+  <rect class="st4" x="74.9" y="27.9" width="65.6" height="22.3" rx="2.5" ry="2.5"/>
+  <rect class="st8" x="3" y="55.5" width="29.8" height="22.3" rx="3.1" ry="3.1"/>
+  <rect class="st1" x="38.4" y="55.5" width="29.6" height="22.3" rx="3.1" ry="3.1"/>
+  <rect class="st2" x="73.6" y="55.5" width="29.8" height="22.3" rx="3.1" ry="3.1"/>
+  <rect class="st8" x="108.9" y="55.5" width="29.6" height="22.3" rx="3.1" ry="3.1"/>
+  <rect class="st6" x="6.1" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st6" x="22.9" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st6" x="39.7" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st0" x="56.5" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st3" x="90.1" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st0" x="73.3" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st6" x="106.9" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+  <rect class="st6" x="123.7" y="83" width="10.8" height="22.3" rx="2" ry="2"/>
+</svg>

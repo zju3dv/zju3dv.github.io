@@ -1,0 +1,107 @@
+/* InfiniDepth Layout and Component Styles */
+
+/* Section Cards */
+.section-card {
+    background: #fff !important;
+    border-radius: 14px !important;
+    box-shadow: 0 1px 6px rgba(80,120,180,0.03) !important;
+    padding: 18px 24px !important;
+}
+
+/* Citation Section */
+.section-card pre,
+.section-card pre code {
+    color: #4a5a6a;
+    background: #f7f9fb;
+}
+
+section {
+    margin-bottom: 2px !important;
+    padding-bottom: 0 !important;
+}
+
+/* Jumbotron - Cover Section */
+.jumbotron.text-center.mt-0 {
+    padding-top: 27px !important;
+    padding-bottom: 18px !important;
+    margin-bottom: 0 !important;
+}
+
+.jumbotron .container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.jumbotron h1 {
+    font-size: 2.15rem !important;
+    line-height: 1.26 !important;
+    margin-top: 1.1em;
+    margin-bottom: 0.45em;
+}
+
+.jumbotron h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0.25em;
+    margin-bottom: 0.45em;
+}
+
+.jumbotron hr {
+    margin: 0.2em 0 0.5em 0 !important;
+}
+
+.author-list,
+.author-row {
+    margin-bottom: 0.2em !important;
+    margin-top: 0 !important;
+}
+
+.jumbotron p {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.2em !important;
+}
+
+.jumbotron .row.justify-content-center {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.2em !important;
+}
+
+.jumbotron .column p {
+    margin-bottom: 0.2em !important;
+    margin-top: 0.2em !important;
+}
+
+.jumbotron .author-list a {
+    font-size: 1.1rem !important;
+    font-weight: 400;
+}
+
+.jumbotron .author-row {
+    margin-bottom: 0.01em !important;
+}
+
+.jumbotron p:not([style]) {
+    font-size: 1.1rem !important;
+    font-weight: 400;
+}
+
+.jumbotron .btn {
+    font-size: 0.95rem !important;
+    padding: 8px 16px !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 700px) {
+    .jumbotron h1 {
+        font-size: 1.25rem !important;
+    }
+
+    .jumbotron h4 {
+        font-size: 0.98rem !important;
+    }
+
+    .jumbotron {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}

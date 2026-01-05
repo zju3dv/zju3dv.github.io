@@ -1,0 +1,1012 @@
+/**
+ * InfiniDepth Auto Recorder
+ * 
+ * Automatic camera movement and zoom for smooth video recording.
+ * Features:
+ * - Predefined anchor points (interesting regions)
+ * - Smooth interpolation between anchors
+ * - Automatic zoom in/out at each anchor
+ * - Configurable timing and animation curves
+ */
+
+class AutoRecorder {
+    constructor(magnifier, config = {}) {
+        this.magnifier = magnifier;
+        
+        // Configuration
+        this.config = {
+            // Movement settings
+            moveSpeed: config.moveSpeed || 0.02,          // Speed of movement between anchors (0.01-0.1)
+            zoomSpeed: config.zoomSpeed || 0.03,          // Speed of zoom animation (0.01-0.1)
+            
+            // Timing settings
+            pauseAtAnchor: config.pauseAtAnchor || 1000,  // Pause time at anchor before zoom (ms)
+            pauseAtZoom: config.pauseAtZoom || 1500,      // Pause time at max zoom (ms)
+            pauseAfterZoomOut: config.pauseAfterZoomOut || 800, // Pause after zoom out (ms)
+            
+            // Zoom settings
+            maxZoomLevel: config.maxZoomLevel || 0.15,    // Maximum zoom (patch size multiplier) - DEPRECATED, use minPatchSize directly
+            useMinPatchSize: config.useMinPatchSize !== false,  // Use minPatchSize directly instead of multiplier
+            
+            // Animation curve (easing functions)
+            moveEasing: config.moveEasing || 'easeInOutCubic',
+            zoomEasing: config.zoomEasing || 'easeInOutQuad'
+        };
+        
+        // State
+        this.isRecording = false;
+        this.isPaused = false;
+        this.currentAnchorIndex = -1;
+        this.animationFrameId = null;
+        
+        // Current position and zoom state
+        this.currentX = 0;
+        this.currentY = 0;
+        this.currentPatchSize = this.magnifier.config.initialPatchSize;
+        
+        // Animation state
+        this.state = 'idle'; // idle, moving, zooming_in, paused, zooming_out
+        this.stateStartTime = 0;
+        this.pauseEndTime = 0;
+        
+        // Anchors (will be set per scene)
+        this.anchors = [];
+        
+        // Create UI
+        this.createUI();
+        
+        console.log('AutoRecorder initialized');
+    }
+    
+    /**
+     * Easing functions for smooth animation
+     */
+    easing = {
+        linear: t => t,
+        easeInQuad: t => t * t,
+        easeOutQuad: t => t * (2 - t),
+        easeInOutQuad: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+        easeInCubic: t => t * t * t,
+        easeOutCubic: t => (--t) * t * t + 1,
+        easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+        easeInOutSine: t => -(Math.cos(Math.PI * t) - 1) / 2
+    };
+    
+    /**
+     * Set anchors for current scene
+     * Anchors are defined as percentage of image dimensions (0-1)
+     */
+    setAnchors(anchors) {
+        this.anchors = anchors.map(anchor => ({
+            x: anchor.x,      // X position (0-1)
+            y: anchor.y,      // Y position (0-1)
+            name: anchor.name || 'Anchor'
+        }));
+        console.log(`Set ${this.anchors.length} anchors:`, this.anchors);
+    }
+    
+    /**
+     * Create UI control panel
+     */
+    createUI() {
+        const panel = document.createElement('div');
+        panel.id = 'autoRecorderPanel';
+        panel.innerHTML = `
+            <div id="recorderContainer" style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid #4a90e2;
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 10000;
+                min-width: 280px;
+                font-family: 'Jost', sans-serif;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #2c3e50; font-size: 18px; font-weight: 600;">
+                        🎬 Auto Recorder
+                    </h3>
+                    <button id="togglePanelBtn" style="
+                        background: #e8f4fd;
+                        border: 1px solid #4a90e2;
+                        border-radius: 4px;
+                        width: 28px;
+                        height: 28px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.2s;
+                    " title="Toggle panel">▼</button>
+                </div>
+                
+                <div id="recorderContent" style="transition: max-height 0.3s ease, opacity 0.3s ease; overflow: hidden;">
+                
+                <div id="recorderContent" style="transition: max-height 0.3s ease, opacity 0.3s ease; overflow: hidden;">
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 14px; color: #555;">Status:</span>
+                        <span id="recorderStatus" style="font-weight: 600; color: #e74c3c;">Idle</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 14px; color: #555;">Anchor:</span>
+                        <span id="recorderAnchor" style="font-weight: 600; color: #3498db;">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 14px; color: #555;">State:</span>
+                        <span id="recorderState" style="font-weight: 600; color: #95a5a6;">-</span>
+                    </div>
+                </div>
+                
+                <div style="border-top: 1px solid #ddd; padding-top: 15px; margin-bottom: 15px;">
+                    <label style="display: block; font-size: 13px; color: #555; margin-bottom: 5px;">
+                        Move Speed: <span id="moveSpeedValue">${this.config.moveSpeed.toFixed(2)}</span>
+                    </label>
+                    <input type="range" id="moveSpeedSlider" min="0.01" max="0.1" step="0.01" 
+                           value="${this.config.moveSpeed}" 
+                           style="width: 100%; margin-bottom: 10px;">
+                    
+                    <label style="display: block; font-size: 13px; color: #555; margin-bottom: 5px;">
+                        Zoom Speed: <span id="zoomSpeedValue">${this.config.zoomSpeed.toFixed(2)}</span>
+                    </label>
+                    <input type="range" id="zoomSpeedSlider" min="0.01" max="0.1" step="0.01" 
+                           value="${this.config.zoomSpeed}" 
+                           style="width: 100%; margin-bottom: 10px;">
+                    
+                    <label style="display: block; font-size: 13px; color: #555; margin-bottom: 5px;">
+                        Pause at Anchor: <span id="pauseAnchorValue">${this.config.pauseAtAnchor}ms</span>
+                    </label>
+                    <input type="range" id="pauseAnchorSlider" min="500" max="3000" step="100" 
+                           value="${this.config.pauseAtAnchor}" 
+                           style="width: 100%;">
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button id="startRecordingBtn" style="
+                        flex: 1;
+                        padding: 10px;
+                        background: #27ae60;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: background 0.2s;
+                    ">▶ Start</button>
+                    
+                    <button id="pauseRecordingBtn" style="
+                        flex: 1;
+                        padding: 10px;
+                        background: #f39c12;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: background 0.2s;
+                        display: none;
+                    ">⏸ Pause</button>
+                    
+                    <button id="stopRecordingBtn" style="
+                        flex: 1;
+                        padding: 10px;
+                        background: #e74c3c;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: background 0.2s;
+                    ">⏹ Stop</button>
+                </div>
+                
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+                    <button id="setAnchorsVisualBtn" style="
+                        width: 100%;
+                        padding: 10px;
+                        background: #9b59b6;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: background 0.2s;
+                        margin-bottom: 10px;
+                    ">🎯 Visual Anchor Mode</button>
+                    
+                    <button id="setAnchorsBtn" style="
+                        width: 100%;
+                        padding: 10px;
+                        background: #3498db;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                        transition: background 0.2s;
+                    ">📍 Set Anchors (JSON)</button>
+                </div>
+                
+                </div>
+            </div>
+        `;
+        document.body.appendChild(panel);
+        
+        // Create visual anchor overlay (initially hidden)
+        this.createVisualAnchorOverlay();
+        
+        // Bind events
+        this.bindUIEvents();
+    }
+    
+    /**
+     * Bind UI events
+     */
+    bindUIEvents() {
+        // Toggle panel
+        document.getElementById('togglePanelBtn').addEventListener('click', () => this.togglePanel());
+        
+        // Buttons
+        document.getElementById('startRecordingBtn').addEventListener('click', () => this.start());
+        document.getElementById('pauseRecordingBtn').addEventListener('click', () => this.togglePause());
+        document.getElementById('stopRecordingBtn').addEventListener('click', () => this.stop());
+        document.getElementById('setAnchorsBtn').addEventListener('click', () => this.showAnchorDialog());
+        document.getElementById('setAnchorsVisualBtn').addEventListener('click', () => this.enterVisualAnchorMode());
+        
+        // Sliders
+        document.getElementById('moveSpeedSlider').addEventListener('input', (e) => {
+            this.config.moveSpeed = parseFloat(e.target.value);
+            document.getElementById('moveSpeedValue').textContent = this.config.moveSpeed.toFixed(2);
+        });
+        
+        document.getElementById('zoomSpeedSlider').addEventListener('input', (e) => {
+            this.config.zoomSpeed = parseFloat(e.target.value);
+            document.getElementById('zoomSpeedValue').textContent = this.config.zoomSpeed.toFixed(2);
+        });
+        
+        document.getElementById('pauseAnchorSlider').addEventListener('input', (e) => {
+            this.config.pauseAtAnchor = parseInt(e.target.value);
+            document.getElementById('pauseAnchorValue').textContent = this.config.pauseAtAnchor + 'ms';
+        });
+    }
+    
+    /**
+     * Toggle panel collapsed/expanded
+     */
+    togglePanel() {
+        const content = document.getElementById('recorderContent');
+        const btn = document.getElementById('togglePanelBtn');
+        const container = document.getElementById('recorderContainer');
+        
+        if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+            // Expand
+            content.style.maxHeight = '1000px';
+            content.style.opacity = '1';
+            btn.textContent = '▼';
+            btn.title = 'Collapse panel';
+        } else {
+            // Collapse
+            content.style.maxHeight = '0px';
+            content.style.opacity = '0';
+            btn.textContent = '▶';
+            btn.title = 'Expand panel';
+        }
+    }
+    
+    /**
+     * Create visual anchor overlay
+     */
+    createVisualAnchorOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'visualAnchorOverlay';
+        overlay.style.display = 'none';
+        overlay.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            " id="visualAnchorBackdrop">
+                <div style="
+                    position: absolute;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: white;
+                    padding: 20px 30px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                    z-index: 10001;
+                    min-width: 400px;
+                    font-family: 'Jost', sans-serif;
+                    pointer-events: auto;
+                ">
+                    <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 18px; font-weight: 600;">
+                        🎯 Visual Anchor Mode
+                    </h3>
+                    <p style="margin: 0 0 15px 0; color: #555; font-size: 14px;">
+                        Click on the RGB image to set anchor points. Anchors will be numbered automatically.
+                    </p>
+                    <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 6px;">
+                        <div style="font-size: 13px; color: #555; margin-bottom: 5px;">
+                            Current anchors: <span id="anchorCount" style="font-weight: 600; color: #3498db;">0</span>
+                        </div>
+                        <div id="anchorList" style="font-size: 12px; color: #666; max-height: 100px; overflow-y: auto;"></div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="clearAnchorsBtn" style="
+                            flex: 1;
+                            padding: 10px;
+                            background: #e74c3c;
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 14px;
+                        ">🗑️ Clear All</button>
+                        <button id="undoAnchorBtn" style="
+                            flex: 1;
+                            padding: 10px;
+                            background: #f39c12;
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 14px;
+                        ">↩️ Undo</button>
+                        <button id="doneAnchorsBtn" style="
+                            flex: 1;
+                            padding: 10px;
+                            background: #27ae60;
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 14px;
+                        ">✓ Done</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        // State for visual anchor mode
+        this.visualAnchors = [];
+        this.visualAnchorMarkers = [];
+        
+        console.log('Visual anchor overlay created');
+    }
+    
+    /**
+     * Enter visual anchor mode
+     */
+    enterVisualAnchorMode() {
+        console.log('Entering visual anchor mode...');
+        
+        const overlay = document.getElementById('visualAnchorOverlay');
+        if (!overlay) {
+            console.error('Visual anchor overlay not found!');
+            return;
+        }
+        overlay.style.display = 'block';
+        
+        // Clear previous anchors and markers
+        this.visualAnchors = [];
+        this.clearAnchorMarkers();
+        this.updateAnchorList();
+        
+        // Remove previous click listener if exists
+        const rgbSide = this.magnifier.rgbSide;
+        if (!rgbSide) {
+            console.error('RGB side element not found!');
+            return;
+        }
+        
+        if (this.anchorClickHandler) {
+            rgbSide.removeEventListener('click', this.anchorClickHandler);
+        }
+        
+        // Add click listener to RGB image
+        this.anchorClickHandler = (e) => this.handleAnchorClick(e);
+        rgbSide.addEventListener('click', this.anchorClickHandler);
+        
+        // Change cursor
+        rgbSide.style.cursor = 'crosshair';
+        
+        // Bind button events (remove old listeners first to prevent duplicates)
+        const clearBtn = document.getElementById('clearAnchorsBtn');
+        const undoBtn = document.getElementById('undoAnchorBtn');
+        const doneBtn = document.getElementById('doneAnchorsBtn');
+        
+        if (clearBtn) {
+            clearBtn.onclick = () => this.clearVisualAnchors();
+        }
+        if (undoBtn) {
+            undoBtn.onclick = () => this.undoLastAnchor();
+        }
+        if (doneBtn) {
+            doneBtn.onclick = () => this.exitVisualAnchorMode();
+        }
+        
+        console.log('Entered visual anchor mode successfully');
+    }
+    
+    /**
+     * Exit visual anchor mode
+     */
+    exitVisualAnchorMode() {
+        const overlay = document.getElementById('visualAnchorOverlay');
+        overlay.style.display = 'none';
+        
+        // Remove click listener
+        const rgbSide = this.magnifier.rgbSide;
+        if (this.anchorClickHandler) {
+            rgbSide.removeEventListener('click', this.anchorClickHandler);
+        }
+        
+        // Restore cursor
+        rgbSide.style.cursor = 'default';
+        
+        // Set anchors if any were created
+        if (this.visualAnchors.length > 0) {
+            this.setAnchors(this.visualAnchors);
+            alert(`Successfully set ${this.visualAnchors.length} anchors!`);
+        }
+        
+        console.log('Exited visual anchor mode');
+    }
+    
+    /**
+     * Handle click on RGB image to add anchor
+     */
+    handleAnchorClick(e) {
+        console.log('Click detected at:', e.clientX, e.clientY);
+        
+        // Stop event propagation
+        e.stopPropagation();
+        e.preventDefault();
+        
+        const rect = this.magnifier.rgbImage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        console.log('Relative position:', x, y);
+        console.log('Rect bounds:', rect);
+        
+        // Calculate normalized coordinates (0-1)
+        const normalizedX = x / rect.width;
+        const normalizedY = y / rect.height;
+        
+        console.log('Normalized:', normalizedX, normalizedY);
+        
+        // Clamp to valid range
+        if (normalizedX < 0 || normalizedX > 1 || normalizedY < 0 || normalizedY > 1) {
+            console.warn('Click outside valid range');
+            return;
+        }
+        
+        // Add anchor
+        const anchorIndex = this.visualAnchors.length + 1;
+        this.visualAnchors.push({
+            x: normalizedX,
+            y: normalizedY,
+            name: `Anchor ${anchorIndex}`
+        });
+        
+        console.log(`Added anchor ${anchorIndex}`);
+        
+        // Add visual marker
+        this.addAnchorMarker(x, y, anchorIndex);
+        
+        // Update UI
+        this.updateAnchorList();
+        
+        console.log(`Successfully added anchor ${anchorIndex} at (${normalizedX.toFixed(3)}, ${normalizedY.toFixed(3)})`);
+    }
+    
+    /**
+     * Add visual marker at anchor position
+     */
+    addAnchorMarker(x, y, index) {
+        const marker = document.createElement('div');
+        marker.className = 'anchor-marker';
+        marker.style.cssText = `
+            position: absolute;
+            left: ${x}px;
+            top: ${y}px;
+            width: 24px;
+            height: 24px;
+            background: #e74c3c;
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: 'Jost', sans-serif;
+            animation: anchorPulse 0.3s ease-out;
+        `;
+        marker.textContent = index;
+        
+        // Add to RGB side
+        this.magnifier.rgbSide.appendChild(marker);
+        this.visualAnchorMarkers.push(marker);
+        
+        // Add pulse animation
+        const style = document.createElement('style');
+        if (!document.getElementById('anchorPulseStyle')) {
+            style.id = 'anchorPulseStyle';
+            style.textContent = `
+                @keyframes anchorPulse {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                    50% { transform: translate(-50%, -50%) scale(1.3); }
+                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    /**
+     * Clear all anchor markers
+     */
+    clearAnchorMarkers() {
+        this.visualAnchorMarkers.forEach(marker => marker.remove());
+        this.visualAnchorMarkers = [];
+    }
+    
+    /**
+     * Clear all visual anchors
+     */
+    clearVisualAnchors() {
+        this.visualAnchors = [];
+        this.clearAnchorMarkers();
+        this.updateAnchorList();
+        console.log('Cleared all anchors');
+    }
+    
+    /**
+     * Undo last anchor
+     */
+    undoLastAnchor() {
+        if (this.visualAnchors.length === 0) return;
+        
+        this.visualAnchors.pop();
+        const lastMarker = this.visualAnchorMarkers.pop();
+        if (lastMarker) {
+            lastMarker.remove();
+        }
+        this.updateAnchorList();
+        console.log('Undid last anchor');
+    }
+    
+    /**
+     * Update anchor list display
+     */
+    updateAnchorList() {
+        const countEl = document.getElementById('anchorCount');
+        const listEl = document.getElementById('anchorList');
+        
+        countEl.textContent = this.visualAnchors.length;
+        
+        if (this.visualAnchors.length === 0) {
+            listEl.innerHTML = '<em style="color: #999;">No anchors set</em>';
+        } else {
+            listEl.innerHTML = this.visualAnchors.map((anchor, i) => 
+                `<div style="margin-bottom: 3px;">
+                    ${i + 1}. ${anchor.name}: (${anchor.x.toFixed(3)}, ${anchor.y.toFixed(3)})
+                </div>`
+            ).join('');
+        }
+    }
+    
+    /**
+     * Show dialog to set anchors
+     */
+    showAnchorDialog() {
+        const currentScene = this.magnifier.config.scenes[this.magnifier.currentSceneIndex];
+        const defaultAnchors = currentScene.anchors || this.getDefaultAnchors();
+        
+        const anchorsStr = JSON.stringify(defaultAnchors, null, 2);
+        
+        const userInput = prompt(
+            'Enter anchors as JSON array.\nEach anchor has x, y (0-1 range) and optional name:\n' +
+            'Example: [{"x": 0.3, "y": 0.4, "name": "Tree"}, {"x": 0.7, "y": 0.6, "name": "Building"}]',
+            anchorsStr
+        );
+        
+        if (userInput) {
+            try {
+                const anchors = JSON.parse(userInput);
+                this.setAnchors(anchors);
+                alert(`Successfully set ${anchors.length} anchors!`);
+            } catch (e) {
+                alert('Invalid JSON format: ' + e.message);
+            }
+        }
+    }
+    
+    /**
+     * Get default anchors (grid pattern)
+     */
+    getDefaultAnchors() {
+        return [
+            { x: 0.3, y: 0.3, name: 'Top-Left Detail' },
+            { x: 0.7, y: 0.3, name: 'Top-Right Detail' },
+            { x: 0.5, y: 0.5, name: 'Center' },
+            { x: 0.3, y: 0.7, name: 'Bottom-Left Detail' },
+            { x: 0.7, y: 0.7, name: 'Bottom-Right Detail' }
+        ];
+    }
+    
+    /**
+     * Start automatic recording
+     */
+    start() {
+        if (this.isRecording) {
+            console.log('Already recording');
+            return;
+        }
+        
+        // Load anchors from scene config or use defaults
+        const currentScene = this.magnifier.config.scenes[this.magnifier.currentSceneIndex];
+        if (currentScene.anchors) {
+            this.setAnchors(currentScene.anchors);
+        } else if (this.anchors.length === 0) {
+            this.setAnchors(this.getDefaultAnchors());
+        }
+        
+        if (this.anchors.length === 0) {
+            alert('Please set anchors first!');
+            return;
+        }
+        
+        // Clear visual anchor markers when starting recording
+        this.clearAnchorMarkers();
+        
+        this.isRecording = true;
+        this.isPaused = false;
+        this.currentAnchorIndex = -1;
+        
+        // Reset to initial position (first anchor)
+        const firstAnchor = this.anchors[0];
+        const rect = this.magnifier.rgbImage.getBoundingClientRect();
+        this.currentX = firstAnchor.x * rect.width;
+        this.currentY = firstAnchor.y * rect.height;
+        this.currentPatchSize = this.magnifier.config.initialPatchSize;
+        
+        // Enable magnifier and show lens (will be handled in updateMagnifier)
+        this.magnifier.isHovering = false; // Reset to allow updateMagnifier to initialize it
+        
+        // Update UI
+        this.updateUI('Recording', '#27ae60');
+        document.getElementById('startRecordingBtn').style.display = 'none';
+        document.getElementById('pauseRecordingBtn').style.display = 'block';
+        
+        // Start animation loop
+        this.moveToNextAnchor();
+        
+        console.log('Auto recording started');
+    }
+    
+    /**
+     * Stop recording
+     */
+    stop() {
+        if (!this.isRecording) return;
+        
+        this.isRecording = false;
+        this.isPaused = false;
+        
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
+        
+        // Hide magnifier lens with animation
+        this.magnifier.isHovering = false;
+        this.magnifier.lens.classList.remove('active');
+        this.magnifier.zoomInfo.classList.remove('active');
+        
+        // Wait for animation to complete before hiding
+        setTimeout(() => {
+            this.magnifier.lens.style.display = 'none';
+            this.magnifier.zoomInfo.style.display = 'none';
+            
+            // Restore full depth image
+            this.magnifier.drawFullDepth();
+        }, 300);
+        
+        // Update UI
+        this.updateUI('Idle', '#e74c3c');
+        document.getElementById('startRecordingBtn').style.display = 'block';
+        document.getElementById('pauseRecordingBtn').style.display = 'none';
+        document.getElementById('recorderAnchor').textContent = '-';
+        document.getElementById('recorderState').textContent = '-';
+        
+        console.log('Auto recording stopped');
+    }
+    
+    /**
+     * Toggle pause
+     */
+    togglePause() {
+        this.isPaused = !this.isPaused;
+        const btn = document.getElementById('pauseRecordingBtn');
+        btn.textContent = this.isPaused ? '▶ Resume' : '⏸ Pause';
+        this.updateUI(this.isPaused ? 'Paused' : 'Recording', this.isPaused ? '#f39c12' : '#27ae60');
+        console.log('Recording ' + (this.isPaused ? 'paused' : 'resumed'));
+    }
+    
+    /**
+     * Update UI status
+     */
+    updateUI(status, color) {
+        const statusEl = document.getElementById('recorderStatus');
+        statusEl.textContent = status;
+        statusEl.style.color = color;
+    }
+    
+    /**
+     * Move to next anchor
+     */
+    moveToNextAnchor() {
+        this.currentAnchorIndex++;
+        
+        if (this.currentAnchorIndex >= this.anchors.length) {
+            // Finished all anchors, loop or stop
+            console.log('Finished all anchors, restarting...');
+            this.currentAnchorIndex = 0;
+            // Optionally: this.stop(); return;
+        }
+        
+        const anchor = this.anchors[this.currentAnchorIndex];
+        console.log(`Moving to anchor ${this.currentAnchorIndex + 1}/${this.anchors.length}: ${anchor.name}`);
+        
+        document.getElementById('recorderAnchor').textContent = 
+            `${this.currentAnchorIndex + 1}/${this.anchors.length} - ${anchor.name}`;
+        
+        this.state = 'moving';
+        this.stateStartTime = Date.now();
+        
+        // Calculate target position
+        const rect = this.magnifier.rgbImage.getBoundingClientRect();
+        this.targetX = anchor.x * rect.width;
+        this.targetY = anchor.y * rect.height;
+        this.startX = this.currentX;
+        this.startY = this.currentY;
+        
+        // Start animation
+        this.animate();
+    }
+    
+    /**
+     * Main animation loop
+     */
+    animate() {
+        if (!this.isRecording) return;
+        
+        // Handle pause
+        if (this.isPaused) {
+            this.animationFrameId = requestAnimationFrame(() => this.animate());
+            return;
+        }
+        
+        const now = Date.now();
+        
+        // State machine
+        switch (this.state) {
+            case 'moving':
+                this.handleMoving(now);
+                break;
+            case 'paused':
+                this.handlePause(now);
+                break;
+            case 'zooming_in':
+                this.handleZoomIn(now);
+                break;
+            case 'zooming_out':
+                this.handleZoomOut(now);
+                break;
+        }
+        
+        // Update UI state
+        document.getElementById('recorderState').textContent = this.state.replace('_', ' ').toUpperCase();
+        
+        // Continue animation
+        this.animationFrameId = requestAnimationFrame(() => this.animate());
+    }
+    
+    /**
+     * Handle moving state
+     */
+    handleMoving(now) {
+        const dx = this.targetX - this.startX;
+        const dy = this.targetY - this.startY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Calculate progress
+        const elapsed = now - this.stateStartTime;
+        const duration = distance / this.config.moveSpeed; // Adaptive duration based on distance
+        let progress = Math.min(1, elapsed / duration);
+        
+        // Apply easing
+        const easingFunc = this.easing[this.config.moveEasing] || this.easing.easeInOutCubic;
+        progress = easingFunc(progress);
+        
+        // Update position
+        this.currentX = this.startX + dx * progress;
+        this.currentY = this.startY + dy * progress;
+        
+        // Update magnifier
+        this.updateMagnifier();
+        
+        // Check if reached target
+        if (elapsed >= duration) {
+            console.log('Reached anchor, pausing before zoom...');
+            this.state = 'paused';
+            this.stateStartTime = now;
+            this.pauseEndTime = now + this.config.pauseAtAnchor;
+            this.nextState = 'zooming_in';
+        }
+    }
+    
+    /**
+     * Handle pause state
+     */
+    handlePause(now) {
+        if (now >= this.pauseEndTime) {
+            console.log(`Pause ended, transitioning to ${this.nextState}`);
+            
+            // Check if we need to move to next anchor
+            if (this.nextState === 'moving_to_next') {
+                this.moveToNextAnchor();
+                return;
+            }
+            
+            this.state = this.nextState;
+            this.stateStartTime = now;
+            
+            if (this.state === 'zooming_in') {
+                this.startPatchSize = this.currentPatchSize;
+                // Use minPatchSize directly (e.g., 32) instead of multiplier
+                this.targetPatchSize = this.config.useMinPatchSize 
+                    ? this.magnifier.config.minPatchSize 
+                    : this.magnifier.config.minPatchSize * this.config.maxZoomLevel;
+                console.log(`Zooming in from ${this.startPatchSize} to ${this.targetPatchSize}`);
+            } else if (this.state === 'zooming_out') {
+                this.startPatchSize = this.currentPatchSize;
+                this.targetPatchSize = this.magnifier.config.initialPatchSize;
+                console.log(`Zooming out from ${this.startPatchSize} to ${this.targetPatchSize}`);
+            }
+        }
+    }
+    
+    /**
+     * Handle zoom in state
+     */
+    handleZoomIn(now) {
+        const elapsed = now - this.stateStartTime;
+        const duration = Math.abs(this.targetPatchSize - this.startPatchSize) / this.config.zoomSpeed;
+        let progress = Math.min(1, elapsed / duration);
+        
+        // Apply easing
+        const easingFunc = this.easing[this.config.zoomEasing] || this.easing.easeInOutQuad;
+        progress = easingFunc(progress);
+        
+        // Update patch size
+        this.currentPatchSize = this.startPatchSize + (this.targetPatchSize - this.startPatchSize) * progress;
+        
+        // Update magnifier
+        this.updateMagnifier();
+        
+        // Check if reached max zoom
+        if (elapsed >= duration) {
+            console.log('Reached max zoom, pausing...');
+            this.state = 'paused';
+            this.stateStartTime = now;
+            this.pauseEndTime = now + this.config.pauseAtZoom;
+            this.nextState = 'zooming_out';
+        }
+    }
+    
+    /**
+     * Handle zoom out state
+     */
+    handleZoomOut(now) {
+        const elapsed = now - this.stateStartTime;
+        const duration = Math.abs(this.targetPatchSize - this.startPatchSize) / this.config.zoomSpeed;
+        let progress = Math.min(1, elapsed / duration);
+        
+        // Apply easing
+        const easingFunc = this.easing[this.config.zoomEasing] || this.easing.easeInOutQuad;
+        progress = easingFunc(progress);
+        
+        // Update patch size
+        this.currentPatchSize = this.startPatchSize + (this.targetPatchSize - this.startPatchSize) * progress;
+        
+        // Update magnifier
+        this.updateMagnifier();
+        
+        // Check if reached original zoom
+        if (elapsed >= duration) {
+            console.log('Zoom out complete, pausing before next anchor...');
+            this.state = 'paused';
+            this.stateStartTime = now;
+            this.pauseEndTime = now + this.config.pauseAfterZoomOut;
+            this.nextState = 'moving_to_next';  // Special state to trigger next anchor
+        }
+    }
+    
+    /**
+     * Update magnifier position and zoom
+     */
+    updateMagnifier() {
+        const rect = this.magnifier.rgbImage.getBoundingClientRect();
+        
+        // Create synthetic mouse event
+        const syntheticEvent = {
+            clientX: rect.left + this.currentX,
+            clientY: rect.top + this.currentY
+        };
+        
+        // Update patch size
+        this.magnifier.patchSize = this.currentPatchSize;
+        
+        // Enable magnifier lens display if not already active
+        if (!this.magnifier.isHovering) {
+            this.magnifier.isHovering = true;
+            this.magnifier.lens.style.display = 'block';
+            this.magnifier.zoomInfo.style.display = 'block';
+            
+            // Initialize position for smooth display
+            this.magnifier.targetPos = { x: this.currentX, y: this.currentY };
+            this.magnifier.currentPos = { x: this.currentX, y: this.currentY };
+            
+            // Add active class for animation
+            setTimeout(() => {
+                this.magnifier.lens.classList.add('active');
+                this.magnifier.zoomInfo.classList.add('active');
+            }, 10);
+        }
+        
+        // Update magnifier position (this will update both lens and depth patch)
+        this.magnifier.updateLensPositionDirect(syntheticEvent);
+        
+        // Update zoom info
+        if (this.magnifier.zoomInfo) {
+            this.magnifier.zoomInfo.textContent = 
+                `Patch Size: ${Math.round(this.currentPatchSize)}×${Math.round(this.currentPatchSize)}`;
+        }
+    }
+}
+
+// Make it globally accessible
+window.AutoRecorder = AutoRecorder;

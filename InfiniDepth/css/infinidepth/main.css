@@ -1,0 +1,509 @@
+/* InfiniDepth Project Page Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Jost', 'Lato', sans-serif;
+    background: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+strong { font-weight: 600; }
+b { font-weight: 700; }
+
+/* Jumbotron - 标题区域 */
+.jumbotron {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 3rem 1rem;
+    margin-bottom: 0;
+    margin-top: 0 !important;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 添加装饰性渐变背景 */
+.jumbotron::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(107,154,196,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.jumbotron::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(123,165,145,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.jumbotron h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+}
+
+.jumbotron h4 {
+    color: #5a6268;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.jumbotron hr {
+    border-top: 2px solid rgba(0,0,0,0.1);
+    margin: 1.5rem auto;
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, transparent 0%, rgba(107,154,196,0.3) 50%, transparent 100%);
+    height: 2px;
+    border: none;
+}
+
+.jumbotron a {
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 0 8px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.jumbotron a:hover {
+    color: #6b9ac4;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.jumbotron a:active {
+    transform: scale(0.95);
+    color: #5a8ab8;
+}
+
+.jumbotron sup { font-size: 0.7em; }
+
+.jumbotron p {
+    color: #6c757d;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Author names - 作者名称更大 */
+.author-list {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+/* Author rows */
+.author-row {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+/* Buttons */
+.btn-large {
+    padding: 13px 36px;
+    font-size: 1.02rem;
+    font-weight: 500;
+    border-radius: 32px;
+    border: 2px solid rgba(52, 85, 120, 0.12);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #495057 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 2px 8px rgba(52, 85, 120, 0.08),
+        0 4px 16px rgba(52, 85, 120, 0.04);
+    margin: 0 10px;
+    text-decoration: none !important;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-large::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #5a8ab8 0%, #345 100%);
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.btn-large:hover {
+    color: white !important;
+    border-color: #5a8ab8;
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 12px rgba(90, 138, 184, 0.25),
+        0 8px 24px rgba(90, 138, 184, 0.15);
+}
+
+.btn-large:hover::before {
+    left: 0;
+}
+
+.btn-large:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+        0 2px 8px rgba(90, 138, 184, 0.2),
+        0 4px 16px rgba(90, 138, 184, 0.1);
+}
+
+.btn-large i { margin-right: 8px; }
+
+/* Sections */
+section {
+    padding: 3rem 0;
+    border-bottom: none;
+}
+
+section:first-of-type {
+    padding-top: 0;
+}
+
+section:last-of-type { border-bottom: none; }
+
+/* Section Content Card - 为每个模块添加卡片样式 */
+.section-card {
+    background: white;
+    border: 1px solid rgba(52, 85, 120, 0.08);
+    border-radius: 16px;
+    padding: 2.8rem;
+    box-shadow:
+        0 1px 3px rgba(52, 85, 120, 0.04),
+        0 4px 12px rgba(52, 85, 120, 0.06),
+        0 8px 24px rgba(52, 85, 120, 0.02);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(97, 182, 242, 0.4) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.section-card:hover {
+    box-shadow:
+        0 2px 6px rgba(52, 85, 120, 0.06),
+        0 8px 20px rgba(52, 85, 120, 0.08),
+        0 16px 40px rgba(52, 85, 120, 0.04);
+    transform: translateY(-3px);
+    border-color: rgba(97, 182, 242, 0.15);
+}
+
+.section-card:hover::before {
+    opacity: 1;
+}
+
+section h3 {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.8rem;
+    font-size: 2.1rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #5a8ab8, #61b6f2);
+    border-radius: 2px;
+}
+
+section hr {
+    border-top: 2px solid #e9ecef;
+    margin: 0 0 1.5rem 0;
+    width: 60px;
+}
+
+section p {
+    font-size: 1.06rem;
+    line-height: 1.85;
+    color: #495057;
+    margin-bottom: 1.2rem;
+}
+
+section ul {
+    line-height: 1.85;
+    color: #495057;
+}
+
+section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.text-left { text-align: left; }
+
+/* Media */
+.media-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.media-container img,
+.media-container video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow:
+        0 4px 16px rgba(52, 85, 120, 0.1),
+        0 8px 32px rgba(52, 85, 120, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.media-container img:hover,
+.media-container video:hover {
+    box-shadow:
+        0 6px 20px rgba(52, 85, 120, 0.12),
+        0 12px 40px rgba(52, 85, 120, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Citation */
+pre {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+    padding: 1.8rem;
+    border-radius: 12px;
+    font-size: 0.91rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    box-shadow:
+        0 4px 12px rgba(52, 85, 120, 0.12),
+        0 8px 24px rgba(52, 85, 120, 0.06);
+    border: 1px solid rgba(236, 240, 241, 0.08);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(97, 182, 242, 0.6) rgba(0, 0, 0, 0.15);
+}
+
+pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: rgba(97, 182, 242, 0.6);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(97, 182, 242, 0.9);
+}
+
+pre code {
+    color: #ecf0f1;
+    white-space: pre;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+}
+
+/* Copy Citation Button */
+.copy-citation-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    border: 1px solid rgba(236, 240, 241, 0.3);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.copy-citation-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(97, 182, 242, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(97, 182, 242, 0.3);
+}
+
+.copy-citation-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.copy-citation-btn i {
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    padding: 2rem 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
+
+/* Highlights */
+.highlight-green { color: #28a745; font-weight: 600; }
+.highlight-blue { color: #007bff; font-weight: 600; }
+.highlight-orange { color: #fd7e14; font-weight: 600; }
+.highlight-purple { color: #6f42c1; font-weight: 600; }
+.highlight-teal { color: #20c997; font-weight: 600; }
+.highlight-indigo { color: #6610f2; font-weight: 600; }
+
+/* Case Navigation Buttons */
+.case-nav-btn:hover {
+    background-color: #e5e7eb !important;
+    border-color: #9ca3af !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.case-nav-btn:active {
+    transform: translateY(0);
+}
+
+.case-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .jumbotron h1 { font-size: 2rem; }
+    section h3 { font-size: 1.7rem; }
+
+    .section-card {
+        padding: 2rem;
+        border-radius: 14px;
+    }
+
+    .btn-large {
+        padding: 11px 28px;
+        font-size: 0.96rem;
+        margin: 6px;
+    }
+
+    section p {
+        font-size: 1.04rem;
+    }
+
+    .viz-switch {
+        gap: 10px;
+        padding: 6px;
+    }
+
+    .viz-btn {
+        padding: 7px 20px;
+        font-size: 0.94rem;
+    }
+
+    /* 作者列表在移动端调整 */
+    .author-list-scroll {
+        font-size: 1.2rem;
+    }
+
+    .author-list-wrapper::before,
+    .author-list-wrapper::after {
+        width: 40px;
+    }
+
+    .author-list-scroll::-webkit-scrollbar-track {
+        margin: 0 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .jumbotron h1 { font-size: 1.6rem; }
+    section h3 { font-size: 1.5rem; }
+
+    section p {
+        font-size: 1.02rem;
+        line-height: 1.75;
+    }
+
+    .viz-switch {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .viz-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 作者列表在小屏幕上进一步调整 */
+    .author-list-scroll {
+        font-size: 1rem;
+    }
+
+    .author-list-wrapper::before,
+    .author-list-wrapper::after {
+        width: 30px;
+    }
+
+    .author-list-scroll::-webkit-scrollbar-track {
+        margin: 0 30px;
+    }
+}

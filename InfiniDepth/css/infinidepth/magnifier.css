@@ -1,0 +1,254 @@
+/* Interactive Depth Magnifier Styles */
+
+.interactive-comparison {
+    display: flex;
+    gap: 20px;
+    margin: 2rem 0;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scene transition animations */
+.interactive-comparison.transitioning {
+    pointer-events: none;
+}
+
+.interactive-comparison.slide-out-left {
+    animation: slideOutLeft 0.5s ease-in-out forwards;
+}
+
+.interactive-comparison.slide-out-right {
+    animation: slideOutRight 0.5s ease-in-out forwards;
+}
+
+.interactive-comparison.slide-in-left {
+    animation: slideInLeft 0.5s ease-in-out forwards;
+}
+
+.interactive-comparison.slide-in-right {
+    animation: slideInRight 0.5s ease-in-out forwards;
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Case navigation button styles */
+.case-nav-btn {
+    transition: all 0.2s ease;
+}
+
+.case-nav-btn:hover:not(:disabled) {
+    background-color: #e5e7eb !important;
+    transform: scale(1.05);
+}
+
+.case-nav-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.case-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.rgb-side {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+    display: flex;
+    align-items: stretch;
+    z-index: 1; /* 确保 RGB 容器有基础层级 */
+}
+
+.rgb-side:hover {
+    cursor: none; /* Hide cursor when hovering to show custom lens */
+}
+
+.rgb-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative; /* 确保图像有定位上下文 */
+    z-index: 2; /* RGB 图像层级 */
+}
+
+.magnifier-lens {
+    position: absolute;
+    pointer-events: none;
+    display: none;
+    z-index: 100; /* 大幅提高层级，确保始终在最顶层 */
+    border-radius: 50%;
+    overflow: hidden;
+    
+    /* Fancy border with glow effect */
+    border: 4px solid rgba(107,154,196,0.8);
+    box-shadow: 
+        0 0 0 3px rgba(255,255,255,0.9),
+        0 0 30px rgba(107,154,196,0.6),
+        0 0 60px rgba(107,154,196,0.3),
+        inset 0 0 30px rgba(255,255,255,0.2);
+    
+    /* Animation */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.magnifier-lens.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.magnifier-lens canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Radial fade mask overlay */
+.magnifier-lens::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.3) 80%,
+        rgba(255,255,255,0.8) 95%,
+        rgba(255,255,255,1) 100%
+    );
+    pointer-events: none;
+    z-index: 101; /* 确保遮罩层在放大镜内容之上 */
+}
+
+.depth-side {
+    flex: 1;
+    display: flex;
+    align-self: stretch;
+    position: relative; /* 确保有定位上下文 */
+    z-index: 1; /* 基础层级，低于放大镜 */
+}
+
+.depth-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    background: #f5f5f5;
+    z-index: 2; /* 确保深度图在容器之上 */
+    flex: 1; /* 填充整个父容器 */
+    display: flex;
+}
+
+.depth-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.depth-item canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.depth-label {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+.zoom-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, rgba(107,154,196,0.95), rgba(97,144,186,0.95));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: none;
+    z-index: 102; /* 确保 zoom info 在放大镜之上 */
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 4px 15px rgba(0,0,0,0.2),
+        0 0 20px rgba(107,154,196,0.3);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.zoom-info.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 992px) {
+    .interactive-comparison {
+        flex-direction: column;
+    }
+    
+    .depth-side {
+        width: 100%;
+    }
+}

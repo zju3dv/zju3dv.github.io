@@ -10,9 +10,9 @@ const InfiniDepthConfig = {
     scenes: [
         {
             name: 'Scene 1',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/rgb1.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb1.png',
             depthImages: [
-                'images/pub/infinidepth/interactitve_depth/depth1.png'
+                'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth1.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -20,9 +20,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 2',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/rgb_diode_1.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_diode_1.png',
             depthImages: [
-                'images/pub/infinidepth/interactitve_depth/depth_diode_1.png'
+                'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth_diode_1.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -30,9 +30,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 3',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/rgb3.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb3.png',
             depthImages: [
-               'images/pub/infinidepth/interactitve_depth/depth3.png'
+               'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth3.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -40,9 +40,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 4',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/rgb4.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb4.png',
             depthImages: [
-               'images/pub/infinidepth/interactitve_depth/depth4.png'
+               'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth4.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -50,9 +50,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 5',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/rgb_diode_2.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_diode_2.png',
             depthImages: [
-                'images/pub/infinidepth/interactitve_depth/depth_diode_2.png'
+                'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth_diode_2.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -60,9 +60,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 6',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/DSC_9260.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_9260.png',
             depthImages: [
-               'images/pub/infinidepth/interactitve_depth/PromptNeuralDepth_DSC_9260_up_5_disparity.png'
+               'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_PromptNeuralDepth_DSC_9260_up_5_disparity.png'
             ],
             methodLabels: [
                 'InfiniDepth'
@@ -70,9 +70,9 @@ const InfiniDepthConfig = {
         },
         {
             name: 'Scene 7',
-            rgbImage: 'images/pub/infinidepth/interactitve_depth/DSC_6493.png',
+            rgbImage: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_6493.png',
             depthImages: [
-               'images/pub/infinidepth/interactitve_depth/PromptNeuralDepth_DSC_6493_up_5_disparity.png'
+               'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_PromptNeuralDepth_DSC_6493_up_5_disparity.png'
             ],
             methodLabels: [
                 'InfiniDepth'

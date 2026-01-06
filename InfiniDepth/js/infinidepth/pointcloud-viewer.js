@@ -92,7 +92,7 @@ import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
         }
 
         const loader = new PLYLoader();
-        const plyPath = 'images/pub/infinidepth/pointclouds/' + filename;
+        const plyPath = 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/' + filename;
 
         loader.load(
             plyPath,

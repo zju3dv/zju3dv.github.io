@@ -5,51 +5,51 @@
 
 // Image data configuration
 const depthMainImgs = [
-    'images/pub/infinidepth/depth/depth1.jpg',
-    'images/pub/infinidepth/depth/depth2.jpg',
-    'images/pub/infinidepth/depth/depth3.jpg',
-    'images/pub/infinidepth/depth/depth4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_depth1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_depth2.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_depth3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_depth4.jpg',
 ];
 
 const depthThumbs = [
-    'images/pub/infinidepth/depth/rgb1.jpg',
-    'images/pub/infinidepth/depth/rgb2.jpg',
-    'images/pub/infinidepth/depth/rgb3.jpg',
-    'images/pub/infinidepth/depth/rgb4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_rgb1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_rgb2.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_rgb3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/depth-comparison_rgb4.jpg',
 ];
 
 const pcdMainImgs = [
-    'images/pub/infinidepth/vis_pcd/pcd2.jpg',
-    'images/pub/infinidepth/vis_pcd/pcd1.jpg',
-    'images/pub/infinidepth/vis_pcd/pcd3.jpg',
-    'images/pub/infinidepth/vis_pcd/pcd4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_pcd2.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_pcd1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_pcd3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_pcd4.jpg',
 ];
 
 const pcdThumbs = [
-    'images/pub/infinidepth/vis_pcd/rgb2.jpg',
-    'images/pub/infinidepth/vis_pcd/rgb1.jpg',
-    'images/pub/infinidepth/vis_pcd/rgb3.jpg',
-    'images/pub/infinidepth/vis_pcd/rgb4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_rgb2.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_rgb1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_rgb3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-pcd_rgb4.jpg',
 ];
 
 const nvsMainImgs = [
-    'images/pub/infinidepth/nvs_compare/nvs5.jpg',
-    'images/pub/infinidepth/nvs_compare/nvs3.jpg',
-    'images/pub/infinidepth/nvs_compare/nvs4.jpg',
-    'images/pub/infinidepth/nvs_compare/nvs1.jpg',
-    'images/pub/infinidepth/nvs_compare/nvs2.jpg',
-    // 'images/pub/infinidepth/nvs_compare/nvs7.jpg',
-    'images/pub/infinidepth/nvs_compare/nvs8.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs5.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs2.jpg',
+    // 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs7.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_nvs8.jpg',
 ];
 
 const nvsThumbs = [
-    'images/pub/infinidepth/nvs_compare/rgb5.jpg',
-    'images/pub/infinidepth/nvs_compare/rgb3.jpg',
-    'images/pub/infinidepth/nvs_compare/rgb4.jpg',
-    'images/pub/infinidepth/nvs_compare/rgb1.jpg',
-    'images/pub/infinidepth/nvs_compare/rgb2.jpg',
-    // 'images/pub/infinidepth/nvs_compare/rgb7.jpg',
-    'images/pub/infinidepth/nvs_compare/rgb8.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb5.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb3.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb4.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb1.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb2.jpg',
+    // 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb7.jpg',
+    'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb8.jpg',
 ];
 
 /**

@@ -11,45 +11,45 @@ const VizShowcaseConfig = {
         scenes: [
             {
                 name: 'Scene 1',
-                rgb: 'images/pub/infinidepth/interactitve_depth/rgb1.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/depth1.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/rgb1_low.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb1.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth1.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb1_low.png'
             },
             {
                 name: 'Scene 2',
-                rgb: 'images/pub/infinidepth/interactitve_depth/rgb_diode_1.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/depth_diode_1.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/rgb_low_diode_1.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_diode_1.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth_diode_1.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_low_diode_1.png'
             },
             {
                 name: 'Scene 3',
-                rgb: 'images/pub/infinidepth/interactitve_depth/rgb3.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/depth3.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/rgb3_low.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb3.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth3.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb3_low.png'
             },
             {
                 name: 'Scene 4',
-                rgb: 'images/pub/infinidepth/interactitve_depth/rgb4.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/depth4.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/rgb4_low.png',
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb4.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth4.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb4_low.png',
             },
             {
                 name: 'Scene 5',
-                rgb: 'images/pub/infinidepth/interactitve_depth/rgb_diode_2.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/depth_diode_2.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/rgb_low_diode_2.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_diode_2.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_depth_diode_2.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_rgb_low_diode_2.png'
             },
             {
                 name: 'Scene 6',
-                rgb: 'images/pub/infinidepth/interactitve_depth/DSC_9260.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/PromptNeuralDepth_DSC_9260_up_5_disparity.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/DSC_9260_low.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_9260.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_PromptNeuralDepth_DSC_9260_up_5_disparity.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_9260_low.png'
             },
             {
                 name: 'Scene 7',
-                rgb: 'images/pub/infinidepth/interactitve_depth/DSC_6493.png',
-                depth: 'images/pub/infinidepth/interactitve_depth/PromptNeuralDepth_DSC_6493_up_5_disparity.png',
-                thumbnail: 'images/pub/infinidepth/interactitve_depth/DSC_6493_low.png'
+                rgb: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_6493.png',
+                depth: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_PromptNeuralDepth_DSC_6493_up_5_disparity.png',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/interactive-depth_DSC_6493_low.png'
             },
         ]
     },
@@ -59,48 +59,48 @@ const VizShowcaseConfig = {
         scenes: [
             {
                 name: 'DIODE',
-                plyFile: 'diode_filter.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/00019_00183_indoors_190_040_low.png'
+                plyFile: 'pointclouds_diode_filter.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_00019_00183_indoors_190_040_low.png'
             },
             {
                 name: 'ETH',
-                plyFile: 'eth_1.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/DSC_0219_low.png'
+                plyFile: 'pointclouds_eth_1.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_DSC_0219_low.png'
             },
             {
                 name: 'ETH',
-                plyFile: 'eth3dpipes__images__dslr_images__DSC_0644_filtered.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/DSC_0644_low.png'
+                plyFile: 'pointclouds_eth3dpipes__images__dslr_images__DSC_0644_filtered.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_DSC_0644_low.png'
             },
             {
                 name: 'NYU',
-                plyFile: 'nyudatasets__nyu__home_office__rgb_00555_filtered.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/rgb_555_low.png'
+                plyFile: 'pointclouds_nyudatasets__nyu__home_office__rgb_00555_filtered.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_rgb_555_low.png'
             },
             {
                 name: 'NYU',
-                plyFile: 'nyudatasets__nyu__home_office__rgb_00556_filtered.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/rgb_556_low.png'
+                plyFile: 'pointclouds_nyudatasets__nyu__home_office__rgb_00556_filtered.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_rgb_556_low.png'
             },
             {
                 name: 'NYU',
-                plyFile: 'nyudatasets__nyu__bedroom__rgb_01156_filtered.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/rgb_1156_low.png'
+                plyFile: 'pointclouds_nyudatasets__nyu__bedroom__rgb_01156_filtered.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_rgb_1156_low.png'
             },
             {
                 name: 'ETH',
-                plyFile: 'eth3delectro__images__dslr_images__DSC_9297_filtered.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/DSC_9297_low.png'
+                plyFile: 'pointclouds_eth3delectro__images__dslr_images__DSC_9297_filtered.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_DSC_9297_low.png'
             },
             {
                 name: 'DIODE',
-                plyFile: 'PromptNeuralDepth_00019_00183_indoors_150_000_2d_uniform_up_1_disparity.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/00019_00183_indoors_150_000_low.png'
+                plyFile: 'pointclouds_PromptNeuralDepth_00019_00183_indoors_150_000_2d_uniform_up_1_disparity.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_00019_00183_indoors_150_000_low.png'
             },
             {
                 name: 'DIODE',
-                plyFile: 'PromptNeuralDepth_00019_00183_indoors_320_010_2d_uniform_up_1_disparity.ply',
-                thumbnail: 'images/pub/infinidepth/pointclouds/00019_00183_indoors_320_010_low.png'
+                plyFile: 'pointclouds_PromptNeuralDepth_00019_00183_indoors_320_010_2d_uniform_up_1_disparity.ply',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/pointclouds_00019_00183_indoors_320_010_low.png'
             },
         ]
     },
@@ -110,33 +110,33 @@ const VizShowcaseConfig = {
         scenes: [
             {
                 name: 'NVS Scene 2',
-                video: 'images/pub/infinidepth/vis_nvs/12_88_orig_to_bev_transition.mp4',
-                thumbnail:'images/pub/infinidepth/nvs_compare/rgb3.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_12_88_orig_to_bev_transition.mp4',
+                thumbnail:'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb3.jpg',
             },
             {
                 name: 'NVS Scene 3',
-                video: 'images/pub/infinidepth/vis_nvs/147_30_orig_to_bev_transition.mp4',
-                thumbnail: 'images/pub/infinidepth/nvs_compare/rgb4.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_147_30_orig_to_bev_transition.mp4',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb4.jpg',
             },
              {
                 name: 'NVS Scene 4',
-                video: 'images/pub/infinidepth/vis_nvs/1_190_orig_to_bev_transition.mp4',
-                thumbnail: 'images/pub/infinidepth/nvs_compare/rgb1.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_1_190_orig_to_bev_transition.mp4',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb1.jpg',
             },
             {
                 name: 'NVS Scene 5',
-                video: 'images/pub/infinidepth/vis_nvs/50_69_orig_to_bev_transition.mp4',
-                thumbnail: 'images/pub/infinidepth/nvs_compare/rgb2.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_50_69_orig_to_bev_transition.mp4',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb2.jpg',
             },
             {
                 name: 'NVS Scene 1',
-                video: 'images/pub/infinidepth/vis_nvs/0_36_orig_to_bev_transition.mp4',
-                thumbnail: 'images/pub/infinidepth/nvs_compare/rgb5.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_0_36_orig_to_bev_transition.mp4',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb5.jpg',
             },            
             {
                 name: 'NVS Scene 6',
-                video: 'images/pub/infinidepth/vis_nvs/15_54_orig_to_bev_transition.mp4',
-                thumbnail: 'images/pub/infinidepth/nvs_compare/rgb8.jpg',
+                video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_15_54_orig_to_bev_transition.mp4',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb8.jpg',
             },
         ]
     }

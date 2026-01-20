@@ -142,42 +142,43 @@ const VizShowcaseConfig = {
     },
 
     // Interactive NVS (Gaussian Splatting) scenes
-    // Add your gaussian HTML files here
+    // Using GitHub Pages URLs for better compatibility with large files
     nvsInteractive: {
         scenes: [
             {
                 name: 'Interactive Scene 1',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_018_005_0_gaussians.html',
+                // Try GitHub Pages URL (if enabled) or jsDelivr as fallback
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/ai_018_005_0_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/18_5.png'
             },
             {
                 name: 'Interactive Scene 2',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_031_004_30_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/ai_031_004_30_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/31_4.png'
             },
             {
                 name: 'Interactive Scene 3',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_044_003_0_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/ai_044_003_0_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/44_3.png'
             },
             {
                 name: 'Interactive Scene 4',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/28_80_gaussians.html',
-                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets28-80.png'
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/28_80_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/28-80.png'
             },
             {
                 name: 'Interactive Scene 5',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/0_70_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/0_70_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/0-70.png'
             },
             {
                 name: 'Interactive Scene 6',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/22_84_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/assets/22_84_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/22-84.png'
             },
             {
                 name: 'Interactive Scene 7',
-                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/24_189_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/24_189_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/24-189.png'
             },
         ]

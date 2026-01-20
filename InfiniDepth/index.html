@@ -224,6 +224,7 @@
                 <button class="viz-btn active" data-viz="depth">Depth Map</button>
                 <button class="viz-btn" data-viz="pointcloud">Point Cloud</button>
                 <button class="viz-btn" data-viz="nvs">Novel View Synthesis</button>
+                <button class="viz-btn" data-viz="nvs-interactive">Interactive GS</button>
             </div>
 
             <!-- Mode 1: Interactive Depth -->
@@ -282,6 +283,22 @@
                 </div>
                 <!-- Showcase bar for NVS scenes -->
                 <div class="showcase-bar" id="nvs-viz-showcase"></div>
+            </div>
+
+            <!-- Mode 4: NVS (Interactive) -->
+            <div class="viz-content" id="viz-nvs-interactive">
+                <p><strong>Interactive GS:</strong>
+                Explore 3D Gaussian Splatting results interactively. Use mouse to rotate, zoom, and pan the scene. Click and drag to rotate, scroll to zoom, right-click and drag to pan.
+                </p>
+                <div style="display:flex; justify-content:center; position:relative;">
+                    <div id="gaussian-loading" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10;">
+                        <div class="image-spinner"></div>
+                        <div class="loading-text">Loading viewer...</div>
+                    </div>
+                    <iframe id="gaussian-viewer" style="width:100%; height:700px; border:none; border-radius:12px; box-shadow: 0 4px 24px rgba(0,0,0,0.12);"></iframe>
+                </div>
+                <!-- Showcase bar for interactive NVS scenes -->
+                <div class="showcase-bar" id="nvs-interactive-viz-showcase"></div>
             </div>
 
             </div>
@@ -427,6 +444,7 @@
     <script src="js/infinidepth/viz-switcher.js"></script>
     <script src="js/infinidepth/showcase.js"></script>
     <script src="js/infinidepth/viz-showcase.js"></script>
+    <script src="js/infinidepth/gaussian-viewer.js"></script>
     <script src="js/infinidepth/overview-video.js"></script>
     <script type="module" src="js/infinidepth/pointcloud-viewer.js"></script>
 

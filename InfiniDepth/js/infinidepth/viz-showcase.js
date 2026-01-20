@@ -132,11 +132,53 @@ const VizShowcaseConfig = {
                 name: 'NVS Scene 1',
                 video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_0_36_orig_to_bev_transition.mp4',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb5.jpg',
-            },            
+            },
             {
                 name: 'NVS Scene 6',
                 video: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/vis-nvs_15_54_orig_to_bev_transition.mp4',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/nvs-comparison_rgb8.jpg',
+            },
+        ]
+    },
+
+    // Interactive NVS (Gaussian Splatting) scenes
+    // Add your gaussian HTML files here
+    nvsInteractive: {
+        scenes: [
+            {
+                name: 'Interactive Scene 1',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_018_005_0_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/18_5.png'
+            },
+            {
+                name: 'Interactive Scene 2',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_031_004_30_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/31_4.png'
+            },
+            {
+                name: 'Interactive Scene 3',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/ai_044_003_0_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/44_3.png'
+            },
+            {
+                name: 'Interactive Scene 4',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/28_80_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets28-80.png'
+            },
+            {
+                name: 'Interactive Scene 5',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/0_70_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/0-70.png'
+            },
+            {
+                name: 'Interactive Scene 6',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/22_84_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/22-84.png'
+            },
+            {
+                name: 'Interactive Scene 7',
+                htmlFile: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/24_189_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/24-189.png'
             },
         ]
     }
@@ -147,14 +189,16 @@ class VizShowcaseManager {
         this.currentScenes = {
             depth: 0,
             pointcloud: 0,
-            nvs: 0
+            nvs: 0,
+            nvsInteractive: 0
         };
 
         this.maxVisible = 4; // 固定显示4张图
         this.startIndex = {
             depth: 0,
             pointcloud: 0,
-            nvs: 0
+            nvs: 0,
+            nvsInteractive: 0
         };
 
         this.init();
@@ -173,6 +217,7 @@ class VizShowcaseManager {
         this.setupDepthShowcase();
         this.setupPointCloudShowcase();
         this.setupNVSShowcase();
+        this.setupInteractiveNVSShowcase();
 
         // Initialize first depth scene on page load
         this.initFirstDepthScene();
@@ -185,7 +230,12 @@ class VizShowcaseManager {
         const showcase = document.getElementById(showcaseId);
         if (!showcase) return null;
 
-        const type = showcaseId.replace('-viz-showcase', '');
+        // Map showcase ID to type key - handle both dash and camelCase
+        let type = showcaseId.replace('-viz-showcase', '');
+        // Convert dash-case to camelCase (nvs-interactive -> nvsInteractive)
+        type = type.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+
+        console.log('Creating showcase for type:', type, 'with', scenes.length, 'scenes');
 
         // Create container and arrows
         const container = document.createElement('div');
@@ -486,6 +536,56 @@ class VizShowcaseManager {
                 }, { once: true });
             }
         }
+    }
+
+    /**
+     * Setup Interactive NVS visualization showcase
+     */
+    setupInteractiveNVSShowcase() {
+        console.log('Setting up Interactive NVS showcase');
+        const scenes = VizShowcaseConfig.nvsInteractive.scenes;
+        console.log('Interactive NVS scenes:', scenes);
+
+        this.createShowcaseWithArrows('nvs-interactive-viz-showcase', scenes, (idx) => {
+            this.switchInteractiveNVSScene(idx);
+        });
+
+        // Wait for gaussian viewer to be ready before loading first scene
+        const loadFirstScene = () => {
+            console.log('Gaussian viewer ready, loading first scene');
+            this.switchInteractiveNVSScene(0);
+        };
+
+        // Check if viewer is already ready
+        if (window.gaussianViewerManager && window.gaussianViewerManager.isReady) {
+            console.log('Gaussian viewer already ready');
+            loadFirstScene();
+        } else {
+            // Wait for ready event
+            console.log('Waiting for gaussian viewer to be ready...');
+            window.addEventListener('gaussianViewerReady', loadFirstScene, { once: true });
+        }
+    }
+
+    /**
+     * Switch Interactive NVS scene
+     */
+    switchInteractiveNVSScene(sceneIndex) {
+        console.log('Switching to Interactive NVS scene:', sceneIndex);
+        const scene = VizShowcaseConfig.nvsInteractive.scenes[sceneIndex];
+        if (!scene) {
+            console.error('Scene not found at index:', sceneIndex);
+            return;
+        }
+
+        console.log('Loading scene:', scene);
+        this.currentScenes.nvsInteractive = sceneIndex;
+
+        // Trigger iframe viewer to load new HTML file
+        const event = new CustomEvent('loadGaussianScene', {
+            detail: { htmlFile: scene.htmlFile }
+        });
+        window.dispatchEvent(event);
     }
 }
 

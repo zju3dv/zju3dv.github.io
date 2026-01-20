@@ -429,3 +429,71 @@
     opacity: 0;
     pointer-events: none;
 }
+
+/* Gaussian Viewer Styles */
+#gaussian-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+    opacity: 1;
+}
+
+#gaussian-loading .loading-text {
+    font-size: 1rem;
+    color: #345;
+    font-weight: 500;
+    font-family: 'Jost', sans-serif;
+    margin-top: 8px;
+}
+
+#gaussian-viewer {
+    transition: opacity 0.6s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 12px;
+    opacity: 0;
+}
+
+#gaussian-viewer.loaded {
+    opacity: 1;
+}
+
+/* Visual feedback when iframe is focused/active */
+#gaussian-viewer.active {
+    box-shadow: 0 0 0 3px rgba(97, 182, 242, 0.4) !important;
+}
+
+/* Ensure iframe has proper dimensions */
+#viz-nvs-interactive iframe {
+    min-height: 600px;
+    background: #f7f9fb;
+}
+
+/* Add hint text for keyboard controls */
+.viewer-hint {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.viewer-hint.active {
+    color: #345;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    #viz-nvs-interactive iframe {
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    #viz-nvs-interactive iframe {
+        min-height: 400px;
+    }
+}

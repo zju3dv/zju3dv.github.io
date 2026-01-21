@@ -83,7 +83,6 @@ class GaussianViewerManager {
                 hint = document.createElement('div');
                 hint.id = 'viewer-keyboard-hint';
                 hint.className = 'viewer-hint';
-                hint.innerHTML = '💡 Hover over the viewer and use arrow keys to navigate (arrow keys will control the viewer, not the page)';
                 const container = this.iframe.parentElement;
                 container.parentElement.insertBefore(hint, container.nextSibling);
             }

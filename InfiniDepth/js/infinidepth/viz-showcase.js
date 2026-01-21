@@ -167,6 +167,11 @@ const VizShowcaseConfig = {
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/28-80.png'
             },
             {
+                name: 'Interactive Scene 4',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/147_30_gaussians.html',
+                thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/147_30.png'
+            },
+            {
                 name: 'Interactive Scene 5',
                 htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/0_70_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/0-70.png'

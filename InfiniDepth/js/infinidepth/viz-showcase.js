@@ -178,7 +178,7 @@ const VizShowcaseConfig = {
             },
             {
                 name: 'Interactive Scene 6',
-                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/assets/22_84_gaussians.html',
+                htmlFile: 'https://ritianyu.github.io/ProjectAssets/InfiniDepth/assets/22_84_gaussians.html',
                 thumbnail: 'https://raw.githubusercontent.com/RitianYu/ProjectAssets/main/InfiniDepth/assets/22-84.png'
             },
             {

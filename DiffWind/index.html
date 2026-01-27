@@ -265,41 +265,82 @@ their interaction modeled by the Material Point Method (MPM). To recover wind-dr
     </div>
 
     <div class="hero-body">
-      <div class="columns is-centered has-text-centered">
-        <div class="container is-max-desktop">
-          <h2 class="title is-3">Wind-Driven Object Dynamics Reconstruction</h2>
-            <!-- <div id="results-carousel" class="carousel results-carousel"> -->
-            <div id="results-carousel"
-                class="carousel results-carousel"
-                data-slides-to-show="1"
-                data-slides-to-scroll="1"
-                data-loop="true">
-                <div class="item item-coffee">
-                    <video poster="" id="coffee" autoplay controls muted loop playsinline>
-                      <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_1.mp4" 
-                      type="video/mp4">
-                    </video>
-                </div>
-                <div class="item item-chicken">
-                  <video poster="" id="chicken" autoplay controls muted loop playsinline>
-                    <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_2.mp4" 
-                    type="video/mp4">
-                  </video>
-                </div>
-                <div class="item item-cookie">
-                  <video poster="" id="cookie" autoplay controls muted loop playsinline>
-                    <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_3.mp4" type="video/mp4">
-                  </video>
-                </div>
-                <div class="item item-3dprinter">
-                  <video poster="" id="3dprinter" autoplay controls muted loop playsinline>
-                    <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_4.mp4" type="video/mp4">
-                  </video>
-                </div>
-            </div>
+  <style>
+
+    #results-carousel .carousel-nav-left,
+    #results-carousel .carousel-nav-right,
+    #results-carousel .carousel-navigation {
+      display: none !important;
+    }
+
+
+    #results-carousel .slick-prev,
+    #results-carousel .slick-next,
+    #results-carousel .swiper-button-prev,
+    #results-carousel .swiper-button-next {
+      display: none !important;
+    }
+  </style>
+
+  <div class="hero-body">
+
+  <style>
+    .slider-navigation-previous,
+    .slider-navigation-next {
+      display: none !important;
+    }
+
+    .carousel-nav-left,
+    .carousel-nav-right,
+    .carousel-navigation {
+      display: none !important;
+    }
+
+    .hero-body button[class*="navigation"] {
+      display: none !important;
+    }
+  </style>
+
+  <div class="columns is-centered has-text-centered">
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-3">Wind-Driven Object Dynamics Reconstruction</h2>
+
+      <div id="results-carousel"
+           class="carousel results-carousel"
+           data-slides-to-show="1"
+           data-slides-to-scroll="1"
+           data-loop="true">
+
+        <div class="item recon1">
+          <video id="coffee" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_1.mp4" type="video/mp4">
+          </video>
         </div>
+
+        <div class="item recon2">
+          <video id="chicken" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item recon3">
+          <video id="cookie" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_3.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item recon4">
+          <video id="3dprinter" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_4.mp4" type="video/mp4">
+          </video>
+        </div>
+
       </div>
     </div>
+  </div>
+</div>
+
   </div>
 </section>
 

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DiffWind: Physics-Informed Differentiable Modeling of Wind-Driven Object Dynamics">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/favicon.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.png"/>
+
+  <title>DiffWind: Physics-Informed Differentiable Modeling of Wind-Driven Object Dynamics
+    </title>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  
+
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  
+  
+  <script src="js/dics/dics.original.js"></script>
+  <script src="js/event_handler.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" href="js/dics/dics.original.css">
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/PhysSkin/">
+            PhysSkin
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/gaussian-prediction/">
+            GaussianPrediction
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/GaussianUpdate/">
+            GaussianUpdate
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <img src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/logo.jpg" alt="DiffWind"  style="width: 60%;"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+        Physics-Informed Differentiable Modeling <br> of Wind-Driven Object Dynamics
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">ICLR 2026</h1>
+        <div class="is-size-5 publication-authors">
+        <!-- <div class="is-size-5 publication-authors is-flex is-flex-wrap-wrap has-text-centered"></div> -->
+          <div class="author-block">
+            <a href="https://github.com/huahuo359">Yuanhang Lei</a><sup>1,2*</sup>,</div>
+          <div class="author-block">
+            <a href="https://bomingzhao.github.io/">Boming Zhao</a><sup>1*</sup>,</div>
+          <div class="author-block">
+            <a href="https://github.com/YZsZY">Zesong Yang</a><sup>1*</sup>,</div>
+          <div class="author-block">
+            <a>Xingxuan Li</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a>Tao Cheng</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a>Haocheng Peng</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a>Ru Zhang</a><sup>1</sup>,</div>
+          <div class="author-block">
+            <a>Yang Yang</a><sup>1,2</sup>,</div>
+          <div style="flex-basis: 100%; height: 0;"></div>
+          <div class="author-block">
+            <a href="https://siyuanhuang.com/">Siyuan Huang</a><sup>2</sup>, </div>
+          <div class="author-block">
+            <a href="https://shenyujun.github.io/">Yujun Shen</a><sup>3</sup>, </div>
+          <div class="author-block">
+            <a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>4</sup>, </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>, </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1†</sup>          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <br>
+          * denotes equal contribution † denotes Corresponding Author <br>
+          <br>
+          <span class="author-block"><sup>1</sup>State Key Laboratory of CAD & CG, Zhejiang University, </span>
+          <span class="author-block"><sup>2</sup>State Key Laboratory of General Artificial Intelligence (BIGAI), </span>
+        
+          <br>
+
+          <span class="author-block"><sup>3</sup>Ant Group, </span>
+          <span class="author-block"><sup>4</sup>Shenzhen University.</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://openreview.net/forum?id=vKVzihkbQo"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+                <span>OpenReview</span>
+              </a>
+            </span>
+            <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://openreview.net/pdf?id=vKVzihkbQo"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://openreview.net/attachment?id=vKVzihkbQo&name=supplementary_material"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/zju3dv/DiffWind"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <div class="has-text-centered">
+      <img style="width: 60%;" src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/teaser.png"
+            alt="DiffWind teaser."/>
+    </div>
+    <p style="width: 60%; margin: 0 auto;">
+      DiffWind is a physics-informed differentiable wind-object interaction framework that models wind and object dynamics separately. This design enables the reconstruction of wind and object motion from sparse-view videos, physically consistent simulation under new wind conditions, and retargeting to novel objects.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Modeling wind-driven object dynamics from video observations is highly challenging due to the invisibility and spatio-temporal variability of wind, as well as the complex deformations of objects. We present DiffWind, a physics-informed differentiable framework that unifies wind-object interaction modeling, video-based reconstruction, and forward simulation. Specifically, we represent wind as a grid-based physical field and objects as particle systems derived from 3D Gaussian Splatting, with
+their interaction modeled by the Material Point Method (MPM). To recover wind-driven object dynamics, we introduce a reconstruction framework that jointly optimizes the spatio-temporal wind force field and object motion through differentiable rendering and simulation. To ensure physical validity, we incorporate the Lattice Boltzmann Method (LBM) as a physics-informed constraint, enforcing compliance with fluid dynamics laws. Beyond reconstruction, our method naturally supports forward simulation under novel wind conditions and enable new applications such as wind retargeting. We further introduce WD-Objects, a dataset of synthetic and real-world wind-driven scenes. Extensive experiments demonstrate that our method significantly outperforms prior dynamic scene modeling approaches in both reconstruction accuracy and simulation fidelity, opening a new avenue for video-based wind–object interaction modeling.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <!-- <h2 class="title is-5">YouTube Source</h2> -->
+          <div class="publication-video">
+            <!-- <iframe width="640" height="480" src="./video/cg-slam-show.mp4"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe> -->
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+
+
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Method Overview</h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/pipeline.png"
+              alt="DiffWind Overview."/>
+      </div>
+      <p style="width: 100%; margin: 0 auto;">
+        Overview of DiffWind. We propose a novel wind-object interaction modeling approach, where the wind is represented as a grid field and the object is modeled as a set of particles. Based on this modeling approach, we introduce a reconstruction framework for wind–object interaction by optimizing the wind force field.  In addition, we employ the Lattice Boltzmann Method (LBM) to generate wind force field direction guidance to enforce compliance with fluid dynamics laws.
+      </p>
+    </div>
+  </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Physics-Based Wind Synthesis</h2>
+        <div class="has-text-centered">
+          <video id="functions" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/Hunyuan_Wan.mp4"
+                    type="video/mp4">
+          </video>
+          <video id="functions" autoplay controls muted loop playsinline height="100%">
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/physdreamer-data.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-body">
+  <style>
+
+    #results-carousel .carousel-nav-left,
+    #results-carousel .carousel-nav-right,
+    #results-carousel .carousel-navigation {
+      display: none !important;
+    }
+
+
+    #results-carousel .slick-prev,
+    #results-carousel .slick-next,
+    #results-carousel .swiper-button-prev,
+    #results-carousel .swiper-button-next {
+      display: none !important;
+    }
+  </style>
+
+  <div class="hero-body">
+
+  <style>
+    .slider-navigation-previous,
+    .slider-navigation-next {
+      display: none !important;
+    }
+
+    .carousel-nav-left,
+    .carousel-nav-right,
+    .carousel-navigation {
+      display: none !important;
+    }
+
+    .hero-body button[class*="navigation"] {
+      display: none !important;
+    }
+  </style>
+
+  <div class="columns is-centered has-text-centered">
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-3">Wind-Driven Object Dynamics Reconstruction</h2>
+
+      <div id="results-carousel"
+           class="carousel results-carousel"
+           data-slides-to-show="1"
+           data-slides-to-scroll="1"
+           data-loop="true">
+
+        <div class="item recon1">
+          <video id="coffee" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item recon2">
+          <video id="chicken" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item recon3">
+          <video id="cookie" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_3.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item recon4">
+          <video id="3dprinter" autoplay muted loop playsinline controls>
+            <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/DiffWind-ICLR2026/recon_4.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <hr/>
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@inproceedings{lei2026diffwind,
+  title     = {DiffWind: Physics-Informed Differentiable Modeling of Wind-Driven Object Dynamics},
+  author = {Lei, Yuanhang and Zhao, Boming and Yang, Zesong and Li, Xingxuan and Cheng, Tao and Peng, Haocheng and Zhang, Ru and Yang, Yang and Huang, Siyuan and Shen, Yujun and Hu, Ruizhen and Bao, Hujun and Cui, Zhaopeng},
+  booktitle = {Proceedings of the Fourteenth International Conference on Learning Representations (ICLR)},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=vKVzihkbQo}
+}
+    </code></pre>
+
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>, 
+      <a href="https://ingra14m.github.io/Deformable-Gaussians/" target="_blank">Deformable-GS</a> and <a href="https://research.nvidia.com/labs/dir/neuralangelo/" target="_blank">Neuralangelo</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFMMMPXL0M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFMMMPXL0M');
+</script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

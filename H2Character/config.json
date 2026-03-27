@@ -1,0 +1,117 @@
+{
+  "project": {
+    "name": "H2Char",
+    "fullName": "H2Char: 3D Character Motion Retargeting",
+    "version": "1.0.0",
+    "description": "State-of-the-art motion retargeting system for 3D character animation",
+    "keywords": ["motion retargeting", "3D animation", "character animation", "computer graphics", "deep learning"]
+  },
+  "authors": [
+    {
+      "name": "Your Name",
+      "email": "email@example.com",
+      "affiliation": "Your Institution",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "links": {
+    "github": "https://github.com/yourusername/H2Char",
+    "paper": "docs/paper.pdf",
+    "demo": "index.html#demo",
+    "documentation": "docs/installation.md",
+    "arxiv": "https://arxiv.org/abs/xxxx.xxxxx",
+    "projectPage": "https://yourusername.github.io/H2Char"
+  },
+  "technical": {
+    "framework": "PyTorch",
+    "language": "Python",
+    "requirements": [
+      "python>=3.8",
+      "pytorch>=1.10",
+      "numpy",
+      "scipy",
+      "opencv-python",
+      "trimesh",
+      "smplx"
+    ]
+  },
+  "demo": {
+    "videos": {
+      "explanation": {
+        "filename": "explanation.mp4",
+        "duration": "2:00",
+        "description": "Project overview and technical explanation"
+      },
+      "motions": [
+        {
+          "id": 1,
+          "filename": "walking.mp4",
+          "title": "Walking Motion",
+          "description": "Natural walking motion retargeting"
+        },
+        {
+          "id": 2,
+          "filename": "running.mp4", 
+          "title": "Running Motion",
+          "description": "Fast running motion with proper foot placement"
+        },
+        {
+          "id": 3,
+          "filename": "jumping.mp4",
+          "title": "Jumping Motion", 
+          "description": "Dynamic jumping and landing sequences"
+        },
+        {
+          "id": 4,
+          "filename": "dancing.mp4",
+          "title": "Dancing Motion",
+          "description": "Complex dance movements and transitions"
+        },
+        {
+          "id": 5,
+          "filename": "fighting.mp4",
+          "title": "Fighting Motion",
+          "description": "Martial arts and combat animations"
+        },
+        {
+          "id": 6,
+          "filename": "idle.mp4",
+          "title": "Idle Motion",
+          "description": "Natural idle poses and subtle movements"
+        },
+        {
+          "id": 7,
+          "filename": "climbing.mp4",
+          "title": "Climbing Motion",
+          "description": "Climbing and traversal animations"
+        },
+        {
+          "id": 8,
+          "filename": "sitting.mp4",
+          "title": "Sitting Motion",
+          "description": "Sitting, standing, and chair interactions"
+        },
+        {
+          "id": 9,
+          "filename": "gesturing.mp4",
+          "title": "Gesturing Motion",
+          "description": "Expressive hand gestures and communication"
+        },
+        {
+          "id": 10,
+          "filename": "complex.mp4",
+          "title": "Complex Motion",
+          "description": "Combined complex motion sequences"
+        }
+      ]
+    }
+  },
+  "features": [
+    "Real-time performance optimization",
+    "Self-penetration detection and resolution", 
+    "Contact point preservation",
+    "Multi-character support",
+    "High-quality motion transfer",
+    "Easy integration with existing pipelines"
+  ]
+}

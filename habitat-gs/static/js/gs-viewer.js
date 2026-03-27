@@ -177,6 +177,10 @@ function computeViewMatrix(pos, yaw, pitch) {
     ]);
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const MINIMAP_SIZE = 128;
+const MINIMAP_PADDING = 10;
+
 // ======================== RADIX SORT ========================
 
 class RadixSorter {
@@ -495,6 +499,12 @@ export class GaussianViewer {
         // Data
         this.posData = null;
 
+        // Minimap
+        this.minimapBounds = null;
+        this.minimapScale = 1;
+        this.minimapPadding = MINIMAP_PADDING;
+        this._initMinimap();
+
         this._bindEvents();
     }
 
@@ -515,6 +525,106 @@ export class GaussianViewer {
         c.addEventListener('keyup', (e) => {
             this.keys[e.key.toLowerCase()] = false;
         });
+    }
+
+    _initMinimap() {
+        if (this.minimapEl) return;
+
+        const clipId = `gs-minimap-clip-${Math.random().toString(36).slice(2, 10)}`;
+        const wrap = document.createElement('div');
+        wrap.className = 'gs-minimap';
+        wrap.setAttribute('aria-hidden', 'true');
+
+        const svg = document.createElementNS(SVG_NS, 'svg');
+        svg.setAttribute('viewBox', `0 0 ${MINIMAP_SIZE} ${MINIMAP_SIZE}`);
+        svg.setAttribute('class', 'gs-minimap__svg');
+
+        const defs = document.createElementNS(SVG_NS, 'defs');
+        const clipPath = document.createElementNS(SVG_NS, 'clipPath');
+        clipPath.setAttribute('id', clipId);
+        const clipCircle = document.createElementNS(SVG_NS, 'circle');
+        clipCircle.setAttribute('cx', String(MINIMAP_SIZE / 2));
+        clipCircle.setAttribute('cy', String(MINIMAP_SIZE / 2));
+        clipCircle.setAttribute('r', String(MINIMAP_SIZE / 2 - 2));
+        clipPath.appendChild(clipCircle);
+        defs.appendChild(clipPath);
+        svg.appendChild(defs);
+
+        const meshGroup = document.createElementNS(SVG_NS, 'g');
+        meshGroup.setAttribute('clip-path', `url(#${clipId})`);
+
+        const meshPath = document.createElementNS(SVG_NS, 'path');
+        meshPath.setAttribute('class', 'gs-minimap__mesh');
+        meshGroup.appendChild(meshPath);
+
+        const agentGroup = document.createElementNS(SVG_NS, 'g');
+        agentGroup.setAttribute('class', 'gs-minimap__agent');
+
+        const agentDot = document.createElementNS(SVG_NS, 'circle');
+        agentDot.setAttribute('class', 'gs-minimap__agent-dot');
+        agentDot.setAttribute('cx', '0');
+        agentDot.setAttribute('cy', '0');
+        agentDot.setAttribute('r', '2.6');
+
+        const agentArrow = document.createElementNS(SVG_NS, 'path');
+        agentArrow.setAttribute('class', 'gs-minimap__agent-arrow');
+        agentArrow.setAttribute('d', 'M0 -8 L5 6 L0 3 L-5 6 Z');
+
+        agentGroup.appendChild(agentDot);
+        agentGroup.appendChild(agentArrow);
+        meshGroup.appendChild(agentGroup);
+        svg.appendChild(meshGroup);
+        wrap.appendChild(svg);
+        this.container.appendChild(wrap);
+
+        this.minimapEl = wrap;
+        this.minimapMeshPath = meshPath;
+        this.minimapAgent = agentGroup;
+    }
+
+    _worldToMinimap(x, z) {
+        if (!this.minimapBounds) return [MINIMAP_SIZE / 2, MINIMAP_SIZE / 2];
+
+        const { bmin, bmax } = this.minimapBounds;
+        const mapX = this.minimapPadding + (x - bmin[0]) * this.minimapScale;
+        const mapY = this.minimapPadding + (z - bmin[2]) * this.minimapScale;
+        return [mapX, mapY];
+    }
+
+    _buildMinimap() {
+        if (!this.navmesh || !this.minimapMeshPath) return;
+
+        const { vertices, triangles, params } = this.navmesh;
+        const width = Math.max(params.bmax[0] - params.bmin[0], 1e-6);
+        const depth = Math.max(params.bmax[2] - params.bmin[2], 1e-6);
+        const innerSize = MINIMAP_SIZE - this.minimapPadding * 2;
+        this.minimapScale = Math.min(innerSize / width, innerSize / depth);
+        this.minimapBounds = { bmin: params.bmin, bmax: params.bmax };
+
+        let path = '';
+        for (const tri of triangles) {
+            const [ax, ay] = this._worldToMinimap(vertices[tri[0]][0], vertices[tri[0]][2]);
+            const [bx, by] = this._worldToMinimap(vertices[tri[1]][0], vertices[tri[1]][2]);
+            const [cx, cy] = this._worldToMinimap(vertices[tri[2]][0], vertices[tri[2]][2]);
+            path += `M ${ax.toFixed(2)} ${ay.toFixed(2)} L ${bx.toFixed(2)} ${by.toFixed(2)} L ${cx.toFixed(2)} ${cy.toFixed(2)} Z `;
+        }
+
+        this.minimapMeshPath.setAttribute('d', path.trim());
+        this.minimapEl.classList.add('is-ready');
+        this._updateMinimapAgent();
+    }
+
+    _updateMinimapAgent() {
+        if (!this.minimapAgent || !this.minimapBounds) return;
+
+        const [x, y] = this._worldToMinimap(this.camPos[0], this.camPos[2]);
+        const headingX = -Math.sin(this.camYaw);
+        const headingY = -Math.cos(this.camYaw);
+        const angleDeg = Math.atan2(headingY, headingX) * 180 / Math.PI + 90;
+        this.minimapAgent.setAttribute(
+            'transform',
+            `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${angleDeg.toFixed(2)})`
+        );
     }
 
     async init(splatUrl, navmeshUrl) {
@@ -545,6 +655,7 @@ export class GaussianViewer {
         const navResp = await fetch(navmeshUrl);
         const navData = await navResp.json();
         this.navmesh = new NavMesh(navData);
+        this._buildMinimap();
 
         setProgress(0.05, 'Loading gaussians...');
         const splatBuffer = await loadSplatFile(splatUrl, (p) => {
@@ -565,6 +676,7 @@ export class GaussianViewer {
         this.camYaw = 0;
         this.camPitch = 0;
         this._initCamera();
+        this._updateMinimapAgent();
 
         setProgress(1.0, 'Ready!');
         this._loading = false;
@@ -876,6 +988,7 @@ export class GaussianViewer {
             lastTime = now;
 
             this._updateInput(dt);
+            this._updateMinimapAgent();
             this._sortSplats();
             this._render();
 

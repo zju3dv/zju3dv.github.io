@@ -67,7 +67,7 @@ var views = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Initialize scroll-based video scaling
+  // Keep gallery videos at a fixed full width.
   initScrollScaleVideos();
   
   // Initialize intro video carousel
@@ -95,23 +95,51 @@ function initVideoComparison() {
   var ZOOM = 2;              // magnification factor
   var CANVAS_SIZE = MAGNIFIER_RADIUS * 2;
 
-  // Click-to-emphasize
-  items.forEach(function(item) {
-    item.addEventListener('click', function() {
-      var wasActive = item.classList.contains('active');
+  function syncPlaybackState(item, video) {
+    if (!video) return;
+    item.classList.toggle('is-paused', video.paused);
+  }
 
-      if (wasActive) {
-        // Deactivate — return to equal state
-        item.classList.remove('active');
-        container.classList.remove('has-active');
-      } else {
-        // Directly swap: add active to clicked, remove from others
+  function toggleVideoPlayback(item) {
+    var video = item.querySelector('video');
+    if (!video) return;
+
+    if (video.paused) {
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function() {});
+      }
+    } else {
+      video.pause();
+    }
+
+    syncPlaybackState(item, video);
+  }
+
+  // Click-to-emphasize and pause/play
+  items.forEach(function(item) {
+    var video = item.querySelector('video');
+
+    if (video) {
+      syncPlaybackState(item, video);
+      video.addEventListener('play', function() {
+        syncPlaybackState(item, video);
+      });
+      video.addEventListener('pause', function() {
+        syncPlaybackState(item, video);
+      });
+    }
+
+    item.addEventListener('click', function() {
+      if (!item.classList.contains('active')) {
         items.forEach(function(it) {
           it.classList.remove('active');
         });
         item.classList.add('active');
         container.classList.add('has-active');
       }
+
+      toggleVideoPlayback(item);
     });
   });
 
@@ -408,36 +436,10 @@ function initDeferredSections() {
 function initScrollScaleVideos() {
   var videos = document.querySelectorAll('.scroll-scale-video');
   if (!videos.length) return;
-  
-  function updateVideoWidths() {
-    videos.forEach(function(video) {
-      var rect = video.getBoundingClientRect();
-      var windowHeight = window.innerHeight;
-      
-      // Calculate how far the video has entered the viewport
-      // When video top is at bottom of viewport: progress = 0 (width = 80%)
-      // When video center is at center of viewport: progress = 1 (width = 100%)
-      var videoCenter = rect.top + rect.height / 2;
-      var viewportCenter = windowHeight / 2;
-      
-      // Distance from viewport bottom to viewport center
-      var scrollRange = windowHeight / 2;
-      
-      // Progress: 0 when video just enters, 1 when video center reaches viewport center
-      var distanceFromBottom = windowHeight - rect.top;
-      var progress = Math.min(1, Math.max(0, distanceFromBottom / (scrollRange + rect.height / 2)));
-      
-      // Interpolate width from 80% to 100%
-      var width = 50 + (progress * 50);
-      video.style.width = width + '%';
-    });
-  }
-  
-  // Update on scroll
-  window.addEventListener('scroll', updateVideoWidths, { passive: true });
-  
-  // Initial update
-  updateVideoWidths();
+
+  videos.forEach(function(video) {
+    video.style.width = '100%';
+  });
 }
 
 function initRobotSection() {

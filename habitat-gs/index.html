@@ -178,10 +178,11 @@
       <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6rem;">
         Habitat-GS:
       </h1>
-      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 4.8rem; margin-bottom: 2.65rem;">
-        A High-Fidelity Navigation Simulator <br> with Dynamic Gaussian Splatting
+      <h1 class="title is-1 publication-title publication-title--hero is-size-1-mobile">
+        <span class="publication-title__lead">A High-Fidelity Navigation Simulator</span> <br>
+        <span class="publication-title__tail">with Dynamic Gaussian Splatting</span>
       </h1>
-      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem; margin-top: 1.5rem">
         arXiv preprint 2026
       </h1>
       <h1 class="is-2 is-size-4-mobile" style="font-size: 2rem; opacity: 100%;">
@@ -254,8 +255,9 @@
       <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6rem;">
         Habitat-GS:
       </h1>
-      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 4.8rem;">
-        A High-Fidelity Navigation Simulator <br> with Dynamic Gaussian Splatting
+      <h1 class="title is-1 publication-title publication-title--hero is-size-1-mobile">
+        <span class="publication-title__lead">A High-Fidelity Navigation Simulator</span> <br>
+        <span class="publication-title__tail">with Dynamic Gaussian Splatting</span>
       </h1>
       <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
         arXiv preprint 2026
@@ -287,6 +289,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full has-text-justified">
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: -2rem; margin-bottom: 3rem">TL; DR</h2>
         <h2 class="subtitle">
           We present <strong>Habitat-GS</strong>, a navigation-centric embodied AI simulator based on
           <strong>3DGS</strong>
@@ -305,6 +308,7 @@
         <br>
       </div>
     </div>
+    <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 4rem;">Comparison</h2>
     <!-- Mesh vs GS Side-by-Side Comparison -->
     <div class="video-comparison" id="video-comparison">
       <div class="video-comparison-item" data-side="mesh">
@@ -327,11 +331,12 @@
       </div>
     </div>
     <div class="has-text-centered is-size-6"
-      style="font-style: italic; width: 70vw; margin-left: calc(-35vw + 50%); padding: 0 20px;">
+      style="font-style: italic; width: 71vw; margin-left: calc(-35.5vw + 50%); padding: 0 20px;">
       Compared to traditional mesh-based simulators (<strong>left</strong>), our 3DGS-based simulator
       (<strong>right</strong>)
-      preserves high-frequency visual details and view-dependent effects, as well as introducing realistic gaussian
-      avatars, thus helping train more robust navigation agents. <strong>Hover over the video to zoom in!</strong>
+      preserves high-frequency visual details and view-dependent effects, and introduces realistic gaussian
+      avatars, thus helping train more robust navigation agents.
+      <strong>Click a video to toggle pause/play, and hover to zoom in.</strong>
     </div>
   </div>
 </section>
@@ -458,12 +463,17 @@
       </div>
     </div>
     <div id="toi-buttons" class="comparison-scene-buttons" style="align-items: center;">
-      <button class="button is-light comparison-scene-button is-primary" onclick="Change_TOI_scene(0)">Karaoke
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs is-primary"
+        data-scene-label="Karaoke bar" data-scene-source="InteriorGS" onclick="Change_TOI_scene(0)">Karaoke
         bar</button>
-      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(1)">Science museum</button>
-      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(2)">Apartment</button>
-      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(3)">Japanese garden</button>
-      <button class="button is-light comparison-scene-button" onclick="Change_TOI_scene(4)">Modern villa</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
+        data-scene-label="Science museum" data-scene-source="InteriorGS" onclick="Change_TOI_scene(1)">Science museum</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
+        data-scene-label="Apartment" data-scene-source="InteriorGS" onclick="Change_TOI_scene(2)">Apartment</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
+        data-scene-label="Japanese garden" data-scene-source="Marble" onclick="Change_TOI_scene(3)">Japanese garden</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
+        data-scene-label="Modern villa" data-scene-source="Marble" onclick="Change_TOI_scene(4)">Modern villa</button>
 
       <!-- Legend -->
       <div class="scene-legend is-hidden-mobile"
@@ -484,8 +494,13 @@
       <div class="column is-centered is-four-quarters has-text-justified">
         <div class="columns is-centered">
           <div class="column is-four-quarters has-text-justified">
-            <video autoplay muted loop playsinline width="100%" id="toi-video" data-src="./static/videos/more/0001.mp4"
-              preload="none" data-lazy="true">
+            <div class="toi-video-shell featured-media-shell is-loading" id="toi-video-shell">
+              <div class="toi-video-status" id="toi-video-status" aria-live="polite">
+                Loading InteriorGS scene: Karaoke bar...
+              </div>
+              <video autoplay muted loop playsinline id="toi-video" data-src="./static/videos/more/0001.mp4" preload="none"
+                data-lazy="true"></video>
+            </div>
           </div>
         </div>
       </div>
@@ -498,7 +513,7 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 40px">Navigation Episodes</h2>
-        <div class="content has-text-centered" style="margin-bottom: 20px;">
+        <div class="content has-text-centered" style="margin-bottom: -6rem">
           <p>
             Habitat-GS is fully compatible with the Habitat ecosystem, including <a
               href="https://github.com/facebookresearch/habitat-lab">Habitat-Lab</a> tasks,
@@ -549,7 +564,7 @@
       </div>
       <button class="carousel-nav carousel-nav--next" id="intro-carousel-next" aria-label="Next">&#8250;</button>
     </div>
-    <div class="nav-episode-description" id="nav-episode-description">
+    <div class="nav-episode-description" id="nav-episode-description" style="margin-bottom: -0.5rem; margin-top: -6.5rem">
       <p class="nav-episode-desc-item active" data-index="0"><strong>Point Goal Navigation:</strong> Given RGB-D
         observations and point-goal signal, navigate to the goal location.</p>
       <p class="nav-episode-desc-item" data-index="1"><strong>Image Goal Navigation:</strong> Given an image, navigate
@@ -563,7 +578,7 @@
       <p class="nav-episode-desc-item" data-index="4"><strong>Human Tracking Navigation:</strong> Agent is supposed to
         track human avatar continuously.</p>
     </div>
-    <div class="carousel-dots" id="intro-carousel-dots" style="margin-bottom: 50px;">
+    <div class="carousel-dots" id="intro-carousel-dots" style="margin-bottom: 3rem;">
       <span class="carousel-dot active" data-index="0"></span>
       <span class="carousel-dot" data-index="1"></span>
       <span class="carousel-dot" data-index="2"></span>
@@ -577,19 +592,19 @@
 <section class="section" id="viewer">
   <div class="container is-max-widescreen">
     <div class="content has-text-centered">
-      <h2 class="title is-2 has-text-centered is-size-4-mobile">Interactive Viewer</h2>
+      <h2 class="title is-1 has-text-centered is-size-4-mobile">Interactive Viewer</h2>
       <p class="content has-text-centered" style="margin-top:-0.5rem">
         Explore 3DGS scenes in first-person perspective just as a navigation agent do in Habitat-GS! <br>
         Your action is restricted on <strong>Navigation Mesh</strong>, while 3DGS is responsible for photorealistic rendering.
       </p>
     </div>
-    <div class="comparison-scene-buttons" style="max-width:1120px; margin:0 auto 2rem auto;">
+    <div class="comparison-scene-buttons featured-media-controls" style="margin:0 auto 2rem auto;">
       <button class="button is-light comparison-scene-button is-primary-blue" id="gs-scene-btn-0" onclick="window._gsLoadScene(0)">Sales gallery</button>
       <button class="button is-light comparison-scene-button" id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Spa center</button>
-      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">High-end home</button>
+      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">Tea room</button>
     </div>
-    <div id="gs-viewer-container" tabindex="0"
-      style="position:relative; width:100%; max-width:1120px; margin:0 auto; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; outline:none; cursor:crosshair;">
+    <div id="gs-viewer-container" class="featured-media-shell" tabindex="0"
+      style="position:relative; width:100%; margin:0 auto; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; outline:none; cursor:crosshair;">
       <canvas id="gs-canvas" style="width:100%; height:100%; display:block;"></canvas>
       <div id="gs-loading"
         style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,0.85); color:white; font-family:sans-serif;">
@@ -644,20 +659,14 @@
     }
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !initialized) {
-      observer.disconnect();
-      window._gsLoadScene(0);
-    }
-  }, { rootMargin: '200px' });
-  observer.observe(container);
+  window._gsLoadScene(0);
 </script>
 
 <section class="section" id="method">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
-        <h2 class="title is-1 has-text-centered is-size-4-mobile" style="margin-top: 10px">Method</h2>
+        <h2 class="title is-1 has-text-centered is-size-4-mobile" style="margin-top: 3rem">Method</h2>
       </div>
     </div>
     <div class="columns is-centered has-text-centered">

@@ -1,0 +1,17 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'>
+  <circle fill='#FF156D' stroke='#FF156D' stroke-width='14' r='14' cx='660' cy='512'>
+    <animate attributeName='cy' calcMode='spline' dur='2' values='270;810;270;' keySplines='.5 0 .5 1;.5 0 .5 1' repeatCount='indefinite' begin='-.4'></animate>
+  </circle>
+  <circle fill='#FF156D' stroke='#FF156D' stroke-width='14' r='14' cx='810' cy='512'>
+    <animate attributeName='cy' calcMode='spline' dur='2' values='270;810;270;' keySplines='.5 0 .5 1;.5 0 .5 1' repeatCount='indefinite' begin='-.3'></animate>
+  </circle>
+  <circle fill='#FF156D' stroke='#FF156D' stroke-width='14' r='14' cx='960' cy='512'>
+    <animate attributeName='cy' calcMode='spline' dur='2' values='270;810;270;' keySplines='.5 0 .5 1;.5 0 .5 1' repeatCount='indefinite' begin='-.2'></animate>
+  </circle>
+  <circle fill='#FF156D' stroke='#FF156D' stroke-width='14' r='14' cx='1110' cy='512'>
+    <animate attributeName='cy' calcMode='spline' dur='2' values='270;810;270;' keySplines='.5 0 .5 1;.5 0 .5 1' repeatCount='indefinite' begin='-.1'></animate>
+  </circle>
+  <circle fill='#FF156D' stroke='#FF156D' stroke-width='14' r='14' cx='1260' cy='512'>
+    <animate attributeName='cy' calcMode='spline' dur='2' values='270;810;270;' keySplines='.5 0 .5 1;.5 0 .5 1' repeatCount='indefinite' begin='0'></animate>
+  </circle>
+</svg>

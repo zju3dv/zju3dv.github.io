@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function initGalleryShowcase() {
   var band = document.getElementById("gallery-showcase-band");
   var showcase = document.getElementById("gallery-showcase");
+  var preview = showcase ? showcase.querySelector(".gallery-showcase-preview") : null;
   var video = document.getElementById("gallery-showcase-video");
   var toggle = document.getElementById("gallery-showcase-toggle");
   var toggleIcon = document.getElementById("gallery-showcase-toggle-icon");
@@ -115,16 +116,86 @@ function initGalleryShowcase() {
   var caption = document.getElementById("gallery-showcase-caption");
   var dots = Array.prototype.slice.call(document.querySelectorAll(".gallery-showcase-dot"));
 
-  if (!band || !showcase || !video || !toggle || !toggleIcon || !toggleLabel || !caption || !dots.length) {
+  if (!band || !showcase || !preview || !video || !toggle || !toggleIcon || !toggleLabel || !caption || !dots.length) {
     return;
   }
 
   var currentIndex = 0;
   var expanded = false;
+  var pendingAutoplay = false;
+  var loadRequestId = 0;
+  var defaultPreviewSrc = "./static/videos/noinput_videos/preview.png";
+  var loadingPreviewSrc = "./static/images/loading.svg";
+  var defaultPreviewAlt = "Preview image for the Habitat-GS gallery scenes";
 
   function applyPlaybackRate() {
     video.defaultPlaybackRate = 0.45;
     video.playbackRate = 0.45;
+  }
+
+  function setLoadingPlaceholder(isLoading) {
+    preview.setAttribute("src", isLoading ? loadingPreviewSrc : defaultPreviewSrc);
+    preview.setAttribute("alt", isLoading ? "Loading gallery scene" : defaultPreviewAlt);
+    preview.classList.toggle("is-loading", isLoading);
+    showcase.classList.toggle("is-video-loading", isLoading);
+  }
+
+  function playCurrentVideo() {
+    if (!pendingAutoplay) return;
+    pendingAutoplay = false;
+
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function() {});
+    }
+  }
+
+  function handleVideoReady(requestId) {
+    if (requestId !== loadRequestId) return;
+    setLoadingPlaceholder(false);
+    applyPlaybackRate();
+    playCurrentVideo();
+  }
+
+  function waitForVideoReady(requestId) {
+    if (!expanded) {
+      setLoadingPlaceholder(false);
+      return;
+    }
+
+    if (video.readyState >= 2) {
+      handleVideoReady(requestId);
+      return;
+    }
+
+    setLoadingPlaceholder(true);
+
+    var done = false;
+
+    function cleanup() {
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+      video.removeEventListener("error", onError);
+    }
+
+    function onReady() {
+      if (done) return;
+      done = true;
+      cleanup();
+      handleVideoReady(requestId);
+    }
+
+    function onError() {
+      if (done) return;
+      done = true;
+      cleanup();
+      pendingAutoplay = false;
+      setLoadingPlaceholder(false);
+    }
+
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    video.addEventListener("error", onError);
   }
 
   function updateChrome() {
@@ -150,19 +221,20 @@ function initGalleryShowcase() {
       dot.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
 
+    pendingAutoplay = shouldPlay;
+    var requestId = ++loadRequestId;
+
     if (video.getAttribute("src") !== scene.video) {
+      video.pause();
+      if (expanded) {
+        setLoadingPlaceholder(true);
+      }
       video.setAttribute("src", scene.video);
       video.load();
     }
 
     applyPlaybackRate();
-
-    if (shouldPlay) {
-      var playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(function() {});
-      }
-    }
+    waitForVideoReady(requestId);
   }
 
   function expandShowcase() {
@@ -173,10 +245,12 @@ function initGalleryShowcase() {
 
   function collapseShowcase() {
     expanded = false;
+    pendingAutoplay = false;
     video.pause();
     if (video.currentTime) {
       video.currentTime = 0;
     }
+    setLoadingPlaceholder(false);
     updateChrome();
   }
 

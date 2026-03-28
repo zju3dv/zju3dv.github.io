@@ -667,10 +667,23 @@ h6 {
     filter 0.5s ease;
 }
 
+.gallery-showcase-preview.is-loading {
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 18%;
+  background: #020617;
+}
+
 .gallery-showcase.is-expanded .gallery-showcase-preview {
   opacity: 0;
   transform: scale(1.03);
   filter: blur(6px);
+}
+
+.gallery-showcase.is-expanded.is-video-loading .gallery-showcase-preview {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
 }
 
 .gallery-showcase-video {
@@ -684,6 +697,10 @@ h6 {
 .gallery-showcase.is-expanded .gallery-showcase-video {
   opacity: 1;
   transform: scale(1);
+}
+
+.gallery-showcase.is-expanded.is-video-loading .gallery-showcase-video {
+  opacity: 0;
 }
 
 .gallery-showcase-gradient {

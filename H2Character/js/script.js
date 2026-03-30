@@ -1,15 +1,11 @@
 // Video data - replace with your actual video files
 const motionVideos = [
-    { id: 1, title: "Walking Motion", filename: "walking.mp4" },
-    { id: 2, title: "Running Motion", filename: "running.mp4" },
-    { id: 3, title: "Jumping Motion", filename: "jumping.mp4" },
-    { id: 4, title: "Dancing Motion", filename: "dancing.mp4" },
-    { id: 5, title: "Fighting Motion", filename: "fighting.mp4" },
-    { id: 6, title: "Idle Motion", filename: "idle.mp4" },
-    { id: 7, title: "Climbing Motion", filename: "climbing.mp4" },
-    { id: 8, title: "Sitting Motion", filename: "sitting.mp4" },
-    { id: 9, title: "Gesturing Motion", filename: "gesturing.mp4" },
-    { id: 10, title: "Complex Motion", filename: "complex.mp4" }
+    { id: 1, title: "Hand Clasp", filename: "hand_clasp.mp4" },
+    { id: 2, title: "Fist Touch", filename: "fist_touch.mp4" },
+    { id: 3, title: "Hand on Ankle", filename: "hand_on_ankle.mp4" },
+    { id: 4, title: "Hands on Face", filename: "hands_on_face.mp4" },
+    { id: 5, title: "Hand on Eyebrow", filename: "hand_on_eyebrow.mp4" },
+    { id: 6, title: "Feet Touch", filename: "feet_touch.mp4" }
 ];
 
 // Initialize when DOM is loaded

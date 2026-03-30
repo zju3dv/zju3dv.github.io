@@ -25,45 +25,41 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>H2Char: Advanced 3D Character Motion Retargeting</h1>
-            <p>State-of-the-art motion retargeting system for 3D character animation</p>
-            <div class="hero-buttons">
-                <a href="#paper" class="btn btn-primary">Read Paper</a>
-                <a href="#code" class="btn btn-secondary">View Code</a>
+    <!-- Title & Authors Section -->
+    <section id="home" class="title-section">
+        <div class="container">
+            <h1 class="paper-title">Human-to-Character: Self-Supervised Dense Retargeting for Semantic-Consistent Animation</h1>
+            <p class="author-list">Ruoxi Guo<sup>1</sup>, Qing Shuai<sup>1</sup>, Yue Wang<sup>1</sup>, Sida Peng<sup>1</sup>, Xiaowei Zhou<sup>1</sup></p>
+            <p class="affiliation"><sup>1</sup>Zhejiang University</p>
+            <div class="title-buttons">
+                <a href="#paper" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Paper</a>
+                <a href="#code" class="btn btn-outline"><i class="fab fa-github"></i> Code</a>
+                <a href="#demo" class="btn btn-outline"><i class="fas fa-video"></i> Video</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About H2Char</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>H2Char is a cutting-edge 3D character motion retargeting system that enables seamless transfer of human motions to various character models while preserving motion quality and character-specific features.</p>
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-bolt"></i>
-                            <h4>Real-time Performance</h4>
-                            <p>Optimized for real-time motion retargeting applications</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-shield-alt"></i>
-                            <h4>Self-penetration Free</h4>
-                            <p>Advanced collision detection and resolution</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-hands"></i>
-                            <h4>Contact Preservation</h4>
-                            <p>Maintains important contact points and interactions</p>
-                        </div>
+    <!-- Teaser Section -->
+    <section id="about" class="teaser-section">
+        <div class="container-wide">
+            <div class="teaser-wrapper">
+                <img src="assets/images/teaser_smplh_light.png" alt="H2Char Teaser" id="teaser-image">
+                <div class="features-overlay">
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <h4>Temporally Consistent</h4>
+                        <p>Preserving natural dynamics and rhythm</p>
                     </div>
-                </div>
-                <div class="about-image">
-                    <img src="assets/images/teaser_smplh_light.png" alt="H2Char Teaser" id="teaser-image">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Self-penetration Free</h4>
+                        <p>Advanced collision detection and resolution</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-hands"></i>
+                        <h4>Contact Preservation</h4>
+                        <p>Maintains important contact points and interactions</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,8 +98,8 @@
             <div class="paper-content">
                 <div class="paper-info">
                     <h3>Human-to-Character: Self-Supervised Dense Retargeting for Semantic-Consistent Animation</h3>
-                    <p class="authors">Ruoxi Guo¹, Qing Shuai¹, Yue Wang¹, Sida Peng¹, Xiaowei Zhou¹<br>¹Zhejiang University</p>
-                    <p class="conference">Conference Year</p>
+                    <p class="authors">Ruoxi Guo<sup>1</sup>, Qing Shuai<sup>1</sup>, Yue Wang<sup>1</sup>, Sida Peng<sup>1</sup>, Xiaowei Zhou<sup>1</sup><br><sup>1</sup>Zhejiang University</p>
+                    <p class="conference">2026</p>
                     <div class="paper-links">
                         <a href="docs/paper.pdf" class="btn btn-primary" target="_blank">
                             <i class="fas fa-file-pdf"></i> Download PDF
@@ -114,10 +110,7 @@
                     </div>
                 </div>
                 <div class="paper-image">
-                    <a href="assets/images/paper_img.pdf" target="_blank" style="display: block; text-align: center;">
-                        <img src="assets/images/paper_img.pdf" alt="Paper Figure" style="max-width: 100%; height: auto; border: 1px solid #ddd;">
-                        <p style="margin-top: 8px; font-size: 14px; color: #666;">点击查看/下载PDF</p>
-                    </a>
+                    <img src="assets/images/paper_img.png" alt="Paper Figure">
                 </div>
             </div>
         </div>
@@ -167,15 +160,11 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>email@example.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-twitter"></i>
-                        <span>@username</span>
+                        <span>ruoxiguo@zju.edu.cn</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-university"></i>
-                        <span>Affiliation</span>
+                        <span>The authors from Zhejiang University are affiliated with the State Key Lab of CAD&CG.</span>
                     </div>
                 </div>
             </div>

@@ -66,9 +66,31 @@ var views = [
   { id: "view2", label: "View 2" }
 ];
 
+var galleryShowcaseScenes = [
+  {
+    video: "./static/videos/noinput_videos/0001.mp4",
+    caption: "Girl in green dress wandering in a bookstore."
+  },
+  {
+    video: "./static/videos/noinput_videos/0002.mp4",
+    caption: "Man in brown shirt walking by a house."
+  },
+  {
+    video: "./static/videos/noinput_videos/0003.mp4",
+    caption: "Woman in blue dress walking around in living room."
+  },
+  {
+    video: "./static/videos/noinput_videos/0004.mp4",
+    caption: "Student walking across the overpass."
+  },
+  {
+    video: "./static/videos/noinput_videos/0005.mp4",
+    caption: "On a commercial street of an ancient town."
+  }
+];
+
 document.addEventListener("DOMContentLoaded", function() {
-  // Keep gallery videos at a fixed full width.
-  initScrollScaleVideos();
+  initGalleryShowcase();
   
   // Initialize intro video carousel
   initIntroCarousel();
@@ -82,6 +104,178 @@ document.addEventListener("DOMContentLoaded", function() {
   // Defer heavy sections until they are near the viewport
   initDeferredSections();
 });
+
+function initGalleryShowcase() {
+  var band = document.getElementById("gallery-showcase-band");
+  var showcase = document.getElementById("gallery-showcase");
+  var preview = showcase ? showcase.querySelector(".gallery-showcase-preview") : null;
+  var video = document.getElementById("gallery-showcase-video");
+  var toggle = document.getElementById("gallery-showcase-toggle");
+  var toggleIcon = document.getElementById("gallery-showcase-toggle-icon");
+  var toggleLabel = document.getElementById("gallery-showcase-toggle-label");
+  var caption = document.getElementById("gallery-showcase-caption");
+  var dots = Array.prototype.slice.call(document.querySelectorAll(".gallery-showcase-dot"));
+
+  if (!band || !showcase || !preview || !video || !toggle || !toggleIcon || !toggleLabel || !caption || !dots.length) {
+    return;
+  }
+
+  var currentIndex = 0;
+  var expanded = false;
+  var pendingAutoplay = false;
+  var loadRequestId = 0;
+  var defaultPreviewSrc = "./static/videos/noinput_videos/preview.png";
+  var loadingPreviewSrc = "./static/images/loading.svg";
+  var defaultPreviewAlt = "Preview image for the Habitat-GS gallery scenes";
+
+  function applyPlaybackRate() {
+    video.defaultPlaybackRate = 0.45;
+    video.playbackRate = 0.45;
+  }
+
+  function setLoadingPlaceholder(isLoading) {
+    preview.setAttribute("src", isLoading ? loadingPreviewSrc : defaultPreviewSrc);
+    preview.setAttribute("alt", isLoading ? "Loading gallery scene" : defaultPreviewAlt);
+    preview.classList.toggle("is-loading", isLoading);
+    showcase.classList.toggle("is-video-loading", isLoading);
+  }
+
+  function playCurrentVideo() {
+    if (!pendingAutoplay) return;
+    pendingAutoplay = false;
+
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function() {});
+    }
+  }
+
+  function handleVideoReady(requestId) {
+    if (requestId !== loadRequestId) return;
+    setLoadingPlaceholder(false);
+    applyPlaybackRate();
+    playCurrentVideo();
+  }
+
+  function waitForVideoReady(requestId) {
+    if (!expanded) {
+      setLoadingPlaceholder(false);
+      return;
+    }
+
+    if (video.readyState >= 2) {
+      handleVideoReady(requestId);
+      return;
+    }
+
+    setLoadingPlaceholder(true);
+
+    var done = false;
+
+    function cleanup() {
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+      video.removeEventListener("error", onError);
+    }
+
+    function onReady() {
+      if (done) return;
+      done = true;
+      cleanup();
+      handleVideoReady(requestId);
+    }
+
+    function onError() {
+      if (done) return;
+      done = true;
+      cleanup();
+      pendingAutoplay = false;
+      setLoadingPlaceholder(false);
+    }
+
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    video.addEventListener("error", onError);
+  }
+
+  function updateChrome() {
+    toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    toggle.setAttribute("aria-label", expanded ? "Collapse gallery preview" : "Expand gallery preview");
+    toggleIcon.textContent = expanded ? "-" : "+";
+    toggleLabel.textContent = expanded ? "Collapse" : "Expand";
+    band.classList.toggle("is-expanded", expanded);
+    showcase.classList.toggle("is-expanded", expanded);
+  }
+
+  function updateScene(index, shouldPlay) {
+    var scene = galleryShowcaseScenes[index];
+    if (!scene) return;
+
+    currentIndex = index;
+    caption.textContent = scene.caption;
+
+    dots.forEach(function(dot) {
+      var dotIndex = parseInt(dot.dataset.index, 10);
+      var isActive = dotIndex === index;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    pendingAutoplay = shouldPlay;
+    var requestId = ++loadRequestId;
+
+    if (video.getAttribute("src") !== scene.video) {
+      video.pause();
+      if (expanded) {
+        setLoadingPlaceholder(true);
+      }
+      video.setAttribute("src", scene.video);
+      video.load();
+    }
+
+    applyPlaybackRate();
+    waitForVideoReady(requestId);
+  }
+
+  function expandShowcase() {
+    expanded = true;
+    updateChrome();
+    updateScene(currentIndex, true);
+  }
+
+  function collapseShowcase() {
+    expanded = false;
+    pendingAutoplay = false;
+    video.pause();
+    if (video.currentTime) {
+      video.currentTime = 0;
+    }
+    setLoadingPlaceholder(false);
+    updateChrome();
+  }
+
+  toggle.addEventListener("click", function() {
+    if (expanded) {
+      collapseShowcase();
+    } else {
+      expandShowcase();
+    }
+  });
+
+  dots.forEach(function(dot) {
+    dot.addEventListener("click", function() {
+      if (!expanded) return;
+      var index = parseInt(dot.dataset.index, 10);
+      if (Number.isNaN(index)) return;
+      updateScene(index, true);
+    });
+  });
+
+  video.addEventListener("loadedmetadata", applyPlaybackRate);
+
+  updateScene(0, false);
+  updateChrome();
+}
 
 function initVideoComparison() {
   var container = document.getElementById('video-comparison');
@@ -431,15 +625,6 @@ function initDeferredSections() {
   if (comparisonsSection) {
     observer.observe(comparisonsSection);
   }
-}
-
-function initScrollScaleVideos() {
-  var videos = document.querySelectorAll('.scroll-scale-video');
-  if (!videos.length) return;
-
-  videos.forEach(function(video) {
-    video.style.width = '100%';
-  });
 }
 
 function initRobotSection() {

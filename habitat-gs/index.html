@@ -348,7 +348,7 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-1 has-text-centered is-size-4-mobile">Gallery of GS Scenes and Avatars</h2>
-        <div class="content">
+        <div class="content has-text-centered" style="margin-bottom: -2rem;">
           <p>
             Habitat-GS supports scalable import of 3DGS assets. These include self-reconstructed GS scenes, public 3DGS
             datasets (e.g., <a href="https://huggingface.co/datasets/spatialverse/InteriorGS">InteriorGS</a>), and
@@ -360,102 +360,51 @@
   </div>
 </section>
 
-<section class="section is-small" id="rose">
+<section class="section is-small" id="gallery-showcase-section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered is-size-4-mobile">Girl in green dress wandering in a bookstore.</h2>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="gallery-showcase-band" id="gallery-showcase-band">
+      <div class="gallery-showcase" id="gallery-showcase">
+        <div class="gallery-showcase-media">
+          <img class="gallery-showcase-preview" src="./static/videos/noinput_videos/preview.png"
+            alt="Preview image for the Habitat-GS gallery scenes">
+          <video class="gallery-showcase-video" id="gallery-showcase-video" muted loop playsinline preload="none"
+            poster="./static/videos/noinput_videos/preview.png"></video>
+          <div class="gallery-showcase-gradient"></div>
+        </div>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true"
-  poster="./static/images/loading.svg">
-  <source data-src="./static/videos/noinput_videos/0001.mp4" type="video/mp4">
-</video>
+        <button class="gallery-showcase-toggle" id="gallery-showcase-toggle" type="button"
+          aria-label="Expand gallery preview" aria-expanded="false">
+          <span class="gallery-showcase-toggle__icon" id="gallery-showcase-toggle-icon">+</span>
+          <span class="gallery-showcase-toggle__label" id="gallery-showcase-toggle-label">Expand</span>
+        </button>
 
-<section class="section is-small" id="rose">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered is-size-4-mobile">Man in brown shirt walking by a house.</h2>
-        <div class="content">
-          <p>
-          </p>
+        <div class="gallery-showcase-controls gallery-showcase-controls--left" aria-label="Gallery scene selector">
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0" aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="4" aria-label="Select scene 5"></button>
+        </div>
+
+        <div class="gallery-showcase-controls gallery-showcase-controls--right" id="gallery-showcase-controls"
+          aria-label="Gallery scene selector">
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0" aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="4" aria-label="Select scene 5"></button>
+        </div>
+
+        <div class="gallery-showcase-caption" id="gallery-showcase-caption" aria-live="polite">
+          Girl in green dress wandering in a bookstore.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true"
-  poster="./static/images/loading.svg">
-  <source data-src="./static/videos/noinput_videos/0002.mp4" type="video/mp4">
-</video>
-
 <section class="section is-small" id="rose">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 has-text-centered is-size-4-mobile">Woman in blue dress walking around in living room.
-        </h2>
-        <div class="content">
-          <p>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true"
-  poster="./static/images/loading.svg">
-  <source data-src="./static/videos/noinput_videos/0003.mp4" type="video/mp4">
-</video>
-
-<section class="section is-small" id="rose">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered is-size-4-mobile">Student walking across the overpass.</h2>
-        <div class="content">
-          <p>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true"
-  poster="./static/images/loading.svg">
-  <source data-src="./static/videos/noinput_videos/0004.mp4" type="video/mp4">
-</video>
-
-
-<section class="section is-small" id="rose">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered is-size-4-mobile">On a commercial street of an ancient town.</h2>
-        <div class="content">
-          <p>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<video class="scroll-scale-video" autoplay muted loop playsinline preload="none" data-lazy="true"
-  poster="./static/images/loading.svg">
-  <source data-src="./static/videos/noinput_videos/0005.mp4" type="video/mp4">
-</video>
-
-<section class="section is-small" id="rose">
-  <div class="container is-max-desktop is-centered">
+  <div class="container is-max-widescreen is-centered">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <!-- <h2 class="title is-3 has-text-centered is-size-4-mobile">Select 4D Scenes:</h2> -->
@@ -509,15 +458,15 @@
 </section>
 
 <section class="section is-small" id="nav-episodes">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 40px">Navigation Episodes</h2>
-        <div class="content has-text-centered" style="margin-bottom: -6rem">
+        <div class="content has-text-centered" style="margin-bottom: -6.5rem">
           <p>
             Habitat-GS is fully compatible with the Habitat ecosystem, including <a
               href="https://github.com/facebookresearch/habitat-lab">Habitat-Lab</a> tasks,
-            training, and evaluation APIs. This means users can directly train navigation agents in GS scenes on
+            training, and evaluation APIs. <br> This means users can directly train and evaluate navigation agents in GS scenes on
             Habitat-Lab. Below we show five navigation tasks ran on Habitat-Lab using Habitat-GS as
             its simulator.
           </p>
@@ -525,7 +474,7 @@
       </div>
     </div>
   </div>
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="intro-carousel-container">
       <button class="carousel-nav carousel-nav--prev" id="intro-carousel-prev" aria-label="Previous">&#8249;</button>
       <div class="intro-carousel" id="intro-carousel">
@@ -578,7 +527,7 @@
       <p class="nav-episode-desc-item" data-index="4"><strong>Human Tracking Navigation:</strong> Agent is supposed to
         track human avatar continuously.</p>
     </div>
-    <div class="carousel-dots" id="intro-carousel-dots" style="margin-bottom: 3rem;">
+    <div class="carousel-dots" id="intro-carousel-dots" style="margin-bottom: 4rem;">
       <span class="carousel-dot active" data-index="0"></span>
       <span class="carousel-dot" data-index="1"></span>
       <span class="carousel-dot" data-index="2"></span>
@@ -663,7 +612,7 @@
 </script>
 
 <section class="section" id="method">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
         <h2 class="title is-1 has-text-centered is-size-4-mobile" style="margin-top: 3rem">Method</h2>
@@ -671,26 +620,30 @@
     </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
-        <img src="./static/images/pipeline.png" alt="Method Pipeline"
-          style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        <div class="section-content-wide">
+          <img src="./static/images/pipeline.png" alt="Method Pipeline"
+            style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        </div>
       </div>
     </div>
     <div class="columns is-centered has-text-centered" style="margin-bottom: 1rem;">
       <div class="column is-full">
-        <div class="content has-text-justified">
-          <p>
-            <strong>System overview of Habitat-GS.</strong> From left to right: <strong>Asset Preparation</strong>,
-            where 3DGS scene assets and gaussian avatar assets
-            are
-            prepared respectively. <strong>Habitat-GS Simulation Environment</strong>, where the render engine performs
-            3DGS
-            rasterization for scene gaussians and LBS deformation followed by rasterization for avatar gaussians,
-            producing RGB-D observations. The NavMesh blocking module retrieves pre-computed proxy capsules at runtime
-            and injects them into the NavMesh for obstacle blocking. <strong>Embodied Agent Loop</strong>, where the
-            agent policy
-            consumes sensor observations, executes actions, and receives rewards shaped by both navigation success and
-            avatar collision.
-          </p>
+        <div class="section-content-wide">
+          <div class="content has-text-justified">
+            <p>
+              <strong>System overview of Habitat-GS.</strong> From left to right: <strong>Asset Preparation</strong>,
+              where 3DGS scene assets and gaussian avatar assets
+              are
+              prepared respectively. <strong>Habitat-GS Simulation Environment</strong>, where the render engine performs
+              3DGS
+              rasterization for scene gaussians and LBS deformation followed by rasterization for avatar gaussians,
+              producing RGB-D observations. The NavMesh blocking module retrieves pre-computed proxy capsules at runtime
+              and injects them into the NavMesh for obstacle blocking. <strong>Embodied Agent Loop</strong>, where the
+              agent policy
+              consumes sensor observations, executes actions, and receives rewards shaped by both navigation success and
+              avatar collision.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -698,7 +651,7 @@
 </section>
 
 <section class="section" id="architecture">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
         <h2 class="title is-1 has-text-centered is-size-4-mobile">Architecture</h2>
@@ -706,26 +659,30 @@
     </div>
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
-        <img src="./static/images/architecture.png" alt="System Architecture"
-          style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        <div class="section-content-wide">
+          <img src="./static/images/architecture.png" alt="System Architecture"
+            style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        </div>
       </div>
     </div>
     <div class="columns is-centered has-text-centered" style="margin-bottom: 1rem;">
       <div class="column is-full">
-        <div class="content has-text-justified">
-          <p>
-            <strong>System architecture of Habitat-GS.</strong> Habitat-GS is built as a <strong>non-intrusive</strong>
-            extension
-            to <a href="https://github.com/facebookresearch/habitat-sim">Habitat-Sim</a>. The system adopts a
-            <strong>visual-navigation
-              decoupling</strong> design
-            principle,
-            separating the visual rendering modules handled by the CUDA-based 3DGS rasterizer and LBS deformation,
-            from
-            the navigation module managed by the traditional NavMesh and injected proxy capsules. This allows for
-            photorealistic agent observations without modifying the core Habitat-Sim navigation logic. For more details,
-            please refer to our <a href="./static/files/Habitat-GS.pdf">paper</a>.
-          </p>
+        <div class="section-content-wide">
+          <div class="content has-text-justified">
+            <p>
+              <strong>System architecture of Habitat-GS.</strong> Habitat-GS is built as a <strong>non-intrusive</strong>
+              extension
+              to <a href="https://github.com/facebookresearch/habitat-sim">Habitat-Sim</a>. The system adopts a
+              <strong>visual-navigation
+                decoupling</strong> design
+              principle,
+              separating the visual rendering modules handled by the CUDA-based 3DGS rasterizer and LBS deformation,
+              from
+              the navigation module managed by the traditional NavMesh and injected proxy capsules. This allows for
+              photorealistic agent observations without modifying the core Habitat-Sim navigation logic. For more details,
+              please refer to our <a href="./static/files/Habitat-GS.pdf">paper</a>.
+            </p>
+          </div>
         </div>
       </div>
     </div>

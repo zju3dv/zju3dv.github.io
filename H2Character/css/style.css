@@ -33,7 +33,7 @@ body {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 20px;
+    padding: 0.1rem 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,6 +42,7 @@ body {
 .nav-logo h2 {
     color: #667eea;
     font-weight: 700;
+    margin-top: 12px;
 }
 
 .nav-menu {
@@ -63,7 +64,7 @@ body {
 
 /* Title & Authors Section */
 .title-section {
-    padding-top: 100px;
+    padding-top: 140px;
     padding-bottom: 40px;
     text-align: center;
     background: white;

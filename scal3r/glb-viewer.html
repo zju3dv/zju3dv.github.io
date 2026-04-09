@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scal3R GLB Viewer</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/branding/scal3r-favicon.png">
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Lato, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: #eef2fb;
+        }
+
+        body {
+            position: relative;
+        }
+
+        #mv {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #status {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            z-index: 10;
+            padding: 8px 11px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(191, 208, 232, 0.78);
+            color: #3b516c;
+            font-size: 12px;
+            line-height: 1.3;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        #status[data-state="ready"] {
+            display: none;
+        }
+
+        #pose-panel {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 10;
+            width: min(360px, calc(100vw - 32px));
+            padding: 10px 11px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(191, 208, 232, 0.82);
+            color: #23384d;
+            font-size: 11px;
+            line-height: 1.4;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        #pose-panel[hidden] {
+            display: none;
+        }
+
+        #pose-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        #pose-panel-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #16283a;
+        }
+
+        #pose-panel-note {
+            color: #55708d;
+            font-size: 11px;
+        }
+
+        .pose-copy-btn {
+            appearance: none;
+            border: 1px solid rgba(146, 174, 210, 0.9);
+            background: linear-gradient(180deg, #ffffff 0%, #edf4ff 100%);
+            color: #1f4c8f;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .pose-copy-btn:hover {
+            background: linear-gradient(180deg, #f9fbff 0%, #e7f0ff 100%);
+        }
+
+        #pose-panel pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font: 11px/1.45 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: #27405c;
+        }
+
+        body.embed #pose-panel {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="mv"></div>
+    <div id="status" data-state="loading">Loading GLB...</div>
+    <div id="pose-panel" hidden>
+        <div id="pose-panel-head">
+            <div>
+                <div id="pose-panel-title">Live GLB Pose</div>
+                <div id="pose-panel-note">Copy writes one ready-to-paste attribute snippet. <code>data-up</code> preserves roll, while <code>data-pan</code> carries the offset from the base target.</div>
+            </div>
+            <button type="button" class="pose-copy-btn" id="pose-copy-btn">Copy</button>
+        </div>
+        <pre id="pose-panel-content"></pre>
+    </div>
+
+    <script type="module">
+        import * as THREE from './vendor/three.module.js';
+        import { TrackballControls } from './vendor/TrackballControls.js';
+        import { GLTFLoader } from './vendor/GLTFLoader.js';
+
+        const host = document.getElementById('mv');
+        host.loaded = false;
+        const status = document.getElementById('status');
+        const posePanel = document.getElementById('pose-panel');
+        const posePanelContent = document.getElementById('pose-panel-content');
+        const poseCopyButton = document.getElementById('pose-copy-btn');
+        const query = new URLSearchParams(window.location.search);
+        const src = query.get('src');
+        const camerasSrc = query.get('cameras');
+        const isEmbedView = query.get('embed') === '1';
+        let pointScale = THREE.MathUtils.clamp(
+            Number.parseFloat(query.get('point_scale') || '1.0') || 1.0,
+            0.2,
+            4.0,
+        );
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.NoToneMapping;
+        renderer.setClearColor(0xeef2fb, 1.0);
+        host.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xeef2fb);
+
+        const camera = new THREE.PerspectiveCamera(40, 1, 0.001, 100);
+        camera.position.set(0.9, 0.75, 1.55);
+
+        const controls = new TrackballControls(camera, renderer.domElement);
+        controls.rotateSpeed = 4.2;
+        controls.zoomSpeed = 1.15;
+        controls.panSpeed = 0.5;
+        controls.dynamicDampingFactor = 0.12;
+        controls.staticMoving = isEmbedView;
+        controls.noZoom = false;
+
+        scene.add(new THREE.AmbientLight(0xffffff, 1.35));
+        const keyLight = new THREE.DirectionalLight(0xffffff, 0.75);
+        keyLight.position.set(1.2, 1.8, 1.0);
+        scene.add(keyLight);
+        const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.4);
+        fillLight.position.set(-1.6, 0.8, -1.2);
+        scene.add(fillLight);
+
+        let activeObject = null;
+        let cameraOverlay = null;
+        let poseReference = null;
+        let lastPosePanelText = '';
+        let lastPoseCopyText = '';
+        let renderQueued = false;
+        let controlsAnimating = false;
+        const ROUND_POINT_SHADER_KEY = 'scal3r-round-points-v1';
+        const ROUND_POINT_SCREEN_MIN_CSS_PX = 1.2;
+        const ROUND_POINT_SCREEN_MAX_CSS_PX = 6.8;
+        const roundPointStates = [];
+        const roundPointStateMap = new WeakMap();
+
+        function clamp01(value) {
+            return Math.min(1, Math.max(0, value));
+        }
+
+        function hsvToRgb(h, s, v) {
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: return [v, t, p];
+                case 1: return [q, v, p];
+                case 2: return [p, v, t];
+                case 3: return [p, q, v];
+                case 4: return [t, p, v];
+                default: return [v, p, q];
+            }
+        }
+
+        function rainbowColor(progress) {
+            const t = clamp01(progress);
+            return hsvToRgb((0.5 + t * 0.8) % 1.0, 1.0, 1.0);
+        }
+
+        function getRoundPointScreenLimits() {
+            const pixelRatio = renderer.getPixelRatio?.() || window.devicePixelRatio || 1;
+            return {
+                min: ROUND_POINT_SCREEN_MIN_CSS_PX * pixelRatio,
+                max: ROUND_POINT_SCREEN_MAX_CSS_PX * pixelRatio,
+            };
+        }
+
+        function updateRoundPointScreenLimits() {
+            const limits = getRoundPointScreenLimits();
+            roundPointStates.forEach((state) => {
+                if (!state.uniforms) return;
+                state.uniforms.uPointMinSize.value = limits.min;
+                state.uniforms.uPointMaxSize.value = limits.max;
+            });
+        }
+
+        function ensureRoundPointMaterial(material) {
+            if (!material?.isPointsMaterial) return material;
+
+            const cachedState = roundPointStateMap.get(material);
+            if (cachedState) return material;
+
+            const state = { uniforms: null, material, baseSize: material.size || 1.0 };
+            roundPointStateMap.set(material, state);
+            roundPointStates.push(state);
+
+            const previousOnBeforeCompile = material.onBeforeCompile?.bind(material);
+            const previousCustomProgramCacheKey = material.customProgramCacheKey?.bind(material);
+            const pointSizeChunk = [
+                '\tgl_PointSize = size;',
+                '\t#ifdef USE_SIZEATTENUATION',
+                '\t\tbool isPerspective = isPerspectiveMatrix( projectionMatrix );',
+                '\t\tif ( isPerspective ) gl_PointSize *= ( scale / - mvPosition.z );',
+                '\t#endif',
+            ].join('\n');
+            const patchedPointSizeChunk = [
+                '\tfloat pointSize = size;',
+                '\t#ifdef USE_SIZEATTENUATION',
+                '\t\tbool isPerspective = isPerspectiveMatrix( projectionMatrix );',
+                '\t\tif ( isPerspective ) pointSize *= ( scale / - mvPosition.z );',
+                '\t#endif',
+                '\tgl_PointSize = clamp( pointSize, uPointMinSize, uPointMaxSize );',
+            ].join('\n');
+
+            material.onBeforeCompile = (shader, rendererInstance) => {
+                previousOnBeforeCompile?.(shader, rendererInstance);
+
+                const limits = getRoundPointScreenLimits();
+                state.uniforms = {
+                    uPointMinSize: { value: limits.min },
+                    uPointMaxSize: { value: limits.max },
+                };
+                Object.assign(shader.uniforms, state.uniforms);
+
+                shader.vertexShader = shader.vertexShader
+                    .replace(
+                        'uniform float scale;\n#include <common>',
+                        'uniform float scale;\nuniform float uPointMinSize;\nuniform float uPointMaxSize;\n#include <common>',
+                    )
+                    .replace(pointSizeChunk, patchedPointSizeChunk);
+
+                shader.fragmentShader = shader.fragmentShader.replace(
+                    '#include <logdepthbuf_fragment>',
+                    [
+                        '#include <logdepthbuf_fragment>',
+                        '\tvec2 pointCoord = 2.0 * gl_PointCoord - vec2( 1.0 );',
+                        '\tif ( dot( pointCoord, pointCoord ) > 1.0 ) discard;',
+                    ].join('\n'),
+                );
+            };
+
+            material.customProgramCacheKey = () => [
+                previousCustomProgramCacheKey ? previousCustomProgramCacheKey() : 'points',
+                ROUND_POINT_SHADER_KEY,
+            ].join('|');
+            material.needsUpdate = true;
+            return material;
+        }
+
+        function applyPointMaterialBaseSize(material, baseSize) {
+            const state = roundPointStateMap.get(material);
+            if (!state) return;
+            state.baseSize = baseSize;
+            state.material.size = baseSize * pointScale;
+        }
+
+        function setPointScale(nextScale) {
+            const numeric = THREE.MathUtils.clamp(Number.parseFloat(nextScale) || 1.0, 0.2, 4.0);
+            pointScale = numeric;
+            roundPointStates.forEach((state) => {
+                if (!state.material || !Number.isFinite(state.baseSize)) return;
+                state.material.size = state.baseSize * pointScale;
+            });
+            requestRenderIfNeeded();
+        }
+
+        function handleViewerMessage(event) {
+            if (window.location.origin !== 'null' && event.origin !== window.location.origin) return;
+            const payload = event.data;
+            if (!payload || typeof payload !== 'object') return;
+            if (payload.type === 'glb:setPointScale') {
+                setPointScale(payload.pointScale);
+            }
+        }
+
+        function resize() {
+            const width = Math.max(window.innerWidth, 1);
+            const height = Math.max(window.innerHeight, 1);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isEmbedView ? 1.5 : 2));
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            updateRoundPointScreenLimits();
+            controls.handleResize?.();
+            requestRenderIfNeeded();
+        }
+
+        function getViewMetrics(box, orbitCenter = null) {
+            const sphere = box.getBoundingSphere(new THREE.Sphere());
+            const radius = Math.max(sphere.radius, 1e-4);
+            const size = box.getSize(new THREE.Vector3());
+            const center = orbitCenter ? orbitCenter.clone() : sphere.center.clone();
+            const orbitIdealDistance = Math.max(radius * 2.2, size.length() * 0.72, 0.35);
+            const fitDistance = Math.max(radius / Math.sin(THREE.MathUtils.degToRad(camera.fov) * 0.5), radius * 2.2);
+            return {
+                center,
+                radius,
+                size,
+                orbitIdealDistance,
+                fitDistance,
+            };
+        }
+
+        function parseOrbit(box, orbit, orbitCenter = null) {
+            if (!orbit) return null;
+            const tokens = orbit.trim().split(/\s+/);
+            if (tokens.length < 3) return null;
+
+            const metrics = getViewMetrics(box, orbitCenter);
+
+            const azimuth = THREE.MathUtils.degToRad(parseFloat(tokens[0]) || 0);
+            const polar = THREE.MathUtils.degToRad(parseFloat(tokens[1]) || 60);
+
+            let distance = metrics.orbitIdealDistance;
+            const distanceToken = tokens[2];
+            if (distanceToken.endsWith('%')) {
+                distance = metrics.orbitIdealDistance * ((parseFloat(distanceToken) || 100) / 100);
+            } else {
+                distance = parseFloat(distanceToken) || metrics.orbitIdealDistance;
+            }
+
+            const sinPolar = Math.sin(polar);
+            return new THREE.Vector3(
+                metrics.center.x + distance * sinPolar * Math.sin(azimuth),
+                metrics.center.y + distance * Math.cos(polar),
+                metrics.center.z + distance * sinPolar * Math.cos(azimuth),
+            );
+        }
+
+        function parseTarget(fallbackCenter) {
+            const rawTarget = query.get('target');
+            if (!rawTarget) return fallbackCenter.clone();
+            const tokens = rawTarget.trim().split(/[,\s]+/).filter(Boolean);
+            if (tokens.length < 3) return fallbackCenter.clone();
+            const values = tokens.slice(0, 3).map((token) => Number.parseFloat(token));
+            if (values.some((value) => !Number.isFinite(value))) return fallbackCenter.clone();
+            return new THREE.Vector3(values[0], values[1], values[2]);
+        }
+
+        function parsePan() {
+            const rawPan = query.get('pan');
+            if (!rawPan) return { x: 0, y: 0 };
+            const tokens = rawPan.trim().split(/[,\s]+/).filter(Boolean);
+            if (tokens.length < 2) return { x: 0, y: 0 };
+            const values = tokens.slice(0, 2).map((token) => Number.parseFloat(token));
+            if (values.some((value) => !Number.isFinite(value))) return { x: 0, y: 0 };
+            return { x: values[0], y: values[1] };
+        }
+
+        function parseUp() {
+            const rawUp = query.get('up');
+            if (!rawUp) return new THREE.Vector3(0, 1, 0);
+            const tokens = rawUp.trim().split(/[,\s]+/).filter(Boolean);
+            if (tokens.length < 3) return new THREE.Vector3(0, 1, 0);
+            const values = tokens.slice(0, 3).map((token) => Number.parseFloat(token));
+            if (values.some((value) => !Number.isFinite(value))) return new THREE.Vector3(0, 1, 0);
+            const up = new THREE.Vector3(values[0], values[1], values[2]);
+            if (up.lengthSq() < 1e-8) return new THREE.Vector3(0, 1, 0);
+            return up.normalize();
+        }
+
+        function formatScalar(value, digits = 5) {
+            if (!Number.isFinite(value)) return '0';
+            const normalized = Number.parseFloat(value.toFixed(digits));
+            if (Object.is(normalized, -0)) return '0';
+            return `${normalized}`;
+        }
+
+        function formatVector3(vector, digits = 5) {
+            return [vector.x, vector.y, vector.z].map((value) => formatScalar(value, digits)).join(' ');
+        }
+
+        function formatPan(pan, digits = 5) {
+            return `${formatScalar(pan.x, digits)} ${formatScalar(pan.y, digits)}`;
+        }
+
+        function formatOrbitFromState(target, position, idealDistance) {
+            const offset = position.clone().sub(target);
+            const distance = Math.max(offset.length(), 1e-8);
+            const horizontal = Math.hypot(offset.x, offset.z);
+            const polarDeg = THREE.MathUtils.radToDeg(Math.atan2(horizontal, offset.y));
+            const azimuthDeg = THREE.MathUtils.radToDeg(Math.atan2(offset.x, offset.z));
+            const orbitPercent = idealDistance > 1e-8 ? (distance / idealDistance) * 100 : 100;
+            return {
+                value: `${formatScalar(azimuthDeg, 2)}deg ${formatScalar(polarDeg, 2)}deg ${formatScalar(orbitPercent, 2)}%`,
+                distance,
+                orbitPercent,
+            };
+        }
+
+        async function copyPosePanelText() {
+            if (!lastPoseCopyText) return;
+            poseCopyButton.textContent = 'Copying';
+            try {
+                if (!navigator.clipboard?.writeText) {
+                    throw new Error('Clipboard API unavailable');
+                }
+                await Promise.race([
+                    navigator.clipboard.writeText(lastPoseCopyText),
+                    new Promise((_, reject) => {
+                        window.setTimeout(() => reject(new Error('Clipboard write timed out')), 800);
+                    }),
+                ]);
+                poseCopyButton.textContent = 'Copied';
+            } catch (error) {
+                const fallback = document.createElement('textarea');
+                fallback.value = lastPoseCopyText;
+                fallback.setAttribute('readonly', '');
+                fallback.style.position = 'fixed';
+                fallback.style.opacity = '0';
+                fallback.style.pointerEvents = 'none';
+                document.body.appendChild(fallback);
+                fallback.focus();
+                fallback.select();
+                try {
+                    const copied = document.execCommand('copy');
+                    poseCopyButton.textContent = copied ? 'Copied' : 'Copy failed';
+                } catch (fallbackError) {
+                    poseCopyButton.textContent = 'Copy failed';
+                }
+                fallback.remove();
+            }
+            window.setTimeout(() => {
+                poseCopyButton.textContent = 'Copy';
+            }, 1200);
+        }
+
+        function updatePosePanel() {
+            if (isEmbedView || !activeObject || !poseReference || !posePanelContent) return;
+
+            const forward = controls.target.clone().sub(camera.position).normalize();
+            const right = new THREE.Vector3().crossVectors(forward, camera.up).normalize();
+            const up = new THREE.Vector3().crossVectors(right, forward).normalize();
+            const panOffset = controls.target.clone().sub(poseReference.baseTarget);
+            const pan = {
+                x: panOffset.dot(right) / poseReference.sceneRadius,
+                y: panOffset.dot(up) / poseReference.sceneRadius,
+            };
+            const orbit = formatOrbitFromState(controls.target, camera.position, poseReference.idealDistance);
+            const attributeSnippet = [
+                `data-target="${formatVector3(poseReference.baseTarget)}"`,
+                `data-pan="${formatPan(pan)}"`,
+                `data-up="${formatVector3(camera.up.clone().normalize())}"`,
+                `data-orbit="${orbit.value}"`,
+            ].join(' ');
+            const panelText = [
+                attributeSnippet,
+                '',
+                'Copy button copies the first line only.',
+                '',
+                `current_target="${formatVector3(controls.target)}"`,
+                `camera_position="${formatVector3(camera.position)}"`,
+                `distance="${formatScalar(orbit.distance, 5)}"`,
+                `ideal_distance="${formatScalar(poseReference.idealDistance, 5)}"`,
+                `scene_radius="${formatScalar(poseReference.sceneRadius, 5)}"`,
+            ].join('\n');
+
+            if (panelText === lastPosePanelText) return;
+            lastPosePanelText = panelText;
+            lastPoseCopyText = attributeSnippet;
+            posePanelContent.textContent = panelText;
+            posePanel.hidden = false;
+        }
+
+        function fitView(object) {
+            const box = new THREE.Box3().setFromObject(object);
+            const metrics = getViewMetrics(box);
+            const target = parseTarget(metrics.center);
+            const pan = parsePan();
+            const up = parseUp();
+
+            camera.up.copy(up);
+            controls.target.copy(target);
+            const orbitPosition = parseOrbit(box, query.get('orbit'), target);
+            if (orbitPosition) {
+                camera.position.copy(orbitPosition);
+            } else {
+                camera.position.set(
+                    target.x + metrics.fitDistance * 0.9,
+                    target.y + metrics.fitDistance * 0.55,
+                    target.z + metrics.fitDistance * 1.15,
+                );
+            }
+
+            if (pan.x || pan.y) {
+                const forward = controls.target.clone().sub(camera.position).normalize();
+                const right = new THREE.Vector3().crossVectors(forward, camera.up).normalize();
+                const up = new THREE.Vector3().crossVectors(right, forward).normalize();
+                const panOffset = new THREE.Vector3()
+                    .addScaledVector(right, pan.x * metrics.radius)
+                    .addScaledVector(up, pan.y * metrics.radius);
+                camera.position.add(panOffset);
+                controls.target.add(panOffset);
+            }
+
+            camera.lookAt(controls.target);
+            camera.near = Math.max(metrics.radius / 800, 0.0005);
+            camera.far = Math.max(metrics.radius * 30, 50);
+            camera.updateProjectionMatrix();
+            controls.minDistance = metrics.radius * 0.15;
+            controls.maxDistance = metrics.radius * 8.0;
+            poseReference = {
+                sceneRadius: metrics.radius,
+                idealDistance: metrics.orbitIdealDistance,
+                baseTarget: target.clone(),
+            };
+            controls.update();
+            updatePosePanel();
+            requestRenderIfNeeded();
+        }
+
+        function tuneMaterials(root) {
+            const box = new THREE.Box3().setFromObject(root);
+            const radius = Math.max(box.getBoundingSphere(new THREE.Sphere()).radius, 1e-4);
+            const pointSize = THREE.MathUtils.clamp(radius * 0.0046, 0.0015, 0.0068);
+
+            root.traverse((child) => {
+                if (child.isPoints) {
+                    ensureRoundPointMaterial(child.material);
+                    applyPointMaterialBaseSize(child.material, pointSize);
+                    child.material.sizeAttenuation = true;
+                    child.material.vertexColors = true;
+                    child.material.opacity = 1.0;
+                    child.material.depthWrite = true;
+                    child.material.toneMapped = false;
+                    child.material.needsUpdate = true;
+                }
+                if (child.isMesh && child.material) {
+                    child.material.depthWrite = true;
+                    child.material.toneMapped = false;
+                    child.material.needsUpdate = true;
+                }
+            });
+        }
+
+        function getFrustumCorners(position, target, scale) {
+            const forward = target.clone().sub(position).normalize();
+            const worldUp = Math.abs(forward.y) > 0.95 ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 1, 0);
+            const right = new THREE.Vector3().crossVectors(forward, worldUp).normalize();
+            const up = new THREE.Vector3().crossVectors(right, forward).normalize();
+            const planeCenter = position.clone().addScaledVector(forward, scale * 1.08);
+            const halfWidth = scale * 0.44;
+            const halfHeight = scale * 0.28;
+
+            const tl = planeCenter.clone().addScaledVector(right, -halfWidth).addScaledVector(up, halfHeight);
+            const tr = planeCenter.clone().addScaledVector(right, halfWidth).addScaledVector(up, halfHeight);
+            const br = planeCenter.clone().addScaledVector(right, halfWidth).addScaledVector(up, -halfHeight);
+            const bl = planeCenter.clone().addScaledVector(right, -halfWidth).addScaledVector(up, -halfHeight);
+            return { tl, tr, br, bl };
+        }
+
+        function pushSegment(positions, colors, from, to, colorA, colorB = colorA) {
+            positions.push(from.x, from.y, from.z, to.x, to.y, to.z);
+            colors.push(colorA[0], colorA[1], colorA[2], colorB[0], colorB[1], colorB[2]);
+        }
+
+        function buildCameraOverlay(payload, sceneRadius) {
+            const positions = payload.positions || [];
+            const targets = payload.targets || [];
+            if (!positions.length || positions.length !== targets.length) return null;
+
+            const frustumScaleMultiplier = Math.max(
+                Number.parseFloat(query.get('frustum_scale') || '1.0') || 1.0,
+                0.05,
+            );
+            const frustumScale = Math.max(sceneRadius * 0.038, 0.014) * frustumScaleMultiplier;
+            const frustumPos = [];
+            const frustumColor = [];
+            const pathPos = [];
+            const pathColor = [];
+
+            const cameraPositions = positions.map((item) => new THREE.Vector3(item[0], item[1], item[2]));
+            const cameraTargets = targets.map((item) => new THREE.Vector3(item[0], item[1], item[2]));
+
+            for (let index = 0; index < cameraPositions.length; index += 1) {
+                const color = rainbowColor(index / Math.max(cameraPositions.length, 1));
+                const corners = getFrustumCorners(cameraPositions[index], cameraTargets[index], frustumScale);
+                [corners.tl, corners.tr, corners.br, corners.bl].forEach((corner) => {
+                    pushSegment(frustumPos, frustumColor, cameraPositions[index], corner, color);
+                });
+                [[corners.tl, corners.tr], [corners.tr, corners.br], [corners.br, corners.bl], [corners.bl, corners.tl]].forEach(([a, b]) => {
+                    pushSegment(frustumPos, frustumColor, a, b, color);
+                });
+            }
+
+            for (let index = 0; index < cameraPositions.length - 1; index += 1) {
+                const colorA = rainbowColor(index / Math.max(cameraPositions.length, 1));
+                const colorB = rainbowColor((index + 1) / Math.max(cameraPositions.length, 1));
+                pushSegment(pathPos, pathColor, cameraPositions[index], cameraPositions[index + 1], colorA, colorB);
+            }
+
+            const group = new THREE.Group();
+
+            const frustumGeometry = new THREE.BufferGeometry();
+            frustumGeometry.setAttribute('position', new THREE.Float32BufferAttribute(frustumPos, 3));
+            frustumGeometry.setAttribute('color', new THREE.Float32BufferAttribute(frustumColor, 3));
+            const frustumMaterial = new THREE.LineBasicMaterial({
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.9,
+                toneMapped: false,
+            });
+            group.add(new THREE.LineSegments(frustumGeometry, frustumMaterial));
+
+            if (pathPos.length) {
+                const pathGeometry = new THREE.BufferGeometry();
+                pathGeometry.setAttribute('position', new THREE.Float32BufferAttribute(pathPos, 3));
+                pathGeometry.setAttribute('color', new THREE.Float32BufferAttribute(pathColor, 3));
+                const pathMaterial = new THREE.LineBasicMaterial({
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.42,
+                    toneMapped: false,
+                });
+                group.add(new THREE.LineSegments(pathGeometry, pathMaterial));
+            }
+
+            return group;
+        }
+
+        function renderFrame() {
+            renderQueued = false;
+            controls.update();
+            renderer.render(scene, camera);
+            updatePosePanel();
+            if (controlsAnimating) requestRenderIfNeeded();
+        }
+
+        function requestRenderIfNeeded() {
+            if (renderQueued) return;
+            renderQueued = true;
+            requestAnimationFrame(renderFrame);
+        }
+
+        function setStatus(message, state) {
+            status.textContent = message;
+            status.dataset.state = state;
+        }
+
+        controls.addEventListener('start', () => {
+            controlsAnimating = true;
+            requestRenderIfNeeded();
+        });
+        controls.addEventListener('change', requestRenderIfNeeded);
+        controls.addEventListener('end', () => {
+            controlsAnimating = false;
+            requestRenderIfNeeded();
+        });
+        resize();
+        window.addEventListener('resize', resize);
+        window.addEventListener('message', handleViewerMessage);
+        poseCopyButton?.addEventListener('click', copyPosePanelText);
+
+        if (!src) {
+            setStatus('Missing ?src=... parameter.', 'error');
+            throw new Error('Missing GLB src query parameter.');
+        }
+
+        const loader = new GLTFLoader();
+        loader.load(
+            src,
+            (gltf) => {
+                activeObject = gltf.scene || gltf.scenes?.[0];
+                if (!activeObject) {
+                    setStatus('GLB loaded but no scene was found.', 'error');
+                    return;
+                }
+                scene.add(activeObject);
+                tuneMaterials(activeObject);
+                fitView(activeObject);
+                const box = new THREE.Box3().setFromObject(activeObject);
+                const radius = Math.max(box.getBoundingSphere(new THREE.Sphere()).radius, 1e-4);
+                if (camerasSrc) {
+                    fetch(camerasSrc)
+                        .then((response) => response.json())
+                        .then((payload) => {
+                            cameraOverlay = buildCameraOverlay(payload, radius);
+                            if (cameraOverlay) scene.add(cameraOverlay);
+                            requestRenderIfNeeded();
+                        })
+                        .catch((error) => console.error(error));
+                }
+                host.loaded = true;
+                setStatus('Ready', 'ready');
+                requestRenderIfNeeded();
+            },
+            undefined,
+            (error) => {
+                console.error(error);
+                setStatus('Failed to load GLB.', 'error');
+            },
+        );
+
+        requestRenderIfNeeded();
+    </script>
+</body>
+</html>

@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scal3R: Scalable Test-Time Training for Feed-forward Large-Scale 3D Reconstruction</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/branding/scal3r-favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #ffffff;
+            --bg-alt: #f5f9ff;
+            --bg-accent: #ecf3ff;
+            --text: #162033;
+            --text-secondary: #5b6679;
+            --border: #d7e3f1;
+            --accent: #3b82f6;
+            --ink: #08111b;
+            --font-display: 'Lato', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --font-ui: 'Lato', sans-serif;
+            --font-mono: 'Lato', sans-serif;
+            --section-gap: 4rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.09), transparent 26%),
+                linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: var(--section-gap) 0;
+        }
+
+        section + section {
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 3.35rem 0 2.2rem;
+        }
+
+        .hero .container {
+            max-width: 1120px;
+        }
+
+        .hero-title-row {
+            max-width: min(1180px, 100%);
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 3.6vw, 3rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 0;
+            max-width: none;
+            min-width: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+
+        .hero-title-line {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+            min-width: 0;
+        }
+
+        .hero-title-line + .hero-title-line {
+            margin-top: 0.02em;
+        }
+
+        .hero-title-line--lead {
+            gap: 0.56rem;
+            white-space: nowrap;
+        }
+
+        .hero-title-line--lead > span:last-child {
+            min-width: 0;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            flex: 0 0 auto;
+        }
+
+        .brand-mark img {
+            display: block;
+            height: 1.22em;
+            width: auto;
+            filter: drop-shadow(0 16px 28px rgba(15, 23, 42, 0.1));
+        }
+
+        .hero-meta {
+            display: grid;
+            gap: 0.45rem;
+            margin-bottom: 1.55rem;
+        }
+
+        .hero .venue {
+            font-size: clamp(1.32rem, 1.55vw, 1.72rem);
+            color: var(--text);
+            font-weight: 500;
+            margin: 0.65rem 0;
+            font-family: var(--font-display);
+            letter-spacing: -0.018em;
+        }
+
+        .authors {
+            max-width: 980px;
+            margin: 0 auto;
+            font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+            line-height: 1.4;
+        }
+
+        .authors-row {
+            margin: 0.2rem auto;
+        }
+
+        .author-block {
+            display: inline-block;
+            margin: 0 0.42rem;
+            white-space: nowrap;
+        }
+
+        .authors a,
+        .authors .author-name {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .authors a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+            text-underline-offset: 0.16em;
+        }
+
+        .authors sup,
+        .affiliations sup {
+            font-size: 0.68em;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 0;
+        }
+
+        .authors sup {
+            position: relative;
+            top: -0.42em;
+            margin-left: 0.05em;
+        }
+
+        .affiliations sup {
+            position: relative;
+            top: -0.42em;
+            margin-right: 0.1em;
+        }
+
+        .affiliations {
+            margin: 0 auto;
+            color: var(--text);
+            font-size: clamp(1rem, 1.1vw, 1.15rem);
+            line-height: 1.3;
+        }
+
+        .affiliation-row {
+            margin: 0 auto;
+        }
+
+        .affiliation-block {
+            display: inline-block;
+            margin: 0 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* ── Link Buttons ── */
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-family: var(--font-ui);
+        }
+
+        .links a.primary-btn {
+            background: var(--primary);
+            color: #fff;
+        }
+        .links a.primary-btn:hover { background: var(--primary-dark); }
+
+        .links a.outline-btn {
+            border: 1.5px solid var(--border);
+            color: var(--text);
+            background: #fff;
+        }
+        .links a.outline-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ── Teaser ── */
+        .teaser-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+        }
+
+        .teaser-wrapper img,
+        .teaser-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        .teaser-wrapper video {
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            background: #0f172a;
+        }
+
+        .teaser-picker {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.52rem;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto 0.88rem;
+        }
+
+        .teaser-thumb {
+            appearance: none;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            display: block;
+        }
+
+        .teaser-thumb-media {
+            display: block;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1.5px solid rgba(15, 23, 42, 0.08);
+            background: #ffffff;
+            box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08);
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+        }
+
+        .teaser-thumb img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            background: #ffffff;
+        }
+
+        .teaser-thumb:hover .teaser-thumb-media {
+            transform: translateY(-1px);
+            border-color: rgba(37, 99, 235, 0.34);
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+        }
+
+        .teaser-thumb.is-active .teaser-thumb-media {
+            border-color: rgba(37, 99, 235, 0.76);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), 0 12px 24px rgba(37, 99, 235, 0.16);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 1rem;
+            gap: 0.5rem;
+        }
+
+        .video-placeholder i { font-size: 2.5rem; }
+
+        .teaser-caption {
+            text-align: center;
+            max-width: 960px;
+            font-size: clamp(1.02rem, 1.18vw, 1.14rem);
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── Section Titles ── */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 2.45vw, 2.7rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: -0.045em;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 2rem;
+        }
+
+        .section-kicker {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        /* ── Abstract ── */
+        .abstract-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text);
+            text-align: justify;
+        }
+
+        /* ── Interactive Viewer ── */
+        .viewer-section {
+            background:
+                radial-gradient(circle at top, rgba(37, 99, 235, 0.10), transparent 34%),
+                linear-gradient(180deg, var(--bg-alt) 0%, #edf4ff 100%);
+        }
+
+        .viewer-showcase {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .file-mode-banner {
+            display: none;
+            grid-template-columns: auto 1fr;
+            gap: 0.9rem;
+            align-items: flex-start;
+            padding: 1rem 1.1rem;
+            margin-bottom: 1rem;
+            border-radius: 18px;
+            border: 1px solid rgba(37, 99, 235, 0.16);
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+        }
+
+        .file-mode-banner i {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-top: 0.1rem;
+        }
+
+        .file-mode-banner strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.96rem;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .file-mode-banner p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .file-mode-banner code {
+            padding: 0.08rem 0.32rem;
+            border-radius: 6px;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        body.file-mode .file-mode-banner {
+            display: grid;
+        }
+
+        .viewer-frame-shell {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .viewer-embed {
+            width: 100%;
+            height: clamp(500px, 56vw, 660px);
+            border: none;
+            display: block;
+            background: #f8f9fb;
+        }
+
+        .viewer-file-fallback {
+            display: none;
+            padding: 1.1rem;
+            background: linear-gradient(180deg, #0b1420 0%, #08111b 100%);
+        }
+
+        body.file-mode .viewer-embed {
+            display: none;
+        }
+
+        body.file-mode .viewer-file-fallback {
+            display: block;
+        }
+
+        .viewer-selection,
+        .example-strip-head,
+        .examples-grid {
+            display: none !important;
+        }
+
+        body.file-mode .viewer-selection {
+            display: flex !important;
+        }
+
+        body.file-mode .example-strip-head {
+            display: flex !important;
+        }
+
+        body.file-mode .examples-grid {
+            display: flex !important;
+        }
+
+        .viewer-caption-bar {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            min-height: 84px;
+            padding: 0.9rem 1.2rem 1rem;
+            border-top: 1px solid rgba(15, 23, 42, 0.06);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .viewer-caption-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.18rem;
+        }
+
+        .viewer-caption-copy strong {
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .viewer-caption-copy span {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        .viewer-file-hero {
+            --hero-scene-accent: #2563eb;
+            --hero-method-accent: #2563eb;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+            gap: 1rem;
+            align-items: stretch;
+            min-height: clamp(280px, 30vw, 390px);
+            padding: 1rem;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                radial-gradient(circle at top left, var(--hero-scene-accent) 0%, transparent 52%),
+                radial-gradient(circle at bottom right, var(--hero-method-accent) 0%, transparent 46%),
+                linear-gradient(145deg, rgba(8, 17, 27, 0.96) 0%, rgba(13, 23, 36, 0.98) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .viewer-file-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.85rem;
+            color: #e8f0fb;
+        }
+
+        .viewer-file-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            width: fit-content;
+            padding: 0.38rem 0.72rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(232, 240, 251, 0.88);
+            font-size: 0.76rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .viewer-file-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2.2vw, 2rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .viewer-file-description {
+            max-width: 36rem;
+            color: rgba(223, 234, 247, 0.84);
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+
+        .viewer-file-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .viewer-file-meta-chip {
+            padding: 0.48rem 0.76rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(223, 234, 247, 0.84);
+            font-size: 0.82rem;
+        }
+
+        .viewer-file-meta-chip strong {
+            color: #ffffff;
+            margin-left: 0.2rem;
+            font-family: var(--font-display);
+        }
+
+        .viewer-file-note {
+            color: rgba(223, 234, 247, 0.74);
+            font-size: 0.84rem;
+            line-height: 1.65;
+        }
+
+        .viewer-file-note code,
+        .viewer-file-command code {
+            font-family: var(--font-mono);
+            color: #ffffff;
+        }
+
+        .viewer-file-command {
+            width: fit-content;
+            padding: 0.62rem 0.88rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(232, 240, 251, 0.9);
+            font-size: 0.84rem;
+            line-height: 1.55;
+        }
+
+        .viewer-file-art {
+            min-height: 220px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                radial-gradient(circle at top, rgba(96, 165, 250, 0.18), transparent 52%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .viewer-file-art-svg,
+        .fallback-preview-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .viewer-selection {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0 0.2rem;
+        }
+
+        .viewer-selection-copy {
+            max-width: 640px;
+        }
+
+        .viewer-selection-title {
+            font-family: var(--font-ui);
+            font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.35rem;
+        }
+
+        .viewer-selection-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .viewer-selection-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            justify-content: flex-end;
+        }
+
+        .viewer-selection-chip {
+            padding: 0.48rem 0.78rem;
+            border-radius: 999px;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            background: rgba(255, 255, 255, 0.78);
+            color: var(--text-secondary);
+            font-size: 0.86rem;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+        }
+
+        .viewer-selection-chip strong {
+            color: var(--text);
+            font-family: var(--font-ui);
+            margin-left: 0.18rem;
+        }
+
+        .example-strip-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.35rem;
+        }
+
+        .example-strip-title {
+            font-family: var(--font-ui);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .example-strip-note {
+            color: var(--text-secondary);
+            font-size: 0.84rem;
+        }
+
+        .examples-grid {
+            display: flex;
+            gap: 0.9rem;
+            overflow-x: auto;
+            padding: 0.1rem 0 0.35rem;
+            scroll-snap-type: x proximity;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(37, 99, 235, 0.38) transparent;
+        }
+
+        .examples-grid::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .examples-grid::-webkit-scrollbar-thumb {
+            background: rgba(37, 99, 235, 0.24);
+            border-radius: 999px;
+        }
+
+        .examples-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .example-card {
+            appearance: none;
+            flex: 0 0 clamp(220px, 23vw, 290px);
+            width: clamp(220px, 23vw, 290px);
+            padding: 0;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.84);
+            overflow: hidden;
+            cursor: pointer;
+            text-align: left;
+            color: inherit;
+            font: inherit;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+            scroll-snap-align: start;
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 44px rgba(15, 23, 42, 0.10);
+        }
+
+        .example-card:focus-visible {
+            outline: 2px solid rgba(37, 99, 235, 0.44);
+            outline-offset: 3px;
+        }
+
+        .example-card.is-active {
+            border-color: rgba(37, 99, 235, 0.34);
+            box-shadow: 0 22px 52px rgba(37, 99, 235, 0.16);
+        }
+
+        .example-preview {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: linear-gradient(180deg, #0f172a 0%, #17253a 100%);
+            overflow: hidden;
+        }
+
+        .example-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .example-loading {
+            position: absolute;
+            inset: auto 14px 14px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(8, 17, 27, 0.76);
+            color: #dbe7f4;
+            font-size: 0.74rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .example-card.is-ready .example-loading {
+            display: none;
+        }
+
+        .example-overlay {
+            position: absolute;
+            inset: 14px 14px auto 14px;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .example-scene {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+            padding: 0.38rem 0.66rem;
+            border-radius: 999px;
+            background: rgba(8, 17, 27, 0.72);
+            color: #edf4ff;
+            font-family: var(--font-ui);
+            font-size: 0.74rem;
+            line-height: 1;
+        }
+
+        .example-method {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.36rem;
+            padding: 0.38rem 0.66rem;
+            border-radius: 999px;
+            font-family: var(--font-ui);
+            font-size: 0.74rem;
+            line-height: 1;
+            color: white;
+            box-shadow: 0 8px 18px rgba(8, 17, 27, 0.18);
+        }
+
+        .example-copy {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.7rem 0.8rem 0.82rem;
+        }
+
+        .example-copy-main {
+            min-width: 0;
+        }
+
+        .example-title {
+            font-family: var(--font-ui);
+            font-size: 0.92rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .example-subtitle {
+            margin-top: 0.18rem;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        .example-view-chip {
+            flex: 0 0 auto;
+            padding: 0.28rem 0.5rem;
+            border-radius: 999px;
+            background: var(--bg-accent);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+        }
+
+        .example-badge-row {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            display: flex;
+            gap: 0.42rem;
+            flex-wrap: wrap;
+        }
+
+        .example-badge {
+            padding: 0.24rem 0.46rem;
+            border-radius: 999px;
+            background: rgba(8, 17, 27, 0.72);
+            color: rgba(237, 244, 255, 0.88);
+            font-size: 0.66rem;
+            font-family: var(--font-ui);
+        }
+
+        .example-card[data-fallback-example] .example-preview {
+            background:
+                radial-gradient(circle at top, rgba(96, 165, 250, 0.16), transparent 54%),
+                linear-gradient(180deg, #0c1523 0%, #17253a 100%);
+        }
+
+        /* ── Pipeline ── */
+        .pipeline-img {
+            width: 100%;
+            border-radius: 9px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .pipeline-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: 0 20px 48px rgba(15, 23, 42, 0.06);
+        }
+
+        .pipeline-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .pipeline-svg text {
+            font-family: var(--font-display);
+        }
+
+        .method-copy {
+            max-width: 860px;
+            margin: 1.3rem auto 0;
+            display: grid;
+            gap: 0.95rem;
+        }
+
+        .method-copy p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* ── Trajectory Gallery ── */
+        .trajectory-showcase {
+            --trajectory-radius: 7px;
+            --trajectory-radius-sm: 5px;
+            --trajectory-stage-head-height: 204px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            width: 100%;
+        }
+
+        .trajectory-stage {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border);
+            border-radius: var(--trajectory-radius);
+            padding: 1.35rem;
+            box-shadow: 0 22px 40px rgba(15, 23, 42, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.62rem;
+            width: 100%;
+        }
+
+        .trajectory-stage-head {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 1.1rem;
+            align-items: start;
+            height: var(--trajectory-stage-head-height);
+        }
+
+        .trajectory-stage-copy {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 100%;
+            gap: 0;
+        }
+
+        .trajectory-stage-copy-main {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trajectory-stage-media {
+            min-width: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            min-height: 100%;
+        }
+
+        .trajectory-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.74rem;
+            letter-spacing: 0.06em;
+            color: var(--primary);
+            font-weight: 700;
+            font-family: var(--font-ui);
+            margin-bottom: 0.45rem;
+        }
+
+        .trajectory-scene-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+        }
+
+        .trajectory-scene-description {
+            max-width: 760px;
+            margin-top: 0.55rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.45;
+        }
+
+        .trajectory-scene-meta {
+            margin-top: 0.45rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.34rem 0.68rem;
+            border-radius: var(--trajectory-radius);
+            border: 1px solid rgba(164, 190, 224, 0.72);
+            background: rgba(244, 248, 255, 0.92);
+            font-size: 0.76rem;
+            color: #35506f;
+            letter-spacing: 0.01em;
+            font-weight: 700;
+            font-family: var(--font-ui);
+        }
+
+        .trajectory-video-card {
+            --trajectory-video-card-width: 100%;
+            --trajectory-video-card-padding: 0.36rem;
+            flex: 0 1 auto;
+            width: min(100%, var(--trajectory-video-card-width));
+            min-height: 0;
+            border-radius: var(--trajectory-radius);
+            border: 1px solid rgba(164, 190, 224, 0.72);
+            background:
+                radial-gradient(circle at top right, rgba(59, 130, 246, 0.11), transparent 34%),
+                linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(240, 246, 255, 0.94)),
+                #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            padding: var(--trajectory-video-card-padding);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+            margin-left: auto;
+            margin-right: 0;
+            align-self: flex-start;
+        }
+
+        .trajectory-video-frame {
+            width: 100%;
+            min-height: 0;
+            aspect-ratio: var(--trajectory-video-aspect, 16 / 9);
+            border-radius: var(--trajectory-radius);
+            overflow: hidden;
+            border: 1px solid rgba(191, 208, 232, 0.76);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trajectory-scene-video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            background: #ffffff;
+        }
+
+        .trajectory-video-meta {
+            padding: 0 0.14rem 0.02rem;
+            font-size: 0.67rem;
+            line-height: 1.2;
+            color: #55708e;
+            font-family: var(--font-ui);
+        }
+
+        .trajectory-method-grid-wrap {
+            overflow-x: auto;
+            background: #ffffff;
+            border-radius: var(--trajectory-radius);
+            padding: 0.12rem;
+        }
+
+        .trajectory-method-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 0.38rem;
+            min-width: 820px;
+            background: #ffffff;
+        }
+
+        .trajectory-panel {
+            border-radius: var(--trajectory-radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.035);
+        }
+
+        .trajectory-panel-frame {
+            background: #ffffff;
+            padding: 0.75rem;
+            aspect-ratio: 1/1;
+            position: relative;
+        }
+
+        .trajectory-panel-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: var(--trajectory-radius);
+            background: #ffffff;
+        }
+
+        .trajectory-panel.is-missing .trajectory-panel-frame {
+            background:
+                linear-gradient(180deg, rgba(240, 245, 252, 0.98), rgba(250, 252, 255, 0.98)),
+                #ffffff;
+        }
+
+        .trajectory-panel-placeholder {
+            display: none;
+            height: 100%;
+            border-radius: var(--trajectory-radius);
+            border: 1px dashed rgba(162, 183, 209, 0.88);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(241, 247, 255, 0.96)),
+                #ffffff;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            color: #4e6784;
+            font-family: var(--font-ui);
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+
+        .trajectory-panel.is-missing .trajectory-panel-placeholder {
+            display: flex;
+            padding-top: 3.1rem;
+        }
+
+        .trajectory-panel.is-missing img {
+            display: none;
+        }
+
+        .trajectory-metric-card {
+            position: absolute;
+            top: 0.24rem;
+            left: 0.24rem;
+            z-index: 2;
+            min-width: 47px;
+            padding: 0.18rem 0.28rem 0.16rem;
+            border-radius: var(--trajectory-radius-sm);
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(199, 214, 236, 0.9);
+            box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+            color: #3d5575;
+            font-family: var(--font-ui);
+            font-size: 0.54rem;
+            line-height: 1.08;
+            letter-spacing: 0.01em;
+            white-space: pre-line;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .trajectory-metric-card strong {
+            font-weight: 800;
+            display: inline-block;
+            min-width: 1.38rem;
+        }
+
+        .trajectory-panel[data-metrics-visible="false"] .trajectory-metric-card {
+            opacity: 0;
+            transform: translateY(-4px);
+            pointer-events: none;
+        }
+
+        .trajectory-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .trajectory-toggle-group {
+            display: inline-flex;
+            gap: 0.44rem 0.54rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trajectory-toggle-label {
+            font-size: 0.74rem;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            font-weight: 800;
+            font-family: var(--font-ui);
+        }
+
+        .trajectory-toggle-hint {
+            flex-basis: 100%;
+            font-size: 0.72rem;
+            line-height: 1.35;
+            color: #6c829c;
+            font-family: var(--font-ui);
+        }
+
+        .trajectory-toggle {
+            appearance: none;
+            border: 1px solid rgba(168, 191, 221, 0.84);
+            background: rgba(250, 252, 255, 0.94);
+            color: #34516f;
+            border-radius: 999px;
+            padding: 0.42rem 0.92rem;
+            font-family: var(--font-ui);
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.38rem;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .trajectory-toggle::before {
+            content: "\f0dc";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+
+        .trajectory-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.12);
+        }
+
+        .trajectory-toggle.is-active {
+            border-color: rgba(37, 99, 235, 0.54);
+            background: rgba(226, 238, 255, 0.98);
+            color: #174ea6;
+        }
+
+        .trajectory-legend {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.95rem;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+
+        .trajectory-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: #415973;
+            font-size: 0.78rem;
+            font-family: var(--font-ui);
+        }
+
+        .trajectory-legend-line {
+            width: 2.7rem;
+            height: 0;
+            border-top-width: 2px;
+            border-top-style: solid;
+            display: inline-block;
+        }
+
+        .trajectory-legend-line.is-estimated {
+            border-top-color: #61aeea;
+        }
+
+        .trajectory-legend-line.is-gt {
+            border-top-color: #ff9f9f;
+            border-top-style: dashed;
+        }
+
+        .trajectory-panel-label {
+            padding: 0.34rem 0.62rem 0.38rem;
+            border-top: 1px solid rgba(215, 227, 241, 0.9);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            font-family: var(--font-ui);
+            color: var(--text);
+            background: #ffffff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 1.85rem;
+        }
+
+        .trajectory-panel.is-ours .trajectory-panel-label {
+            color: var(--primary);
+        }
+
+        .trajectory-strip-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .trajectory-strip-title {
+            font-family: var(--font-ui);
+            font-size: 0.84rem;
+            letter-spacing: 0.03em;
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .trajectory-strip-note {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+        }
+
+        .trajectory-scene-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+            gap: 0.5rem;
+            width: 100%;
+            align-items: start;
+        }
+
+        .trajectory-thumb {
+            appearance: none;
+            border: 1px solid rgba(215, 227, 241, 0.9);
+            background: #ffffff;
+            border-radius: var(--trajectory-radius);
+            min-width: 0;
+            max-width: none;
+            padding: 0.28rem;
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .trajectory-thumb:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+        }
+
+        .trajectory-thumb:focus-visible {
+            outline: 2px solid rgba(37, 99, 235, 0.24);
+            outline-offset: 2px;
+        }
+
+        .trajectory-thumb.is-active {
+            border-color: rgba(37, 99, 235, 0.52);
+            box-shadow: 0 18px 30px rgba(37, 99, 235, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .trajectory-thumb-image {
+            display: block;
+            border-radius: var(--trajectory-radius);
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: #ffffff;
+            border: 1px solid rgba(215, 227, 241, 0.9);
+        }
+
+        .trajectory-thumb-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .trajectory-thumb-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.03rem;
+            padding: 0.24rem 0.04rem 0.01rem;
+            text-align: center;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .trajectory-thumb-title {
+            font-size: 0.74rem;
+            font-weight: 800;
+            color: var(--text);
+            font-family: var(--font-display);
+            letter-spacing: -0.02em;
+            line-height: 1.06;
+            min-height: 1.02rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .trajectory-thumb-subtitle {
+            font-size: 0.61rem;
+            line-height: 1.08;
+            color: var(--text-secondary);
+            min-height: 2.12rem;
+            display: block;
+        }
+
+        .trajectory-thumb-subtitle-line {
+            display: block;
+        }
+
+        .trajectory-thumb-badge {
+            margin-top: 0.18rem;
+            display: inline-flex;
+            align-self: center;
+            padding: 0.16rem 0.42rem;
+            border-radius: var(--trajectory-radius);
+            background: rgba(235, 242, 252, 0.95);
+            color: #4c6787;
+            font-size: 0.58rem;
+            letter-spacing: 0.03em;
+            font-weight: 800;
+            font-family: var(--font-ui);
+        }
+
+        @media (max-width: 960px) {
+            .trajectory-stage-head {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .trajectory-stage-copy {
+                min-height: 0;
+            }
+
+            .trajectory-video-card {
+                min-height: 148px;
+                width: 100%;
+            }
+
+            .trajectory-stage-media {
+                min-height: 0;
+            }
+
+            .trajectory-scene-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* ── Comparison Section ── */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .comparison-item {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-item .comp-frame {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            gap: 0.3rem;
+        }
+
+        .comparison-item .comp-label {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            background: var(--bg-alt);
+        }
+
+        .comparison-item .comp-label.ours {
+            color: var(--primary);
+        }
+
+        /* ── Slider Comparison ── */
+        .slider-comparison {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-comparison i { font-size: 2rem; }
+
+        /* ── Scalability ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+
+        /* ── BibTeX ── */
+        .bibtex-block {
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 248, 255, 0.98)),
+                #ffffff;
+            color: #16314f;
+            padding: 2.7rem 0 1.5rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid rgba(181, 202, 228, 0.85);
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+            overflow-x: auto;
+        }
+
+        .bibtex-code {
+            display: inline-block;
+            min-width: calc(100% - 1.5rem);
+            margin: 0;
+            padding-right: 1.5rem;
+            box-sizing: border-box;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 2;
+            background: rgba(246, 250, 255, 0.96);
+            color: var(--primary);
+            border: 1px solid rgba(154, 181, 214, 0.75);
+            border-radius: 999px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: var(--font-ui);
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: rgba(227, 238, 255, 0.98);
+            color: #174ea6;
+            border-color: rgba(101, 143, 214, 0.72);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        footer a { color: var(--text-secondary); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2.7rem 0 1.75rem;
+            }
+            .hero-title-row {
+                max-width: 100%;
+            }
+            .hero h1 {
+                font-size: clamp(2.05rem, 8.2vw, 2.85rem);
+                line-height: 1.12;
+                letter-spacing: -0.036em;
+                margin-bottom: 0.58rem;
+            }
+            .hero-title-line--lead {
+                gap: 0.4rem;
+            }
+            .brand-mark img {
+                height: 1.08em;
+            }
+            .hero-meta {
+                gap: 0.38rem;
+                margin-bottom: 1.3rem;
+            }
+            .authors {
+                font-size: 1.05rem;
+                line-height: 1.45;
+            }
+            .authors-row {
+                margin: 0.12rem auto;
+            }
+            .author-block {
+                margin: 0 0.28rem;
+            }
+            .authors sup,
+            .affiliations sup {
+                font-size: 0.64em;
+            }
+            .affiliation-row {
+                font-size: 1rem;
+            }
+            .affiliation-block {
+                margin: 0 0.42rem;
+            }
+            .hero .venue {
+                font-size: 1.1rem;
+                margin: 0.5rem 0;
+            }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 1rem; }
+            .viewer-caption-bar,
+            .viewer-selection { flex-direction: column; align-items: flex-start; }
+            .viewer-selection-chips { justify-content: flex-start; }
+            .example-strip-head { flex-direction: column; align-items: flex-start; }
+            .trajectory-strip-head { flex-direction: column; align-items: flex-start; }
+            .trajectory-controls { align-items: flex-start; }
+            .trajectory-method-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
+            .trajectory-panel-label { min-height: 2.6rem; }
+            .viewer-file-hero { grid-template-columns: 1fr; }
+            .example-card {
+                flex-basis: min(82vw, 260px);
+                width: min(82vw, 260px);
+            }
+            .viewer-embed { height: min(84vh, 620px); }
+            .teaser-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 560px) {
+            .hero-title-row {
+                width: 100%;
+            }
+            .hero h1 {
+                width: 100%;
+                font-size: clamp(1.68rem, 7.1vw, 2.22rem);
+                line-height: 1.1;
+            }
+            .hero-title-line--lead {
+                display: flex;
+                align-items: start;
+                justify-content: flex-start;
+                gap: 0.28rem;
+                width: 100%;
+                max-width: min(18.6rem, calc(100vw - 2.4rem));
+                margin: 0 auto;
+                white-space: normal;
+                text-align: left;
+            }
+            .hero-title-line--lead .brand-mark {
+                padding-top: 0.06em;
+            }
+            .hero-title-line--lead > span:last-child {
+                display: block;
+                flex: 1 1 auto;
+                min-width: 0;
+                overflow-wrap: anywhere;
+                word-break: normal;
+                hyphens: auto;
+                text-wrap: pretty;
+            }
+            .teaser-picker {
+                gap: 0.42rem;
+                max-width: 100%;
+            }
+            .viewer-embed {
+                height: min(95vh, 700px);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .example-card {
+                flex-basis: clamp(210px, 31vw, 260px);
+                width: clamp(210px, 31vw, 260px);
+            }
+            .trajectory-method-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); min-width: 0; }
+        }
+    </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute; overflow:hidden" aria-hidden="true" focusable="false">
+    <defs>
+        <linearGradient id="thumb-urban-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0a1422"/>
+            <stop offset="55%" stop-color="#12263c"/>
+            <stop offset="100%" stop-color="#1b3551"/>
+        </linearGradient>
+        <linearGradient id="thumb-courtyard-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#08171a"/>
+            <stop offset="60%" stop-color="#10363a"/>
+            <stop offset="100%" stop-color="#1d4f55"/>
+        </linearGradient>
+        <linearGradient id="thumb-livingroom-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1b1209"/>
+            <stop offset="55%" stop-color="#553114"/>
+            <stop offset="100%" stop-color="#8f4a17"/>
+        </linearGradient>
+        <symbol id="thumb-urban" viewBox="0 0 320 180">
+            <rect width="320" height="180" rx="0" fill="url(#thumb-urban-bg)"/>
+            <g opacity="0.42" fill="#8ab6ff">
+                <circle cx="42" cy="140" r="2.4"/><circle cx="58" cy="132" r="1.9"/><circle cx="74" cy="126" r="1.6"/>
+                <circle cx="96" cy="118" r="2.2"/><circle cx="118" cy="109" r="1.8"/><circle cx="140" cy="98" r="2.2"/>
+                <circle cx="162" cy="88" r="1.7"/><circle cx="182" cy="79" r="1.9"/><circle cx="204" cy="69" r="2.2"/>
+                <circle cx="226" cy="60" r="1.8"/><circle cx="246" cy="54" r="1.8"/><circle cx="270" cy="46" r="2.1"/>
+            </g>
+            <g opacity="0.9" fill="#dbeafe">
+                <circle cx="82" cy="128" r="1.8"/><circle cx="108" cy="116" r="1.4"/><circle cx="134" cy="103" r="1.6"/>
+                <circle cx="157" cy="93" r="1.2"/><circle cx="188" cy="78" r="1.5"/><circle cx="215" cy="65" r="1.4"/>
+                <circle cx="239" cy="56" r="1.3"/><circle cx="258" cy="48" r="1.6"/>
+            </g>
+            <polyline points="38,142 74,126 118,108 160,90 204,69 270,44" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="58,142 89,132 122,119 168,97 210,78 278,51" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+            <rect x="0" y="146" width="320" height="34" fill="rgba(255,255,255,0.04)"/>
+        </symbol>
+        <symbol id="thumb-courtyard" viewBox="0 0 320 180">
+            <rect width="320" height="180" rx="0" fill="url(#thumb-courtyard-bg)"/>
+            <g opacity="0.56" fill="#c5fff0">
+                <circle cx="92" cy="74" r="1.7"/><circle cx="118" cy="60" r="2.1"/><circle cx="152" cy="52" r="2.3"/>
+                <circle cx="188" cy="54" r="1.9"/><circle cx="220" cy="69" r="2.2"/><circle cx="238" cy="97" r="2.1"/>
+                <circle cx="234" cy="123" r="2.2"/><circle cx="208" cy="140" r="1.8"/><circle cx="172" cy="146" r="1.9"/>
+                <circle cx="132" cy="140" r="2.0"/><circle cx="100" cy="122" r="2.1"/><circle cx="84" cy="97" r="1.8"/>
+            </g>
+            <g opacity="0.84" fill="#ffffff">
+                <circle cx="104" cy="82" r="1.2"/><circle cx="128" cy="68" r="1.4"/><circle cx="160" cy="61" r="1.5"/>
+                <circle cx="191" cy="65" r="1.1"/><circle cx="214" cy="81" r="1.4"/><circle cx="225" cy="103" r="1.2"/>
+                <circle cx="214" cy="126" r="1.4"/><circle cx="187" cy="137" r="1.1"/><circle cx="158" cy="140" r="1.2"/>
+                <circle cx="126" cy="133" r="1.1"/><circle cx="103" cy="118" r="1.2"/><circle cx="94" cy="98" r="1.3"/>
+            </g>
+            <path d="M92 96 C95 66 128 44 162 44 C204 44 238 74 238 102 C238 130 204 154 158 154 C119 154 90 129 92 96 Z" fill="none" stroke="#2dd4bf" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M110 99 C112 79 135 61 162 61 C192 61 214 80 214 102 C214 124 191 140 162 140 C133 140 110 122 110 99 Z" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" opacity="0.86"/>
+            <rect x="0" y="146" width="320" height="34" fill="rgba(255,255,255,0.04)"/>
+        </symbol>
+        <symbol id="thumb-livingroom" viewBox="0 0 320 180">
+            <rect width="320" height="180" rx="0" fill="url(#thumb-livingroom-bg)"/>
+            <g opacity="0.4" fill="#ffe2bf">
+                <circle cx="68" cy="118" r="2.1"/><circle cx="87" cy="98" r="2.4"/><circle cx="112" cy="82" r="2.1"/>
+                <circle cx="144" cy="72" r="2.5"/><circle cx="174" cy="78" r="2.0"/><circle cx="202" cy="93" r="2.5"/>
+                <circle cx="226" cy="115" r="2.2"/><circle cx="210" cy="132" r="1.8"/><circle cx="171" cy="136" r="1.9"/>
+                <circle cx="135" cy="132" r="1.8"/><circle cx="100" cy="126" r="1.7"/><circle cx="245" cy="92" r="1.5"/>
+            </g>
+            <g opacity="0.9" fill="#fff7ed">
+                <circle cx="83" cy="112" r="1.3"/><circle cx="105" cy="95" r="1.2"/><circle cx="126" cy="84" r="1.4"/>
+                <circle cx="153" cy="78" r="1.4"/><circle cx="182" cy="82" r="1.3"/><circle cx="207" cy="97" r="1.5"/>
+                <circle cx="220" cy="115" r="1.2"/><circle cx="198" cy="125" r="1.2"/><circle cx="170" cy="128" r="1.2"/>
+                <circle cx="138" cy="125" r="1.1"/><circle cx="112" cy="119" r="1.1"/>
+            </g>
+            <polyline points="74,122 99,96 123,83 153,77 182,82 206,96 221,115" fill="none" stroke="#fb923c" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="92,128 120,118 152,114 186,118 214,130" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+            <rect x="0" y="146" width="320" height="34" fill="rgba(255,255,255,0.04)"/>
+        </symbol>
+    </defs>
+</svg>
+
+<!-- ════════════════ HERO ════════════════ -->
+<div class="hero">
+    <div class="container">
+        <div class="hero-title-row">
+            <h1>
+                <span class="hero-title-line hero-title-line--lead">
+                    <span class="brand-mark" aria-hidden="true">
+                        <img src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/branding/scal3r-logo.png" alt="">
+                    </span>
+                    <span><span class="highlight">Scal3R</span>: Scalable Test-Time Training for</span>
+                </span>
+                <span class="hero-title-line">Large-Scale 3D Reconstruction</span>
+            </h1>
+        </div>
+
+        <p class="venue">CVPR 2026</p>
+
+        <div class="hero-meta">
+            <div class="authors" aria-label="Authors">
+                <div class="authors-row">
+                    <span class="author-block"><a href="https://github.com/xbillowy" target="_blank" rel="noreferrer">Tao Xie</a><sup>1,2</sup></span>
+                    <span class="author-block"><a href="https://github.com/PeiPei233/" target="_blank" rel="noreferrer">Peishan Yang</a><sup>1</sup></span>
+                    <span class="author-block"><a href="https://github.com/krahets" target="_blank" rel="noreferrer">Yudong Jin</a><sup>1</sup></span>
+                    <span class="author-block"><span class="author-name">Yingfeng Cai</span><sup>2</sup></span>
+                    <span class="author-block"><a href="https://yvanyin.xyz/" target="_blank" rel="noreferrer">Wei Yin</a><sup>2</sup></span>
+                    <span class="author-block"><span class="author-name">Weiqiang Ren</span><sup>2</sup></span>
+                </div>
+                <div class="authors-row">
+                    <span class="author-block"><span class="author-name">Qian Zhang</span><sup>2</sup></span>
+                    <span class="author-block"><span class="author-name">Wei Hua</span><sup>3</sup></span>
+                    <span class="author-block"><a href="https://pengsida.net/" target="_blank" rel="noreferrer">Sida Peng</a><sup>1</sup></span>
+                    <span class="author-block"><a href="https://github.com/xy-guo" target="_blank" rel="noreferrer">Xiaoyang Guo</a><sup>2†</sup></span>
+                    <span class="author-block"><a href="https://xzhou.me/" target="_blank" rel="noreferrer">Xiaowei Zhou</a><sup>1†</sup></span>
+                </div>
+            </div>
+
+            <div class="affiliations">
+                <div class="affiliation-row">
+                    <span class="affiliation-block"><sup>1</sup>Zhejiang University</span>
+                    <span class="affiliation-block"><sup>2</sup>Horizon Robotics</span>
+                    <span class="affiliation-block"><sup>3</sup>Zhejiang Lab</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="#" class="outline-btn"><i class="fas fa-scroll"></i> arXiv</a>
+            <a href="#" class="outline-btn"><i class="fab fa-github"></i> Code</a>
+            <a href="#" class="outline-btn"><i class="fas fa-database"></i> Model</a>
+        </div>
+
+        <!-- Teaser Video -->
+        <div class="teaser-wrapper">
+            <video id="hero-teaser-video" controls muted loop playsinline preload="metadata" poster="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/zju-zjg-hero-720p-poster.jpg">
+                <source src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/zju-zjg-hero-720p.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="teaser-picker" id="hero-teaser-picker" aria-label="Teaser scene selector">
+            <button
+                class="teaser-thumb is-active"
+                type="button"
+                data-teaser-id="zju-zjg"
+                data-label="ZJU ZJG"
+                data-teaser-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/zju-zjg-hero-720p.mp4"
+                data-teaser-poster="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/zju-zjg-hero-720p-poster.jpg"
+                aria-label="ZJU ZJG"
+                aria-pressed="true"
+            >
+                <span class="teaser-thumb-media">
+                    <img src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/zju-zjg-thumb.gif" alt="ZJU ZJG teaser thumbnail">
+                </span>
+            </button>
+            <button
+                class="teaser-thumb"
+                type="button"
+                data-teaser-id="oxford-college-4"
+                data-label="Oxford College 4"
+                data-teaser-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/oxford-college-4-hero-720p.mp4"
+                data-teaser-poster="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/oxford-college-4-hero-720p-poster.jpg"
+                aria-label="Oxford College 4"
+                aria-pressed="false"
+            >
+                <span class="teaser-thumb-media">
+                    <img src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/oxford-college-4-thumb.gif" alt="Oxford College 4 teaser thumbnail">
+                </span>
+            </button>
+            <button
+                class="teaser-thumb"
+                type="button"
+                data-teaser-id="cyberpunk-1"
+                data-label="Cyberpunk 1"
+                data-teaser-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/cyberpunk-1-hero-720p.mp4"
+                data-teaser-poster="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/cyberpunk-1-hero-720p-poster.jpg"
+                aria-label="Cyberpunk 1"
+                aria-pressed="false"
+            >
+                <span class="teaser-thumb-media">
+                    <img src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/cyberpunk-1-thumb.gif" alt="Cyberpunk 1 teaser thumbnail">
+                </span>
+            </button>
+            <button
+                class="teaser-thumb"
+                type="button"
+                data-teaser-id="kitti-00"
+                data-label="KITTI 00"
+                data-teaser-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/kitti-00-hero-720p.mp4"
+                data-teaser-poster="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/kitti-00-hero-720p-poster.jpg"
+                aria-label="KITTI 00"
+                aria-pressed="false"
+            >
+                <span class="teaser-thumb-media">
+                    <img src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/hero/teasers/kitti-00-thumb.gif" alt="KITTI 00 teaser thumbnail">
+                </span>
+            </button>
+        </div>
+        <p class="teaser-caption">
+            Scal3R reconstructs large-scale 3D scenes from long video sequences via scalable test-time training.
+        </p>
+    </div>
+</div>
+
+<!-- ════════════════ ABSTRACT ════════════════ -->
+<section>
+    <div class="container">
+        <h2 class="section-title">Abstract</h2>
+        <p class="abstract-text">
+            This paper addresses the task of large-scale 3D scene reconstruction from long video sequences.
+            Recent feed-forward reconstruction models have shown promising results by directly regressing 3D geometry from RGB images without explicit 3D priors or geometric constraints. However, these methods often struggle to maintain reconstruction accuracy and consistency over long sequences due to limited memory capacity and the inability to effectively capture global contextual cues.
+            In contrast, humans can naturally exploit the global understanding of the scene to inform local perception.
+            Motivated by this, we propose a novel neural global context representation that efficiently compresses and retains long-range scene information, enabling the model to leverage extensive contextual cues for enhanced reconstruction accuracy and consistency.
+            The context representation is realized through a set of lightweight neural sub-networks that are rapidly adapted during test time via self-supervised objectives, which substantially increases memory capacity without incurring significant computational overhead.
+            The experiments on multiple large-scale benchmarks, including the KITTI Odometry and Oxford Spires datasets, demonstrate the effectiveness of our approach in handling ultra-large scenes, achieving leading pose accuracy and state-of-the-art 3D reconstruction accuracy while maintaining efficiency.
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════ INTERACTIVE 3D VIEWER ════════════════ -->
+<section id="viewer" class="viewer-section">
+    <div class="container">
+        <p class="section-kicker">Interactive Examples</p>
+        <h2 class="section-title">Preloaded Point Cloud Reconstructions</h2>
+        <p class="section-subtitle">Explore reconstructed 3D point clouds from large-scale scenes. Drag to orbit and scroll to zoom.</p>
+        <div class="file-mode-banner" id="file-mode-banner">
+            <i class="fas fa-circle-info"></i>
+            <div>
+                <strong>Static preview mode is active</strong>
+                <p>You opened this page through <code>file://</code>, so the real WebGL viewer cannot fetch the local modules and JSON point-cloud assets. That is why the point cloud inside the frame does not actually load when you open <code>index.html</code> directly. The preview strip below still works as a static selector. For the full interactive viewer, run <code>python3 -m http.server 8765</code> in this folder and open <code>http://127.0.0.1:8765/index.html</code>.</p>
+            </div>
+        </div>
+
+        <div class="viewer-showcase">
+            <div class="viewer-frame-shell">
+                <iframe
+                    id="interactive-viewer"
+                    class="viewer-embed"
+                    src="about:blank"
+                    data-http-src="viewer.html?embed=1"
+                    title="Scal3R interactive point cloud viewer"
+                    allowfullscreen
+                ></iframe>
+                <div class="viewer-file-fallback" id="viewer-file-fallback">
+                    <div class="viewer-file-hero" id="viewer-file-hero">
+                        <div class="viewer-file-copy">
+                            <span class="viewer-file-kicker"><i class="fas fa-images"></i>File Mode Preview</span>
+                            <div class="viewer-file-title" id="file-fallback-title">Oxford Keble · Scal3R</div>
+                            <div class="viewer-file-description" id="file-fallback-description">Built from the local Oxford Spires xyz.ply source for fast web viewing. The horizontal strip below is still selectable even when you open the page directly as a local file.</div>
+                            <div class="viewer-file-meta">
+                                <div class="viewer-file-meta-chip">Scene<strong id="file-fallback-scene">Oxford Keble</strong></div>
+                                <div class="viewer-file-meta-chip">Method<strong id="file-fallback-method">Scal3R</strong></div>
+                                <div class="viewer-file-meta-chip">View<strong id="file-fallback-view">Detail</strong></div>
+                            </div>
+                            <div class="viewer-file-note">This frame is only a static fallback poster. The real point cloud is not loaded here under <code>file://</code>; orbit, zoom, and pose scrubbing require serving the directory over HTTP instead of opening the file directly.</div>
+                            <div class="viewer-file-command"><code>cd scripts/gfm/scal3r/web</code><br><code>python3 -m http.server 8765</code></div>
+                        </div>
+                        <div class="viewer-file-art">
+                            <svg class="viewer-file-art-svg" viewBox="0 0 320 180" aria-hidden="true">
+                                <use id="file-fallback-symbol" href="#thumb-courtyard"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewer-caption-bar">
+                    <div class="viewer-caption-copy">
+                        <strong id="viewer-caption-title">Oxford Keble</strong>
+                        <span id="viewer-caption-note">Outdoor Oxford Spires walk with facades, trees, and long-range loop structure. Offline Oxford scene with the full point cloud and recovered cameras loaded together for static inspection.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewer-selection">
+                <div class="viewer-selection-copy">
+                    <div class="viewer-selection-title" id="selected-example-title">Oxford Keble · Scal3R</div>
+                <div class="viewer-selection-description" id="selected-example-description">Static Oxford point-cloud GLB plus gradient recovered cameras for cleaner geometry inspection in the embedded viewer.</div>
+                </div>
+                <div class="viewer-selection-chips">
+                    <div class="viewer-selection-chip">Scene<strong id="selected-scene">Oxford Keble</strong></div>
+                    <div class="viewer-selection-chip">Method<strong id="selected-method">Scal3R</strong></div>
+                    <div class="viewer-selection-chip">View<strong id="selected-view">Detail</strong></div>
+                </div>
+            </div>
+
+            <div class="example-strip-head">
+                <div class="example-strip-title">Example Point Clouds</div>
+                <div class="example-strip-note">Scroll horizontally if needed. Each preview box is a preloaded point-cloud example bound to the viewer above.</div>
+            </div>
+            <div class="examples-grid" id="example-grid">
+                <button type="button" class="example-card is-ready" data-fallback-example data-example-id="kitti-07-scatt3r" data-title="KITTI 07 · Scal3R" data-description="Downsampled directly from data/datasets/kitti/07/xyz.ply for fast web inspection." data-scene-label="KITTI 07" data-method-label="Scal3R" data-view-label="Overview" data-scene-accent="#2563eb" data-method-accent="#2563eb" data-preview-symbol="#thumb-urban">
+                    <div class="example-preview">
+                        <svg class="fallback-preview-svg" viewBox="0 0 320 180" aria-hidden="true"><use href="#thumb-urban"></use></svg>
+                        <div class="example-overlay">
+                            <span class="example-scene"><i class="fas fa-cube"></i>KITTI 07</span>
+                            <span class="example-method" style="background:#2563eb;">Scal3R</span>
+                        </div>
+                        <div class="example-badge-row">
+                            <span class="example-badge">72k pts</span>
+                            <span class="example-badge">180 cams</span>
+                        </div>
+                    </div>
+                    <div class="example-copy">
+                        <div class="example-copy-main">
+                            <div class="example-title">KITTI 07</div>
+                            <div class="example-subtitle">Driving</div>
+                        </div>
+                        <span class="example-view-chip">Overview</span>
+                    </div>
+                </button>
+                <button type="button" class="example-card is-ready is-active" data-fallback-example data-example-id="oxford-keble-scatt3r" data-title="Oxford Keble · Scal3R" data-description="Static Oxford point-cloud GLB plus gradient recovered cameras for cleaner geometry inspection in the embedded viewer." data-scene-label="Oxford Keble" data-method-label="Scal3R" data-view-label="Detail" data-scene-accent="#0f8b8d" data-method-accent="#2563eb" data-preview-symbol="#thumb-courtyard">
+                    <div class="example-preview">
+                        <svg class="fallback-preview-svg" viewBox="0 0 320 180" aria-hidden="true"><use href="#thumb-courtyard"></use></svg>
+                        <div class="example-overlay">
+                            <span class="example-scene"><i class="fas fa-cube"></i>Oxford Keble</span>
+                            <span class="example-method" style="background:#2563eb;">Scal3R</span>
+                        </div>
+                        <div class="example-badge-row">
+                            <span class="example-badge">72k pts</span>
+                            <span class="example-badge">180 cams</span>
+                        </div>
+                    </div>
+                    <div class="example-copy">
+                        <div class="example-copy-main">
+                            <div class="example-title">Oxford Keble</div>
+                            <div class="example-subtitle">Oxford Spires</div>
+                        </div>
+                        <span class="example-view-chip">Detail</span>
+                    </div>
+                </button>
+                <button type="button" class="example-card is-ready" data-fallback-example data-example-id="oxford-observatory-scatt3r" data-title="Oxford Observatory · Scal3R" data-description="A second Oxford scene added as an extra real-world example while the requested ZJU point cloud is unavailable in this workspace." data-scene-label="Oxford Observatory" data-method-label="Scal3R" data-view-label="Front" data-scene-accent="#f97316" data-method-accent="#2563eb" data-preview-symbol="#thumb-courtyard">
+                    <div class="example-preview">
+                        <svg class="fallback-preview-svg" viewBox="0 0 320 180" aria-hidden="true"><use href="#thumb-courtyard"></use></svg>
+                        <div class="example-overlay">
+                            <span class="example-scene"><i class="fas fa-cube"></i>Oxford Observatory</span>
+                            <span class="example-method" style="background:#2563eb;">Scal3R</span>
+                        </div>
+                        <div class="example-badge-row">
+                            <span class="example-badge">64k pts</span>
+                            <span class="example-badge">140 cams</span>
+                        </div>
+                    </div>
+                    <div class="example-copy">
+                        <div class="example-copy-main">
+                            <div class="example-title">Oxford Observatory</div>
+                            <div class="example-subtitle">Oxford Spires</div>
+                        </div>
+                        <span class="example-view-chip">Front</span>
+                    </div>
+                </button>
+                <button type="button" class="example-card is-ready" data-fallback-example data-example-id="cyberpunk-1-scatt3r" data-title="Cyberpunk 1 · Scal3R" data-description="Downsampled from data/datasets/vggt-long/cyberpunk_1/xyz.ply to keep the page responsive." data-scene-label="Cyberpunk 1" data-method-label="Scal3R" data-view-label="Overview" data-scene-accent="#ec4899" data-method-accent="#2563eb" data-preview-symbol="#thumb-livingroom">
+                    <div class="example-preview">
+                        <svg class="fallback-preview-svg" viewBox="0 0 320 180" aria-hidden="true"><use href="#thumb-livingroom"></use></svg>
+                        <div class="example-overlay">
+                            <span class="example-scene"><i class="fas fa-cube"></i>Cyberpunk 1</span>
+                            <span class="example-method" style="background:#2563eb;">Scal3R</span>
+                        </div>
+                        <div class="example-badge-row">
+                            <span class="example-badge">72k pts</span>
+                            <span class="example-badge">180 cams</span>
+                        </div>
+                    </div>
+                    <div class="example-copy">
+                        <div class="example-copy-main">
+                            <div class="example-title">Cyberpunk 1</div>
+                            <div class="example-subtitle">Synthetic</div>
+                        </div>
+                        <span class="example-view-chip">Overview</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════ METHOD ════════════════ -->
+<section>
+    <div class="container">
+        <h2 class="section-title">Method</h2>
+        <p class="section-subtitle">
+            Scal3R extends VGGT with test-time-trainable Global Context Memory so long RGB sequences can be processed chunk-by-chunk without losing sequence-wide context.
+        </p>
+
+        <!-- Pipeline Figure -->
+        <div class="pipeline-card">
+            <img
+                class="pipeline-img"
+                src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/pipeline/pipeline.svg"
+                loading="lazy"
+                decoding="async"
+                alt="Scal3R pipeline with chunked video processing, global context memory, chunk-wise alignment, and point-cloud chunk previews"
+            >
+        </div>
+
+        <div class="method-copy">
+            <p>
+                Given a large set of input RGB images, directly applying VGGT is infeasible due to the quadratic complexity of attention. VGGT-Long mitigates this by partitioning the input sequence into overlapping chunks and aligning adjacent results, but it still cannot exploit long-range contextual information and remains sensitive to local inconsistencies.
+            </p>
+            <p>
+                Inspired by Test-Time Training, Scal3R inserts Global Context Memory (GCM) modules after the global attention layers of VGGT. Each GCM is implemented with lightweight Adaptive Memory Units that are rapidly adapted through self-supervised updates, allowing the model to compress and retain long-range context while preserving VGGT's strong geometric reasoning capabilities.
+            </p>
+            <p>
+                During training and inference, the input sequence is divided into overlapping chunks and distributed across GPUs for parallel processing. We further introduce Global Context Synchronization (GCS), which all-reduces the adaptive memory updates across chunks so each local chunk can benefit from sequence-wide observations. This improves local accuracy, strengthens cross-chunk consistency, and enables scalable kilometer-scale 3D reconstruction from RGB-only videos.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════ TRAJECTORY COMPARISON ════════════════ -->
+<section id="trajectory" style="background: var(--bg-alt);">
+    <div class="container">
+        <h2 class="section-title">Camera Trajectory Comparison</h2>
+        <p class="section-subtitle">
+            Scal3R maintains globally consistent trajectories even over multi-kilometer drives, while baselines accumulate severe drift.
+        </p>
+
+        <div class="trajectory-showcase">
+            <div class="trajectory-stage">
+                <div class="trajectory-stage-head">
+                    <div class="trajectory-stage-copy">
+                        <div class="trajectory-stage-copy-main">
+                            <div class="trajectory-kicker"><i class="fas fa-route"></i>Selected Trajectory Example</div>
+                            <div class="trajectory-scene-title" id="trajectory-scene-title">KITTI 07</div>
+                            <div class="trajectory-scene-meta" id="trajectory-scene-meta">KITTI Odometry · 1101 frames · 650 m</div>
+                            <div class="trajectory-scene-description" id="trajectory-scene-description">Sequence 07 is a strong long-horizon showcase: our trajectory stays tightly aligned to the dashed GT route while several baselines drift or collapse.</div>
+                        </div>
+                    </div>
+                    <div class="trajectory-stage-media">
+                        <div class="trajectory-video-card" id="trajectory-video-card">
+                            <div class="trajectory-video-frame">
+                                <video class="trajectory-scene-video" id="trajectory-scene-video" muted loop playsinline preload="metadata"></video>
+                            </div>
+                            <div class="trajectory-video-meta" id="trajectory-video-meta">KITTI 07 · looped scene clip.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trajectory-controls">
+                    <div class="trajectory-toggle-group">
+                        <span class="trajectory-toggle-label">Metrics Toggle</span>
+                        <button class="trajectory-toggle is-active" id="trajectory-toggle-metrics" type="button" aria-pressed="true">Hide Metrics</button>
+                        <span class="trajectory-toggle-hint">Click to show or hide the metric cards above.</span>
+                    </div>
+                    <div class="trajectory-legend" id="trajectory-legend">
+                        <span class="trajectory-legend-item"><span class="trajectory-legend-line is-gt"></span>GT trajectory</span>
+                        <span class="trajectory-legend-item"><span class="trajectory-legend-line is-estimated"></span>Predicted trajectory</span>
+                    </div>
+                </div>
+
+                <div class="trajectory-method-grid-wrap">
+                    <div class="trajectory-method-grid" id="trajectory-method-grid"></div>
+                </div>
+            </div>
+
+            <div class="trajectory-strip-head">
+                <div class="trajectory-strip-title">Scene Thumbnails</div>
+                <div class="trajectory-strip-note">Click a scene below to refresh the six method panels above.</div>
+            </div>
+
+            <div class="trajectory-scene-strip" id="trajectory-scene-strip"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════ RECONSTRUCTION COMPARISON ════════════════ -->
+<!-- Temporarily hidden per latest page curation. -->
+<section hidden>
+    <div class="container">
+        <h2 class="section-title">Reconstruction Quality Comparison</h2>
+        <p class="section-subtitle">
+            Drag the slider to compare 3D reconstruction quality between Scal3R and baselines.
+        </p>
+
+        <div class="slider-comparison">
+            <div style="text-align:center;">
+                <i class="fas fa-arrows-alt-h"></i><br>
+                Image Comparison Slider<br>
+                <span style="font-size:0.8rem; opacity:0.6;">Embed img-comparison-slider here<br>Left: Baseline &middot; Right: Scal3R</span>
+            </div>
+        </div>
+        <p style="text-align:center; font-size:0.85rem; color:var(--text-secondary);">
+            Use <a href="https://github.com/niclasjst/img-comparison-slider" target="_blank" style="color:var(--primary)">img-comparison-slider</a> for interactive before/after comparisons.
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════ GLOBAL CONTEXT VISUALIZATION ════════════════ -->
+<!-- Temporarily hidden per latest page curation. -->
+<section hidden style="background: var(--bg-alt);">
+    <div class="container">
+        <h2 class="section-title">Global Context Matters</h2>
+        <p class="section-subtitle">
+            Our Global Context Synchronization mechanism shares information across all chunks, eliminating boundary artifacts and ensuring global consistency.
+        </p>
+
+        <div class="comparison-grid">
+            <div class="comparison-item">
+                <div class="comp-frame">
+                    <i class="fas fa-puzzle-piece"></i>
+                    Without GCS
+                </div>
+                <div class="comp-label">Without Global Context Sync</div>
+            </div>
+            <div class="comparison-item">
+                <div class="comp-frame">
+                    <i class="fas fa-globe"></i>
+                    With GCS
+                </div>
+                <div class="comp-label ours">With Global Context Sync (Ours)</div>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:1rem; font-size:0.85rem; color:var(--text-secondary);">
+            Replace with ablation visualizations showing the effect of global context synchronization.
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════ SCALABILITY ════════════════ -->
+<!-- Temporarily hidden per latest page curation. -->
+<section hidden>
+    <div class="container">
+        <h2 class="section-title">Scalability</h2>
+        <p class="section-subtitle">
+            Scal3R scales linearly with sequence length while maintaining stable accuracy.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">5+ km</div>
+                <div class="stat-label">Maximum Reconstruction Scale</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">~3 FPS</div>
+                <div class="stat-label">Stable Throughput</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">RGB Only</div>
+                <div class="stat-label">No LiDAR, IMU, or Intrinsics</div>
+            </div>
+        </div>
+
+        <div style="text-align:center;">
+            <div class="video-placeholder" style="aspect-ratio:2/1; border-radius:12px;">
+                <i class="fas fa-chart-line"></i>
+                <span>Runtime Scaling Graph</span>
+                <span style="font-size:0.8rem; opacity:0.6;">Replace with runtime_scaling.png — frames vs time, showing linear growth</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════ ACKNOWLEDGMENT ════════════════ -->
+<section>
+    <div class="container">
+        <h2 class="section-title">Acknowledgment</h2>
+        <p class="abstract-text">
+            This work was partially supported by National Key R&amp;D Program of China (No. 2024YFB2809105), NSFC (No. U24B20154), and Information Technology Center and State Key Lab of CAD&amp;CG, Zhejiang University. We thank Tianyuan Zhang for helpful discussions on LaCT and Dongli Tan for valuable discussions. We also thank Haotong Lin for providing the captured video demo of Zijingang Campus, Zhejiang University, and the VGGT-Long authors for providing the cyberpunk recording demo video.
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════ BIBTEX ════════════════ -->
+<section id="bibtex" style="background: var(--bg-alt);">
+    <div class="container">
+        <h2 class="section-title">BibTeX</h2>
+        <div style="position: relative;">
+            <button class="copy-btn" id="copy-bibtex" type="button" aria-label="Copy BibTeX"><i class="fas fa-copy"></i> Copy</button>
+            <div class="bibtex-block"><pre class="bibtex-code" id="bibtex-entry">@inproceedings{xie2026scal3r,
+    title     = {Scal3R: Scalable Test-Time Training for Feed-forward Large-Scale 3D Reconstruction},
+    author    = {Xie, Tao and Yang, Peishan and Jin, Yudong and Cai, Yingfeng and Yin, Wei and Ren, Weiqiang and Zhang, Qian and Hua, Wei and Peng, Sida and Guo, Xiaoyang and Zhou, Xiaowei},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year      = {2026}
+}</pre></div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+    <div class="container">
+        <p>Template adapted from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Point viewer template adapted from <a href="https://haian-jin.github.io/ZipMap/" target="_blank">ZipMap</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        const isFileMode = window.location.protocol === 'file:';
+        const heroTeaserVideo = document.getElementById('hero-teaser-video');
+        const heroTeaserSource = heroTeaserVideo?.querySelector('source');
+        const heroTeaserButtons = Array.from(document.querySelectorAll('[data-teaser-video-src]'));
+        const viewerFrame = document.getElementById('interactive-viewer');
+        const LOCAL_VIEWER_BUILD = '20260330f';
+        const pageQuery = new URLSearchParams(window.location.search);
+        const POST_MESSAGE_TARGET_ORIGIN = window.location.origin === 'null' ? '*' : window.location.origin;
+        const managedVisibilityState = new WeakMap();
+        const managedPlaybackCallbacks = new Map();
+        const managedVisibilityObserver = typeof IntersectionObserver === 'function'
+            ? new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    managedVisibilityState.set(entry.target, entry.isIntersecting && entry.intersectionRatio >= 0.2);
+                    managedPlaybackCallbacks.get(entry.target)?.();
+                });
+            }, {
+                threshold: [0, 0.2, 0.45],
+            })
+            : null;
+
+        function observeManagedPlaybackTarget(target, callback) {
+            if (!target) return;
+            managedPlaybackCallbacks.set(target, callback);
+            managedVisibilityState.set(target, true);
+            managedVisibilityObserver?.observe(target);
+            callback();
+        }
+
+        function isManagedTargetActive(target) {
+            return document.visibilityState === 'visible' && (managedVisibilityState.get(target) ?? true);
+        }
+
+        function syncManagedVideoPlayback(video) {
+            if (!video) return;
+            const hasSource = Boolean(video.currentSrc || video.src || video.querySelector('source[src]'));
+            if (!hasSource) {
+                video.pause();
+                return;
+            }
+            if (isManagedTargetActive(video)) {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+            } else {
+                video.pause();
+            }
+        }
+
+        function syncViewerFramePlayback() {
+            if (!viewerFrame) return;
+            try {
+                viewerFrame.contentWindow?.postMessage({
+                    type: 'viewer:setPlaybackActive',
+                    active: isManagedTargetActive(viewerFrame),
+                }, POST_MESSAGE_TARGET_ORIGIN);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            managedPlaybackCallbacks.forEach((callback) => callback());
+        });
+
+        window.addEventListener('pagehide', () => {
+            managedPlaybackCallbacks.forEach((callback) => callback());
+        });
+
+        function setActiveHeroTeaserButton(activeButton) {
+            heroTeaserButtons.forEach((button) => {
+                const isActive = button === activeButton;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        }
+
+        function selectHeroTeaser(button, options = {}) {
+            if (!button || !heroTeaserVideo || !heroTeaserSource) return;
+            const nextSrc = button.dataset.teaserVideoSrc;
+            const nextPoster = button.dataset.teaserPoster || '';
+            if (!nextSrc) return;
+
+            setActiveHeroTeaserButton(button);
+
+            const currentSrc = heroTeaserSource.getAttribute('src') || '';
+            if (currentSrc === nextSrc && heroTeaserVideo.poster === nextPoster && !options.forceReload) {
+                syncManagedVideoPlayback(heroTeaserVideo);
+                return;
+            }
+
+            const shouldResume = !heroTeaserVideo.paused && !heroTeaserVideo.ended;
+            heroTeaserVideo.pause();
+            heroTeaserVideo.poster = nextPoster;
+            heroTeaserSource.src = nextSrc;
+            heroTeaserVideo.load();
+
+            if (shouldResume || isManagedTargetActive(heroTeaserVideo)) {
+                const resumePlayback = () => {
+                    heroTeaserVideo.removeEventListener('loadedmetadata', resumePlayback);
+                    syncManagedVideoPlayback(heroTeaserVideo);
+                };
+                heroTeaserVideo.addEventListener('loadedmetadata', resumePlayback, { once: true });
+            }
+        }
+
+        heroTeaserButtons.forEach((button) => {
+            button.addEventListener('click', () => selectHeroTeaser(button));
+        });
+
+        const defaultHeroTeaserButton = heroTeaserButtons.find((button) => button.classList.contains('is-active')) || heroTeaserButtons[0];
+        if (defaultHeroTeaserButton) {
+            setActiveHeroTeaserButton(defaultHeroTeaserButton);
+            if (heroTeaserSource) heroTeaserSource.src = defaultHeroTeaserButton.dataset.teaserVideoSrc || heroTeaserSource.getAttribute('src') || '';
+            if (heroTeaserVideo && defaultHeroTeaserButton.dataset.teaserPoster) {
+                heroTeaserVideo.poster = defaultHeroTeaserButton.dataset.teaserPoster;
+            }
+        }
+
+        observeManagedPlaybackTarget(heroTeaserVideo, () => {
+            syncManagedVideoPlayback(heroTeaserVideo);
+        });
+
+        if (viewerFrame) {
+            observeManagedPlaybackTarget(viewerFrame, syncViewerFramePlayback);
+            viewerFrame.addEventListener('load', syncViewerFramePlayback);
+        }
+
+        const trajectoryMethodOrder = [
+            { id: 'ours', label: 'Ours', className: 'is-ours' },
+            { id: 'fastvggt', label: 'FastVGGT' },
+            { id: 'vggt-long', label: 'VGGT-Long' },
+            { id: 'stream3r', label: 'STream3R' },
+            { id: 'cut3r', label: 'CUT3R' },
+            { id: 'ttt3r', label: 'TTT3R' }
+        ];
+        const trajectoryCatalog = [
+            {
+                id: 'kitti-00',
+                label: 'KITTI 00',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">KITTI Odometry</span><span class="trajectory-thumb-subtitle-line">4542 frames</span><span class="trajectory-thumb-subtitle-line">3742m</span>',
+                meta: 'KITTI Odometry · 4542 frames · 3742 m',
+                description: 'Sequence 00 is the longest driving loop in the paper figure. It is a strong large-scale stress test where globally consistent methods preserve the loop geometry while weaker baselines drift or collapse.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/00/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '4.298', RTE: '1.898', RRE: '0.639' },
+                    fastvggt: { note: 'OOM' },
+                    'vggt-long': { ATE: '8.637', RTE: '4.717', RRE: '1.416' },
+                    stream3r: { ATE: '191.0', RTE: '62.27', RRE: '27.95' },
+                    cut3r: { ATE: '185.9', RTE: '69.45', RRE: '15.20' },
+                    ttt3r: { ATE: '190.9', RTE: '58.14', RRE: '17.19' }
+                }
+            },
+            {
+                id: 'oxford-keble-04',
+                label: 'Oxford Keble 04',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">Oxford Spires</span><span class="trajectory-thumb-subtitle-line">701 frames</span><span class="trajectory-thumb-subtitle-line">773m</span>',
+                meta: 'Oxford Spires · 701 frames · 773 m',
+                description: 'Keble 04 is the longer Oxford route from the paper figure, where trajectory consistency over a full campus loop becomes immediately visible.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-04/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '2.448', RTE: '2.078', RRE: '2.426' },
+                    fastvggt: { ATE: '39.93', RTE: '27.03', RRE: '45.20' },
+                    'vggt-long': { ATE: '13.20', RTE: '10.19', RRE: '14.14' },
+                    stream3r: { ATE: '4354', RTE: '26.66', RRE: '48.93' },
+                    cut3r: { ATE: '31.31', RTE: '18.76', RRE: '19.50' },
+                    ttt3r: { ATE: '40.99', RTE: '23.80', RRE: '45.59' }
+                }
+            },
+            {
+                id: 'oxford-quarter-01',
+                label: 'Oxford Quarter 1',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">Oxford Spires</span><span class="trajectory-thumb-subtitle-line">353 frames</span><span class="trajectory-thumb-subtitle-line">393m</span>',
+                meta: 'Oxford Spires · 353 frames · 393 m',
+                description: 'Quarter 01 is the compact Oxford row from the first paper figure, with tighter turns that make local distortions and heading drift easy to spot.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-13-observatory-quarter-01/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '1.624', RTE: '2.318', RRE: '2.767' },
+                    fastvggt: { ATE: '26.86', RTE: '36.58', RRE: '68.14' },
+                    'vggt-long': { ATE: '11.95', RTE: '24.03', RRE: '27.45' },
+                    stream3r: { ATE: '28.40', RTE: '33.30', RRE: '62.44' },
+                    cut3r: { ATE: '25.32', RTE: '28.75', RRE: '52.69' },
+                    ttt3r: { ATE: '28.17', RTE: '32.38', RRE: '67.56' }
+                }
+            },
+            {
+                id: 'kitti-01',
+                label: 'KITTI 01',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">KITTI Odometry</span><span class="trajectory-thumb-subtitle-line">1101 frames</span><span class="trajectory-thumb-subtitle-line">2453m</span>',
+                meta: 'KITTI Odometry · 1101 frames · 2453 m',
+                description: 'Sequence 01 highlights long straight motion. Both Ours and VGGT-Long maintain a globally consistent scale, while several baselines collapse into compact clusters or peel away from the GT path.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/01/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '45.29', RTE: '11.99', RRE: '1.123' },
+                    fastvggt: { ATE: '705.4', RTE: '111.8', RRE: '12.53' },
+                    'vggt-long': { ATE: '61.21', RTE: '14.87', RRE: '1.762' },
+                    stream3r: { ATE: '682.0', RTE: '129.1', RRE: '9.745' },
+                    cut3r: { ATE: '651.5', RTE: '137.0', RRE: '11.05' },
+                    ttt3r: { ATE: '546.8', RTE: '148.2', RRE: '8.985' }
+                }
+            },
+            {
+                id: 'kitti-05',
+                label: 'KITTI 05',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">KITTI Odometry</span><span class="trajectory-thumb-subtitle-line">2761 frames</span><span class="trajectory-thumb-subtitle-line">2206m</span>',
+                meta: 'KITTI Odometry · 2761 frames · 2206 m',
+                description: 'Sequence 05 contains repeated crossings and a branching street layout, so trajectory distortion becomes obvious immediately. Ours tracks the GT outline closely while weaker methods spiral or compress into local loops.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/05/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '3.303', RTE: '1.837', RRE: '0.567' },
+                    fastvggt: { ATE: '157.7', RTE: '58.05', RRE: '28.73' },
+                    'vggt-long': { ATE: '9.880', RTE: '4.997', RRE: '1.138' },
+                    stream3r: { ATE: '159.9', RTE: '58.67', RRE: '29.79' },
+                    cut3r: { ATE: '155.6', RTE: '54.75', RRE: '22.59' },
+                    ttt3r: { ATE: '153.1', RTE: '55.44', RRE: '23.76' }
+                }
+            },
+            {
+                id: 'kitti-07',
+                label: 'KITTI 07',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">KITTI Odometry</span><span class="trajectory-thumb-subtitle-line">1101 frames</span><span class="trajectory-thumb-subtitle-line">650m</span>',
+                meta: 'KITTI Odometry · 1101 frames · 650 m',
+                description: 'Sequence 07 is a strong long-horizon showcase: our trajectory stays tightly aligned to the dashed GT route while several baselines drift or collapse.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/07/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '2.026', RTE: '2.035', RRE: '0.933' },
+                    fastvggt: { ATE: '69.27', RTE: '70.72', RRE: '57.28' },
+                    'vggt-long': { ATE: '2.659', RTE: '3.268', RRE: '1.632' },
+                    stream3r: { ATE: '90.37', RTE: '60.91', RRE: '49.17' },
+                    cut3r: { ATE: '77.03', RTE: '56.12', RRE: '41.30' },
+                    ttt3r: { ATE: '70.95', RTE: '66.53', RRE: '42.45' }
+                }
+            },
+            {
+                id: 'kitti-09',
+                label: 'KITTI 09',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">KITTI Odometry</span><span class="trajectory-thumb-subtitle-line">1591 frames</span><span class="trajectory-thumb-subtitle-line">1705m</span>',
+                meta: 'KITTI Odometry · 1591 frames · 1705 m',
+                description: 'Sequence 09 is a compact city block where the best methods nearly overlap GT, but weaker baselines still reveal turn-by-turn shape distortion.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/FastVGGT.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/kitti/09/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '12.32', RTE: '5.289', RRE: '1.206' },
+                    fastvggt: { ATE: '190.1', RTE: '98.21', RRE: '31.78' },
+                    'vggt-long': { ATE: '31.84', RTE: '12.46', RRE: '2.135' },
+                    stream3r: { ATE: '216.3', RTE: '82.33', RRE: '24.98' },
+                    cut3r: { ATE: '205.9', RTE: '82.46', RRE: '24.11' },
+                    ttt3r: { ATE: '211.0', RTE: '62.41', RRE: '17.01' }
+                }
+            },
+            {
+                id: 'oxford-keble-02',
+                label: 'Oxford Keble 02',
+                subtitle: '<span class="trajectory-thumb-subtitle-line">Oxford Spires</span><span class="trajectory-thumb-subtitle-line">787 frames</span><span class="trajectory-thumb-subtitle-line">290m</span>',
+                meta: 'Oxford Spires · 787 frames · 290 m',
+                description: 'Keble 02 adds a compact collegiate loop where tight turns make consistency errors immediately obvious. This is the complete Oxford row with all six compared methods available locally.',
+                thumbnail: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/Ours.png',
+                methods: {
+                    ours: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/Ours.png',
+                    fastvggt: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/fastvggt.png',
+                    'vggt-long': 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/VGGT-Long.png',
+                    stream3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/STream3R.png',
+                    cut3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/CUT3R.png',
+                    ttt3r: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory/oxford_spires/2024-03-12-keble-college-02/TTT3R.png'
+                },
+                metrics: {
+                    ours: { ATE: '4.818', RTE: '7.644', RRE: '10.35' },
+                    fastvggt: { ATE: '24.10', RTE: '40.00', RRE: '77.79' },
+                    'vggt-long': { ATE: '6.547', RTE: '10.98', RRE: '32.48' },
+                    stream3r: { ATE: '33.08', RTE: '47.28', RRE: '98.80' },
+                    cut3r: { ATE: '30.68', RTE: '48.62', RRE: '84.41' },
+                    ttt3r: { ATE: '27.75', RTE: '50.83', RRE: '73.69' }
+                }
+            }
+        ];
+        const trajectoryVideoCatalog = {
+            'kitti-00': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-00.mp4', width: 576, height: 174, cardWidth: '100%', cardPadding: '0.52rem' },
+            'kitti-01': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-01.mp4', width: 576, height: 174, cardWidth: '100%', cardPadding: '0.52rem' },
+            'kitti-05': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-05.mp4', width: 576, height: 174, cardWidth: '100%', cardPadding: '0.52rem' },
+            'kitti-07': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-07.mp4', width: 576, height: 174, cardWidth: '100%', cardPadding: '0.52rem' },
+            'kitti-09': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-09.mp4', width: 576, height: 174, cardWidth: '100%', cardPadding: '0.52rem' },
+            'oxford-keble-02': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/oxford-keble-02.mp4', width: 576, height: 432, cardWidth: '15.9rem', cardPadding: '0.24rem' },
+            'oxford-keble-04': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/oxford-keble-04.mp4', width: 576, height: 432, cardWidth: '15.9rem', cardPadding: '0.24rem' },
+            'oxford-quarter-01': { src: 'https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/oxford-quarter-01.mp4', width: 576, height: 432, cardWidth: '15.9rem', cardPadding: '0.24rem' }
+        };
+
+        function initTrajectoryGallery() {
+            const trajectoryMethodGrid = document.getElementById('trajectory-method-grid');
+            const trajectorySceneStrip = document.getElementById('trajectory-scene-strip');
+            const trajectorySceneTitle = document.getElementById('trajectory-scene-title');
+            const trajectorySceneMeta = document.getElementById('trajectory-scene-meta');
+            const trajectorySceneDescription = document.getElementById('trajectory-scene-description');
+            const trajectoryVideoCard = document.getElementById('trajectory-video-card');
+            const trajectorySceneVideo = document.getElementById('trajectory-scene-video');
+            const trajectoryVideoMeta = document.getElementById('trajectory-video-meta');
+            const metricsToggle = document.getElementById('trajectory-toggle-metrics');
+
+            const trajectoryUi = {
+                showMetrics: true,
+            };
+
+            if (!trajectoryMethodGrid || !trajectorySceneStrip || !trajectoryCatalog.length) return;
+
+            trajectoryMethodGrid.innerHTML = trajectoryMethodOrder.map((method) => `
+                <figure class="trajectory-panel ${method.className || ''}" data-trajectory-method="${method.id}">
+                    <div class="trajectory-panel-frame">
+                        <div class="trajectory-metric-card" data-trajectory-metrics></div>
+                        <img src="" alt="" width="576" height="576" loading="eager">
+                        <div class="trajectory-panel-placeholder">Local export missing.<br>Metrics kept from the paper figure.</div>
+                    </div>
+                    <figcaption class="trajectory-panel-label">${method.label}</figcaption>
+                </figure>
+            `).join('');
+
+            trajectorySceneStrip.innerHTML = trajectoryCatalog.map((scene) => `
+                <button class="trajectory-thumb${scene.id === 'kitti-07' ? ' is-active' : ''}" type="button" data-trajectory-scene="${scene.id}">
+                    <span class="trajectory-thumb-image">
+                        <img src="${scene.thumbnail}" alt="${scene.label} trajectory thumbnail" width="576" height="576" loading="lazy">
+                    </span>
+                    <span class="trajectory-thumb-copy">
+                        <span class="trajectory-thumb-title">${scene.label}</span>
+                        <span class="trajectory-thumb-subtitle">${scene.subtitle}</span>
+                        ${scene.previewStatus ? `<span class="trajectory-thumb-badge">${scene.previewStatus}</span>` : ''}
+                    </span>
+                </button>
+            `).join('');
+
+            const methodPanels = new Map(
+                Array.from(trajectoryMethodGrid.querySelectorAll('[data-trajectory-method]'))
+                    .map((panel) => [panel.dataset.trajectoryMethod, panel])
+            );
+            const sceneButtons = Array.from(trajectorySceneStrip.querySelectorAll('[data-trajectory-scene]'));
+
+            function formatMetricMarkup(metric) {
+                if (!metric) return '';
+                if (metric.note) return `<strong>${metric.note}</strong>`;
+                return [
+                    `<strong>ATE</strong> ${metric.ATE}`,
+                    `<strong>RTE</strong> ${metric.RTE}`,
+                    `<strong>RRE</strong> ${metric.RRE}`,
+                ].join('<br>');
+            }
+
+            function syncTrajectoryUi() {
+                trajectoryMethodOrder.forEach((method) => {
+                    const panel = methodPanels.get(method.id);
+                    if (!panel) return;
+                    panel.dataset.metricsVisible = trajectoryUi.showMetrics ? 'true' : 'false';
+                });
+
+                metricsToggle?.classList.toggle('is-active', trajectoryUi.showMetrics);
+                if (metricsToggle) {
+                    metricsToggle.textContent = trajectoryUi.showMetrics ? 'Hide Metrics' : 'Show Metrics';
+                    metricsToggle.setAttribute('aria-pressed', trajectoryUi.showMetrics ? 'true' : 'false');
+                }
+            }
+
+            function syncTrajectoryVideo(scene) {
+                if (!trajectoryVideoCard || !trajectorySceneVideo || !trajectoryVideoMeta) return;
+                const video = trajectoryVideoCatalog[scene.id];
+
+                if (!video?.src) {
+                    trajectoryVideoCard.style.setProperty('--trajectory-video-aspect', '16 / 9');
+                    trajectoryVideoCard.style.setProperty('--trajectory-video-card-width', '100%');
+                    trajectoryVideoCard.style.setProperty('--trajectory-video-card-padding', '0.52rem');
+                    trajectorySceneVideo.pause();
+                    trajectorySceneVideo.removeAttribute('src');
+                    trajectorySceneVideo.removeAttribute('data-current-src');
+                    trajectorySceneVideo.load();
+                    trajectoryVideoMeta.textContent = `Scene video is unavailable for ${scene.label}.`;
+                    syncManagedVideoPlayback(trajectorySceneVideo);
+                    return;
+                }
+
+                trajectoryVideoCard.style.setProperty('--trajectory-video-aspect', `${video.width} / ${video.height}`);
+                trajectoryVideoCard.style.setProperty('--trajectory-video-card-width', video.cardWidth || '100%');
+                trajectoryVideoCard.style.setProperty('--trajectory-video-card-padding', video.cardPadding || '0.52rem');
+                trajectoryVideoMeta.textContent = `${scene.label} · looped scene clip.`;
+                trajectorySceneVideo.setAttribute('aria-label', `${scene.label} compressed scene video`);
+
+                if (trajectorySceneVideo.dataset.currentSrc !== video.src) {
+                    trajectorySceneVideo.pause();
+                    trajectorySceneVideo.dataset.currentSrc = video.src;
+                    trajectorySceneVideo.src = video.src;
+                    trajectorySceneVideo.load();
+                } else if (trajectorySceneVideo.readyState > 0) {
+                    try {
+                        trajectorySceneVideo.currentTime = 0;
+                    } catch (error) {}
+                }
+
+                syncManagedVideoPlayback(trajectorySceneVideo);
+            }
+
+            function selectTrajectoryScene(sceneId) {
+                const scene = trajectoryCatalog.find((item) => item.id === sceneId) || trajectoryCatalog[0];
+
+                trajectorySceneTitle.textContent = scene.label;
+                if (trajectorySceneMeta) trajectorySceneMeta.textContent = scene.meta || scene.subtitle || '';
+                trajectorySceneDescription.textContent = scene.description;
+                syncTrajectoryVideo(scene);
+
+                sceneButtons.forEach((button) => {
+                    button.classList.toggle('is-active', button.dataset.trajectoryScene === scene.id);
+                });
+
+                trajectoryMethodOrder.forEach((method) => {
+                    const panel = methodPanels.get(method.id);
+                    const image = panel?.querySelector('img');
+                    const metricCard = panel?.querySelector('[data-trajectory-metrics]');
+                    if (!panel || !image || !metricCard) return;
+                    const imageSrc = scene.methods[method.id];
+                    const metric = scene.metrics?.[method.id];
+                    metricCard.innerHTML = formatMetricMarkup(metric);
+                    panel.classList.toggle('is-missing', !imageSrc);
+                    if (imageSrc) {
+                        image.src = imageSrc;
+                        image.alt = `${scene.label} trajectory comparison for ${method.label}`;
+                    } else {
+                        image.removeAttribute('src');
+                        image.alt = `${scene.label} trajectory comparison for ${method.label} is unavailable in this workspace`;
+                    }
+                });
+
+                syncTrajectoryUi();
+            }
+
+            sceneButtons.forEach((button) => {
+                button.addEventListener('click', () => selectTrajectoryScene(button.dataset.trajectoryScene));
+            });
+
+            metricsToggle?.addEventListener('click', () => {
+                trajectoryUi.showMetrics = !trajectoryUi.showMetrics;
+                syncTrajectoryUi();
+            });
+
+            observeManagedPlaybackTarget(trajectorySceneVideo, () => {
+                syncManagedVideoPlayback(trajectorySceneVideo);
+            });
+            selectTrajectoryScene('kitti-07');
+        }
+
+        initTrajectoryGallery();
+
+        const bibtexCopyButton = document.getElementById('copy-bibtex');
+        const bibtexEntry = document.getElementById('bibtex-entry');
+        const copyButtonMarkup = {
+            idle: '<i class="fas fa-copy"></i> Copy',
+            working: '<i class="fas fa-spinner fa-spin"></i> Copying',
+            success: '<i class="fas fa-check"></i> Copied',
+            error: '<i class="fas fa-xmark"></i> Copy failed',
+        };
+        let bibtexCopyResetTimer = null;
+
+        function setBibtexCopyButtonState(state) {
+            if (!bibtexCopyButton) return;
+            bibtexCopyButton.innerHTML = copyButtonMarkup[state] || copyButtonMarkup.idle;
+        }
+
+        async function copyBibtexText() {
+            if (!bibtexCopyButton || !bibtexEntry) return;
+            const bibtexText = bibtexEntry.textContent || '';
+            if (!bibtexText.trim()) return;
+
+            if (bibtexCopyResetTimer) {
+                window.clearTimeout(bibtexCopyResetTimer);
+                bibtexCopyResetTimer = null;
+            }
+
+            setBibtexCopyButtonState('working');
+
+            try {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(bibtexText);
+                } else {
+                    throw new Error('Clipboard API unavailable');
+                }
+                setBibtexCopyButtonState('success');
+            } catch (error) {
+                const fallback = document.createElement('textarea');
+                fallback.value = bibtexText;
+                fallback.setAttribute('readonly', '');
+                fallback.style.position = 'fixed';
+                fallback.style.opacity = '0';
+                fallback.style.pointerEvents = 'none';
+                document.body.appendChild(fallback);
+                fallback.focus();
+                fallback.select();
+                try {
+                    const copied = document.execCommand('copy');
+                    setBibtexCopyButtonState(copied ? 'success' : 'error');
+                } catch (fallbackError) {
+                    setBibtexCopyButtonState('error');
+                }
+                fallback.remove();
+            }
+
+            bibtexCopyResetTimer = window.setTimeout(() => {
+                setBibtexCopyButtonState('idle');
+                bibtexCopyResetTimer = null;
+            }, 1600);
+        }
+
+        bibtexCopyButton?.addEventListener('click', copyBibtexText);
+
+        if (viewerFrame?.dataset.httpSrc) {
+            const viewerFrameUrl = new URL(viewerFrame.dataset.httpSrc, window.location.href);
+            viewerFrameUrl.searchParams.set('build', LOCAL_VIEWER_BUILD);
+            viewerFrameUrl.searchParams.set('rev', `${Date.now()}`);
+            viewerFrame.src = viewerFrameUrl.href;
+        }
+
+        const autoScene = pageQuery.get('autoscene');
+        const scheduleAutoScene = () => {
+            if (!autoScene || !viewerFrame) return;
+            const sceneViews = {
+                'zju-zjg': 'overview',
+                'pubg-taego': 'overview',
+                'oxford-keble': 'detail',
+                'kitti-00': 'overview',
+                'kitti-05': 'overview',
+                'kitti-07': 'overview',
+                'oxford-observatory': 'overview',
+                'cyberpunk-1': 'overview',
+            };
+            const sceneView = sceneViews[autoScene];
+            if (sceneView) {
+                let autoSceneAttempts = 0;
+                const sendAutoScene = () => {
+                    autoSceneAttempts += 1;
+                    try {
+                        viewerFrame.contentWindow?.postMessage({ type: 'viewer:setScene', scene: autoScene }, window.location.origin);
+                        viewerFrame.contentWindow?.postMessage({ type: 'viewer:setMethod', method: 'scatt3r' }, window.location.origin);
+                        viewerFrame.contentWindow?.postMessage({ type: 'viewer:setView', view: sceneView }, window.location.origin);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    if (autoSceneAttempts < 10) {
+                        window.setTimeout(sendAutoScene, 700);
+                    }
+                };
+                viewerFrame.addEventListener('load', () => {
+                    window.setTimeout(sendAutoScene, 900);
+                }, { once: true });
+                window.setTimeout(sendAutoScene, 1800);
+            }
+        };
+
+        if (!isFileMode) {
+            const moduleScript = document.createElement('script');
+            moduleScript.type = 'module';
+            moduleScript.src = `index.js?build=${encodeURIComponent(LOCAL_VIEWER_BUILD)}`;
+            document.body.appendChild(moduleScript);
+            scheduleAutoScene();
+            return;
+        }
+
+        scheduleAutoScene();
+    })();
+</script>
+
+</body>
+</html>

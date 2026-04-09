@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scal3R Interactive Viewer</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/branding/scal3r-favicon.png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Lato, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f6f9fd 0%, #edf3f9 100%);
+            color: #152132;
+        }
+
+        body.embed {
+            background: transparent;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viewer-shell {
+            width: min(920px, 100%);
+            margin: 0 auto;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(24, 39, 56, 0.08);
+            border-radius: 14px;
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+        }
+
+        body.embed .viewer-shell {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background: transparent;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        body.embed #interactive {
+            aspect-ratio: auto;
+            flex: 1;
+            min-height: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.embed .load {
+            order: 1;
+            padding: 8px 0 2px;
+            flex-shrink: 0;
+        }
+
+        #interactive {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            aspect-ratio: 16/9;
+            max-width: 100%;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 4px #000;
+            background: #000;
+        }
+
+        #interactive canvas,
+        #interactive #glfailed,
+        #interactive #loading {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+
+        #interactive #glfailed {
+            color: #f88;
+            background: black;
+            display: none;
+        }
+
+        #interactive #loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #17314a;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.01em;
+            background: linear-gradient(180deg, rgba(246, 250, 254, 0.68), rgba(235, 242, 250, 0.76));
+            backdrop-filter: blur(4px);
+            z-index: 14;
+            pointer-events: none;
+        }
+
+        .viewer-loading-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(173, 195, 224, 0.82);
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
+        }
+
+        .viewer-loading-spinner {
+            width: 1rem;
+            height: 1rem;
+            flex: 0 0 auto;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 99, 235, 0.18);
+            border-top-color: #2563eb;
+            animation: viewer-loading-spin 0.8s linear infinite;
+        }
+
+        .viewer-loading-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.06rem;
+        }
+
+        .viewer-loading-title {
+            color: #18314d;
+            font-size: 0.98rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .viewer-loading-subtitle {
+            color: #58708f;
+            font-size: 0.78rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        @keyframes viewer-loading-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #interactive #local-video-overlay {
+            display: none;
+            position: absolute;
+            touch-action: none;
+            top: 8px;
+            left: 8px;
+            width: 280px;
+            height: auto;
+            z-index: 11;
+            border-radius: 4px;
+            border: 2px solid rgba(255,255,255,0.7);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            background: transparent;
+            object-fit: contain;
+            overflow: hidden;
+        }
+
+        .viewer-control-band {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0;
+            padding: 8px 18px;
+            border-top: 1px solid rgba(15, 23, 42, 0.06);
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,253,0.98));
+        }
+
+        .viewer-inline-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .viewer-control-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-height: 32px;
+            padding: 0 10px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,247,251,0.98));
+            border: 1px solid rgba(15, 23, 42, 0.10);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        .viewer-control-label,
+        .viewer-control-value,
+        .viewer-switch-state {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .viewer-control-label {
+            color: rgba(15, 23, 42, 0.78);
+        }
+
+        .viewer-control-value,
+        .viewer-switch-state {
+            color: #111827;
+        }
+
+        .viewer-control-slider input[type=range] {
+            width: 104px;
+        }
+
+        .viewer-switch {
+            appearance: none;
+            cursor: pointer;
+            color: inherit;
+            font: inherit;
+            border: 1px solid rgba(15, 23, 42, 0.10);
+        }
+
+        .viewer-switch-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .viewer-switch-track {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.34);
+            border: 1px solid rgba(148, 163, 184, 0.38);
+            transition: background 0.18s ease, border-color 0.18s ease;
+        }
+
+        .viewer-switch-thumb {
+            position: absolute;
+            top: 50%;
+            left: 1px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.18);
+            transform: translateY(-50%);
+            transition: transform 0.18s ease;
+        }
+
+        .viewer-switch.is-active .viewer-switch-track {
+            background: rgba(37, 99, 235, 0.92);
+            border-color: rgba(37, 99, 235, 0.92);
+        }
+
+        .viewer-switch.is-active .viewer-switch-thumb {
+            transform: translate(18px, -50%);
+        }
+
+        .viewer-switch:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .viewer-standalone-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 24px;
+            padding: 0 2px;
+            border: none;
+            background: transparent;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .viewer-standalone-link:hover {
+            color: #1d4ed8;
+        }
+
+        .viewer-standalone-link svg {
+            width: 14px;
+            height: 14px;
+            flex: 0 0 auto;
+            stroke: currentColor;
+        }
+
+        .viewer-standalone-link[hidden] {
+            display: none;
+        }
+
+        .viewer-scene-intro {
+            margin-top: 12px;
+            padding: 14px 18px 15px;
+            border-radius: 14px;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(241, 246, 252, 0.98));
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+        }
+
+        .viewer-scene-kicker {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #2563eb;
+        }
+
+        .viewer-scene-title {
+            margin-top: 5px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #152132;
+        }
+
+        .viewer-scene-description {
+            margin: 7px 0 0;
+            font-size: 13px;
+            line-height: 1.62;
+            color: #455468;
+        }
+
+        .load {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-start;
+            gap: 10px;
+            margin-top: 0;
+            min-height: 100px;
+            padding: 8px 18px;
+            border-top: 1px solid rgba(15, 23, 42, 0.06);
+            background: linear-gradient(180deg, rgba(251,253,255,0.98), rgba(247,250,253,0.98));
+            max-width: 914px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .load img {
+            width: 144px;
+            height: 101px;
+            object-fit: cover;
+            border: 2px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+            border-radius: 8px;
+            vertical-align: bottom;
+        }
+
+        .load img:active {
+            box-shadow: 0 0 4px #000;
+            opacity: .8;
+        }
+
+        .load img.is-active {
+            border-color: rgba(37, 99, 235, 0.76);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), 0 14px 28px rgba(37, 99, 235, 0.14);
+        }
+
+        .frusta-btn {
+            font-size: 12px;
+            padding: 2px 7px;
+        }
+
+        input[type=range]:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .frusta-btn.active-frusta {
+            font-weight: bold;
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
+            text-decoration: underline;
+        }
+
+        .viewer-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            align-items: center;
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 4px;
+            margin: 5px 0 2px 0;
+            font-size: 13px;
+            user-select: none;
+        }
+
+        .viewer-toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toolbar-label {
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+            margin-right: 2px;
+        }
+
+        body.embed .viewer-toolbar {
+            display: none;
+        }
+
+        body.embed .viewer-control-band {
+            padding: 8px 18px;
+            flex-shrink: 0;
+        }
+
+        body.embed .viewer-scene-intro {
+            display: none;
+        }
+
+        body.embed .load img {
+            width: 100px;
+            height: 70px;
+            border-width: 2px;
+        }
+
+        body.embed .load {
+            gap: 8px;
+            max-width: 700px;
+            min-height: 96px;
+            padding: 8px 18px;
+        }
+
+        body.embed .load + div,
+        body.embed .viewer-shell > div[style] {
+            display: none;
+        }
+
+        @media (max-width: 760px) {
+            .load img {
+                width: 144px;
+                height: 101px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body.embed #interactive {
+                flex: 1 1 auto;
+                min-height: 320px;
+            }
+
+            body.embed .viewer-control-band {
+                padding: 6px 12px;
+            }
+
+            body.embed .viewer-inline-controls {
+                gap: 6px;
+            }
+
+            body.embed .load {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 6px;
+                max-width: none;
+                min-height: 0;
+                padding: 6px 12px 10px;
+            }
+
+            body.embed .load img {
+                width: min(100%, 92px);
+                height: auto;
+                aspect-ratio: 10 / 7;
+                justify-self: center;
+            }
+        }
+
+    </style>
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('embed') === '1' || document.body?.dataset.viewerEmbed === '1') {
+                window.addEventListener('DOMContentLoaded', () => document.body.classList.add('embed'));
+            }
+        })();
+    </script>
+    <script src="./static/js/viewer.js?rev=20260327b"></script>
+</head>
+<body>
+    <div class="viewer-shell">
+        <div id="interactive" class="hero">
+            <canvas id="megaview" width="512" height="288"></canvas>
+            <canvas id="video-overlay" style="position:absolute; top:8px; left:8px; z-index:10; border-radius:4px; border:2px solid rgba(255,255,255,0.7); box-shadow:0 2px 8px rgba(0,0,0,0.6); display:block; image-rendering:auto;"></canvas>
+            <video id="local-video-overlay" muted loop playsinline preload="metadata"></video>
+            <iframe id="glb-viewer-frame" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; border:none; z-index:6;" allowfullscreen></iframe>
+            <div id="glfailed"><br><br>[Demo requires browser with WebGL2 support.]</div>
+            <div id="loading" aria-live="polite" aria-label="Loading scene">
+                <div class="viewer-loading-card">
+                    <span class="viewer-loading-spinner" aria-hidden="true"></span>
+                    <span class="viewer-loading-copy">
+                        <span class="viewer-loading-title">Loading scene</span>
+                        <span class="viewer-loading-subtitle">Preparing point cloud and recovered cameras...</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="viewer-control-band">
+            <div class="viewer-inline-controls">
+                <label class="viewer-control-pill viewer-control-slider" for="point-size-slider">
+                    <span class="viewer-control-label">Point size</span>
+                    <input type="range" id="point-size-slider" min="0.2" max="4.0" step="0.05" value="2.2">
+                    <span id="point-size-value" class="viewer-control-value">2.20</span>
+                </label>
+                <button type="button" id="video-overlay-toggle" class="viewer-control-pill viewer-switch is-active" role="switch" aria-checked="true">
+                    <span class="viewer-switch-track" aria-hidden="true">
+                        <span class="viewer-switch-thumb"></span>
+                    </span>
+                    <span class="viewer-switch-copy">
+                        <span class="viewer-control-label">Scene video</span>
+                        <span id="video-overlay-toggle-value" class="viewer-switch-state">On</span>
+                    </span>
+                </button>
+                <a id="viewer-standalone-link" class="viewer-standalone-link" href="viewer.html" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2.5H3.5A1.5 1.5 0 0 0 2 4v8a1.5 1.5 0 0 0 1.5 1.5h8A1.5 1.5 0 0 0 13 12V9.5"></path>
+                        <path d="M9.5 2.5H13.5V6.5"></path>
+                        <path d="M13.2 2.8L7.8 8.2"></path>
+                    </svg>
+                    <span>Open standalone viewer</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="viewer-toolbar" id="viewer-toolbar">
+            <div class="viewer-toolbar-group">
+                <span id="points-mode-controls"><span class="toolbar-label">Points:</span><button onclick="setOtherPoints('no');" id="other-points-no" class="frusta-btn">Off</button><button onclick="setOtherPoints('points');" id="other-points-points" class="frusta-btn">All</button><button onclick="setOtherPoints('past');" id="other-points-past" class="frusta-btn active-frusta">Past</button></span>
+                <span id="multi-size-controls"><span class="toolbar-label" style="margin-left:6px">Multi size:</span><input type="range" id="other-point-size-slider" min="0.2" max="6.2" step="0.4" value="2.6" oninput="state.other_point_size=+this.value; dirty=true;" style="width:70px; vertical-align:middle"></span>
+            </div>
+            <div class="viewer-toolbar-group" id="frusta-mode-group">
+                <span class="toolbar-label">Frusta:</span>
+                <button onclick="setFrustaMode('all');" id="frusta-all" class="frusta-btn active-frusta">All</button><button onclick="setFrustaMode('current');" id="frusta-current" class="frusta-btn">Current</button><button onclick="setFrustaMode('none');" id="frusta-none" class="frusta-btn">None</button>
+            </div>
+            <div class="viewer-toolbar-group" id="frustum-size-group">
+                <span class="toolbar-label">Frusta size:</span>
+                <input type="range" id="frustum-size-slider" min="0.01" max="0.5" step="0.02" value="0.25" oninput="state.frustum_size=+this.value; dirty=true;" style="width:90px; vertical-align:middle">
+            </div>
+        </div>
+
+        <div class="viewer-scene-intro" id="viewer-scene-intro">
+            <div class="viewer-scene-kicker" id="viewer-scene-kicker">Oxford Spires</div>
+            <div class="viewer-scene-title" id="viewer-scene-title">Oxford Keble</div>
+            <p class="viewer-scene-description" id="viewer-scene-description">Outdoor Oxford walk with facades, trees, and long-range loop structure. This is the most complete local example in the viewer: the full point cloud is loaded together with recovered cameras and the corresponding scene video.</p>
+        </div>
+
+        <div class="load" id="load-strip">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%23102433'/%3E%3Cpath d='M0 64 L24 48 L54 55 L83 30 L107 44 L130 38 L130 91 L0 91 Z' fill='%231db4a5' opacity='0.8'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23c8fff8' font-size='13' font-family='Arial,sans-serif'%3EZJU ZJG%3C/text%3E%3C/svg%3E" alt="ZJU ZJG (Scal3R)" title="ZJU ZJG (Scal3R)" data-scene-id="zju-zjg" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/zju-zjg-thumb.png?rev=20260329zjgthumb1" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/zju-zjg.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/zju-zjg-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/zju-zjg-input.mp4" data-target="0.11431 -0.02184 -0.03467" data-pan="0.25695 -0.40774" data-up="0.81063 0.48342 0.33043" data-orbit="-110.47deg 144.54deg 81.3%" data-frustum_scale="0.2">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%23142528'/%3E%3Cpath d='M0 66 L28 51 L57 56 L86 31 L111 42 L130 38 L130 91 L0 91 Z' fill='%2348bb78' opacity='0.82'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23dcfce7' font-size='13' font-family='Arial,sans-serif'%3EPUBG Taego%3C/text%3E%3C/svg%3E" alt="PUBG Taego (Scal3R)" title="PUBG Taego (Scal3R)" data-scene-id="pubg-taego" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/pubg-taego-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/pubg-taego.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/pubg-taego-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/pubg-taego-input.mp4" data-video-width="210" data-video-frac="0.27" data-target="-0.03395 0.03091 0.00833" data-pan="0.37944 -0.16308" data-up="-0.00394 -0.91274 0.40853" data-orbit="-163.37deg 133.95deg 93.57%" data-frustum_scale="0.18">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%23111827'/%3E%3Cpath d='M0 60 L38 42 L68 58 L99 29 L130 51 L130 91 L0 91 Z' fill='%2321c1a1' opacity='0.75'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23bfe9df' font-size='14' font-family='Arial,sans-serif'%3EOxford%3C/text%3E%3C/svg%3E" alt="Oxford Keble (Scal3R)" title="Oxford Keble (Scal3R)" data-scene-id="oxford-keble" data-method-id="scatt3r" data-view="detail" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-keble-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-keble.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-keble-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/oxford-keble-04.mp4" data-video-width="210" data-video-frac="0.27" data-target="0 0 0" data-pan="0.19091 -0.30049" data-up="0.00013 -0.97915 -0.20312" data-orbit="131.81deg 132.58deg 99.49%">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%231a3558'/%3E%3Cpath d='M0 68 L30 53 L58 58 L88 34 L112 45 L130 40 L130 91 L0 91 Z' fill='%2348b4ff' opacity='0.78'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23d8f4ff' font-size='14' font-family='Arial,sans-serif'%3EKITTI 00%3C/text%3E%3C/svg%3E" alt="KITTI 00 (Scal3R)" title="KITTI 00 (Scal3R)" data-scene-id="kitti-00" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-00-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-00.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-00-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-00.mp4" data-target="0.03429 0.00458 -0.01571" data-pan="0.46077 -0.29546" data-up="-0.17664 -0.93004 -0.32222" data-orbit="-165.24deg 129.97deg 91.92%" data-frustum_scale="0.18">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%232c1639'/%3E%3Cpath d='M0 69 L24 46 L49 60 L75 29 L104 44 L130 32 L130 91 L0 91 Z' fill='%23ec4899' opacity='0.8'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23ffd4ea' font-size='13' font-family='Arial,sans-serif'%3ECyberpunk 1%3C/text%3E%3C/svg%3E" alt="Cyberpunk 1 (Scal3R)" title="Cyberpunk 1 (Scal3R)" data-scene-id="cyberpunk-1" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/cyberpunk-1-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/cyberpunk-1.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/cyberpunk-1-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/cyberpunk-1-input.mp4" data-video-width="190" data-video-frac="0.24" data-target="0.05182 -0.0049 0.01102" data-pan="0.29613 -0.33905" data-up="0.09842 -0.96257 -0.25254" data-orbit="54.87deg 141.6deg 87.89%" data-frustum_scale="0.68">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%23193a5a'/%3E%3Cpath d='M0 69 L30 54 L58 57 L90 35 L130 46 L130 91 L0 91 Z' fill='%2338bdf8' opacity='0.78'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23d9f4ff' font-size='14' font-family='Arial,sans-serif'%3EKITTI 05%3C/text%3E%3C/svg%3E" alt="KITTI 05 (Scal3R)" title="KITTI 05 (Scal3R)" data-scene-id="kitti-05" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-05-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-05.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-05-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-05.mp4" data-target="-0.02553 0.00185 0.00801" data-pan="0.42292 -0.32298" data-up="-0.12262 -0.99113 -0.0512" data-orbit="-174.47deg 142.95deg 104.26%" data-frustum_scale="0.68">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%232b2c55'/%3E%3Cpath d='M0 61 L28 46 L56 59 L87 33 L130 49 L130 91 L0 91 Z' fill='%23f59e0b' opacity='0.78'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23ffebc0' font-size='13' font-family='Arial,sans-serif'%3EObservatory%3C/text%3E%3C/svg%3E" alt="Oxford Observatory (Scal3R)" title="Oxford Observatory (Scal3R)" data-scene-id="oxford-observatory" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-observatory-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-observatory.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-observatory-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/oxford-observatory-input.mp4" data-video-width="210" data-video-frac="0.27" data-target="-0.07637 0.05152 0.06276" data-pan="0.2874 -0.24628" data-up="0.13015 -0.8415 0.52435" data-orbit="-145.09deg 142deg 93.24%" data-frustum_scale="0.62">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='91' viewBox='0 0 130 91'%3E%3Crect width='130' height='91' rx='8' fill='%231c3352'/%3E%3Cpath d='M0 72 L34 59 L67 63 L98 37 L130 48 L130 91 L0 91 Z' fill='%236ab0f5' opacity='0.78'/%3E%3Ctext x='12' y='24' fill='white' font-size='13' font-family='Arial,sans-serif'%3EScal3R%3C/text%3E%3Ctext x='12' y='43' fill='%23dceefe' font-size='14' font-family='Arial,sans-serif'%3EKITTI 07%3C/text%3E%3C/svg%3E" alt="KITTI 07 (Scal3R)" title="KITTI 07 (Scal3R)" data-scene-id="kitti-07" data-method-id="scatt3r" data-view="overview" data-local-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-07-thumb.png" data-glb="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-07.glb" data-cameras="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/local-examples/kitti-07-cameras.json" data-video-src="https://raw.githubusercontent.com/xbillowy/assets/main/scal3r.github.io.assets/trajectory-videos/kitti-07.mp4" data-target="-0.08701 -0.01234 0.02082" data-pan="0.49146 -0.27158" data-up="-0.11981 -0.97446 0.18992" data-orbit="-64.55deg 138.75deg 106.89%" data-frustum_scale="0.68">
+        </div>
+
+    </div>
+
+    <script>
+        let localVideoOverlay = null;
+        let activeLocalVideoUrl = '';
+        let activeLocalVideoStart = 0;
+        let useRainbowFrusta = false;
+        let currentSceneTarget = null;
+        let hostPlaybackActive = true;
+        let pagePlaybackActive = document.visibilityState === 'visible';
+        const glbPointScaleOverrides = new Map();
+        let viewerState = {
+            scene: null,
+            method: 'scatt3r',
+            view: 'overview',
+        };
+        const sceneIntroCatalog = {
+            'zju-zjg': {
+                kicker: 'Campus Capture',
+                title: 'ZJU ZJG',
+                description: 'A long campus-scale walk with dense facades, trees, and extended trajectory coverage. This web preview uses a downsampled local GLB with recovered cameras and a synchronized source-video overlay for quick inspection.'
+            },
+            'pubg-taego': {
+                kicker: 'Game World',
+                title: 'PUBG Taego',
+                description: 'Large-scale outdoor PUBG route with long roads, vegetation, and broad horizon structure. The viewer ships a local GLB, recovered cameras, and a looping clip so the scene can be inspected without any remote assets.'
+            },
+            'oxford-keble': {
+                kicker: 'Oxford Spires',
+                title: 'Oxford Keble',
+                description: 'Outdoor Oxford walk with facades, trees, and long-range loop structure. This is the most complete local example in the viewer: the full point cloud is loaded together with recovered cameras and the corresponding scene video.'
+            },
+            'kitti-00': {
+                kicker: 'Driving',
+                title: 'KITTI 00',
+                description: 'A long autonomous-driving route with strong forward motion, deep road geometry, and dense roadside layout. The web preview uses a local GLB plus recovered cameras for lightweight inspection of the scene and camera track.'
+            },
+            'cyberpunk-1': {
+                kicker: 'Synthetic',
+                title: 'Cyberpunk 1',
+                description: 'Synthetic neon-lit environment with dense high-frequency structure and heavy color variation. The local viewer keeps the scene responsive with a downsampled GLB, recovered cameras, and an aligned source-video preview.'
+            },
+            'kitti-05': {
+                kicker: 'Driving',
+                title: 'KITTI 05',
+                description: 'An urban autonomous-driving corridor with long straight motion and broad scene extent. Recovered cameras and the scene video make it easy to compare vehicle motion against the reconstructed point cloud.'
+            },
+            'oxford-observatory': {
+                kicker: 'Oxford Spires',
+                title: 'Oxford Observatory',
+                description: 'A compact Oxford route with denser local facade detail around the observatory. This local scene uses a GLB export, recovered cameras, and a synchronized preview video built from the completed image set.'
+            },
+            'kitti-07': {
+                kicker: 'Driving',
+                title: 'KITTI 07',
+                description: 'A long KITTI corridor with dense roadside geometry and persistent forward motion. The local viewer focuses on quick inspection of overall scene structure, camera placement, and source-video alignment.'
+            }
+        };
+        const baseVec4Lerp = typeof window.vec4Lerp === 'function' ? window.vec4Lerp : null;
+
+        function clamp01(value) {
+            return Math.min(1, Math.max(0, value));
+        }
+
+        function hsvToRgb(h, s, v) {
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: return [v, t, p];
+                case 1: return [q, v, p];
+                case 2: return [p, v, t];
+                case 3: return [p, q, v];
+                case 4: return [t, p, v];
+                default: return [v, p, q];
+            }
+        }
+
+        function rainbowFrustumColor(progress) {
+            const t = clamp01(Number(progress) || 0);
+            const hue = (0.5 + t * 0.8) % 1.0;
+            return hsvToRgb(hue, 1.0, 1.0);
+        }
+
+        if (baseVec4Lerp) {
+            window.vec4Lerp = function (a, b, p) {
+                if (!useRainbowFrusta) {
+                    return baseVec4Lerp(a, b, p);
+                }
+                const rgb = rainbowFrustumColor(p);
+                const startAlpha = Array.isArray(a) && a.length > 3 ? a[3] : 1.0;
+                const endAlpha = Array.isArray(b) && b.length > 3 ? b[3] : 1.0;
+                const alpha = startAlpha * (1 - p) + endAlpha * p;
+                return [rgb[0], rgb[1], rgb[2], alpha];
+            };
+        }
+
+        const pageQuery = new URLSearchParams(window.location.search);
+        const LOCAL_VIEWER_REV = pageQuery.get('build') || pageQuery.get('rev') || `${Date.now()}`;
+        const EMBED_VIEWER = pageQuery.get('embed') === '1';
+        const VIEWER_TARGET_ORIGIN = window.location.origin === 'null' ? '*' : window.location.origin;
+        const REQUESTED_SCENE = pageQuery.get('scene');
+        const REQUESTED_METHOD = pageQuery.get('method');
+        const REQUESTED_VIEW = pageQuery.get('view');
+        const REQUESTED_SHOW_VIDEO = pageQuery.get('show_video');
+        const REQUESTED_POINT_SCALE = Number.parseFloat(pageQuery.get('point_scale') || '');
+        const REQUESTED_POINT_SIZE = Number.parseFloat(pageQuery.get('point_size') || '');
+
+        function resolveLocalViewerAsset(path) {
+            return new URL(path, window.location.href).href;
+        }
+
+        function appendRevision(url) {
+            const resolved = new URL(url, window.location.href);
+            resolved.searchParams.set('rev', LOCAL_VIEWER_REV);
+            return resolved.href;
+        }
+
+        function setRainbowFrusta(enabled) {
+            useRainbowFrusta = Boolean(enabled);
+        }
+
+        function setStaticOfflineMode(enabled) {
+            window._localStaticOffline = Boolean(enabled);
+            if (window._localStaticOffline && !activeLocalVideoUrl) {
+                showVideoOverlay = false;
+            }
+            applyOverlayVisibility();
+        }
+
+        function getCurrentTargetMode() {
+            if (currentSceneTarget?.dataset?.glb) return 'glb';
+            if (currentSceneTarget?.dataset?.packedUrl || currentSceneTarget?.dataset?.scene) return 'packed';
+            return 'generic';
+        }
+
+        function formatPointSizeLabel(value, mode = getCurrentTargetMode()) {
+            const numeric = Number(value) || 0;
+            return mode === 'glb' ? `${numeric.toFixed(2)}x` : `${numeric.toFixed(2)}`;
+        }
+
+        function getVideoOverlaySizing(target = currentSceneTarget) {
+            const maxWidth = Number.parseFloat(target?.dataset?.videoWidth || '280');
+            const widthFraction = Number.parseFloat(target?.dataset?.videoFrac || '0.36');
+            return {
+                maxWidth: Number.isFinite(maxWidth) ? maxWidth : 280,
+                widthFraction: Number.isFinite(widthFraction) ? widthFraction : 0.36,
+            };
+        }
+
+        function applyLocalVideoOverlaySizing(target = currentSceneTarget) {
+            if (!localVideoOverlay) return;
+            const interactive = document.getElementById('interactive');
+            if (!interactive) return;
+            const { maxWidth, widthFraction } = getVideoOverlaySizing(target);
+            const width = Math.max(120, Math.round(Math.min(maxWidth, interactive.clientWidth * widthFraction)));
+            localVideoOverlay.style.width = `${width}px`;
+            if (localVideoOverlay.videoWidth > 0 && localVideoOverlay.videoHeight > 0) {
+                const height = Math.round(width * localVideoOverlay.videoHeight / localVideoOverlay.videoWidth);
+                localVideoOverlay.style.height = `${height}px`;
+            } else {
+                localVideoOverlay.style.removeProperty('height');
+            }
+        }
+
+        function syncVideoToggleButtons(isAvailable = true) {
+            const isActive = Boolean(showVideoOverlay);
+            const toggle = document.getElementById('video-overlay-toggle');
+            const stateLabel = document.getElementById('video-overlay-toggle-value');
+            if (toggle) {
+                toggle.classList.toggle('is-active', isActive && isAvailable);
+                toggle.disabled = !isAvailable;
+                toggle.setAttribute('aria-checked', isActive && isAvailable ? 'true' : 'false');
+            }
+            if (stateLabel) {
+                stateLabel.textContent = isAvailable ? (isActive ? 'On' : 'Off') : 'N/A';
+            }
+        }
+
+        function updatePointSizeReadout(value, mode = getCurrentTargetMode()) {
+            const label = formatPointSizeLabel(value, mode);
+            const readout = document.getElementById('point-size-value');
+            if (readout) readout.textContent = label;
+        }
+
+        function syncPointSizeSliders(value, mode = getCurrentTargetMode()) {
+            const numeric = Number(value) || 0;
+            const slider = document.getElementById('point-size-slider');
+            if (slider) slider.value = `${numeric}`;
+            updatePointSizeReadout(numeric, mode);
+        }
+
+        function getGlbPointScale(target) {
+            if (!target?.dataset?.sceneId) return 1.0;
+            const stored = glbPointScaleOverrides.get(target.dataset.sceneId);
+            if (Number.isFinite(stored)) return stored;
+            const initial = Number.parseFloat(target.dataset.glbPointScale || target.dataset.pointScale || '1.0');
+            return Number.isFinite(initial) ? initial : 1.0;
+        }
+
+        function postToGlbViewer(message) {
+            const frame = document.getElementById('glb-viewer-frame');
+            const frameWindow = frame?.contentWindow;
+            if (!frameWindow) return;
+            frameWindow.postMessage(message, VIEWER_TARGET_ORIGIN);
+        }
+
+        function isEmbedPlaybackActive() {
+            return hostPlaybackActive && pagePlaybackActive;
+        }
+
+        function applyViewerModeUi(mode = getCurrentTargetMode()) {
+            const isGlb = mode === 'glb';
+            const toolbar = document.getElementById('viewer-toolbar');
+            const pointsModeControls = document.getElementById('points-mode-controls');
+            const multiSizeControls = document.getElementById('multi-size-controls');
+            const frustaModeGroup = document.getElementById('frusta-mode-group');
+            const frustumSizeGroup = document.getElementById('frustum-size-group');
+
+            if (toolbar) {
+                toolbar.style.display = EMBED_VIEWER || isGlb ? 'none' : '';
+            }
+            if (pointsModeControls) pointsModeControls.style.display = isGlb ? 'none' : '';
+            if (multiSizeControls) multiSizeControls.style.display = isGlb ? 'none' : '';
+            if (frustaModeGroup) frustaModeGroup.style.display = isGlb ? 'none' : '';
+            if (frustumSizeGroup) frustumSizeGroup.style.display = isGlb ? 'none' : '';
+        }
+
+        function handlePointSizeControlInput(rawValue) {
+            const numeric = Math.min(4.0, Math.max(0.2, Number.parseFloat(rawValue) || 1.0));
+            const mode = getCurrentTargetMode();
+            syncPointSizeSliders(numeric, mode);
+            if (mode === 'glb' && currentSceneTarget?.dataset?.sceneId) {
+                glbPointScaleOverrides.set(currentSceneTarget.dataset.sceneId, numeric);
+                postToGlbViewer({ type: 'glb:setPointScale', pointScale: numeric });
+            } else {
+                state.point_size = numeric;
+                dirty = true;
+            }
+            updateStandaloneLink();
+        }
+
+        function applyOverlayVisibility() {
+            const canvasOverlay = document.getElementById('video-overlay');
+            const glbFrame = document.getElementById('glb-viewer-frame');
+            const glbActive = Boolean(glbFrame && glbFrame.style.display !== 'none');
+            const usingLocalVideo = Boolean(activeLocalVideoUrl);
+            const hasCanvasOverlay = !glbActive && Boolean(data && data.rgb && data.rgb.length);
+            const overlayControlsAllowed = usingLocalVideo || hasCanvasOverlay;
+            const playbackActive = isEmbedPlaybackActive();
+
+            if (canvasOverlay) {
+                canvasOverlay.style.display = (!usingLocalVideo && hasCanvasOverlay && showVideoOverlay) ? 'block' : 'none';
+            }
+
+            if (localVideoOverlay) {
+                applyLocalVideoOverlaySizing();
+                if (overlayControlsAllowed && usingLocalVideo && showVideoOverlay && playbackActive) {
+                    localVideoOverlay.style.display = 'block';
+                    const playPromise = localVideoOverlay.play();
+                    if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+                } else {
+                    localVideoOverlay.pause();
+                    localVideoOverlay.style.display = 'none';
+                }
+            }
+
+            syncVideoToggleButtons(overlayControlsAllowed);
+
+            if (showVideoOverlay && !usingLocalVideo && hasCanvasOverlay) {
+                lastOverlayFrame = -1;
+                dirty = true;
+            }
+        }
+
+        function syncLocalVideoStart() {
+            if (!localVideoOverlay || !activeLocalVideoStart) return;
+            const duration = Number(localVideoOverlay.duration) || 0;
+            const targetTime = Math.min(activeLocalVideoStart, Math.max(duration - 0.1, 0));
+            if (targetTime > 0.0 && Math.abs(localVideoOverlay.currentTime - targetTime) > 0.08) {
+                localVideoOverlay.currentTime = targetTime;
+            }
+        }
+
+        function setActiveLocalVideo(videoUrl, startTime = 0) {
+            activeLocalVideoUrl = videoUrl || '';
+            activeLocalVideoStart = Math.max(Number(startTime) || 0, 0);
+            if (localVideoOverlay) {
+                if (activeLocalVideoUrl) {
+                    if (localVideoOverlay.src !== activeLocalVideoUrl) {
+                        localVideoOverlay.src = activeLocalVideoUrl;
+                        localVideoOverlay.currentTime = 0;
+                        localVideoOverlay.addEventListener('loadedmetadata', () => {
+                            applyLocalVideoOverlaySizing();
+                            syncLocalVideoStart();
+                        }, { once: true });
+                    }
+                    applyLocalVideoOverlaySizing();
+                } else {
+                    localVideoOverlay.removeAttribute('src');
+                    localVideoOverlay.load();
+                    localVideoOverlay.style.removeProperty('height');
+                }
+            }
+            applyOverlayVisibility();
+        }
+
+        function toggleVideoOverlay() {
+            showVideoOverlay = !showVideoOverlay;
+            applyOverlayVisibility();
+            updateStandaloneLink();
+        }
+
+        function notifyParentState() {
+            if (window.parent === window) return;
+            window.parent.postMessage({
+                type: 'viewer:state',
+                scene: viewerState.scene,
+                method: viewerState.method,
+                view: viewerState.view,
+            }, VIEWER_TARGET_ORIGIN);
+        }
+
+        function setActiveThumb(target) {
+            document.querySelectorAll('.load img').forEach((img) => {
+                img.classList.toggle('is-active', img === target);
+            });
+        }
+
+        function getSceneIntro(target = currentSceneTarget) {
+            const fallbackTitle = target?.getAttribute('title')?.replace(/\s*\(Scal3R\)\s*$/, '') || 'Local Scene';
+            return sceneIntroCatalog[target?.dataset?.sceneId] || {
+                kicker: 'Interactive Scene',
+                title: fallbackTitle,
+                description: 'Local point-cloud preview with recovered cameras and optional scene-video overlay.'
+            };
+        }
+
+        function updateSceneIntro(target = currentSceneTarget) {
+            const intro = getSceneIntro(target);
+            const kickerEl = document.getElementById('viewer-scene-kicker');
+            const titleEl = document.getElementById('viewer-scene-title');
+            const descriptionEl = document.getElementById('viewer-scene-description');
+            if (kickerEl) kickerEl.textContent = intro.kicker;
+            if (titleEl) titleEl.textContent = intro.title;
+            if (descriptionEl) descriptionEl.textContent = intro.description;
+        }
+
+        function updateStandaloneLink(target = currentSceneTarget) {
+            const standaloneLink = document.getElementById('viewer-standalone-link');
+            if (!standaloneLink) return;
+            if (!EMBED_VIEWER) {
+                standaloneLink.hidden = true;
+                return;
+            }
+            standaloneLink.hidden = false;
+            const nextUrl = new URL('viewer.html', window.location.href);
+            nextUrl.searchParams.set('build', LOCAL_VIEWER_REV);
+            if (target?.dataset?.sceneId) nextUrl.searchParams.set('scene', target.dataset.sceneId);
+            if (target?.dataset?.methodId) nextUrl.searchParams.set('method', target.dataset.methodId);
+            if (target?.dataset?.view) nextUrl.searchParams.set('view', target.dataset.view);
+            nextUrl.searchParams.set('show_video', showVideoOverlay ? '1' : '0');
+            if (target?.dataset?.glb) {
+                nextUrl.searchParams.set('point_scale', `${getGlbPointScale(target)}`);
+            } else if (typeof state !== 'undefined' && Number.isFinite(state?.point_size)) {
+                nextUrl.searchParams.set('point_size', `${state.point_size}`);
+            }
+            standaloneLink.href = nextUrl.href;
+        }
+
+        function updateViewerStateFromTarget(target) {
+            if (!target) return;
+            currentSceneTarget = target;
+            viewerState = {
+                scene: target.dataset.sceneId || viewerState.scene,
+                method: target.dataset.methodId || 'scatt3r',
+                view: target.dataset.view || viewerState.view || 'overview',
+            };
+            setActiveThumb(target);
+            applyLocalVideoOverlaySizing(target);
+            updateSceneIntro(target);
+            updateStandaloneLink(target);
+            applyViewerModeUi();
+            notifyParentState();
+        }
+
+        function findThumbForState(nextState = {}) {
+            const thumbs = Array.from(document.querySelectorAll('.load img[data-scene-id]'));
+            if (!thumbs.length) return null;
+
+            const wantedScene = nextState.scene || viewerState.scene;
+            const wantedMethod = nextState.method || viewerState.method || 'scatt3r';
+            const wantedView = nextState.view || viewerState.view || 'overview';
+
+            return thumbs.find((img) => (
+                img.dataset.sceneId === wantedScene &&
+                (img.dataset.methodId || 'scatt3r') === wantedMethod &&
+                (img.dataset.view || 'overview') === wantedView
+            )) || thumbs.find((img) => (
+                img.dataset.sceneId === wantedScene &&
+                (img.dataset.methodId || 'scatt3r') === wantedMethod
+            )) || thumbs.find((img) => img.dataset.sceneId === wantedScene) || thumbs[0];
+        }
+
+        function preparePointSceneUi(target) {
+            document.getElementById('glb-viewer-frame').style.display = 'none';
+            document.getElementById('megaview').style.visibility = '';
+            document.getElementById('viewer-toolbar').style.display = '';
+            applyViewerModeUi('packed');
+            applyOverlayVisibility();
+            const frustaMode = target.dataset.frusta_mode || 'all';
+            ['all', 'current', 'none'].forEach((m) => document.getElementById('frusta-' + m).classList.remove('active-frusta'));
+            document.getElementById('frusta-' + frustaMode).classList.add('active-frusta');
+            setOtherPoints(target.dataset.other_points || 'past');
+            const otherSizeSlider = document.getElementById('other-point-size-slider');
+            if (otherSizeSlider && target.dataset.other_point_size) otherSizeSlider.value = target.dataset.other_point_size;
+            const curSizeSlider = document.getElementById('point-size-slider');
+            const pointSizeValue = target.dataset.point_size ? Number.parseFloat(target.dataset.point_size) : state.point_size;
+            if (curSizeSlider && Number.isFinite(pointSizeValue)) {
+                syncPointSizeSliders(pointSizeValue, 'packed');
+            }
+        }
+
+        function loadGlbScene(target) {
+            _localSceneActive = false;
+            setStaticOfflineMode(false);
+            setRainbowFrusta(false);
+            const pointScale = getGlbPointScale(target);
+            setActiveLocalVideo(
+                target.dataset.videoSrc ? resolveLocalViewerAsset(target.dataset.videoSrc) : '',
+                target.dataset.videoStart || 0,
+            );
+            const frame = document.getElementById('glb-viewer-frame');
+            const ds = target.dataset;
+            let glbUrl = appendRevision(resolveLocalViewerAsset('glb-viewer.html')) + '&src=' + encodeURIComponent(appendRevision(resolveLocalViewerAsset(ds.glb)));
+            if (EMBED_VIEWER) glbUrl += '&embed=1';
+            if (ds.orbit) glbUrl += '&orbit=' + encodeURIComponent(ds.orbit);
+            if (ds.cameras) glbUrl += '&cameras=' + encodeURIComponent(appendRevision(resolveLocalViewerAsset(ds.cameras)));
+            if (ds.target) glbUrl += '&target=' + encodeURIComponent(ds.target);
+            if (ds.pan) glbUrl += '&pan=' + encodeURIComponent(ds.pan);
+            if (ds.up) glbUrl += '&up=' + encodeURIComponent(ds.up);
+            if (ds.frustum_scale) glbUrl += '&frustum_scale=' + encodeURIComponent(ds.frustum_scale);
+            if (ds.shadow_intensity !== undefined) glbUrl += '&shadow_intensity=' + encodeURIComponent(ds.shadow_intensity);
+            glbUrl += '&point_scale=' + encodeURIComponent(`${pointScale}`);
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) loadingEl.style.display = 'flex';
+            if (window._glbLoadInterval) clearInterval(window._glbLoadInterval);
+            frame.src = glbUrl;
+            window._glbLoadInterval = setInterval(() => {
+                try {
+                    const mv = frame.contentDocument && frame.contentDocument.getElementById('mv');
+                    if (mv && mv.loaded) {
+                        if (loadingEl) loadingEl.style.display = 'none';
+                        postToGlbViewer({ type: 'glb:setPointScale', pointScale });
+                        clearInterval(window._glbLoadInterval);
+                    }
+                } catch (e) {}
+            }, 200);
+            frame.style.display = 'block';
+            document.getElementById('megaview').style.visibility = 'hidden';
+            applyViewerModeUi('glb');
+            syncPointSizeSliders(pointScale, 'glb');
+            applyOverlayVisibility();
+        }
+
+        async function loadPackedSceneFromUrl(packedUrl, override) {
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) loadingEl.style.display = 'flex';
+            lastOverlayFrame = -1;
+            data = {};
+            resetState(state, parameterSpec.state, override);
+            resetState(camera, parameterSpec.camera, override);
+            resetState(colors, parameterSpec.colors);
+            if (override.frustum_color) colors.frustum = override.frustum_color;
+            if (override.other_frusta_color) colors.other_frusta = override.other_frusta_color;
+            if (override.other_frusta_end_color) colors.other_frusta_end = override.other_frusta_end_color;
+            if (override.path_color) colors.path = override.path_color;
+            console.log(`Loading local packed scene: ${packedUrl}`);
+            const packedData = await fetchPacked(packedUrl);
+            if (!packedData['data.json']) {
+                if (loadingEl) loadingEl.style.display = 'none';
+                console.error(`Missing data.json in packed scene: ${packedUrl}`);
+                return;
+            }
+
+            data = JSON.parse(await packedData['data.json'].text());
+            data.rgb = [];
+            data.depth = [];
+            data.depth_scale = 20;
+            data.path = buildPathBuffer(data.poses);
+
+            if (data.frustum_size !== undefined && !('frustum_size' in override)) {
+                state.frustum_size = data.frustum_size;
+            }
+            const frustumSlider = document.getElementById('frustum-size-slider');
+            if (frustumSlider) frustumSlider.value = state.frustum_size;
+            const pointSizeSlider = document.getElementById('point-size-slider');
+            if (pointSizeSlider) syncPointSizeSliders(state.point_size, 'packed');
+            const otherPointSizeSlider = document.getElementById('other-point-size-slider');
+            if (otherPointSizeSlider) otherPointSizeSlider.value = state.other_point_size;
+
+            if (data.camera_dist !== undefined && !('distance' in override)) {
+                camera.distance = data.camera_dist;
+            }
+            if (data.camera_forward !== undefined && !('forward' in override)) {
+                camera.forward = data.camera_forward;
+            }
+
+            for (let i = 0; i < data.poses.length; i++) {
+                data.rgb[i] = loadTexture(packedData[`rgb_${pad5(i)}.png`]);
+                data.depth[i] = loadDepth(packedData[`depthrgb_${pad5(i)}.png`]);
+            }
+            dirty = true;
+        }
+
+        // Wheel/pan interceptors removed — with pose[0]=identity in the
+        // rebuilt .bin, ZipMap's native camera handles zoom and pan correctly.
+        let _localSceneActive = false;
+        function installWheelInterceptor() {}
+
+        function setFrustaMode(mode) {
+            state.other_frusta = (mode === 'all');
+            state.draw_frustum = (mode !== 'none');
+            dirty = true;
+            ['all', 'current', 'none'].forEach((m) => document.getElementById('frusta-' + m).classList.remove('active-frusta'));
+            document.getElementById('frusta-' + mode).classList.add('active-frusta');
+        }
+
+        function setOtherPoints(mode) {
+            state.other_points = mode;
+            dirty = true;
+            ['no', 'points', 'past'].forEach((m) => document.getElementById('other-points-' + m).classList.remove('active-frusta'));
+            document.getElementById('other-points-' + mode).classList.add('active-frusta');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            localVideoOverlay = document.getElementById('local-video-overlay');
+            installWheelInterceptor();
+            if (REQUESTED_SHOW_VIDEO !== null) {
+                showVideoOverlay = !['0', 'false', 'off'].includes(String(REQUESTED_SHOW_VIDEO).toLowerCase());
+            }
+            document.getElementById('point-size-slider')?.addEventListener('input', (event) => {
+                handlePointSizeControlInput(event.target.value);
+            });
+            document.getElementById('video-overlay-toggle')?.addEventListener('click', () => {
+                toggleVideoOverlay();
+            });
+            window.addEventListener('resize', () => applyLocalVideoOverlaySizing());
+            document.addEventListener('visibilitychange', () => {
+                pagePlaybackActive = document.visibilityState === 'visible';
+                applyOverlayVisibility();
+            });
+            document.querySelectorAll('.load img[data-local-src]').forEach((img) => {
+                img.src = resolveLocalViewerAsset(img.dataset.localSrc);
+            });
+            syncVideoToggleButtons(false);
+            applyOverlayVisibility();
+
+            const rail = document.querySelector('.load');
+            rail.addEventListener('click', function (event) {
+                const localPackedTarget = event.target && event.target.closest && event.target.closest('img[data-packed-url]');
+                if (!localPackedTarget) return;
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                updateViewerStateFromTarget(localPackedTarget);
+                _localSceneActive = true;
+                setStaticOfflineMode(localPackedTarget.dataset.static_offline === 'true');
+                setRainbowFrusta(localPackedTarget.dataset.rainbow_frusta === 'true');
+                setActiveLocalVideo(
+                    localPackedTarget.dataset.videoSrc ? resolveLocalViewerAsset(localPackedTarget.dataset.videoSrc) : '',
+                    localPackedTarget.dataset.video_start || 0,
+                );
+                preparePointSceneUi(localPackedTarget);
+                loadPackedSceneFromUrl(resolveLocalViewerAsset(localPackedTarget.dataset.packedUrl), localPackedTarget.dataset);
+            }, true);
+
+            rail.addEventListener('click', function (event) {
+                if (event.target.dataset && event.target.dataset.glb) {
+                    updateViewerStateFromTarget(event.target);
+                    loadGlbScene(event.target);
+                } else if (event.target.dataset && event.target.dataset.scene) {
+                    updateViewerStateFromTarget(event.target);
+                    _localSceneActive = false;
+                    setStaticOfflineMode(false);
+                    setRainbowFrusta(false);
+                    setActiveLocalVideo('');
+                    preparePointSceneUi(event.target);
+                }
+            });
+
+            window.addEventListener('message', function (event) {
+                if (VIEWER_TARGET_ORIGIN !== '*' && event.origin !== window.location.origin) return;
+                const data = event.data;
+                if (!data || typeof data !== 'object') return;
+
+                if (data.type === 'viewer:setPlaybackActive') {
+                    hostPlaybackActive = data.active !== false;
+                    applyOverlayVisibility();
+                    return;
+                }
+
+                if (data.type === 'viewer:setScene' || data.type === 'viewer:setMethod' || data.type === 'viewer:setView') {
+                    const target = findThumbForState({
+                        scene: data.type === 'viewer:setScene' ? data.scene : viewerState.scene,
+                        method: data.type === 'viewer:setMethod' ? data.method : viewerState.method,
+                        view: data.type === 'viewer:setView' ? data.view : viewerState.view,
+                    });
+                    if (target) {
+                        target.click();
+                    }
+                }
+            });
+
+            const defaultTarget = findThumbForState({
+                scene: REQUESTED_SCENE || 'oxford-keble',
+                method: REQUESTED_METHOD || 'scatt3r',
+                view: REQUESTED_VIEW || 'detail'
+            }) || rail.querySelector('img[data-glb]');
+            if (defaultTarget) {
+                const activateDefaultTarget = () => {
+                    if (defaultTarget.dataset.sceneId && Number.isFinite(REQUESTED_POINT_SCALE)) {
+                        glbPointScaleOverrides.set(defaultTarget.dataset.sceneId, Math.min(4.0, Math.max(0.2, REQUESTED_POINT_SCALE)));
+                    } else if (Number.isFinite(REQUESTED_POINT_SIZE) && typeof state !== 'undefined') {
+                        state.point_size = Math.min(4.0, Math.max(0.2, REQUESTED_POINT_SIZE));
+                    }
+                    defaultTarget.click();
+                };
+                window.addEventListener('load', () => window.setTimeout(activateDefaultTarget, 0), { once: true });
+            }
+        });
+
+    </script>
+</body>
+</html>

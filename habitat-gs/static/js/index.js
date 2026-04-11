@@ -109,6 +109,7 @@ function initGalleryShowcase() {
   var band = document.getElementById("gallery-showcase-band");
   var showcase = document.getElementById("gallery-showcase");
   var preview = showcase ? showcase.querySelector(".gallery-showcase-preview") : null;
+  var loadingOverlay = document.getElementById("gallery-showcase-loading");
   var video = document.getElementById("gallery-showcase-video");
   var toggle = document.getElementById("gallery-showcase-toggle");
   var toggleIcon = document.getElementById("gallery-showcase-toggle-icon");
@@ -124,9 +125,6 @@ function initGalleryShowcase() {
   var expanded = false;
   var pendingAutoplay = false;
   var loadRequestId = 0;
-  var defaultPreviewSrc = "./static/videos/noinput_videos/preview.png";
-  var loadingPreviewSrc = "./static/images/loading.svg";
-  var defaultPreviewAlt = "Preview image for the Habitat-GS gallery scenes";
 
   function applyPlaybackRate() {
     video.defaultPlaybackRate = 0.45;
@@ -134,9 +132,9 @@ function initGalleryShowcase() {
   }
 
   function setLoadingPlaceholder(isLoading) {
-    preview.setAttribute("src", isLoading ? loadingPreviewSrc : defaultPreviewSrc);
-    preview.setAttribute("alt", isLoading ? "Loading gallery scene" : defaultPreviewAlt);
-    preview.classList.toggle("is-loading", isLoading);
+    if (loadingOverlay) {
+      loadingOverlay.classList.toggle("is-visible", isLoading);
+    }
     showcase.classList.toggle("is-video-loading", isLoading);
   }
 

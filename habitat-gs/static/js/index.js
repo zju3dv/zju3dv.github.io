@@ -158,11 +158,6 @@ function initGalleryShowcase() {
   }
 
   function waitForVideoReady(requestId) {
-    if (!expanded) {
-      setLoadingPlaceholder(false);
-      return;
-    }
-
     if (video.readyState >= 2) {
       handleVideoReady(requestId);
       return;
@@ -226,9 +221,7 @@ function initGalleryShowcase() {
 
     if (video.getAttribute("src") !== scene.video) {
       video.pause();
-      if (expanded) {
-        setLoadingPlaceholder(true);
-      }
+      setLoadingPlaceholder(true);
       video.setAttribute("src", scene.video);
       video.load();
     }
@@ -245,12 +238,6 @@ function initGalleryShowcase() {
 
   function collapseShowcase() {
     expanded = false;
-    pendingAutoplay = false;
-    video.pause();
-    if (video.currentTime) {
-      video.currentTime = 0;
-    }
-    setLoadingPlaceholder(false);
     updateChrome();
   }
 
@@ -264,7 +251,6 @@ function initGalleryShowcase() {
 
   dots.forEach(function(dot) {
     dot.addEventListener("click", function() {
-      if (!expanded) return;
       var index = parseInt(dot.dataset.index, 10);
       if (Number.isNaN(index)) return;
       updateScene(index, true);
@@ -273,7 +259,7 @@ function initGalleryShowcase() {
 
   video.addEventListener("loadedmetadata", applyPlaybackRate);
 
-  updateScene(0, false);
+  updateScene(0, true);
   updateChrome();
 }
 

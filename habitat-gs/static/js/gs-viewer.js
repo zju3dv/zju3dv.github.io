@@ -682,7 +682,6 @@ export class GaussianViewer {
         this._loading = false;
         setTimeout(() => {
             if (loadingEl) loadingEl.style.display = 'none';
-            this.container.focus();
         }, 300);
     }
 

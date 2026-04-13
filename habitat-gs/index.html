@@ -220,8 +220,9 @@
     <nav class="tabs is-toggle is-toggle-rounded is-centered is-size-5 jump-tabs" aria-label="Jump to section">
       <ul>
         <li><a href="#intro">Introduction</a></li>
-        <li><a href="#demo">GS Scenes and Avatars</a></li>
+        <li><a href="#demo">GS Gallery</a></li>
         <li><a href="#viewer">Interactive Viewer</a></li>
+        <li><a href="#agent">HabitatAgent</a></li>
         <li><a href="#method">Method</a></li>
         <li><a href="#architecture">Architecture</a></li>
       </ul>
@@ -629,6 +630,38 @@
 
   window._gsLoadScene(0);
 </script>
+
+<section class="section" id="agent">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile" style="margin-top: 4rem">🦞 HabitatAgent</h2>
+        <div class="content has-text-centered" style="margin-top:-0.3rem; margin-bottom: -0.4rem;">
+          <p>
+            HabitatAgent is an LLM-powered agent system built on top of Habitat-GS, enabling natural-language navigation, <br>MCP tool integration, and interactive scene exploration via a terminal chat interface.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <div class="section-content-wide">
+          <div class="toi-video-shell featured-media-shell is-loading" id="agent-video-shell"
+            style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div class="toi-video-status" id="agent-video-status" aria-live="polite">
+              Loading HabitatAgent demo...
+            </div>
+            <video autoplay muted loop playsinline preload="none" id="agent-video" data-lazy="true"
+              data-loading-shell="agent-video-shell" data-loading-status="agent-video-status"
+              data-loading-error="Unable to load the HabitatAgent demo right now.">
+              <source data-src="./static/videos/agent_demo.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="method">
   <div class="container is-max-widescreen">

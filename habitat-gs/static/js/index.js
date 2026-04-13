@@ -98,6 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Initialize Mesh vs GS comparison
   initVideoComparison();
 
+  // Keep loading placeholders visible until deferred videos are playable.
+  initLoadingShellVideos();
+
   // Lazy-load non-hero videos
   initLazyVideos();
 
@@ -560,6 +563,56 @@ function initLazyVideos() {
 
   lazyVideos.forEach(function(video) {
     observer.observe(video);
+  });
+}
+
+function initLoadingShellVideos() {
+  var shellVideos = document.querySelectorAll('video[data-loading-shell]');
+  if (!shellVideos.length) return;
+
+  shellVideos.forEach(function(video) {
+    var shell = document.getElementById(video.dataset.loadingShell);
+    var status = video.dataset.loadingStatus ? document.getElementById(video.dataset.loadingStatus) : null;
+    var errorMessage = video.dataset.loadingError || "Unable to load this video right now.";
+
+    if (!shell) {
+      return;
+    }
+
+    var resolved = false;
+
+    function cleanup() {
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+      video.removeEventListener("error", onError);
+    }
+
+    function onReady() {
+      if (resolved) return;
+      resolved = true;
+      cleanup();
+      shell.classList.remove("is-loading");
+    }
+
+    function onError() {
+      if (resolved) return;
+      resolved = true;
+      cleanup();
+      if (status) {
+        status.textContent = errorMessage;
+      }
+      shell.classList.add("is-loading");
+    }
+
+    if (video.readyState >= 2) {
+      shell.classList.remove("is-loading");
+      return;
+    }
+
+    shell.classList.add("is-loading");
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    video.addEventListener("error", onError);
   });
 }
 

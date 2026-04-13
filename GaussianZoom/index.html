@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="GaussianZoom: Progressive Zoom-in Generative 3D Gaussian Splatting with Geometric and Semantic Guidance">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/favicon.png" />
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.png" />
+
+  <title>GaussianZoom: Progressive Zoom-in Generative 3D Gaussian Splatting with Geometric and Semantic Guidance</title>
+
+  <!-- <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+  <script src="js/dics/dics.original.js"></script>
+  <script src="js/event_handler.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" href="js/dics/dics.original.css">
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css" />
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+          <img src="https://raw.githubusercontent.com/shijialew/open_access_assets/main/GaussianZoom-CVPR2026/logo.png"
+            alt="GaussianZoom" style="width: 60%;" />
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          Progressive Zoom-in Generative 3D Gaussian Splatting with Geometric and Semantic Guidance
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">CVPR 2026</h1>
+        <div class="is-size-5 publication-authors">
+          <!-- <div class="is-size-5 publication-authors is-flex is-flex-wrap-wrap has-text-centered"></div> -->
+          <div class="author-block">
+            <a href="https://github.com/shijialew">Jiale Shi</a>,
+          </div>
+          <div class="author-block">
+            <a href="https://scholar.google.com/citations?user=0CJPK3IAAAAJ&hl=zh-CN">Jiarui Hu</a>,
+          </div>
+          <div class="author-block">
+            <a href="https://github.com/YZsZY">Zesong Yang</a><sup>‡</sup>,
+          </div>
+          <div class="author-block">
+            <a>Kaixuan Luan</a>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>†</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block">State Key Laboratory of CAD & CG, Zhejiang University </span>
+          <br>
+          ‡ denotes Project Lead, † denotes Corresponding Author
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Supplementary</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <div class="has-text-centered">
+        <img style="width: 60%;"
+          src="https://raw.githubusercontent.com/shijialew/open_access_assets/main/GaussianZoom-CVPR2026/teaser.png"
+          alt="GaussianZoom teaser." />
+      </div>
+      <p style="width: 60%; margin: 0 auto;">
+        GaussianZoom progressively magnifies 3D scenes from low-resolution inputs, reconstructing them into multi-view
+        consistent and
+        detail-rich representations. The expandable continuous Level-of-Detail hierarchy organizes primitives across
+        scales, enabling smooth and alias-free rendering throughout the zoom-in process.
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce GaussianZoom, a generative zoom-in 3D reconstruction system with an iterative progressive
+              framework that combines geometry-consistent scene modeling and multi-scale semantic reasoning to enable
+              high-fidelity extreme zoom-in rendering from low-resolution inputs.
+              To achieve this, we develop a novel multi-view consistent super-resolution module with depth-based feature
+              warping and VLM-driven detail synthesis, ensuring accurate multi-view correspondence while enriching
+              fine-scale appearance beyond the observed resolution.
+              To support zooming across large magnification ranges, we further introduce a new expandable continuous
+              Level-of-Detail hierarchy that dynamically modulates Gaussian visibility for smooth, alias-free
+              cross-scale rendering. Experiments on Mip-NeRF360 and Tanks&Temples demonstrate that GaussianZoom achieves
+              superior perceptual quality, multi-view consistency, and robustness under extreme magnification,
+              establishing a strong baseline for generative zoom-in 3D scene reconstruction.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <!-- Paper video. -->
+
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div> -->
+
+
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Method Overview</h2>
+          <div class="has-text-centered">
+            <img style="width: 100%;"
+              src="https://raw.githubusercontent.com/shijialew/open_access_assets/main/GaussianZoom-CVPR2026/pipeline.png"
+              alt="GaussianZoom Pipeline." />
+          </div>
+          <p style="width: 100%; margin: 0 auto;">
+            Our framework jointly leverages geometry-aware alignment, semantic priors, and a continuous Level-of-Detail
+            (LoD) representation to perform generative zoom-in reconstruction. Starting from a coarse 3D Gaussian
+            Splatting model, we derive per-view depth maps that enable depth-based feature warping, providing accurate
+            multi-view correspondence. In parallel, coarse and zoomed-in renderings are processed by a vision-language
+            model to infer semantic cues describing fine-scale appearance. These geometry-aligned features and semantic
+            descriptions together condition the super-resolution network, synthesizing high-resolution zoomed views with
+            plausible, view-consistent details. The resulting images are used to update a continuous LoD hierarchy,
+            where opacity of each primitive is dynamically adjusted to enable alias-free rendering and smooth
+            transitions across zoom levels.
+          </p>
+        </div>
+      </div>
+
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Real-Time Physics-Based Animation</h2>
+          <div class="has-text-centered">
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source
+                src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/animation.mp4"
+                type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div> -->
+
+
+
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Generalizable Self-Supervised Neural Skinning</h2>
+          <div class="has-text-centered">
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source
+                src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/rignet.mp4"
+                type="video/mp4">
+            </video>
+
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source
+                src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/shapenet.mp4"
+                type="video/mp4">
+            </video>
+
+            <video id="functions" autoplay controls muted loop playsinline height="100%">
+              <source
+                src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/compare.mp4"
+                type="video/mp4">
+            </video>
+
+          </div>
+        </div>
+      </div> -->
+
+      <style>
+        #results-carousel .carousel-nav-left,
+        #results-carousel .carousel-nav-right,
+        #results-carousel .carousel-navigation {
+          display: none !important;
+        }
+
+
+        #results-carousel .slick-prev,
+        #results-carousel .slick-next,
+        #results-carousel .swiper-button-prev,
+        #results-carousel .swiper-button-next {
+          display: none !important;
+        }
+      </style>
+
+
+      <style>
+        .slider-navigation-previous,
+        .slider-navigation-next {
+          display: none !important;
+        }
+
+        .carousel-nav-left,
+        .carousel-nav-right,
+        .carousel-navigation {
+          display: none !important;
+        }
+
+        .hero-body button[class*="navigation"] {
+          display: none !important;
+        }
+      </style>
+    </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container content is-max-desktop">
+      <hr />
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+@inproceedings{shi2026gaussianzoom,
+  title     = {GaussianZoom: Progressive Zoom-in Generative 3D Gaussian Splatting with Geometric and Semantic Guidance},
+  author    = {Shi, Jiale and Hu, Jiarui and Yang, Zesong and Luan, Kaixuan and Bao, Hujun and Cui, Zhaopeng},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}
+    </code></pre>
+
+
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        Thanks to <a href="https://www.flaticon.com/" target="_blank">Flaticon</a> for providing beautiful icons.
+        The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a>,
+        <a href="https://ingra14m.github.io/Deformable-Gaussians/" target="_blank">Deformable-GS</a> and <a
+          href="https://research.nvidia.com/labs/dir/neuralangelo/" target="_blank">Neuralangelo</a>.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFMMMPXL0M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TFMMMPXL0M');
+  </script>
+
+  <script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+
+</html>

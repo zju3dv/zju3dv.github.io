@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Habitat-GS: A High-Fidelity Navigation Simulator with Dynamic Gaussian Splatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Embodied Navigation, Embodied Simulation, Computer Vision, Gaussian Splatting">
+  <meta name="application-name" content="Habitat-GS">
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.ico">
+  <title>
+    Habitat-GS: A High-Fidelity Navigation Simulator with Dynamic Gaussian Splatting
+  </title>
+  <link rel="canonical" href="https://zju3dv.github.io/habitat-gs/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Habitat-GS">
+  <meta property="og:site_name" content="Habitat-GS">
+  <meta property="og:url" content="https://zju3dv.github.io/habitat-gs/">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Habitat-GS",
+      "alternateName": "A High-Fidelity Navigation Simulator with Dynamic Gaussian Splatting",
+      "url": "https://zju3dv.github.io/habitat-gs/"
+    }
+  </script>
+  <link rel="preload" as="video" href="./static/videos/teaser-small.mp4" type="video/mp4" media="(min-width: 1024px)">
+  <link rel="preload" as="video" href="./static/videos/teaser-mobile-small.mp4" type="video/mp4"
+    media="(max-width: 1023px)">
+
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+
+  <!-- <link rel="apple-touch-icon" sizes="57x57"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-180x180.png" /> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <!-- <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-196x196.png"
+    sizes="196x196" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-192x192.png"
+    sizes="192x192" /> -->
+  <!-- <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-128.png" sizes="128x128" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-16x16.png" sizes="16x16" /> -->
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/select.js"></script>
+  <style>
+    .hero-cover-desktop {
+      background-color: #000000;
+      background-image: url("./static/videos/teaser.png");
+      background-size: cover;
+      color: #fff;
+    }
+
+    .hero-cover-touch {
+      background-color: #000000;
+      background-image: url("./static/videos/teaser-mobile.png");
+      background-size: cover;
+      color: #fff;
+    }
+
+
+    .column-my {
+      flex: 1;
+      /* Ensures both columns take up equal width */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .half {
+      flex: 1;
+      /* Each child takes half the height of the column */
+      display: flex;
+      /* Make it a flex container */
+      justify-content: center;
+      /* Center horizontally */
+      align-items: center;
+      /* Center vertically */
+      text-align: center;
+      /* Align text within the element */
+    }
+  </style>
+</head>
+
+<script type="text/javascript">
+  var sc_project = 12835460;
+  var sc_invisible = 1;
+  var sc_security = "d2e3b553"; 
+</script>
+<script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript>
+  <div class="statcounter"><a title="free hit counter" href="https://statcounter.com/" target="_blank"><img
+        class="statcounter" src="https://c.statcounter.com/12835460/0/d2e3b553/1/" alt="free hit counter"
+        referrerPolicy="no-referrer-when-downgrade"></a></div>
+</noscript>
+<!-- End of Statcounter Code -->
+
+<section class="hero hero-cover-desktop is-link is-hidden-touch is-fullheight video"
+  style="overflow: hidden; position:relative;">
+  <div class="hero-video is-hidden-touch"
+    style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+    <video playsinline autoplay muted loop preload="auto">
+      <source src="./static/videos/teaser-small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video is-hidden-desktop is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop preload="auto">
+      <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay">
+  </div>
+
+  <div class="hero-head is-hidden-touch">
+    <header class="navbar is-hidden-touch">
+      <div class="container is-size-5">
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item pl-4 pr-4" href="./static/files/Habitat-GS.pdf">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv (Coming soon)</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/github.png" alt="GitHub" />
+              </span>
+              <span>Code (Coming soon)</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/huggingface.png" alt="Huggingface" />
+              </span>
+              <span>Dataset (Coming soon)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!--  Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6rem;">
+        Habitat-GS:
+      </h1>
+      <h1 class="title is-1 publication-title publication-title--hero is-size-1-mobile">
+        <span class="publication-title__lead">A High-Fidelity Navigation Simulator</span> <br>
+        <span class="publication-title__tail">with Dynamic Gaussian Splatting</span>
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem; margin-top: 1.5rem">
+        arXiv preprint 2026
+      </h1>
+      <h1 class="is-2 is-size-4-mobile" style="font-size: 2rem; opacity: 100%;">
+        <a href="https://ziyuan-xia.com">Ziyuan Xia<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://github.com/echo636">Jingyi Xu<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://github.com/Kinchite17">Chong Cui<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://yuanhongyu.xyz">Yuanhong Yu<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://jzhzhang.github.io">Jiazhao Zhang<sup class="is-size-6-mobile">2</sup></a>
+        <a href="https://yanqswhu.top">Qingsong Yan<sup class="is-size-6-mobile">3</sup></a>
+        <br>
+        <a href="https://orcid.org/0000-0002-8676-6546">Tao Ni<sup class="is-size-6-mobile">4</sup></a>
+        <a href="https://scholar.google.com/citations?user=4YOIYGwAAAAJ&hl=en">Junbo Chen<sup
+            class="is-size-6-mobile">4</sup></a>
+        <a href="https://xzhou.me">Xiaowei Zhou<sup class="is-size-6-mobile">1</sup></a>
+        <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu<sup class="is-size-6-mobile">5</sup></a>
+        <a href="https://pengsida.net">Sida Peng<sup class="is-size-6-mobile">1,&dagger;</sup></a>
+      </h1>
+      <br>
+      <h1 class="is-3 is-size-5-mobile affiliation-line" style="font-size: 1.75rem; opacity: 100%;">
+        <span class="affiliation-item">1. Zhejiang University</span>
+        <span class="affiliation-item">2. Peking University</span>
+        <span class="affiliation-item">3. XGRIDS</span>
+        <span class="affiliation-item">4. UDeer AI</span>
+        <span class="affiliation-item">5. Shenzhen University</span>
+      </h1>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot is-hidden-mobile jump-nav">
+    <nav class="tabs is-toggle is-toggle-rounded is-centered is-size-5 jump-tabs" aria-label="Jump to section">
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#demo">GS Scenes and Avatars</a></li>
+        <li><a href="#viewer">Interactive Viewer</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="hero hero-cover-touch is-hidden-desktop is-link is-fullheight video"
+  style="overflow: hidden; position:relative;">
+
+  <!-- <div class="hero-video is-hidden-desktop is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop>
+      <source src="/rose4d/static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div>  -->
+
+  <div class="hero-video is-inline-block-mobile"
+    style="height: 172.28571428vw; width: 100%; min-width: 100%;min-height: 56.25vw;">
+    <video playsinline autoplay muted loop preload="auto">
+      <source src="./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div>
+
+
+  <div class="overlay">
+  </div>
+
+  <!--  Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 6rem;">
+        Habitat-GS:
+      </h1>
+      <h1 class="title is-1 publication-title publication-title--hero is-size-1-mobile">
+        <span class="publication-title__lead">A High-Fidelity Navigation Simulator</span> <br>
+        <span class="publication-title__tail">with Dynamic Gaussian Splatting</span>
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 2rem;">
+        arXiv preprint 2026
+      </h1>
+      <h1 class="is-2 is-size-4-mobile" style="font-size: 2rem; opacity: 100%;">
+        <a href="https://ziyuan-xia.com">Ziyuan Xia<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://github.com/echo636">Jingyi Xu<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://github.com/Kinchite17">Chong Cui<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://yuanhongyu.xyz">Yuanhong Yu<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://jzhzhang.github.io">Jiazhao Zhang<sup class="is-size-6-mobile">2</sup></a>
+        <a href="https://yanqswhu.top">Qingsong Yan<sup class="is-size-6-mobile">3</sup></a>
+        <br>
+        <a href="https://orcid.org/0000-0002-8676-6546">Tao Ni<sup class="is-size-6-mobile">4</sup></a>
+        <a href="https://scholar.google.com/citations?user=4YOIYGwAAAAJ&hl=en">Junbo Chen<sup
+            class="is-size-6-mobile">4</sup></a>
+        <a href="https://xzhou.me">Xiaowei Zhou<sup class="is-size-6-mobile">1</sup></a>
+        <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao<sup class="is-size-6-mobile">1</sup></a>
+        <a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu<sup class="is-size-6-mobile">5</sup></a>
+        <a href="https://pengsida.net">Sida Peng<sup class="is-size-6-mobile">1,&dagger;</sup></a>
+      </h1>
+    </div>
+  </div>
+
+  </div>
+
+</section>
+
+<section class="section is-medium" id="intro">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-justified">
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: -2rem; margin-bottom: 3rem">TL; DR
+        </h2>
+        <h2 class="subtitle">
+          We present <strong>Habitat-GS</strong>, a navigation-centric embodied AI simulator based on
+          <strong>3DGS</strong>
+          and <strong>dynamic gaussian avatars</strong>. Compared to traditional mesh-based simulators, our simulation
+          environment
+          delivers <strong>photorealistic</strong> rendering. Habitat-GS is extended from facebook research's <a
+            href="https://github.com/facebookresearch/habitat-sim">Habitat-Sim</a>, and we integrated 3DGS scene
+          rendering backend and a drivable gaussian avatar module into it. Our simulation platform is fully
+          <strong>open-source</strong>
+          and
+          maintains <strong>complete compatibility</strong> with <a href="https://aihabitat.org">Habitat</a> ecosystem.
+          By introducing gaussian splatting to
+          embodied
+          simulators, we hope our work can facilitate future embodied AI research.
+        </h2>
+        <br>
+      </div>
+    </div>
+    <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 4rem;">Comparison</h2>
+    <!-- Mesh vs GS Side-by-Side Comparison -->
+    <div class="video-comparison" id="video-comparison">
+      <div class="video-comparison-item" data-side="mesh">
+        <div class="video-comparison-label" style="font-size: 1.8rem;">Habitat-Sim (Mesh-based)</div>
+        <div class="video-comparison-media">
+          <video autoplay muted loop playsinline preload="none" poster="./static/videos/settings/preview_imgs/mesh.png">
+            <source src="./static/videos/settings/mesh.mp4" type="video/mp4">
+          </video>
+          <canvas class="magnifier-canvas"></canvas>
+        </div>
+      </div>
+      <div class="video-comparison-item" data-side="gs">
+        <div class="video-comparison-label" style="font-size: 1.8rem;">Habitat-GS (Ours)</div>
+        <div class="video-comparison-media">
+          <video autoplay muted loop playsinline preload="none" poster="./static/videos/settings/preview_imgs/gs.png">
+            <source src="./static/videos/settings/gs.mp4" type="video/mp4">
+          </video>
+          <canvas class="magnifier-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="has-text-centered is-size-6"
+      style="font-style: italic; width: 71vw; margin-left: calc(-35.5vw + 50%); padding: 0 20px;">
+      Compared to traditional mesh-based simulators (<strong>left</strong>), our 3DGS-based simulator
+      (<strong>right</strong>)
+      preserves high-frequency visual details and view-dependent effects, and introduces realistic gaussian
+      avatars, thus helping train more robust navigation agents.
+      <strong>Click a video to toggle pause/play, and hover to zoom in.</strong>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section is-small" id="demo">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">Gallery of GS Scenes and Avatars</h2>
+        <div class="content has-text-centered" style="margin-bottom: -2rem;">
+          <p>
+            Habitat-GS supports scalable import of 3DGS assets. These include self-reconstructed GS scenes, public 3DGS
+            datasets (e.g., <a href="https://huggingface.co/datasets/spatialverse/InteriorGS">InteriorGS</a>), and
+            generative pipelines like <a href="https://marble.worldlabs.ai">Marble</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-small" id="gallery-showcase-section">
+  <div class="container is-max-desktop">
+    <div class="gallery-showcase-band" id="gallery-showcase-band">
+      <div class="gallery-showcase" id="gallery-showcase">
+        <div class="gallery-showcase-media">
+          <img class="gallery-showcase-preview" src="./static/videos/noinput_videos/preview.png"
+            alt="Preview image for the Habitat-GS gallery scenes">
+          <video class="gallery-showcase-video" id="gallery-showcase-video" muted loop playsinline preload="none"
+            poster="./static/videos/noinput_videos/preview.png"></video>
+          <div class="gallery-showcase-loading" id="gallery-showcase-loading" aria-hidden="true">
+            <img class="gallery-showcase-loading__icon" src="./static/images/loading.svg" alt="">
+          </div>
+          <div class="gallery-showcase-gradient"></div>
+        </div>
+
+        <button class="gallery-showcase-toggle" id="gallery-showcase-toggle" type="button"
+          aria-label="Expand gallery preview" aria-expanded="false">
+          <span class="gallery-showcase-toggle__icon" id="gallery-showcase-toggle-icon">+</span>
+          <span class="gallery-showcase-toggle__label" id="gallery-showcase-toggle-label">Expand</span>
+        </button>
+
+        <div class="gallery-showcase-controls gallery-showcase-controls--left" aria-label="Gallery scene selector">
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0"
+            aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="4" aria-label="Select scene 5"></button>
+        </div>
+
+        <div class="gallery-showcase-controls gallery-showcase-controls--right" id="gallery-showcase-controls"
+          aria-label="Gallery scene selector">
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0"
+            aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
+          <button class="gallery-showcase-dot" type="button" data-index="4" aria-label="Select scene 5"></button>
+        </div>
+
+        <div class="gallery-showcase-caption" id="gallery-showcase-caption" aria-live="polite">
+          Girl in green dress wandering in a bookstore.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-small" id="rose">
+  <div class="container is-max-widescreen is-centered">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3 has-text-centered is-size-4-mobile">Select 4D Scenes:</h2> -->
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 60px">More 3DGS Scene Demos in
+          Habitat-GS</h2>
+      </div>
+    </div>
+    <div id="toi-buttons" class="comparison-scene-buttons" style="align-items: center;">
+      <button
+        class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs is-primary"
+        data-scene-label="Karaoke bar" data-scene-source="InteriorGS" onclick="Change_TOI_scene(0)">Karaoke
+        bar</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
+        data-scene-label="Science museum" data-scene-source="InteriorGS" onclick="Change_TOI_scene(1)">Science
+        museum</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
+        data-scene-label="Apartment" data-scene-source="InteriorGS" onclick="Change_TOI_scene(2)">Apartment</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
+        data-scene-label="Japanese garden" data-scene-source="Marble" onclick="Change_TOI_scene(3)">Japanese
+        garden</button>
+      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
+        data-scene-label="Modern villa" data-scene-source="Marble" onclick="Change_TOI_scene(4)">Modern villa</button>
+
+      <!-- Legend -->
+      <div class="scene-legend is-hidden-mobile"
+        style="display: flex; flex-direction: column; justify-content: center; gap: 4px; margin-left: 10px; font-size: 0.85rem; height: auto;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span
+            style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; background-color: #00d1b2;"></span>
+          <span style="color: #4a4a4a; font-weight: 500;">InteriorGS</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span
+            style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; background-color: #a78bfa;"></span>
+          <span style="color: #4a4a4a; font-weight: 500;">Marble</span>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-centered is-four-quarters has-text-justified">
+        <div class="columns is-centered">
+          <div class="column is-four-quarters has-text-justified">
+            <div class="toi-video-shell featured-media-shell is-loading" id="toi-video-shell">
+              <div class="toi-video-status" id="toi-video-status" aria-live="polite">
+                Loading InteriorGS scene: Karaoke bar...
+              </div>
+              <video autoplay muted loop playsinline id="toi-video" data-src="./static/videos/more/0001.mp4"
+                preload="none" data-lazy="true"></video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-small" id="nav-episodes">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 40px">Navigation Episodes</h2>
+        <div class="content has-text-centered" style="margin-bottom: -6.5rem">
+          <p>
+            Habitat-GS is fully compatible with the Habitat ecosystem, including <a
+              href="https://github.com/facebookresearch/habitat-lab">Habitat-Lab</a> tasks,
+            training, and evaluation APIs. <br> This means users can directly train and evaluate navigation agents in GS
+            scenes on
+            Habitat-Lab. Below we show five navigation tasks ran on Habitat-Lab using Habitat-GS as
+            its simulator.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container is-max-widescreen">
+    <div class="intro-carousel-container">
+      <button class="carousel-nav carousel-nav--prev" id="intro-carousel-prev" aria-label="Previous">&#8249;</button>
+      <div class="intro-carousel" id="intro-carousel">
+        <div class="intro-carousel-track">
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline preload="none"
+              poster="./static/videos/settings/preview_imgs/pointnav.png">
+              <source data-src="./static/videos/settings/pointnav.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline preload="none"
+              poster="./static/videos/settings/preview_imgs/imagenav.png">
+              <source data-src="./static/videos/settings/imagenav.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline preload="none"
+              poster="./static/videos/settings/preview_imgs/objectnav.png">
+              <source data-src="./static/videos/settings/objectnav.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline preload="none"
+              poster="./static/videos/settings/preview_imgs/pointnav-avatar.png">
+              <source data-src="./static/videos/settings/pointnav-avatar.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="intro-carousel-slide">
+            <video autoplay muted loop playsinline preload="none"
+              poster="./static/videos/settings/preview_imgs/tracknav.png">
+              <source data-src="./static/videos/settings/tracknav.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-nav carousel-nav--next" id="intro-carousel-next" aria-label="Next">&#8250;</button>
+    </div>
+    <div class="nav-episode-description" id="nav-episode-description"
+      style="margin-bottom: -0.5rem; margin-top: -6.5rem">
+      <p class="nav-episode-desc-item active" data-index="0"><strong>Point Goal Navigation:</strong> Given RGB-D
+        observations and point-goal signal, navigate to the goal location.</p>
+      <p class="nav-episode-desc-item" data-index="1"><strong>Image Goal Navigation:</strong> Given an image, navigate
+        to the location where the image is taken.</p>
+      <p class="nav-episode-desc-item" data-index="2"><strong>Object Goal Navigation:</strong> Given the semantic ID of
+        an object, navigate to the corresponding location. <br> In video, target objects are <strong>sofa</strong> and
+        <strong>plant</strong> respectively.
+      </p>
+      <p class="nav-episode-desc-item" data-index="3"><strong>Avatar-aware Point Goal Navigation:</strong> Navigate to
+        the destination without colliding with human avatars.</p>
+      <p class="nav-episode-desc-item" data-index="4"><strong>Human Tracking Navigation:</strong> Agent is supposed to
+        track human avatar continuously.</p>
+    </div>
+    <div class="carousel-dots" id="intro-carousel-dots" style="margin-bottom: 4rem;">
+      <span class="carousel-dot active" data-index="0"></span>
+      <span class="carousel-dot" data-index="1"></span>
+      <span class="carousel-dot" data-index="2"></span>
+      <span class="carousel-dot" data-index="3"></span>
+      <span class="carousel-dot" data-index="4"></span>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="viewer">
+  <div class="container is-max-widescreen">
+    <div class="content has-text-centered">
+      <h2 class="title is-1 has-text-centered is-size-4-mobile">Interactive Viewer</h2>
+      <p class="content has-text-centered" style="margin-top:-0.5rem">
+        Explore 3DGS scenes in first-person perspective just as a navigation agent do in Habitat-GS! <br>
+        Your action is restricted on <strong>Navigation Mesh</strong>, while 3DGS is responsible for photorealistic
+        rendering.
+      </p>
+    </div>
+    <div class="comparison-scene-buttons featured-media-controls" style="margin:0 auto 2rem auto;">
+      <button class="button is-light comparison-scene-button is-primary-blue" id="gs-scene-btn-0"
+        onclick="window._gsLoadScene(0)">Sales gallery</button>
+      <button class="button is-light comparison-scene-button" id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Spa
+        center</button>
+      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">Tea
+        room</button>
+    </div>
+    <div id="gs-viewer-container" class="featured-media-shell" tabindex="0"
+      style="position:relative; width:100%; margin:0 auto; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; outline:none; cursor:crosshair;">
+      <canvas id="gs-canvas" style="width:100%; height:100%; display:block;"></canvas>
+      <div id="gs-loading"
+        style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,0.85); color:white; font-family:sans-serif;">
+        <div style="font-size:1.1em; margin-bottom:12px;">Loading 3DGS Scene...</div>
+        <div style="width:55%; height:4px; background:#333; border-radius:2px; overflow:hidden;">
+          <div id="gs-progress"
+            style="height:100%; width:0%; background:#4fc3f7; border-radius:2px; transition:width 0.15s;"></div>
+        </div>
+        <div id="gs-progress-text" style="margin-top:8px; font-size:0.8em; color:#aaa;">0%</div>
+      </div>
+      <div id="gs-controls-hint"
+        style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.6); color:white; padding:6px 14px; border-radius:6px; font-size:0.72em; pointer-events:none; white-space:nowrap; letter-spacing:0.01em;">
+        <b>W/S</b> Forward/Back &nbsp;|&nbsp; <b>A/D</b> Left/Right &nbsp;|&nbsp; <b>Z/X</b> Up/Down &nbsp;|&nbsp;
+        <b>Arrow Keys</b> Look Around
+      </div>
+      <div id="gs-fps"
+        style="position:absolute; top:10px; right:10px; color:white; font-size:0.72em; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; pointer-events:none; font-family:monospace;">
+        FPS: --
+      </div>
+    </div>
+  </div>
+</section>
+<script type="module">
+  import { GaussianViewer } from './static/js/gs-viewer.js';
+
+  const scenes = [
+    { splat: './static/scenes/scene1/scene.splat', navmesh: './static/scenes/scene1/navmesh.json' },
+    { splat: './static/scenes/scene2/scene.splat', navmesh: './static/scenes/scene2/navmesh.json' },
+    { splat: './static/scenes/scene3/scene.splat', navmesh: './static/scenes/scene3/navmesh.json' },
+  ];
+
+  const container = document.getElementById('gs-viewer-container');
+  const viewer = new GaussianViewer(container);
+  let currentScene = 0;
+
+  function updateButtons(idx) {
+    document.querySelectorAll('[id^="gs-scene-btn-"]').forEach((btn, i) => {
+      btn.classList.toggle('is-primary-blue', i === idx);
+    });
+  }
+
+  let initialized = false;
+
+  window._gsLoadScene = async function (idx) {
+    if (idx === currentScene && viewer.splatCount > 0) return;
+    currentScene = idx;
+    updateButtons(idx);
+    const s = scenes[idx];
+    if (!initialized) {
+      initialized = true;
+      await viewer.init(s.splat, s.navmesh);
+    } else {
+      await viewer.loadScene(s.splat, s.navmesh);
+    }
+  };
+
+  window._gsLoadScene(0);
+</script>
+
+<section class="section" id="method">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile" style="margin-top: 3rem">Method</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <div class="section-content-wide">
+          <img src="./static/images/pipeline.png" alt="Method Pipeline"
+            style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-bottom: 1rem;">
+      <div class="column is-full">
+        <div class="section-content-wide">
+          <div class="content has-text-justified">
+            <p>
+              <strong>System overview of Habitat-GS.</strong> From left to right: <strong>Asset Preparation</strong>,
+              where 3DGS scene assets and gaussian avatar assets
+              are
+              prepared respectively. <strong>Habitat-GS Simulation Environment</strong>, where the render engine
+              performs
+              3DGS
+              rasterization for scene gaussians and LBS deformation followed by rasterization for avatar gaussians,
+              producing RGB-D observations. The NavMesh blocking module retrieves pre-computed proxy capsules at runtime
+              and injects them into the NavMesh for obstacle blocking. <strong>Embodied Agent Loop</strong>, where the
+              agent policy
+              consumes sensor observations, executes actions, and receives rewards shaped by both navigation success and
+              avatar collision.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="architecture">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">Architecture</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <div class="section-content-wide">
+          <img src="./static/images/architecture.png" alt="System Architecture"
+            style="width: 100%; border-radius: 10px; margin-top: 1rem; margin-bottom: 1rem;" />
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-bottom: 1rem;">
+      <div class="column is-full">
+        <div class="section-content-wide">
+          <div class="content has-text-justified">
+            <p>
+              <strong>System architecture of Habitat-GS.</strong> Habitat-GS is built as a
+              <strong>non-intrusive</strong>
+              extension
+              to <a href="https://github.com/facebookresearch/habitat-sim">Habitat-Sim</a>. The system adopts a
+              <strong>visual-navigation
+                decoupling</strong> design
+              principle,
+              separating the visual rendering modules handled by the CUDA-based 3DGS rasterizer and LBS deformation,
+              from
+              the navigation module managed by the traditional NavMesh and injected proxy capsules. This allows for
+              photorealistic agent observations without modifying the core Habitat-Sim navigation logic. For more
+              details,
+              please refer to our <a href="./static/files/Habitat-GS.pdf">paper</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section is-hidden-touch" id="bibtex">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <h3 class="title">Bibtex</h3>
+    </div>
+    <div class="columns is-centered">
+      <div class="content" style="margin-top: 10pt;">
+        <pre class="is-hidden-mobile"><code>Coming soon
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <h3 class="title">Acknowledgements</h3>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content" style="font-size: 11pt;">
+          <p>
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a>, <a
+              href="https://www.cs.columbia.edu/~huy/scalingup/">Scaling Up Distilling Down</a>, <a
+              href="https://umi-on-legs.github.io/">UMI on Legs</a>, <a href="https://chen-geng.com/rose4d">Birth
+              and Death of a Rose</a>, and <a href="https://yanzhelyu.github.io/chord/">CHORD</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow and modify the <a
+              href="https://github.com/nerfies/nerfies.github.io">source
+              code</a> of this website as long as
+            you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Control all videos playback rate to 0.45x -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+      video.defaultPlaybackRate = 0.45;
+      video.playbackRate = 0.45;
+    });
+  });
+</script>
+</body>
+
+</html>

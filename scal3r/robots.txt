@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zju3dv.github.io/scal3r/sitemap.xml

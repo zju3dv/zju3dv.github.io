@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="title" content="LAMP: Lift Image-Editing as General 3D Priors for Open-world Manipulation">
+  <meta name="description" content="LAMP lifts image-editing as 3D priors to extract inter-object transformations, enabling robust open-world robotic manipulation from monocular RGB-D observations.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LAMP: Lift Image-Editing as General 3D Priors for Open-world Manipulation">
+  <meta property="og:description" content="LAMP lifts image-editing as 3D priors to extract inter-object transformations, enabling robust open-world robotic manipulation.">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LAMP: Lift Image-Editing as General 3D Priors for Open-world Manipulation">
+
+  <title>LAMP: Lift Image-Editing as General 3D Priors for Open-world Manipulation</title>
+
+  <link rel="icon" type="image/x-icon" href="static/images/lamp.ico">
+  <link rel="apple-touch-icon" href="static/images/lamp.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ===== CSS Variables - Orange Theme ===== */
+    :root {
+      --primary: #ea580c;
+      --primary-dark: #c2410c;
+      --primary-light: #f97316;
+      --accent: #fb923c;
+      --accent-light: #fdba74;
+      --warm-50: #fff7ed;
+      --warm-100: #ffedd5;
+      --warm-200: #fed7aa;
+      --text: #1c1917;
+      --text-secondary: #57534e;
+      --text-light: #a8a29e;
+      --bg: #ffffff;
+      --bg-alt: #fffbf5;
+      --bg-accent: #fff7ed;
+      --border: #f5e6d3;
+      --shadow-sm: 0 1px 3px rgba(234,88,12,0.06);
+      --shadow-md: 0 4px 14px rgba(234,88,12,0.1);
+      --shadow-lg: 0 12px 32px rgba(234,88,12,0.12);
+      --shadow-xl: 0 20px 40px rgba(234,88,12,0.16);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--primary-dark); }
+    img { max-width: 100%; height: auto; }
+
+    /* ===== Layout ===== */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .container-wide { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--bg-alt); }
+
+    /* ===== Hero - Video Section ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      padding: -10px 10px;
+      background: radial-gradient(circle, #ffffff 0%, #ffffff 40%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-video-bg {
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      max-height: 450px;
+      object-fit: contain;
+      border-radius: var(--radius-lg);
+    }
+
+    /* ===== Title Section (below hero) ===== */
+    .title-section {
+      text-align: center;
+      padding: 60px 24px 48px;
+      background: linear-gradient(180deg, var(--warm-50) 0%, #ffffff 100%);
+    }
+    .title-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .title-logo img {
+      width: 64px;
+      height: 64px;
+    }
+    .title-logo-text {
+      font-size: 4.5em;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fdba74 0%, #f97316 30%, #ea580c 60%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .title-subtitle {
+      font-size: 3.0em;
+      font-weight: 600;
+      color: var(--text);
+      max-width: 880px;
+      margin: 0 auto 28px;
+      line-height: 1.35;
+    }
+    .letter-l { color: #ff894aff; font-weight: 800; }
+    .letter-a { color: #f8cb42ff; font-weight: 800; }
+    .letter-m { color: #8aa3dbff; font-weight: 800; }
+    .letter-p { color: #96ceaaff; font-weight: 800; }
+
+    /* Authors */
+    .authors {
+      margin-bottom: 10px;
+      font-size: 1.05em;
+    }
+    .authors a {
+      color: var(--text);
+      font-weight: 500;
+      margin: 0 6px;
+    }
+    .authors a:hover { color: var(--primary); }
+
+    /* Venue */
+    .venue {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 8px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1em;
+      margin-bottom: 32px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 20px rgba(234,88,12,0.25);
+    }
+
+    /* Link Buttons */
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: var(--transition);
+      border: 2px solid var(--text);
+      color: var(--text);
+      background: white;
+    }
+    .btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(234,88,12,0.3);
+    }
+    .btn i { font-size: 1.1em; }
+
+    /* ===== Section Title ===== */
+    .section-title {
+      font-size: 2em;
+      font-weight: 800;
+      margin-bottom: 24px;
+      position: relative;
+      display: inline-block;
+      color: var(--text);
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    .centered .section-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .centered { text-align: center; }
+
+    /* ===== Abstract ===== */
+    .abstract-text {
+      font-size: 1.08em;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    /* ===== Highlight Box ===== */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--warm-100), var(--warm-50));
+      border-left: 5px solid var(--primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 28px;
+      margin: 28px 0;
+      font-size: 1.02em;
+      line-height: 1.75;
+      color: var(--text);
+    }
+    .highlight-box strong { color: var(--primary-dark); }
+
+    /* ===== Method Pipeline ===== */
+    .pipeline-img {
+      display: block;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+    .pipeline-img:hover {
+      transform: scale(1.01);
+      box-shadow: var(--shadow-xl);
+    }
+    .pipeline-caption {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.95em;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Features Grid ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+    .feature-icon {
+      font-size: 2em;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+    .feature-card p {
+      font-size: 0.95em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== Result Blocks ===== */
+    .result-block {
+      margin-bottom: 56px;
+    }
+    .result-block:last-child { margin-bottom: 0; }
+    .result-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .result-icon {
+      font-size: 2em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .result-header h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+    .result-header p {
+      font-size: 0.95em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .video-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .video-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 680px;
+    }
+    .video-cell {
+      display: grid;
+    }
+    .video-cell video {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      background: #f5f5f5;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      grid-area: 1 / 1;
+    }
+    .video-cell .speed-badge {
+      grid-area: 1 / 1;
+      align-self: end;
+      justify-self: end;
+      margin: 0 8px 8px 0;
+      z-index: 1;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.72em;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .video-cell .video-label {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ===== Results Table ===== */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92em;
+    }
+    thead {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+    }
+    th {
+      padding: 14px 16px;
+      text-align: center;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:hover { background: var(--bg-accent); }
+    tbody tr:last-child td { border-bottom: none; }
+    .best { font-weight: 700; color: var(--primary-dark); }
+    td:first-child { text-align: left; font-weight: 500; }
+
+    /* ===== How It Works ===== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    .step-item h3 {
+      font-size: 1.15em;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+    .step-item h3 i {
+      margin-right: 8px;
+      color: var(--accent);
+    }
+    .step-item p {
+      color: var(--text-secondary);
+      font-size: 0.95em;
+    }
+
+    /* ===== BibTeX ===== */
+    .bibtex-container { position: relative; }
+    .bibtex-code {
+      background: var(--bg-accent);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+      font-size: 0.88em;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--text);
+    }
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .copy-btn.copied { background: #16a34a; }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9em;
+    }
+    .footer a { color: var(--text-secondary); }
+    .footer a:hover { color: var(--primary); }
+
+    /* ===== Scroll to Top ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+      box-shadow: 0 4px 16px rgba(234,88,12,0.3);
+    }
+    .scroll-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate { animation: fadeUp 0.7s ease-out both; }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+
+    /* ===== Video Row Layout (Language-Guided & Long-Horizon) ===== */
+    .video-row-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .video-row-item {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .video-row-text {
+      background: var(--bg-accent);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 120px;
+    }
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.93em;
+      color: var(--text);
+      line-height: 1.5;
+      padding: 5px 7px;
+      margin: 0 -7px;
+      border-radius: 7px;
+      opacity: 0.35;
+      transition: opacity 0.4s ease, background 0.4s ease;
+    }
+    .step-row.step-active {
+      opacity: 1;
+      background: rgba(234,88,12,0.07);
+    }
+    .step-row.step-active .step-num {
+      animation: stepPulse 1.5s ease-in-out infinite;
+    }
+    .step-row.step-active .step-label {
+      background: var(--primary);
+      color: white;
+    }
+    @keyframes stepPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.45); }
+      50% { box-shadow: 0 0 0 7px rgba(234,88,12,0); }
+    }
+    .step-num {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78em;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-label {
+      background: var(--warm-200);
+      color: var(--primary-dark);
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+    .hl {
+      background: #fff3e8;
+      color: var(--primary);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .hl-white {
+      background: #f8f8f8;
+      color: #666;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+      border: 1px solid #e8e8e8;
+    }
+    .hl-blue {
+      background: #cee3ff;
+      color: #5589c9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .hl-green {
+      background: #e0fde8;
+      color: #89bb9b;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .hl-pink {
+      background: #fff6fb;
+      color: #e5b9d0;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .hero { padding: 24px 16px; }
+      .title-logo-text { font-size: 3em; }
+      .title-subtitle { font-size: 1.2em; }
+      .section { padding: 48px 0; }
+      .section-title { font-size: 1.6em; }
+      .links { gap: 8px; }
+      .btn { padding: 9px 18px; font-size: 0.85em; }
+      .features-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+      .video-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: 1fr; }
+      .video-row-item { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 20px 12px; }
+      .title-logo-text { font-size: 2.4em; }
+      .title-subtitle { font-size: 1em; }
+      .btn { width: 100%; justify-content: center; }
+      .links { flex-direction: column; align-items: center; }
+      .video-grid, .video-grid.cols-3, .video-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== HERO - Video ==================== -->
+<section class="hero">
+  <video class="hero-video-bg" autoplay loop muted playsinline preload="auto">
+    <source src="static/videos/title.mp4" type="video/mp4">
+  </video>
+</section>
+
+<!-- ==================== TITLE SECTION ==================== -->
+<section class="title-section">
+  <!-- <div class="title-logo animate">
+    <img src="static/images/lamp.ico" alt="LAMP Logo">
+    <span class="title-logo-text">LAMP</span>
+  </div> -->
+  <h1 class="title-subtitle animate delay-1">
+    <span class="letter-l">L</span>ift Im<span class="letter-a">A</span>ge-Editing as General 3D Priors for Open-world <span class="letter-m">M</span>ani<span class="letter-p">P</span>ulation
+  </h1>
+
+  <div class="authors animate delay-2">
+    <a href="#">Anonymous Authors</a>
+  </div>
+  <!-- <div class="venue animate delay-2">CVPR 2026</div> -->
+
+  <div class="links animate delay-3">
+    <a class="btn" href="#">
+      <i class="fas fa-file-pdf"></i> Paper
+    </a>
+    <a class="btn" href="#">
+      <i class="fab fa-github"></i> Code
+    </a>
+    <!-- <a class="btn" href="#">
+      <i class="fas fa-video"></i> Video
+    </a> -->
+  </div>
+</section>
+
+<!-- ==================== ABSTRACT ==================== -->
+<section class="section" id="abstract">
+  <div class="container">
+    <h2 class="section-title">Abstract</h2>
+    <p class="abstract-text">
+      Human-like generalization in open-world remains a fundamental challenge for robotic manipulation.
+      Existing learning-based methods, including reinforcement learning, imitation learning, and vision-language-action models (VLAs),
+      often struggle with novel tasks and unseen environments. Another promising direction is to explore generalizable representations
+      that capture fine-grained spatial and geometric relations for open-world manipulation.
+      While large-language-models (LLMs) and vision-language-models (VLMs) provide strong semantic reasoning based on language or
+      annotated 2D representations, their limited 3D awareness restricts their applicability to fine-grained manipulation.
+    </p>
+    <div class="highlight-box">
+      <strong>Key Insight:</strong> Image-editing inherently encodes rich 2D spatial cues, and lifting these implicit cues into 3D
+      transformations provides fine-grained and accurate guidance for open-world manipulation. We propose <strong>LAMP</strong>,
+      which lifts image-editing as 3D priors to extract inter-object 3D transformations as continuous, geometry-aware representations,
+      enabling robust generalization across diverse manipulation tasks from monocular RGB-D observations and promptable instructions.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section" id="details">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-item">
+        <h3><i class="fas fa-image"></i>1. Image Editing</h3>
+        <p>Given a monocular RGB-D observation and a language instruction, an image-editing model generates the target post-manipulation state,
+          depicting where and how objects should be rearranged.</p>
+      </div>
+      <div class="step-item">
+        <h3><i class="fas fa-mountain"></i>2. Depth Lifting</h3>
+        <p>Both the current and edited images are lifted into pixel-aligned 3D point clouds using monocular depth estimation,
+          with mask-based cropping to preserve spatial detail.</p>
+      </div>
+      <div class="step-item">
+        <h3><i class="fas fa-arrows-alt"></i>3. Cross-State Registration</h3>
+        <p>A robust registration pipeline with point cloud filtering, semantic matching via DINOv3 features, and scale alignment
+          extracts precise 6-DoF inter-object transformations.</p>
+      </div>
+      <div class="step-item">
+        <h3><i class="fas fa-robot"></i>4. Goal-Conditioned Execution</h3>
+        <p>The extracted transformation is converted into target poses with edit-informed grasp filtering and heuristic primitive-based
+          motion planning for robust robotic execution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== METHOD ==================== -->
+<section class="section" id="method">
+  <div class="container">
+    <h2 class="section-title">Method</h2>
+    <p style="color:var(--text-secondary); margin-bottom:32px; max-width:800px;">
+      Given an RGB-D observation and a language instruction, LAMP uses image-editing to generate the target state,
+      then lifts 2D spatial cues into 3D inter-object transformations through cross-state point cloud registration for execution.
+    </p>
+    <img src="static/images/pipeline.png" alt="LAMP Method Pipeline" class="pipeline-img">
+    <p class="pipeline-caption">
+      <strong>Figure 1:</strong> Overview of LAMP. The image-editing model generates an edited state from the current observation and language instruction.
+      Cross-state point cloud registration extracts the inter-object 3D transformation, which is converted into target poses for robotic execution.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== RESULTS ==================== -->
+<section class="section section-alt" id="results">
+  <div class="container-wide">
+    <h2 class="section-title">Experimental Results</h2>
+    <p style="color:var(--text-secondary); margin-bottom:48px;">
+      We evaluate LAMP on 13 real-world manipulation tasks spanning insertion, covering, assembly, stacking, articulated manipulation, and more.
+      LAMP significantly outperforms prior methods across all task categories.
+    </p>
+
+    <!-- 1: Fine-Grained Assembly & Insertion -->
+    <div class="result-block">
+      <div class="result-header">
+        <span class="result-icon">&#128295;</span>
+        <div>
+          <h3>Fine-Grained Assembly &amp; Insertion</h3>
+          <p>LAMP recovers precise 6-DoF inter-object transformations for high-precision tasks — insertion, covering, stacking, and assembly — where millimeter-level accuracy is essential.</p>
+        </div>
+      </div>
+      <div class="video-grid">
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/coin_insertion.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Coin Insertion</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/toast_insertion.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Toast Insertion</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/stick_insertion.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Pencil Insertion</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/block_assembly.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Block Assembly</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/ring_stacking.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Ring Stacking</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/lid_covering.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Lid Covering</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/pen_covering.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Pen-cap Covering</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/assembly_tasks/teapot_covering.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">Teapot Covering</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: Language-Guided Promptable Manipulation -->
+    <div class="result-block">
+      <div class="result-header">
+        <span class="result-icon">&#128172;</span>
+        <div>
+          <h3>Language-Guided Promptable Manipulation</h3>
+          <p>Different language instructions yield different manipulation behaviors on the same scene — the edited image prior faithfully reflects the semantic intent, guiding distinct 3D transformations.</p>
+        </div>
+      </div>
+      <div class="video-row-layout">
+        <div class="video-row-item">
+          <div class="video-cell">
+            <video autoplay loop muted playsinline><source src="static/videos/language_instruction/pear_placing.mp4" type="video/mp4"></video>
+            <span class="speed-badge">x3</span>
+          </div>
+          <div class="video-row-text">
+            <div class="step-list">
+              <div class="step-row">
+                <span class="step-label">Instruction A</span>
+                <span>"Place the pear <span class="hl">upright</span> onto the plate" — the pear is oriented vertically on its base</span>
+              </div>
+              <div class="step-row">
+                <span class="step-label">Instruction B</span>
+                <span>"Place the pear <span class="hl">lying on its side</span> on the plate" — the pear is oriented horizontally on the surface</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-row-item">
+          <div class="video-cell">
+            <video autoplay loop muted playsinline><source src="static/videos/language_instruction/bowl_stacking.mp4" type="video/mp4"></video>
+            <span class="speed-badge">x3</span>
+          </div>
+          <div class="video-row-text">
+            <div class="step-list">
+              <div class="step-row"><span class="step-num">1</span><span>Move the <span class="hl-white">white bowl</span> onto the <span class="hl-blue">blue bowl</span></span></div>
+              <div class="step-row"><span class="step-num">2</span><span>Move the <span class="hl-green">green bowl</span> onto the <span class="hl-white">white bowl</span></span></div>
+              <div class="step-row"><span class="step-num">3</span><span>Move the <span class="hl-pink">pink bowl</span> onto the <span class="hl-green">green bowl</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: Articulated Object Manipulation -->
+    <div class="result-block">
+      <div class="result-header">
+        <span class="result-icon">&#9881;&#65039;</span>
+        <div>
+          <h3>Articulated Object Manipulation</h3>
+          <p>For articulated objects like drawers and toasters, LAMP treats the static housing as the passive object and extracts the transformation of the movable part from edited images.</p>
+        </div>
+      </div>
+      <div class="video-grid cols-2">
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/other_tasks/open_toaster.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">"Slide down the toaster lever"</div>
+        </div>
+        <div class="video-cell">
+          <video autoplay loop muted playsinline><source src="static/videos/other_tasks/tea_pouring.mp4" type="video/mp4"></video>
+          <span class="speed-badge">x3</span>
+          <div class="video-label">"Pour the tea"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: Long-Horizon Multi-Step Tasks -->
+    <div class="result-block">
+      <div class="result-header">
+        <span class="result-icon">&#128279;</span>
+        <div>
+          <h3>Long-Horizon Multi-Step Tasks</h3>
+          <p>LAMP chains multiple sub-tasks sequentially — each step conditions on the outcome of the previous one, demonstrating coherent multi-step planning and execution.</p>
+        </div>
+      </div>
+      <div class="video-row-layout">
+        <div class="video-row-item">
+          <div class="video-cell">
+            <video autoplay loop muted playsinline><source src="static/videos/long_horizon_tasks/drawer_long.mp4" type="video/mp4"></video>
+            <span class="speed-badge">x3</span>
+          </div>
+          <div class="video-row-text">
+            <div class="step-list">
+              <div class="step-row"><span class="step-num">1</span><span>Open the drawer</span></div>
+              <div class="step-row"><span class="step-num">2</span><span>Pick up the duck</span></div>
+              <div class="step-row"><span class="step-num">3</span><span>Place the duck inside the drawer</span></div>
+              <div class="step-row"><span class="step-num">4</span><span>Close the drawer</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-row-item">
+          <div class="video-cell">
+            <video autoplay loop muted playsinline><source src="static/videos/long_horizon_tasks/egg_long.mp4" type="video/mp4"></video>
+            <span class="speed-badge">x3</span>
+          </div>
+          <div class="video-row-text">
+            <div class="step-list">
+              <div class="step-row"><span class="step-num">1</span><span>Grasp the first egg</span></div>
+              <div class="step-row"><span class="step-num">2</span><span>Place it into the designated carton slot</span></div>
+              <div class="step-row"><span class="step-num">3</span><span>Repeat for all remaining eggs in sequence</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-row-item">
+          <div class="video-cell">
+            <video autoplay loop muted playsinline><source src="static/videos/long_horizon_tasks/toast_applying.mp4" type="video/mp4"></video>
+            <span class="speed-badge">x3</span>
+          </div>
+          <div class="video-row-text">
+            <div class="step-list">
+              <div class="step-row"><span class="step-num">1</span><span>Pick up the brush</span></div>
+              <div class="step-row"><span class="step-num">2</span><span>Insert the brush into the sauce bottle</span></div>
+              <div class="step-row"><span class="step-num">3</span><span>Apply the sauce onto the toast</span></div>
+              <div class="step-row"><span class="step-num">4</span><span>Place the brush into the bowl</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== BIBTEX ==================== -->
+<section class="section section-alt" id="bibtex">
+  <div class="container">
+    <h2 class="section-title">BibTeX</h2>
+    <div class="bibtex-container">
+      <button class="copy-btn" onclick="copyBibtex()" id="copyBtn">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+      <div class="bibtex-code" id="bibtexCode">@inproceedings{lamp,
+  title={LAMP: Lift Image-Editing as General 3D Priors for Open-world Manipulation},
+  author={Anonymous},
+  booktitle={},
+  year={}
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <p>
+      This page template is adapted from the
+      <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>,
+      licensed under
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+    </p>
+  </div>
+</footer>
+
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+// Scroll-to-top visibility
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 400) {
+    btn.classList.add('visible');
+  } else {
+    btn.classList.remove('visible');
+  }
+});
+
+// Copy BibTeX
+function copyBibtex() {
+  var text = document.getElementById('bibtexCode').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+    }, 2000);
+  });
+}
+
+// Step progress sync with video
+document.querySelectorAll('.video-row-item').forEach(function(item) {
+  var video = item.querySelector('video');
+  var steps = Array.from(item.querySelectorAll('.step-row'));
+  if (!video || steps.length === 0) return;
+
+  function activate(index) {
+    steps.forEach(function(s, i) {
+      s.classList.toggle('step-active', i === index);
+    });
+  }
+
+  // Show first step immediately
+  activate(0);
+
+  video.addEventListener('timeupdate', function() {
+    if (!video.duration) return;
+    var idx = Math.min(
+      Math.floor((video.currentTime / video.duration) * steps.length),
+      steps.length - 1
+    );
+    activate(idx);
+  });
+});
+
+// Scroll animation observer
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(function(el) {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

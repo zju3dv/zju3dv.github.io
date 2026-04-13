@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="Embodied Navigation, Embodied Simulation, Computer Vision, Gaussian Splatting">
   <meta name="application-name" content="Habitat-GS">
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.ico">
   <title>
     Habitat-GS: A High-Fidelity Navigation Simulator with Dynamic Gaussian Splatting
   </title>
@@ -193,7 +194,7 @@
         <a href="https://jzhzhang.github.io">Jiazhao Zhang<sup class="is-size-6-mobile">2</sup></a>
         <a href="https://yanqswhu.top">Qingsong Yan<sup class="is-size-6-mobile">3</sup></a>
         <br>
-        <a href="https://orcid.org/0000-0002-8676-6546">Ni Tao<sup class="is-size-6-mobile">4</sup></a>
+        <a href="https://orcid.org/0000-0002-8676-6546">Tao Ni<sup class="is-size-6-mobile">4</sup></a>
         <a href="https://scholar.google.com/citations?user=4YOIYGwAAAAJ&hl=en">Junbo Chen<sup
             class="is-size-6-mobile">4</sup></a>
         <a href="https://xzhou.me">Xiaowei Zhou<sup class="is-size-6-mobile">1</sup></a>
@@ -270,7 +271,7 @@
         <a href="https://jzhzhang.github.io">Jiazhao Zhang<sup class="is-size-6-mobile">2</sup></a>
         <a href="https://yanqswhu.top">Qingsong Yan<sup class="is-size-6-mobile">3</sup></a>
         <br>
-        <a href="https://orcid.org/0000-0002-8676-6546">Ni Tao<sup class="is-size-6-mobile">4</sup></a>
+        <a href="https://orcid.org/0000-0002-8676-6546">Tao Ni<sup class="is-size-6-mobile">4</sup></a>
         <a href="https://scholar.google.com/citations?user=4YOIYGwAAAAJ&hl=en">Junbo Chen<sup
             class="is-size-6-mobile">4</sup></a>
         <a href="https://xzhou.me">Xiaowei Zhou<sup class="is-size-6-mobile">1</sup></a>
@@ -289,7 +290,8 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full has-text-justified">
-        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: -2rem; margin-bottom: 3rem">TL; DR</h2>
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: -2rem; margin-bottom: 3rem">TL; DR
+        </h2>
         <h2 class="subtitle">
           We present <strong>Habitat-GS</strong>, a navigation-centric embodied AI simulator based on
           <strong>3DGS</strong>
@@ -382,7 +384,8 @@
         </button>
 
         <div class="gallery-showcase-controls gallery-showcase-controls--left" aria-label="Gallery scene selector">
-          <button class="gallery-showcase-dot is-active" type="button" data-index="0" aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0"
+            aria-label="Select scene 1"></button>
           <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
           <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
           <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
@@ -391,7 +394,8 @@
 
         <div class="gallery-showcase-controls gallery-showcase-controls--right" id="gallery-showcase-controls"
           aria-label="Gallery scene selector">
-          <button class="gallery-showcase-dot is-active" type="button" data-index="0" aria-label="Select scene 1"></button>
+          <button class="gallery-showcase-dot is-active" type="button" data-index="0"
+            aria-label="Select scene 1"></button>
           <button class="gallery-showcase-dot" type="button" data-index="1" aria-label="Select scene 2"></button>
           <button class="gallery-showcase-dot" type="button" data-index="2" aria-label="Select scene 3"></button>
           <button class="gallery-showcase-dot" type="button" data-index="3" aria-label="Select scene 4"></button>
@@ -411,19 +415,23 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <!-- <h2 class="title is-3 has-text-centered is-size-4-mobile">Select 4D Scenes:</h2> -->
-        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 60px">More 3DGS Scene Demos in Habitat-GS</h2>
+        <h2 class="title is-2 has-text-centered is-size-4-mobile" style="margin-top: 60px">More 3DGS Scene Demos in
+          Habitat-GS</h2>
       </div>
     </div>
     <div id="toi-buttons" class="comparison-scene-buttons" style="align-items: center;">
-      <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs is-primary"
+      <button
+        class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs is-primary"
         data-scene-label="Karaoke bar" data-scene-source="InteriorGS" onclick="Change_TOI_scene(0)">Karaoke
         bar</button>
       <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
-        data-scene-label="Science museum" data-scene-source="InteriorGS" onclick="Change_TOI_scene(1)">Science museum</button>
+        data-scene-label="Science museum" data-scene-source="InteriorGS" onclick="Change_TOI_scene(1)">Science
+        museum</button>
       <button class="button is-light comparison-scene-button scene-source-button scene-source-button--interiorgs"
         data-scene-label="Apartment" data-scene-source="InteriorGS" onclick="Change_TOI_scene(2)">Apartment</button>
       <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
-        data-scene-label="Japanese garden" data-scene-source="Marble" onclick="Change_TOI_scene(3)">Japanese garden</button>
+        data-scene-label="Japanese garden" data-scene-source="Marble" onclick="Change_TOI_scene(3)">Japanese
+        garden</button>
       <button class="button is-light comparison-scene-button scene-source-button scene-source-button--marble"
         data-scene-label="Modern villa" data-scene-source="Marble" onclick="Change_TOI_scene(4)">Modern villa</button>
 
@@ -450,8 +458,8 @@
               <div class="toi-video-status" id="toi-video-status" aria-live="polite">
                 Loading InteriorGS scene: Karaoke bar...
               </div>
-              <video autoplay muted loop playsinline id="toi-video" data-src="./static/videos/more/0001.mp4" preload="none"
-                data-lazy="true"></video>
+              <video autoplay muted loop playsinline id="toi-video" data-src="./static/videos/more/0001.mp4"
+                preload="none" data-lazy="true"></video>
             </div>
           </div>
         </div>
@@ -469,7 +477,8 @@
           <p>
             Habitat-GS is fully compatible with the Habitat ecosystem, including <a
               href="https://github.com/facebookresearch/habitat-lab">Habitat-Lab</a> tasks,
-            training, and evaluation APIs. <br> This means users can directly train and evaluate navigation agents in GS scenes on
+            training, and evaluation APIs. <br> This means users can directly train and evaluate navigation agents in GS
+            scenes on
             Habitat-Lab. Below we show five navigation tasks ran on Habitat-Lab using Habitat-GS as
             its simulator.
           </p>
@@ -516,7 +525,8 @@
       </div>
       <button class="carousel-nav carousel-nav--next" id="intro-carousel-next" aria-label="Next">&#8250;</button>
     </div>
-    <div class="nav-episode-description" id="nav-episode-description" style="margin-bottom: -0.5rem; margin-top: -6.5rem">
+    <div class="nav-episode-description" id="nav-episode-description"
+      style="margin-bottom: -0.5rem; margin-top: -6.5rem">
       <p class="nav-episode-desc-item active" data-index="0"><strong>Point Goal Navigation:</strong> Given RGB-D
         observations and point-goal signal, navigate to the goal location.</p>
       <p class="nav-episode-desc-item" data-index="1"><strong>Image Goal Navigation:</strong> Given an image, navigate
@@ -547,13 +557,17 @@
       <h2 class="title is-1 has-text-centered is-size-4-mobile">Interactive Viewer</h2>
       <p class="content has-text-centered" style="margin-top:-0.5rem">
         Explore 3DGS scenes in first-person perspective just as a navigation agent do in Habitat-GS! <br>
-        Your action is restricted on <strong>Navigation Mesh</strong>, while 3DGS is responsible for photorealistic rendering.
+        Your action is restricted on <strong>Navigation Mesh</strong>, while 3DGS is responsible for photorealistic
+        rendering.
       </p>
     </div>
     <div class="comparison-scene-buttons featured-media-controls" style="margin:0 auto 2rem auto;">
-      <button class="button is-light comparison-scene-button is-primary-blue" id="gs-scene-btn-0" onclick="window._gsLoadScene(0)">Sales gallery</button>
-      <button class="button is-light comparison-scene-button" id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Spa center</button>
-      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">Tea room</button>
+      <button class="button is-light comparison-scene-button is-primary-blue" id="gs-scene-btn-0"
+        onclick="window._gsLoadScene(0)">Sales gallery</button>
+      <button class="button is-light comparison-scene-button" id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Spa
+        center</button>
+      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">Tea
+        room</button>
     </div>
     <div id="gs-viewer-container" class="featured-media-shell" tabindex="0"
       style="position:relative; width:100%; margin:0 auto; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; outline:none; cursor:crosshair;">
@@ -562,13 +576,15 @@
         style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,0.85); color:white; font-family:sans-serif;">
         <div style="font-size:1.1em; margin-bottom:12px;">Loading 3DGS Scene...</div>
         <div style="width:55%; height:4px; background:#333; border-radius:2px; overflow:hidden;">
-          <div id="gs-progress" style="height:100%; width:0%; background:#4fc3f7; border-radius:2px; transition:width 0.15s;"></div>
+          <div id="gs-progress"
+            style="height:100%; width:0%; background:#4fc3f7; border-radius:2px; transition:width 0.15s;"></div>
         </div>
         <div id="gs-progress-text" style="margin-top:8px; font-size:0.8em; color:#aaa;">0%</div>
       </div>
       <div id="gs-controls-hint"
         style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.6); color:white; padding:6px 14px; border-radius:6px; font-size:0.72em; pointer-events:none; white-space:nowrap; letter-spacing:0.01em;">
-        <b>W/S</b> Forward/Back &nbsp;|&nbsp; <b>A/D</b> Left/Right &nbsp;|&nbsp; <b>Z/X</b> Up/Down &nbsp;|&nbsp; <b>Arrow Keys</b> Look Around
+        <b>W/S</b> Forward/Back &nbsp;|&nbsp; <b>A/D</b> Left/Right &nbsp;|&nbsp; <b>Z/X</b> Up/Down &nbsp;|&nbsp;
+        <b>Arrow Keys</b> Look Around
       </div>
       <div id="gs-fps"
         style="position:absolute; top:10px; right:10px; color:white; font-size:0.72em; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; pointer-events:none; font-family:monospace;">
@@ -598,7 +614,7 @@
 
   let initialized = false;
 
-  window._gsLoadScene = async function(idx) {
+  window._gsLoadScene = async function (idx) {
     if (idx === currentScene && viewer.splatCount > 0) return;
     currentScene = idx;
     updateButtons(idx);
@@ -637,7 +653,8 @@
               <strong>System overview of Habitat-GS.</strong> From left to right: <strong>Asset Preparation</strong>,
               where 3DGS scene assets and gaussian avatar assets
               are
-              prepared respectively. <strong>Habitat-GS Simulation Environment</strong>, where the render engine performs
+              prepared respectively. <strong>Habitat-GS Simulation Environment</strong>, where the render engine
+              performs
               3DGS
               rasterization for scene gaussians and LBS deformation followed by rasterization for avatar gaussians,
               producing RGB-D observations. The NavMesh blocking module retrieves pre-computed proxy capsules at runtime
@@ -673,7 +690,8 @@
         <div class="section-content-wide">
           <div class="content has-text-justified">
             <p>
-              <strong>System architecture of Habitat-GS.</strong> Habitat-GS is built as a <strong>non-intrusive</strong>
+              <strong>System architecture of Habitat-GS.</strong> Habitat-GS is built as a
+              <strong>non-intrusive</strong>
               extension
               to <a href="https://github.com/facebookresearch/habitat-sim">Habitat-Sim</a>. The system adopts a
               <strong>visual-navigation
@@ -682,7 +700,8 @@
               separating the visual rendering modules handled by the CUDA-based 3DGS rasterizer and LBS deformation,
               from
               the navigation module managed by the traditional NavMesh and injected proxy capsules. This allows for
-              photorealistic agent observations without modifying the core Habitat-Sim navigation logic. For more details,
+              photorealistic agent observations without modifying the core Habitat-Sim navigation logic. For more
+              details,
               please refer to our <a href="./static/files/Habitat-GS.pdf">paper</a>.
             </p>
           </div>

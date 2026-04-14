@@ -89,6 +89,161 @@ var galleryShowcaseScenes = [
   }
 ];
 
+var habitatAgentStages = [
+  {
+    id: "how-it-works",
+    label: "How It Works",
+    tag: "MCP Surface",
+    start: 3.4,
+    end: 10.1,
+    title: "From chat to photoreal observation.",
+    summary: "One hab_* tool surface lets any MCP client ask for a scene observation. The bridge forwards the call and Habitat-GS returns RGB and depth outputs from the same simulator state.",
+    bullets: [
+      "Same request surface across Claude, Codex, Feishu, and internal tools.",
+      "Scene init and sensor rendering stay inside one continuous loop."
+    ],
+    statusLabel: "Stage loop: request -> bridge -> observation",
+    demoHtml: `
+      <div class="agent-showcase agent-showcase--flow-vertical">
+        <div class="agent-flow-step">
+          <span class="agent-chip">Any MCP Client</span>
+          <strong>Claude Code / Codex / Feishu</strong>
+          <p>Different entry points, one shared request surface.</p>
+        </div>
+        <div class="agent-flow-step">
+          <span class="agent-chip">Bridge</span>
+          <strong>MCP server + HTTP relay</strong>
+          <p>Forwards hab_* calls into Habitat-GS.</p>
+        </div>
+        <div class="agent-flow-step">
+          <span class="agent-chip">GS Simulator</span>
+          <strong>RGB / depth</strong>
+          <p>Returns the observation from the current scene state.</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "basic-capability",
+    label: "Basic Capability",
+    tag: "Look Around",
+    start: 10.1,
+    end: 16.6,
+    title: "Same behavior from any driver.",
+    summary: "Built-in TUI, Claude Code, and Codex all call the same panorama action and get the same room-aware response.",
+    bullets: [
+      "The driver changes, but the tool call stays the same.",
+      "Responses are grounded in the live simulator state."
+    ],
+    statusLabel: "Stage loop: shared observation behavior",
+    demoHtml: `
+      <div class="agent-showcase">
+        <div class="agent-mini-card">
+          <span class="agent-chip">Observation</span>
+          <span class="agent-mini-card__header">Room-aware answer</span>
+          <div class="agent-terminal-window">
+            <div class="agent-terminal-window__bar"><span></span><span></span><span></span></div>
+            <div class="agent-terminal-window__body">
+              <div class="agent-terminal-line agent-terminal-line--typing"><span class="agent-prompt">&gt;</span>hab_panorama --scan</div>
+              <div class="agent-terminal-line">sensor sweep: RGB + depth</div>
+              <div class="agent-terminal-line">semantic tags: desk / doorway / hallway</div>
+              <div class="agent-terminal-line">free space detected near right-side passage</div>
+              <div class="agent-terminal-line">status: observation ready</div>
+            </div>
+          </div>
+          <div class="agent-observation-list">
+            <div class="agent-observation-pill">desk and shelving visible ahead</div>
+            <div class="agent-observation-pill">dark-framed doorway on the right</div>
+            <div class="agent-observation-pill">hallway remains visible in the panorama</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "navloop-triggers",
+    label: "NavLoop Triggers",
+    tag: "External Trigger",
+    start: 16.6,
+    end: 23.4,
+    title: "Four entry points. Same agent.",
+    summary: "CLI and phone chat can both start one running navloop. Status queries keep pointing at that same active loop.",
+    bullets: [
+      "Telegram and Feishu enter through the same OpenClaw MCP bridge.",
+      "Follow-up queries resolve against the active loop id."
+    ],
+    statusLabel: "Stage loop: external trigger + live status",
+    demoHtml: `
+      <div class="agent-showcase">
+        <div class="agent-mini-card">
+          <span class="agent-chip">Telegram / Feishu</span>
+          <span class="agent-mini-card__header">Chat clients can launch the same navloop</span>
+          <div class="agent-chat-thread">
+            <div class="agent-chat-message agent-chat-message--incoming">Start a navloop to the reachable teatable and keep it running.</div>
+            <div class="agent-chat-message agent-chat-message--outgoing agent-chat-message--glow">Navloop started. Reachable scene-graph target selected.</div>
+            <div class="agent-chat-message agent-chat-message--incoming">Use only reachable targets and avoid blocked areas.</div>
+            <div class="agent-chat-message agent-chat-message--outgoing">Confirmed. Navmesh route locked to the reachable teatable.</div>
+            <div class="agent-chat-message agent-chat-message--incoming">check navloop status</div>
+            <div class="agent-chat-message agent-chat-message--outgoing">running · phase navigating · no stop requested</div>
+            <div class="agent-chat-message agent-chat-message--incoming">send the latest progress</div>
+            <div class="agent-chat-message agent-chat-message--outgoing">target still active · moving along planned path · telemetry streaming</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "scene-graph",
+    label: "Scene Graph",
+    tag: "Scene Graph + Navmesh",
+    start: 23.4,
+    end: 31.0,
+    title: "Scene graph query -> reachable target -> collision-free path.",
+    summary: "The scene graph chooses a reachable teatable, then the navmesh planner drives execution while RGB, depth, and BEV stay in sync.",
+    bullets: [
+      "Language instructions become room and object graph queries.",
+      "Reachability is checked before the route is executed."
+    ],
+    statusLabel: "Stage loop: scene graph query + route planning",
+    demoHtml: `
+      <div class="agent-showcase">
+        <div class="agent-mini-card agent-mini-card--viz">
+          <span class="agent-chip">Scene Graph</span>
+          <span class="agent-mini-card__header">Select one reachable target from the room graph</span>
+          <div class="agent-viz-panel agent-scene-viz">
+            <div class="agent-scene-viz__query">query: reachable teatable</div>
+            <div class="agent-scene-viz__body">
+              <div class="agent-scene-list">
+                <div class="agent-scene-row">
+                  <span class="agent-scene-row__step">01</span>
+                  <div class="agent-scene-row__body">
+                    <strong>room_1</strong>
+                    <span>query current room graph</span>
+                  </div>
+                </div>
+                <div class="agent-scene-row">
+                  <span class="agent-scene-row__step">02</span>
+                  <div class="agent-scene-row__body">
+                    <strong>table cluster</strong>
+                    <span>expand candidate objects</span>
+                  </div>
+                </div>
+                <div class="agent-scene-row agent-scene-row--target">
+                  <span class="agent-scene-row__step">03</span>
+                  <div class="agent-scene-row__body">
+                    <strong>reachable teatable</strong>
+                    <span>selected target</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+];
+
 document.addEventListener("DOMContentLoaded", function() {
   initGalleryShowcase();
   
@@ -100,6 +255,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Keep loading placeholders visible until deferred videos are playable.
   initLoadingShellVideos();
+
+  // HabitatAgent stage explorer
+  initHabitatAgentDemo();
 
   // Lazy-load non-hero videos
   initLazyVideos();
@@ -262,6 +420,276 @@ function initGalleryShowcase() {
 
   updateScene(0, true);
   updateChrome();
+}
+
+function initHabitatAgentDemo() {
+  var expandBtn = document.getElementById("agent-demo-expand");
+  var previewVideo = document.getElementById("agent-video-preview");
+  var modal = document.getElementById("agent-demo-modal");
+  var sidebar = modal ? modal.querySelector(".agent-demo-sidebar") : null;
+  var closeBtn = document.getElementById("agent-demo-close");
+  var stageMarkers = document.getElementById("agent-demo-stage-markers");
+  var stageShell = document.getElementById("agent-stage-shell");
+  var stageStatus = document.getElementById("agent-stage-status");
+  var stageStatusLabel = document.getElementById("agent-demo-stage-status-label");
+  var stageVideo = document.getElementById("agent-video-stage");
+  var stageKicker = document.getElementById("agent-demo-stage-kicker");
+  var stageTitle = document.getElementById("agent-demo-stage-title");
+  var stageSummary = document.getElementById("agent-demo-stage-summary");
+  var stageBullets = document.getElementById("agent-demo-stage-bullets");
+  var stageShowcase = document.getElementById("agent-demo-stage-showcase");
+  var stageTag = document.getElementById("agent-demo-stage-tag");
+  var progressBar = document.getElementById("agent-demo-progress");
+  var stageInfoPanel = stageKicker ? stageKicker.closest(".agent-demo-sidebar__panel") : null;
+
+  if (!expandBtn || !previewVideo || !modal || !sidebar || !closeBtn || !stageMarkers || !stageShell || !stageStatus || !stageVideo || !stageKicker || !stageTitle || !stageSummary || !stageBullets || !stageShowcase || !stageTag || !progressBar || !stageInfoPanel) {
+    return;
+  }
+
+  var activeStage = habitatAgentStages[0];
+  var modalOpen = false;
+  var pendingStageStart = null;
+
+  function ensureVideoSource(video) {
+    var source = video.querySelector("source");
+    if (!source) return;
+    var dataSrc = source.getAttribute("data-src");
+    if (dataSrc && !source.getAttribute("src")) {
+      source.setAttribute("src", dataSrc);
+      video.load();
+    }
+  }
+
+  function playVideo(video) {
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function() {});
+    }
+  }
+
+  function formatIndex(index) {
+    return index < 9 ? "0" + (index + 1) : String(index + 1);
+  }
+
+  function findStageById(stageId) {
+    return habitatAgentStages.find(function(stage) {
+      return stage.id === stageId;
+    }) || habitatAgentStages[0];
+  }
+
+  function findStageForTime(time) {
+    for (var i = 0; i < habitatAgentStages.length; i += 1) {
+      var stage = habitatAgentStages[i];
+      if (time >= stage.start && time < stage.end) {
+        return stage;
+      }
+    }
+    if (time < habitatAgentStages[0].start) {
+      return habitatAgentStages[0];
+    }
+    return habitatAgentStages[habitatAgentStages.length - 1];
+  }
+
+  function updateProgress() {
+    if (!activeStage) return;
+    var ratio = 0;
+    if (stageVideo.readyState >= 1) {
+      var elapsed = stageVideo.currentTime - activeStage.start;
+      var duration = activeStage.end - activeStage.start;
+      ratio = Math.min(1, Math.max(0, elapsed / duration));
+    }
+    progressBar.style.transform = "scaleX(" + ratio + ")";
+  }
+
+  function applyPendingStageStart() {
+    if (pendingStageStart === null || stageVideo.readyState < 1) {
+      return;
+    }
+    try {
+      stageVideo.currentTime = pendingStageStart;
+      pendingStageStart = null;
+    } catch (error) {
+      // Ignore seek failures until metadata is fully ready.
+    }
+  }
+
+  function syncStagePlayback() {
+    if (!activeStage) return;
+
+    ensureVideoSource(stageVideo);
+    pendingStageStart = activeStage.start + 0.02;
+    stageStatus.textContent = "Loading stage playback...";
+    stageShell.classList.add("is-loading");
+    applyPendingStageStart();
+
+    if (stageVideo.readyState >= 2) {
+      stageShell.classList.remove("is-loading");
+      playVideo(stageVideo);
+    }
+
+    updateProgress();
+  }
+
+  function updateStageButtons() {
+    var markers = stageMarkers.querySelectorAll("[data-agent-stage]");
+    markers.forEach(function(button) {
+      button.classList.toggle("is-active", button.dataset.agentStage === activeStage.id);
+    });
+  }
+
+  function syncSidebarInfoHeight() {
+    stageInfoPanel.style.height = "auto";
+    sidebar.style.removeProperty("--agent-demo-sidebar-top-height");
+
+    var nextHeight = Math.ceil(stageInfoPanel.scrollHeight) + 2;
+    sidebar.style.setProperty("--agent-demo-sidebar-top-height", nextHeight + "px");
+  }
+
+  function requestSidebarInfoHeightSync() {
+    window.requestAnimationFrame(syncSidebarInfoHeight);
+  }
+
+  function renderStage(stage, options) {
+    activeStage = stage;
+    stageKicker.textContent = stage.label;
+    stageTitle.textContent = stage.title;
+    stageSummary.textContent = stage.summary;
+    stageTag.textContent = stage.tag;
+    stageStatusLabel.textContent = stage.statusLabel;
+    stageBullets.innerHTML = stage.bullets.map(function(item) {
+      return "<li>" + item + "</li>";
+    }).join("");
+    stageShowcase.innerHTML = stage.demoHtml;
+
+    updateStageButtons();
+    requestSidebarInfoHeightSync();
+    updateProgress();
+
+    if (!options || options.syncPlayback !== false) {
+      syncStagePlayback();
+    }
+  }
+
+  function cycleStage(direction) {
+    var currentIndex = habitatAgentStages.findIndex(function(stage) {
+      return stage.id === activeStage.id;
+    });
+    var nextIndex = (currentIndex + direction + habitatAgentStages.length) % habitatAgentStages.length;
+    renderStage(habitatAgentStages[nextIndex]);
+  }
+
+  function openModal() {
+    modalOpen = true;
+    var stageFromPreview = findStageForTime(previewVideo.currentTime || 0);
+
+    document.body.classList.add("agent-demo-modal-open");
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    expandBtn.setAttribute("aria-expanded", "true");
+
+    previewVideo.pause();
+    renderStage(stageFromPreview);
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modalOpen = false;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    expandBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("agent-demo-modal-open");
+    stageVideo.pause();
+
+    if (previewVideo.readyState >= 2) {
+      playVideo(previewVideo);
+    }
+  }
+
+  habitatAgentStages.forEach(function(stage, index) {
+    var marker = document.createElement("button");
+    marker.type = "button";
+    marker.className = "agent-demo-player__stage";
+    marker.dataset.agentStage = stage.id;
+    marker.innerHTML =
+      '<span class="agent-demo-player__stage-index">' + formatIndex(index) + '</span>' +
+      '<span class="agent-demo-player__stage-label">' + stage.label + '</span>';
+    stageMarkers.appendChild(marker);
+  });
+
+  renderStage(habitatAgentStages[0], { syncPlayback: false });
+
+  expandBtn.addEventListener("click", openModal);
+
+  modal.addEventListener("click", function(event) {
+    var closeTarget = event.target.closest("[data-agent-close]");
+    if (closeTarget) {
+      closeModal();
+    }
+  });
+
+  stageMarkers.addEventListener("click", function(event) {
+    var button = event.target.closest("[data-agent-stage]");
+    if (!button) return;
+    renderStage(findStageById(button.dataset.agentStage));
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (!modalOpen) return;
+    if (event.key === "Escape") {
+      closeModal();
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      cycleStage(1);
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      cycleStage(-1);
+    }
+  });
+
+  window.addEventListener("resize", function() {
+    requestSidebarInfoHeightSync();
+  });
+
+  stageVideo.addEventListener("loadedmetadata", function() {
+    applyPendingStageStart();
+    updateProgress();
+  });
+
+  stageVideo.addEventListener("loadeddata", function() {
+    stageShell.classList.remove("is-loading");
+    applyPendingStageStart();
+    if (modalOpen) {
+      playVideo(stageVideo);
+    }
+    updateProgress();
+  });
+
+  stageVideo.addEventListener("canplay", function() {
+    stageShell.classList.remove("is-loading");
+    applyPendingStageStart();
+    if (modalOpen) {
+      playVideo(stageVideo);
+    }
+  });
+
+  stageVideo.addEventListener("timeupdate", function() {
+    if (!activeStage) return;
+
+    if (stageVideo.currentTime >= activeStage.end - 0.04 || stageVideo.currentTime < activeStage.start - 0.15) {
+      pendingStageStart = activeStage.start + 0.02;
+      applyPendingStageStart();
+      if (modalOpen) {
+        playVideo(stageVideo);
+      }
+    }
+
+    updateProgress();
+  });
+
+  stageVideo.addEventListener("error", function() {
+    stageStatus.textContent = "Unable to load stage playback right now.";
+    stageShell.classList.add("is-loading");
+  });
 }
 
 function initVideoComparison() {

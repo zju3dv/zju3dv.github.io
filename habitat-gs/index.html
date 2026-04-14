@@ -646,16 +646,78 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
         <div class="section-content-wide">
-          <div class="toi-video-shell featured-media-shell is-loading" id="agent-video-shell"
+          <div class="agent-demo-preview-shell toi-video-shell featured-media-shell is-loading" id="agent-preview-shell"
             style="margin-top: 1rem; margin-bottom: 1rem;">
-            <div class="toi-video-status" id="agent-video-status" aria-live="polite">
+            <div class="toi-video-status" id="agent-preview-status" aria-live="polite">
               Loading HabitatAgent demo...
             </div>
-            <video autoplay muted loop playsinline preload="none" id="agent-video" data-lazy="true"
-              data-loading-shell="agent-video-shell" data-loading-status="agent-video-status"
+            <button class="agent-demo-expand" id="agent-demo-expand" type="button" aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="agent-demo-modal" aria-label="Open the HabitatAgent stage explorer">
+              <span class="agent-demo-expand__corner agent-demo-expand__corner--tl" aria-hidden="true"></span>
+              <span class="agent-demo-expand__corner agent-demo-expand__corner--tr" aria-hidden="true"></span>
+              <span class="agent-demo-expand__corner agent-demo-expand__corner--br" aria-hidden="true"></span>
+              <span class="agent-demo-expand__corner agent-demo-expand__corner--bl" aria-hidden="true"></span>
+            </button>
+            <video autoplay muted loop playsinline preload="none" id="agent-video-preview" data-lazy="true"
+              data-loading-shell="agent-preview-shell" data-loading-status="agent-preview-status"
               data-loading-error="Unable to load the HabitatAgent demo right now.">
               <source data-src="./static/videos/agent_demo.mp4" type="video/mp4">
             </video>
+          </div>
+          <p class="agent-demo-preview-note">Click the corner brackets to open the full stage breakdown.</p>
+        </div>
+      </div>
+    </div>
+    <div class="agent-demo-modal" id="agent-demo-modal" aria-hidden="true">
+      <div class="agent-demo-modal__backdrop" data-agent-close="true"></div>
+      <div class="agent-demo-modal__panel" role="dialog" aria-modal="true" aria-labelledby="agent-demo-title">
+        <div class="agent-demo-modal__shell">
+          <div class="agent-demo-modal__header">
+            <div>
+              <p class="agent-demo-modal__eyebrow">HabitatAgent Stage Explorer</p>
+              <h3 class="agent-demo-modal__title" id="agent-demo-title">Four stages. One continuous agent loop.</h3>
+            </div>
+            <button class="agent-demo-modal__close" id="agent-demo-close" type="button" data-agent-close="true"
+              aria-label="Close the HabitatAgent stage explorer">
+              Close
+            </button>
+          </div>
+          <div class="agent-demo-modal__grid">
+            <aside class="agent-demo-sidebar">
+              <div class="agent-demo-sidebar__panel">
+                <p class="agent-demo-sidebar__kicker" id="agent-demo-stage-kicker">How It Works</p>
+                <h4 class="agent-demo-sidebar__title" id="agent-demo-stage-title">
+                  MCP request in, photorealistic observation out.
+                </h4>
+                <p class="agent-demo-sidebar__summary" id="agent-demo-stage-summary"></p>
+                <ul class="agent-demo-sidebar__bullets" id="agent-demo-stage-bullets"></ul>
+              </div>
+              <div class="agent-demo-sidebar__panel agent-demo-sidebar__panel--showcase" id="agent-demo-stage-showcase"></div>
+            </aside>
+            <div class="agent-demo-player-shell">
+              <div class="agent-demo-player__meta">
+                <div class="agent-demo-player__label-group">
+                  <span class="agent-demo-player__label" id="agent-demo-stage-tag">MCP Surface</span>
+                </div>
+                <div class="agent-demo-player__status">
+                  <span class="agent-demo-player__dot" aria-hidden="true"></span>
+                  <span id="agent-demo-stage-status-label">Looping selected stage</span>
+                </div>
+              </div>
+              <div class="agent-demo-player__stages" id="agent-demo-stage-markers"></div>
+              <div class="agent-demo-player toi-video-shell is-loading" id="agent-stage-shell">
+                <div class="toi-video-status" id="agent-stage-status" aria-live="polite">
+                  Loading stage playback...
+                </div>
+                <video muted playsinline preload="none" id="agent-video-stage">
+                  <source data-src="./static/videos/agent_demo.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="agent-demo-player__progress">
+                <div class="agent-demo-player__progress-bar" id="agent-demo-progress"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

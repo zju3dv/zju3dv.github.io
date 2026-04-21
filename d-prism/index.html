@@ -1,1 +1,801 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="D-Prism: Differentiable Primitives for Structured Dynamic Modeling">
+  <meta name="keywords" content="D-Prism, Primitives, Dynamic Reconstruction, NeRF, 3DGS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Prism: Differentiable Primitives for Structured Dynamic Modeling</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/dprism-logo.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">D-Prism: Differentiable Primitives for Structured Dynamic Modeling
+            </h1>
+            <h2 class="title is-3"><strong>CVPR 2026</strong></h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="mailto:rickyyxy@zju.edu.cn">Xingyuan Yu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:eugenelyj@foxmail.com">Yijin Li</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:chongzeng@siggraph.org">Chong Zeng</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:yuhang.ming@hdu.edu.cn">Yuhang Ming</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:bao@cad.zju.edu.cn">Hujun Bao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:zhangguofeng@zju.edu.cn">Guofeng Zhang</a><sup>1&dagger;</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>State Key Lab of CAD & CG, Zhejiang University,</span>
+              <span class="author-block"><sup>2</sup>Stanford University,</span>
+              <span class="author-block"><sup>3</sup>Hangzhou Dianzi University</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2604.17082" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="http://arxiv.org/abs/2604.17082" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                <!- - TODO: Change to Youtube video link - ->
+                <a href="https://d-prism-pj.github.io/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="javascript:void(0);" class="external-link button is-normal is-rounded is-dark" style="pointer-events: none; opacity: 0.7;">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <!-- <span class="link-block">
+                <!- - TODO: Change to Dataset link - ->
+                <a href="https://d-prism-pj.github.io/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container" style="max-width: 1400px;">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered" style="margin-bottom: 1.5rem;">
+          <span class="dnerf">D-Prism</span> is a novel framework based on structured primitives for dynamic geometry
+          reconstruction using monocular inputs.
+        </h2>
+
+        <!-- Comparison Grid -->
+        <div class="teaser-comparison">
+          <!-- Column Headers -->
+          <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0.3rem;">
+            <div class="column" style="flex: 1;"><strong>Ground Truth</strong></div>
+            <div class="column" style="flex: 1;"><strong>DG-Mesh (Mesh)</strong></div>
+            <div class="column" style="flex: 1;"><strong>DG-Mesh (Rendered)</strong></div>
+            <div class="column" style="flex: 1;"><strong>Ours (Primitives)</strong></div>
+            <div class="column" style="flex: 1;"><strong>Ours (Rendered)</strong></div>
+          </div>
+
+          <!-- Row 1: box -->
+          <div class="columns is-mobile is-gapless" style="margin-bottom: 0.5rem;">
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/gt/box.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/dgmesh/box/move_mesh.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/dgmesh/box/move_mesh_img.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/ours/box/move_primitive_img.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/ours/box/move_gs_img.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Row 2: cube -->
+          <div class="columns is-mobile is-gapless" style="margin-bottom: 0.5rem;">
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/gt/cube.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/dgmesh/cube/move_mesh.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/dgmesh/cube/move_mesh_img.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/ours/cube/move_primitive_img.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column" style="flex: 1; padding: 2px;">
+              <video autoplay muted loop playsinline style="width: 100%; border-radius: 6px;">
+                <source src="./static/videos/start_compare/ours/cube/move_gs_img.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 1.5rem;">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Capturing both geometry and rigid motion for structured dynamic objects, like multi-part assemblies or
+              jointed mechanisms, remains a key challenge. Existing dynamic methods, such as deformable meshes or 3DGS,
+              rely on unstructured representations and fail to jointly model suitable geometry and articulated motion.
+              Primitive-based methods excel at structured static scenes, but their dynamic potential is still
+              unexplored. We propose <b>D-Prism</b>, the first framework to achieve high-fidelity structured dynamic
+              modeling by extending differentiable primitives to the dynamic domain. Specifically, we bind 3DGS to
+              primitive surfaces, leveraging their respective strengths in appearance and geometry. We introduce a
+              deformation network to control primitive motion, ensuring it accurately matches the object's movement.
+              Furthermore, we design a novel adaptive control strategy to dynamically adjust primitive counts, better
+              matching objects' true spatial footprint. Experiments confirm that our method excels at structured dynamic
+              modeling, providing both structured geometry and precise motion tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Pipeline. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Pipeline</h2>
+          <div class="content">
+            <img src="./static/images/framework2_white.png" alt="D-Prism Pipeline Overview"
+              style="width: 100%; max-width: 1200px;" />
+            <p class="has-text-justified" style="margin-top: 1rem;">
+              <b>Overview of D-Prism.</b> Given calibrated monocular images and masks, our method learns the structured
+              dynamic geometry and appearance for the sequence. Starting from randomly initialized primitives with
+              learnable shape, scale, opacity, and motion parameters, deformation networks (backward and forward
+              mapping) model the object's underlying motion and drive the primitives across timesteps. Meanwhile, a
+              novel <i>Primitive Adaptive Control</i> strategy manages their count and distribution via merge, clone,
+              and prune operations to enhance our framework's representational ability. Finally, 3D Gaussians are bound
+              to primitive surfaces for high-quality rasterization, supervised by RGB and mask losses.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Pipeline. -->
+
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Quantitative Results</h2>
+
+          <!-- Motion Tracking Results -->
+          <div class="content" style="margin-bottom: 2rem;">
+            <h3 class="title is-4">Structured Motion Tracking Results on Dynamic Primitive Dataset</h3>
+            <img src="./static/images/motion_tracking_res.png" alt="Motion Tracking"
+              style="width: 100%; max-width: 900px;" />
+            <p class="has-text-justified" style="margin-top: 0.75rem;">
+              <b>Structured motion tracking results.</b> We evaluate geometry motion tracking accuracy using
+              End-Point-Error (EPE) and
+              accuracy thresholds (δ<sub>3D</sub>) across six structured dynamic object categories. Our method
+              demonstrates superior
+              or highly competitive performance compared to Shape of Motion, Ub4D, MovingParts, SP-GS, and DG-Mesh.
+            </p>
+          </div>
+
+          <!-- Dynamic Reconstruction Results -->
+          <div class="content">
+            <h3 class="title is-4">Structured Dynamic Reconstruction Results on Dynamic Primitive Dataset</h3>
+            <img src="./static/images/dyn_recon_res.png" alt="Dynamic Reconstruction"
+              style="width: 100%; max-width: 900px;" />
+            <p class="has-text-justified" style="margin-top: 0.75rem;">
+              <b>Dynamic geometry reconstruction results.</b> We compare our method against Ub4D and DG-Mesh using
+              Dynamic Chamfer Distance (CD<sub>d</sub>) and Dynamic Earth Mover's Distance (EMD<sub>d</sub>) metrics
+              across six structured dynamic object categories. Our method achieves the best results on most scenes.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Results. -->
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container" style="max-width: 1400px;">
+      <!-- Dataset Visualization. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3" style="margin-bottom: 2rem;">Visualization Results</h2>
+
+          <!-- Dynamic Primitive Dataset -->
+          <div class="content" style="margin-bottom: 2.5rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Dynamic Primitive Dataset</h3>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0.3rem;">
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+            </div>
+            <!-- Row 1: box, cube, door -->
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem;">
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/box/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/box/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/cube/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/cube/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/door/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/door/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Row 1 Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 1.5rem;">
+              <div class="column" style="flex: 2;"><em>Treasure Box</em></div>
+              <div class="column" style="flex: 2;"><em>Rubik's Cube</em></div>
+              <div class="column" style="flex: 2;"><em>Door</em></div>
+            </div>
+
+            <!-- Row 2 Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0.3rem;">
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+            </div>
+            <!-- Row 2: pliers, chair, sunglasses -->
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem;">
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/pliers/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/pliers/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/chair/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/chair/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/sunglasses/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dynamic_primitive_dataset/sunglasses/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Row 2 Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0;">
+              <div class="column" style="flex: 2;"><em>Pliers</em></div>
+              <div class="column" style="flex: 2;"><em>Folding Chair</em></div>
+              <div class="column" style="flex: 2;"><em>Sunglasses</em></div>
+            </div>
+          </div>
+
+          <!-- Real-World Robotic -->
+          <div class="content" style="margin-bottom: 2.5rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Real-World Robotic Scenes</h3>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0.3rem;">
+              <div class="column" style="flex: 1;"><strong>GT</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>GT</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+            </div>
+            <!-- Row: dexterous_hand, robotic_arm -->
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem;">
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/dexterous_hand/gt_images.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/dexterous_hand/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/dexterous_hand/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/robotic_arm/gt_images.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/robotic_arm/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/real_world_robotic/robotic_arm/move_gs_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Row Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0;">
+              <div class="column" style="flex: 3;"><em>Dexterous Hand</em></div>
+              <div class="column" style="flex: 3;"><em>Robotic Arm</em></div>
+            </div>
+          </div>
+
+          <!-- D-NeRF Dataset -->
+          <div class="content">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">D-NeRF Dataset</h3>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 0.3rem;">
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 1;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 1;"><strong>Rendered</strong></div>
+            </div>
+            <!-- Row 1: hellwarrior, hook, jump -->
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem;">
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/hellwarrior/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/hellwarrior/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/hook/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/hook/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/jump/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 1; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/jump/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Row 1 Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered" style="margin-bottom: 1.5rem;">
+              <div class="column" style="flex: 2;"><em>Hell Warrior</em></div>
+              <div class="column" style="flex: 2;"><em>Hook</em></div>
+              <div class="column" style="flex: 2;"><em>Jumping Jacks</em></div>
+            </div>
+
+            <!-- Row 2 Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0.3rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 16.666%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 16.666%;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 0 0 16.666%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 16.666%;"><strong>Rendered</strong></div>
+            </div>
+            <!-- Row 2: mutant, standup (centered) -->
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 16.666%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/mutant/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 16.666%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/mutant/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 16.666%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/standup/move_primitive_img.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 16.666%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/dataset_vis/dnerf_dataset/standup/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Row 2 Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0; justify-content: center;">
+              <div class="column" style="flex: 0 0 33.333%;"><em>Mutant</em></div>
+              <div class="column" style="flex: 0 0 33.333%;"><em>Stand Up</em></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--/ Dataset Visualization. -->
+
+      <!-- Applications. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3" style="margin-bottom: 2rem;">Applications</h2>
+          <div class="content has-text-justified" style="margin-bottom: 1.5rem;">
+            <p>
+              Our method provides a structured geometric representation that enables easy editing of the reconstructed
+              results. Below we demonstrate several applications powered by our primitive-based representation.
+            </p>
+          </div>
+
+          <!-- Motion Pattern Transfer -->
+          <div class="content" style="margin-bottom: 2.5rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Motion Pattern Transfer</h3>
+            <p class="has-text-justified" style="margin-bottom: 1rem;">
+              By exchanging motion parameters between different objects' primitives, we can transfer motion patterns
+              across objects. For example, we transfer the opening motion of the Treasure Box lid to the top layer of
+              the
+              Rubik's Cube, or apply the rotation of the Rubik's Cube to the Treasure Box lid.
+            </p>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0.3rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+            </div>
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/motion_exchange/box/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/motion_exchange/box/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/motion_exchange/cube/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/motion_exchange/cube/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0; justify-content: center;">
+              <div class="column" style="flex: 0 0 50%;"><em>Box with Cube's rotation</em></div>
+              <div class="column" style="flex: 0 0 50%;"><em>Cube with Box's opening</em></div>
+            </div>
+          </div>
+
+          <!-- Effortless Articulation -->
+          <div class="content" style="margin-bottom: 2.5rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Effortless Articulation</h3>
+            <p class="has-text-justified" style="margin-bottom: 1rem;">
+              Leveraging our structured representation, we can control limb movements in Blender by simply setting up a
+              skeleton and Inverse Kinematics (IK) parameters based on primitive parent-child relationships —
+              eliminating
+              the need for skinning. This makes the articulation of any reconstructed subject remarkably
+              straightforward.
+            </p>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0.3rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+            </div>
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/human_articulation/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/human_articulation/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exploded View -->
+          <div class="content" style="margin-bottom: 2.5rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Exploded View</h3>
+            <p class="has-text-justified" style="margin-bottom: 1rem;">
+              Since each primitive represents a distinct part, we can easily create exploded-view visualizations by
+              translating primitives outward from the object center, revealing the internal structure of the
+              reconstruction.
+            </p>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0.3rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+            </div>
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/blow_vis/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/blow_vis/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physics-based Motion Simulation -->
+          <div class="content" style="margin-bottom: 2rem;">
+            <h3 class="title is-4" style="margin-bottom: 1.5rem;">Physics-based Motion Simulation</h3>
+            <p class="has-text-justified" style="margin-bottom: 1rem;">
+              By controlling primitive motion parameters, we can simulate physics-based effects on individual object
+              parts. For instance, we simulate the Rubik's Cube rotating upon impact and gradually stopping due to
+              friction, or the Treasure Box lid accelerating open under force and slowly settling back due to joint
+              damping.
+            </p>
+            <!-- Column Headers -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0.3rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Primitives</strong></div>
+              <div class="column" style="flex: 0 0 25%;"><strong>Rendered</strong></div>
+            </div>
+            <div class="columns is-mobile is-gapless" style="margin-bottom: 0.25rem; justify-content: center;">
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/physic_motion_sim/box/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/physic_motion_sim/box/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/physic_motion_sim/cube/move_primitive_img.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column" style="flex: 0 0 25%; padding: 2px;">
+                <video autoplay muted loop playsinline style="width: 100%; border-radius: 4px;">
+                  <source src="./static/videos/editing/physic_motion_sim/cube/move_gs_img.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Labels -->
+            <div class="columns is-mobile is-gapless has-text-centered"
+              style="margin-bottom: 0; justify-content: center;">
+              <div class="column" style="flex: 0 0 50%;"><em>Box — Joint Damping</em></div>
+              <div class="column" style="flex: 0 0 50%;"><em>Cube — Friction Stop</em></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--/ Applications. -->
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0" frameborder="0"
+              allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div> -->
+      <!--/ Paper video. -->
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{yu2026dprism,
+  title     = {D-Prism: Differentiable Primitives for Structured Dynamic Modeling},
+  author    = {Yu, Xingyuan and Li, Yijin and Zeng, Chong and Ming, Yuhang and Bao, Hujun and Zhang, Guofeng},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <!-- <div class="content has-text-centered">
+        <a class="icon-link" href="./static/videos/nerfies_paper.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div> -->
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is constructed using the source code provided by <a
+                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, and we are grateful for their template.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

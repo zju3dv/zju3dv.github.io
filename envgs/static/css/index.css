@@ -10,7 +10,7 @@
 }
 
 body {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -30,7 +30,7 @@ body {
 }
 
 .teaser {
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .zoom-container .column {
@@ -83,16 +83,16 @@ body {
 .publication-header .hero-body {}
 
 .publication-title {
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .publication-authors {
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .publication-venue {
   margin-top: 0.5em;
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .publication-awards {

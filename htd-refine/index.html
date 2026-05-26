@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Project page for HTD-Refine: Natural Human Motion Recovery by Aligning High-Order Temporal Dynamics from Monocular Videos."
+  />
+  <meta
+    name="keywords"
+    content="HTD-Refine, human motion recovery, monocular video, temporal dynamics, velocity, acceleration, project page"
+  />
+  <title>HTD-Refine | Project Page</title>
+
+  <link href="vendor/jost/jost.css" rel="stylesheet" />
+  <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/academicons/css/academicons.min.css" rel="stylesheet" />
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="page">
+    <aside class="side-nav">
+      <a href="#top">Top</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#methods">Methods</a>
+      <a href="#qualitative">Video</a>
+      <a href="#results">Results</a>
+      <a href="#citation">Citation</a>
+    </aside>
+
+      <main class="content">
+        <div class="content-group content-group-intro">
+          <section class="hero" id="top">
+            <div class="hero-title-region">
+              <h1>
+                <span class="title-mark">HTD-Refine</span>:
+                Natural Human Motion Recovery <br>
+                by Aligning <span class="title-emphasis-one">High-order Temporal Dynamics</span> <br>
+                from Monocular Videos
+              </h1>
+
+              <div class="venue-row">
+                CVPR 2026
+                <span class="venue-icon venue-icon-oral" aria-hidden="true">
+                  <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M121.6 908.8l537.6-163.2L284.8 368zM438.4 403.2c-9.6 0-16-3.2-22.4-9.6-12.8-12.8-12.8-32 0-44.8 32-32 32-32 0-60.8-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0c57.6 57.6 57.6 96 0 153.6-3.2 3.2-12.8 6.4-22.4 6.4zM659.2 624c-9.6 0-16-3.2-22.4-9.6-12.8-12.8-12.8-32 0-44.8l9.6-9.6c28.8-28.8 48-48 73.6-48 28.8 0 48 22.4 80 51.2 12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0c-9.6-9.6-25.6-25.6-35.2-32-6.4 3.2-19.2 16-28.8 28.8l-9.6 9.6c-6.4 6.4-12.8 9.6-22.4 9.6z"></path>
+                    <path d="M512 476.8c-9.6 0-16-3.2-22.4-9.6-12.8-12.8-12.8-32 0-44.8l64-64c57.6-57.6 57.6-128 0-185.6l-35.2-35.2c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0L598.4 128c80 80 80 195.2 0 275.2l-64 64c-3.2 6.4-12.8 9.6-22.4 9.6zM588.8 550.4c-9.6 0-16-3.2-22.4-9.6-12.8-12.8-12.8-32 0-44.8l134.4-134.4c102.4-102.4 153.6-64 227.2 9.6 12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0c-67.2-67.2-73.6-73.6-137.6-9.6l-134.4 134.4c-6.4 6.4-16 9.6-22.4 9.6z"></path>
+                  </svg>
+                </span>
+                <span class="venue-label-oral">Oral</span>
+                <i class="fa fa-trophy venue-icon-trophy" aria-hidden="true"></i>
+                <span class="venue-label-candidate">Award Candidate</span>
+              </div>
+
+              <div class="authors">
+                <a class="author-link" data-author="Dingkun Wei" href="https://kune1008.github.io/" target="_blank" rel="noopener noreferrer">Dingkun Wei<sup>1,2,*</sup></a>
+                <a class="author-link" data-author="Zehong Shen" href="https://zehongs.github.io/" target="_blank" rel="noopener noreferrer">Zehong Shen<sup>2,*</sup></a>
+                <a class="author-link" data-author="Yan Xia" href="https://scholar.isshikih.top/" target="_blank" rel="noopener noreferrer">Yan Xia<sup>3</sup></a>
+                <a class="author-link" data-author="Georgios Pavlakos" href="https://geopavlakos.github.io/" target="_blank" rel="noopener noreferrer">Georgios Pavlakos<sup>3</sup></a>
+                <a class="author-link" data-author="Yujun Shen" href="https://shenyujun.github.io/" target="_blank" rel="noopener noreferrer">Yujun Shen<sup>2</sup></a>
+                <a class="author-link" data-author="Xiaowei Zhou" href="https://www.xzhou.me/" target="_blank" rel="noopener noreferrer">Xiaowei Zhou<sup>1</sup></a>
+              </div>
+
+              <div class="affiliations">
+                <span class="affiliation-item"><sup>*</sup>Equal contribution</span>
+                <span class="affiliation-item"><i class="fa fa-university" aria-hidden="true"></i><span><sup>1</sup>Zhejiang University</span></span>
+                <span class="affiliation-item"><i class="fa fa-building" aria-hidden="true"></i><span><sup>2</sup>Ant Group</span></span>
+                <span class="affiliation-item"><i class="fa fa-university" aria-hidden="true"></i><span><sup>3</sup>The University of Texas at Austin</span></span>
+              </div>
+            </div>
+
+            <div class="hero-buttons">
+              <a class="hero-button" data-link="arxiv" href="#">
+                <i class="ai ai-arxiv"></i>
+                arXiv
+              </a><span class="button-sep">/</span>
+              <a class="hero-button" id="hero-citation-copy" data-link="citation" href="#citation">
+                <i class="fa fa-quote-right"></i>
+                <span id="hero-citation-copy-label">Citation</span>
+              </a><span class="button-sep">/</span>
+              <a class="hero-button" data-link="code" href="#">
+                <i class="fa fa-github"></i>
+                Code
+                <span class="hero-button-tooltip">Coming Soon</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <p class="tldr-inline">
+              <span class="tldr-label">TL;DR </span>
+              &nbsp; We refine existing HMR methods with estimated 3D velocity and 3D acceleration to recover natural human motion in global coordinates.
+            </p>
+            <div class="method-figure abstract-figure tldr-follow-video">
+              <video autoplay muted loop playsinline preload="metadata" controls>
+                <source src="assets/teaser.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </section>
+        </div>
+
+        <div class="content-group content-group-main">
+          <section class="section-card" id="abstract">
+          <div class="section-header">
+            <h2>Abstract</h2>
+          </div>
+          <p>
+              Human motion recovered from monocular videos often appears overly smooth or dynamically inconsistent, <strong>even
+            when joint positions are numerically accurate</strong>.
+            We observe that this limitation stems from the absence of
+            reliable high-order temporal cues, namely <strong>velocity and acceleration</strong>, which are essential for reconstructing
+            motion with realistic momentum, timing, and high-frequency detail.
+          </p>
+
+          <div class="method-figure abstract-figure abstract-video-figure">
+            <video class="abstract-video" id="abstract-video" autoplay muted loop playsinline preload="metadata">
+              <source src="assets/abstract.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="abstract-video-toolbar">
+              <input
+                class="video-progress abstract-video-progress"
+                id="abstract-video-progress"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="0.1"
+                aria-label="Abstract video progress"
+              />
+              <button class="video-control-btn" type="button" id="abstract-video-play-toggle">Pause</button>
+              <button class="video-control-btn abstract-speed-toggle" type="button" id="abstract-video-speed-toggle">Speed: 1x</button>
+              <button class="video-control-btn" type="button" id="abstract-video-restart">Restart</button>
+            </div>
+          </div>
+          </section>
+
+
+          <section class="section-card" id="methods">
+          <div class="section-header">
+            <h2>Methods</h2>
+          </div>
+          <p class="section-description">
+            HTD-Refine recovers natural global human motion from a monocular video through three stages. First, we
+            initialize a world-space trajectory by combining camera-space SMPL estimates from an off-the-shelf HMR
+            model and per-frame camera extrinsics. Second, our lightweight temporal transformer, PVA-Net, predicts stabilized 2D keypoints together
+            with camera-space 3D joint velocities and accelerations. Third, we optimize pose, global orientation, and translation over the full sequence with
+            velocity and acceleration targets from PVA-Net, under constraints of 2D keypoints, jerk smoothness, and
+            regularization toward the initialization.
+          </p>
+
+          <div class="method-figure pipeline-figure">
+            <img src="assets/method.png" alt="HTD-Refine pipeline" />
+          </div>
+          </section>
+
+          <section class="section-card" id="qualitative">
+          <div class="section-header">
+            <h2>Video Results</h2>
+          </div>
+          <div class="video-filter-bar" role="group" aria-label="Video source filters">
+            <button type="button" class="video-filter-btn is-active" id="video-filter-web" aria-pressed="true">
+              <span class="video-filter-check" aria-hidden="true"></span>
+              Web Video
+            </button>
+            <button type="button" class="video-filter-btn is-active" id="video-filter-emdb" aria-pressed="true">
+              <span class="video-filter-check" aria-hidden="true"></span>
+              EMDB Dataset
+            </button>
+          </div>
+          <div class="video-interaction-area">
+            <div class="video-shell">
+              <div class="video-empty hidden" id="video-empty">Select at least one video source to preview results.</div>
+              <div class="video-loading" id="video-loading">
+                <div class="spinner" aria-hidden="true"></div>
+                <div>Video loading...</div>
+              </div>
+              <video
+                class="qualitative-video-layer is-active"
+                id="qualitative-video-primary"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                src="assets/1_demo_pamela_comparison_all_gvhmr.mp4"
+              ></video>
+              <video
+                class="qualitative-video-layer"
+                id="qualitative-video-secondary"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="carousel-btn video-shell-hover-btn prev" type="button" id="video-prev-hover" aria-label="Previous video">
+                <span class="carousel-arrow" aria-hidden="true">&#8249;</span>
+              </button>
+              <button class="carousel-btn video-shell-hover-btn next" type="button" id="video-next-hover" aria-label="Next video">
+                <span class="carousel-arrow" aria-hidden="true">&#8250;</span>
+              </button>
+            </div>
+            <div class="video-controls-wrap">
+              <button class="carousel-btn prev" type="button" id="video-prev" aria-label="Previous video">
+                <span class="carousel-arrow" aria-hidden="true">&#8249;</span>
+              </button>
+              <div class="video-controls-center">
+                <div class="carousel-dots" id="video-dots"></div>
+                <div class="video-toolbar">
+                  <div class="video-progress-row">
+                    <input class="video-progress" id="video-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+                  </div>
+                  <div class="video-actions-row">
+                    <button class="video-control-btn" type="button" id="video-play-toggle">Pause</button>
+                    <div class="speed-group" aria-label="Playback speed">
+                      <button class="video-control-btn" type="button" id="video-speed-toggle">Speed: 1x</button>
+                    </div>
+                    <button class="video-control-btn" type="button" id="video-restart">Restart</button>
+                  </div>
+
+                </div>
+              </div>
+              <button class="carousel-btn next" type="button" id="video-next" aria-label="Next video">
+                <span class="carousel-arrow" aria-hidden="true">&#8250;</span>
+              </button>
+            </div>
+          </div>
+          </section>
+
+          <section class="section-card" id="results">
+          <div class="section-header">
+            <h2>Main Results</h2>
+          </div>
+
+          <div class="metrics-explain">
+            <p><em>MPJVE: Mean Per-Joint Velocity Error. MPJAE: Mean Per-Joint Acceleration Error.</em></p>
+          </div>
+
+          <div class="table-block">
+            <h3>EMDB-2 <span class="camera-note">Moving Cameras</span></h3>
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 results-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Jitter</th>
+                    <th>FS</th>
+                    <th>MPJVE</th>
+                    <th>MPJAE</th>
+                    <th>WA-MPJPE</th>
+                    <th>W-MPJPE</th>
+                    <th>RTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TRAM (w/ traj filter)</td>
+                    <td>25.1</td>
+                    <td>12.0</td>
+                    <td>0.6</td>
+                    <td>12.3</td>
+                    <td>78.8</td>
+                    <td>221.3</td>
+                    <td>1.5</td>
+                  </tr>
+                  <tr class="refine-row">
+                    <td><strong>TRAM + HTD-Refine</strong></td>
+                    <td><strong>6.6</strong></td>
+                    <td><strong>7.5</strong></td>
+                    <td><strong>0.4</strong></td>
+                    <td><strong>8.0</strong></td>
+                    <td><strong>71.7</strong></td>
+                    <td><strong>204.9</strong></td>
+                    <td>1.5</td>
+                  </tr>
+                  <tr>
+                    <td>GVHMR</td>
+                    <td>17.2</td>
+                    <td><strong>4.0</strong></td>
+                    <td>0.6</td>
+                    <td>10.4</td>
+                    <td>118.7</td>
+                    <td>292.7</td>
+                    <td>2.1</td>
+                  </tr>
+                  <tr class="refine-row">
+                    <td><strong>GVHMR + HTD-Refine</strong></td>
+                    <td><strong>7.2</strong></td>
+                    <td>5.7</td>
+                    <td><strong>0.4</strong></td>
+                    <td><strong>7.9</strong></td>
+                    <td><strong>69.2</strong></td>
+                    <td><strong>192.4</strong></td>
+                    <td><strong>1.5</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Human3R</td>
+                    <td>529.6</td>
+                    <td>60.0</td>
+                    <td>2.9</td>
+                    <td>143.3</td>
+                    <td>169.0</td>
+                    <td><strong>367.1</strong></td>
+                    <td>2.2</td>
+                  </tr>
+                  <tr class="refine-row">
+                    <td><strong>Human3R + HTD-Refine</strong></td>
+                    <td><strong>132.5</strong></td>
+                    <td><strong>23.2</strong></td>
+                    <td><strong>1.3</strong></td>
+                    <td><strong>39.4</strong></td>
+                    <td><strong>156.2</strong></td>
+                    <td>391.4</td>
+                    <td>2.2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="table-block">
+            <h3>RICH <span class="camera-note">Static Cameras</span></h3>
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 results-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Jitter</th>
+                    <th>FS</th>
+                    <th>MPJVE</th>
+                    <th>MPJAE</th>
+                    <th>WA-MPJPE</th>
+                    <th>W-MPJPE</th>
+                    <th>RTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TRAM (w/ traj filter)</td>
+                    <td>18.7</td>
+                    <td>12.9</td>
+                    <td>0.6</td>
+                    <td>8.7</td>
+                    <td>103.6</td>
+                    <td>168.4</td>
+                    <td>2.7</td>
+                  </tr>
+                  <tr class="refine-row">
+                    <td><strong>TRAM + HTD-Refine</strong></td>
+                    <td><strong>4.2</strong></td>
+                    <td><strong>6.5</strong></td>
+                    <td><strong>0.4</strong></td>
+                    <td><strong>5.1</strong></td>
+                    <td><strong>90.2</strong></td>
+                    <td><strong>145.3</strong></td>
+                    <td><strong>2.5</strong></td>
+                  </tr>
+                  <tr>
+                    <td>GVHMR</td>
+                    <td>13.0</td>
+                    <td>3.3</td>
+                    <td>0.4</td>
+                    <td>6.8</td>
+                    <td>77.4</td>
+                    <td>124.0</td>
+                    <td>2.5</td>
+                  </tr>
+                  <tr class="refine-row">
+                    <td><strong>GVHMR + HTD-Refine</strong></td>
+                    <td><strong>3.6</strong></td>
+                    <td>3.3</td>
+                    <td><strong>0.3</strong></td>
+                    <td><strong>4.8</strong></td>
+                    <td><strong>75.2</strong></td>
+                    <td><strong>123.8</strong></td>
+                    <td><strong>2.3</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </section>
+        </div>
+
+        <div class="content-group content-group-citation">
+          <section class="section-card" id="citation">
+          <div class="section-header">
+            <h2>Citation</h2>
+          </div>
+          <pre>@inproceedings{wei2026htdrefine,
+  title     = {Natural Human Motion Recovery by Aligning High-Order Temporal Dynamics from Monocular Videos},
+  author    = {Wei, Dingkun and Shen, Zehong and Xia, Yan and Pavlakos, Georgios and Shen, Yujun and Zhou, Xiaowei},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</pre>
+          </section>
+        </div>
+      </main>
+  </div>
+
+  <footer class="page-footer" role="contentinfo" aria-label="Footer">
+    <p>&copy; 2026 Dingkun Wei. All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

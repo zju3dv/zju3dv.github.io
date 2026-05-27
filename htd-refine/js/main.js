@@ -8,7 +8,7 @@ const pageLinksConfig = {
     "Xiaowei Zhou": "https://www.xzhou.me/"
   },
   buttons: {
-    arxiv: "#",
+    arxiv: "https://arxiv.org/abs/2605.26879",
     citation: "#citation",
     code: "#"
   },

@@ -290,13 +290,7 @@ h3 {
 .hero-button[data-link="code"]:active,
 .hero-button[data-link="code"]:focus,
 .hero-button[data-link="code"]:focus-visible,
-.hero-button[data-link="code"]:visited,
-.hero-button[data-link="arxiv"],
-.hero-button[data-link="arxiv"]:hover,
-.hero-button[data-link="arxiv"]:active,
-.hero-button[data-link="arxiv"]:focus,
-.hero-button[data-link="arxiv"]:focus-visible,
-.hero-button[data-link="arxiv"]:visited {
+.hero-button[data-link="code"]:visited {
   color: #667085;
   text-decoration: none;
   outline: none;

@@ -736,12 +736,18 @@ body.archon-site {
   padding-bottom: 4.25rem;
 }
 
+.archon-site .archon-video-section .container.is-max-desktop {
+  width: calc(100% - 2rem);
+  max-width: 1180px;
+}
+
 .archon-site .archon-video-embed {
   position: relative;
-  width: min(100%, 920px);
-  height: 0;
+  width: min(100%, 1120px);
+  height: auto;
+  aspect-ratio: 16 / 9;
   margin: 1.4rem auto 0;
-  padding-bottom: 56.25%;
+  padding-bottom: 0;
   overflow: hidden;
   border: 1px solid rgba(50, 214, 211, 0.3);
   border-radius: 24px;

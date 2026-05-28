@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="archon" x1="8" x2="56" y1="58" y2="6" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8a4bff"/>
+      <stop offset="0.45" stop-color="#1aa7ff"/>
+      <stop offset="1" stop-color="#ff9d2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#ffffff"/>
+  <path d="M12 52 29 12h7l16 40h-8l-4-10H24l-4 10h-8Zm15-17h10l-5-13-5 13Z" fill="url(#archon)"/>
+</svg>

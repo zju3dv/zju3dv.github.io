@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EnvGS</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
@@ -139,21 +139,8 @@
   <!-- > Teaser -->
   <section class="section has-background-white has-text-black" id="section_teaser">
     <div class="container is-max-desktop has-text-centered" id="comparisons">
-      <!-- preload videos here to avoid flickering -->
-      <div>
-        <video data-label="sparse_view_gs" preload="auto" autoplay muted loop playsinline controls hidden
-          src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/sparse_view_gs.mp4">
-        </video>
-        <video data-label="sparse_to_dense" preload="auto" autoplay muted loop playsinline hidden
-          src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/sparse_to_dense.mp4">
-        </video>
-        <video data-label="dense_view_gs" preload="auto" autoplay muted loop playsinline hidden
-          src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/dense_view_gs.mp4">
-        </video>
-      </div>
-
       <div class="comparisons-video-wrapper">
-        <video id="comparisons-video" width="100%" controls autoplay muted loop playsinline></video>
+        <video id="comparisons-video" width="100%" controls autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="teaser-caption-container">
@@ -265,22 +252,26 @@
                 the viewpoint.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/hatchback/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -305,22 +296,26 @@
                 near-field reflections of the nearby paintings and bowl.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/toaster/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -346,22 +341,26 @@
                 baseline methods.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/sedan/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -387,22 +386,26 @@
                 head.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/ref_real/spheres/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -427,22 +430,26 @@
                 lights and the nearby buildings, while baseline methods fail to capture these details.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/dog/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -469,22 +476,26 @@
                 and fail to accurately capture near-field reflections.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/envgs/audi/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -509,22 +520,26 @@
                 it is able to simulate convincing reflections across the body and windshield of the car.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/compact/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -550,22 +565,26 @@
                 disappearing depending on the viewing angle.
                 <div class="video-comparison" data-label="3DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/2dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/2dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="2DGS" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="GaussianShader" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/gaussianshader_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/gaussianshader_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="3DGS-DR" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs-dr_ours_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/comparison/nerf-casting/grinder/render/3dgs-dr_ours_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -627,27 +646,32 @@
                 quality.
                 <div class="video-comparison" data-label="w/o joint optimization" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_joint_optimization_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_joint_optimization_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o monocular normal loss" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_monocular_normal_loss_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_monocular_normal_loss_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/ environment map" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/w_envmap_256_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/w_envmap_256_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o color sabotage" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_color_sabotage_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_color_sabotage_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o normal propagation" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_normal_propagation_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/render/wo_normal_propagation_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -677,27 +701,32 @@
                 near-field inter-reflections.
                 <div class="video-comparison" data-label="w/o joint optimization" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_joint_optimization_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_joint_optimization_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o monocular normal loss" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_monocular_normal_loss_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_monocular_normal_loss_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/ environment map" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/w_envmap_256_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/w_envmap_256_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o color sabotage" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_color_sabotage_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_color_sabotage_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
                 <div class="video-comparison" data-label="w/o normal propagation" data-label2="Ours">
                   <video class="video" width=100% loop playsinline muted
-                    src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_normal_propagation_full_30fps.mp4"></video>
+                    preload="none"
+                    data-src="https://raw.githubusercontent.com/xbillowy/assets/refs/heads/main/envgs.github.io.assets/ablation/ref_real/spheres/normal/wo_normal_propagation_full_30fps.mp4"></video>
                   <canvas></canvas>
                 </div>
               </div>
@@ -734,14 +763,12 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop">
       <h2 class="title is-4">Citation</h2>
-      <pre><code>
-@article{xie2024envgs,
+      <pre><code>@article{xie2024envgs,
     title={EnvGS: Modeling View-Dependent Appearance with Environment Gaussian},
     author={Xie, Tao and Chen, Xi and Xu, Zhen and Xie, Yiman and Jin, Yudong and Shen, Yujun and Peng, Sida and Bao, Hujun and Zhou, Xiaowei},
     journal={arXiv preprint arXiv:2412.15215},
     year={2024}
-}
-    </code></pre>
+}</code></pre>
     </div>
   </section>
 

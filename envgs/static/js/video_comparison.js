@@ -18,21 +18,41 @@ class VideoComparison {
         this.context = this.canvas[0].getContext("2d");
 
         this.isPlaying = false;
+        this.tabVisible = false;
+        this.viewportVisible = false;
+        this.readyStateListenerAttached = false;
 
         this.label = container.data('label') || "Label 1"; // Get the first label, default to "Label 1"
         this.label2 = container.data('label2') || "Label 2"; // Get the second label, default to "Label 2"
 
         this.video[0].style.height = "0px";  // Hide video without stopping it
+        this.video[0].preload = "none";
         // this.video[0].playbackRate = 0.5;
 
         let self = this;
         container.on('tab:show', function (e) {
-            self.playWhenReady();
+            self.tabVisible = true;
+            self.updatePlayback();
         });
         container.on('tab:hide', function(e) {
-            // self.video[0].pause();
+            self.tabVisible = false;
             self.pause();
         });
+
+        if ('IntersectionObserver' in window) {
+            this.viewportObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    self.viewportVisible = entry.isIntersecting || entry.intersectionRatio > 0;
+                    self.updatePlayback();
+                });
+            }, {
+                rootMargin: '300px 0px',
+                threshold: 0.01
+            });
+            this.viewportObserver.observe(this.container[0]);
+        } else {
+            this.viewportVisible = true;
+        }
 
         function trackLocation(e) {
             // Normalize to [0, 1]
@@ -58,6 +78,9 @@ class VideoComparison {
     resize() {
         const videoWidth = this.video[0].videoWidth / 2;
         const videoHeight = this.video[0].videoHeight;
+        if (!videoWidth || !videoHeight) {
+            return;
+        }
         const canvasWidth = this.container.width();
         const canvasHeight = canvasWidth * videoHeight / videoWidth;
         this.canvas[0].width = canvasWidth;
@@ -65,13 +88,21 @@ class VideoComparison {
     }
 
     play() {
+        if (!this.shouldPlay()) {
+            return;
+        }
         this.resize();
         if (this.isPlaying) {
             return;
         }
-        console.log('Playing video', this.video[0])
+        const self = this;
         this.isPlaying = true;
-        this.video[0].play();
+        const playPromise = this.video[0].play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function () {
+                self.isPlaying = false;
+            });
+        }
         this.drawLoop();
     }
 
@@ -80,17 +111,42 @@ class VideoComparison {
         this.isPlaying = false;
     }
 
+    shouldPlay() {
+        return this.tabVisible && this.viewportVisible;
+    }
+
+    updatePlayback() {
+        if (this.shouldPlay()) {
+            this.playWhenReady();
+        } else {
+            this.pause();
+        }
+    }
+
+    ensureVideoLoaded() {
+        const video = this.video[0];
+        if (!video.currentSrc && !video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+        }
+    }
+
     playWhenReady() {
-        console.log('play when ready', this.video[0])
+        if (!this.shouldPlay()) {
+            return;
+        }
+        this.ensureVideoLoaded();
         const self = this;
         if (self.video[0].readyState >= 3) {
             self.play();
         } else if (!self.readyStateListenerAttached) {
-            document.addEventListener('readystatechange', function () {
-                if (self.video[0].readyState >= 3) {
+            self.readyStateListenerAttached = true;
+            self.video[0].addEventListener('canplay', function () {
+                self.readyStateListenerAttached = false;
+                if (self.shouldPlay()) {
                     self.play();
                 }
-            });
+            }, { once: true });
         }
     }
 
@@ -171,7 +227,7 @@ class VideoComparison {
             context.fillStyle = "#AAAAAA";
             context.fill();
 
-            context.font = "30px 'Google Sans', sans-serif";
+            context.font = "30px 'Lato', sans-serif";
             context.fillStyle = "white";
             context.strokeStyle = 'black';
             context.lineWidth = 2;

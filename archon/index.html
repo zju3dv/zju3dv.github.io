@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    .video-title-container {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 0 10%;
+    }
+    .video-title {
+      width: 100%;
+      text-align: center;
+      font-style: italic;
+      font-size: 1em; 
+    }
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 15px; /* Space between videos */
+      max-width: 1500px; /* Adjust to your preferred width */
+      margin: 0 auto; /* Center align the grid */
+    }
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .video-title {
+        margin-bottom: 10px; 
+        font-weight: bold;
+        text-align: center;
+    }
+    video {
+        width: 100%; 
+        height: auto;
+    }
+    .video-container-four {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns */
+      gap: 15px; /* Space between videos */
+      max-width: 1500px; /* Adjust to your preferred width */
+      margin: 0 auto; /* Center align the grid */
+    }
+    .video-item-four {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .video-title-four {
+        margin-bottom: 0px; /* Space between title and video */
+        font-weight: bold;
+        text-align: center;
+    }
+    .new-row-container {
+        display: flex; /* Keep text and videos in one row */
+        flex-direction: row; /* Align text next to the videos */
+        align-items: center; /* Vertically align the text and videos */
+        justify-content: center; /* Center the whole row on the page */
+        gap: 20px; /* Space between the text and videos */
+        padding: 10px;
+        margin-left: 4%;
+    }
+
+    .new-videos {
+        display: flex;
+        flex-direction: row; /* Arrange videos horizontally */
+        gap: 15px; /* Space between video items */
+    }
+
+    .new-video-item {
+        display: flex;
+        flex-direction: column; /* Stack title above the video */
+        align-items: center; /* Center-align titles and videos */
+    }
+
+    .new-video-title {
+        font-size: 16px;
+        margin-bottom: 5px; /* Space between title and video */
+    }
+
+    .new-videos video {
+        width: 200px; /* Set video size */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Crop and center the video */
+        font-size: small;
+    }
+
+    .slider-pagination .slider-page {
+        background: white;  
+    }
+
+    polyline {
+        fill: black;
+        stroke-width: 0.5em;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Single video row classes */
+    .carousel-row-single {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        width: 100%;
+        max-width: 85%;
+        /* margin-bottom: 5px; */
+        margin: 0 auto 5px auto;  /* center the row */
+    }
+    .video-item-single {
+        width: 100%;
+        box-sizing: border-box;
+        position: relative; /* added: enable overlay positioning */
+    }
+    .video-item-single video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+    .video-title-single {
+        text-align: center;
+        margin-top: 4px;
+        font-size: clamp(10px, 1.2vw, 14px);
+        font-family: "Times New Roman", serif;
+        font-weight: normal;
+    }
+
+    @media screen and (max-width: 480px) {
+        .carousel-row-single {
+            gap: 6px;
+        }
+        .video-title-single {
+            font-size: clamp(8px, 1.5vw, 12px);
+        }
+    }
+
+    /* Prompt overlay (ported from Ovi and made always visible) */
+    .prompt {
+        max-width: calc(100% - 20px);
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: rgba(0,0,0,0.5);
+        color: rgba(255,255,255,0.95);
+        font-size: 10px;
+        line-height: 1.3;
+        padding: 4px 8px;
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        opacity: 0;                 /* hidden by default */
+        pointer-events: none;       /* don't block mouse unless visible */
+        transition: opacity 0.25s ease;
+    }
+
+    @media (hover: hover) {
+        /* Show overlay when hovering the video container */
+        .video-item-3x3:hover .prompt,
+        .video-item-single:hover .prompt {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    /* qulitative comparison css */
+
+            /* Container that holds the row of videos */
+            .new-row-container {
+            display: flex;
+            justify-content: space-between; /* Evenly space out the videos */
+            gap: 10px; /* Space between the videos */
+            flex-wrap: nowrap; /* Prevent wrapping of items */
+            padding: 0px 0;
+            width: 100%;
+            max-width: 100%; /* Ensure the container takes up the full width */
+            margin: 0 auto; /* Center the container */
+            overflow: hidden; /* Ensure any excess content is clipped */
+            }
+
+
+            /* Title above the video */
+            .new-text-prompt {
+            font-size: 20px; /* Size of the title text */
+            color: #333; /* Dark color for the text */
+            }
+
+            /* Title above the video */
+            .new-text-prompt-bold {
+            font-size: 20px; /* Size of the title text */
+            font-weight: bold;
+            color: #02376c; /* Dark color for the text */
+            }
+
+            /* Make the video fill the width of its container */
+            .new-video-item video {
+            width: 100%; /* Make the video take the full width of the item */
+            display: block;
+            border: none; /* No border around the video */
+            outline: none; /* Remove focus outline */
+            height: auto; /* Maintain video aspect ratio */
+            }
+
+            /* Optional: style for the prompt below the video */
+            /* .new-video-item .new-text-prompt:last-child {
+            font-size: 20px;
+            font-weight: normal;
+            color: #666; /* Lighter color for the prompt } */
+
+            /* Responsive design: Stack the videos vertically on smaller screens */
+            @media (max-width: 768px) {
+            .new-video-item {
+                flex: 1 1 100%; /* Stack videos on smaller screens */
+                width: 100%; /* Full width on smaller devices */
+            }
+
+            .new-video-item:hover {
+                transform: none; /* Remove scale effect on hover */
+            }
+
+                    /* Title above the video */
+            .new-text-prompt {
+                font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+                color: #333; /* Dark color for the text */
+            }
+
+            .new-text-prompt-bold {
+                font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+                font-weight: bold;
+                color: #02376c; /* Dark color for the text */
+            }
+            }
+
+  </style>
+
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Archon: A Unified Multimodal Model for Holistic Digital Human Generation">
+  <meta property="og:title" content="Archon"/>
+  <meta property="og:description" content="Archon: A Unified Multimodal Model for Holistic Digital Human Generation"/>
+  <meta property="og:image" content="static/images/archon-title-pattern.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Multimodal Language Model, Digital Human, Talking Head Generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Archon: A Unified Multimodal Model for Holistic Digital Human Generation</title>
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+    var sources = document.querySelectorAll('source');
+
+    if ("IntersectionObserver" in window) {
+      var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(video) {
+          if (video.isIntersecting) {
+            for (var source in video.target.children) {
+              var videoSource = video.target.children[source];
+              if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                videoSource.src = videoSource.dataset.src;
+              }
+            }
+
+            video.target.load();
+            video.target.classList.remove("lazy");
+            lazyVideoObserver.unobserve(video.target);
+          }
+        });
+      });
+
+      lazyVideos.forEach(function(lazyVideo) {
+        lazyVideoObserver.observe(lazyVideo);
+      });
+    }
+  });
+  </script>
+  <style>
+    /* --- Floating Navigation Styles --- */
+    .side-nav {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100000;
+    }
+
+    .nav-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0.85rem;
+      border-radius: 20px;
+      background: rgba(3, 5, 10, 0.82);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform-origin: top left;
+    }
+
+    /* Link styling */
+    .side-nav a {
+      color: #ddd; 
+      text-decoration: none;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 0;
+      outline: 0;
+      border-radius: 999px;
+      padding: 0.42rem 0.65rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Main Item Dot */
+    .side-nav a:not(.sub-item)::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background-color: currentColor;
+      border-radius: 50%;
+      margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+
+    /* Sub Item Styling (Hierarchy) */
+    .side-nav a.sub-item {
+        font-size: 0.8rem;
+        color: #aaa;
+        padding-left: 1.2rem; /* Indent */
+    }
+    
+    /* Sub Item Dot (Smaller) */
+    .side-nav a.sub-item::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background-color: currentColor;
+      border-radius: 50%;
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+
+    /* Hover States */
+    .side-nav a:hover {
+      color: #5dade2; 
+      background: rgba(93, 173, 226, 0.13);
+      transform: translateX(5px); 
+    }
+    .side-nav a:hover::before {
+        background-color: #5dade2;
+        transform: scale(1.2);
+    }
+
+    /* Toggle Button */
+    .nav-toggle-btn {
+        background: linear-gradient(135deg, #5dade2, #32d6d3);
+        border: none;
+        outline: none;
+        color: #ffffff; 
+        font-size: 1.5rem; 
+        cursor: pointer;
+        padding: 0;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px; 
+        height: 30px; 
+        border-radius: 999px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+        transition: color 0.3s ease, transform 0.2s ease; 
+    }
+    .nav-toggle-btn:hover {
+        color: #5dade2;
+        transform: scale(1.1);
+    }
+
+    /* Hiding Logic */
+    .side-nav.nav-hidden .nav-links-container {
+        display: none;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .side-nav {
+        display: none;
+      }
+    }
+
+    .page-container {
+      width: 1200px;
+      min-height: 1000px;
+      margin: 0 auto;
+      text-align: left;
+      padding-top: 5em;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-bottom: 1em;
+      height: auto;
+    }
+
+    .scrollable-table-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #scrollableTableWrapper {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+      display: table;
+      border-collapse: separate;
+      box-sizing: border-box;
+      text-indent: initial;
+      line-height: normal;
+      font-weight: normal;
+      font-size: medium;
+      font-style: normal;
+      color: -internal-quirk-inherit;
+      text-align: start;
+      border-spacing: 2px;
+      border-color: gray;
+      white-space: normal;
+      font-variant: normal;
+    }
+
+    .last-updated {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      color: black;
+      /* text color */
+      font-size: 1.0em;
+      z-index: 1000;
+      /* ensures it's on top of other elements */
+    }
+
+    .container-1 {
+      height:750px;
+    }
+
+    .container-2{
+      height:550px;
+
+    }
+
+    .video-container-character {
+      position: relative;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100%;
+      padding: 0;
+    }
+
+    .video-container-stylizaton {
+      position: relative;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100%;
+      padding: 0;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      content: '';
+    }
+
+    .video-container-character .swiper-button-next,
+    .video-container-character .swiper-button-prev {
+      top: 23rem;
+      outline: none;
+    }
+
+    .video-container-stylizaton .swiper-button-next,
+    .video-container-stylizaton .swiper-button-prev {
+      top: 15rem;
+      outline: none;
+    }
+
+    .swiper-icon {
+      font-size: 4rem;
+      color: black;
+    }
+    .video-size {
+    height: 335px;
+    }
+    .video-size-2 {
+    height: 250px;
+    }
+
+    .responsive-img {
+    width: 80vw;  /* Always 80% of viewport width */
+    max-width: 1400px;  /* Prevents it from exceeding original size */
+    height: auto;  /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto;  /* Center horizontally */
+}
+
+.full-width-container {
+    width: 100vw;  /* Ensure it covers the full viewport width */
+    margin-left: calc(-50vw + 50%);  /* Shift left to align with viewport */
+    text-align: center;
+}
+
+
+
+    .video-container-four {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: calc(0.5%); /* Space between videos */
+            max-width: 1100px; /* Adjust to your preferred width */
+            margin: 0 auto; /* Center align the grid */
+        }
+        .video-item-four {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-title-four {
+            margin-bottom: 0px; /* Space between title and video */
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .video-container-five {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            gap: calc(0.5%); /* Space between videos */
+            max-width: 1400px; /* Adjust to your preferred width */
+            margin: 0 auto; /* Center align the grid */
+        }
+
+        /* carouseal with 3 items and 3 rows */
+
+        .results-carousel-3x3 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        padding: 0;
+        margin: 0 auto; /* Center the carousel */
+        width: 100vw; /* keep 50vw */
+        max-width: 100vw;  /* modify this!*/
+        background-color: var(--main-bg-color);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Use grid to prevent overlap and control spacing */
+    .carousel-row-3x3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;  /* space between videos */
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    /* Two-column layout */
+    .carousel-row-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;  /* slightly larger gap for 2-column layout */
+        width: 100%;
+        max-width: 85%;  /* limit width to prevent videos from being too wide */
+        margin: 0 auto 5px auto;  /* center the row */
+    }
+
+    /* Six-column layout */
+    .carousel-row-6 {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;  /* smaller gap for 6-column layout */
+        width: 100%;
+        max-width: 85%;  /* use more width for 6 columns */
+        margin: 0 auto 5px auto;  /* center the row */
+    }
+
+    /* Three-column layout */
+    .carousel-row-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    max-width: 85%;
+    margin: 0 auto 5px auto;
+}
+
+/* Video item for 3-column layout */
+.video-item-3 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+.video-item-3 video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+    outline: none;
+    object-fit: contain;
+}
+
+/* Four-column layout */
+.carousel-row-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto 8px auto;
+}
+
+/* Video item for 4-column layout */
+.video-item-4 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.video-item-4 video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+    outline: none;
+    object-fit: contain;
+}
+
+/* Let items fill their grid cell */
+    .video-item-3x3 {
+        width: 100%;
+        min-width: 0;        /* prevent overflow in narrow containers */
+        box-sizing: border-box;
+        position: relative; /* enable prompt overlay positioning */
+    }
+
+    /* Video item for 2-column layout */
+    .video-item-2 {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .video-item-2 video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: none;
+        outline: none;
+        object-fit: contain;
+    }
+
+    /* Video item for 6-column layout */
+    .video-item-6 {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .video-item-6 video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: none;
+        outline: none;
+        object-fit: contain;
+    }
+
+    .video-title-3x3 {
+        text-align: center;
+        margin-top: 0px;
+        font-family: "Times New Roman", serif;
+        font-weight: normal !important;
+        /* Reduced font size range for better scaling */
+        font-size: clamp(8px, 1.5vw, 20px); /* Smaller minimum size, reduced scaling rate */
+        width: 100%; /* Added: Forces container to match video width */
+        
+        /* Keep truncation attempt */
+        /* display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+        max-height: 2.4em;
+        line-height: 1.2; */
+    }
+
+    .video-title-2 {
+        text-align: center;
+        margin-top: 4px;
+        font-family: "Times New Roman", serif;
+        font-weight: normal !important;
+        font-size: clamp(10px, 1.8vw, 22px);
+    }
+
+    .video-title-6 {
+        text-align: center;
+        margin-top: 2px;
+        font-family: "Times New Roman", serif;
+        font-weight: normal !important;
+        font-size: clamp(7px, 1.2vw, 14px);
+    }
+
+    @media screen and (max-width: 480px) {
+        .video-title-3x3 {
+            font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+            margin-top: 0px;
+            margin: 0px;
+            /* -webkit-line-clamp: 2;
+            line-clamp: 2;
+            max-height: 1.2em; */
+        }
+
+        .results-carousel-3x3 {
+            width: 90vw;
+            /* ...existing code... */
+        }
+
+        /* Keep 3 columns on small screens (adjust to 2 if preferred) */
+        .carousel-row-3x3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .carousel-row-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            max-width: 90%;
+        }
+
+        .carousel-row-6 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on mobile */
+            gap: 4px;
+            max-width: 95%;
+        }
+
+        .carousel-row-4 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on mobile */
+            gap: 6px;
+            max-width: 90%;
+        }
+
+        .video-title-2 {
+            font-size: clamp(9px, 1.5vw, 16px);
+        }
+
+        .video-title-6 {
+            font-size: clamp(6px, 1vw, 12px);
+        }
+
+        .video-item-3x3 {
+            width: 100%;
+        }
+    }
+
+            /* qulitative comparison css */
+
+            /* Container that holds the row of videos */
+            .new-row-container {
+            display: flex;
+            justify-content: space-between; /* Evenly space out the videos */
+            gap: 10px; /* Space between the videos */
+            flex-wrap: nowrap; /* Prevent wrapping of items */
+            padding: 0px 0;
+            width: 100%;
+            max-width: 100%; /* Ensure the container takes up the full width */
+            margin: 0 auto; /* Center the container */
+            overflow: hidden; /* Ensure any excess content is clipped */
+            }
+
+
+            /* Title above the video */
+            .new-text-prompt {
+            font-size: 20px; /* Size of the title text */
+            color: #333; /* Dark color for the text */
+            }
+
+            /* Title above the video */
+            .new-text-prompt-bold {
+            font-size: 20px; /* Size of the title text */
+            font-weight: bold;
+            color: #02376c; /* Dark color for the text */
+            }
+
+            /* Make the video fill the width of its container */
+            .new-video-item video {
+            width: 100%; /* Make the video take the full width of the item */
+            display: block;
+            border: none; /* No border around the video */
+            outline: none; /* Remove focus outline */
+            height: auto; /* Maintain video aspect ratio */
+            }
+
+            /* Optional: style for the prompt below the video */
+            /* .new-video-item .new-text-prompt:last-child {
+            font-size: 20px;
+            font-weight: normal;
+            color: #666; /* Lighter color for the prompt } */
+
+            /* Responsive design: Stack the videos vertically on smaller screens */
+            @media (max-width: 768px) {
+            .new-video-item {
+                flex: 1 1 100%; /* Stack videos on smaller screens */
+                width: 100%; /* Full width on smaller devices */
+            }
+
+            .new-video-item:hover {
+                transform: none; /* Remove scale effect on hover */
+            }
+
+                    /* Title above the video */
+            .new-text-prompt {
+                font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+                color: #333; /* Dark color for the text */
+            }
+
+            .new-text-prompt-bold {
+                font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+                font-weight: bold;
+                color: #02376c; /* Dark color for the text */
+            }
+            }
+
+  </style>
+  <style>
+    .highlight-blue {
+            color: #5dade2; /* A nice shade of blue */
+            font-weight: bold;
+    }
+  /* Hover-only overlay with the same look as .prompt */
+  .video-overlay {
+      position: absolute;
+      bottom: 100%;           /* sit right above the video container */
+      left: 0;
+      width: 100%;
+      /* keep prompt-like look */
+      background: rgba(0,0,0,0.5);
+      /* color: rgba(255,255,255,0.95); */
+      font-size: 10px;
+      line-height: 1.3;
+      padding: 6px 10px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      box-sizing: border-box;
+      z-index: 2;
+
+      /* hidden by default; slide up on hover */
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  @media (hover: hover) {
+      .video-item-single:hover .video-overlay,
+      .video-item-3x3:hover .video-overlay,
+      .video-item-3:hover .video-overlay,
+      .video-item-2:hover .video-overlay,
+      .video-item-6:hover .video-overlay,
+      .video-item-4:hover .video-overlay {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: all;
+      }
+  }
+
+  /* Ensure containers can position overlays */
+  .video-item-single,
+  .video-item-3x3,
+  .video-item-2,
+  .video-item-6,
+  .video-item-4 {
+      position: relative; /* keep/ensure relative for overlay positioning */
+  }
+
+        /* --- JSON Viewer Styles --- */
+    .json-frame {
+        box-sizing: border-box; /* Fixes width calculation issues */
+        height: 120px; /* Height of the 'roller' window */
+        overflow: auto; /* Vertical scrollbar */
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 10px;
+        border-radius: 6px;
+        text-align: left;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 11px;
+        white-space: pre-wrap; /* Wraps long lines so they don't break layout */
+        word-wrap: break-word;
+        margin: 5px auto 10px auto;
+        width: 100%; /* Use full width of container */
+        max-width: 100%; /* Ensure it doesn't overflow */
+        border: 1px solid #333;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    /* Syntax Highlighting Colors */
+    .json-key { color: #9cdcfe; }      /* Light Blue */
+    .json-string { color: #ce9178; }   /* Orange/Red */
+    .json-number { color: #b5cea8; }   /* Light Green */
+    .json-boolean { color: #569cd6; }  /* Blue */
+    .json-null { color: #569cd6; }     /* Blue */
+
+    /* Scrollbar Styling for the JSON frame */
+    .json-frame::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    .json-frame::-webkit-scrollbar-track {
+        background: #1e1e1e; 
+    }
+    .json-frame::-webkit-scrollbar-thumb {
+        background: #444; 
+        border-radius: 4px;
+    }
+    .json-frame::-webkit-scrollbar-thumb:hover {
+        background: #5dade2; 
+    }
+
+  </style>
+</head>
+
+
+
+<body class="archon-site">
+
+ <!-- Floating Navigation Bar -->
+ <nav class="side-nav nav-hidden" id="sideNav">
+    <button class="nav-toggle-btn" id="navToggle" title="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="nav-links-container">
+        <a href="#top">Home</a>
+        <a href="#challenges">Explore</a>
+        <a href="#video">Video</a>
+        <a href="#generation">Any Generation</a>
+        <a href="#desc_gen" class="sub-item">Description to all </a>
+        <a href="#desc_scr_gen" class="sub-item">Description + Script to all </a>
+        <a href="#spe_gen" class="sub-item">Speech to all </a>
+        <a href="#ani_gen" class="sub-item">Animation to all </a>
+        <a href="#seg_gen" class="sub-item">Segmentation to all </a>
+        <a href="#video_gen" class="sub-item">Video to all </a>
+        <a href="#editing">Any Editing</a>
+        <a href="#scr_editing" class="sub-item">Script Editing </a>
+        <a href="#desc_editing" class="sub-item">Description Editing </a>
+        <a href="#ani_editing" class="sub-item">Animation Editing </a>
+        <a href="#comparisons">Comparisons</a>
+        <a href="#BibTeX">BibTeX</a>
+
+        <!-- <a href="#BibTeX">BibTeX</a> -->
+    </div>
+  </nav>
+
+  <!-- Toggle Logic Script (Robust Version) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.getElementById('sideNav');
+      const toggleBtn = document.getElementById('navToggle');
+      
+      // Only add listener if elements exist
+      if (nav && toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            nav.classList.toggle('nav-hidden');
+            
+            // Check if the menu is now hidden or visible
+            if (nav.classList.contains('nav-hidden')) {
+                // Menu is hidden, show Hamburger icon
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            } else {
+                // Menu is visible, show Arrow icon
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            }
+        });
+      } else {
+        console.warn("Navigation elements not found. Check HTML structure.");
+      }
+    });
+  </script>
+
+ <!-- JSON Viewer Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to syntax highlight JSON string
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        // Find all elements marked as json-source
+        const jsonElements = document.querySelectorAll('.json-source');
+        jsonElements.forEach(el => {
+            try {
+                const rawText = el.textContent.trim();
+                const jsonObj = JSON.parse(rawText);
+                const prettyJson = JSON.stringify(jsonObj, null, 2);
+                const coloredJson = syntaxHighlight(prettyJson);
+                
+                el.innerHTML = coloredJson;
+                el.classList.add('json-frame');
+                el.classList.remove('json-source');
+            } catch (e) {
+                console.error("JSON Parsing Error:", e);
+                el.style.border = "1px solid red";
+                el.style.color = "red";
+                el.innerHTML = "Error parsing JSON: " + e.message;
+                el.classList.add('json-frame');
+            }
+        });
+    });
+  </script>
+
+    
+
+ <section id="top" class="hero mb-0 pb-0 is-black" style="background-color: black">
+    <div class="hero-body mb-0 pb-0">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <br> 
+            <div class="archon-hero-brand" aria-label="Archon">
+              <img src="static/images/archon-title-pattern.png" alt="Archon">
+            </div>
+            <h1 class="title is-2 publication-title archon-paper-title">
+              A Unified Multimodal Model for Holistic Digital Human Generation
+            </h1>
+            <div class="is-size-5 publication-authors archon-authors">
+              <span class="author-block"><a href="https://chobao.github.io/">Chong Bao</a><sup>1,2,*</sup></span>
+              <span class="author-block"><a href="https://shichenliu.github.io/">Shichen Liu</a><sup>2,*</sup></span>
+              <span class="author-block"><a href="https://me.lj-y.com/">Lijun Yu</a><sup>3</sup></span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=ozNFrecAAAAJ&amp;hl=en">David Futschik</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://moschoglou.com/">Stylianos Moschoglou</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://www.linkedin.com/in/shefalisri">Shefali Srivastava</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://zqbai-jeremy.github.io/">Ziqian Bai</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?hl=en&amp;user=qsrpuKIAAAAJ">Feitong Tan</a><sup>2</sup></span>
+              <span class="author-block"><a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1</sup></span>
+              <span class="author-block"><a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1</sup></span>
+              <span class="author-block"><a href="https://research.google/people/seanfanello/">Sean Fanello</a><sup>2</sup></span>
+              <span class="author-block"><a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>2,†</sup></span>
+            </div>
+            <div class="is-size-6 publication-authors archon-affiliations">
+              <span><sup>1</sup>State Key Lab of CAD&amp;CG, Zhejiang University</span>
+              <span><sup>2</sup>Google</span>
+              <span><sup>3</sup>Google DeepMind</span>
+            </div>
+            <div class="is-size-7 archon-author-notes">
+              <span><sup>*</sup>Equal contribution.</span>
+              <span><sup>†</sup>Corresponding author.</span>
+            </div>
+            <div class="archon-venue-text" aria-label="CVPR 2026 acceptance">
+              CVPR 2026
+            </div>
+            <div class="column has-text-centered">
+              <div class="publication-links archon-release-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2605.30311" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2605.30311" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/chobao/Archon" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code Coming Soon</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <p class="archon-tldr">
+              <strong>TL;DR:</strong> Archon is a unified multimodal model reasoning over description, script, speech, animation, semantic video, image, and video, enabling any-to-any generation and editing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+
+
+<section id= "overview" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+
+            <div class="content">
+            <h1 class="title is-2 archon-section-title">Framework</h1>
+            <img class="archon-framework-image" src="static/framework_cropped.jpg" alt="Archon unified multimodal framework" style="max-width: 100%; height: auto;">
+            <!-- <div style="width: 80%; height: auto; margin: 0 auto;">
+                <video controls playsinline class="plyr-video lazy" style="width: 100%; height: auto; display: block;">
+                    <source data-src="assets/v_7.mp4" type="video/mp4">
+                </video>
+            </div> -->
+
+            <p class="archon-framework-caption">
+              Archon unifies description, script, speech, animation, semantic video, image, and RGB video in one autoregressive multimodal model. Modality-specific tokenizers map each signal into a shared discrete space, while a semantic-driven video decoder converts compact semantic representations into high-quality digital human videos for generation and editing.
+            </p>
+              
+            </div>
+        </div>
+        </div>
+    </div>
+
+<br/>
+<br/>
+</section>
+
+<section id="challenges" class="section hero is-small pl-0 pr-0 is-black archon-challenges">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h1 class="title is-2 archon-section-title">What do we explore?</h1>
+        <p class="archon-section-lead">
+          Archon explores how a single multimodal model can reason across multiple heterogeneous modalities, including text (description, script), audio (speech), animation (identity, expression, pose), semantic video, image, and video.
+        </p>
+      </div>
+    </div>
+
+    <div class="archon-challenge-grid">
+      <article class="archon-challenge-card challenge-modeling">
+        <span class="archon-challenge-index">01</span>
+        <h2>Any-to-Any Multimodal Modeling</h2>
+        <p class="challenge-question">How to fuse multiple modalities into one unified model while enabling flexible any-to-any generation?</p>
+        <div class="challenge-answer">
+          <ul class="challenge-answer-list">
+            <li>A shared discrete token space from modality-specific tokenizers</li>
+            <li>Unified multimodal autoregressive model</li>
+            <li>Train on 72 multimodal tasks</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="archon-challenge-card challenge-video">
+        <span class="archon-challenge-index">02</span>
+        <h2>Video Parameterization</h2>
+        <p class="challenge-question">How to efficiently tokenize continuous video signals without generating excessively many tokens that exceed context limits?</p>
+        <div class="challenge-answer">
+          <ul class="challenge-answer-list">
+            <li>Memory-efficient video discretization</li>
+            <li>Semantic-driven video diffusion decoder</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="archon-challenge-card challenge-reliability">
+        <span class="archon-challenge-index">03</span>
+        <h2>Reliable Cross-Modal Generation</h2>
+        <p class="challenge-question">How to reduce uncertainty and improve quality in complex cross-modal generations (e.g., speech-to-video)?</p>
+        <div class="challenge-answer">
+          <ul class="challenge-answer-list">
+            <li>Thinking in modalities for reliable chains of modalities</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="video" class="section hero is-small pl-0 pr-0 is-black archon-video-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h1 class="title is-2 archon-section-title">Video</h1>
+        <div class="publication-video archon-video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/9h2_L9E2KjE?si=jhtA25Px3MsD0V-4"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Title: Any-to-Any Generation -->
+<section id="generation" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black; padding-top: 60px; padding-bottom: 20px;">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full">
+                <h1 class="title is-2" style="font-family: 'Roboto', sans-serif; color: white; border-bottom: 3px solid #5dade2; display: inline-block; padding-bottom: 10px;">
+                    Any-to-Any Generation
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Description  -> Script + Speech + Animation + Segmentation + Video -->
+<section id="desc_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Description &rarr; Script + Speech + Animation + Segmentation + Video</h2>
+            <div class="content has-text-justified">
+              <p>
+                We demonstrate the generation of 
+                script, 
+                speech, 
+                animation, 
+                segmentation, and 
+                video
+                driven solely by descriptions. 
+                The <span style="text-decoration: underline;">input description</span> are displayed above each example. 
+                The <span style="text-decoration: underline;">generated script</span> is shown below each video.
+                The video visualization presents the 
+                <span style="text-decoration: underline;">generated animation, segmentation, and final video</span> arranged from left to right.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short", "wavy"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "dress_shirt", "lower_body": "trousers", "footwear": "none", "accessories": ["tie", "none"], "dominant_colors": ["white", "red", "blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_and_gesturing_with_hands"], "emotion": ["serious_and_engaged"], "energy_level": ["consistent"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "brow_furrowing"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "orange_and_white_wall_with_blurred_plant_and_metal_fencing", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209102651/VUtkd21zcWwzZmtfMTI/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+Driving cross country is something everyone should do.
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["hispanic", "middle_eastern"], "body_build": ["average"], "hair_color": ["black"], "hair_style": ["curly", "long"], "facial_features": ["makeup", "none_discernible"], "clothing": {"upper_body": "long-sleeved black shirt", "lower_body": "none", "footwear": "none", "accessories": ["earrings", "none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "earrings", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "smile", "overall_impression": ["speaking to the camera", "hand gestures"], "emotion": ["confident", "engaging"], "energy_level": ["medium"], "mouth_action": ["wide_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "raising_outer_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "green wall with a white mantle, two framed pictures on the wall", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209103302/QVlvU3VFd0ltN0VfMA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+Technically, you could do it that way, but it is not recommended.
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "senior", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray", "white"], "hair_style": ["short", "straight"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "suit_jacket_and_dress_shirt", "lower_body": "trousers", "footwear": "none", "accessories": ["tie", "none"], "dominant_colors": ["blue", "white", "gray"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_directly_to_to_camera", "slight_head_movements", "occasional_smiles"], "emotion": ["serious", "calm", "confident"], "energy_level": ["consistently_low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering", "raising_inner_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "amplitude_and_tempo_of_movements", "directional_changes_pitch/yaw/roll", "transitions_between_stillness_and_motion"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead", "fixed_forward_focus"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["microphone", "none"]}, "environment": {"lighting_conditions": "artificial_light", "background_description": "solid_black_background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209104328/V1JBX0pvaG5Ib2V2ZW5fMDAw/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+Growing your social media following fast is easier with this strategy.
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["bald"], "hair_style": ["bald"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "dress_shirt", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["white", "purple", "gold"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_directly_to_camera"], "emotion": ["calm", "neutral"], "energy_level": ["low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["none"], "blink_frequency": "medium", "head_action": ["mostly_centered"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "white_brick_wall_and_fire_decoration", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209107224/UkRfUmFkaW80M18wMDA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+On this level without taking any damage is the ultimate gamer flex.
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["long", "wavy"], "facial_features": ["glasses", "makeup", "none_discernible"], "clothing": {"upper_body": "blouse, jacket", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black", "red", "pink"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking to the camera"], "emotion": ["serious and sincere"], "energy_level": ["consistent"], "mouth_action": ["narrow_opening", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "blurred background with cabinets, a lamp, and a picture frame", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "office"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209107224/UkRfUmFkaW80NV8wMDA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+Googled questions about me are getting answered right now in this video.
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short", "spiky"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "clerical_collar", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black", "white"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_to_camera"], "emotion": ["calm", "serious"], "energy_level": ["consistently_low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "solid_orange_background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209102651/WW9SbFhkUnJNMndfMA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Script (output):</span>
+You just have to take a break and recharge your batteries.
+                        </span>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Description + Script -> Speech + Animation + Segmentation + Video -->
+<section id="desc_scr_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Description + Script &rarr; Speech + Animation + Segmentation + Video</h2>
+            <div class="content has-text-justified">
+              <p>
+                We showcase results where 
+                descriptions and scripts are employed to generate speech, animation, segmentation, and video. 
+                The corresponding  <span style="text-decoration: underline;">input description and script </span>
+                are provided above each example. 
+                The video composite displays the 
+                <span style="text-decoration: underline;">generated animation, segmentation, and final video</span>
+                arranged from left to right.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["blonde"], "hair_style": ["short", "wavy"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "dress_shirt", "lower_body": "trousers", "footwear": "none", "accessories": ["none"], "dominant_colors": ["gray", "blue", "white"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_while_sitting"], "emotion": ["serious"], "energy_level": ["low-key"], "mouth_action": ["narrow_opening", "relaxed_lips"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "wooden_wall", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+And there are people who say there's no such thing about audience
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/MFhjV0tNZVZSd3dfMA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["black"], "hair_style": ["short", "wavy"], "facial_features": ["beard", "mustache", "none_discernible"], "clothing": {"upper_body": "t-shirt", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "frown", "overall_impression": ["man_is_speaking_to_the_camera", "man_is_gesturing_with_his_right_hand"], "emotion": ["serious_and_concerned"], "energy_level": ["moderate"], "mouth_action": ["narrow_opening", "lip_protrusion_or_retraction", ""], "eyebrow_action": ["brow_furrowing", "brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "shelf_with_movies_and_a_beanbag_on_the_floor_behind_the_person_behind_the_person_behind_the_man_and_a_white_wall", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "home"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+The last that's left of them. It wasn't, though, when they charged in the Battle of Winter
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/ZDgyTEtQTmVzRThfMTIx/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "young_adult", "ethnicity": ["caucasian"], "body_build": ["slim"], "hair_color": ["blonde"], "hair_style": ["long", "wavy"], "facial_features": ["makeup", "none_discernible"], "clothing": {"upper_body": " \u2047 maclouse", "lower_body": "none", "footwear": "none", "accessories": ["earrings", "none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "earrings", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "open mouth", "overall_impression": ["speaking to the camera", "gesturing with hands"], "emotion": ["calm and engaged"], "energy_level": ["medium"], "mouth_action": ["wide_opening", "lip_protrusion_or_retraction", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "raising_outer_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "artificial_light", "background_description": "wooden planks", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+That if you are a new fan to Watchmen, that you can be a new
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/azdJU1hxMUVFLWdfMg/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray"], "hair_style": ["short"], "facial_features": ["beard", "none_discernible"], "clothing": {"upper_body": "turtleneck sweater and jacket", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["looking down", "looking up", "looking to the side"], "emotion": ["subdued and thoughtful"], "energy_level": ["consistently low-key"], "mouth_action": ["relaxed_lips", "narrow_opening"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["downward", "straight_ahead", "lateral_glances"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "blurred background with a painting and kitchen appliances", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "home"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+The intimate story, the character story, what links these.
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/bGpzTUdUWkVTeDhfNA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["black"], "hair_style": ["curly", "long", "other"], "facial_features": ["beard", "mustache", "none_discernible"], "clothing": {"upper_body": "jacket", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black", "gray"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_to_camera"], "emotion": ["subdued_and_thoughtful"], "energy_level": ["consistently_low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "dim", "background_description": "white_wall_and_window_with_blinds", "time_of_day": "evening", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+just as selective as you would be posting your own work.
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/Q193ODhNeU9PTVlfNQ/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                                        <div class="video-item video-item-2">
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (input):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "young_adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["long", "wavy", "bangs"], "facial_features": ["makeup", "none_discernible"], "clothing": {"upper_body": "t-shirt", "lower_body": "none", "footwear": "none", "accessories": ["jewelry_e.g._earrings", "none"], "dominant_colors": ["white", "brown"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "smile", "overall_impression": ["smiling and engaging", "looking at the camera"], "emotion": ["happy", "friendly", "engaging"], "energy_level": ["medium"], "mouth_action": ["wide_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "raising_outer_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "white wall with pink and blue hexagonal lights, a bookshelf with books and stuffed animals, a plant", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (input):</span>
+I'm going to walk you through the entire process.
+                        </span>
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/209101394/Sy1yd1N0eUNydzhfMA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+
+<!-- Speech  -> Animation + Segmentation + Video -->
+<section id="spe_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Speech &rarr; Description + Script + Animation + Segmentation + Video</h2>
+            <div class="content has-text-justified">
+              <p>
+                We demonstrate results where speech is used to generate description, 
+                script, animation, segmentation, and video. 
+                The <span style="text-decoration: underline;">inferred description and script</span> 
+                are displayed below each example. 
+                The video composite visualizes the <span style="text-decoration: underline;">generated animation, segmentation, and final video</span> arranged from left to right.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/208330550/VUtkd21zcWwzZmtfMTI/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short", "wavy"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "dress_shirt", "lower_body": "trousers", "footwear": "none", "accessories": ["tie", "none"], "dominant_colors": ["white", "red", "blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_and_gesturing_with_hands"], "emotion": ["serious_and_engaged"], "energy_level": ["consistent"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "brow_furrowing"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "orange_and_white_wall_with_blurred_plant_and_metal_fencing", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+The director of the film that I want to talk about tonight's split M Night Shyamalan saw that
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/208330550/VE1HY2d6UjRsZThfMg/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["black"], "hair_style": ["long", "straight"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "blouse", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "smile", "overall_impression": ["speaking directly to the camera", "slight head movements", "facial expressions change with speech"], "emotion": ["friendly and engaging", "positive and enthusiastic"], "energy_level": ["medium"], "mouth_action": ["wide opening", "lip corners pulled up", "synchronization and precision with spoken words"], "eyebrow_action": ["raising inner eyebrows", "raising outer eyebrows"], "blink_frequency": "medium", "head_action": ["mostly centered", "slight nods", "tilts inquisitively"], "eye_state": ["fully wide alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "plain wall with a framed picture and a patterned curtain in the background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+Okay, today's tip is for you if you want to know how to get more auditions from your submissions.
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/208330550/bGpzTUdUWkVTeDhfNA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray"], "hair_style": ["short"], "facial_features": ["beard", "none_discernible"], "clothing": {"upper_body": "turtleneck sweater and jacket", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["looking down", "looking up", "looking to the side"], "emotion": ["subdued and thoughtful"], "energy_level": ["consistently low-key"], "mouth_action": ["relaxed_lips", "narrow_opening"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["downward", "straight_ahead", "lateral_glances"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "blurred background with a painting and kitchen appliances", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "home"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+the intimate story, the character story, what links these people.
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/208330550/VDdidm94dndlQzRfMQ/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "senior", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray", "white"], "hair_style": ["short", "wavy"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "jacket", "lower_body": "none", "footwear": "none", "accessories": ["jewelry_e.g._necklace/earrings/bracelet/ring", "none"], "dominant_colors": ["brown", "beige"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "earrings", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking", "looking_directly_at_camera"], "emotion": ["serious", "thoughtful"], "energy_level": ["low-key"], "mouth_action": ["narrow_opening", "relaxed_lips"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "indoor_stadium_with_baseball_field_in_background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+that in 1969 he told an academic
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/208330550/OGlrZllQcHkwWGNfNQ/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["blonde"], "hair_style": ["short", "straight"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "tank_top", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking to the camera", "hand gestures"], "emotion": ["calm and conversational"], "energy_level": ["consistently low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "raising_outer_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "artificial_light", "background_description": "multiple_screens_displaying_aurora_borealis_and_bookshelves_with_boxes_and_books", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+That the concept is the same, but the story
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/cEZUODRDN3RtZEVfNA/animation_seg_rgb.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "young_adult", "ethnicity": ["caucasian", "unknown"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short", "wavy"], "facial_features": ["beard", "veveveed_face"], "clothing": {"upper_body": "t-shirt", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["gray"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "frown", "overall_impression": ["looking_down", "speaking"], "emotion": ["subdued_and_thoughtful"], "energy_level": ["consistently_low-key"], "mouth_action": ["narrow_opening", "relaxed_lips"], "eyebrow_action": ["brow_furrowing"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["downward"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "dim", "background_description": "black_background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+<span class="highlight-blue">Script (output):</span>
+Blunt, I did not know what was going to work, then
+                        </span>
+                    </div>
+                </div>
+                
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Animation  -> Segmentation + Video -->
+<section id="ani_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Animation &rarr; Segmentation + Video</h2>
+            <div class="content has-text-justified">
+              <p>
+                We present results where animation serves as the condition to generate segmentation and video. 
+                The composite video displays the <span style="text-decoration: underline;">input animation</span>, 
+                <span style="text-decoration: underline;">generated segmentation, and final video</span> arranged from left to right.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Two-column row with two videos -->
+<div class="carousel-row-2">
+
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V1JBX0FkYW1LaW56aW5nZXIwXzAwMA/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204745774/akpjZzhKMGJFcUlfMTA/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- Two-column row with two videos -->
+<div class="carousel-row-2">
+
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204745774/SnluWF9XTGxIT1lfMA/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/UkRfUmFkaW84XzAwMA/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- Two-column row with two videos -->
+<div class="carousel-row-2">
+
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V0RBX0phY2tpZVNwZWllcl8wMDA/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="video-item video-item-2">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204748323/azdJU1hxMUVFLWdfMg/animation_seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+                
+                
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Segmentation -> Animation + Video -->
+<section id="seg_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Segmentation &rarr; Video </h2>
+            <div class="content has-text-justified">
+              <p>
+                We present results where segmentation is utilized to generate video. 
+                Each demo displays the <span style="text-decoration: underline;">input segmentation</span> 
+                and the <span style="text-decoration: underline;">synthesized video</span> side-by-side (left to right).
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Three-column row with seg+rgb videos -->
+<div class="carousel-row-3">
+
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204745774/ZDZlQzhqd2dITTBfMA/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V1JBX1JvYlBvcnRtYW5fMDAw/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V1JBX01hcmt3YXluZU11bGxpbl8wMDA/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- Three-column row with seg+rgb videos -->
+<div class="carousel-row-3">
+
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V1JBX1RpbVNjb3R0XzAwMA/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204746506/V0RBX1N0ZXBoYW5pZU11cnBoeV8wMDA/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+        <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/204419331/ZElDb29nYm1YbVFfNDQ/seg_rgb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+                
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Video -> Description + Script + Speech + Animation + Segmentation -->
+<section id="video_gen" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Video (silent) &rarr; Description + Speech + Animation + Segmentation</h2>
+            <div class="content has-text-justified">
+              <p>
+                We showcase results for <span style="text-decoration: underline;">video understanding</span> , 
+                <span style="text-decoration: underline;">video dubbing</span>, 
+                <span style="text-decoration: underline;">animation tracking</span>, and 
+                <span style="text-decoration: underline;">video segmentation</span>.
+                From an input video, we parse the corresponding description, speech, animation, 
+                while obtaining segmentation via an off-the-shelf model. 
+                The <span style="text-decoration: underline;">inferred description</span> is displayed below each example. 
+                The visual composite presents the <span style="text-decoration: underline;">input video</span>, 
+                <span style="text-decoration: underline;">extracted animation</span>, and 
+                <span style="text-decoration: underline;">video segmentation</span> arranged from left to right.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                <!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/UkRfUmFkaW8xXzAwMA/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "senior", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray", "white"], "hair_style": ["short", "wavy"], "facial_features": ["glasses", "none_discernible"], "clothing": {"upper_body": "jacket", "lower_body": "none", "footwear": "none", "accessories": ["none"], "dominant_colors": ["red", "black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_with_serious_tone"], "emotion": ["serious", "thoughtful"], "energy_level": ["consistent"], "mouth_action": ["narrow_opening", "lip_protrusion_or_retraction", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "blurred_background_with_furniture", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/V0RBX0Nhcm9seW5NYWxvbmV5MV8wMDA/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["blonde"], "hair_style": ["wavy", "long"], "facial_features": ["makeup", "none_discernible"], "clothing": {"upper_body": "blouse", "lower_body": "none", "footwear": "none", "accessories": ["jewelry_e.g._necklace", "none"], "dominant_colors": ["pink", "silver"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_directly_to_the_camera", "slight_head_movements"], "emotion": ["serious", "concerned"], "energy_level": ["medium"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "brow_furrowing"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "amplitude_and_tempo_of_movements", "directional_changes_pitch/yaw/roll", "transitions_between_stillness_and_motion"], "eye_state": ["partially_narrowed_relaxed"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "blurred_background_with_a_door_and_a_chair", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "home"}}
+</div>
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/V0RBX0plYW5uZVNoYWhlZW4xXzAwMA/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "female", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown", "gray"], "hair_style": ["short", "curly", "wavy"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "sweater", "lower_body": "none", "footwear": "none", "accessories": ["jewelry_e.g._necklace/earrings/bracelet/ring", "none"], "dominant_colors": ["red", "black"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "earrings", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "smile", "overall_impression": ["speaking directly to the camera", "slight head movements", "occasional blinking"], "emotion": ["calm and informative", "engaged and thoughtful"], "energy_level": ["consistently low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "brow_furrowing"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "plain gray background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/V0RBX1JpY2hhcmRCbHVtZW50aGFsXzAwMA/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short", "straight"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "suit jacket, dress shirt", "lower_body": "trousers", "footwear": "none", "accessories": ["tie", "none"], "dominant_colors": ["gray", "orange", "blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "smile", "overall_impression": ["speaking_directly_to_camera", "slight_head_movements"], "emotion": ["positive", "engaged"], "energy_level": ["medium"], "mouth_action": ["wide_opening", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "artificial_light", "background_description": "bookshelf with various items", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                    </div>
+                </div>
+
+<!-- Two-column row with two videos -->
+                <div class="carousel-row-2">
+
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/V1JBX0NvcnlHYXJkbmVyMF8wMDA/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["gray"], "hair_style": ["short", "straight"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "suit_jacket", "lower_body": "trousers", "footwear": "none", "accessories": ["tie", "none"], "dominant_colors": ["brown", "white", "blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_directly_to_camera"], "emotion": ["calm", "professional"], "energy_level": ["medium"], "mouth_action": ["narrow_opening", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["raising_inner_eyebrows", "brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "nods_rhythmically"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "bright", "background_description": "office_setting_with_framed_documents_on_bookshelves", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "office"}}
+</div>
+                        </span>
+                    </div>
+                    <div class="video-item video-item-2">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/understanding/PaperHolisticUnderstanding_Dubbingwochain/V1JBX1BhdWxSeWFuMF8wMDE/rgb_animation_seg.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <span class="highlight-blue">Description (output):</span>
+<div class="json-source">
+{"appearance": {"gender": "male", "age_group": "adult", "ethnicity": ["caucasian"], "body_build": ["average"], "hair_color": ["brown"], "hair_style": ["short"], "facial_features": ["none_discernible"], "clothing": {"upper_body": "jacket", "lower_body": "unknown", "footwear": "none", "accessories": ["none"], "dominant_colors": ["brown", "gray", "blue"]}, "physical_attributes": {"visible_tattoos": "none", "visible_piercings": "none", "distinctive_marks": "none", "posture": "upright", "gait": "not_applicable", "physical_aids": ["none"]}}, "action": {"activity_type": "speaking", "expression": "closed mouth", "overall_impression": ["speaking_to_camera"], "emotion": ["neutral"], "energy_level": ["low-key"], "mouth_action": ["narrow_opening", "relaxed_lips", "synchronization_and_precision_with_spoken_words"], "eyebrow_action": ["brow_lowering"], "blink_frequency": "medium", "head_action": ["mostly_centered", "tilts_inquisitively"], "eye_state": ["fully_wide_alert"], "gaze_direction": ["straight_ahead"], "nonverbal_habits": ["none"], "interactions": ["none"], "props_used": ["none"]}, "environment": {"lighting_conditions": "artificial_light", "background_description": "blurred_blue_background", "time_of_day": "unknown", "weather_conditions": "indoor_not_applicable", "context": "indoor"}}
+</div>
+                        </span>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Main Title: Any Modality Editing -->
+<section id="editing" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black; padding-top: 60px; padding-bottom: 20px;">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full">
+                <h1 class="title is-2" style="font-family: 'Roboto', sans-serif; color: white; border-bottom: 3px solid #5dade2; display: inline-block; padding-bottom: 10px;">
+                    Any Modality Editing
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Script Editing -->
+<section id="scr_editing" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Script Editing</h2>
+            <div class="content has-text-justified">
+              <p>
+                We showcase <span style="text-decoration: underline;">script editing</span>. 
+                We modify the script of the <span style="text-decoration: underline;">original video (left)</span> 
+                to generate an <span style="text-decoration: underline;">edited video (right)</span> that 
+                articulates 
+                the <span style="text-decoration: underline;">new script</span> while 
+                faithfully preserving the <span style="text-decoration: underline;">original appearance and voice</span>.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+<!-- Six-column row with up to six videos -->
+<div class="carousel-row-6">
+
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/QjBraVM0dV9VYkVfNA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> I do. I have a big family, and I have a lot of little nieces and nephews and cousins.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/QjBraVM0dV9VYkVfNA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> I can use my voice in different characters.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/QnkwVmUxSW8tTThfMA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> is your algorithm's uncanny ability to specifically classify the human.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/QnkwVmUxSW8tTThfMA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> Just was at a standstill after a while. There wasn't really much evidence.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/SnluWF9XTGxIT1lfMA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> Jump Street picks up with Schmidt and Janko going undercover to
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/SnluWF9XTGxIT1lfMA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> you know it's kind of it's a new aesthetic but you know people who were fans
+        </span>
+    </div>
+</div>
+
+<!-- Six-column row with up to six videos -->
+<div class="carousel-row-6">
+
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/X0RjOGdScXg5NjRfMA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> studios but what I can tell you is this has
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/X0RjOGdScXg5NjRfMA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> is that act of applying our consciousness to solving the next problem.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/RkZubGFRbEkxU29fOA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> Everything just was at a standstill after a while. There wasn't really much evidence.
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/RkZubGFRbEkxU29fOA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> Here's an easy one for both of you. Okay Google, Alexa
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/V1F2VDFfdFFEaGdfMA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Script:</span> Sandra Bullock is giving back in a big way with the help of her eight-year-old daughter,
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/script_editing/V1F2VDFfdFFEaGdfMA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Script:</span> Just a girl standing in front of a boy, just.
+        </span>
+    </div>
+</div>
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Appearance Editing using Description -->
+<section id="desc_editing" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Editing using Description</h2>
+            <div class="content has-text-justified">
+              <p>
+                We present results for video editing via description. 
+                We modify the <span style="text-decoration: underline;">description of the original video</span> to generate an 
+                <span style="text-decoration: underline;">edited video with a new appearance</span>. 
+                When identity-defining attributes are altered (e.g., gender swap), 
+                we simultaneously <span style="text-decoration: underline;">adapt the voice to match the new identity (see second row)</span>. 
+                Notably, all unedited attributes and the original script are <span style="text-decoration: underline;">strictly preserved</span>.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+                
+<!-- Three-column row with up to four videos -->
+<div class="carousel-row-3">
+
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing/M1d2dDl4dy1rUGNfMA/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left - Original Description:</span>  "appearance.age_group": adult<br><span class="highlight-blue">Right - Edited Description:</span> "appearance.age_group": young_adult
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing/RUI4SHBmQmxFN1lfMTc/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left - Original Description:</span> "appearance.clothing.dominant_colors": ["blue"]<br><span class="highlight-blue">Right - Edited Description:</span> "appearance.clothing.dominant_colors": ["white"]
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing/SjM5emJjX3RHMU1fMzA/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left - Original Description:</span> "appearance.age_group": young_adult, "appearance.clothing.accessories": ["earrings"], "appearance.clothing.dominant_colors": ["black", "red"], "appearance.clothing.upper_body": lace print blouse<br><span class="highlight-blue">Right - Edited Description:</span> "appearance.age_group": adult, "appearance.clothing.accessories": ["none"], "appearance.clothing.dominant_colors": ["purple"], "appearance.clothing.upper_body": dress_shirt
+        </span>
+    </div>
+</div>
+                
+<!-- Six-column row with up to six videos -->
+<div class="carousel-row-6">
+
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/M1hLNl9XektueEFfMg/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Description:</span> "appearance.gender": male
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/M1hLNl9XektueEFfMg/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Description:</span> "appearance.gender": female
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/Sl81QWFUUlJxQ2NfOA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Description:</span> "appearance.gender": female
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/Sl81QWFUUlJxQ2NfOA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Description:</span> "appearance.gender": male
+        </span>
+    </div>
+        <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/UkRfUmFkaW80NV8wMDA/orig.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Original Description:</span> "appearance.gender": female
+        </span>
+    </div>
+    <div class="video-item video-item-6">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/description_editing_voice/UkRfUmFkaW80NV8wMDA/edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Edited Description:</span> "appearance.gender": male
+        </span>
+    </div>
+</div>
+                
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+
+<!-- Animation Editing -->
+<section id="ani_editing" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Animation Editing (Face Reenactment)</h2>
+            <div class="content has-text-justified">
+              <p>
+                We present results for animation editing (face reenactment). 
+                We employ a <span style="text-decoration: underline;">reference video (left) </span> 
+                to drive the motion of the original video. 
+                The resulting <span style="text-decoration: underline;">edited video (right)</span> 
+                <span style="text-decoration: underline;">adopts the reference animation </span> while retaining the original subject's appearance.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+<!-- Three-column row with up to four videos -->
+<div class="carousel-row-3">
+
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/dXFGdDNzc1QwUU1fNg/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/V0RBX0hhbGV5U3RldmVuc18wMDA/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/V1JBX0RlYkZpc2NoZXIyXzAwMA/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+</div>
+                
+<!-- Three-column row with up to four videos -->
+<div class="carousel-row-3">
+
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/dlBya3NyWlQ5V0VfNw/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/V0RBX0NocmlzQ29vbnNfMDAw/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+    <div class="video-item video-item-3">
+        <video controls playsinline class="plyr-video lazy">
+            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/animation_editing/V1JBX01hcmt3YXluZU11bGxpbl8wMDA/orig_edit.mp4" type="video/mp4">
+        </video>
+        <span class="video-title-3x3" style="font-size: 12px;">
+            <span class="highlight-blue">Left:</span> Reference Video, <span class="highlight-blue">Right:</span> Edited Video
+        </span>
+    </div>
+</div>
+                </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<!-- Main Title: Comparisons -->
+<section id="comparisons" class="section hero is-small pl-0 pr-0 is-black" style="background-color: black; padding-top: 60px; padding-bottom: 20px;">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full">
+                <h1 class="title is-2" style="font-family: 'Roboto', sans-serif; color: white; border-bottom: 3px solid #5dade2; display: inline-block; padding-bottom: 10px;">
+                    Comparisons
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comparisons -->
+<section class="section hero is-small pl-0 pr-0 is-black" style="background-color: black">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <!-- <h2 class="title is-3"  style="font-family: 'Roboto', sans-serif;">Comparisons</h2> -->
+            <div class="content has-text-justified">
+              <p>
+                We present comparisons of 
+                speech-driven video generation against state-of-the-art methods. 
+                From left to right, the videos display: <span style="text-decoration: underline;">Ground Truth</span>, <span style="text-decoration: underline;">Aniportrait</span>, <span style="text-decoration: underline;">Echomimic</span>, <span style="text-decoration: underline;">Hallo3</span>, and <span style="text-decoration: underline;">Ours</span>.
+              </p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <table width="100%" align="center">
+        <tbody>
+            <div id="results-carousel" class="carousel results-carousel-3x3">
+            
+            <!-- Carousel Item 1 (3 rows of 3 videos) -->
+            <div class="carousel-item carousel-item-3x3">
+               
+
+<div class="carousel-row-single">
+                    <div class="video-item video-item-single">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/comparisons/hdtf/comparison.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <p><span class="highlight-blue">Methods:</span> Ground Truth, Aniportrait, Echomimic, Hallo3, Ours</p>
+                        </span>
+                    </div>
+                </div>
+<div class="carousel-row-single">
+                    <div class="video-item video-item-single">
+                        <video controls playsinline class="plyr-video lazy">
+                            <source data-src="https://raw.githubusercontent.com/chobao/open_access_assets/main/archon/assets_index2/comparisons/celebv-hq/comparison.mp4" type="video/mp4">
+                        </video>
+                        <span class="video-title-3x3" style="font-size: 12px;">
+                            <p><span class="highlight-blue">Methods:</span> Ground Truth, Aniportrait, Echomimic, Hallo3, Ours</p>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Three-column row with duplicated segmentation video (4 items) -->
+            </div>
+        </div>
+    </tbody>
+    </table>
+    <br/>
+    <br/>
+</section>
+
+<section class="section hero is-small pl-0 pr-0 is-black" id="BibTeX">
+    <div class="container is-max-desktop content archon-bibtex">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h1 class="title is-2 archon-section-title">BibTeX</h1>
+        </div>
+      </div>
+      <pre><code>@inproceedings{bao2026archon,
+  title={Archon: A Unified Multimodal Model for Holistic Digital Human Generation},
+  author={Bao, Chong and Liu, Shichen and Yu, Lijun and Futschik, David and Moschoglou, Stylianos and Srivastava, Shefali and Bai, Ziqian and Tan, Feitong and Zhang, Guofeng and Cui, Zhaopeng and Fanello, Sean and Zhang, Yinda},
+  booktitle={The IEEE/CVF Computer Vision and Pattern Recognition Conference (CVPR)},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+<!--End BibTex citation -->
+
+
+<footer class="footer has-background-black has-text-white">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script>
+        bulmaCarousel.attach('#results-carousel', {
+            slidesToScroll: 1,
+            slidesToShow: 1
+        });
+    </script>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script>
+        const players = Plyr.setup('.plyr-video', {
+            // controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen', 'download']
+            controls: ['play', 'progress', 'mute']
+        });
+
+        players.forEach(player => {
+            const source = player.media.querySelector('source');
+            if (source) {
+                // Set download URL as same as video src
+                const src = source.getAttribute('data-src') || source.getAttribute('src');
+                player.config.urls = { download: src };
+            }
+        });
+    </script>
+  </body>
+  </html>

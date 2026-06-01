@@ -559,15 +559,24 @@
       <p class="content has-text-centered" style="margin-top:-0.5rem">
         Explore 3DGS scenes in first-person perspective just as a navigation agent do in Habitat-GS! <br>
         Your action is restricted on <strong>Navigation Mesh</strong>, while 3DGS is responsible for photorealistic
-        rendering.
+        rendering. <br>
+        &#9733; indicates reflective scenes that highlight 3DGS-specific view-dependent effects.
       </p>
     </div>
     <div class="comparison-scene-buttons featured-media-controls" style="margin:0 auto 2rem auto;">
-      <button class="button is-light comparison-scene-button is-primary-blue" id="gs-scene-btn-0"
-        onclick="window._gsLoadScene(0)">Sales gallery</button>
-      <button class="button is-light comparison-scene-button" id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Spa
+      <button class="button is-light comparison-scene-button gs-viewer-scene-button gs-viewer-scene-button--reflective is-primary-blue"
+        id="gs-scene-btn-0" onclick="window._gsLoadScene(0)">Wedding hall<span class="reflective-scene-star"
+          aria-hidden="true">&#9733;</span></button>
+      <button class="button is-light comparison-scene-button gs-viewer-scene-button gs-viewer-scene-button--reflective"
+        id="gs-scene-btn-1" onclick="window._gsLoadScene(1)">Karaoke bar<span class="reflective-scene-star"
+          aria-hidden="true">&#9733;</span></button>
+      <button class="button is-light comparison-scene-button gs-viewer-scene-button" id="gs-scene-btn-2"
+        onclick="window._gsLoadScene(2)">Spa
         center</button>
-      <button class="button is-light comparison-scene-button" id="gs-scene-btn-2" onclick="window._gsLoadScene(2)">Tea
+      <button class="button is-light comparison-scene-button gs-viewer-scene-button" id="gs-scene-btn-3"
+        onclick="window._gsLoadScene(3)">Sales gallery</button>
+      <button class="button is-light comparison-scene-button gs-viewer-scene-button" id="gs-scene-btn-4"
+        onclick="window._gsLoadScene(4)">Tea
         room</button>
     </div>
     <div id="gs-viewer-container" class="featured-media-shell" tabindex="0"
@@ -598,8 +607,10 @@
   import { GaussianViewer } from './static/js/gs-viewer.js';
 
   const scenes = [
-    { splat: './static/scenes/scene1/scene.splat', navmesh: './static/scenes/scene1/navmesh.json' },
+    { splat: './static/scenes/scene5/scene.splat', navmesh: './static/scenes/scene5/navmesh.json', initialYaw: Math.PI },
+    { splat: './static/scenes/scene4/scene.splat', navmesh: './static/scenes/scene4/navmesh.json' },
     { splat: './static/scenes/scene2/scene.splat', navmesh: './static/scenes/scene2/navmesh.json' },
+    { splat: './static/scenes/scene1/scene.splat', navmesh: './static/scenes/scene1/navmesh.json' },
     { splat: './static/scenes/scene3/scene.splat', navmesh: './static/scenes/scene3/navmesh.json' },
   ];
 
@@ -620,11 +631,12 @@
     currentScene = idx;
     updateButtons(idx);
     const s = scenes[idx];
+    const sceneOptions = { initialYaw: s.initialYaw };
     if (!initialized) {
       initialized = true;
-      await viewer.init(s.splat, s.navmesh);
+      await viewer.init(s.splat, s.navmesh, sceneOptions);
     } else {
-      await viewer.loadScene(s.splat, s.navmesh);
+      await viewer.loadScene(s.splat, s.navmesh, sceneOptions);
     }
   };
 

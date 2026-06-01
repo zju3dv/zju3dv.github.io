@@ -324,6 +324,26 @@ h6 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.comparison-scene-button.button.gs-viewer-scene-button {
+  position: relative;
+  min-height: 2.5rem;
+  line-height: 1.1;
+}
+
+.comparison-scene-button.button.gs-viewer-scene-button--reflective {
+  padding-right: 1.85rem;
+}
+
+.reflective-scene-star {
+  position: absolute;
+  top: -0.2rem;
+  right: 0.35rem;
+  color: #f59e0b;
+  font-size: 0.85rem;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
 .featured-media-controls {
   max-width: var(--featured-media-max-width);
 }

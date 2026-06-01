@@ -627,20 +627,21 @@ export class GaussianViewer {
         );
     }
 
-    async init(splatUrl, navmeshUrl) {
+    async init(splatUrl, navmeshUrl, options = {}) {
         this._loading = false;
         this._animating = false;
-        await this._loadSceneData(splatUrl, navmeshUrl);
+        await this._loadSceneData(splatUrl, navmeshUrl, options);
         this._animate();
     }
 
-    async loadScene(splatUrl, navmeshUrl) {
+    async loadScene(splatUrl, navmeshUrl, options = {}) {
         if (this._loading) return;
-        await this._loadSceneData(splatUrl, navmeshUrl);
+        await this._loadSceneData(splatUrl, navmeshUrl, options);
     }
 
-    async _loadSceneData(splatUrl, navmeshUrl) {
+    async _loadSceneData(splatUrl, navmeshUrl, options = {}) {
         this._loading = true;
+        const initialYaw = typeof options.initialYaw === 'number' ? options.initialYaw : 0;
         const loadingEl = this.container.querySelector('#gs-loading');
         const progressEl = this.container.querySelector('#gs-progress');
         const progressTextEl = this.container.querySelector('#gs-progress-text');
@@ -673,7 +674,7 @@ export class GaussianViewer {
         await new Promise(r => setTimeout(r, 0));
 
         this._uploadSceneGPU(splatData);
-        this.camYaw = 0;
+        this.camYaw = initialYaw;
         this.camPitch = 0;
         this._initCamera();
         this._updateMinimapAgent();

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NeuMesh++ is a mesh-based neural radiance representation for versatile and efficient volumetric editing with geometry, texture, and semantic controls.">
+  <meta name="keywords" content="NeuMesh++, Neural Rendering, Volumetric Editing, NeRF, Mesh Editing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/framework.png"/>
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title>NeuMesh++: Towards Versatile and Efficient Volumetric Editing with Disentangled Neural Mesh-based Implicit Field</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://zju3dv.github.io/neumesh/">
+            NeuMesh
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/object_nerf">
+            Object-NeRF
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/nr_in_a_room">
+            Neural Rendering in a Room
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/neural_outdoor_rerender">
+            Neural Outdoor Re-Rendering
+          </a>
+          <a class="navbar-item" href="https://zju3dv.github.io/sine">
+            SINE
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-7 has-text-centered">
+          <img src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/title.png" alt="NeuMesh++"/>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <!-- <h1 class="title is-1 publication-title">
+          NeuMesh++
+        </h1> -->
+        <h1 class="title is-2 publication-title">
+          Towards Versatile and Efficient Volumetric Editing with<br/>
+          Disentangled Neural Mesh-based Implicit Field
+        </h1>
+        <h1 class="title is-size-3" style="color:#5a6268;">IEEE TPAMI 2025</h1>
+
+        <div class="is-size-5 publication-authors">
+          <div class="author-block">
+            <a href="https://chobao.github.io/">Chong Bao</a><sup>1,*</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://y-u-a-n-l-i.github.io/">Yuan Li</a><sup>1,*</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://ybbbbt.com">Bangbang Yang</a><sup>4</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://shenyujun.github.io/">Yujun Shen</a><sup>2</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1,&dagger;</sup>,
+          </div>
+          <div class="author-block">
+            <a href="https://www.zhangyinda.com/">Yinda Zhang</a><sup>3,&dagger;</sup>,
+          </div>
+          <div class="author-block">
+            <a href="http://www.cad.zju.edu.cn/home/gfzhang/">Guofeng Zhang</a><sup>1,&dagger;</sup>
+          </div>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><sup>1</sup>State Key Lab of CAD&amp;CG, College of Computer Science, Zhejiang University,</span>
+          <span class="author-block"><sup>2</sup>Ant Research,</span>
+          <span class="author-block"><sup>3</sup>Google,</span>
+          <span class="author-block"><sup>4</sup>ByteDance</span>
+        </div>
+        <div class="is-size-6 publication-authors">
+          <span class="author-block"><sup>*</sup>Equal contribution.</span>
+          <span class="author-block"><sup>&dagger;</sup>Corresponding authors.</span>
+        </div>
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/paper/neumeshplusplus.pdf"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://youtu.be/mE3I5KMoF-k"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-youtube"></i>
+                </span>
+                <span>Video</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://youtu.be/LO3mC0-v17E"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-youtube"></i>
+                </span>
+                <span>GUI Video</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Comming Soon)</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <video id="teaser" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/realtime_editing.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <i>NeuMesh++</i> encodes geometry, texture, and semantic features on a mesh scaffold, enabling interactive mesh-guided geometry deformation, texture editing, semantic-guided editing, and hybrid volumetric edits.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            NeuMesh++ introduces a mesh-based neural radiance representation for versatile and efficient volumetric editing. The method encodes geometry, texture, and semantic features as disentangled vertex-bounded codes on a mesh scaffold, enabling mesh-guided geometry deformation, texture swapping, texture filling, texture painting, and semantic-guided editing. NeuMesh++ improves rendering quality and training stability through a local space parameterization and post-interpolation strategy, supports high-fidelity texture edits with a learnable per-vertex modification color, and enables precise edits through spatial-aware optimization and semantic-aided region selection. Experiments on real and synthetic datasets show strong rendering quality, efficient interaction, and flexible geometry and texture editing.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered" id="video">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Video</h2>
+        <h2 class="title is-5">YouTube Source</h2>
+        <div class="publication-video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/mE3I5KMoF-k?si=N1477aNRzn7o8yp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <br/>
+        <h2 class="title is-5">GUI Video</h2>
+        <div class="publication-video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/LO3mC0-v17E?si=7rVr71xscSLa7aJw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <h2 class="title is-3 has-text-centered">Framework Overview</h2>
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/framework.png"
+             alt="NeuMesh++ framework overview."/>
+      </div>
+      <p>
+        NeuMesh++ represents a neural radiance field on a mesh scaffold, where each vertex stores disentangled geometry, texture, and semantic codes, plus a decoder-free modification color for high-fidelity texture edits. For each sampled query point along a camera ray, nearby mesh vertices provide local codes and local indicators; lightweight geometry and radiance decoders predict per-vertex density and color contributions, which are then fused by post-interpolation. Semantic features are decoded from interpolated semantic codes to support click-based 3D region selection, while the mesh scaffold keeps editing compatible with standard mesh workflows.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Real-Time Interactive Editing</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/webpage.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        NeuMesh++ supports semantic-guided editing, where users click on a rendered view to propagate a semantic 3D region and then apply targeted geometry or texture edits with immediate neural-field preview.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Geometry Editing</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/geometry_edit_0.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        Users deform the mesh scaffold directly, and the aligned neural radiance field follows the edited shape without additional fine-tuning.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Physical Simulation</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/physical_simulation.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        NeuMesh++ can combine mesh-guided neural rendering with physical simulation, producing dynamic deformations such as bouncing or swaying objects.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Semantic-Guided Geometry Editing</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/semantic-guidedgeo.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        A single-view click can propagate to a semantic 3D mesh region, enabling targeted geometry edits without dense manual annotation.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Texture Swapping</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/texture_swapping.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        The method transfers texture codes and modification colors between selected mesh regions while preserving the target geometry.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Texture Filling</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/texture_filling.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        Selected regions can be filled with repeated material patterns from pre-captured source models using UV-space texture-code transfer.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Texture Painting</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/texture_painting.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        Users paint on a single rendered view, and NeuMesh++ transfers the strokes into the 3D radiance field for consistent novel-view rendering.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Semantic-Guided Texture Editing</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/semantictexture.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        Semantic vertex codes allow users to select a meaningful object region from one clicked view and apply texture edits to the corresponding 3D area.
+      </p>
+    </div>
+  </div>
+
+  <br/>
+
+
+  <div class="container is-max-desktop">
+    <div class="content has-text-justified">
+      <!-- <h2 class="title is-3 has-text-centered">Hybrid Editing</h2> -->
+      <video class="result-video" autoplay controls muted loop playsinline height="100%">
+        <source src="https://raw.githubusercontent.com/chobao/open_access_assets/main/neumeshplusplus/videos/hybrid_editing.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        NeuMesh++ supports combined edits such as geometry deformation, texture painting, and texture filling in the same object.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<section class="section" id="BibTeX">
+  <div class="container content is-max-desktop">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{bao2025neumesh++,
+  title={NeuMesh++: Towards Versatile and Efficient Volumetric Editing with Disentangled Neural Mesh-based Implicit Field},
+  author={Bao, Chong and Li, Yuan and Yang, Bangbang and Shen, Yujun and Bao, Hujun and Cui, Zhaopeng and Zhang, Yinda and Zhang, Guofeng},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2025},
+  publisher={IEEE}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      The website template is borrowed from <a href="https://hypernerf.github.io/" target="_blank">HyperNeRF</a> and follows the style of the <a href="https://zju3dv.github.io/neumesh/" target="_blank">NeuMesh</a> project page.
+    </div>
+  </div>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>

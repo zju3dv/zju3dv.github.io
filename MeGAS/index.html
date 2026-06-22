@@ -1,0 +1,447 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="MeGAS: Thermomechanical Dynamic Gaussian Splatting for Thermophysical Scene Editing">
+    <meta name="keywords" content="3D Gaussian Splatting, Thermomechanical, Thermophysical, Thermodynamic, Physical Simulation, 3D Scene Editing">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MeGAS : Thermomechanical Dynamic Gaussian Splatting for Thermophysical Scene Editing</title>
+
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css"><!-- 提供响应式布局 -->
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css"><!-- 用于图像和视频的轮播 -->
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"><!-- 用于图标展示 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!-- 提供与学术相关的图标 -->
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <!--如下是实现对比的效果-->
+    <script src="static/js/video_comparison.js"></script>
+    <script src="static/js/app.js"></script>
+    <link rel="stylesheet" href="static/css/dics.original.css">
+    <script src="static/js/event_handler.js"></script>
+    <script src="static/js/dics.original.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap-4.4.1.css">
+    <link rel="stylesheet" href="static/css/navbar.css">
+
+</head>
+
+<body>
+    <nav class="project-navbar" id="project-navbar" aria-label="Primary navigation">
+        <div class="project-nav-container">
+            <a class="project-nav-brand" href="#home" aria-label="MeGAS home">
+                <!-- <img src="./sources/images/logo.png" alt="" class="project-nav-logo"> -->
+                <span>MeGAS</span>
+            </a>
+            <div class="project-nav-links">
+                <a href="#home">Home</a>
+                <a href="./sources/pdf/ECCV26-MeGAS.pdf">Paper with Supp</a>
+                <a href="https://arxiv.org/abs/2507.08416">ArXiv</a>
+                <a href="https://github.com/zju3dv/MeGAS">Code</a>
+                <a href="https://youtu.be/wAaGvaGSkGU">Video</a>
+                <span class="project-nav-divider" aria-hidden="true">|</span>
+                <a href="#Abstract">Abstract</a>
+                <a href="#Pipeline">Pipeline</a>
+                <a href="#Experiments">Experiment</a>
+                <span class="project-nav-divider" aria-hidden="true">|</span>
+                <a href="#BibTeX">BibTeX</a>
+                <div class="project-nav-more">
+                    <button class="project-nav-more-button" type="button" aria-haspopup="true" aria-expanded="false">
+                        More Research
+                        <span class="project-nav-caret" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="project-nav-dropdown" role="menu">
+                        <a href="https://zju3dv.github.io/GURecon/" role="menuitem">GURecon <span>AAAI 2025</span></a>
+                        <a href="https://zju3dv.github.io/instascene/" role="menuitem">InstaScene <span>ICCV 2025</span></a>
+                        <a href="https://zju3dv.github.io/DiffWind/" role="menuitem">DiffWind <span>ICLR 2026</span></a>
+                        <a href="https://zju3dv.github.io/PhysSkin/" role="menuitem">PhysSkin <span>CVPR 2026</span></a>
+                        <a href="https://zju3dv.github.io/GaussianZoom/" role="menuitem">GaussianZomm <span>CVPR 2026</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Title + Authors + Links -->
+    <section class="hero project-hero page-band band-white" id="home">
+        <!--div class="reduce-space"-->
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered"> <!---->
+                        <div class="column has-text-centered"><!---->
+                            <h1 class="title is-2 publication-title project-title">
+                                <span class="title-logo-wrap"><img src="./sources/images/logo.png" alt="MeGAS Logo" class="title-image"></span>
+                                <span class="title-text"><img src="./sources/images/title_icon.png" alt="MeGAS" class="title-wordmark"> : Thermomechanical Dynamic Gaussian
+                                    Splatting for Thermophysical Scene Editing
+                                </span>
+                            </h1>
+
+                            <h1 class="title is-size-3" style="color:#5a6268;">ECCV 2026</h1>
+
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block">
+                                    <a href="https://github.com/YZsZY">Zesong Yang</a><sup>1*</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://github.com/huahuo359">Yuanhang Lei</a><sup>1*</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://scholar.google.com/citations?user=WhwTrhcAAAAJ&hl=zh-CN">Liyuan Cui</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://sh17c.top/">Yihang Chen</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://github.com/Shallowy">Jiaer Huang</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://bomingzhao.github.io/">Boming Zhao</a><sup>1</sup>,
+                                </span>
+                                <br>
+                                <span class="author-block">
+                                    <a href="https://peterchencyc.com/">Peter Yichen Chen</a><sup>2</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="http://www.cad.zju.edu.cn/home/bao">Hujun Bao</a><sup>1</sup>,
+                                </span>
+                                <span class="author-block">
+                                    <a href="https://zhpcui.github.io">Zhaopeng Cui</a><sup>1†</sup>
+                                </span>
+                            </div>
+                            <div class="is-size-5 publication-authors publication-affiliations">
+                                <span class="author-block affiliation-line"><sup>1</sup>State Key Laboratory of CAD&amp;CG, Zhejiang University</span>
+                                <br>
+                                <span class="author-block affiliation-line"><sup>2</sup>University of British Columbia</span>
+                                <br>
+                                <span class="author-block contribution-note">* denotes equal contribution</span>
+                                <span class="author-block contribution-note">† denotes Corresponding Author</span>
+                            </div>
+
+                            <div class="column has-text-centered">
+                                <div class="publication-links">
+                                    <span class="link-block">
+                                        <a href="./sources/pdf/ECCV26-MeGAS.pdf" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </span>
+                                            <span>Paper with Supp</span>
+                                        </a>
+                                    </span>
+
+
+                                    <span class="link-block"><!-- Arixv -->
+                                        <a href="https://arxiv.org/abs/2507.08416"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="ai ai-arxiv"></i>
+                                            </span>
+                                            <span>ArXiv</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
+                                        <a href="https://github.com/zju3dv/MeGAS"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fab fa-github"></i>
+                                            </span>
+                                            <span>Code</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
+                                        <a href="https://youtu.be/wAaGvaGSkGU" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fab fa-youtube"></i>
+                                            </span>
+                                            <span>Video</span>
+                                        </a>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
+    </section>
+
+     <section class="hero teaser page-band band-muted">
+        <div class="container is-max-desktop">
+          <h2 class="subtitle has-text-centered tldr-text float-module">
+            TL;DR: 
+            <strong>MeGAS</strong> is the first 3DGS framework to integrate <strong>thermomechanical dynamics</strong>, enabling <strong>physically grounded thermophysical editing</strong> (e.g., melting and solidification) through temporally <strong>evolving temperature fields</strong> and <strong>phase-change-aware constitutive model switching</strong>, while preserving smooth, continuous geometry <strong>under large deformations</strong>.
+          </h2>
+            <div class="columns is-centered teaser-video-wrap float-module">
+              <video id="teaser" autoplay muted loop controls>
+                <source src="./sources/videos/teaser.mp4" type="video/mp4">
+              </video>
+            </div>
+            
+            <div class="content has-text-justified teaser-description float-module">
+                MeGAS integrates thermomechanical dynamics into 3D Gaussian Splatting, enabling physically grounded editing with temporally evolving temperature fields, while maintaining smooth and continuous geometry under large deformations.
+            </div>
+
+            <img src="./sources/images/teaser.png" alt="" class="teaser-image float-module">
+          </div>
+        </div>
+    </section>
+
+    <section class="section page-band band-white abstract-section" id="Abstract">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Abstract</h2>
+            </div>
+            <div class="content has-text-justified abstract-text float-module">
+                    <p>
+                    Recent advances integrate physically grounded Newtonian dynamics with neural rendering frameworks, narrowing the gap between photorealistic scene reconstruction and physics-based animation. However, existing approaches focus on mechanically driven dynamics while neglecting temperature, a fundamental yet invisible physical factor underlying phenomena such as melting, solidification, and other thermomechanical processes.
+                    In this paper, we propose MeGAS, a novel framework that incorporates thermomechanical phase-change dynamics into 3D Gaussian Splatting (3DGS).  
+                    Specifically, we propose a new thermomechanical dynamic Gaussian Splatting representation that augments 3DGS with temperature attributes and employs a heat advection-diffusion solver with MPM dynamics incorporating phase transitions, enabling physically plausible and visually realistic synthesis of thermophysical phenomena. 
+                    Furthermore, a new topology-adaptive Gaussian rendering strategy
+                    is proposed to mitigate cracking and floaters under extreme deformation.
+                    Extensive experiments demonstrate that MeGAS produces physically consistent thermomechanical behavior while maintaining high-fidelity photorealistic rendering, advancing toward physics-integrated world models. 
+                    </p>
+            </div>
+
+            <div class="columns is-centered has-text-centered abstract-video-row">
+                <div class="column abstract-video-column">
+                  <div class="publication-video">
+                    <iframe src="https://youtu.be/wAaGvaGSkGU"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  </div>
+                  <p class="video-caption-text float-module">
+                    The video provides a detailed overview of the paper’s background, the design motivations behind each module of the pipeline, comparative experiments, and editing results across diverse scenarios.
+                  </p>
+                </div>
+            </div>
+            <div class="section-bottom-spacer" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <section class="section page-band band-muted pipeline-section" id="Pipeline">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Pipeline</h2>
+            </div>
+            <img src="./sources/images/pipeline.png" alt="MeGAS Pipeline" class="pipeline-image float-module">
+            <!-- <div class="content has-text-justified pipeline-text float-module">
+                <p>
+                    Starting from posed RGB sequences, we reconstruct the scene with 3DGS. To mitigate floaters and interior artifacts under extreme deformation, we introduce an interior-free uniform-Gaussian regularization that suppresses anisotropy and prunes unsupported interior splats. We then provide volumetric support via ray-tracing–based internal filling. Next, we augment 3DGS with per-Gaussian temperature and, driven by user-specified heat sources, MeGAS updates temperatures using a grid-based heat advection-diffusion solver within an MPM simulator, and performs temperature-dependent phase-aware constitutive switching. Deformations are mapped back to 3DGS, and we apply adaptive surface densification to handle topology change and seal cracks. Finally, we synthesize physically plausible thermomechanical dynamics with photorealistic appearance and temporally smooth geometry.
+                </p>
+            </div> -->
+
+            <div class="pipeline-subsection">
+                <!-- <h3 class="title is-4 has-text-centered">Thermomechanical Dynamic Gaussian Splats</h3> -->
+                <div class="pipeline-video-wrap float-module">
+                    <video autoplay muted loop controls>
+                        <source src="./sources/videos/thermal_pipeline.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="content has-text-justified pipeline-text float-module">
+                    <p>
+                        <strong>Thermomechanical Dynamic Gaussian Splats.</strong> We augment 3D Gaussian Splatting with a per-Gaussian temperature field, update the temperature distribution using a grid-based heat advection–diffusion solver integrated into an MPM simulator, and perform temperature-dependent, phase-aware constitutive model switching. The resulting deformations are subsequently mapped back to the 3D Gaussian representation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pipeline-subsection">
+                <div class="pipeline-video-wrap float-module">
+                    <video autoplay muted loop controls>
+                        <source src="./sources/videos/topology_pipeline.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="content has-text-justified pipeline-text float-module">
+                    <p>
+                        <strong>Topology-Adaptive Gaussian Rendering.</strong> Since melting entails extreme non-rigid deformation and topology change (e.g., surface cracking, internal exposure), naïvely applying PhysGaussian under such conditions leads to severe visual artifacts. We propose a topology-adaptive 3DGS framework specifically designed for stable rendering under large-scale melting deformation with Internal-Free Uniform Gaussian Regularization and Implicit-surface–guided adaptive surface cracking densification.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section page-band band-white" id="BidirectionalPhaseChangeEditing">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Bidirectional Phase-Change Editing</h2>
+            </div>
+            <div class="pipeline-video-wrap float-module">
+                <video autoplay muted loop controls>
+                    <source src="./sources/videos/bidirectional_phase.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="content has-text-justified pipeline-text float-module">
+                <p>
+                    Our framework naturally supports bidirectional phase transitions: controlled heating induces melting, whereas subsequent cooling drives resolidification. This capability enables physically consistent thermomechanical evolution throughout the phase-transition cycle and facilitates general thermophysical scene editing.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section page-band band-muted exp-video-section" id="Experiments">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Experiments</h2>
+            </div>
+            <p class="exp-video-note">
+                For additional demonstrations, please refer to the final section of the video.
+            </p>
+            <div class="exp-video-grid float-module">
+                <div class="exp-video-card">
+                    <h3 class="exp-video-title">Object Comparison</h3>
+                    <div class="exp-video-tabs" role="tablist" aria-label="Object Comparison videos">
+                        <button class="exp-video-tab is-active" type="button" data-exp-source="./sources/videos/Exp/Object-Melting/Icecream.mp4">Icecream</button>
+                        <button class="exp-video-tab" type="button" data-exp-source="./sources/videos/Exp/Object-Melting/Sculpture.mp4">Sculpture</button>
+                        <button class="exp-video-tab" type="button" data-exp-source="./sources/videos/Exp/Object-Melting/ToyCar.mp4">ToyCar</button>
+                    </div>
+                    <div class="exp-video-wrap">
+                        <video autoplay muted loop controls playsinline>
+                            <source src="./sources/videos/Exp/Object-Melting/Icecream.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="exp-video-description">
+                        While baseline methods accumulate internal floaters, needle-like artifacts, and surface cracks under large deformations, our MeGAS maintains volume-consistent, crack-free geometry and stable rendering throughout the melting process.
+                    </p>
+                </div>
+                <div class="exp-video-card">
+                    <h3 class="exp-video-title">Scene Comparison</h3>
+                    <div class="exp-video-tabs" role="tablist" aria-label="Scene Comparison videos">
+                        <button class="exp-video-tab is-active" type="button" data-exp-source="./sources/videos/Exp/Scene-Melting/Caterpillar.mp4">Caterpillar</button>
+                        <button class="exp-video-tab" type="button" data-exp-source="./sources/videos/Exp/Scene-Melting/Truck.mp4">Truck</button>
+                    </div>
+                    <div class="exp-video-wrap">
+                        <video autoplay muted loop controls playsinline>
+                            <source src="./sources/videos/Exp/Scene-Melting/Caterpillar.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="exp-video-description">
+                        Prior methods lack physical realism, photorealism, or multi-view consistency, whereas MeGAS preserves photorealistic appearance and delivers physically plausible, temporally consistent melting.
+                    </p>
+                </div>
+                <div class="exp-video-card">
+                    <h3 class="exp-video-title">Scene Demo</h3>
+                    <div class="exp-video-tabs" role="tablist" aria-label="Scene Demo videos">
+                        <button class="exp-video-tab is-active" type="button" data-exp-source="./sources/videos/Exp/Scene-Demo/Kitchen.mp4">Kitchen</button>
+                        <button class="exp-video-tab" type="button" data-exp-source="./sources/videos/Exp/Scene-Demo/Sculpture.mp4">Sculpture</button>
+                        <button class="exp-video-tab" type="button" data-exp-source="./sources/videos/Exp/Scene-Demo/Truck.mp4">Truck</button>
+                    </div>
+                    <div class="exp-video-wrap">
+                        <video autoplay muted loop controls playsinline>
+                            <source src="./sources/videos/Exp/Scene-Demo/Kitchen.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="exp-video-description">
+                        We illustrate the deformation process on real-world scenes, with rendered RGB images, rendered temperature field, and deformation geometries (rendered normals and meshes) at different viewpoints and time steps.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section page-band band-white" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title has-text-centered">BibTeX</h2>
+            <pre class="bibtex-box float-module"><code>
+@inproceedings{yang2025megas,
+        title={MeGAS : Thermomechanical Dynamic Gaussian Splatting for Thermophysical Scene Editing},
+        author={Yang, Zesong and Lei, Yuanhang and Cui, Liyuan and Chen, Yihang and Huang, Jiaer and Zhao, Boming and Chen, Peter Yichen and Bao, Hujun and Cui, Zhaopeng},
+        booktitle={European Conference on Computer Vision (ECCV)},
+        year={2026}
+    }
+            </code></pre>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <!-- <div class="column is-8"> -->
+                <div class="content has-text-centered">
+                    <p>
+                        This website page is sourced from <a href="https://github.com/nerfies/nerfies.github.io"
+                            style="color: #3498db;">Nerfies</a>.
+                    </p>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const navbar = document.getElementById('project-navbar');
+            const moreMenu = document.querySelector('.project-nav-more');
+            const moreButton = document.querySelector('.project-nav-more-button');
+            const updateNavbar = () => {
+                navbar.classList.toggle('is-floating', window.scrollY > 24);
+            };
+
+            updateNavbar();
+            window.addEventListener('scroll', updateNavbar, { passive: true });
+
+            if (moreMenu && moreButton) {
+                moreButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const isOpen = moreMenu.classList.toggle('is-open');
+                    moreButton.setAttribute('aria-expanded', String(isOpen));
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!moreMenu.contains(event.target)) {
+                        moreMenu.classList.remove('is-open');
+                        moreButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        moreMenu.classList.remove('is-open');
+                        moreButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            document.querySelectorAll('.exp-video-card').forEach((card) => {
+                const video = card.querySelector('video');
+                const source = video ? video.querySelector('source') : null;
+                const tabs = card.querySelectorAll('.exp-video-tab');
+
+                tabs.forEach((tab) => {
+                    tab.addEventListener('click', () => {
+                        const nextSource = tab.dataset.expSource;
+
+                        if (!video || !source || !nextSource || source.getAttribute('src') === nextSource) {
+                            return;
+                        }
+
+                        tabs.forEach((item) => item.classList.remove('is-active'));
+                        tab.classList.add('is-active');
+                        source.setAttribute('src', nextSource);
+                        video.load();
+                        video.play().catch(() => {});
+                    });
+                });
+            });
+        })();
+    </script>
+
+</body>
+
+
+</html>

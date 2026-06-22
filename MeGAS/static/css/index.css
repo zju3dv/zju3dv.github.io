@@ -1,0 +1,452 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.main-title{
+  font-weight:bold;
+}
+
+.sub-title {
+  font-weight:normal !important;
+}
+
+figure{
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+figcaption{
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.publication-links .link-block a {
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.publication-links .link-block a:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 24px rgba(18, 24, 38, 0.18);
+  text-decoration: none;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    /*width: fit-content;*/
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: rgb(163, 31, 52) !important;
+}
+
+/* .publication-authors a:visited {
+   color: rgb(138, 139, 140) !important;
+}
+
+.publication-authors a:hover {
+    color: rgb(163, 31, 52) !important;
+    text-decoration: underline;
+} */
+
+a:link {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(138, 139, 140);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.is-light a:hover {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.is-light a:link {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.is-light a:visited {
+  color: rgb(138, 139, 140);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.is-light a:hover {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
+/* Style the buttons that are used to open the tab content */
+.nav-item {
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+  background-color: inherit;
+  float: left;
+  border: 1px solid #ddd;
+  outline: none;
+  cursor: pointer;
+  transition: 0.0s;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+/* Change background color of buttons on hover */
+.nav-item:hover {
+  background-color: #c7dc94;
+}
+
+/* Create an active/current tablink class */
+.nav-tabs .nav-link.active {
+  background-color: #5c7f17;
+  color:white;
+  font-weight: 500;
+}
+
+.nav a {
+  color: #000;
+  text-decoration: none;
+}
+.nav a:hover {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+
+
+
+
+.navbar-item a:link {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.navbar-item a:visited {
+  color: rgb(138, 139, 140);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.navbar-item a:hover {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.navbar a:link {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.navbar a:visited {
+  color: rgb(138, 139, 140);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: rgb(163, 31, 52);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+select::-ms-expand {
+    border-color: rgb(163, 31, 52);/*change your color here*/
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-legend {
+  margin-top: 1rem;
+}
+
+.legend {
+  vertical-align: center;
+  display: inline-flex;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+  object-position: center;
+}
+
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 0px solid #bbb;
+  border-radius: 0px;
+  padding: 0;
+  font-size: 0;
+}
+
+results-carousel video {
+  margin: 0;
+}
+
+.exp-video-section {
+  overflow: visible;
+  padding-bottom: 3rem;
+  transition: padding-bottom 0.28s ease;
+}
+
+.exp-video-section:has(.exp-video-card:hover) {
+  padding-bottom: 22rem;
+}
+
+.exp-video-section .container {
+  max-width: min(1440px, calc(100vw - 48px)) !important;
+}
+
+.exp-video-note {
+  margin: -0.35rem auto 1.25rem;
+  color: #5f6872;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.exp-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+  overflow: visible;
+}
+
+.exp-video-card {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 14px 36px rgba(18, 24, 38, 0.08);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, z-index 0s linear;
+}
+
+.exp-video-card:hover {
+  z-index: 10;
+  transform: translateY(-10px) scale(2);
+  box-shadow: 0 22px 52px rgba(18, 24, 38, 0.18);
+}
+
+.exp-video-title {
+  margin: 0 0 0.85rem;
+  color: #2f3a45;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.exp-video-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.1rem;
+  margin-bottom: 0.35rem;
+  align-content: flex-start;
+}
+
+.exp-video-tab {
+  border: 1px solid rgba(163, 31, 52, 0.22);
+  border-radius: 999px;
+  padding: 0.42rem 0.72rem;
+  background: #ffffff;
+  color: rgb(163, 31, 52);
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exp-video-tab:hover,
+.exp-video-tab.is-active {
+  background: rgb(163, 31, 52);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(163, 31, 52, 0.18);
+  transform: translateY(-1px);
+}
+
+.exp-video-wrap {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #111111;
+  aspect-ratio: 16 / 9;
+}
+
+.exp-video-wrap video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exp-video-description {
+  margin: 0.85rem 0 0;
+  color: #3f4852;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  text-align: justify;
+}
+
+@media screen and (max-width: 900px) {
+  .exp-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-video-card:hover {
+    transform: translateY(-6px) scale(1.03);
+  }
+
+  .exp-video-tabs {
+    min-height: auto;
+  }
+}
+
+.footer {
+    background: #FFFFFF;
+}
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}

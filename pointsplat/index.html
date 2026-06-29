@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="PointSplat: Compact Gaussian Splatting via Human-Centric Prediction" name="title" />
+  <meta content="A human-centric, feed-forward approach that predicts compact 3D Gaussian primitives directly from an input point set for high-fidelity, low-redundancy human reconstruction." name="description" />
+  <meta content="3D Human Reconstruction, Gaussian Splatting, Feed-forward Model, Point-Image Transformer, Novel View Synthesis, Compact Representation, arXiv 2025" name="keywords" />
+  <meta content="index, follow" name="robots" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="English" name="language" />
+  <meta content="Yujie Guo" name="author" />
+  <title>PointSplat: Compact Gaussian Splatting via Human-Centric Prediction</title>
+
+  <script src="js/video_comparison.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap-4.4.1.js"></script>
+
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" rel="stylesheet" />
+  <link href="img/favicon.svg" rel="icon" sizes="any" type="image/svg+xml" />
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --theme-blue-soft: #d3effa;
+      --theme-blue: #5f8fbd;
+      --theme-blue-deep: #3f6f9f;
+      --theme-pink-soft: #ffd6f2;
+      --theme-pink: #d96fae;
+      --theme-pink-deep: #b94f92;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    code { white-space: pre-wrap; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      color: #2d3748;
+      background: #fafbfd;
+      overflow-x: hidden;
+    }
+
+    b { font-weight: 800; }
+    strong { font-weight: 600; }
+
+    /* ─── Hero / Jumbotron ─── */
+    .jumbotron {
+      position: relative;
+      background: linear-gradient(160deg, var(--theme-blue-soft) 0%, #f7f9fc 44%, var(--theme-pink-soft) 100%);
+      padding: 4rem 1rem 2.5rem;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+
+    .jumbotron::before,
+    .jumbotron::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .jumbotron::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(95,143,189,0.16), transparent 70%);
+      top: -150px; left: -100px;
+      filter: blur(80px);
+    }
+
+    .jumbotron::after {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,214,242,0.45), transparent 70%);
+      bottom: -100px; right: -50px;
+      filter: blur(70px);
+    }
+
+    .jumbotron h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .conf-label {
+      display: inline-block;
+      color: var(--theme-blue-deep);
+      font-weight: 700;
+      font-size: 1.28rem;
+      letter-spacing: 0.04em;
+      margin-top: 0.7em;
+    }
+
+    .abstract-heading {
+      margin-top: 1.5rem;
+    }
+
+    /* ─── Author links ─── */
+    .authors { font-size: 1.05rem; }
+    .authors a {
+      color: var(--theme-blue);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .2s;
+    }
+    .authors a:hover { color: var(--theme-blue-deep); text-decoration: underline; }
+
+    .affiliations {
+      color: #64748b;
+      margin-top: 0.5em;
+      font-size: 0.95rem;
+    }
+
+    /* ─── Link Buttons (arXiv / Code / Demo) ─── */
+    .link-buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    .btn-link-custom {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 26px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+
+    .btn-link-custom:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-link-custom.paper {
+      background: linear-gradient(135deg, var(--theme-blue), #84b8dd);
+      box-shadow: 0 4px 15px rgba(95,143,189,0.3);
+    }
+    .btn-link-custom.paper:hover { box-shadow: 0 6px 22px rgba(95,143,189,0.4); }
+
+    .btn-link-custom.arxiv {
+      background: linear-gradient(135deg, #c68b5b, #d9a574);
+      box-shadow: 0 4px 15px rgba(198,139,91,0.3);
+    }
+    .btn-link-custom.arxiv:hover { box-shadow: 0 6px 22px rgba(198,139,91,0.4); }
+
+    .btn-link-custom.code {
+      background: linear-gradient(135deg, var(--theme-pink-deep), var(--theme-pink));
+      box-shadow: 0 4px 15px rgba(217,111,174,0.3);
+    }
+    .btn-link-custom.code:hover { box-shadow: 0 6px 22px rgba(217,111,174,0.4); }
+
+    .btn-link-custom.demo {
+      background: linear-gradient(135deg, var(--theme-blue-deep), #5fbda6);
+      box-shadow: 0 4px 15px rgba(63,111,159,0.3);
+    }
+    .btn-link-custom.demo:hover { box-shadow: 0 6px 22px rgba(63,111,159,0.4); }
+
+    .btn-link-custom.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      filter: grayscale(0.3);
+    }
+    .btn-link-custom.disabled:hover {
+      transform: none !important;
+      box-shadow: none;
+    }
+
+    /* ─── Sections ─── */
+    section {
+      padding: 60px 0;
+    }
+
+    section:nth-child(even) {
+      background: #f5f7fa;
+    }
+
+    section h3 {
+      font-weight: 700;
+      font-size: 1.6rem;
+      padding-left: 16px;
+      border-left: 4px solid;
+      border-image: linear-gradient(180deg, var(--theme-blue), var(--theme-pink)) 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-hr {
+      display: none;
+    }
+
+    .emphasis-pink {
+      color: var(--theme-pink);
+      font-style: italic;
+    }
+
+    .emphasis-blue {
+      color: var(--theme-blue-deep);
+      font-weight: 700;
+    }
+
+    .emphasis-blue-text {
+      color: var(--theme-blue-deep);
+      font-weight: 400;
+    }
+
+    .highlight-blue-bg {
+      background: rgba(211,239,250,0.62);
+      border-radius: 5px;
+      padding: 0 0.16em;
+    }
+
+    .pointsplat-word {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pointsplat-word .point { color: var(--theme-blue); }
+    .pointsplat-word .splat { color: var(--theme-pink); }
+
+    /* ─── Viewer Cards (glassmorphism) ─── */
+    .viewer-card {
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .viewer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .viewer-card iframe {
+      display: block;
+      border: 0;
+      width: 100%;
+    }
+
+    .viewer-previews {
+      display: flex;
+      border-top: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .viewer-preview {
+      display: block;
+      width: 25%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    /* ─── Video containers ─── */
+    video {
+      border-radius: 12px;
+      padding: 0;
+      margin: 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .a16x9 { aspect-ratio: 16/9; }
+
+    .embed-responsive { border-radius: 12px; overflow: hidden; }
+    .overview-video-frame {
+      width: 100%;
+      aspect-ratio: 1920 / 842;
+      margin-top: 0.35em;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .overview-video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* ─── Scene pills ─── */
+    .scene-pill {
+      display: block;
+      width: 100%;
+      padding: 0;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      background: transparent;
+      font-family: inherit;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+
+    .scene-pill:hover {
+      border-color: var(--theme-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(95,143,189,0.2);
+    }
+    .scene-pill.active {
+      border-color: var(--theme-blue);
+      box-shadow: 0 4px 12px rgba(95,143,189,0.25);
+    }
+
+    .scene-pill img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #f1f3f5;
+    }
+
+    .scene-pill video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: none;
+      background: #111827;
+    }
+
+    .scene-pill-label {
+      display: block;
+      padding: 0.35rem 0.45rem;
+      color: #475569;
+      background: rgba(255,255,255,0.92);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .comparison-scene-grid {
+      margin: 0.8em -4px 0;
+      row-gap: 0.35rem;
+    }
+
+    .comparison-scene-grid > [class*="col-"] {
+      padding-right: 4px;
+      padding-left: 4px;
+    }
+
+    .comparison-card {
+      height: 100%;
+      padding: 0.38rem;
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 5px 16px rgba(15,23,42,0.05);
+    }
+
+    .comparison-title {
+      display: block;
+      margin-bottom: 0.32rem;
+      color: #1f2937;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .comparison-video,
+    .bullettime-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #111827;
+    }
+
+    .bullettime-label {
+      margin: 0.45rem 0 0.25rem;
+      color: #64748b;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .motivation-figure {
+      display: block;
+      width: 70%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* ─── Citation ─── */
+    .citation-block {
+      position: relative;
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.8em 2em;
+      border-radius: 14px;
+      border-left: 4px solid;
+      border-image: linear-gradient(180deg, var(--theme-blue), var(--theme-pink)) 1;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .citation-block code {
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #94a3b8;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      font-family: 'Jost', sans-serif;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      color: #94a3b8;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a { color: #9ccfee; transition: color .2s; }
+    footer a:hover { color: #fff; }
+
+    /* ─── Scroll Reveal ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── Misc ─── */
+    .row.sm-gutters {
+      margin: 5px;
+    }
+
+    .results-section { padding-bottom: 30px; }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; top: 50%; transform: translateY(-50%);
+    }
+    .carousel-control-prev { left: 25px; }
+    .carousel-control-next { right: 25px; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .jumbotron { padding: 2.5rem 1rem 1.5rem; }
+      .jumbotron h1 { font-size: 1.5rem; }
+      section { padding: 40px 0; }
+      .link-buttons { gap: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================== -->
+  <!-- Title / Authors / Buttons                                      -->
+  <!-- ============================================================== -->
+  <section style="padding: 0;">
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1>
+              <b>
+                <span style="color: var(--theme-blue)">Point</span><span style="color: var(--theme-pink)">Splat</span>:
+                Compact Gaussian Splatting via<br>
+                <span style="color: #c68b5b">Human-Centric Prediction</span>
+              </b>
+            </h1>
+            <span class="conf-label">ECCV 2026</span>
+            <p class="authors" style="margin-top: 1.5em;">
+              <a href="https://guoyujie.cn/" target="_blank" rel="noopener">Yujie Guo<sup>1</sup></a>,
+              <a href="https://github.com/krahets" target="_blank" rel="noopener">Yudong Jin<sup>1</sup></a>,
+              <a href="https://lingtengqiu.github.io/" target="_blank" rel="noopener">Lingteng Qiu<sup>3</sup></a>,
+              <a href="https://zehongs.github.io/" target="_blank" rel="noopener">Zehong Shen<sup>1</sup></a>,
+              <a href="https://zhenx.me/" target="_blank" rel="noopener">Zhen Xu<sup>1</sup></a>,
+              <span>Zhang Jing<sup>2</sup></span>,
+              <span>Xianchao Shen<sup>2</sup></span>,
+              <a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank" rel="noopener">Hujun Bao<sup>1</sup></a>,
+              <a href="https://pengsida.net/" target="_blank" rel="noopener">Sida Peng<sup>1</sup></a>,
+              <a href="https://xzhou.me/" target="_blank" rel="noopener">Xiaowei Zhou<sup>1 †</sup></a>
+            </p>
+            <p class="affiliations">
+              <sup>1</sup>Zhejiang University &nbsp;&nbsp; <sup>2</sup>ByteDance &nbsp;&nbsp; <sup>3</sup>CUHK, Shenzhen<br>
+              <sup>†</sup>Corresponding author
+            </p>
+            <div class="link-buttons">
+              <a class="btn-link-custom arxiv disabled" href="#" title="Coming soon">
+                <i class="ai ai-arxiv"></i> arXiv
+              </a>
+              <a class="btn-link-custom code" href="https://github.com/zju3dv/PointSplat" target="_blank" rel="noopener">
+                <i class="fa fa-github"></i> Code
+              </a>
+              <a class="btn-link-custom demo" href="#interactive-demo">
+                <i class="fa fa-cube"></i> Interactive Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Abstract + Teaser                                              -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <img src="img/teaser.webp" width="100%" alt="PointSplat teaser" />
+          <h3 class="abstract-heading">Abstract</h3>
+          <div class="overview-video-frame">
+            <video id="overview-video" controls muted loop playsinline preload="metadata">
+              <source src="videos/overview_white.mp4" type="video/mp4" />
+              Your browser does not support the HTML5 video tag.
+            </video>
+          </div>
+          <p class="text-left" style="margin-top: 0.45em;">
+            Producing 3D human representations from input views on the fly is essential for immersive live streaming systems,
+            where representation compactness is as critical as high fidelity due to limited computational power and transmission bandwidth.
+            Although recent feed-forward reconstruction methods achieve impressive quality through the <em>view-centric</em> prediction of 3D representations,
+            they repeatedly encode the same subject content across multiple views, leading to significant inter-view redundancy.
+            <span class="highlight-blue-bg">Our key insight is to perform predictions directly within 3D space, enabling the network to learn and produce a highly compact representation.</span>
+            To this end, we propose <span class="pointsplat-word"><span class="point">Point</span><span class="splat">Splat</span></span>, a novel <em class="emphasis-blue-text">human-centric</em> approach that directly infers Gaussian primitives from an input <span class="emphasis-blue-text">point set</span>.
+            The proposed method first estimates a coarse geometric proxy and performs ray-casting to prune redundant points and establish explicit 2D&ndash;3D correspondences.
+            Subsequently, it employs a Point-Image Transformer to fuse appearance and geometry features, predicting Gaussian attributes in a single forward pass.
+            This design restricts predictions to foreground regions of interest, substantially reducing the total number of Gaussians while improving the rendering quality of novel views.
+            Extensive experiments demonstrate that <span class="pointsplat-word"><span class="point">Point</span><span class="splat">Splat</span></span> achieves higher efficiency and quality, while exhibiting strong robustness to variations in view count and image resolution across multiple datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Motivation                                                     -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <h3>Motivation</h3>
+          <img class="motivation-figure" src="img/comp_view_and_3d.webp" alt="Comparison between view-centric and human-centric prediction" />
+          <p style="margin-top: 1em;">
+            <strong>Comparison between <span class="emphasis-pink">view-centric</span> and <span class="emphasis-blue">human-centric</span> prediction.</strong>
+            Existing view-centric methods predict pixel-aligned Gaussian maps for each input view and then unproject them into 3D space.
+            This design inherently introduces <span class="emphasis-pink">inter-view redundancy</span>&mdash;the same subject content is repeatedly encoded across different views,
+            causing computation and transmission overhead to grow rapidly with the number of views and rendering resolution.
+            In contrast, <span class="emphasis-blue-text">our human-centric approach directly infers Gaussian primitives in 3D space by fusing multi-view observations into a shared point set</span>,
+            eliminating this redundancy and producing a substantially more compact representation with far fewer points while improving novel-view synthesis quality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Method / Pipeline                                              -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <h3>Method</h3>
+          <img src="img/pipeline.webp" width="100%" alt="PointSplat pipeline overview" />
+          <p style="margin-top: 1em;">
+            <strong><span class="pointsplat-word"><span class="point">Point</span><span class="splat">Splat</span></span> pipeline.</strong>
+            Given a sparse set of input views, we first estimate a coarse geometric proxy of the human
+            and perform ray-casting against this proxy to construct a compact set of 3D points that lie
+            on the visible foreground surface, eliminating background and inter-view redundancy.
+            Each point is then projected back to gather multi-view image features, and a Point-Image Transformer
+            fuses these appearance features with point-wise geometry features to predict the full set of 3D Gaussian
+            primitives (position offset, color, opacity, scale, and rotation) in a single forward pass.
+            Because predictions are anchored on a shared 3D point set rather than per-view 2D maps, the model produces
+            a substantially more compact representation while maintaining high-fidelity novel-view rendering.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Interactive                                                    -->
+  <!-- ============================================================== -->
+  <section id="interactive-demo">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <h3>Interactive Demo</h3>
+          <p class="text-left" style="margin-bottom: 1em;">All Gaussians are predicted in 0.4 seconds, with only 60-80K primitives.</p>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="viewer-card">
+                <iframe id="viewer-1" height="360" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=294b0670"></iframe>
+                <div class="viewer-previews">
+                  <img class="viewer-preview" src="img/interactive_demo/1/000011-000120_gt.png" alt="Interactive demo 1 preview 1">
+                  <img class="viewer-preview" src="img/interactive_demo/1/000023-000120_gt.png" alt="Interactive demo 1 preview 2">
+                  <img class="viewer-preview" src="img/interactive_demo/1/000035-000120_gt.png" alt="Interactive demo 1 preview 3">
+                  <img class="viewer-preview" src="img/interactive_demo/1/000047-000120_gt.png" alt="Interactive demo 1 preview 4">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="viewer-card">
+                <iframe id="viewer-2" height="360" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=3093b52b"></iframe>
+                <div class="viewer-previews">
+                  <img class="viewer-preview" src="img/interactive_demo/2/000011-000060_gt.png" alt="Interactive demo 2 preview 1">
+                  <img class="viewer-preview" src="img/interactive_demo/2/000023-000060_gt.png" alt="Interactive demo 2 preview 2">
+                  <img class="viewer-preview" src="img/interactive_demo/2/000035-000060_gt.png" alt="Interactive demo 2 preview 3">
+                  <img class="viewer-preview" src="img/interactive_demo/2/000047-000060_gt.png" alt="Interactive demo 2 preview 4">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="viewer-card">
+                <iframe id="viewer-3" height="360" allow="fullscreen; xr-spatial-tracking" src="https://superspl.at/s?id=d3bf12e7"></iframe>
+                <div class="viewer-previews">
+                  <img class="viewer-preview" src="img/interactive_demo/3/000011-000090_gt.png" alt="Interactive demo 3 preview 1">
+                  <img class="viewer-preview" src="img/interactive_demo/3/000023-000090_gt.png" alt="Interactive demo 3 preview 2">
+                  <img class="viewer-preview" src="img/interactive_demo/3/000035-000090_gt.png" alt="Interactive demo 3 preview 3">
+                  <img class="viewer-preview" src="img/interactive_demo/3/000047-000090_gt.png" alt="Interactive demo 3 preview 4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Comparison With Baselines                                      -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <h3>Comparison With Baselines</h3>
+          <div class="row sm-gutters" id="comparisons-pills"></div>
+          <div class="row comparison-scene-grid" id="comparison-grid">
+            <div class="col-12 col-sm-6 col-lg-3 mb-3">
+              <div class="comparison-card">
+                <div class="comparison-title">
+                  <span>GT</span>
+                </div>
+                <video class="comparison-video" data-method-video="gt" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-3">
+              <div class="comparison-card">
+                <div class="comparison-title">
+                  <span>Ours</span>
+                </div>
+                <video class="comparison-video" data-method-video="pointsplat" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+                <div class="bullettime-label">Bullet Time</div>
+                <video class="bullettime-video" data-bullettime-video="pointsplat" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-3">
+              <div class="comparison-card">
+                <div class="comparison-title">
+                  <span>DepthSplat</span>
+                </div>
+                <video class="comparison-video" data-method-video="depthsplat" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+                <div class="bullettime-label">Bullet Time</div>
+                <video class="bullettime-video" data-bullettime-video="depthsplat" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-3">
+              <div class="comparison-card">
+                <div class="comparison-title">
+                  <span>GPS-Gaussian</span>
+                </div>
+                <video class="comparison-video" data-method-video="gpsgs" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+                <div class="bullettime-label">Bullet Time</div>
+                <video class="bullettime-video" data-bullettime-video="gpsgs" controls muted loop playsinline preload="metadata">
+                  Your browser does not support the HTML5 video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- More Quantitative Results                                      -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 reveal">
+          <h3>More Quantitative Results</h3>
+          <div class="row sm-gutters">
+            <div class="col-12 mb-3">
+              <video class="a16x9" controls playsinline preload="metadata" width="100%">
+                <source src="videos/dymvhumans_results.mp4" type="video/mp4" />
+                Your browser does not support the HTML5 video tag.
+              </video>
+            </div>
+            <div class="col-12 mb-3">
+              <video class="a16x9" controls playsinline preload="metadata" width="100%">
+                <source src="videos/dna_rendering_results.mp4" type="video/mp4" />
+                Your browser does not support the HTML5 video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- Citation                                                       -->
+  <!-- ============================================================== -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 reveal">
+          <h3>Citation</h3>
+          <pre class="citation-block" id="citation-text"><button class="copy-btn" onclick="copyCitation()">Copy</button><code>@article{guo2026pointsplat,
+  title={PointSplat: Compact Gaussian Splatting via Human-Centric Prediction},
+  author={Yujie Guo and Yudong Jin and Lingteng Qiu and Zehong Shen and Zhen Xu and Jing Zhang and Xianchao Shen and Hujun Bao and Sida Peng and Xiaowei Zhou},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    Page template adapted from
+    <a href="https://zju3dv.github.io/4k4d/" target="_blank">4K4D</a>
+    (originally by
+    <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a>).
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      const overviewVideo = document.getElementById('overview-video');
+      if (overviewVideo) {
+        const overviewObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              overviewVideo.play().catch(() => {});
+              overviewObserver.unobserve(overviewVideo);
+            }
+          });
+        }, { threshold: 0.35 });
+        overviewObserver.observe(overviewVideo);
+      }
+
+      // Baseline comparisons
+      const comparisonWrap = document.getElementById('comparisons-pills');
+      if (comparisonWrap) {
+        const basePath = 'videos/comparison_w_baselines';
+        const bullettimeBasePath = `${basePath}/videos_bullettime_all`;
+        const scenes = [
+          { id: '0012_09_cam000017', label: '0012_09', bulletFrame: '000060' },
+          { id: '0022_10_cam000023', label: '0022_10', bulletFrame: '000077' },
+          { id: '0166_04_cam000023', label: '0166_04', bulletFrame: '000090' },
+          { id: '0173_02_cam000023', label: '0173_02', bulletFrame: '000050' },
+          { id: '0718_06_cam000017', label: '0718_06', bulletFrame: '000030' },
+          { id: '0811_06_cam000023', label: '0811_06', bulletFrame: '000120' }
+        ];
+
+        const setVideoSource = (video, src, shouldPlay = true) => {
+          if (!video || video.dataset.src === src) return;
+          video.dataset.src = src;
+          video.src = src;
+          video.load();
+          if (shouldPlay) {
+            video.play().catch(() => {});
+          }
+        };
+
+        const getBullettimePath = (scene, method) => {
+          return `${bullettimeBasePath}/comparison_bullettime_numviews44_${method}/videos_bullettime/${scene.label}_${scene.bulletFrame}_bullettime.mp4`;
+        };
+
+        const selectScene = (scene) => {
+          comparisonWrap.querySelectorAll('.scene-pill').forEach((pill) => {
+            pill.classList.toggle('active', pill.dataset.scene === scene.id);
+          });
+
+          document.querySelectorAll('[data-method-video]').forEach((video) => {
+            const method = video.dataset.methodVideo;
+            setVideoSource(video, `${basePath}/${scene.id}_${method}.mp4`);
+          });
+
+          document.querySelectorAll('[data-bullettime-video]').forEach((video) => {
+            const method = video.dataset.bullettimeVideo;
+            setVideoSource(video, getBullettimePath(scene, method));
+          });
+        };
+
+        scenes.forEach((scene, index) => {
+          const col = document.createElement('div');
+          col.className = 'col-6 col-md-2 mb-3';
+
+          const pill = document.createElement('button');
+          pill.type = 'button';
+          pill.className = `scene-pill${index === 0 ? ' active' : ''}`;
+          pill.dataset.scene = scene.id;
+          pill.setAttribute('aria-label', `Show comparison scene ${scene.label}`);
+
+          const preview = document.createElement('video');
+          preview.muted = true;
+          preview.loop = true;
+          preview.playsInline = true;
+          preview.preload = 'metadata';
+          preview.src = `${basePath}/${scene.id}_gt.mp4`;
+          preview.setAttribute('aria-hidden', 'true');
+
+          const label = document.createElement('span');
+          label.className = 'scene-pill-label';
+          label.textContent = scene.label;
+
+          pill.append(preview, label);
+          pill.addEventListener('click', () => selectScene(scene));
+          pill.addEventListener('mouseenter', () => preview.play().catch(() => {}));
+          pill.addEventListener('mouseleave', () => preview.pause());
+
+          col.appendChild(pill);
+          comparisonWrap.appendChild(col);
+        });
+
+        selectScene(scenes[0]);
+      }
+
+    });
+
+    // Copy citation
+    function copyCitation() {
+      const code = document.querySelector('#citation-text code');
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

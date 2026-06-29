@@ -203,7 +203,7 @@
 
     .emphasis-pink {
       color: var(--theme-pink);
-      font-style: italic;
+      font-style: normal;
     }
 
     .emphasis-blue {
@@ -277,7 +277,7 @@
     .embed-responsive { border-radius: 12px; overflow: hidden; }
     .overview-video-frame {
       width: 100%;
-      aspect-ratio: 1920 / 842;
+      aspect-ratio: 1920 / 788;
       margin-top: 0.35em;
       border-radius: 10px;
       overflow: hidden;
@@ -553,7 +553,7 @@
           <h3 class="abstract-heading">Abstract</h3>
           <div class="overview-video-frame">
             <video id="overview-video" controls muted loop playsinline preload="metadata">
-              <source src="videos/overview_white.mp4" type="video/mp4" />
+              <source src="videos/overview.mp4" type="video/mp4" />
               Your browser does not support the HTML5 video tag.
             </video>
           </div>
@@ -671,13 +671,13 @@
   </section>
 
   <!-- ============================================================== -->
-  <!-- Comparison With Baselines                                      -->
+  <!-- Comparison with Baselines                                      -->
   <!-- ============================================================== -->
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12 reveal">
-          <h3>Comparison With Baselines</h3>
+          <h3>Comparison with Baselines</h3>
           <div class="row sm-gutters" id="comparisons-pills"></div>
           <div class="row comparison-scene-grid" id="comparison-grid">
             <div class="col-12 col-sm-6 col-lg-3 mb-3">
@@ -739,13 +739,13 @@
   </section>
 
   <!-- ============================================================== -->
-  <!-- More Quantitative Results                                      -->
+  <!-- More Qualitative Results                                       -->
   <!-- ============================================================== -->
   <section>
     <div class="container">
       <div class="row">
         <div class="col-12 reveal">
-          <h3>More Quantitative Results</h3>
+          <h3>More Qualitative Results</h3>
           <div class="row sm-gutters">
             <div class="col-12 mb-3">
               <video class="a16x9" controls playsinline preload="metadata" width="100%">
@@ -831,14 +831,48 @@
           { id: '0811_06_cam000023', label: '0811_06', bulletFrame: '000120' }
         ];
 
-        const setVideoSource = (video, src, shouldPlay = true) => {
-          if (!video || video.dataset.src === src) return;
+        const comparisonVideos = Array.from(document.querySelectorAll('#comparison-grid video'));
+        let sceneLoadToken = 0;
+
+        const setVideoSource = (video, src) => {
+          if (!video) return;
+          video.pause();
+          video.currentTime = 0;
+          if (video.dataset.src === src) return;
           video.dataset.src = src;
           video.src = src;
           video.load();
-          if (shouldPlay) {
-            video.play().catch(() => {});
+        };
+
+        const waitUntilReady = (video) => {
+          if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+            return Promise.resolve();
           }
+          return new Promise((resolve) => {
+            const cleanup = () => {
+              video.removeEventListener('canplay', onReady);
+              video.removeEventListener('error', onReady);
+            };
+            const onReady = () => {
+              cleanup();
+              resolve();
+            };
+            video.addEventListener('canplay', onReady, { once: true });
+            video.addEventListener('error', onReady, { once: true });
+          });
+        };
+
+        const playSceneVideosInSync = () => {
+          const token = ++sceneLoadToken;
+          Promise.all(comparisonVideos.map(waitUntilReady)).then(() => {
+            if (token !== sceneLoadToken) return;
+            comparisonVideos.forEach((video) => {
+              video.currentTime = 0;
+            });
+            comparisonVideos.forEach((video) => {
+              video.play().catch(() => {});
+            });
+          });
         };
 
         const getBullettimePath = (scene, method) => {
@@ -859,6 +893,8 @@
             const method = video.dataset.bullettimeVideo;
             setVideoSource(video, getBullettimePath(scene, method));
           });
+
+          playSceneVideosInSync();
         };
 
         scenes.forEach((scene, index) => {

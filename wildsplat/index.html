@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WildSplat: Feedforward Gaussian Splatting from Unposed In-the-Wild Images. ECCV 2026 project page.">
+    <title>WildSplat</title>
+    <link rel="stylesheet" href="styles.css?v=author-links">
+  </head>
+  <body>
+    <header class="topbar" aria-label="Site navigation">
+      <a class="brand" href="#top">WildSplat</a>
+      <nav>
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#video">Video</a>
+        <a href="#bibtex">BibTeX</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-content">
+          <p class="venue">ECCV 2026</p>
+          <h1 id="title">WildSplat: Feedforward Gaussian Splatting from Unposed In-the-Wild Images</h1>
+          <p class="subtitle">
+            <span>TL;DR</span>
+            Feedforward 3D Gaussian Splatting for unposed in-the-wild photos, with reference-guided appearance control.
+          </p>
+          <div class="authors" aria-label="Authors">
+            <a href="https://github.com/xyzhang77" target="_blank" rel="noopener">Xiyu Zhang<sup>1,2,*,‡</sup></a>
+            <a href="https://scholar.google.com/citations?user=xuljwP8AAAAJ&amp;hl=en&amp;oi=sra" target="_blank" rel="noopener">Jingyu Zhuang<sup>2,*</sup></a>
+            <a href="https://zhaihongjia.github.io/" target="_blank" rel="noopener">Hongjia Zhai<sup>1</sup></a>
+            <a href="https://scholar.google.com/citations?user=Dt5LAqcAAAAJ&amp;hl=en&amp;oi=sra" target="_blank" rel="noopener">Zizheng Yan<sup>2</sup></a>
+            <a href="https://scholar.google.com/citations?user=Pcsml4oAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Jinwei Chen<sup>2</sup></a>
+            <span class="author-pair">
+              <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank" rel="noopener">Guofeng Zhang<sup>1,†</sup></a>
+              <a href="https://fqnchina.github.io/" target="_blank" rel="noopener">Qingnan Fan<sup>2,†</sup></a>
+            </span>
+          </div>
+          <p class="affiliations">
+            <sup>1</sup>State Key Lab of CAD&amp;CG, Zhejiang University &middot;
+            <sup>2</sup>vivo BlueImage Lab
+          </p>
+          <p class="author-notes">
+            <sup>*</sup>Equal contribution. <sup>†</sup>Corresponding author.
+            <sup>‡</sup>Work done during an internship at vivo BlueImage Lab.
+          </p>
+          <div class="actions" aria-label="Paper resources">
+            <a class="action" href="">
+              <span aria-hidden="true">arXiv</span>
+              arXiv
+            </a>
+            <a class="action primary" href="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/paper.pdf">
+              <span aria-hidden="true">PDF</span>
+              Paper
+            </a>
+            <a class="action" href="#video">
+              <span aria-hidden="true">▶</span>
+              Video
+            </a>
+            <a class="action" href="#bibtex">
+              <span aria-hidden="true">Bib</span>
+              Citation
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="visual-section" aria-label="WildSplat video overview">
+        <figure class="hero-visual">
+          <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/teaser.gif" alt="WildSplat video showing appearance-conditioned novel-view synthesis results.">
+        </figure>
+      </section>
+
+      <section id="abstract" class="section narrow">
+        <h2>Abstract</h2>
+        <p>
+          Feedforward 3D reconstruction enables efficient novel-view synthesis, but it typically assumes photometric consistency across input views. In-the-wild photo collections violate this assumption: images of the same scene may vary dramatically in illumination, weather, exposure, and capture time.
+        </p>
+        <p>
+          WildSplat is a feedforward 3D Gaussian Splatting framework for appearance-conditioned novel-view synthesis from sparse, unposed, in-the-wild images. It uses a dual-branch architecture to decouple appearance-invariant geometry from target-conditioned appearance: the geometry branch predicts camera poses and 3D Gaussian structure, while the appearance branch injects reference appearance cues through globally pre-modulated cross-attention. A joint multi-reference training strategy further discourages geometry-appearance entanglement, enabling state-of-the-art in-the-wild synthesis and appearance editing in a single forward pass.
+        </p>
+      </section>
+
+      <section id="method" class="section">
+        <div class="section-heading compact">
+          <h2>Method</h2>
+        </div>
+        <figure class="media full">
+          <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/pipeline.png" alt="WildSplat architecture with a geometry branch, appearance encoder, appearance injector, Gaussian prediction, and rendering.">
+          <figcaption>
+            <span>Overview</span>
+            Given unposed context images with varying appearances and a reference view, the Geometry Branch estimates camera poses and appearance-invariant Gaussian geometry. The Appearance Branch injects reference appearance cues through globally pre-modulated cross-attention, producing view-consistent colors for conditioned rasterization.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="results" class="section">
+        <div class="section-heading compact">
+          <h2>Results</h2>
+        </div>
+        <div class="results-viewer">
+          <div class="result-tabs" role="tablist" aria-label="Result categories">
+            <button class="result-tab active" id="tab-megascenes" type="button" role="tab" aria-controls="panel-megascenes" aria-selected="true">MegaScenes</button>
+            <button class="result-tab" id="tab-phototourism" type="button" role="tab" aria-controls="panel-phototourism" aria-selected="false">Phototourism</button>
+            <button class="result-tab" id="tab-appearance" type="button" role="tab" aria-controls="panel-appearance" aria-selected="false">Appearance Control</button>
+            <button class="result-tab" id="tab-interpolation" type="button" role="tab" aria-controls="panel-interpolation" aria-selected="false">Interpolation</button>
+          </div>
+          <figure class="result-panel active" id="panel-megascenes" role="tabpanel" aria-labelledby="tab-megascenes">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/megascenes.png" alt="Qualitative comparison on MegaScenes.">
+            <div class="comparison-labels" aria-label="Comparison methods">
+              <span>GT</span>
+              <span>WildGaussian</span>
+              <span>AnySplat</span>
+              <span>WorldMirror</span>
+              <span>Ours</span>
+            </div>
+            <figcaption><span>MegaScenes</span>Consistent novel-view synthesis from sparse in-the-wild inputs.</figcaption>
+          </figure>
+          <figure class="result-panel" id="panel-phototourism" role="tabpanel" aria-labelledby="tab-phototourism" hidden>
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/phototourism.png" alt="Qualitative comparison on the Phototourism dataset.">
+            <div class="comparison-labels" aria-label="Comparison methods">
+              <span>GT</span>
+              <span>WildGaussian</span>
+              <span>AnySplat</span>
+              <span>WorldMirror</span>
+              <span>Ours</span>
+            </div>
+            <figcaption><span>Phototourism</span>Appearance-consistent rendering under challenging illumination changes.</figcaption>
+          </figure>
+          <figure class="result-panel" id="panel-appearance" role="tabpanel" aria-labelledby="tab-appearance" hidden>
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/app_editing.png" alt="Appearance editing examples using different reference images.">
+            <figcaption><span>Appearance Control</span>Reference images control global appearance while preserving scene structure.</figcaption>
+          </figure>
+          <figure class="result-panel" id="panel-interpolation" role="tabpanel" aria-labelledby="tab-interpolation" hidden>
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/interp.png" alt="Appearance interpolation results between references.">
+            <figcaption><span>Interpolation</span>Smooth transitions between distinct reference appearance conditions.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="video" class="section">
+        <div class="section-heading compact">
+          <h2>Videos</h2>
+        </div>
+        <div class="video-category">
+          <h3>Novel View Synthesis</h3>
+          <div class="video-grid column-labeled-video-grid" aria-label="Novel view synthesis videos extracted from slide 6">
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb-17351.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_03-17365.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_00-17362.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb-17356.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_02-17394.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_03-17403.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb-17867.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_03-17890.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_06/rgb_01-17893.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <div class="video-column-caption">AnySplat</div>
+            <div class="video-column-caption ours-condition">Ours (under different condition)</div>
+          </div>
+          <div class="video-grid interpolation-grid row-labeled-video-grid secondary-video-grid" aria-label="Novel view synthesis comparison videos extracted from slide 7">
+            <div class="video-row-label">AnySplat</div>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17690.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17753.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17783.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <div class="video-row-label">Ours</div>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17679.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17760.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_07/rgb_100-17786.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+        </div>
+        <div class="video-category">
+          <h3>Appearance Control</h3>
+          <div class="condition-image-strip" aria-label="Condition images for appearance control">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/appearance_images/3.jpg" alt="Appearance condition image 3.">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/appearance_images/4.jpeg" alt="Appearance condition image 4.">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/appearance_images/5.jpeg" alt="Appearance condition image 5.">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/appearance_images/1.jpeg" alt="Appearance condition image 1.">
+            <img src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/appearance_images/2.jpeg" alt="Appearance condition image 2.">
+          </div>
+          <div class="video-comparison-grid" aria-label="Slide 8 comparison videos extracted from the Keynote deck">
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_02-17601.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_03-17602.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_04-17598.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_00-17599.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_01-17600.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_02-17639.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_03-17640.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_04-17636.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_00-17637.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video autoplay muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_08/rgb_01-17638.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+        </div>
+        <div class="video-category">
+          <h3>Appearance Interpolation</h3>
+          <div class="interpolation-scrubber">
+            <button class="interpolation-play-toggle" type="button" aria-label="Play appearance interpolation">
+              <span aria-hidden="true">▶</span>
+            </button>
+            <input class="interpolation-slider" type="range" min="0" max="1000" value="0" aria-label="Control appearance interpolation playback position">
+          </div>
+          <div class="video-grid interpolation-video-grid" aria-label="Slide 9 result videos extracted from the Keynote deck">
+            <figure class="video-result">
+              <video muted playsinline preload="auto">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_09/rgb-17422.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video muted playsinline preload="auto">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_09/rgb-17593.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+            <figure class="video-result">
+              <video muted playsinline preload="auto">
+                <source src="https://raw.githubusercontent.com/xyzhang77/open_access_assets/main/WildSplat/videos/slide_09/rgb-17439.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="bibtex" class="section narrow">
+        <h2>BibTeX</h2>
+        <pre><code>@inproceedings{zhang2026wildsplat,
+  title={WildSplat: Feedforward Gaussian Splatting from Unposed In-the-Wild Images},
+  author={Zhang, Xiyu and Zhuang, Jingyu and Zhai, Hongjia and Yan, Zizheng and Chen, Jinwei and Zhang, Guofeng and Fan, Qingnan},
+  booktitle={European Conference on Computer Vision},
+  year={2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>WildSplat &middot; ECCV 2026</p>
+    </footer>
+    <script>
+      const resultTabs = document.querySelectorAll(".result-tab");
+      const resultPanels = document.querySelectorAll(".result-panel");
+
+      resultTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          resultTabs.forEach((item) => {
+            item.classList.remove("active");
+            item.setAttribute("aria-selected", "false");
+          });
+
+          resultPanels.forEach((panel) => {
+            panel.classList.remove("active");
+            panel.hidden = true;
+          });
+
+          tab.classList.add("active");
+          tab.setAttribute("aria-selected", "true");
+          const panel = document.getElementById(tab.getAttribute("aria-controls"));
+          panel.hidden = false;
+          panel.classList.add("active");
+        });
+      });
+
+      const interpolationSlider = document.querySelector(".interpolation-slider");
+      const interpolationPlayToggle = document.querySelector(".interpolation-play-toggle");
+      const interpolationVideos = Array.from(document.querySelectorAll(".interpolation-video-grid video"));
+      const interpolationCycleMs = 6000;
+      let interpolationIsPlaying = false;
+      let interpolationFrame = null;
+      let interpolationLastTimestamp = null;
+
+      function scrubInterpolationVideos() {
+        if (!interpolationSlider) {
+          return;
+        }
+
+        const progress = Number(interpolationSlider.value) / Number(interpolationSlider.max);
+
+        interpolationVideos.forEach((video) => {
+          if (!Number.isFinite(video.duration) || video.duration <= 0) {
+            return;
+          }
+
+          video.pause();
+          video.currentTime = Math.min(video.duration * progress, Math.max(video.duration - 0.05, 0));
+        });
+      }
+
+      function setInterpolationPlaying(isPlaying) {
+        interpolationIsPlaying = isPlaying;
+
+        if (interpolationPlayToggle) {
+          interpolationPlayToggle.setAttribute(
+            "aria-label",
+            interpolationIsPlaying ? "Pause appearance interpolation" : "Play appearance interpolation"
+          );
+          interpolationPlayToggle.querySelector("span").textContent = interpolationIsPlaying ? "II" : "▶";
+        }
+
+        if (interpolationIsPlaying) {
+          interpolationLastTimestamp = null;
+          interpolationFrame = requestAnimationFrame(advanceInterpolationSlider);
+        } else if (interpolationFrame !== null) {
+          cancelAnimationFrame(interpolationFrame);
+          interpolationFrame = null;
+        }
+      }
+
+      function advanceInterpolationSlider(timestamp) {
+        if (!interpolationSlider || !interpolationIsPlaying) {
+          return;
+        }
+
+        if (interpolationLastTimestamp === null) {
+          interpolationLastTimestamp = timestamp;
+        }
+
+        const elapsed = timestamp - interpolationLastTimestamp;
+        interpolationLastTimestamp = timestamp;
+
+        const max = Number(interpolationSlider.max);
+        const nextValue = (Number(interpolationSlider.value) + (elapsed / interpolationCycleMs) * max) % max;
+        interpolationSlider.value = String(nextValue);
+        scrubInterpolationVideos();
+        interpolationFrame = requestAnimationFrame(advanceInterpolationSlider);
+      }
+
+      interpolationVideos.forEach((video) => {
+        video.addEventListener("loadedmetadata", scrubInterpolationVideos);
+      });
+
+      if (interpolationSlider) {
+        interpolationSlider.addEventListener("input", scrubInterpolationVideos);
+      }
+
+      if (interpolationPlayToggle) {
+        interpolationPlayToggle.addEventListener("click", () => {
+          setInterpolationPlaying(!interpolationIsPlaying);
+        });
+      }
+    </script>
+  </body>
+</html>

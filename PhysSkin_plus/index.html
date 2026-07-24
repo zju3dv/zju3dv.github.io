@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PhysSkin++: Real-Time and Generalizable Physics-Based Animation via Self-Supervised Neural Skinning">
+  <meta name="keywords" content="physics-based animation, neural skinning, reduced-order simulation, self-supervised learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="PhysSkin++">
+  <meta property="og:description" content="Real-Time and Generalizable Physics-Based Animation via Self-Supervised Neural Skinning">
+  <meta property="og:image" content="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/PhysSkin_teaser.png">
+
+  <title>PhysSkin++: Real-Time and Generalizable Physics-Based Animation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="./static/css/navbar.css">
+  <link rel="stylesheet" href="./static/css/physskin-plus.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/physskin-plus.js"></script>
+</head>
+
+<body>
+  <nav class="project-navbar" id="project-navbar" aria-label="Primary navigation">
+    <div class="project-nav-container">
+      <a class="project-nav-brand" href="#home" aria-label="PhysSkin++ home">
+        <span>PhysSkin++</span>
+      </a>
+      <div class="project-nav-links">
+        <a href="#home">Home</a>
+        <a href="#">Paper</a>
+        <a href="https://arxiv.org/abs/2603.23194">arXiv</a>
+        <a href="https://github.com/zju3dv/PhysSkin">Code</a>
+        <span class="project-nav-divider" aria-hidden="true">|</span>
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#animation">Animation</a>
+        <a href="#skinning">Skinning</a>
+        <span class="project-nav-divider" aria-hidden="true">|</span>
+        <a href="#bibtex">BibTeX</a>
+        <div class="project-nav-more">
+          <button class="project-nav-more-button" type="button" aria-haspopup="true" aria-expanded="false">
+            More Research
+            <span class="project-nav-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="project-nav-dropdown" role="menu">
+            <a href="https://zju3dv.github.io/PhysSkin/" role="menuitem">PhysSkin <span>CVPR 2026</span></a>
+            <a href="https://zju3dv.github.io/MeGAS/" role="menuitem">MeGAS <span>ECCV 2026</span></a>
+            <a href="https://zju3dv.github.io/DiffWind/" role="menuitem">DiffWind <span>ICLR 2026</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero project-hero page-band band-white" id="home">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <img
+                class="project-logo"
+                src="static/images/physskin-plus-logo.png"
+                alt="PhysSkin++"
+              >
+              <h1 class="title publication-title project-title">
+                <span class="project-title-line">Real-Time and Generalizable Physics-Based Animation</span>
+                <span class="project-title-line">via Self-Supervised Neural Skinning</span>
+              </h1>
+
+              <div class="is-size-5 publication-authors author-list">
+                <span class="author-block"><a href="https://github.com/huahuo359">Yuanhang Lei</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://github.com/LaBaFan">Baofei Liu</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://github.com/Leo11-strive">Xingxuan Li</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://academic.tao-cheng.cc/">Tao Cheng</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://bomingzhao.github.io/">Boming Zhao</a><sup>1</sup>,</span>
+                <br>
+                <span class="author-block"><a href="https://siyuanhuang.com/">Siyuan Huang</a><sup>2</sup>,</span>
+                <span class="author-block"><a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>3</sup>,</span>
+                <span class="author-block"><a href="https://peterchencyc.com/">Peter Yichen Chen</a><sup>4</sup>,</span>
+                <span class="author-block"><a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1†</sup></span>
+              </div>
+
+              <div class="is-size-6 publication-affiliations">
+                <p class="affiliation-line"><sup>1</sup>State Key Laboratory of CAD&amp;CG, Zhejiang University</p>
+                <p class="affiliation-line"><sup>2</sup>Beijing Institute for General Artificial Intelligence (BIGAI)</p>
+                <p class="affiliation-line"><sup>3</sup>Shenzhen University &nbsp;  &nbsp; <sup>4</sup>University of British Columbia</p>
+                <p class="contribution-note">† Corresponding author</p>
+              </div>
+
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2603.23194" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/zju3dv/PhysSkin" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser page-band band-muted" aria-labelledby="teaser-title">
+      <div class="container is-max-desktop">
+        <h2 class="subtitle has-text-centered tldr-text float-module" id="teaser-title">
+          <strong>TL;DR:</strong> PhysSkin++ learns generalizable and discretization-agnostic neural skinning fields directly from static 3D geometry through physics-informed self-supervision, enabling diverse real-time physics-based animations with interactive control, environmental contact, multi-object interaction, and complementary elastic deformation for user-authored rigs.
+        </h2>
+        <figure class="teaser-figure float-module">
+          <img
+            src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/teaser_physskin_plus.png"
+            alt="Overview of PhysSkin neural skinning and physics-based animation results"
+            loading="eager">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-band band-white abstract-section" id="abstract">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified abstract-text float-module">
+              <p>
+                Achieving real-time physics-based animation that generalizes across diverse 3D shapes and discretizations remains a fundamental challenge. We introduce PhysSkin++, a physics-informed framework that addresses this challenge. In the spirit of Linear Blend Skinning, we learn continuous skinning fields as basis functions lifting motion subspace coordinates to full-space deformation, with subspace defined by handle transformations. To generate mesh-free, discretization-agnostic, and physically consistent skinning fields that generalize well across diverse 3D shapes, PhysSkin++ employs a new neural skinning fields autoencoder which consists of a transformer-based encoder and a cross-attention decoder. Furthermore, we also develop a novel physics-informed self-supervised learning strategy that incorporates on-the-fly skinning-field normalization and conflict-aware gradient correction, enabling stable joint optimization of multiple self-supervised objectives. Beyond unconstrained deformation, PhysSkin++ supports Dirichlet boundary conditions, interactive control, environmental contact, and collision-aware multi-object interaction within its reduced animation framework. We further introduce a self-supervised rig-complementarity objective that enriches user-authored rig animations with physics-based complementary elastic deformation. PhysSkin++ shows outstanding performance on generalizable neural skinning and enables diverse forms of real-time physics-based animation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-band band-muted pipeline-section" id="method">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Method Overview</h2>
+            <img
+              class="pipeline-image float-module"
+              src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/PhysSkin_pipeline.png"
+              alt="PhysSkin method pipeline"
+              loading="lazy">
+            <p class="pipeline-text float-module">
+              Given a static 3D shape, the framework samples volumetric cubature points for animation and surface points for shape encoding. A shape encoder produces shape latents, from which learnable queries extract handle latents through cross-attention. Spatial queries then attend to these handle latents and decode continuous neural skinning fields. Geometry-only, physics-informed self-supervision optimizes the fields under physical, smoothness, and orthogonality objectives.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-band band-white" id="animation">
+      <div class="container is-max-desktop">
+        <div class="has-text-centered">
+          <h2 class="title is-3">Controllable and Collision-Aware Animation</h2>
+          <p class="section-lead">
+            PhysSkin++ supports diverse real-time physics-based animations through Dirichlet boundary conditions, interactive dragging, and energy-based boundary penalties for environmental contact.
+          </p>
+        </div>
+
+        <div class="animation-card-grid">
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Dirichlet Boundary Conditions</h3>
+                <p>Prescribed regions remain fixed while the unconstrained domain deforms under external forces.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 6</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo4.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo5.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/pin/demo6.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous Dirichlet boundary result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next Dirichlet boundary result">›</button>
+            </div>
+          </article>
+
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Interactive Control</h3>
+                <p>Users manipulate localized regions of a deformable object through directly applied drag forces.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 6</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo4.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo5.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/drag/demo6.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous interactive control result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next interactive control result">›</button>
+            </div>
+          </article>
+
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Single-Plane Environment Interaction</h3>
+                <p>Boundary-penalty energies model contact between deformable objects and a single inclined plane.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 12</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo4.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo5.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo6.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo7.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo8.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo9.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo10.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo11.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/single/demo12.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous single-plane result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next single-plane result">›</button>
+            </div>
+          </article>
+
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Multi-Plane Environment Interaction</h3>
+                <p>The same boundary-penalty formulation supports sequential contact across multiple planar boundaries.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 6</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo4.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo5.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/incline/multi/demo6.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous multi-plane result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next multi-plane result">›</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="has-text-centered animation-subsection">
+          <h3 class="title is-4">Multi-Object Interaction</h3>
+          <p class="section-lead">
+            A point-based IPC-style barrier models inter-object contact, while boundary-penalty energies handle contact with the supporting floor.
+          </p>
+        </div>
+
+        <div class="animation-card-grid">
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Rigid–Deformable Interaction</h3>
+                <p>Falling rigid bodies transfer collision responses to deformable objects through the shared contact formulation.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 4</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_rigid/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_rigid/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_rigid/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_rigid/demo4.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous rigid-deformable result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next rigid-deformable result">›</button>
+            </div>
+          </article>
+
+          <article class="animation-card float-module" data-video-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Deformable–Deformable Interaction</h3>
+                <p>Multiple deformable objects are simulated jointly as inter-object contacts evolve over time.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1 / 6</span>
+            </div>
+            <div class="video-carousel">
+              <video class="carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo1.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo2.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo3.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo4.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo5.mp4" type="video/mp4"></video>
+              <video class="carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/multi_obj/soft_soft/demo6.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous deformable-deformable result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next deformable-deformable result">›</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-band band-muted" id="rig-animation">
+      <div class="container is-max-desktop">
+        <div class="has-text-centered">
+          <h2 class="title is-3">Rig-Complementary Animation</h2>
+          <p class="section-lead">
+            PhysSkin++ enriches rig-based primary animation with physics-based complementary deformation.
+          </p>
+        </div>
+
+        <div class="rig-animation-stack">
+          <article class="animation-card float-module" data-video-pair-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>Interactive Rig Control</h3>
+                <p>Through an interactive rig interface, users manipulate bone poses while PhysSkin++ adds complementary elastic deformation.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1–2 / 10</span>
+            </div>
+            <div class="video-carousel video-pair-carousel">
+              <video class="pair-carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo1.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo2.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo3.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo4.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo5.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo6.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo7.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo8.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo9.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_control/demo10.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous interactive rig-control result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next interactive rig-control result">›</button>
+            </div>
+          </article>
+
+          <article class="animation-card float-module" data-video-pair-carousel>
+            <div class="animation-card-heading">
+              <div>
+                <h3>User-Authored Rig Animation</h3>
+                <p>PhysSkin++ enriches user-authored rig animation sequences with physics-based complementary elastic deformation.</p>
+              </div>
+              <span class="carousel-count" aria-live="polite">1–2 / 10</span>
+            </div>
+            <div class="video-carousel video-pair-carousel">
+              <video class="pair-carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo1.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video is-active" autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo2.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo3.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo4.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo5.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo6.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo7.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo8.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo9.mp4" type="video/mp4"></video>
+              <video class="pair-carousel-video" muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/rig_anim/demo10.mp4" type="video/mp4"></video>
+              <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous user-authored rig-animation result">‹</button>
+              <button class="carousel-button carousel-button-next" type="button" aria-label="Next user-authored rig-animation result">›</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-band band-white" id="skinning">
+      <div class="container is-max-desktop">
+        <div class="has-text-centered">
+          <h2 class="title is-3">Generalizable Self-Supervised Neural Skinning</h2>
+          <p class="section-lead">
+            PhysSkin++ predicts physically consistent neural skinning fields across different geometries.
+          </p>
+        </div>
+
+        <div class="result-grid">
+          <article class="result-card float-module">
+            <h3>Character Generalization</h3>
+            <div class="skinning-video-frame">
+              <video autoplay controls muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/rignet.mp4" type="video/mp4">
+              </video>
+            </div>
+          </article>
+          <article class="result-card float-module">
+            <h3>Category-General Objects</h3>
+            <div class="skinning-video-frame">
+              <video autoplay controls muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/shapenet.mp4" type="video/mp4">
+              </video>
+            </div>
+          </article>
+          <article class="result-card result-card-wide float-module">
+            <h3>Comparison with Prior Methods</h3>
+            <div class="skinning-video-frame skinning-video-frame-wide">
+              <video autoplay controls muted loop playsinline preload="metadata">
+                <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/compare.mp4" type="video/mp4">
+              </video>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-band band-white" id="bibtex">
+      <div class="container content is-max-desktop">
+        <h2 class="title has-text-centered">BibTeX</h2>
+        <pre class="bibtex-box float-module"><code>@inproceedings{lei2026physskin,
+  title     = {PhysSkin: Real-Time and Generalizable Physics-Based Animation via Self-Supervised Neural Skinning},
+  author    = {Lei, Yuanhang and Cheng, Tao and Li, Xingxuan and Zhao, Boming and Huang, Siyuan and Hu, Ruizhen and Chen, Peter Yichen and Bao, Hujun and Cui, Zhaopeng},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          This project page is based on the visual structure of the
+          <a href="https://zju3dv.github.io/MeGAS/">MeGAS project page</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

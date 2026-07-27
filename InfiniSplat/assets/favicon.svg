@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <title>InfiniSplat</title>
+    <path
+        d="M8 50c0-19 9-28 20-28 12 0 19 17 24 27s12 27 24 27c11 0 16-10 16-26S87 24 76 24c-12 0-19 17-24 27S40 78 28 78C17 78 8 69 8 50Z"
+        fill="none"
+        stroke="#b7b7b7"
+        stroke-width="14"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        transform="translate(2 4)"
+    />
+    <path
+        d="M8 50c0-19 9-28 20-28 12 0 19 17 24 27s12 27 24 27c11 0 16-10 16-26S87 24 76 24c-12 0-19 17-24 27S40 78 28 78C17 78 8 69 8 50Z"
+        fill="none"
+        stroke="#5b5b5b"
+        stroke-width="14"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        transform="translate(1 2)"
+    />
+    <path
+        d="M8 50c0-19 9-28 20-28 12 0 19 17 24 27s12 27 24 27c11 0 16-10 16-26S87 24 76 24c-12 0-19 17-24 27S40 78 28 78C17 78 8 69 8 50Z"
+        fill="none"
+        stroke="#35d5d7"
+        stroke-width="14"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+</svg>

@@ -10,7 +10,7 @@ const pageLinksConfig = {
   buttons: {
     arxiv: "https://arxiv.org/abs/2605.26879",
     citation: "#citation",
-    code: "#"
+    code: "https://github.com/ant-research/HTD-Refine"
   },
   videos: {
     qualitative: [

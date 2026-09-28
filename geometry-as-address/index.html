@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Zesong Yang, Weikai Chen, Liyuan Cui, Lutao Jiang, Runze Zhang, Yingda Yin, Xiaoyang Huang, Kai Yan, Keyang Luo, Wangguandong Zheng, Xin Wang, Hujun Bao, Zhaopeng Cui">
+  <meta name="description" content="Geometry as Address: Routing Attention to Visual Memory for Long-Horizon Camera-Controlled Video Generation">
+  <meta name="theme-color" content="#ffffff">
+  <title>Geometry as Address: Routing Attention to Visual Memory for Long-Horizon Camera-Controlled Video Generation</title>
+  <link rel="icon" href="material/title_icon/01_G.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css?v=20260928b">
+  <script src="static/js/data.js?v=20260925j" defer></script>
+  <script src="static/js/main.js?v=20260925i" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="toc" id="toc">
+    <div class="toc-inner">
+      <nav class="toc-links" id="toc-links" aria-label="Table of contents">
+        <a href="#gallery" data-target="gallery">Gallery</a>
+        <a href="#motivation" data-target="motivation">Motivation</a>
+        <a href="#method" data-target="method">Method</a>
+        <span class="toc-sep" aria-hidden="true"></span>
+        <a href="#long-horizon" data-target="long-horizon">Minute-Long Comparison</a>
+        <a href="#dl3dv" data-target="dl3dv">DL3DV Comparison</a>
+        <a href="#worldscore" data-target="worldscore">World-Score Comparison</a>
+        <span class="toc-sep" aria-hidden="true"></span>
+        <a href="#bibtex" data-target="bibtex">BibTeX</a>
+      </nav>
+      <button class="toc-toggle" type="button" aria-controls="toc-links" aria-expanded="false" aria-label="Open table of contents">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <span class="toc-progress" aria-hidden="true"></span>
+  </header>
+
+  <div class="page">
+    <main id="main">
+      <header class="paper-header" id="top">
+        <h1 class="title">
+          <span class="visually-hidden">Geometry as Address: Routing Attention to Visual Memory for Long-Horizon Camera-Controlled Video Generation</span>
+          <span class="glyph-title" aria-hidden="true">
+            <span class="glyph-word">
+              <img class="glyph word1" src="material/title_icon/01_G.png" style="--h:349" alt="">
+              <img class="glyph word2" src="material/title_icon/02_e.png" style="--h:255" alt="">
+              <img class="glyph word3" src="material/title_icon/03_o.png" style="--h:313" alt="">
+              <img class="glyph word4" src="material/title_icon/04_m.png" style="--h:254" alt="">
+              <img class="glyph word5" src="material/title_icon/05_e.png" style="--h:255" alt="">
+              <img class="glyph word6" src="material/title_icon/06_t.png" style="--h:312" alt="">
+              <img class="glyph word1" src="material/title_icon/07_r.png" style="--h:275" alt="">
+              <img class="glyph word2 descender" src="material/title_icon/08_y.png" style="--h:313" alt="">
+            </span>
+            <span class="glyph-word">
+              <img class="glyph word3" src="material/title_icon/10_a.png" style="--h:265" alt="">
+              <img class="glyph word4" src="material/title_icon/11_s.png" style="--h:252" alt="">
+            </span>
+            <span class="glyph-word">
+              <img class="glyph word5" src="material/title_icon/13_A.png" style="--h:371" alt="">
+              <img class="glyph word6" src="material/title_icon/14_d.png" style="--h:316" alt="">
+              <img class="glyph word1" src="material/title_icon/15_d.png" style="--h:316" alt="">
+              <img class="glyph word2" src="material/title_icon/16_r.png" style="--h:275" alt="">
+              <img class="glyph word3" src="material/title_icon/17_e.png" style="--h:255" alt="">
+              <img class="glyph word4" src="material/title_icon/18_s.png" style="--h:252" alt="">
+              <img class="glyph word5" src="material/title_icon/19_s.png" style="--h:252" alt="">
+            </span>
+          </span>
+          <span class="subtitle" aria-hidden="true">Routing Attention to Visual Memory for <span class="nowrap">Long-Horizon</span> <span class="nowrap">Camera-Controlled</span> Video Generation</span>
+        </h1>
+        <p class="venue">ARXIV 2026</p>
+        <div class="authors">
+          <p class="author-row">
+            <span class="author"><a href="https://github.com/YZsZY" target="_blank" rel="noopener">Zesong Yang</a><sup>1</sup></span>
+            <span class="author"><a href="https://chenweikai.github.io" target="_blank" rel="noopener">Weikai Chen</a><sup>2‡</sup></span>
+            <span class="author"><a href="https://scholar.google.com/citations?user=WhwTrhcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">Liyuan Cui</a><sup>1</sup></span>
+            <span class="author"><a href="https://lutao2021.github.io" target="_blank" rel="noopener">Lutao Jiang</a><sup>2</sup></span>
+            <span class="author">Runze Zhang<sup>2</sup></span>
+          </p>
+          <p class="author-row">
+            <span class="author">Yingda Yin<sup>2</sup></span>
+            <span class="author">Xiaoyang Huang<sup>2</sup></span>
+            <span class="author">Kai Yan<sup>2</sup></span>
+            <span class="author">Keyang Luo<sup>2</sup></span>
+          </p>
+          <p class="author-row">
+            <span class="author">Wangguandong Zheng</span>
+            <span class="author">Xin Wang<sup>2</sup></span>
+            <span class="author"><a href="http://www.cad.zju.edu.cn/home/bao" target="_blank" rel="noopener">Hujun Bao</a><sup>1</sup></span>
+            <span class="author"><a href="https://zhpcui.github.io/" target="_blank" rel="noopener">Zhaopeng Cui</a><sup>1†</sup></span>
+          </p>
+        </div>
+        <p class="affiliations">
+          <span><sup>1</sup>State Key Laboratory of CAD&amp;CG, Zhejiang University</span>
+          <span><sup>2</sup>LIGHTSPEED</span>
+        </p>
+        <p class="author-notes">
+          <span><sup>‡</sup> denotes Project Lead</span>
+          <span><sup>†</sup> denotes Corresponding Author</span>
+        </p>
+        <div class="header-links">
+          <span class="link-btn is-soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+            Arxiv <span class="link-soon">coming soon</span>
+          </span>
+          <a class="link-btn" href="https://github.com/zju3dv/geometry-as-address" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+            Code
+          </a>
+        </div>
+      </header>
+
+      <section class="paper-section" id="gallery" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">Gallery</h2>
+        <p class="section-intro">
+          Given a single image and a text prompt, <strong class="inline-accent">GEAR</strong> generates minute-long, photorealistic videos along <strong>arbitrary user-specified camera trajectories</strong>, while preserving spatial consistency and <strong>faithfully recovering previously observed content upon revisitation</strong>.
+        </p>
+        <div class="gallery" id="gallery-grid"></div>
+        <noscript><p class="note">Enable JavaScript to view the gallery.</p></noscript>
+      </section>
+
+      <section class="paper-section" id="motivation" aria-labelledby="motivation-title">
+        <h2 id="motivation-title">Motivation</h2>
+        <ul class="motivation-points">
+          <li class="mp-limit"><strong>History-based implicit methods</strong> retain historical latents as memory and retrieve relevant observations via attention, but the growing context makes dense historical attention increasingly expensive and susceptible to irrelevant tokens.</li>
+          <li class="mp-limit"><strong>Reconstruction-based explicit methods</strong> fuse historical observations into a global 3D representation for target-view reprojection, but accumulated geometry errors and cross-view inconsistencies can introduce persistent artifacts such as duplicated surfaces, floaters, and geometric drift that contaminate subsequent generations.</li>
+          <li class="mp-insight">These limitations motivate using <strong>geometry as a visual-memory address</strong> rather than the memory itself, leveraging local historical-to-target correspondences without relying on globally consistent reconstruction.</li>
+          <li class="mp-ours">Based on this insight, we propose <strong class="inline-accent">GEAR</strong>, a <strong>Geometry-Enabled Attention Routing</strong> framework that establishes per-frame source-target correspondences from estimated depth and uses <strong>Geometric Correspondence Attention</strong> to sparsely route each target token to geometrically matched historical memory during denoising.</li>
+        </ul>
+        <figure class="media-figure narrated" id="motivation-video">
+          <div class="media-frame">
+            <video data-src="material/Motivation/motivation.mp4" data-audio-fallback poster="static/images/motivation_poster.jpg" width="1880" height="802" playsinline controls preload="none" aria-label="Motivation video with narration"></video>
+            <button class="narrated-overlay" type="button" aria-label="Play motivation video with audio">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            </button>
+          </div>
+          <figcaption>
+            <button class="audio-hint" type="button" aria-pressed="false">
+              <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+              <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13M16 5.5v13"/></svg>
+              Play with audio
+            </button>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="paper-section" id="method" aria-labelledby="method-title">
+        <h2 id="method-title">Method</h2>
+        <div class="method-copy">
+          <p>We propose <strong class="inline-accent">GEAR</strong>, a <strong>Geometry-Enabled Attention Routing framework</strong> for camera-controlled long-horizon interactive video generation. Instead of globally fusing estimated geometry, <strong class="inline-accent">GEAR</strong> uses the depth of each historical frame independently to establish source-target correspondences under future viewpoints, and stores the patch-level relationships in a lightweight cache. Our <strong>Geometric Correspondence Attention (GCA)</strong> then exposes each noisy target token only to its geometrically matched historical memory tokens as keys and values, and injects the aggregated features through a residual branch during denoising. Geometry thus explicitly determines <em>where each target token can retrieve visual evidence</em>, introducing a sparse, explicitly geometry-addressed pathway for long-term memory access.</p>
+          <p class="method-highlight">Rather than requiring the video model to search the entire history or the geometry estimator to reconstruct the entire world, <strong class="inline-accent">GEAR</strong> uses geometry to <strong>identify which pieces of history are relevant to each piece of the future</strong>.</p>
+          <p>We additionally introduce an <strong>Invisible Octree</strong> that incrementally accumulates visibility evidence along the generation trajectory and filters geometrically plausible but occluded correspondences.</p>
+        </div>
+        <figure class="method-figure">
+          <a class="method-image-link" href="material/pipeline.png" target="_blank" rel="noopener" aria-label="View the full-resolution pipeline figure (opens in a new tab)">
+            <img src="static/images/pipeline.jpg" width="2600" height="1522" loading="lazy" decoding="async" alt="GEAR system overview: historical observation chunks, geometry-addressed patch memory, visibility-aware correspondence filtering with the Invisible Octree, and Geometric Correspondence Attention inside the DiT blocks.">
+          </a>
+          <figcaption>
+            <p><strong>System overview.</strong> For each target chunk, <strong class="inline-accent">GEAR</strong> constructs patch correspondences to retrieved history using per-frame geometry and filters occluded matches with the Invisible Octree. GCA then injects matched historical features into noisy target tokens during denoising, after which generated observations are appended to the history bank for continued rollout.</p>
+          </figcaption>
+        </figure>
+        <figure class="method-figure media-figure">
+          <div class="media-frame media-frame--dark">
+            <video data-src="material/Methods/vis_method.mp4" poster="static/images/vis_method_poster.jpg" width="1920" height="1080" muted loop playsinline controls preload="none" aria-label="Visualization of geometry-addressed correspondence and Geometric Correspondence Attention"></video>
+          </div>
+          <figcaption>
+            <p>We illustrate how the local geometry of each history condition is used to establish a history-to-target patch correspondence cache at the latent resolution. Our <strong>Geometric Correspondence Attention</strong> then restricts each noisy target token to attend only to its geometrically matched historical memory tokens as keys and values, and injects the aggregated features through a residual branch during denoising, as illustrated in the pipeline figure.</p>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="paper-section comparison-section" id="long-horizon" aria-labelledby="long-horizon-title">
+        <h2 id="long-horizon-title">Qualitative Comparisons for Minute-Long Generation under Challenging Camera Trajectories</h2>
+        <p class="section-intro">We present one-minute videos generated by different methods under a challenging camera trajectory involving rapid motion and continuous rotation. The <strong>Reference</strong> visualizes the geometry corresponding to the first frame projected along the target camera trajectory, serving as a reference for camera motion. <strong class="inline-accent">Our GEAR</strong> maintains high visual fidelity and scene consistency throughout the extended trajectory, whereas competing methods suffer from progressive drift and visual degradation.</p>
+        <div class="compare" data-dataset="longHorizon" data-speed-toggle="fast"></div>
+      </section>
+
+      <section class="paper-section comparison-section" id="dl3dv" aria-labelledby="dl3dv-title">
+        <h2 id="dl3dv-title">Qualitative Comparisons for DL3DV-Evaluation</h2>
+        <p class="section-intro">We present inference results on <strong>DL3DV-Evaluation</strong>. Given the first-frame image and the corresponding camera trajectory as input, each method generates a video following the specified camera motion. We additionally compare the camera trajectories estimated from the generated videos using <a href="https://research.nvidia.com/labs/toronto-ai/vipe" target="_blank" rel="noopener"><strong>ViPE</strong></a> against the ground-truth trajectories. <strong class="inline-accent">GEAR</strong> preserves visual quality, camera adherence, and scene consistency throughout long-horizon generation.</p>
+        <div class="compare" data-dataset="dl3dv"></div>
+        <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>To reduce storage requirements, we downsample the generated videos by a factor of 2 in both spatial resolution.</p>
+      </section>
+
+      <section class="paper-section comparison-section" id="worldscore" aria-labelledby="worldscore-title">
+        <h2 id="worldscore-title">Qualitative Comparisons for World-Score</h2>
+        <p class="section-intro">We generate a set of <strong>closed-loop camera trajectories</strong> to evaluate the <strong>long-horizon revisitation</strong> ability of each model. Since each trajectory returns to previously observed viewpoints, a model with consistent memory should reproduce the same scene content when the camera revisits it.</p>
+        <div class="compare" data-dataset="worldScore"></div>
+        <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>To reduce storage requirements, we downsample the generated videos by a factor of 2 in spatial resolution.</p>
+      </section>
+
+      <section class="paper-section" id="bibtex" aria-labelledby="bibtex-title">
+        <h2 id="bibtex-title">BibTeX</h2>
+        <pre class="bibtex"><code>@inproceedings{yang2026megas,
+    title={Geometry as Address: Routing Attention to Visual Memory for Long-Horizon Camera-Controlled Video Generation},
+    author={Yang, Zesong and Chen, Weikai and Cui, Liyuan and Jiang, Lutao and Zhang, Runze and Yin, Yingda and Huang, Xiaoyang and Yan, Kai and Luo, Keyang and Zheng, Wangguandong and Wang, Xin and Bao, Hujun and Cui, Zhaopeng},
+    booktitle={Arxiv},
+    year={2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 The Authors.</p>
+      <a class="footer-top" href="#top">Back to top<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4m-5 5 5-5 5 5"/></svg></a>
+    </footer>
+  </div>
+
+</body>
+</html>

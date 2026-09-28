@@ -1,0 +1,161 @@
+{
+  "title": "Geometry as Address",
+  "character_count": 17,
+  "unique_designs": 11,
+  "note": "Repeated letters intentionally reuse the same newly generated glyph for consistent typography. Every PNG has real transparency and complete letter edges.",
+  "glyphs": [
+    {
+      "position": 1,
+      "character": "G",
+      "file": "01_G.png",
+      "size": [
+        343,
+        349
+      ]
+    },
+    {
+      "position": 2,
+      "character": "e",
+      "file": "02_e.png",
+      "size": [
+        233,
+        255
+      ]
+    },
+    {
+      "position": 3,
+      "character": "o",
+      "file": "03_o.png",
+      "size": [
+        299,
+        313
+      ]
+    },
+    {
+      "position": 4,
+      "character": "m",
+      "file": "04_m.png",
+      "size": [
+        316,
+        248
+      ]
+    },
+    {
+      "position": 5,
+      "character": "e",
+      "file": "05_e.png",
+      "size": [
+        233,
+        255
+      ]
+    },
+    {
+      "position": 6,
+      "character": "t",
+      "file": "06_t.png",
+      "size": [
+        213,
+        312
+      ]
+    },
+    {
+      "position": 7,
+      "character": "r",
+      "file": "07_r.png",
+      "size": [
+        238,
+        275
+      ]
+    },
+    {
+      "position": 8,
+      "character": "y",
+      "file": "08_y.png",
+      "size": [
+        247,
+        313
+      ]
+    },
+    {
+      "position": 10,
+      "character": "a",
+      "file": "10_a.png",
+      "size": [
+        242,
+        265
+      ]
+    },
+    {
+      "position": 11,
+      "character": "s",
+      "file": "11_s.png",
+      "size": [
+        217,
+        252
+      ]
+    },
+    {
+      "position": 13,
+      "character": "A",
+      "file": "13_A.png",
+      "size": [
+        350,
+        371
+      ]
+    },
+    {
+      "position": 14,
+      "character": "d",
+      "file": "14_d.png",
+      "size": [
+        233,
+        316
+      ]
+    },
+    {
+      "position": 15,
+      "character": "d",
+      "file": "15_d.png",
+      "size": [
+        233,
+        316
+      ]
+    },
+    {
+      "position": 16,
+      "character": "r",
+      "file": "16_r.png",
+      "size": [
+        238,
+        275
+      ]
+    },
+    {
+      "position": 17,
+      "character": "e",
+      "file": "17_e.png",
+      "size": [
+        233,
+        255
+      ]
+    },
+    {
+      "position": 18,
+      "character": "s",
+      "file": "18_s.png",
+      "size": [
+        217,
+        252
+      ]
+    },
+    {
+      "position": 19,
+      "character": "s",
+      "file": "19_s.png",
+      "size": [
+        217,
+        252
+      ]
+    }
+  ]
+}

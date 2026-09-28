@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="PhysSkin++">
   <meta property="og:description" content="Real-Time and Generalizable Physics-Based Animation via Self-Supervised Neural Skinning">
-  <meta property="og:image" content="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin-CVPR2026/PhysSkin_teaser.png">
+  <meta property="og:image" content="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/teaser_physskin_plus_v2.png">
 
   <title>PhysSkin++: Real-Time and Generalizable Physics-Based Animation</title>
 
@@ -37,6 +37,7 @@
         <a href="https://github.com/zju3dv/PhysSkin">Code</a>
         <span class="project-nav-divider" aria-hidden="true">|</span>
         <a href="#abstract">Abstract</a>
+        <a href="#overview">Video</a>
         <a href="#method">Method</a>
         <a href="#animation">Animation</a>
         <a href="#skinning">Skinning</a>
@@ -123,13 +124,16 @@
     <section class="hero teaser page-band band-muted" aria-labelledby="teaser-title">
       <div class="container is-max-desktop">
         <h2 class="subtitle has-text-centered tldr-text float-module" id="teaser-title">
-          <strong>TL;DR:</strong> PhysSkin++ learns generalizable and discretization-agnostic neural skinning fields directly from static 3D geometry through physics-informed self-supervision, enabling diverse real-time physics-based animations with interactive control, environmental contact, multi-object interaction, and complementary elastic deformation for user-authored rigs.
+          <strong>TL;DR:</strong> PhysSkin++ learns generalizable, discretization-agnostic neural skinning fields directly from static 3D geometry through physics-informed self-supervision, then applies them in a feed-forward manner to meshes, point clouds, NeRFs, and Gaussian splats for real-time physics-based animation.
         </h2>
         <figure class="teaser-figure float-module">
           <img
-            src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/teaser_physskin_plus.png"
-            alt="Overview of PhysSkin neural skinning and physics-based animation results"
+            src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/teaser_physskin_plus_v2.png"
+            alt="PhysSkin++ learns neural skinning fields from static meshes, point clouds, NeRFs, and Gaussian splats, enabling interactive control, multi-object interaction, and rig-complementary animation"
             loading="eager">
+          <figcaption class="teaser-description">
+            Learned from static 3D geometries without annotations, PhysSkin++ enables interactive control, collision-aware multi-object interaction, and rig-complementary animation.
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -141,9 +145,18 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified abstract-text float-module">
               <p>
-                Achieving real-time physics-based animation that generalizes across diverse 3D shapes and discretizations remains a fundamental challenge. We introduce PhysSkin++, a physics-informed framework that addresses this challenge. In the spirit of Linear Blend Skinning, we learn continuous skinning fields as basis functions lifting motion subspace coordinates to full-space deformation, with subspace defined by handle transformations. To generate mesh-free, discretization-agnostic, and physically consistent skinning fields that generalize well across diverse 3D shapes, PhysSkin++ employs a new neural skinning fields autoencoder which consists of a transformer-based encoder and a cross-attention decoder. Furthermore, we also develop a novel physics-informed self-supervised learning strategy that incorporates on-the-fly skinning-field normalization and conflict-aware gradient correction, enabling stable joint optimization of multiple self-supervised objectives. Beyond unconstrained deformation, PhysSkin++ supports Dirichlet boundary conditions, interactive control, environmental contact, and collision-aware multi-object interaction within its reduced animation framework. We further introduce a self-supervised rig-complementarity objective that enriches user-authored rig animations with physics-based complementary elastic deformation. PhysSkin++ shows outstanding performance on generalizable neural skinning and enables diverse forms of real-time physics-based animation.
+                Achieving real-time physics-based animation that generalizes across diverse 3D shapes and discretizations remains a fundamental challenge. We introduce PhysSkin++, a physics-informed framework that addresses this challenge. In the spirit of Linear Blend Skinning, we learn continuous skinning fields as basis functions lifting motion subspace coordinates to full-space deformation, with the subspace defined by handle transformations. An optional primary displacement extends this representation to rig-complementary animation, where a prescribed rig provides the primary motion and the neural skinning fields represent complementary elastic deformation. To generate mesh-free, discretization-agnostic, and physically consistent skinning fields directly from static geometries, PhysSkin++ employs a neural skinning fields autoencoder comprising a transformer-based encoder and a cross-attention decoder. A physics-informed self-supervised learning strategy combines on-the-fly skinning-field normalization with conflict-aware gradient correction to balance energy minimization, spatial smoothness, and orthogonality constraints. A self-supervised rig-complementarity objective further constrains the learned deformation subspace to complement the prescribed rig animation space. Beyond unconstrained deformation, PhysSkin++ supports Dirichlet boundary conditions, interactive control, environmental contact, collision-aware multi-object interaction, and rig-complementary animation. Its continuous neural skinning fields can be bound directly to meshes, point clouds, or Gaussian splats, enabling generalizable neural skinning and real-time physics-based animation.
               </p>
             </div>
+          </div>
+        </div>
+
+        <div class="abstract-video-wrap" id="overview">
+          <div class="media-frame overview-video float-module">
+            <video controls playsinline preload="auto" aria-label="PhysSkin++ overview video">
+              <source src="https://raw.githubusercontent.com/huahuo359/open_access_assets/main/PhysSkin_plus/PhysSkin_video.mp4" type="video/mp4">
+              Your browser does not support embedded MP4 video.
+            </video>
           </div>
         </div>
       </div>

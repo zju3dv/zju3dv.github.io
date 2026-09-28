@@ -10,6 +10,7 @@
   <meta property="og:type" content="website">
   <title>SuperNav — An Agentic Navigation System</title>
   <link rel="icon" href="assets/favicon.svg?v=20260928" type="image/svg+xml">
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
@@ -78,7 +79,7 @@
 
       <div class="overview">
         <div class="window overview-frame">
-          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Real world and simulation</span><button class="preview-toggle reel-toggle" type="button" aria-pressed="false" hidden><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#pause"/></svg><span class="sr-only">Pause previews</span></button></div>
+          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Overview</span><button class="preview-toggle reel-toggle" type="button" aria-pressed="false" hidden><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#pause"/></svg><span class="sr-only">Pause previews</span></button></div>
           <video class="highlight-video overview-video" muted loop playsinline preload="none" poster="assets/videos/overview/overview-poster.webp" aria-label="Navigation runs on a Unitree Go2 and in simulation, shown in a grid that grows from one to sixteen videos">
             <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/overview/overview-960.mp4" type="video/mp4" media="(max-width: 700px)">
             <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/overview/overview.mp4" type="video/mp4">
@@ -109,7 +110,12 @@
           <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4" type="video/mp4">
           Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Download the video.</a>
         </video>
-        <p class="video-error" id="video-error" hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Open the MP4 directly.</a></p>
+        <div class="video-loading" id="video-loading" hidden>
+          <span class="loading-title" role="status">Loading video…</span>
+          <progress max="100" aria-label="Video buffered"></progress>
+          <span class="loading-detail">Connecting…</span>
+        </div>
+        <p class="video-error" id="video-error" hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Open the MP4 directly.</a> <button id="video-retry" type="button">Retry</button></p>
       </div>
 
         <div class="gallery-rail">

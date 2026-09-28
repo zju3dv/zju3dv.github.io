@@ -1,43 +1,200 @@
 'use strict';
 const root = document.documentElement;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const video = document.querySelector('#demo-video');
+let video = document.querySelector('#demo-video');
 const playbackStatus = document.querySelector('#playback-status');
 const videoError = document.querySelector('#video-error');
-video.addEventListener('error', () => { videoError.hidden = false; });
-video.querySelector('source').addEventListener('error', () => { videoError.hidden = false; });
-video.addEventListener('playing', () => { videoError.hidden = true; });
-
-// Gallery: one player, many complete runs. Each card is a link to its MP4, so
-// without JavaScript it still opens the video; with it, the card loads the player.
+const loadingPanel = document.querySelector('#video-loading');
+const loadingProgress = loadingPanel.querySelector('progress');
+const loadingDetail = loadingPanel.querySelector('.loading-detail');
 const galleryItems = [...document.querySelectorAll('.gallery-item')];
 const galleryTitle = document.querySelector('#gallery-now');
 const galleryCount = document.querySelector('.stage-count b');
+const connection = navigator.connection;
+const saveData = () => connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '');
 let currentItem = galleryItems.find(item => item.hasAttribute('aria-current')) ?? galleryItems[0];
 const shownItems = () => galleryItems.filter(item => !item.parentElement.hidden);
+const players = new Map();
+let selection = 0;
+let background = null;
+let warmTimer;
+const warmed = new Set();
+
+function bufferedFraction(player) {
+  if (!Number.isFinite(player.duration) || player.duration <= 0) return null;
+  let seconds = 0;
+  for (let i = 0; i < player.buffered.length; i++) {
+    seconds += player.buffered.end(i) - player.buffered.start(i);
+  }
+  return Math.min(1, seconds / player.duration);
+}
+function updateLoadingProgress() {
+  const fraction = bufferedFraction(video);
+  if (fraction === null || !video.buffered.length) {
+    loadingProgress.removeAttribute('value');
+    loadingDetail.textContent = 'Connecting…';
+  } else {
+    const percent = Math.floor(fraction * 100);
+    loadingProgress.value = percent;
+    loadingDetail.textContent = `${percent}% buffered`;
+  }
+}
+function showLoading(show) {
+  loadingPanel.hidden = !show;
+  video.setAttribute('aria-busy', String(show));
+  if (show) updateLoadingProgress();
+}
+
+// Retain each media element so a selection uses its existing native buffer.
+// MP4 Range requests allow playback and seeking before the full file arrives.
+function preparePlayer(item) {
+  if (players.has(item)) return players.get(item);
+  const player = item === currentItem && !players.size ? video : video.cloneNode(true);
+  if (player !== video) {
+    player.removeAttribute('id');
+    player.removeAttribute('aria-busy');
+    player.hidden = true;
+    player.preload = 'none';
+    player.poster = item.dataset.poster;
+    player.querySelector('source').src = item.href;
+    player.querySelector('a').href = item.href;
+    videoError.before(player);
+  }
+  const fail = () => {
+    if (player === video) {
+      showLoading(false);
+      videoError.hidden = false;
+      playbackStatus.textContent = 'Unable to load this video. Try again or open the MP4 directly.';
+    }
+    if (background?.player === player) finishWarmup();
+  };
+  player.addEventListener('error', fail);
+  player.querySelector('source').addEventListener('error', fail);
+  ['progress', 'loadedmetadata', 'durationchange'].forEach(event => player.addEventListener(event, () => {
+    if (player === video) updateLoadingProgress();
+    if (background?.player === player && bufferedFraction(player) >= .99) finishWarmup();
+  }));
+  player.addEventListener('suspend', () => {
+    // Browsers may finish their chosen preload before buffering the entire file.
+    if (background?.player === player && player.readyState >= 2) finishWarmup();
+  });
+  ['waiting', 'seeking'].forEach(event => player.addEventListener(event, () => {
+    if (player !== video) return;
+    if (!player.paused || player.seeking) showLoading(true);
+    stopWarmup();
+  }));
+  ['canplay', 'seeked'].forEach(event => player.addEventListener(event, () => {
+    if (player !== video) return;
+    if (player.readyState >= 3) showLoading(false);
+    scheduleWarmup();
+  }));
+  player.addEventListener('playing', () => {
+    if (player !== video) return;
+    videoError.hidden = true;
+    showLoading(false);
+    scheduleWarmup();
+  });
+  player.addEventListener('play', () => {
+    if (player !== video) return;
+    item.classList.add('is-playing');
+    if (player.readyState < 3) showLoading(true);
+    syncPreviews();
+  });
+  player.addEventListener('pause', () => {
+    item.classList.remove('is-playing');
+    if (player !== video) return;
+    if (!player.seeking) showLoading(false);
+    syncPreviews();
+    scheduleWarmup();
+  });
+  player.addEventListener('ended', () => { if (player === video) stepVideo(1, true); });
+  player.addEventListener('timeupdate', () => {
+    if (player === video && player.duration) item.style.setProperty('--played', (player.currentTime / player.duration).toFixed(4));
+  });
+  players.set(item, player);
+  return player;
+}
+
+function stopWarmup() {
+  clearTimeout(warmTimer);
+  if (!background) return;
+  clearTimeout(background.timer);
+  // A hint to stop speculative loading; keep the element and its existing buffer.
+  if (background.player !== video) background.player.preload = 'none';
+  background = null;
+}
+function finishWarmup() {
+  if (!background) return;
+  warmed.add(background.item);
+  stopWarmup();
+  scheduleWarmup();
+}
+function scheduleWarmup() {
+  clearTimeout(warmTimer);
+  warmTimer = setTimeout(warmNext, 1200);
+}
+function warmNext() {
+  if (background || document.hidden || saveData() || !loadingPanel.hidden || video.readyState < 3) return;
+  // Give an actively playing video enough headroom before sharing bandwidth.
+  if (!video.paused) {
+    let ahead = 0;
+    for (let i = 0; i < video.buffered.length; i++) {
+      if (video.buffered.start(i) <= video.currentTime && video.buffered.end(i) >= video.currentTime) ahead = video.buffered.end(i) - video.currentTime;
+    }
+    if (ahead < Math.min(10, video.duration - video.currentTime)) { scheduleWarmup(); return; }
+  }
+  const ordered = [...shownItems(), ...galleryItems];
+  const item = ordered.find(item => item !== currentItem && !warmed.has(item));
+  if (!item) return;
+  const player = preparePlayer(item);
+  if (player.error || player.networkState === 3) { warmed.add(item); scheduleWarmup(); return; }
+  background = {item, player, timer: setTimeout(finishWarmup, 15000)};
+  player.preload = 'auto';
+  if (!player.currentSrc) player.load();
+}
+
 function selectVideo(item, play) {
+  const request = ++selection;
+  stopWarmup();
   if (item !== currentItem) {
+    const next = preparePlayer(item);
+    const previous = video;
+    previous.pause();
+    previous.hidden = true;
+    previous.preload = 'none';
+    previous.removeAttribute('id');
     currentItem.removeAttribute('aria-current');
     currentItem.classList.remove('is-playing');
     currentItem.style.removeProperty('--played');
     currentItem = item;
+    video = next;
+    video.id = 'demo-video';
+    video.hidden = false;
+    video.volume = previous.volume;
+    video.muted = previous.muted;
+    video.playbackRate = previous.playbackRate;
+    if (video.readyState >= 1) video.currentTime = 0;
     item.setAttribute('aria-current', 'true');
-    const src = item.getAttribute('href');
-    video.poster = item.dataset.poster;
-    video.querySelector('source').src = src;
-    videoError.hidden = true;
-    videoError.querySelector('a').href = src;
-    video.preload = 'metadata';
-    video.load();
     galleryTitle.textContent = item.dataset.title;
     galleryCount.textContent = galleryItems.indexOf(item) + 1;
   }
+  videoError.hidden = true;
+  videoError.querySelector('a').href = item.href;
+  video.preload = 'auto';
+  if (video.error || video.networkState === 3) video.load();
+  showLoading(play && video.readyState < 3);
   if (play) {
-    playbackStatus.textContent = `Playing ${item.dataset.title}.`;
-    video.play().catch(() => {
+    const selectedPlayer = video;
+    playbackStatus.textContent = `Loading ${item.dataset.title}.`;
+    selectedPlayer.play().then(() => {
+      if (request === selection) playbackStatus.textContent = `Playing ${item.dataset.title}.`;
+    }).catch(() => {
+      if (request !== selection) return;
+      showLoading(false);
       playbackStatus.textContent = `Selected ${item.dataset.title}. Use the video controls to start playback.`;
     });
   }
+  scheduleWarmup();
 }
 function stepVideo(offset, play) {
   const list = shownItems();
@@ -47,35 +204,48 @@ function stepVideo(offset, play) {
   return Boolean(next);
 }
 if (galleryItems.length) {
-  galleryItems.forEach(item => item.addEventListener('click', event => {
-    event.preventDefault();
-    selectVideo(item, true);
-    // Bring the player into view when it has scrolled away above the cards.
-    const rect = video.getBoundingClientRect();
-    if (rect.top < 0 || rect.bottom > innerHeight) {
-      video.scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center'});
-    }
-  }));
+  preparePlayer(currentItem);
+  video.preload = saveData() ? 'none' : 'auto';
+  galleryItems.forEach(item => {
+    let start = null;
+    let dragged = false;
+    item.addEventListener('pointerdown', event => {
+      start = {x: event.clientX, y: event.clientY};
+      dragged = false;
+    }, {passive: true});
+    item.addEventListener('pointermove', event => {
+      if (start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 10) dragged = true;
+    }, {passive: true});
+    item.addEventListener('pointercancel', () => { start = null; dragged = true; }, {passive: true});
+    item.addEventListener('pointerup', () => { start = null; }, {passive: true});
+    item.addEventListener('click', event => {
+      event.preventDefault();
+      // Preserve native swiping; keyboard activation has detail === 0.
+      if (event.detail !== 0 && dragged) return;
+      selectVideo(item, true);
+      const rect = video.getBoundingClientRect();
+      const desktopPointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (desktopPointer && (rect.top < 0 || rect.bottom > innerHeight)) {
+        video.scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center'});
+      }
+    });
+  });
+  document.querySelector('#video-retry').addEventListener('click', () => selectVideo(currentItem, true));
   const stageNav = document.querySelector('.stage-nav');
   stageNav.hidden = false;
-  stageNav.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => {
-    stepVideo(Number(button.dataset.step), !video.paused);
-  }));
-  // Continue with the next run in the current list once one finishes.
-  video.addEventListener('ended', () => { stepVideo(1, true); });
-  video.addEventListener('play', () => currentItem.classList.add('is-playing'));
-  video.addEventListener('pause', () => currentItem.classList.remove('is-playing'));
-  video.addEventListener('timeupdate', () => {
-    if (video.duration) currentItem.style.setProperty('--played', (video.currentTime / video.duration).toFixed(4));
-  });
-
+  stageNav.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => stepVideo(Number(button.dataset.step), !video.paused)));
   const filter = document.querySelector('.gallery-filter');
   filter.hidden = false;
   filter.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
     filter.querySelectorAll('button').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
-    const kind = button.dataset.filter;
-    galleryItems.forEach(item => { item.parentElement.hidden = kind !== 'all' && item.parentElement.dataset.kind !== kind; });
+    galleryItems.forEach(item => { item.parentElement.hidden = button.dataset.filter !== 'all' && item.parentElement.dataset.kind !== button.dataset.filter; });
   }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopWarmup();
+    else scheduleWarmup();
+  });
+  connection?.addEventListener?.('change', () => { stopWarmup(); scheduleWarmup(); });
+  scheduleWarmup();
 }
 
 // Scroll-linked state: reading progress and the current section in the header.
@@ -248,8 +418,6 @@ if (previewToggles.length && 'IntersectionObserver' in window) {
     toggle.addEventListener('click', () => { previewsEnabled = !previewsEnabled; syncPreviews(); });
   });
   document.addEventListener('visibilitychange', syncPreviews);
-  video.addEventListener('play', syncPreviews);
-  video.addEventListener('pause', syncPreviews);
   reducedMotion.addEventListener('change', event => { previewsEnabled = !event.matches; syncPreviews(); });
   syncPreviews();
 }

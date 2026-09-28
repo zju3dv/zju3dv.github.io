@@ -285,11 +285,23 @@ a.paper-button:hover { scale: 1.05; }
 
 .video-shell { position: relative; }
 #demo-video { width: 100%; aspect-ratio: 16 / 9; background: #000; object-fit: contain; }
+.video-shell video[hidden] { display: none; }
+.video-loading {
+  position: absolute; z-index: 2; left: 50%; bottom: 68px; transform: translateX(-50%);
+  width: min(280px, calc(100% - 32px)); padding: 14px 18px; border-radius: 14px;
+  background: var(--white); color: var(--ink); box-shadow: var(--shadow);
+  pointer-events: none;
+}
+.video-loading[hidden] { display: none; }
+.loading-title { display: block; font-size: 14px; font-weight: 600; }
+.loading-detail { display: block; font: 11px/1.5 var(--mono); color: var(--muted); }
+.video-loading progress { display: block; width: 100%; height: 5px; margin: 9px 0 7px; accent-color: var(--ica); }
+#video-retry { border: 0; border-radius: 6px; padding: 4px 8px; background: var(--ink); color: var(--white); cursor: pointer; }
 .video-error {
   position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%);
   padding: 10px 16px; border-radius: 12px;
   background: var(--white); box-shadow: var(--shadow);
-  font-size: 14px; white-space: nowrap;
+  font-size: 14px; width: max-content; max-width: calc(100% - 24px);
 }
 .video-error a { text-decoration: underline; text-underline-offset: 3px; }
 .stage-nav { display: inline-flex; align-items: center; gap: 4px; }
@@ -518,9 +530,9 @@ html:has(.lightbox[open]) { overflow: hidden; }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1000px) {
-  .gallery-stage { grid-template-columns: 1fr; }
-  .gallery-rail { min-height: 0; }
-  .gallery-list { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0; overflow: visible; }
+  .gallery-stage { grid-template-columns: minmax(0, 1fr); }
+  .gallery-rail { min-height: 0; min-width: 0; }
+  .gallery-list { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0; overflow: visible; overscroll-behavior-y: auto; }
   .gallery-item { flex-direction: column; align-items: stretch; height: 100%; padding: 7px 7px 12px; }
   .gallery-thumb { width: auto; }
   .gallery-text { padding: 0 4px; }
@@ -570,11 +582,11 @@ html:has(.lightbox[open]) { overflow: hidden; }
 @media (max-width: 520px) {
   /* A swipeable row, bleeding to the screen edges, instead of a tall stack. */
   .gallery-list {
-    display: flex; gap: 12px; margin-inline: -18px; padding: 4px 18px 10px; overflow-y: hidden;
+    display: flex; flex-direction: row; gap: 12px; margin-inline: -18px; padding: 4px 18px 10px; overflow-y: hidden;
     overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 18px; scrollbar-width: none;
   }
   .gallery-list::-webkit-scrollbar { display: none; }
-  .gallery-entry { flex: 0 0 74%; scroll-snap-align: start; }
+  .gallery-entry { flex: 0 0 74%; min-width: 0; scroll-snap-align: start; }
   .window-bar .window-title { visibility: hidden; }
 }
 

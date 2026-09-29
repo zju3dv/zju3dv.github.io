@@ -88,8 +88,8 @@
 
       <div class="overview">
         <div class="window overview-frame">
-          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Overview Video</span><button class="preview-toggle reel-toggle" type="button" aria-pressed="false" hidden><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#pause"/></svg><span class="sr-only">Pause previews</span></button></div>
-          <video class="highlight-video overview-video" muted loop playsinline preload="none" poster="assets/videos/overview/overview-poster.webp" aria-label="Navigation runs on a Unitree Go2 and in simulation, shown in a grid that grows from one to sixteen videos">
+          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Overview Video</span></div>
+          <video class="highlight-video overview-video" controls muted loop playsinline preload="none" poster="assets/videos/overview/overview-poster.webp" aria-label="Navigation runs on a Unitree Go2 and in simulation, shown in a grid that grows from one to sixteen videos">
             <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/overview/overview-960.mp4" type="video/mp4" media="(max-width: 700px)">
             <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/overview/overview.mp4" type="video/mp4">
           </video>
@@ -167,42 +167,42 @@
       <div class="gallery-stage">
       <div class="window video-shell">
         <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title" id="simulation-gallery-now" data-now>Find the laptop in the pink bedroom</span><span class="stage-nav" hidden><span class="stage-count"><b>1</b> / 6</span><button class="stage-step" type="button" data-step="-1" aria-label="Previous video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button><button class="stage-step" type="button" data-step="1" aria-label="Next video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button></span></div>
-        <video id="simulation-demo-video" data-player style="aspect-ratio: 4 / 3" controls playsinline preload="none" poster="assets/videos/gallery/sim-single-laptop-poster.webp" aria-labelledby="simulation-gallery-now">
-          <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4">Download the video.</a>
+        <video id="simulation-demo-video" data-player controls playsinline preload="none" poster="assets/videos/gallery/sim-single-laptop-16x9-poster.webp" aria-labelledby="simulation-gallery-now">
+          <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-single-laptop-16x9.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-single-laptop-16x9.mp4">Download the video.</a>
         </video>
         <div class="video-loading" id="simulation-video-loading" data-loading hidden>
           <span class="loading-title" role="status">Loading video…</span>
           <progress max="100" aria-label="Video buffered"></progress>
           <span class="loading-detail">Connecting…</span>
         </div>
-        <p class="video-error" id="simulation-video-error" data-error hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4">Open the MP4 directly.</a> <button id="simulation-video-retry" data-retry type="button">Retry</button></p>
+        <p class="video-error" id="simulation-video-error" data-error hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-single-laptop-16x9.mp4">Open the MP4 directly.</a> <button id="simulation-video-retry" data-retry type="button">Retry</button></p>
       </div>
 
 
         <div class="gallery-rail">
           <ul class="gallery-list" aria-label="Simulation Demos">
         <li class="gallery-entry" data-kind="sim" data-task="single-object">
-          <a class="gallery-item" aria-current="true" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4" data-poster="assets/videos/gallery/sim-single-laptop-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the laptop in the pink bedroom">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-single-laptop-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">0:37</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" aria-current="true" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-single-laptop-16x9.mp4" data-poster="assets/videos/gallery/sim-single-laptop-16x9-poster.webp" data-title="Find the laptop in the pink bedroom">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-single-laptop-16x9-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">0:37</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the laptop in the pink bedroom</strong><small>Single-object · Habitat-GS</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="sim" data-task="multi-object">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-lounge.mp4" data-poster="assets/videos/gallery/sim-multi-lounge-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the sofa and woven cabinet in order">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-lounge-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">1:13</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-multi-lounge-16x9.mp4" data-poster="assets/videos/gallery/sim-multi-lounge-16x9-poster.webp" data-title="Find the sofa and woven cabinet in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-lounge-16x9-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:13</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the sofa and woven cabinet in order</strong><small>Multi-object · Habitat-GS</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="sim" data-task="multi-object">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-livingroom.mp4" data-poster="assets/videos/gallery/sim-multi-livingroom-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the sofa chair, artwork, and lamp in order">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-livingroom-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">1:36</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-multi-livingroom-16x9.mp4" data-poster="assets/videos/gallery/sim-multi-livingroom-16x9-poster.webp" data-title="Find the sofa chair, artwork, and lamp in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-livingroom-16x9-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:36</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the sofa chair, artwork, and lamp in order</strong><small>Multi-object · Habitat-GS</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="sim" data-task="multi-object">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-crossroom.mp4" data-poster="assets/videos/gallery/sim-multi-crossroom-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the drawing board, lamp, and shower in order">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-crossroom-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">3:02</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/05eafdd6b77ec87beaf3528853321f01c405eb85/assets/videos/gallery/sim-multi-crossroom-16x9.mp4" data-poster="assets/videos/gallery/sim-multi-crossroom-16x9-poster.webp" data-title="Find the drawing board, lamp, and shower in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-crossroom-16x9-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">3:02</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the drawing board, lamp, and shower in order</strong><small>Multi-object · Habitat-GS</small></span>
           </a>
         </li>
@@ -377,10 +377,6 @@
     </div>
   </section>
 </main>
-
-<footer class="site-footer" aria-hidden="true">
-  <p class="footer-mark">SuperNav</p>
-</footer>
 
 <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
   <div class="lightbox-bar">

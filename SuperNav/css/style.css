@@ -273,15 +273,6 @@ a.paper-button:hover { scale: 1.05; }
 
 .overview { width: min(1160px, 100%); margin-top: clamp(48px, 6vh, 72px); }
 .overview-video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--card); }
-.preview-toggle.reel-toggle {
-  display: grid; place-items: center;
-  width: 28px; height: 28px; padding: 0;
-  border: 0; border-radius: 8px; background: transparent; color: var(--ink); cursor: pointer;
-  transition: background .2s;
-}
-.preview-toggle.reel-toggle:hover { background: rgba(5, 5, 5, .06); }
-.preview-toggle.reel-toggle .ui-icon { width: 12px; height: 12px; fill: currentColor; }
-
 /* ---------- Gallery: one player, a list of complete runs ---------- */
 
 .gallery { background: var(--white); border-block: 1px solid var(--line); }
@@ -465,16 +456,6 @@ a.paper-button:hover { scale: 1.05; }
   font: 400 14px/1.85 var(--mono); color: var(--muted);
 }
 
-/* ---------- Footer: the wordmark rests at the bottom edge, partly below it ---------- */
-
-.site-footer { overflow: hidden; padding-top: clamp(24px, 5vw, 56px); background: var(--dots), var(--paper); user-select: none; }
-.footer-mark {
-  margin: 0 0 -.2em;
-  font-size: clamp(4.6rem, 20vw, 18rem); line-height: .82; font-weight: 600; letter-spacing: -.065em;
-  text-align: center; white-space: nowrap;
-  color: rgba(5, 5, 5, .07);
-}
-
 /* ---------- Lightbox ---------- */
 
 html:has(.lightbox[open]) { overflow: hidden; }
@@ -606,7 +587,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 /* ---------- Print ---------- */
 
 @media print {
-  .site-header, .scroll-progress, .preview-toggle, .figure-zoom, .lightbox, .gallery-filter, .stage-nav, .site-footer { display: none !important; }
+  .site-header, .scroll-progress, .figure-zoom, .lightbox, .gallery-filter, .stage-nav { display: none !important; }
   html, body, main, .gallery, .results { background: #fff !important; }
   .results-tabs { display: none !important; }
   .result-panel[hidden] { display: block !important; }

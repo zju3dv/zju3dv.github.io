@@ -64,8 +64,6 @@ function initGallery(gallery) {
       player.querySelector('a').href = item.href;
       videoError.before(player);
     }
-    // Match each clip's native framing, including the new 4:3 simulation demos.
-    player.style.aspectRatio = item.dataset.aspectRatio ?? '16 / 9';
     const fail = () => {
       if (player === video) {
         showLoading(false);
@@ -402,22 +400,33 @@ syncScroll();
 
 // Play only the visible short clips; respect reduced motion and the gallery player.
 const highlights = [...document.querySelectorAll('.highlight-video')];
-const previewToggles = [...document.querySelectorAll('.preview-toggle')];
 const visibleHighlights = new Set();
+const manuallyPausedHighlights = new WeakSet();
+const automaticPreviewPauses = new WeakSet();
 let previewsEnabled = !reducedMotion.matches;
 function syncPreviews() {
   highlights.forEach(clip => {
-    if (previewsEnabled && visibleHighlights.has(clip) && !document.hidden && [...allGalleryPlayers].every(player => player.paused)) {
+    if (previewsEnabled && !manuallyPausedHighlights.has(clip) && visibleHighlights.has(clip) && !document.hidden && [...allGalleryPlayers].every(player => player.paused)) {
       clip.play().catch(() => {}); // Native controls remain available if autoplay is blocked.
-    } else clip.pause();
-  });
-  previewToggles.forEach(toggle => {
-    toggle.querySelector('span').textContent = previewsEnabled ? 'Pause previews' : 'Play previews';
-    toggle.querySelector('use').setAttribute('href', 'assets/icons/supernav.svg#' + (previewsEnabled ? 'pause' : 'play'));
-    toggle.setAttribute('aria-pressed', String(!previewsEnabled));
+    } else if (!clip.paused) {
+      automaticPreviewPauses.add(clip);
+      clip.pause();
+    }
   });
 }
-if (previewToggles.length && 'IntersectionObserver' in window) {
+highlights.forEach(clip => {
+  clip.addEventListener('pause', () => {
+    // Scrolling or gallery playback may pause automatically; native-control pauses persist.
+    if (automaticPreviewPauses.has(clip)) automaticPreviewPauses.delete(clip);
+    else if (!clip.seeking) manuallyPausedHighlights.add(clip);
+  });
+  clip.addEventListener('play', () => {
+    manuallyPausedHighlights.delete(clip);
+    previewsEnabled = true;
+    allGalleryPlayers.forEach(player => player.pause());
+  });
+});
+if (highlights.length && 'IntersectionObserver' in window) {
   const clipObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       // The overview peeks below the hero text, so it starts once a sliver is visible.
@@ -428,10 +437,6 @@ if (previewToggles.length && 'IntersectionObserver' in window) {
     syncPreviews();
   }, {threshold: [0, 0.1, 0.3]});
   highlights.forEach(clip => clipObserver.observe(clip));
-  previewToggles.forEach(toggle => {
-    toggle.hidden = false;
-    toggle.addEventListener('click', () => { previewsEnabled = !previewsEnabled; syncPreviews(); });
-  });
   document.addEventListener('visibilitychange', syncPreviews);
   reducedMotion.addEventListener('change', event => { previewsEnabled = !event.matches; syncPreviews(); });
   syncPreviews();

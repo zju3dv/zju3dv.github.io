@@ -21,8 +21,8 @@
 <header class="site-header">
   <a class="wordmark" href="#top" aria-label="SuperNav home"><span class="brand-tile"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg?v=20260928#brand"/></svg></span>SuperNav</a>
   <nav class="site-nav" aria-label="Main navigation">
-    <span class="nav-links"><a href="#gallery">Gallery</a><a href="#method">Method</a><a href="#results">Results</a><a href="#citation">BibTeX</a></span>
-    <a class="nav-cta" href="#gallery"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#film"/></svg>Watch the videos</a>
+    <span class="nav-links"><a href="#real-demos">Real World</a><a href="#simulation-demos">Simulation</a><a href="#method">Method</a><a href="#results">Results</a><a href="#citation">BibTeX</a></span>
+    <a class="nav-cta" href="#real-demos"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#film"/></svg>Watch the videos</a>
   </nav>
 </header>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -72,94 +72,156 @@
         <div class="paper-resources" aria-label="Paper resources">
           <button type="button" class="paper-button" disabled><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#paper"/></svg><span>arXiv</span><small>Soon</small></button>
           <button type="button" class="paper-button" disabled><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#code"/></svg><span>Code</span><small>Soon</small></button>
-          <a class="paper-button is-primary" href="#gallery"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#film"/></svg><span>Videos</span></a>
+          <a class="paper-button is-primary" href="#real-demos"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#film"/></svg><span>Videos</span></a>
           <a class="paper-button" href="#citation"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#braces"/></svg><span>BibTeX</span><small>Soon</small></a>
         </div>
       </div>
 
+      <section class="intro-card" aria-labelledby="intro-title">
+        <h2 id="intro-title">TL<span class="intro-punctuation">;</span>DR</h2>
+        <ul>
+          <li><strong>SuperNav</strong> is an <strong class="intro-keyphrase">agentic navigation system</strong> for diverse tasks and scenes, from finding objects and visiting multiple targets to fulfilling high-level requests.</li>
+          <li>A <strong>pretrained multimodal model</strong> directs navigation through tool use, task-progress tracking, and context management, without navigation-specific fine-tuning.</li>
+          <li>Experiments show <strong>higher success rates</strong> than the evaluated baselines on single-object, multi-object, and demand-driven navigation, alongside real-world deployment on a quadruped robot.</li>
+        </ul>
+      </section>
+
       <div class="overview">
         <div class="window overview-frame">
-          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Overview</span><button class="preview-toggle reel-toggle" type="button" aria-pressed="false" hidden><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#pause"/></svg><span class="sr-only">Pause previews</span></button></div>
+          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">Overview Video</span><button class="preview-toggle reel-toggle" type="button" aria-pressed="false" hidden><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#pause"/></svg><span class="sr-only">Pause previews</span></button></div>
           <video class="highlight-video overview-video" muted loop playsinline preload="none" poster="assets/videos/overview/overview-poster.webp" aria-label="Navigation runs on a Unitree Go2 and in simulation, shown in a grid that grows from one to sixteen videos">
-            <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/overview/overview-960.mp4" type="video/mp4" media="(max-width: 700px)">
-            <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/overview/overview.mp4" type="video/mp4">
+            <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/overview/overview-960.mp4" type="video/mp4" media="(max-width: 700px)">
+            <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/overview/overview.mp4" type="video/mp4">
           </video>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
+  <section class="section gallery" id="real-demos" data-gallery aria-labelledby="real-title">
     <div class="wrap">
       <header class="section-head">
-        <div>
-          <h2 id="gallery-title">Gallery</h2>
-          <p class="section-lede">Complete runs on a Unitree Go2 and in simulation. Choose a video to play it.</p>
-        </div>
-        <div class="gallery-filter" role="group" aria-label="Show videos" hidden>
-          <button type="button" data-filter="all" aria-pressed="true">All <span>6</span></button>
-          <button type="button" data-filter="real" aria-pressed="false">Real world <span>4</span></button>
-          <button type="button" data-filter="sim" aria-pressed="false">Simulation <span>2</span></button>
-        </div>
-      </header>
+        <div><h2 id="real-title">Real-World Demos</h2></div>
 
+      </header>
       <div class="gallery-stage">
       <div class="window video-shell">
-        <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title" id="gallery-now">Find the printer, then the trash bin</span><span class="stage-nav" hidden><span class="stage-count"><b>1</b> / 6</span><button class="stage-step" type="button" data-step="-1" aria-label="Previous video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button><button class="stage-step" type="button" data-step="1" aria-label="Next video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button></span></div>
-        <video id="demo-video" controls playsinline preload="none" poster="assets/videos/gallery/real-find-printer-then-trashbin-poster.webp" aria-labelledby="gallery-now">
-          <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Download the video.</a>
+        <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title" id="real-gallery-now" data-now>Find the printer, then the trash bin</span><span class="stage-nav" hidden><span class="stage-count"><b>1</b> / 4</span><button class="stage-step" type="button" data-step="-1" aria-label="Previous video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button><button class="stage-step" type="button" data-step="1" aria-label="Next video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button></span></div>
+        <video id="real-demo-video" data-player controls playsinline preload="none" poster="assets/videos/gallery/real-find-printer-then-trashbin-poster.webp" aria-labelledby="real-gallery-now">
+          <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-find-printer-then-trashbin.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Download the video.</a>
         </video>
-        <div class="video-loading" id="video-loading" hidden>
+        <div class="video-loading" id="real-video-loading" data-loading hidden>
           <span class="loading-title" role="status">Loading video…</span>
           <progress max="100" aria-label="Video buffered"></progress>
           <span class="loading-detail">Connecting…</span>
         </div>
-        <p class="video-error" id="video-error" hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Open the MP4 directly.</a> <button id="video-retry" type="button">Retry</button></p>
+        <p class="video-error" id="real-video-error" data-error hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-find-printer-then-trashbin.mp4">Open the MP4 directly.</a> <button id="real-video-retry" data-retry type="button">Retry</button></p>
       </div>
 
+
         <div class="gallery-rail">
-      <ul class="gallery-list" aria-label="Videos">
+          <ul class="gallery-list" aria-label="Real-World Demos">
         <li class="gallery-entry" data-kind="real">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-find-printer-then-trashbin.mp4" data-poster="assets/videos/gallery/real-find-printer-then-trashbin-poster.webp" data-title="Find the printer, then the trash bin" aria-current="true">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/real-find-printer-then-trashbin-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-real">Real</span><span class="gallery-time">1:22</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" aria-current="true" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-find-printer-then-trashbin.mp4" data-poster="assets/videos/gallery/real-find-printer-then-trashbin-poster.webp" data-title="Find the printer, then the trash bin">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/real-find-printer-then-trashbin-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:22</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the printer, then the trash bin</strong><small>Multi-object · Unitree Go2</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="real">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-go-to-basketball.mp4" data-poster="assets/videos/gallery/real-go-to-basketball-poster.webp" data-title="Find the basketball">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-basketball-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-real">Real</span><span class="gallery-time">1:11</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-go-to-basketball.mp4" data-poster="assets/videos/gallery/real-go-to-basketball-poster.webp" data-title="Find the basketball">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-basketball-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:11</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find the basketball</strong><small>Single-object · Unitree Go2</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="real">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-go-to-another-dog.mp4" data-poster="assets/videos/gallery/real-go-to-another-dog-poster.webp" data-title="Find another Go2">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-another-dog-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-real">Real</span><span class="gallery-time">1:33</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-go-to-another-dog.mp4" data-poster="assets/videos/gallery/real-go-to-another-dog-poster.webp" data-title="Find another Go2">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-another-dog-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:33</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Find another Go2</strong><small>Single-object · Unitree Go2</small></span>
           </a>
         </li>
         <li class="gallery-entry" data-kind="real">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/real-go-to-trash-bin.mp4" data-poster="assets/videos/gallery/real-go-to-trash-bin-poster.webp" data-title="Go to the trash bin">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-trash-bin-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-real">Real</span><span class="gallery-time">0:53</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/real-go-to-trash-bin.mp4" data-poster="assets/videos/gallery/real-go-to-trash-bin-poster.webp" data-title="Go to the trash bin">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/real-go-to-trash-bin-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">0:53</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Go to the trash bin</strong><small>Single-object · Unitree Go2</small></span>
           </a>
         </li>
-        <li class="gallery-entry" data-kind="sim">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/sim-multi-object.mp4" data-poster="assets/videos/gallery/sim-multi-object-poster.webp" data-title="Bar counter, front desk, city model, then the cactus">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-object-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-sim">Sim</span><span class="gallery-time">1:42</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+          </ul>
+        </div>
+      </div>
+      <p class="sr-only" data-playback-status role="status"></p>
+    </div>
+  </section>
+
+  <section class="section gallery" id="simulation-demos" data-gallery aria-labelledby="simulation-title">
+    <div class="wrap">
+      <header class="section-head">
+        <div><h2 id="simulation-title">Simulation Demos</h2></div>
+        <div class="gallery-filter" role="group" aria-label="Simulation tasks" hidden>
+          <button type="button" data-filter="all" aria-pressed="true">All <span>6</span></button>
+          <button type="button" data-filter="single-object" aria-pressed="false">Single-object <span>1</span></button>
+          <button type="button" data-filter="multi-object" aria-pressed="false">Multi-object <span>4</span></button>
+          <button type="button" data-filter="demand-driven" aria-pressed="false">Demand-driven <span>1</span></button>
+        </div>
+      </header>
+      <div class="gallery-stage">
+      <div class="window video-shell">
+        <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title" id="simulation-gallery-now" data-now>Find the laptop in the pink bedroom</span><span class="stage-nav" hidden><span class="stage-count"><b>1</b> / 6</span><button class="stage-step" type="button" data-step="-1" aria-label="Previous video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button><button class="stage-step" type="button" data-step="1" aria-label="Next video"><svg class="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="assets/icons/supernav.svg#arrow-right"/></svg></button></span></div>
+        <video id="simulation-demo-video" data-player style="aspect-ratio: 4 / 3" controls playsinline preload="none" poster="assets/videos/gallery/sim-single-laptop-poster.webp" aria-labelledby="simulation-gallery-now">
+          <source src="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4">Download the video.</a>
+        </video>
+        <div class="video-loading" id="simulation-video-loading" data-loading hidden>
+          <span class="loading-title" role="status">Loading video…</span>
+          <progress max="100" aria-label="Video buffered"></progress>
+          <span class="loading-detail">Connecting…</span>
+        </div>
+        <p class="video-error" id="simulation-video-error" data-error hidden>Unable to load this video. <a href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4">Open the MP4 directly.</a> <button id="simulation-video-retry" data-retry type="button">Retry</button></p>
+      </div>
+
+
+        <div class="gallery-rail">
+          <ul class="gallery-list" aria-label="Simulation Demos">
+        <li class="gallery-entry" data-kind="sim" data-task="single-object">
+          <a class="gallery-item" aria-current="true" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-single-laptop.mp4" data-poster="assets/videos/gallery/sim-single-laptop-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the laptop in the pink bedroom">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-single-laptop-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">0:37</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+            <span class="gallery-text"><strong>Find the laptop in the pink bedroom</strong><small>Single-object · Habitat-GS</small></span>
+          </a>
+        </li>
+        <li class="gallery-entry" data-kind="sim" data-task="multi-object">
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-lounge.mp4" data-poster="assets/videos/gallery/sim-multi-lounge-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the sofa and woven cabinet in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-lounge-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">1:13</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+            <span class="gallery-text"><strong>Find the sofa and woven cabinet in order</strong><small>Multi-object · Habitat-GS</small></span>
+          </a>
+        </li>
+        <li class="gallery-entry" data-kind="sim" data-task="multi-object">
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-livingroom.mp4" data-poster="assets/videos/gallery/sim-multi-livingroom-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the sofa chair, artwork, and lamp in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-livingroom-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">1:36</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+            <span class="gallery-text"><strong>Find the sofa chair, artwork, and lamp in order</strong><small>Multi-object · Habitat-GS</small></span>
+          </a>
+        </li>
+        <li class="gallery-entry" data-kind="sim" data-task="multi-object">
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-crossroom.mp4" data-poster="assets/videos/gallery/sim-multi-crossroom-poster.webp" data-aspect-ratio="4 / 3" data-title="Find the drawing board, lamp, and shower in order">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-crossroom-thumb.webp" width="480" height="360" loading="lazy" alt=""><span class="gallery-time">3:02</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+            <span class="gallery-text"><strong>Find the drawing board, lamp, and shower in order</strong><small>Multi-object · Habitat-GS</small></span>
+          </a>
+        </li>
+        <li class="gallery-entry" data-kind="sim" data-task="multi-object">
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-multi-object.mp4" data-poster="assets/videos/gallery/sim-multi-object-poster.webp" data-title="Bar counter, front desk, city model, then the cactus">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-multi-object-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:42</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Bar counter, front desk, city model, then the cactus</strong><small>Multi-object · Habitat-GS</small></span>
           </a>
         </li>
-        <li class="gallery-entry" data-kind="sim">
-          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/0b6546d9a6b86738273f13de385ca6f18aef4986/assets/videos/gallery/sim-demand-driven.mp4" data-poster="assets/videos/gallery/sim-demand-driven-poster.webp" data-title="Help me get ready for decorating">
-            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-demand-driven-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="kind-tag is-sim">Sim</span><span class="gallery-time">1:14</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+        <li class="gallery-entry" data-kind="sim" data-task="demand-driven">
+          <a class="gallery-item" href="https://raw.githubusercontent.com/The0xKa1/SuperNav-assets/37b75f203b75ed2f750f837547d33f80cae9163f/assets/videos/gallery/sim-demand-driven.mp4" data-poster="assets/videos/gallery/sim-demand-driven-poster.webp" data-title="Help me get ready for decorating">
+            <span class="gallery-thumb"><img src="assets/videos/gallery/sim-demand-driven-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:14</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
             <span class="gallery-text"><strong>Help me get ready for decorating</strong><small>Demand-driven · AI2-THOR</small></span>
           </a>
         </li>
-      </ul>
+          </ul>
         </div>
       </div>
-      <p id="playback-status" class="sr-only" role="status"></p>
+      <p class="sr-only" data-playback-status role="status"></p>
     </div>
   </section>
 

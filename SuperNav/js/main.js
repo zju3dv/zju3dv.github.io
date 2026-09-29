@@ -1,251 +1,266 @@
 'use strict';
 const root = document.documentElement;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-let video = document.querySelector('#demo-video');
-const playbackStatus = document.querySelector('#playback-status');
-const videoError = document.querySelector('#video-error');
-const loadingPanel = document.querySelector('#video-loading');
-const loadingProgress = loadingPanel.querySelector('progress');
-const loadingDetail = loadingPanel.querySelector('.loading-detail');
-const galleryItems = [...document.querySelectorAll('.gallery-item')];
-const galleryTitle = document.querySelector('#gallery-now');
-const galleryCount = document.querySelector('.stage-count b');
+const allGalleryPlayers = new Set();
 const connection = navigator.connection;
 const saveData = () => connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '');
-let currentItem = galleryItems.find(item => item.hasAttribute('aria-current')) ?? galleryItems[0];
-const shownItems = () => galleryItems.filter(item => !item.parentElement.hidden);
-const players = new Map();
-let selection = 0;
-let background = null;
-let warmTimer;
-const warmed = new Set();
 
-function bufferedFraction(player) {
-  if (!Number.isFinite(player.duration) || player.duration <= 0) return null;
-  let seconds = 0;
-  for (let i = 0; i < player.buffered.length; i++) {
-    seconds += player.buffered.end(i) - player.buffered.start(i);
-  }
-  return Math.min(1, seconds / player.duration);
-}
-function updateLoadingProgress() {
-  const fraction = bufferedFraction(video);
-  if (fraction === null || !video.buffered.length) {
-    loadingProgress.removeAttribute('value');
-    loadingDetail.textContent = 'Connecting…';
-  } else {
-    const percent = Math.floor(fraction * 100);
-    loadingProgress.value = percent;
-    loadingDetail.textContent = `${percent}% buffered`;
-  }
-}
-function showLoading(show) {
-  loadingPanel.hidden = !show;
-  video.setAttribute('aria-busy', String(show));
-  if (show) updateLoadingProgress();
-}
+function initGallery(gallery) {
+  let video = gallery.querySelector('[data-player]');
+  const playbackStatus = gallery.querySelector('[data-playback-status]');
+  const videoError = gallery.querySelector('[data-error]');
+  const loadingPanel = gallery.querySelector('[data-loading]');
+  const loadingProgress = loadingPanel.querySelector('progress');
+  const loadingDetail = loadingPanel.querySelector('.loading-detail');
+  const galleryItems = [...gallery.querySelectorAll('.gallery-item')];
+  const galleryTitle = gallery.querySelector('[data-now]');
+  const galleryCount = gallery.querySelector('.stage-count b');
+  let currentItem = galleryItems.find(item => item.hasAttribute('aria-current')) ?? galleryItems[0];
+  const shownItems = () => galleryItems.filter(item => !item.parentElement.hidden);
+  const players = new Map();
+  let selection = 0;
+  let background = null;
+  let warmTimer;
+  const warmed = new Set();
 
-// Retain each media element so a selection uses its existing native buffer.
-// MP4 Range requests allow playback and seeking before the full file arrives.
-function preparePlayer(item) {
-  if (players.has(item)) return players.get(item);
-  const player = item === currentItem && !players.size ? video : video.cloneNode(true);
-  if (player !== video) {
-    player.removeAttribute('id');
-    player.removeAttribute('aria-busy');
-    player.hidden = true;
-    player.preload = 'none';
-    player.poster = item.dataset.poster;
-    player.querySelector('source').src = item.href;
-    player.querySelector('a').href = item.href;
-    videoError.before(player);
-  }
-  const fail = () => {
-    if (player === video) {
-      showLoading(false);
-      videoError.hidden = false;
-      playbackStatus.textContent = 'Unable to load this video. Try again or open the MP4 directly.';
+  function bufferedFraction(player) {
+    if (!Number.isFinite(player.duration) || player.duration <= 0) return null;
+    let seconds = 0;
+    for (let i = 0; i < player.buffered.length; i++) {
+      seconds += player.buffered.end(i) - player.buffered.start(i);
     }
-    if (background?.player === player) finishWarmup();
-  };
-  player.addEventListener('error', fail);
-  player.querySelector('source').addEventListener('error', fail);
-  ['progress', 'loadedmetadata', 'durationchange'].forEach(event => player.addEventListener(event, () => {
-    if (player === video) updateLoadingProgress();
-    if (background?.player === player && bufferedFraction(player) >= .99) finishWarmup();
-  }));
-  player.addEventListener('suspend', () => {
-    // Browsers may finish their chosen preload before buffering the entire file.
-    if (background?.player === player && player.readyState >= 2) finishWarmup();
-  });
-  ['waiting', 'seeking'].forEach(event => player.addEventListener(event, () => {
-    if (player !== video) return;
-    if (!player.paused || player.seeking) showLoading(true);
-    stopWarmup();
-  }));
-  ['canplay', 'seeked'].forEach(event => player.addEventListener(event, () => {
-    if (player !== video) return;
-    if (player.readyState >= 3) showLoading(false);
-    scheduleWarmup();
-  }));
-  player.addEventListener('playing', () => {
-    if (player !== video) return;
-    videoError.hidden = true;
-    showLoading(false);
-    scheduleWarmup();
-  });
-  player.addEventListener('play', () => {
-    if (player !== video) return;
-    item.classList.add('is-playing');
-    if (player.readyState < 3) showLoading(true);
-    syncPreviews();
-  });
-  player.addEventListener('pause', () => {
-    item.classList.remove('is-playing');
-    if (player !== video) return;
-    if (!player.seeking) showLoading(false);
-    syncPreviews();
-    scheduleWarmup();
-  });
-  player.addEventListener('ended', () => { if (player === video) stepVideo(1, true); });
-  player.addEventListener('timeupdate', () => {
-    if (player === video && player.duration) item.style.setProperty('--played', (player.currentTime / player.duration).toFixed(4));
-  });
-  players.set(item, player);
-  return player;
-}
-
-function stopWarmup() {
-  clearTimeout(warmTimer);
-  if (!background) return;
-  clearTimeout(background.timer);
-  // A hint to stop speculative loading; keep the element and its existing buffer.
-  if (background.player !== video) background.player.preload = 'none';
-  background = null;
-}
-function finishWarmup() {
-  if (!background) return;
-  warmed.add(background.item);
-  stopWarmup();
-  scheduleWarmup();
-}
-function scheduleWarmup() {
-  clearTimeout(warmTimer);
-  warmTimer = setTimeout(warmNext, 1200);
-}
-function warmNext() {
-  if (background || document.hidden || saveData() || !loadingPanel.hidden || video.readyState < 3) return;
-  // Give an actively playing video enough headroom before sharing bandwidth.
-  if (!video.paused) {
-    let ahead = 0;
-    for (let i = 0; i < video.buffered.length; i++) {
-      if (video.buffered.start(i) <= video.currentTime && video.buffered.end(i) >= video.currentTime) ahead = video.buffered.end(i) - video.currentTime;
+    return Math.min(1, seconds / player.duration);
+  }
+  function updateLoadingProgress() {
+    const fraction = bufferedFraction(video);
+    if (fraction === null || !video.buffered.length) {
+      loadingProgress.removeAttribute('value');
+      loadingDetail.textContent = 'Connecting…';
+    } else {
+      const percent = Math.floor(fraction * 100);
+      loadingProgress.value = percent;
+      loadingDetail.textContent = `${percent}% buffered`;
     }
-    if (ahead < Math.min(10, video.duration - video.currentTime)) { scheduleWarmup(); return; }
   }
-  const ordered = [...shownItems(), ...galleryItems];
-  const item = ordered.find(item => item !== currentItem && !warmed.has(item));
-  if (!item) return;
-  const player = preparePlayer(item);
-  if (player.error || player.networkState === 3) { warmed.add(item); scheduleWarmup(); return; }
-  background = {item, player, timer: setTimeout(finishWarmup, 15000)};
-  player.preload = 'auto';
-  if (!player.currentSrc) player.load();
-}
+  function showLoading(show) {
+    loadingPanel.hidden = !show;
+    video.setAttribute('aria-busy', String(show));
+    if (show) updateLoadingProgress();
+  }
 
-function selectVideo(item, play) {
-  const request = ++selection;
-  stopWarmup();
-  if (item !== currentItem) {
-    const next = preparePlayer(item);
-    const previous = video;
-    previous.pause();
-    previous.hidden = true;
-    previous.preload = 'none';
-    previous.removeAttribute('id');
-    currentItem.removeAttribute('aria-current');
-    currentItem.classList.remove('is-playing');
-    currentItem.style.removeProperty('--played');
-    currentItem = item;
-    video = next;
-    video.id = 'demo-video';
-    video.hidden = false;
-    video.volume = previous.volume;
-    video.muted = previous.muted;
-    video.playbackRate = previous.playbackRate;
-    if (video.readyState >= 1) video.currentTime = 0;
-    item.setAttribute('aria-current', 'true');
-    galleryTitle.textContent = item.dataset.title;
-    galleryCount.textContent = galleryItems.indexOf(item) + 1;
-  }
-  videoError.hidden = true;
-  videoError.querySelector('a').href = item.href;
-  video.preload = 'auto';
-  if (video.error || video.networkState === 3) video.load();
-  showLoading(play && video.readyState < 3);
-  if (play) {
-    const selectedPlayer = video;
-    playbackStatus.textContent = `Loading ${item.dataset.title}.`;
-    selectedPlayer.play().then(() => {
-      if (request === selection) playbackStatus.textContent = `Playing ${item.dataset.title}.`;
-    }).catch(() => {
-      if (request !== selection) return;
-      showLoading(false);
-      playbackStatus.textContent = `Selected ${item.dataset.title}. Use the video controls to start playback.`;
-    });
-  }
-  scheduleWarmup();
-}
-function stepVideo(offset, play) {
-  const list = shownItems();
-  const index = list.indexOf(currentItem);
-  const next = list[index === -1 ? 0 : index + offset];
-  if (next) selectVideo(next, play);
-  return Boolean(next);
-}
-if (galleryItems.length) {
-  preparePlayer(currentItem);
-  video.preload = saveData() ? 'none' : 'auto';
-  galleryItems.forEach(item => {
-    let start = null;
-    let dragged = false;
-    item.addEventListener('pointerdown', event => {
-      start = {x: event.clientX, y: event.clientY};
-      dragged = false;
-    }, {passive: true});
-    item.addEventListener('pointermove', event => {
-      if (start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 10) dragged = true;
-    }, {passive: true});
-    item.addEventListener('pointercancel', () => { start = null; dragged = true; }, {passive: true});
-    item.addEventListener('pointerup', () => { start = null; }, {passive: true});
-    item.addEventListener('click', event => {
-      event.preventDefault();
-      // Preserve native swiping; keyboard activation has detail === 0.
-      if (event.detail !== 0 && dragged) return;
-      selectVideo(item, true);
-      const rect = video.getBoundingClientRect();
-      const desktopPointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (desktopPointer && (rect.top < 0 || rect.bottom > innerHeight)) {
-        video.scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center'});
+  // Retain each media element so a selection uses its existing native buffer.
+  // MP4 Range requests allow playback and seeking before the full file arrives.
+  function preparePlayer(item) {
+    if (players.has(item)) return players.get(item);
+    const player = item === currentItem && !players.size ? video : video.cloneNode(true);
+    if (player !== video) {
+      player.removeAttribute('id');
+      player.removeAttribute('data-player');
+      player.removeAttribute('aria-busy');
+      player.hidden = true;
+      player.preload = 'none';
+      player.poster = item.dataset.poster;
+      player.querySelector('source').src = item.href;
+      player.querySelector('a').href = item.href;
+      videoError.before(player);
+    }
+    // Match each clip's native framing, including the new 4:3 simulation demos.
+    player.style.aspectRatio = item.dataset.aspectRatio ?? '16 / 9';
+    const fail = () => {
+      if (player === video) {
+        showLoading(false);
+        videoError.hidden = false;
+        playbackStatus.textContent = 'Unable to load this video. Try again or open the MP4 directly.';
       }
+      if (background?.player === player) finishWarmup();
+    };
+    player.addEventListener('error', fail);
+    player.querySelector('source').addEventListener('error', fail);
+    ['progress', 'loadedmetadata', 'durationchange'].forEach(event => player.addEventListener(event, () => {
+      if (player === video) updateLoadingProgress();
+      if (background?.player === player && bufferedFraction(player) >= .99) finishWarmup();
+    }));
+    player.addEventListener('suspend', () => {
+      // Browsers may finish their chosen preload before buffering the entire file.
+      if (background?.player === player && player.readyState >= 2) finishWarmup();
     });
-  });
-  document.querySelector('#video-retry').addEventListener('click', () => selectVideo(currentItem, true));
-  const stageNav = document.querySelector('.stage-nav');
-  stageNav.hidden = false;
-  stageNav.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => stepVideo(Number(button.dataset.step), !video.paused)));
-  const filter = document.querySelector('.gallery-filter');
-  filter.hidden = false;
-  filter.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
-    filter.querySelectorAll('button').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
-    galleryItems.forEach(item => { item.parentElement.hidden = button.dataset.filter !== 'all' && item.parentElement.dataset.kind !== button.dataset.filter; });
-  }));
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopWarmup();
-    else scheduleWarmup();
-  });
-  connection?.addEventListener?.('change', () => { stopWarmup(); scheduleWarmup(); });
-  scheduleWarmup();
+    ['waiting', 'seeking'].forEach(event => player.addEventListener(event, () => {
+      if (player !== video) return;
+      if (!player.paused || player.seeking) showLoading(true);
+      stopWarmup();
+    }));
+    ['canplay', 'seeked'].forEach(event => player.addEventListener(event, () => {
+      if (player !== video) return;
+      if (player.readyState >= 3) showLoading(false);
+      scheduleWarmup();
+    }));
+    player.addEventListener('playing', () => {
+      if (player !== video) return;
+      videoError.hidden = true;
+      showLoading(false);
+      scheduleWarmup();
+    });
+    player.addEventListener('play', () => {
+      if (player !== video) return;
+      allGalleryPlayers.forEach(other => { if (other !== player) other.pause(); });
+      item.classList.add('is-playing');
+      if (player.readyState < 3) showLoading(true);
+      syncPreviews();
+    });
+    player.addEventListener('pause', () => {
+      item.classList.remove('is-playing');
+      if (player !== video) return;
+      if (!player.seeking) showLoading(false);
+      syncPreviews();
+      scheduleWarmup();
+    });
+    player.addEventListener('ended', () => { if (player === video) stepVideo(1, true); });
+    player.addEventListener('timeupdate', () => {
+      if (player === video && player.duration) item.style.setProperty('--played', (player.currentTime / player.duration).toFixed(4));
+    });
+    allGalleryPlayers.add(player);
+    players.set(item, player);
+    return player;
+  }
+
+  function stopWarmup() {
+    clearTimeout(warmTimer);
+    if (!background) return;
+    clearTimeout(background.timer);
+    // A hint to stop speculative loading; keep the element and its existing buffer.
+    if (background.player !== video) background.player.preload = 'none';
+    background = null;
+  }
+  function finishWarmup() {
+    if (!background) return;
+    warmed.add(background.item);
+    stopWarmup();
+    scheduleWarmup();
+  }
+  function scheduleWarmup() {
+    clearTimeout(warmTimer);
+    warmTimer = setTimeout(warmNext, 1200);
+  }
+  function warmNext() {
+    if (background || document.hidden || saveData() || !loadingPanel.hidden || video.readyState < 3) return;
+    // Give an actively playing video enough headroom before sharing bandwidth.
+    if (!video.paused) {
+      let ahead = 0;
+      for (let i = 0; i < video.buffered.length; i++) {
+        if (video.buffered.start(i) <= video.currentTime && video.buffered.end(i) >= video.currentTime) ahead = video.buffered.end(i) - video.currentTime;
+      }
+      if (ahead < Math.min(10, video.duration - video.currentTime)) { scheduleWarmup(); return; }
+    }
+    const ordered = [...shownItems(), ...galleryItems];
+    const item = ordered.find(item => item !== currentItem && !warmed.has(item));
+    if (!item) return;
+    const player = preparePlayer(item);
+    if (player.error || player.networkState === 3) { warmed.add(item); scheduleWarmup(); return; }
+    background = {item, player, timer: setTimeout(finishWarmup, 15000)};
+    player.preload = 'auto';
+    if (!player.currentSrc) player.load();
+  }
+
+  function selectVideo(item, play) {
+    const request = ++selection;
+    stopWarmup();
+    if (item !== currentItem) {
+      const next = preparePlayer(item);
+      const previous = video;
+      previous.pause();
+      previous.hidden = true;
+      previous.preload = 'none';
+      previous.removeAttribute('id');
+      previous.removeAttribute('data-player');
+      currentItem.removeAttribute('aria-current');
+      currentItem.classList.remove('is-playing');
+      currentItem.style.removeProperty('--played');
+      currentItem = item;
+      video = next;
+      video.id = `${gallery.id}-player`;
+      video.setAttribute('data-player', '');
+      video.hidden = false;
+      video.volume = previous.volume;
+      video.muted = previous.muted;
+      video.playbackRate = previous.playbackRate;
+      if (video.readyState >= 1) video.currentTime = 0;
+      item.setAttribute('aria-current', 'true');
+      galleryTitle.textContent = item.dataset.title;
+      galleryCount.textContent = galleryItems.indexOf(item) + 1;
+    }
+    videoError.hidden = true;
+    videoError.querySelector('a').href = item.href;
+    video.preload = 'auto';
+    if (video.error || video.networkState === 3) video.load();
+    showLoading(play && video.readyState < 3);
+    if (play) {
+      const selectedPlayer = video;
+      playbackStatus.textContent = `Loading ${item.dataset.title}.`;
+      selectedPlayer.play().then(() => {
+        if (request === selection) playbackStatus.textContent = `Playing ${item.dataset.title}.`;
+      }).catch(() => {
+        if (request !== selection) return;
+        showLoading(false);
+        playbackStatus.textContent = `Selected ${item.dataset.title}. Use the video controls to start playback.`;
+      });
+    }
+    scheduleWarmup();
+  }
+  function stepVideo(offset, play) {
+    const list = shownItems();
+    const index = list.indexOf(currentItem);
+    const next = list[index === -1 ? 0 : index + offset];
+    if (next) selectVideo(next, play);
+    return Boolean(next);
+  }
+  if (galleryItems.length) {
+    preparePlayer(currentItem);
+    video.preload = saveData() ? 'none' : 'auto';
+    galleryItems.forEach(item => {
+      let start = null;
+      let dragged = false;
+      item.addEventListener('pointerdown', event => {
+        start = {x: event.clientX, y: event.clientY};
+        dragged = false;
+      }, {passive: true});
+      item.addEventListener('pointermove', event => {
+        if (start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 10) dragged = true;
+      }, {passive: true});
+      item.addEventListener('pointercancel', () => { start = null; dragged = true; }, {passive: true});
+      item.addEventListener('pointerup', () => { start = null; }, {passive: true});
+      item.addEventListener('click', event => {
+        event.preventDefault();
+        // Preserve native swiping; keyboard activation has detail === 0.
+        if (event.detail !== 0 && dragged) return;
+        selectVideo(item, true);
+        const rect = video.getBoundingClientRect();
+        const desktopPointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (desktopPointer && (rect.top < 0 || rect.bottom > innerHeight)) {
+          video.scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center'});
+        }
+      });
+    });
+    gallery.querySelector('[data-retry]').addEventListener('click', () => selectVideo(currentItem, true));
+    const stageNav = gallery.querySelector('.stage-nav');
+    stageNav.hidden = false;
+    stageNav.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => stepVideo(Number(button.dataset.step), !video.paused)));
+    const filter = gallery.querySelector('.gallery-filter');
+    if (filter) {
+    filter.hidden = false;
+    filter.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+      filter.querySelectorAll('button').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+      galleryItems.forEach(item => { item.parentElement.hidden = button.dataset.filter !== 'all' && item.parentElement.dataset.task !== button.dataset.filter; });
+      if (currentItem.parentElement.hidden && shownItems().length) selectVideo(shownItems()[0], false);
+    }));
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopWarmup();
+      else scheduleWarmup();
+    });
+    connection?.addEventListener?.('change', () => { stopWarmup(); scheduleWarmup(); });
+    scheduleWarmup();
+  }
+
 }
 
 // Scroll-linked state: reading progress and the current section in the header.
@@ -392,7 +407,7 @@ const visibleHighlights = new Set();
 let previewsEnabled = !reducedMotion.matches;
 function syncPreviews() {
   highlights.forEach(clip => {
-    if (previewsEnabled && visibleHighlights.has(clip) && !document.hidden && video.paused) {
+    if (previewsEnabled && visibleHighlights.has(clip) && !document.hidden && [...allGalleryPlayers].every(player => player.paused)) {
       clip.play().catch(() => {}); // Native controls remain available if autoplay is blocked.
     } else clip.pause();
   });
@@ -421,3 +436,6 @@ if (previewToggles.length && 'IntersectionObserver' in window) {
   reducedMotion.addEventListener('change', event => { previewsEnabled = !event.matches; syncPreviews(); });
   syncPreviews();
 }
+
+// Each demo section owns its playlist and player; only one demo plays at a time.
+document.querySelectorAll('[data-gallery]').forEach(initGallery);

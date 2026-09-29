@@ -231,6 +231,7 @@ h2 {
 }
 .paper-authors { max-width: 520px; gap: 7px 22px; margin: 0; font-size: 17px; font-weight: 500; line-height: 1.65; }
 .paper-authors li, .paper-affiliations li { white-space: nowrap; }
+.paper-authors a:hover, .paper-authors a:focus-visible { color: var(--pop-ink); text-decoration: underline; text-underline-offset: 4px; }
 .paper-meta sup { position: relative; top: -.1em; font-size: .65em; line-height: 0; }
 .paper-authors sup { margin-left: 3px; color: var(--muted); }
 .paper-affiliations { gap: 5px 24px; margin: 12px 0 0; font-size: 14.5px; color: var(--muted); }

@@ -14,7 +14,15 @@ Then visit `http://localhost:8000`.
 
 The page uses plain HTML, CSS, and JavaScript. It has no package manager, build step, or external runtime dependency.
 
-The web player uses `assets/video/video-web.mp4`, an H.264/AAC version optimized for progressive browser playback. The uploaded source is retained as `assets/video/video.mp4`.
+The web player uses `assets/video/video-web.mp4`, a compressed H.264/AAC video (about 17.2 MiB) retaining 1920×1080 resolution, 30 fps, and the original audio. MP4 faststart enables progressive browser playback. Keep the original master outside the repository.
+
+To reproduce from an original master stored outside the repository:
+
+```bash
+ffmpeg -i /path/to/original.mp4 -map 0:v:0 -map '0:a?' \
+  -c:v libx264 -preset slow -crf 23 -threads 8 -pix_fmt yuv420p \
+  -c:a copy -movflags +faststart assets/video/video-web.mp4
+```
 
 ## Updating project links and text
 

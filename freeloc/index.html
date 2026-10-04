@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="FreeLoc: Online Floorplan Localization via Diffusion-Aided Pose Refinement. CoRL 2026."
+    >
+    <title>FreeLoc: Online Floorplan Localization via Diffusion-Aided Pose Refinement</title>
+    <link rel="icon" href="assets/images/teaser/teaser.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260929-1">
+    <script src="assets/js/demo-config.js" defer></script>
+    <script src="assets/js/interactive-demo.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container hero__inner">
+        <h1>
+          <span class="title-line"><span class="title-accent">FreeLoc:</span> Online Floorplan Localization</span>
+          <span class="title-line">via Diffusion-Aided Pose Refinement</span>
+        </h1>
+        <p class="venue">CoRL 2026</p>
+
+        <div class="authors" aria-label="Authors">
+          <span><a href="https://github.com/HaoChenga" target="_blank" rel="noopener noreferrer">Haocheng Peng</a></span>
+          <span><a href="https://github.com/AugetyVolta" target="_blank" rel="noopener noreferrer">Boyang Zhou</a></span>
+          <span><a href="https://scholar.google.com/citations?user=0CJPK3IAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Jiarui Hu<sup>†</sup></a></span>
+          <span><a href="https://scholar.google.com/citations?user=P8ewTVYAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Xiyue Guo</a></span>
+          <span><a href="https://github.com/AwsSleepy" target="_blank" rel="noopener noreferrer">Ziyang Zhang</a></span>
+          <span><a href="https://bomingzhao.github.io/" target="_blank" rel="noopener noreferrer">Boming Zhao</a></span>
+          <span><a href="https://github.com/yifan-gao-dev" target="_blank" rel="noopener noreferrer">Yifan Gao</a></span>
+          <span>Xiao Li</span>
+          <span><a href="https://openreview.net/profile?id=%7EHujun_Bao1" target="_blank" rel="noopener noreferrer">Hujun Bao</a></span>
+          <span><a href="https://zhpcui.github.io/" target="_blank" rel="noopener noreferrer">Zhaopeng Cui<sup>‡</sup></a></span>
+        </div>
+
+        <p class="author-notes">
+          <span><sup>†</sup> Project leader</span>
+          <span><sup>‡</sup> Corresponding author</span>
+        </p>
+        <p class="affiliation">State Key Lab of CAD&amp;CG, Zhejiang University</p>
+
+        <nav class="paper-links" aria-label="Project links">
+          <a class="paper-link is-placeholder" href="#" aria-label="Paper link, coming soon">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6V2Zm8 1.5V7h3.5M9 11h6M9 15h6M9 19h4"/></svg>
+            Paper
+          </a>
+          <a class="paper-link is-placeholder" href="#" aria-label="arXiv link, coming soon">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 18 4-12 3 9 2-6 5 9M3 20h18"/></svg>
+            arXiv
+          </a>
+          <a class="paper-link is-placeholder" href="#" aria-label="Code link, coming soon">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 9-4 3 4 3m8-6 4 3-4 3m-2-9-4 12"/></svg>
+            Code
+          </a>
+          <a class="paper-link" href="#overview-video">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+            Video
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview-video" class="section section--first" aria-labelledby="video-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="video-title">Overview Video</h2>
+          </div>
+          <div class="media-frame video-frame">
+            <video controls playsinline preload="metadata" poster="assets/images/video-poster.jpg?v=20260923">
+              <source src="assets/video/video-web.mp4?v=20260923" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="abstract-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="abstract-title">Abstract</h2>
+          </div>
+          <figure class="paper-figure paper-figure--teaser">
+            <img src="assets/images/teaser/teaser.png" alt="Overview of the FreeLoc online floorplan localization approach">
+          </figure>
+          <p class="body-copy">
+            Floorplans provide compact and widely available geometric maps for indoor localization, but existing high-performing floorplan-based methods still convert them into dense scene-specific offline databases, tying accuracy, storage, and runtime to the sampling resolution of the discretized pose space. We present FreeLoc, an online RGB-based floorplan localization framework that treats the floorplan as a directly queryable geometric map. FreeLoc introduces an efficient online geometric querying and diffusion-aided refinement scheme, which retrieves plausible pose anchors through on-the-fly floorplan ray querying and refines them into accurate continuous pose estimates. For sequential localization, FreeLoc develops an online likelihood construction strategy that bridges single-frame localization and probabilistic temporal fusion by constructing likelihoods from coarse-sampled candidates and refined pose hypotheses, enabling histogram-filter-based temporal fusion without offline databases. Experiments demonstrate real-time online inference and state-of-the-art performance in both single-frame and sequential localization, while real-world results validate practical deployability in indoor robotic localization scenarios.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="method-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="method-title">Method</h2>
+          </div>
+          <figure class="paper-figure paper-figure--method">
+            <img src="assets/images/method/pipeline.png" alt="FreeLoc method pipeline">
+          </figure>
+          <p class="body-copy">
+            Our pipeline follows a coarse-to-fine design for database-free online floorplan localization. Given a gravity-aligned RGB image, we first extract image-side scan rays and retrieve top-(<em>K</em>) coarse pose anchors by matching them with floorplan-side rays queried online from sampled pose hypotheses. These anchors are then refined using a diffusion-aided pose refinement module with ray-level geometric cues, and the refined hypotheses are re-scored to obtain the final single-frame pose estimate. For sequential localization, FreeLoc constructs online observation likelihoods from the coarse and refined hypotheses and integrates them with a histogram filter to achieve temporally consistent localization.
+          </p>
+        </div>
+      </section>
+
+      <section id="results" class="section" aria-labelledby="results-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="results-title">Interactive Demo</h2>
+          </div>
+
+          <div id="interactive-demo" class="demo" aria-live="polite">
+            <div class="scene-picker">
+              <p class="control-label">Floorplan</p>
+              <h3 id="scene-name" class="scene-name">Spencerville</h3>
+              <div class="map-carousel">
+                <button id="previous-scene" class="carousel-button" type="button" aria-label="Previous floorplan">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <div class="map-stage">
+                  <img id="scene-map" src="assets/demo/Spencerville/map.png" alt="Spencerville floorplan">
+                </div>
+                <button id="next-scene" class="carousel-button" type="button" aria-label="Next floorplan">
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+              <div id="scene-dots" class="scene-dots" aria-label="Select a floorplan"></div>
+            </div>
+
+            <div class="mode-control">
+              <p id="mode-label" class="control-label">Localization mode</p>
+              <div class="segmented-control" role="group" aria-labelledby="mode-label">
+                <button class="mode-button is-active" type="button" data-mode="single" aria-pressed="true">Single-frame Localization</button>
+                <button class="mode-button" type="button" data-mode="sequential" aria-pressed="false">Sequential Localization</button>
+              </div>
+            </div>
+
+            <div id="demo-content" class="demo-content">
+              <div id="single-panel" class="single-panel">
+                <h3 class="result-heading">Select Observation</h3>
+                <div id="observation-list" class="observation-list" role="list"></div>
+                <div class="selected-result">
+                  <h3 class="result-heading">Localization Result</h3>
+                  <div class="result-stage">
+                    <img id="single-result" alt="Single-frame localization result">
+                  </div>
+                </div>
+              </div>
+
+              <div id="sequential-panel" class="sequential-panel" hidden>
+                <figure class="sequence-card">
+                  <figcaption>Observation</figcaption>
+                  <div class="sequence-stage">
+                    <img id="sequential-observation" alt="Sequential camera observation">
+                  </div>
+                </figure>
+                <figure class="sequence-card">
+                  <figcaption>Localization Result</figcaption>
+                  <div class="sequence-stage sequence-stage--result">
+                    <img id="sequential-result" alt="Sequential localization result">
+                  </div>
+                </figure>
+                <p class="sequence-note">
+                  Note: Floorplan outlines are overlaid for visualization only and are not part of the posterior.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="bibtex-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="bibtex-title">Citation</h2>
+          </div>
+          <div class="bibtex-card">
+            <button id="copy-bibtex" class="copy-button" type="button">Copy</button>
+            <pre><code id="bibtex-code">@inproceedings{peng2026freeloc,
+  title     = {FreeLoc: Online Floorplan Localization via Diffusion-Aided Pose Refinement},
+  author    = {Haocheng Peng and Boyang Zhou and Jiarui Hu and Xiyue Guo and Ziyang Zhang and Boming Zhao and Yifan Gao and Xiao Li and Hujun Bao and Zhaopeng Cui},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>FreeLoc · CoRL 2026</p>
+      </div>
+    </footer>
+  </body>
+</html>

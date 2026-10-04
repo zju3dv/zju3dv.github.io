@@ -540,7 +540,7 @@ button:focus-visible {
 
 .sequential-panel {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
 }
 
@@ -566,24 +566,17 @@ button:focus-visible {
   text-align: center;
 }
 
-.sequence-stage {
-  display: flex;
-  min-height: 360px;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
+.sequence-labels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.sequence-stage img {
+.sequence-card video {
+  display: block;
   width: 100%;
   height: auto;
-  max-height: 610px;
-  object-fit: contain;
-}
-
-.sequence-stage--result img {
-  width: auto;
-  max-width: 100%;
+  aspect-ratio: 2 / 1;
+  background: white;
 }
 
 .sequence-note {
@@ -744,10 +737,6 @@ button:focus-visible {
 
   .sequential-panel {
     grid-template-columns: 1fr;
-  }
-
-  .sequence-stage {
-    min-height: 250px;
   }
 
   .bibtex-card pre {

@@ -33,4 +33,11 @@ Edit `index.html` to replace the placeholder Paper, arXiv, and Code links and to
 1. Add the scene media below `assets/demo/<Scene>/` using the existing directory layout.
 2. Add one scene object to `assets/js/demo-config.js`.
 
-No changes to `assets/js/interactive-demo.js` are required. Sequential GIFs are loaded only while their scene is visible in Sequential Localization mode.
+No changes to `assets/js/interactive-demo.js` are required. Each scene's `sequential.video` points to `assets/demo/<Scene>/sequential/synchronized.mp4`, loaded only when selected in Sequential Localization mode. Observation and localization result are encoded side by side in a single video, so playback, seeking, and looping stay synchronized. Switching scenes restarts playback; switching to Single-frame Localization releases the video.
+
+The original sequential GIFs are retained as source assets. Each pair must have matching frame counts and frame durations; the current assets and conversion script use 200 ms per frame (5 fps). Regenerate the synchronized videos with:
+
+```bash
+python scripts/build-sequential-videos.py
+# Alternatively: python scripts/build-sequential-videos.py --ffmpeg /path/to/ffmpeg
+```

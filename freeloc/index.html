@@ -9,9 +9,9 @@
     >
     <title>FreeLoc: Online Floorplan Localization via Diffusion-Aided Pose Refinement</title>
     <link rel="icon" href="assets/images/teaser/teaser.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260929-1">
-    <script src="assets/js/demo-config.js" defer></script>
-    <script src="assets/js/interactive-demo.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css?v=20261004-sync">
+    <script src="assets/js/demo-config.js?v=20261004-sync" defer></script>
+    <script src="assets/js/interactive-demo.js?v=20261004-sync" defer></script>
     <script src="assets/js/main.js" defer></script>
   </head>
   <body>
@@ -152,16 +152,12 @@
 
               <div id="sequential-panel" class="sequential-panel" hidden>
                 <figure class="sequence-card">
-                  <figcaption>Observation</figcaption>
-                  <div class="sequence-stage">
-                    <img id="sequential-observation" alt="Sequential camera observation">
-                  </div>
-                </figure>
-                <figure class="sequence-card">
-                  <figcaption>Localization Result</figcaption>
-                  <div class="sequence-stage sequence-stage--result">
-                    <img id="sequential-result" alt="Sequential localization result">
-                  </div>
+                  <figcaption class="sequence-labels">
+                    <span>Observation</span>
+                    <span>Localization Result</span>
+                  </figcaption>
+                  <video id="sequential-video" controls autoplay loop muted playsinline preload="none"
+                    aria-label="Synchronized camera observation and localization result"></video>
                 </figure>
                 <p class="sequence-note">
                   Note: Floorplan outlines are overlaid for visualization only and are not part of the posterior.

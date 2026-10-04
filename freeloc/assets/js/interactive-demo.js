@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observationList: document.querySelector("#observation-list"),
     singleResult: document.querySelector("#single-result"),
     sequentialPanel: document.querySelector("#sequential-panel"),
-    sequentialObservation: document.querySelector("#sequential-observation"),
-    sequentialResult: document.querySelector("#sequential-result")
+    sequentialVideo: document.querySelector("#sequential-video")
   };
 
   const state = {
@@ -105,26 +104,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function restartSequentialGifs() {
+  function restartSequentialVideo() {
     const scene = currentScene();
-    const observationSource = scene.sequential.observation;
-    const resultSource = scene.sequential.result;
-
-    // Clearing both sources first makes the two GIF timelines restart together.
-    elements.sequentialObservation.removeAttribute("src");
-    elements.sequentialResult.removeAttribute("src");
-
-    requestAnimationFrame(() => {
-      elements.sequentialObservation.src = observationSource;
-      elements.sequentialObservation.alt = `${scene.name} sequential observation`;
-      elements.sequentialResult.src = resultSource;
-      elements.sequentialResult.alt = `${scene.name} sequential localization result`;
-    });
+    const video = elements.sequentialVideo;
+    video.pause();
+    video.muted = true;
+    video.src = scene.sequential.video;
+    video.setAttribute("aria-label", `${scene.name}: camera observation on the left and localization result on the right`);
+    video.load();
+    // Both panels are encoded in the same frame and share a single playback clock.
+    // Native controls remain available if the browser blocks autoplay.
+    video.play().catch(() => {});
   }
 
-  function clearSequentialGifs() {
-    elements.sequentialObservation.removeAttribute("src");
-    elements.sequentialResult.removeAttribute("src");
+  function clearSequentialVideo() {
+    const video = elements.sequentialVideo;
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
   }
 
   function renderMode() {
@@ -139,10 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (isSingle) {
-      clearSequentialGifs();
+      clearSequentialVideo();
       renderSinglePanel();
     } else {
-      restartSequentialGifs();
+      restartSequentialVideo();
     }
   }
 

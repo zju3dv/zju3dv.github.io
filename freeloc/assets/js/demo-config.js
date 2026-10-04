@@ -9,8 +9,7 @@ const DEMO_DATA = [
       result: `assets/demo/Spencerville/single/results/Spencerville_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Spencerville/sequential/observation/Spencerville_obs_traj_0000.gif",
-      result: "assets/demo/Spencerville/sequential/results/Spencerville_post_traj_0000.gif"
+      video: "assets/demo/Spencerville/sequential/synchronized.mp4"
     }
   },
   {
@@ -21,8 +20,7 @@ const DEMO_DATA = [
       result: `assets/demo/Spotswood/single/results/Spotswood_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Spotswood/sequential/observation/Spotswood_obs_traj_0001.gif",
-      result: "assets/demo/Spotswood/sequential/results/Spotswood_post_traj_0001.gif"
+      video: "assets/demo/Spotswood/sequential/synchronized.mp4"
     }
   },
   {
@@ -33,8 +31,7 @@ const DEMO_DATA = [
       result: `assets/demo/Springhill/single/results/Springhill_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Springhill/sequential/observation/Springhill_obs_traj_0003.gif",
-      result: "assets/demo/Springhill/sequential/results/Springhill_post_traj_0003.gif"
+      video: "assets/demo/Springhill/sequential/synchronized.mp4"
     }
   },
   {
@@ -45,8 +42,7 @@ const DEMO_DATA = [
       result: `assets/demo/Stilwell/single/results/Stilwell_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Stilwell/sequential/observation/Stilwell_obs_traj_0002.gif",
-      result: "assets/demo/Stilwell/sequential/results/Stilwell_post_traj_0002.gif"
+      video: "assets/demo/Stilwell/sequential/synchronized.mp4"
     }
   },
   {
@@ -57,8 +53,7 @@ const DEMO_DATA = [
       result: `assets/demo/Stokes/single/results/Stokes_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Stokes/sequential/observation/Stokes_obs_traj_0001.gif",
-      result: "assets/demo/Stokes/sequential/results/Stokes_post_traj_0001.gif"
+      video: "assets/demo/Stokes/sequential/synchronized.mp4"
     }
   },
   {
@@ -69,8 +64,7 @@ const DEMO_DATA = [
       result: `assets/demo/Sumas/single/results/Sumas_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Sumas/sequential/observation/Sumas_obs_traj_0002.gif",
-      result: "assets/demo/Sumas/sequential/results/Sumas_post_traj_0002.gif"
+      video: "assets/demo/Sumas/sequential/synchronized.mp4"
     }
   },
   {
@@ -81,8 +75,7 @@ const DEMO_DATA = [
       result: `assets/demo/Superior/single/results/Superior_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Superior/sequential/observation/Superior_obs_traj_0005.gif",
-      result: "assets/demo/Superior/sequential/results/Superior_post_traj_0005.gif"
+      video: "assets/demo/Superior/sequential/synchronized.mp4"
     }
   },
   {
@@ -93,8 +86,7 @@ const DEMO_DATA = [
       result: `assets/demo/Swormville/single/results/Swormville_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Swormville/sequential/observation/Swormville_obs_traj_0001.gif",
-      result: "assets/demo/Swormville/sequential/results/Swormville_post_traj_0001.gif"
+      video: "assets/demo/Swormville/sequential/synchronized.mp4"
     }
   },
   {
@@ -105,8 +97,7 @@ const DEMO_DATA = [
       result: `assets/demo/Woonsocket/single/results/Woonsocket_frame_${frame}-3.png`
     })),
     sequential: {
-      observation: "assets/demo/Woonsocket/sequential/observation/Woonsocket_obs_traj_0000.gif",
-      result: "assets/demo/Woonsocket/sequential/results/Woonsocket_post_traj_0000.gif"
+      video: "assets/demo/Woonsocket/sequential/synchronized.mp4"
     }
   }
 ];

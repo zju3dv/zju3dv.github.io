@@ -571,6 +571,18 @@ button:focus-visible {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.sequence-card .sequence-labels {
+  padding-inline: 0;
+}
+
+.sequence-labels span {
+  padding-inline: 12px;
+}
+
+.sequence-labels span + span {
+  border-left: 1px solid var(--line);
+}
+
 .sequence-card video {
   display: block;
   width: 100%;

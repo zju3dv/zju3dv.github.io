@@ -9,7 +9,7 @@ const DEMO_DATA = [
       result: `assets/demo/Spencerville/single/results/Spencerville_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Spencerville/sequential/synchronized.mp4"
+      video: "assets/demo/Spencerville/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -20,7 +20,7 @@ const DEMO_DATA = [
       result: `assets/demo/Spotswood/single/results/Spotswood_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Spotswood/sequential/synchronized.mp4"
+      video: "assets/demo/Spotswood/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -31,7 +31,7 @@ const DEMO_DATA = [
       result: `assets/demo/Springhill/single/results/Springhill_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Springhill/sequential/synchronized.mp4"
+      video: "assets/demo/Springhill/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -42,7 +42,7 @@ const DEMO_DATA = [
       result: `assets/demo/Stilwell/single/results/Stilwell_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Stilwell/sequential/synchronized.mp4"
+      video: "assets/demo/Stilwell/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -53,7 +53,7 @@ const DEMO_DATA = [
       result: `assets/demo/Stokes/single/results/Stokes_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Stokes/sequential/synchronized.mp4"
+      video: "assets/demo/Stokes/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -64,7 +64,7 @@ const DEMO_DATA = [
       result: `assets/demo/Sumas/single/results/Sumas_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Sumas/sequential/synchronized.mp4"
+      video: "assets/demo/Sumas/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -75,7 +75,7 @@ const DEMO_DATA = [
       result: `assets/demo/Superior/single/results/Superior_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Superior/sequential/synchronized.mp4"
+      video: "assets/demo/Superior/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -86,7 +86,7 @@ const DEMO_DATA = [
       result: `assets/demo/Swormville/single/results/Swormville_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Swormville/sequential/synchronized.mp4"
+      video: "assets/demo/Swormville/sequential/synchronized.mp4?v=20261004-spacing"
     }
   },
   {
@@ -97,7 +97,7 @@ const DEMO_DATA = [
       result: `assets/demo/Woonsocket/single/results/Woonsocket_frame_${frame}-3.png`
     })),
     sequential: {
-      video: "assets/demo/Woonsocket/sequential/synchronized.mp4"
+      video: "assets/demo/Woonsocket/sequential/synchronized.mp4?v=20261004-spacing"
     }
   }
 ];

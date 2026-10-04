@@ -35,6 +35,8 @@ Edit `index.html` to replace the placeholder Paper, arXiv, and Code links and to
 
 No changes to `assets/js/interactive-demo.js` are required. Each scene's `sequential.video` points to `assets/demo/<Scene>/sequential/synchronized.mp4`, loaded only when selected in Sequential Localization mode. Observation and localization result are encoded side by side in a single video, so playback, seeking, and looping stay synchronized. Switching scenes restarts playback; switching to Single-frame Localization releases the video.
 
+All synchronized videos use a 1440×720 canvas with two equal cells. Each image fits inside 672×672 without cropping, leaving at least 24 pixels of padding per side and 48 pixels between images. A subtle center divider separates the views. These dimensions scale with the player width.
+
 The original sequential GIFs are retained as source assets. Each pair must have matching frame counts and frame durations; the current assets and conversion script use 200 ms per frame (5 fps). Regenerate the synchronized videos with:
 
 ```bash

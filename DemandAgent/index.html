@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="DemandAgent: Towards an Embodied Agent Harness for Everyday Human Demands">
+  <meta name="keywords" content="DemandAgent, DemandNav, Demand-Bench, embodied AI, embodied navigation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="DemandAgent: Towards an Embodied Agent Harness for Everyday Human Demands">
+  <meta property="og:description" content="An embodied agent harness for everyday assistance through demand understanding and navigation execution.">
+  <meta property="og:image" content="static/images/teaser.png">
+  <meta property="og:image:width" content="2001">
+  <meta property="og:image:height" content="1125">
+
+  <title>DemandAgent: Towards an Embodied Agent Harness for Everyday Human Demands</title>
+  <link rel="icon" type="image/png" href="static/images/logo.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/agent.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="DemandAgent home">
+      <span class="brand-tile"><img src="static/images/logo.png" width="34" height="34" alt=""></span>
+      <span class="brand-name"><span class="brand-demand">Demand</span><span class="brand-agent">Agent</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <span class="nav-links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#BibTeX">BibTeX</a></span>
+      <a class="nav-cta" href="#demo"><span class="icon"><i class="fas fa-film" aria-hidden="true"></i></span>Videos</a>
+    </nav>
+  </header>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <main id="main">
+  <section class="hero publication-header" id="top">
+    <div class="hero-body">
+      <div class="wrap">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <p class="agent-kicker">Human demands. Agent decisions. Embodied action.</p>
+            <h1 class="title is-2 publication-title">
+              <span class="publication-name">
+                <span class="sr-only">DemandAgent:</span>
+                <svg class="agent-art" viewBox="0 -12 1060 285" data-phase="understand" aria-hidden="true" focusable="false">
+                  <defs>
+                    <path id="agent-feedback-route" d="M260 34 H936 Q986 34 986 84 V180 Q986 225 941 225 H211 Q166 225 166 180 V79 Q166 34 214 34 H260Z"/>
+                  </defs>
+                  <use class="agent-orbit" href="#agent-feedback-route"/>
+                  <image href="static/images/logo.png" x="0" y="52" width="130" height="130"/>
+                  <text x="196" y="156"><tspan class="demand-word">Demand</tspan><tspan class="agent-word">Agent</tspan></text>
+                  <g class="agent-node is-active" data-stage="understand" transform="translate(260 34)">
+                    <circle r="17"/>
+                    <path d="M-8-6H8V4H1L-4 8V4H-8Z M-4-2H4"/>
+                  </g>
+                  <g class="agent-node" data-stage="plan" transform="translate(640 34)">
+                    <circle r="17"/>
+                    <path d="M0-7V-1M-7 7V2H7V7 M0-1V7"/>
+                    <circle class="node-detail" cy="-9" r="2"/>
+                  </g>
+                  <g class="agent-node" data-stage="observe" transform="translate(986 115)">
+                    <circle r="17"/>
+                    <path d="M-4-8H-8V-4M4-8H8V-4M8 4V8H4M-4 8H-8V4"/>
+                    <circle class="node-detail" r="3"/>
+                  </g>
+                  <g class="agent-node" data-stage="act" transform="translate(790 225)">
+                    <circle r="17"/>
+                    <path d="M-5-8L8 0L-5 8Z"/>
+                  </g>
+                  <g class="agent-node" data-stage="remember" transform="translate(345 225)">
+                    <circle r="17"/>
+                    <path d="M-7-5L6-6L0 7Z"/>
+                    <circle class="node-detail" cx="-7" cy="-5" r="2.5"/>
+                    <circle class="node-detail" cx="6" cy="-6" r="2.5"/>
+                    <circle class="node-detail" cy="7" r="2.5"/>
+                  </g>
+                  <g class="agent-traveler">
+                    <animateMotion dur="15s" repeatCount="indefinite" calcMode="spline" keyPoints="0;0;0.1947;0.1947;0.4038;0.4038;0.5519;0.5519;0.7799;0.7799;1" keyTimes="0;0.05;0.2;0.25;0.4;0.45;0.6;0.65;0.8;0.85;1" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1">
+                      <mpath href="#agent-feedback-route"/>
+                    </animateMotion>
+                    <g class="mini-messenger">
+                      <g class="robot-pose">
+                        <g class="robot-body"><image href="static/images/logo.png" x="-24" y="-25" width="48" height="48"/></g>
+                        <g class="robot-prop prop-understand" transform="translate(13 -35)">
+                          <path class="prop-paper" d="M6 0H24Q30 0 30 6V15Q30 21 24 21H12L6 26V21Q0 21 0 15V6Q0 0 6 0Z"/>
+                          <path class="prop-ink" d="M11 7Q11 3 16 3Q21 3 21 7Q21 10 16 11V14"/>
+                          <circle class="prop-dot" cx="16" cy="17" r="1.3"/>
+                        </g>
+                        <g class="robot-prop prop-plan">
+                          <g class="plan-card">
+                            <rect class="prop-paper" x="14" y="-15" width="34" height="35" rx="5"/>
+                            <path class="prop-ink" d="M31-5V2M22 11V5H40V11"/>
+                            <rect class="prop-mark" x="27" y="-10" width="8" height="6" rx="2"/>
+                            <rect class="prop-mark" x="18" y="11" width="8" height="6" rx="2"/>
+                            <rect class="prop-mark" x="36" y="11" width="8" height="6" rx="2"/>
+                          </g>
+                        </g>
+                        <g class="robot-prop prop-observe" transform="translate(18 -13)">
+                          <rect class="viewfinder-glass" width="31" height="26" rx="3"/>
+                          <path class="viewfinder-frame" d="M8 0H0V7M23 0H31V7M31 19V26H23M8 26H0V19"/>
+                          <path class="scan-line" d="M4 5H27"/>
+                          <circle class="viewfinder-target" cx="15.5" cy="13" r="4"/>
+                        </g>
+                        <g class="robot-prop prop-act">
+                          <path class="robot-tool" d="M13 8L24 10L31-2L40-2M40-7V3M40-7L46-10M40 3L46 6"/>
+                          <path class="action-spark" d="M51-2H56M49-10L53-14M49 6L53 10"/>
+                        </g>
+                        <g class="robot-prop prop-remember">
+                          <g class="memory-card">
+                            <rect class="prop-paper" width="23" height="18" rx="4"/>
+                            <path class="prop-ink" d="M5 9L9 13L18 5"/>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <span class="publication-subtitle">
+                <span style="color:#FFCC00">Towards</span>
+                an
+                <span style="color:#00339B">Embodied Agent Harness</span><br>
+                for <span style="color:#a42423">Everyday Human Demands</span>
+              </span>
+            </h1>
+
+            <div class="agent-loop-bar">
+              <ol class="agent-loop" aria-label="Agent decision loop: understand, plan, observe, act, remember, then repeat">
+                <li class="is-active" data-stage="understand"><span>01</span> Understand</li>
+                <li data-stage="plan"><span>02</span> Plan</li>
+                <li data-stage="observe"><span>03</span> Observe</li>
+                <li data-stage="act"><span>04</span> Act</li>
+                <li data-stage="remember"><span>05</span> Remember</li>
+              </ol>
+            </div>
+
+            <div class="is-size-5 publication-authors" aria-label="Authors">
+              <span class="author-block"><a href="https://li-xingxiao.github.io/homepage/" target="_blank" rel="noopener noreferrer">Lixing Xiao</a><sup>1</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://yuanhongyu.xyz/" target="_blank" rel="noopener noreferrer">Yuanhong Yu</a><sup>1</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://xuxiaogang.com/" target="_blank" rel="noopener noreferrer">Xiaogang Xu</a><sup>1</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://zehongs.github.io/" target="_blank" rel="noopener noreferrer">Zehong Shen</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://shenyujun.github.io/" target="_blank" rel="noopener noreferrer">Yujun Shen</a><sup>2</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://csse.szu.edu.cn/staff/ruizhenhu/" target="_blank" rel="noopener noreferrer">Ruizhen Hu</a><sup>3</sup>,&nbsp;</span>
+              <span class="author-block"><a href="https://pengsida.net/" target="_blank" rel="noopener noreferrer">Sida Peng</a><sup>1</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-affiliations" aria-label="Affiliations">
+              <span><sup>1</sup> Zhejiang University</span>
+              <span><sup>2</sup> Ant Group</span>
+              <span><sup>3</sup> Shenzhen University</span>
+            </div>
+
+            <div class="publication-links" aria-label="Paper resources">
+              <a class="paper-button is-primary watch-demo" href="#demo">
+                <span class="icon"><i class="fas fa-film" aria-hidden="true"></i></span><span>Videos</span>
+              </a>
+              <button class="paper-button" type="button" disabled title="Coming soon">
+                <span class="icon"><i class="fas fa-file-alt" aria-hidden="true"></i></span><span>arXiv</span><small>Soon</small>
+              </button>
+              <button class="paper-button" type="button" disabled title="Coming soon">
+                <span class="icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span><span>Paper</span><small>Soon</small>
+              </button>
+              <button class="paper-button" type="button" disabled title="Coming soon">
+                <span class="icon"><i class="fab fa-github" aria-hidden="true"></i></span><span>Code</span><small>Soon</small>
+              </button>
+              <button class="paper-button" type="button" disabled title="Coming soon">
+                <span class="icon"><i class="fas fa-database" aria-hidden="true"></i></span><span>Data</span><small>Soon</small>
+              </button>
+            </div>
+            <p class="agent-tldr"><strong class="idea-label"><i class="fas fa-lightbulb" aria-hidden="true"></i>The idea</strong> <strong class="idea-project">DemandAgent</strong> turns everyday human demands into <span class="idea-dependency">dependency-aware</span> navigation, using embodied skills, tool calls, and persistent task and spatial memory.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small teaser" id="teaser">
+    <div class="hero-body">
+      <div class="wrap">
+        <figure class="zoomable-figure" data-reveal="up">
+          <div class="window">
+            <div class="window-bar">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="window-title">DemandAgent overview</span>
+              <button class="figure-expand" type="button" aria-label="Enlarge DemandAgent teaser" hidden>Enlarge ↗</button>
+            </div>
+            <div class="figure-frame">
+              <img class="publication-figure" src="static/images/teaser.png" width="2001" height="1125" alt="DemandAgent teaser showing demand understanding and navigation execution">
+            </div>
+          </div>
+          <figcaption class="has-text-centered figure-caption"><strong>DemandAgent</strong> is an embodied agent harness for everyday assistance through demand understanding and navigation execution.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero" id="abstract">
+    <div class="wrap">
+      <header class="section-head" data-reveal="up"><h2 class="title is-3">Abstract</h2></header>
+      <div class="window" data-reveal="up">
+        <div class="window-bar">
+          <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="window-title">Abstract</span>
+        </div>
+        <div class="content has-text-justified abstract-copy">
+          <p>
+          Real-world embodied assistance often begins with a <mark class="abstract-highlight">high-level human demand</mark> rather than a fully specified task. Existing embodied navigation settings typically ask agents either to reach a specified object goal or to navigate by following detailed route instructions. We argue that satisfying real-world human demands goes beyond localizing relevant targets and instead requires transforming high-level demands into executable embodied behaviors while considering inherent task dependencies. We introduce <strong class="abstract-highlight"><em>DemandNav</em></strong>, a <strong class="abstract-keyphrase">dependency-aware task formulation</strong> that represents a human demand as functional requirements and their prerequisite relations. To address this task, we present <strong class="abstract-highlight"><em>DemandAgent</em></strong>, an <strong class="abstract-keyphrase">embodied agent harness</strong> built around dedicated <strong>MCP tools</strong> for embodied interaction and <strong>persistent task-state and spatial-state management</strong>, guided by specialized <strong>embodied agent skills</strong>. We further introduce a top-down data construction pipeline and instantiate <strong class="abstract-highlight"><em>Demand-Bench</em></strong> with <strong>200 episodes</strong> from distinct ProcTHOR scenes. On Demand-Bench, DemandAgent achieves a <strong class="abstract-highlight abstract-result">52.5% success rate</strong>, substantially outperforming adapted navigation baselines with static LLM-based demand decomposition and goal translation. Further evaluation on the public EB-Navigation benchmark shows that an adapted DemandAgent achieves the best performance among the evaluated baselines, with a <strong class="abstract-highlight abstract-result">65.7% average success rate</strong>, demonstrating the cross-benchmark adaptability of the proposed embodied agent harness.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero" id="method">
+    <div class="wrap">
+      <header class="section-head" data-reveal="up"><h2 class="title is-3">Method Overview</h2></header>
+      <figure class="zoomable-figure" data-reveal="up">
+        <div class="window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="window-title">Embodied Agent Harness</span>
+            <button class="figure-expand" type="button" aria-label="Enlarge DemandAgent method overview" hidden>Enlarge ↗</button>
+          </div>
+          <div class="figure-frame">
+            <img class="publication-figure" src="static/images/main_figure.png" width="1754" height="1186" alt="Overview of the DemandAgent embodied agent harness">
+          </div>
+        </div>
+        <figcaption class="has-text-justified figure-caption">
+          <strong>Overview of DemandAgent.</strong> Top: given a human demand and current four-view RGB observations, DemandAgent reads embodied agent skills and calls MCP tools to select the next navigation target, with execution results and state context fed back for subsequent decisions. Bottom: the Adaptive Demand Ledger tools manage task state and enable online replanning, while Spatial Memory tools incrementally update the memory graph and recall return-route cues for revisitation.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section hero" id="demo" data-gallery aria-labelledby="demo-title">
+    <div class="wrap">
+      <header class="section-head" data-reveal="up"><h2 class="title is-3" id="demo-title">Video Demos</h2></header>
+      <div class="gallery-stage" data-reveal="up">
+        <div class="window video-shell">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="window-title" id="demo-now" data-now title="The kitchen is pretty dirty. Help me clean it up.">The kitchen is pretty dirty. Help me clean it up.</span>
+            <span class="stage-nav" hidden>
+              <span class="stage-count"><b>1</b> / 6</span>
+              <button class="stage-step" type="button" data-step="-1" aria-label="Previous video" disabled><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+              <button class="stage-step" type="button" data-step="1" aria-label="Next video"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+            </span>
+          </div>
+          <video id="demo-player" data-player controls muted playsinline preload="none" poster="static/images/demo/video_1-poster.webp?v=first-frame" aria-labelledby="demo-now">
+            <source src="static/video/video_1.mp4" type="video/mp4">
+            Your browser does not support embedded video. <a href="static/video/video_1.mp4">Download the video.</a>
+          </video>
+          <div class="video-loading" data-loading hidden><span role="status">Loading video…</span></div>
+          <p class="video-error" data-error hidden>Unable to load this video. <a href="static/video/video_1.mp4">Open the MP4 directly.</a> <button type="button" data-retry>Retry</button></p>
+        </div>
+        <div class="gallery-rail">
+          <ul class="gallery-list" aria-label="Demand input video demos">
+            <li class="gallery-entry">
+              <a class="gallery-item" aria-current="true" href="static/video/video_1.mp4" data-poster="static/images/demo/video_1-poster.webp?v=first-frame" data-title="The kitchen is pretty dirty. Help me clean it up.">
+                <span class="gallery-thumb"><img src="static/images/demo/video_1-thumb.webp?v=first-frame" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">2:04</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>The kitchen is pretty dirty. Help me clean it up.</strong><small>Memory guided</small></span>
+              </a>
+            </li>
+            <li class="gallery-entry">
+              <a class="gallery-item" href="static/video/video_2.mp4" data-poster="static/images/demo/video_2-poster.webp" data-title="I want to make my seat comfortable for rest.">
+                <span class="gallery-thumb"><img src="static/images/demo/video_2-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:37</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>I want to make my seat comfortable for rest.</strong><small>Memory guided</small></span>
+              </a>
+            </li>
+            <li class="gallery-entry">
+              <a class="gallery-item" href="static/video/video_3.mp4" data-poster="static/images/demo/video_3-poster.webp" data-title="I want a warm drink and rest in a comfortable seat.">
+                <span class="gallery-thumb"><img src="static/images/demo/video_3-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:38</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>I want a warm drink and rest in a comfortable seat.</strong><small>Replan</small></span>
+              </a>
+            </li>
+            <li class="gallery-entry">
+              <a class="gallery-item" href="static/video/video_4.mp4" data-poster="static/images/demo/video_4-poster.webp" data-title="I want toast for breakfast.">
+                <span class="gallery-thumb"><img src="static/images/demo/video_4-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:55</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>I want toast for breakfast.</strong><small>Memory guided</small></span>
+              </a>
+            </li>
+            <li class="gallery-entry">
+              <a class="gallery-item" href="static/video/video_5.mp4" data-poster="static/images/demo/video_5-poster.webp" data-title="I’m ready to go out.">
+                <span class="gallery-thumb"><img src="static/images/demo/video_5-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:17</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>I’m ready to go out.</strong><small>Independent requirements</small></span>
+              </a>
+            </li>
+            <li class="gallery-entry">
+              <a class="gallery-item" href="static/video/video_6.mp4" data-poster="static/images/demo/video_6-poster.webp" data-title="I’d like to settle in and relax for the evening. Could you make the space feel warm and cozy for me?">
+                <span class="gallery-thumb"><img src="static/images/demo/video_6-thumb.webp" width="480" height="270" loading="lazy" alt=""><span class="gallery-time">1:35</span><span class="now-playing" aria-hidden="true"><i></i><i></i><i></i></span><span class="gallery-progress" aria-hidden="true"></span></span>
+                <span class="gallery-text"><strong>I’d like to settle in and relax for the evening. Could you make the space feel warm and cozy for me?</strong><small>Memory guided</small></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="sr-only" data-playback-status role="status"></p>
+    </div>
+  </section>
+
+  <section class="section hero results-section" id="results">
+    <div class="wrap">
+      <header class="section-head" data-reveal="up"><h2 class="title is-3">Results</h2></header>
+
+      <article class="result-block" data-reveal="up" aria-labelledby="results-comparison">
+        <h3 class="title is-4" id="results-comparison">Comparison on Demand-Bench</h3>
+        <!-- <p class="result-summary">DemandAgent achieves <strong>52.5% success rate</strong> from human demands and <strong>76.0%</strong> with oracle object sequences on the 200-episode Demand-Bench.</p> -->
+        <div class="window results-window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="window-title">Demand-Bench · Comparison</span>
+          </div>
+          <div class="table-scroll" role="region" aria-labelledby="results-comparison" tabindex="0">
+          <table class="results-table comparison-table">
+            <caption class="sr-only">Table 1. Comparison on Demand-Bench under Human Demand and Oracle Object Sequence inputs. All metrics are percentages; higher is better.</caption>
+            <thead>
+              <tr><th rowspan="2" scope="col">Method</th><th colspan="5" scope="colgroup">Human Demand</th><th colspan="5" scope="colgroup">Oracle Object Sequence</th></tr>
+              <tr><th scope="col">SR ↑</th><th scope="col">RCR ↑</th><th scope="col">PSR ↑</th><th scope="col">SPL ↑</th><th scope="col">PSPL ↑</th><th scope="col">SR ↑</th><th scope="col">RCR ↑</th><th scope="col">PSR ↑</th><th scope="col">SPL ↑</th><th scope="col">PSPL ↑</th></tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">OpenFMNav</th><td>5.0</td><td>18.2</td><td>15.2</td><td>4.5</td><td>8.9</td><td>8.0</td><td>26.0</td><td>17.0</td><td>7.2</td><td>11.5</td></tr>
+                <tr><th scope="row">InstructNav</th><td>5.5</td><td>21.0</td><td>17.4</td><td>5.1</td><td>9.6</td><td>9.0</td><td>28.0</td><td>18.2</td><td>8.5</td><td>12.0</td></tr>
+                <tr><th scope="row">SG-Nav</th><td>4.5</td><td>18.5</td><td>13.2</td><td>4.1</td><td>8.1</td><td>7.0</td><td>24.5</td><td>15.6</td><td>6.2</td><td>10.6</td></tr>
+                <tr><th scope="row">Uni-NaVid</th><td>2.5</td><td>16.0</td><td>11.5</td><td>1.6</td><td>6.4</td><td>5.0</td><td>20.0</td><td>12.0</td><td>4.3</td><td>9.2</td></tr>
+                <tr><th scope="row">ApexNav</th><td class="rank-second">10.0</td><td class="rank-third">24.8</td><td class="rank-third">21.9</td><td class="rank-second">7.4</td><td class="rank-second">11.8</td><td class="rank-second">32.5</td><td class="rank-third">53.7</td><td class="rank-third">44.8</td><td class="rank-second">21.1</td><td class="rank-second">24.6</td></tr>
+                <tr><th scope="row">WMNav</th><td>6.0</td><td>22.4</td><td>18.7</td><td>5.3</td><td>10.4</td><td>10.0</td><td>30.0</td><td>20.0</td><td>9.1</td><td>13.5</td></tr>
+                <tr><th scope="row">CogNav</th><td class="rank-third">9.0</td><td class="rank-second">25.2</td><td class="rank-second">22.4</td><td class="rank-third">6.8</td><td class="rank-third">10.6</td><td class="rank-third">29.5</td><td class="rank-second">54.2</td><td class="rank-second">45.5</td><td class="rank-third">17.2</td><td class="rank-third">21.0</td></tr>
+                <tr class="ours-row"><th scope="row">DemandAgent (Ours)</th><td class="rank-first">52.5</td><td class="rank-first">61.1</td><td class="rank-first">60.7</td><td class="rank-first">26.1</td><td class="rank-first">28.4</td><td class="rank-first">76.0</td><td class="rank-first">84.4</td><td class="rank-first">83.8</td><td class="rank-first">41.4</td><td class="rank-first">42.9</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <p class="result-caption">Results under Human Demand and Oracle Object Sequence inputs, reported in %. Top-three results are highlighted as <span class="rank-first">first</span>, <span class="rank-second">second</span>, and <span class="rank-third">third</span>.</p>
+        <p class="result-caption">SR: Success Rate; RCR: Requirement Coverage Rate; PSR: Partial Success Rate; SPL: Success weighted by Path Length; PSPL: Partial Success weighted by Path Length. Higher is better for all five metrics.</p>
+      </article>
+
+      <article class="result-block" data-reveal="up" aria-labelledby="results-ablation">
+        <h3 class="title is-4" id="results-ablation">Ablation Study</h3>
+        <!-- <p class="result-summary">Removing the Adaptive Demand Ledger (ADL), Spatial Memory, or Skills reduces success rate from 52.5% to 42.0%, 37.5%, and 34.0%, respectively.</p> -->
+        <div class="window results-window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="window-title">Demand-Bench · Ablation Study</span>
+          </div>
+          <div class="table-scroll" role="region" aria-labelledby="results-ablation" tabindex="0">
+          <table class="results-table">
+            <caption class="sr-only">Table 2. Ablation study on Demand-Bench. All metrics are percentages; higher is better.</caption>
+            <thead><tr><th scope="col">Variant</th><th scope="col">SR ↑</th><th scope="col">RCR ↑</th><th scope="col">PSR ↑</th><th scope="col">SPL ↑</th><th scope="col">PSPL ↑</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Vanilla Codex</th><td>31.5</td><td>37.5</td><td>37.5</td><td>18.0</td><td>20.6</td></tr>
+                <tr><th scope="row">w/o ADL</th><td class="rank-third">42.0</td><td>54.6</td><td class="rank-third">54.6</td><td class="rank-third">21.3</td><td class="rank-third">25.1</td></tr>
+                <tr><th scope="row">ADL w/o Replan</th><td class="rank-second">51.5</td><td class="rank-third">60.2</td><td class="rank-second">60.2</td><td class="rank-second">25.5</td><td class="rank-second">28.0</td></tr>
+                <tr><th scope="row">w/o Spatial Memory</th><td>37.5</td><td>46.1</td><td>46.1</td><td>20.6</td><td>24.3</td></tr>
+                <tr><th scope="row">w/o Skills</th><td>34.0</td><td>42.7</td><td>42.7</td><td>19.5</td><td>23.0</td></tr>
+                <tr><th scope="row">Box-based Nav.</th><td>39.0</td><td class="rank-first">63.0</td><td>54.2</td><td>16.5</td><td>21.3</td></tr>
+                <tr class="ours-row"><th scope="row">DemandAgent (Ours)</th><td class="rank-first">52.5</td><td class="rank-second">61.1</td><td class="rank-first">60.7</td><td class="rank-first">26.1</td><td class="rank-first">28.4</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <p class="result-caption">DemandAgent and component variants on Demand-Bench, reported in %. Colors mark the top-three results in each metric.</p>
+      </article>
+
+      <article class="result-block" data-reveal="up" aria-labelledby="results-token-usage results-task-complexity">
+        <div class="result-figure-grid">
+        <h3 class="title is-4" id="results-token-usage">Success Rate and Input Token Usage</h3>
+        <figure class="zoomable-figure token-usage-figure" aria-labelledby="results-token-usage">
+          <div class="window">
+            <div class="window-bar">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="window-title">Token usage</span>
+              <button class="figure-expand" type="button" aria-label="Enlarge success rate versus input token usage" hidden>Enlarge ↗</button>
+            </div>
+            <div class="figure-frame">
+              <img class="publication-figure" src="static/images/sr_vs_mean_input_tokens.png" width="1340" height="1004" loading="eager" alt="Success rate versus mean input tokens per episode for DemandAgent and six ablation variants.">
+            </div>
+          </div>
+          <!-- <figcaption class="result-caption"><strong>Token Cost Comparison.</strong> Success rate versus mean cumulative input tokens per episode. SR and input tokens are reported in % and millions (M), respectively.</figcaption> -->
+        </figure>
+        <h3 class="title is-4 complexity-title" id="results-task-complexity">Performance across Task Complexity</h3>
+        <figure class="zoomable-figure task-complexity-figure" aria-labelledby="results-task-complexity">
+          <div class="window">
+            <div class="window-bar">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="window-title">Task complexity</span>
+              <button class="figure-expand" type="button" aria-label="Enlarge performance across task complexity, panels a and b" hidden>Enlarge ↗</button>
+            </div>
+            <div class="figure-frame">
+              <img class="publication-figure" src="static/images/performance_across_task_complexity_ab.png" width="1377" height="780" loading="eager" alt="Partial success rates by functional requirement count (a) and DAG depth (b).">
+            </div>
+          </div>
+        </figure>
+        </div>
+      </article>
+
+      <article class="result-block" data-reveal="up" aria-labelledby="results-eb-navigation">
+        <h3 class="title is-4" id="results-eb-navigation">Complete EB-Navigation Benchmark Comparison</h3>
+        <!-- <p class="result-summary">Adapted DemandAgent achieves <strong>65.7% average success rate</strong> on EB-Navigation. Its largest gain over direct GPT-5.6-Luna is on Long Horizon: <strong>60.0% vs. 33.3%</strong>.</p> -->
+        <div class="window results-window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="window-title">EB-Navigation · Success Rates</span>
+          </div>
+          <div class="table-scroll" role="region" aria-labelledby="results-eb-navigation" tabindex="0">
+          <table class="results-table eb-navigation-table">
+            <caption class="sr-only">Complete EB-Navigation success rates in percentages. Bold marks best results and underlining marks second-best results, with ties marked jointly.</caption>
+            <thead><tr><th scope="col">Model</th><th scope="col">Avg</th><th scope="col">Base</th><th scope="col">Common</th><th scope="col">Complex</th><th scope="col">Visual</th><th scope="col">Long</th></tr></thead>
+            <tbody>
+                <tr class="table-group"><th colspan="7" scope="rowgroup">Proprietary MLLMs</th></tr>
+                <tr><th scope="row">GPT-4o</th><td>57.7</td><td>55.0</td><td>60.0</td><td>58.3</td><td><strong>60.0</strong></td><td><span class="second-best">55.0</span></td></tr>
+                <tr><th scope="row">GPT-4o-mini</th><td>32.8</td><td>31.7</td><td>33.3</td><td>35.0</td><td>28.3</td><td>33.3</td></tr>
+                <tr><th scope="row">Claude-3.7-Sonnet</th><td>45.0</td><td>50.0</td><td>61.7</td><td>50.0</td><td>36.7</td><td>26.7</td></tr>
+                <tr><th scope="row">Claude-3.5-Sonnet</th><td>44.7</td><td>66.7</td><td>51.7</td><td>41.7</td><td>36.7</td><td>26.7</td></tr>
+                <tr><th scope="row">Gemini-1.5-Pro</th><td>24.3</td><td>23.3</td><td>25.0</td><td>25.0</td><td>28.3</td><td>20.0</td></tr>
+                <tr><th scope="row">Gemini-2.0-flash</th><td>48.7</td><td>63.3</td><td><span class="second-best">65.0</span></td><td>50.0</td><td>51.7</td><td>13.3</td></tr>
+                <tr><th scope="row">Gemini-1.5-Flash</th><td>41.7</td><td>56.7</td><td>50.0</td><td>46.7</td><td>50.0</td><td>5.0</td></tr>
+                <tr><th scope="row">Qwen-VL-Max</th><td>39.7</td><td>50.0</td><td>46.7</td><td>41.7</td><td>35.0</td><td>25.0</td></tr>
+                <tr><th scope="row">GPT-4o (Lang.)</th><td>17.4</td><td>21.7</td><td>21.7</td><td>26.7</td><td>16.7</td><td>0.0</td></tr>
+                <tr><th scope="row">GPT-4o-mini (Lang.)</th><td>8.3</td><td>3.3</td><td>13.3</td><td>10.0</td><td>15.0</td><td>0.0</td></tr>
+                <tr class="table-group"><th colspan="7" scope="rowgroup">Open-Source MLLMs</th></tr>
+                <tr><th scope="row">Llama-3.2-90B-Vision-Ins</th><td>30.0</td><td>48.3</td><td>23.3</td><td>38.3</td><td>33.3</td><td>6.7</td></tr>
+                <tr><th scope="row">Llama-3.2-11B-Vision-Ins</th><td>21.4</td><td>23.3</td><td>21.7</td><td>26.7</td><td>18.3</td><td>17.0</td></tr>
+                <tr><th scope="row">InternVL2.5-78B</th><td>30.7</td><td>36.7</td><td>38.3</td><td>33.3</td><td>21.7</td><td>23.3</td></tr>
+                <tr><th scope="row">InternVL2.5-38B</th><td>30.3</td><td>35.0</td><td>28.3</td><td>38.3</td><td>26.7</td><td>23.3</td></tr>
+                <tr><th scope="row">InternVL2.5-8B</th><td>21.3</td><td>35.0</td><td>23.3</td><td>21.7</td><td>26.7</td><td>0.0</td></tr>
+                <tr><th scope="row">InternVL3-78B</th><td>53.7</td><td>66.7</td><td>63.3</td><td>61.7</td><td>45.0</td><td>31.7</td></tr>
+                <tr><th scope="row">InternVL3-38B</th><td>50.7</td><td>55.0</td><td>61.7</td><td>55.0</td><td><span class="second-best">56.7</span></td><td>25.0</td></tr>
+                <tr><th scope="row">InternVL3-8B</th><td>29.3</td><td>38.3</td><td>30.0</td><td>40.0</td><td>33.3</td><td>5.0</td></tr>
+                <tr><th scope="row">Qwen2-VL-72B-Ins</th><td>21.2</td><td>26.7</td><td>30.0</td><td>28.3</td><td>16.0</td><td>5.0</td></tr>
+                <tr><th scope="row">Qwen2-VL-7B-Ins</th><td>14.0</td><td>26.7</td><td>10.0</td><td>15.0</td><td>15.0</td><td>3.3</td></tr>
+                <tr><th scope="row">Qwen2.5-VL-72B-Ins</th><td>40.0</td><td>46.7</td><td>46.7</td><td>46.7</td><td>26.7</td><td>33.3</td></tr>
+                <tr><th scope="row">Qwen2.5-VL-7B-Ins</th><td>20.3</td><td>20.0</td><td>26.7</td><td>38.3</td><td>16.7</td><td>0.0</td></tr>
+                <tr><th scope="row">Ovis2-34B</th><td>45.7</td><td>63.3</td><td>50.0</td><td>56.7</td><td>46.7</td><td>11.7</td></tr>
+                <tr><th scope="row">Ovis2-16B</th><td>47.7</td><td>60.0</td><td>46.7</td><td>58.3</td><td>48.3</td><td>25.0</td></tr>
+                <tr><th scope="row">gemma-3-27b-it</th><td>45.4</td><td>53.3</td><td>45.0</td><td>61.7</td><td>50.0</td><td>16.7</td></tr>
+                <tr><th scope="row">gemma-3-12b-it</th><td>34.0</td><td>38.3</td><td>36.7</td><td>48.3</td><td>40.0</td><td>6.7</td></tr>
+                <tr class="table-group"><th colspan="7" scope="rowgroup">Our evaluated systems</th></tr>
+                <tr><th scope="row">GPT-5.6-Luna</th><td><span class="second-best">59.3</span></td><td><span class="second-best">68.3</span></td><td><strong>66.7</strong></td><td><span class="second-best">68.3</span></td><td><strong>60.0</strong></td><td>33.3</td></tr>
+                <tr class="ours-row"><th scope="row">DemandAgent (adapted)</th><td><strong>65.7</strong></td><td><strong>71.7</strong></td><td><strong>66.7</strong></td><td><strong>70.0</strong></td><td><strong>60.0</strong></td><td><strong>60.0</strong></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <p class="result-caption">Results reported in success rates (%). Published baseline results are from EmbodiedBench, the final two rows show the direct GPT-5.6-Luna model and the adapted DemandAgent. <strong>Bold</strong> and <span class="second-best">underlined</span> entries mark the best and second-best results, respectively, with ties marked jointly.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="wrap">
+      <header class="section-head" data-reveal="up"><h2 class="title">BibTeX</h2></header>
+      <div class="window citation-block" data-reveal="up">
+        <div class="window-bar">
+          <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="window-title">BibTeX</span>
+          <span class="draft-label">Coming soon</span>
+        </div>
+        <pre><code></code></pre>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <dialog class="figure-dialog" id="figure-dialog" aria-labelledby="figure-dialog-title">
+    <div class="figure-dialog-bar">
+      <p id="figure-dialog-title">DemandAgent figure</p>
+      <a id="figure-original" href="static/images/teaser.png" target="_blank" rel="noopener noreferrer">Open full size ↗</a>
+      <form method="dialog"><button type="submit" aria-label="Close enlarged figure">Close ×</button></form>
+    </div>
+    <div class="figure-dialog-body"><img alt=""></div>
+  </dialog>
+</body>
+</html>

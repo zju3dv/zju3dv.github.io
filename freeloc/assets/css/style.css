@@ -62,24 +62,22 @@ video {
 }
 
 .hero__inner {
+  width: min(1500px, calc(100% - 40px));
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .hero h1 {
-  max-width: 1040px;
+  width: 100%;
+  max-width: 1500px;
   margin: 0 auto 16px;
   color: var(--navy);
   font-family: var(--display-font);
-  font-size: clamp(2.25rem, 4.3vw, 3.65rem);
+  font-size: clamp(1.55rem, 3.2vw, 2.9rem);
   font-weight: 600;
   letter-spacing: -0.045em;
   line-height: 1.06;
-}
-
-.title-line {
-  display: block;
 }
 
 .venue {
@@ -235,7 +233,7 @@ button:focus-visible {
   padding-bottom: 12px;
   color: var(--navy);
   font-family: var(--display-font);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.2;
@@ -666,7 +664,7 @@ button:focus-visible {
   }
 
   .hero h1 {
-    font-size: clamp(2rem, 10.8vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
   }
 
   .venue {
@@ -760,7 +758,7 @@ button:focus-visible {
 }
 
 @media (min-width: 761px) {
-  .title-line {
+  .hero h1 {
     white-space: nowrap;
   }
 }

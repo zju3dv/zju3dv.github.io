@@ -554,15 +554,6 @@
     margin-bottom: 14px;
 }
 
-.v2-preview-status {
-    margin-bottom: 3px;
-    color: #9a5b13;
-    font-size: 1.42rem;
-    font-weight: 800;
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
 .v2-preview-header h3 {
     margin: 0;
     color: #345;
@@ -574,6 +565,10 @@
     margin: 4px 0 0;
     color: #68788a;
     font-size: 0.96rem;
+}
+
+.v2-preview-link {
+    margin-top: 10px;
 }
 
 .v2-preview-frame {

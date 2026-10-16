@@ -75,15 +75,17 @@
               </h1>
 
               <div class="is-size-5 publication-authors author-list">
-                <span class="author-block"><a href="https://github.com/huahuo359">Yuanhang Lei</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://github.com/huahuo359">Yuanhang Lei</a><sup>1,2</sup>,</span>
                 <span class="author-block"><a href="https://github.com/LaBaFan">Baofei Liu</a><sup>1</sup>,</span>
                 <span class="author-block"><a href="https://github.com/Leo11-strive">Xingxuan Li</a><sup>1</sup>,</span>
                 <span class="author-block"><a href="https://academic.tao-cheng.cc/">Tao Cheng</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://github.com/wzxtsl">Zixuan Wang</a><sup>1</sup>,</span>
                 <span class="author-block"><a href="https://bomingzhao.github.io/">Boming Zhao</a><sup>1</sup>,</span>
                 <br>
+                <span class="author-block"><a href="https://shenyujun.github.io/">Yujun Shen</a><sup>3</sup>,</span>
                 <span class="author-block"><a href="https://siyuanhuang.com/">Siyuan Huang</a><sup>2</sup>,</span>
-                <span class="author-block"><a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>3</sup>,</span>
-                <span class="author-block"><a href="https://peterchencyc.com/">Peter Yichen Chen</a><sup>4</sup>,</span>
+                <span class="author-block"><a href="https://csse.szu.edu.cn/staff/ruizhenhu/">Ruizhen Hu</a><sup>4</sup>,</span>
+                <span class="author-block"><a href="https://peterchencyc.com/">Peter Yichen Chen</a><sup>5</sup>,</span>
                 <span class="author-block"><a href="http://www.cad.zju.edu.cn/home/bao/">Hujun Bao</a><sup>1</sup>,</span>
                 <span class="author-block"><a href="https://zhpcui.github.io/">Zhaopeng Cui</a><sup>1†</sup></span>
               </div>
@@ -91,7 +93,7 @@
               <div class="is-size-6 publication-affiliations">
                 <p class="affiliation-line"><sup>1</sup>State Key Laboratory of CAD&amp;CG, Zhejiang University</p>
                 <p class="affiliation-line"><sup>2</sup>Beijing Institute for General Artificial Intelligence (BIGAI)</p>
-                <p class="affiliation-line"><sup>3</sup>Shenzhen University &nbsp;  &nbsp; <sup>4</sup>University of British Columbia</p>
+                <p class="affiliation-line"><sup>3</sup>Ant Group &nbsp;  &nbsp; <sup>4</sup>Shenzhen University &nbsp;  &nbsp; <sup>5</sup>University of British Columbia</p>
                 <p class="contribution-note">† Corresponding author</p>
               </div>
 
@@ -132,7 +134,7 @@
             alt="PhysSkin++ learns neural skinning fields from static meshes, point clouds, NeRFs, and Gaussian splats, enabling interactive control, multi-object interaction, and rig-complementary animation"
             loading="eager">
           <figcaption class="teaser-description">
-            Learned from static 3D geometries without annotations, PhysSkin++ enables interactive control, collision-aware multi-object interaction, and rig-complementary animation.
+            Learned from unannotated static 3D geometries, PhysSkin++ enables interactive control, collision-aware multi-object interaction, and rig-complementary animation.
           </figcaption>
         </figure>
       </div>
@@ -145,7 +147,7 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified abstract-text float-module">
               <p>
-                Achieving real-time physics-based animation that generalizes across diverse 3D shapes and discretizations remains a fundamental challenge. We introduce PhysSkin++, a physics-informed framework that addresses this challenge. In the spirit of Linear Blend Skinning, we learn continuous skinning fields as basis functions lifting motion subspace coordinates to full-space deformation, with the subspace defined by handle transformations. An optional primary displacement extends this representation to rig-complementary animation, where a prescribed rig provides the primary motion and the neural skinning fields represent complementary elastic deformation. To generate mesh-free, discretization-agnostic, and physically consistent skinning fields directly from static geometries, PhysSkin++ employs a neural skinning fields autoencoder comprising a transformer-based encoder and a cross-attention decoder. A physics-informed self-supervised learning strategy combines on-the-fly skinning-field normalization with conflict-aware gradient correction to balance energy minimization, spatial smoothness, and orthogonality constraints. A self-supervised rig-complementarity objective further constrains the learned deformation subspace to complement the prescribed rig animation space. Beyond unconstrained deformation, PhysSkin++ supports Dirichlet boundary conditions, interactive control, environmental contact, collision-aware multi-object interaction, and rig-complementary animation. Its continuous neural skinning fields can be bound directly to meshes, point clouds, or Gaussian splats, enabling generalizable neural skinning and real-time physics-based animation.
+                Generalizing real-time physics-based animation across diverse 3D shapes and spatial discretizations remains challenging. In this paper, we introduce PhysSkin++, a physics-informed framework that learns continuous neural skinning fields from static geometries to construct compact deformation subspaces. Specifically, we propose a Neural Skinning Fields Autoencoder that predicts shape-dependent deformation subspaces without per-object network training. To learn these subspaces without simulation trajectories, we develop a Physics-Informed Self-Supervised Learning strategy that combines skinning-field normalization with conflict-aware gradient correction, stabilizing joint optimization under physical and orthogonality constraints. The learned representation supports efficient reduced dynamics with user control and contact interactions, together with direct animation binding to meshes, point clouds, and 3D Gaussians. For prescribed rig animation, we further introduce a self-supervised complementarity objective to learn complementary elastic responses without enforcing complementarity constraints at runtime. Experiments demonstrate cross-shape generalization of the learned skinning fields, real-time reduced simulation, and applications to controllable, collision-aware, and rig-complementary animation.
               </p>
             </div>
           </div>

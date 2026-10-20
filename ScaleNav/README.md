@@ -2,7 +2,7 @@
 
 Static review copy of the ScaleNav project page. The title, method summary and result tables were checked against the author-provided ScaleNav PDF on October 13, 2026. Author order and affiliations follow the author-supplied list. Author links point to personal homepages checked against institutional and research information; names without confirmed homepages remain unlinked.
 
-The Code and Model buttons link to the public GitHub and Hugging Face repositories. The arXiv button remains a disabled placeholder until the paper URL is ready. The review PDF is not included in this website.
+The arXiv button links to https://arxiv.org/abs/2610.25690. The Code, Model, and Data buttons link to the public GitHub and Hugging Face repositories. The review PDF is not included in this website.
 
 Open `index.html` through a static HTTP server. There is no build step and no package installation. Edit `index.html`, `style.css`, `app.js`, and `assets/demos.json` as needed.
 

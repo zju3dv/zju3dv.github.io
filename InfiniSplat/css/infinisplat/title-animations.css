@@ -1,0 +1,55 @@
+/* Title Gradient Animations */
+
+/* Title Highlights - 标题专用高亮色 (经典学术配色 - 极致柔和版) */
+.title-main { 
+    background: linear-gradient(120deg, #4a5d6f 0%, #6a7d8f 30%, #8a9daf 50%, #6a7d8f 70%, #4a5d6f 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+.title-resolution { 
+    background: linear-gradient(120deg, #5d85b8 0%, #7da5d8 30%, #9dc5f0 50%, #7da5d8 70%, #5d85b8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+.title-finegrained { 
+    background: linear-gradient(120deg, #6d8f7a 0%, #8daf9a 30%, #adccba 50%, #8daf9a 70%, #6d8f7a 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+.title-neural { 
+    background: linear-gradient(120deg, #7a6d8f 0%, #9a8daf 30%, #baadcc 50%, #9a8daf 70%, #7a6d8f 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* 渐变动画 - 更流畅的移动效果 */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

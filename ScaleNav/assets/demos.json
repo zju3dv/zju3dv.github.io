@@ -1,0 +1,74 @@
+[
+  {
+    "id": "demo-1",
+    "title": "Leftmost short white cylinder",
+    "instruction": "go over to the leftmost short white cylinder visible in your initial view",
+    "domain": "Real robot",
+    "video": "assets/demo-1.mp4",
+    "poster": "assets/demo-1.jpg"
+  },
+  {
+    "id": "demo-2",
+    "title": "Rocket model on the right",
+    "instruction": "go to the rocket model on the right visible in your initial view.",
+    "domain": "Real robot",
+    "video": "assets/demo-2.mp4",
+    "poster": "assets/demo-2.jpg"
+  },
+  {
+    "id": "demo-3",
+    "title": "Wooden bar stool",
+    "instruction": "Approach the wooden bar stool visible in your initial view.",
+    "domain": "Real robot",
+    "video": "assets/demo-3.mp4",
+    "poster": "assets/demo-3.jpg"
+  },
+  {
+    "id": "demo-4",
+    "title": "Sofa ahead",
+    "instruction": "Take me to the multi person sofa ahead visible in your initial view.",
+    "domain": "Habitat-GS",
+    "video": "assets/demo-4.mp4",
+    "poster": "assets/demo-4.jpg"
+  },
+  {
+    "id": "demo-5",
+    "title": "Plant on the front-right",
+    "instruction": "Walk up to the plant on your front-right visible in your initial view.",
+    "domain": "Habitat-GS",
+    "video": "assets/demo-5.mp4",
+    "poster": "assets/demo-5.jpg"
+  },
+  {
+    "id": "demo-6",
+    "title": "Cafe chair",
+    "instruction": "Proceed to the chair visible in your initial view.",
+    "domain": "Habitat-GS",
+    "video": "assets/demo-6.mp4",
+    "poster": "assets/demo-6.jpg"
+  },
+  {
+    "id": "demo-7",
+    "title": "Dresser",
+    "instruction": "Navigate to the dresser visible in your initial view.",
+    "domain": "HM3D",
+    "video": "assets/demo-7.mp4",
+    "poster": "assets/demo-7.jpg"
+  },
+  {
+    "id": "demo-8",
+    "title": "Ottoman",
+    "instruction": "Please go to the ottoman visible in your initial view.",
+    "domain": "HM3D",
+    "video": "assets/demo-8.mp4",
+    "poster": "assets/demo-8.jpg"
+  },
+  {
+    "id": "demo-9",
+    "title": "Christmas tree",
+    "instruction": "Walk to the christmas tree visible in your initial view.",
+    "domain": "HM3D",
+    "video": "assets/demo-9.mp4",
+    "poster": "assets/demo-9.jpg"
+  }
+]

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="canonical" href="https://zju3dv.github.io/ScaleNav/">
+<meta property="og:url" content="https://zju3dv.github.io/ScaleNav/">
+<title>ScaleNav: Scalable Internet Video Pretraining for Language-Conditioned Local Navigation</title>
+<meta name="description" content="ScaleNav learns navigation priors from Internet egocentric videos through action-free pretraining and transfers them to action generation for language-conditioned local navigation.">
+<meta name="theme-color" content="#f7f9f6"><meta property="og:title" content="ScaleNav: Scalable Internet Video Pretraining for Language-Conditioned Local Navigation"><meta property="og:description" content="ScaleNav learns navigation priors from Internet egocentric videos through action-free pretraining and transfers them to action generation for language-conditioned local navigation."><meta property="og:image" content="https://zju3dv.github.io/ScaleNav/assets/hero-real.jpg"><meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/SpaceGrotesk-Variable.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<div class="reading-progress" aria-hidden="true"></div><header class="header"><a class="brand" href="#top" aria-label="ScaleNav home">ScaleNav</a><nav aria-label="Main navigation"><a href="#demos">Demos</a><a href="#idea" class="nav-idea">Overview</a><a href="#method">Method</a><a href="#results">Results</a></nav></header>
+<main id="main">
+<section class="hero" id="top">
+<div class="hero-terrain" aria-hidden="true"><svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="route-color"><stop stop-color="#c0d9cf"/><stop offset=".55" stop-color="#37947d"/><stop offset="1" stop-color="#b9d8cd"/></linearGradient></defs><g class="terrain-lines"><path d="M-80 400H100Q145 400 145 355V260Q145 210 195 210H300"/><path d="M-50 470H130Q215 470 215 385V330Q215 285 260 285H345"/><path d="M1160 140H1260Q1305 140 1305 185V280Q1305 320 1345 320H1520"/><path d="M1130 210H1200Q1240 210 1240 250V350Q1240 390 1280 390H1530"/><path d="M-30 540H235Q290 540 290 485V465H425M1025 455H1195Q1240 455 1240 500V550H1480"/></g><path class="terrain-route" d="M-40 435H105Q180 435 180 360V300Q180 250 230 250H315M1120 175H1220Q1270 175 1270 225V310Q1270 355 1315 355H1490"/><g class="terrain-nodes"><circle cx="315" cy="250" r="5"/><circle cx="1120" cy="175" r="5"/><circle cx="425" cy="465" r="4"/><circle cx="1025" cy="455" r="4"/></g></svg></div>
+<div class="wrap hero-inner">
+<h1 class="paper-title"><span class="title-project">ScaleNav<span class="sr-only">:</span></span> <span class="paper-subtitle">Scalable Internet Video Pretraining for Language-Conditioned Local Navigation</span></h1>
+<ul class="authors" aria-label="Authors">
+<li><a href="https://yangyihui0502.github.io/" target="_blank" rel="noopener noreferrer">Yihui Yang</a><sup>1</sup></li>
+<li><a href="https://yuanhongyu.xyz/" target="_blank" rel="noopener noreferrer">Yuanhong Yu</a><sup>1</sup></li>
+<li><a href="https://pluswave.top/" target="_blank" rel="noopener noreferrer">Jiawei Wang</a><sup>1</sup></li>
+<li><span>Zhongrui Yu</span><sup>2</sup></li>
+<li><span>Jia Shi</span><sup>2</sup></li>
+<li><a href="https://zhankunliauto.github.io/" target="_blank" rel="noopener noreferrer">Kun Zhan</a><sup>2</sup></li>
+<li><a href="https://csse.szu.edu.cn/staff/ruizhenhu/" target="_blank" rel="noopener noreferrer">Ruizhen Hu</a><sup>3</sup></li>
+<li><a href="https://xzhou.me/" target="_blank" rel="noopener noreferrer">Xiaowei Zhou</a><sup>1</sup></li>
+<li><span>Yu Liu</span><sup>2</sup></li>
+<li><a href="https://pengsida.net/" target="_blank" rel="noopener noreferrer">Sida Peng</a><sup>1</sup></li>
+</ul>
+<ul class="affiliations" aria-label="Affiliations"><li><sup>1</sup> Zhejiang University</li><li><sup>2</sup> Li Auto Inc.</li><li><sup>3</sup> Shenzhen University</li></ul>
+<div class="hero-actions" aria-label="Project resources">
+<a class="button" href="https://arxiv.org/abs/2610.25690" target="_blank" rel="noopener noreferrer" aria-label="ScaleNav paper on arXiv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M9 13h6M9 17h6"/></svg><span>arXiv</span></a>
+<a class="button" href="https://github.com/MachEmbodied/ScaleNav" target="_blank" rel="noopener noreferrer" aria-label="ScaleNav code on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16"/></svg><span>Code</span></a>
+<a class="button" href="https://huggingface.co/Yangyihui/ScaleNav" target="_blank" rel="noopener noreferrer" aria-label="ScaleNav model on Hugging Face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5v8l-9 5-9-5V8zm0 9 9-4M12 12 3 8m9 4v9M7.5 5.5l9 5"/></svg><span>Model</span></a>
+<a class="button" href="https://huggingface.co/datasets/Yangyihui/ScaleNav-Data" target="_blank" rel="noopener noreferrer" aria-label="ScaleNav data on Hugging Face"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Data</span></a>
+<button class="button primary" data-full-demo><span aria-hidden="true">▶</span> Watch the demo</button>
+</div>
+</div></section>
+<section class="tldr wrap" aria-labelledby="tldr-title"><h2 id="tldr-title">TL;DR</h2><p>ScaleNav learns navigation priors from Internet egocentric videos through <strong>action-free pretraining</strong> and transfers them to action generation for <strong>language-conditioned local navigation</strong>.</p></section>
+<section class="showcase wrap" id="demos" aria-labelledby="demos-title">
+<div class="section-intro"><h2 id="demos-title">Demonstrations</h2><button id="motion-toggle" class="motion-toggle" aria-pressed="false">Pause videos Ⅱ</button></div>
+<div id="demo-groups" aria-busy="true"></div>
+<p class="footnote">Target highlights and “Arrival” labels are presentation annotations in the edited demos.</p>
+<noscript><p><a href="assets/scalenav-demo.mp4">Watch the complete ScaleNav demonstration.</a></p></noscript>
+
+</section>
+<section class="idea section" id="idea"><div class="wrap section-card"><h2 class="section-title">From video to action<span class="heading-dot">.</span></h2><div class="overview-copy"><p>ScaleNav transfers navigation priors learned from Internet egocentric videos to action generation through action alignment and joint fine-tuning on simulated robot trajectories.</p><p class="scope-note">The task is to reach a language-specified target visible in the initial view and stop at the instructed location.</p></div><figure class="paper-figure teaser"><button class="image-zoom" data-figure="assets/teaser.png" data-figure-title="ScaleNav overview" data-caption="ScaleNav overview: Internet video pretraining, action alignment, and robot navigation." aria-label="Enlarge the ScaleNav overview figure"><img src="assets/teaser.png" alt="ScaleNav paper teaser illustrating the transfer of Internet video navigation priors to robot actions" loading="lazy" width="2400" height="1200"><span class="zoom-label">View figure ↗</span></button></figure></div></section>
+
+<section class="method section" id="method"><div class="wrap section-card"><div class="section-heading"><h2 class="section-title">One model. Three stages<span class="heading-dot">.</span></h2><p>A shared Diffusion Transformer jointly predicts future video latents and action chunks from the instruction, current RGB observation, and memory.</p></div><div class="stages"><article><span class="stage-number">01</span><h3>Video pretraining</h3><p>Learn goal-directed visual dynamics from action-free Internet egocentric videos paired with navigation instructions.</p></article><article><span class="stage-number">02</span><h3>Action alignment</h3><p>Train the action modules and shared self-attention layers on action-labeled simulated trajectories.</p></article><article><span class="stage-number">03</span><h3>Joint fine-tuning</h3><p>Fine-tune the shared backbone and both output heads, continuing Internet video replay from action alignment.</p></article></div><figure class="paper-figure method-figure"><button class="image-zoom" data-figure="assets/method_pipeline.png" data-figure-title="Model architecture and three-stage training" data-caption="The ScaleNav architecture and three-stage training procedure." aria-label="Enlarge the method diagram"><img src="assets/method_pipeline.png" alt="The ScaleNav architecture, with an initial-frame anchor, recent memory, chunk-wise causal attention, and three training stages" loading="lazy" width="2400" height="1537"><span class="zoom-label">View figure ↗</span></button></figure></div></section>
+<section class="section wrap section-card" id="results"><div class="section-heading"><h2 class="section-title">Experimental results<span class="heading-dot">.</span></h2><p>We evaluate ScaleNav on two simulation benchmarks and a real quadruped robot.</p></div><div class="result-metrics"><div><strong>94.9<span>%</span></strong><span>Success on HabitatGS-LN</span></div><div><strong>86.5<span>%</span></strong><span>Success on Short-Horizon OVON¹</span></div><div><strong>83.3<span>%</span></strong><span>Real-robot success · 60 trials</span></div></div>
+<p class="footnote centered">¹ Short-Horizon OVON uses a single-view subset under our evaluation protocol (524 episodes); HabitatGS-LN contains 157 episodes in held-out scenes.</p>
+<section class="benchmark-results" aria-labelledby="simulation-title">
+<h3 id="simulation-title">Simulation benchmarks</h3>
+<p class="table-note">Success rate (SR) and success weighted by path length (SPL), in %. Higher is better.</p>
+<div class="table-scroll" role="region" aria-labelledby="simulation-title" tabindex="0"><table class="simulation-results">
+<caption class="sr-only">Complete simulation results, including zero-shot and fine-tuned baselines</caption>
+<colgroup><col class="method-col"><col span="4"><col class="latency-col"></colgroup>
+<thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Short-Horizon OVON¹</th><th scope="colgroup" colspan="2">HabitatGS-LN</th><th scope="col" rowspan="2">Amortized latency<br>(ms/action) ↓</th></tr><tr><th scope="col">SR ↑</th><th scope="col">SPL ↑</th><th scope="col">SR ↑</th><th scope="col">SPL ↑</th></tr></thead>
+<tbody>
+<tr><th scope="row">LocateAnything + NavDP</th><td>74.4</td><td>37.2</td><td>82.8</td><td>61.0</td><td>184</td></tr>
+<tr><th scope="row">LocateAnything + ApexNav</th><td>73.3</td><td>64.1</td><td>75.8</td><td>66.8</td><td>511</td></tr>
+<tr><th scope="row">StreamVLN (zero-shot)</th><td>61.1</td><td>51.2</td><td>48.4</td><td>40.0</td><td>87</td></tr>
+<tr><th scope="row">Uni-NaVid (zero-shot)</th><td>11.6</td><td>9.9</td><td>8.9</td><td>8.2</td><td>99</td></tr>
+<tr><th scope="row">StreamVLN (fine-tuned)</th><td>79.6</td><td>62.9</td><td>75.8</td><td>59.5</td><td>—</td></tr>
+<tr><th scope="row">Uni-NaVid (fine-tuned)</th><td>80.2</td><td>68.1</td><td>82.2</td><td>71.6</td><td>—</td></tr>
+<tr><th scope="row">ScaleNav w/o Internet videos</th><td>81.1</td><td>65.5</td><td>90.4</td><td>80.8</td><td>—</td></tr>
+<tr class="ours"><th scope="row">ScaleNav</th><td>86.5</td><td>71.3</td><td>94.9</td><td>86.1</td><td>76</td></tr>
+</tbody></table></div>
+<p class="table-note table-footnote">Latency is amortized per executed action on RTX 4090. “—” denotes variants not profiled separately.</p>
+</section>
+<p class="result-insight">With the same simulated action data, incorporating Internet egocentric videos improves success by <strong>5.3 percentage points on Short-Horizon OVON</strong> and <strong>4.5 points on HabitatGS-LN</strong>.</p>
+<section class="benchmark-results" aria-labelledby="real-results-title">
+<h3 id="real-results-title">Real-robot evaluation</h3>
+<p class="table-note">Success rate (%) on Unitree Go2: 20 trials in each environment, 60 per method.</p>
+<div class="table-scroll" role="region" aria-labelledby="real-results-title" tabindex="0"><table class="real-results">
+<caption class="sr-only">Real-robot success rates (%) by environment and overall</caption>
+<colgroup><col class="method-col"><col span="4"></colgroup>
+<thead><tr><th scope="col">Method</th><th scope="col">Hall ↑</th><th scope="col">Lounge ↑</th><th scope="col">Office ↑</th><th scope="col">Overall ↑</th></tr></thead>
+<tbody>
+<tr><th scope="row">StreamVLN (fine-tuned)</th><td>25.0</td><td>60.0</td><td>40.0</td><td>41.7</td></tr>
+<tr><th scope="row">Uni-NaVid (fine-tuned)</th><td>60.0</td><td>75.0</td><td>20.0</td><td>51.7</td></tr>
+<tr><th scope="row">ScaleNav w/o Internet videos</th><td>75.0</td><td>60.0</td><td>60.0</td><td>65.0</td></tr>
+<tr class="ours"><th scope="row">ScaleNav</th><td>85.0</td><td>85.0</td><td>80.0</td><td>83.3</td></tr>
+</tbody></table></div>
+</section></section>
+
+
+<section class="paper-resources wrap" id="resources" aria-labelledby="resources-title"><h2 id="resources-title">Paper &amp; resources</h2><p class="paper-full-title">ScaleNav: Scalable Internet Video Pretraining for Language-Conditioned Local Navigation</p><p><a class="text-link" href="https://arxiv.org/abs/2610.25690">Paper</a> · <a class="text-link" href="https://github.com/MachEmbodied/ScaleNav">Code</a> · <a class="text-link" href="https://huggingface.co/Yangyihui/ScaleNav">Model</a> · <a class="text-link" href="https://huggingface.co/datasets/Yangyihui/ScaleNav-Data">Data</a> · <a class="text-link" href="https://huggingface.co/collections/Yangyihui/scalenav-6ad591e8ff62bb75ec75f645">Hugging Face collection</a></p></section>
+</main>
+<footer class="wrap"><a class="brand" href="#top">ScaleNav</a><a href="#top" class="text-link">Back to top ↑</a></footer>
+<dialog id="media-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><h2 id="dialog-title">ScaleNav demonstration</h2><button class="dialog-close" aria-label="Close viewer">×</button></div><div id="dialog-content"></div><p id="dialog-description"></p></dialog>
+</body></html>

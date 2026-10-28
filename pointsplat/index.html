@@ -168,6 +168,12 @@
     }
     .btn-link-custom.demo:hover { box-shadow: 0 6px 22px rgba(63,111,159,0.4); }
 
+    .btn-link-custom.benchmark {
+      background: linear-gradient(135deg, #6875a5, #8c6fa5);
+      box-shadow: 0 4px 15px rgba(104,117,165,0.3);
+    }
+    .btn-link-custom.benchmark:hover { box-shadow: 0 6px 22px rgba(104,117,165,0.4); }
+
     .btn-link-custom.disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -532,6 +538,9 @@
               <a class="btn-link-custom code" href="https://github.com/zju3dv/PointSplat" target="_blank" rel="noopener">
                 <i class="fa fa-github"></i> Code
               </a>
+              <a class="btn-link-custom benchmark" id="pwc-badge" href="https://paperswithcode.co/benchmark/dna-rendering?task=novel-view-synthesis&amp;eval=44911" target="_blank" rel="noopener" aria-label="Papers with Code DNA Rendering benchmark">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i> <span id="pwc-rank-label" aria-live="polite">Papers with Code</span>
+              </a>
               <a class="btn-link-custom demo" href="#interactive-demo">
                 <i class="fa fa-cube"></i> Interactive Demo
               </a>
@@ -793,6 +802,48 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Keep the Papers with Code badge in sync with the public evaluation rank.
+      const pwcBadge = document.getElementById('pwc-badge');
+      const pwcRankLabel = document.getElementById('pwc-rank-label');
+      if (pwcBadge && pwcRankLabel) {
+        let rankRequestInFlight = false;
+        const updatePwcRank = async () => {
+          if (rankRequestInFlight) return;
+          rankRequestInFlight = true;
+          const controller = new AbortController();
+          const timeoutId = window.setTimeout(() => controller.abort(), 10000);
+
+          try {
+            const response = await fetch('https://paperswithcode.co/api/v1/evaluations/44911', {
+              cache: 'no-cache',
+              signal: controller.signal
+            });
+            if (!response.ok) throw new Error(`Papers with Code returned ${response.status}`);
+
+            const evaluation = await response.json();
+            const rank = Number(evaluation.best_rank);
+            if (!Number.isInteger(rank) || rank < 1) throw new Error('Rank is unavailable');
+
+            pwcRankLabel.textContent = `Papers with Code · Rank #${rank}`;
+            pwcBadge.setAttribute('aria-label', `Papers with Code, Rank ${rank} on the DNA Rendering benchmark`);
+            pwcBadge.title = `Papers with Code · Rank #${rank} on the DNA Rendering benchmark`;
+          } catch (_) {
+            pwcRankLabel.textContent = 'Papers with Code';
+            pwcBadge.setAttribute('aria-label', 'Papers with Code DNA Rendering benchmark');
+            pwcBadge.removeAttribute('title');
+          } finally {
+            window.clearTimeout(timeoutId);
+            rankRequestInFlight = false;
+          }
+        };
+
+        updatePwcRank();
+        window.setInterval(updatePwcRank, 5 * 60 * 1000);
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) updatePwcRank();
+        });
+      }
+
       // Scroll reveal
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {

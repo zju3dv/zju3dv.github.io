@@ -168,6 +168,19 @@
     }
     .btn-link-custom.demo:hover { box-shadow: 0 6px 22px rgba(63,111,159,0.4); }
 
+    .benchmark-badge { display: flex; justify-content: center; margin-top: 16px; }
+    .benchmark-badge a {
+      display: inline-flex;
+      max-width: 100%;
+      color: var(--theme-blue-deep);
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .benchmark-badge a:hover { transform: translateY(-2px); opacity: 0.9; }
+    .benchmark-badge img { display: block; width: 325px; max-width: 100%; height: auto; }
+    .benchmark-badge img[hidden] { display: none; }
+
     .btn-link-custom.disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -486,7 +499,13 @@
       .jumbotron { padding: 2.5rem 1rem 1.5rem; }
       .jumbotron h1 { font-size: 1.5rem; }
       section { padding: 40px 0; }
-      .link-buttons { gap: 10px; }
+      .link-buttons { gap: 6px; flex-wrap: nowrap; }
+      .link-buttons .btn-link-custom {
+        gap: 5px;
+        padding: 9px clamp(5px, 1.8vw, 14px);
+        font-size: clamp(0.7rem, 3.2vw, 0.95rem);
+        white-space: nowrap;
+      }
     }
   </style>
 </head>
@@ -534,6 +553,12 @@
               </a>
               <a class="btn-link-custom demo" href="#interactive-demo">
                 <i class="fa fa-cube"></i> Interactive Demo
+              </a>
+            </div>
+            <div class="benchmark-badge">
+              <a href="https://paperswithcode.co/api/v1/papers/2606.32036/leaderboard-badge-link?eval=44911" target="_blank" rel="noopener" aria-label="Papers with Code DNA-Rendering leaderboard" title="Papers with Code DNA-Rendering leaderboard">
+                <img id="pwc-badge-image" src="https://paperswithcode.co/api/v1/papers/2606.32036/leaderboard-badge.svg?eval=44911&amp;live=1" alt="Papers with Code DNA-Rendering leaderboard ranking" width="259" height="20">
+                <span id="pwc-badge-fallback" hidden>Papers with Code</span>
               </a>
             </div>
           </div>
@@ -793,6 +818,28 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Refresh the official live badge while the page is open.
+      const pwcBadgeImage = document.getElementById('pwc-badge-image');
+      const pwcBadgeFallback = document.getElementById('pwc-badge-fallback');
+      if (pwcBadgeImage && pwcBadgeFallback) {
+        const badgeUrl = 'https://paperswithcode.co/api/v1/papers/2606.32036/leaderboard-badge.svg?eval=44911&live=1';
+        const showBadge = (available) => {
+          pwcBadgeImage.hidden = !available;
+          pwcBadgeFallback.hidden = available;
+        };
+        pwcBadgeImage.addEventListener('load', () => showBadge(true));
+        pwcBadgeImage.addEventListener('error', () => showBadge(false));
+        if (pwcBadgeImage.complete) showBadge(pwcBadgeImage.naturalWidth > 0);
+
+        const refreshBadge = () => {
+          pwcBadgeImage.src = `${badgeUrl}&refresh=${Date.now()}`;
+        };
+        window.setInterval(refreshBadge, 5 * 60 * 1000);
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) refreshBadge();
+        });
+      }
+
       // Scroll reveal
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {

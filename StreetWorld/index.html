@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020617" />
+    <meta
+      name="description"
+      content="StreetWorld: A Comprehensive and Photorealistic Closed-Loop Autonomous Driving Benchmark."
+    />
+    <title>StreetWorld: A Comprehensive and Photorealistic Closed-Loop Autonomous Driving Benchmark</title>
+    <link rel="icon" href="./favicon.svg?v=4180a86e12f9" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css?v=e934a3814e22" />
+    <script type="module" src="./app.js?v=f3d3d158ae56"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#gallery">Skip to Street Gallery</a>
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="StreetWorld overview"
+        ><img
+          src="./assets/streetworld-logo.svg"
+          alt="StreetWorld"
+          width="1334"
+          height="246"
+      /></a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#overview" class="active">Project</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#framework">Framework</a>
+        <a href="#comparison">Comparison</a>
+        <a href="#citation">BibTeX</a>
+      </nav>
+    </header>
+    <main id="deck">
+      <section
+        id="overview"
+        class="chapter active"
+        data-transition="cover"
+        aria-labelledby="overview-title"
+      >
+        <div class="paper-header">
+          <h1 id="overview-title">
+            <img
+              class="project-logo"
+              src="./assets/streetworld-logo.svg"
+              alt="StreetWorld"
+              width="1334"
+              height="246"
+            /><span class="project-title"
+              >A Comprehensive and Photorealistic <span>Closed-Loop</span> Autonomous Driving Benchmark</span
+            >
+          </h1>
+          <div class="authors" aria-label="Authors">
+            <span>Lvchang Fu<sup>1</sup></span>
+            <span>Hejiakang Cao<sup>1</sup></span>
+            <span>Futang Zhu<sup>2</sup></span>
+            <span>Yongchen Zai<sup>2</sup></span>
+            <span>Zhen Yang<sup>2</sup></span>
+            <span>Tian Xie<sup>1</sup></span>
+            <span>Hujun Bao<sup>1</sup></span>
+            <span>Xiaowei Zhou<sup>1</sup></span>
+            <span>Sida Peng<sup>1</sup></span>
+          </div>
+          <p class="affiliations">
+            <span><sup>1</sup> Zhejiang University</span>
+            <span><sup>2</sup> BYD Company Limited</span>
+          </p>
+          <div
+            class="resource-links"
+            aria-label="Project resources"
+          >
+            <button
+              disabled
+              title="Paper URL to be added"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 3h8l4 4v14H6ZM14 3v5h4M9 12h6M9 16h6" /></svg
+              >Paper
+            </button>
+            <a
+              class="resource-github"
+              href="https://github.com/zju3dv/StreetWorld"
+              target="_blank"
+              rel="noopener"
+              title="StreetWorld source code"
+            >
+              <svg
+                class="resource-brand-icon"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <use href="./assets/resource-icons.svg#github" /></svg
+              >GitHub
+            </a>
+            <a
+              class="resource-video"
+              href="./demo.html"
+              target="_blank"
+              rel="noopener"
+              title="Watch the StreetWorld demo"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="m10 8 6 4-6 4Z" /></svg
+              >Demo
+            </a>
+            <a
+              class="resource-huggingface"
+              href="https://huggingface.co/datasets/lvchangfu/streetworld-benchmark"
+              target="_blank"
+              rel="noopener"
+              title="StreetWorld scene assets"
+            >
+              <svg
+                class="resource-brand-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <use href="./assets/resource-icons.svg#huggingface" /></svg
+              >Hugging Face
+            </a>
+          </div>
+        </div>
+        <div class="tldr">
+          <span class="tldr-label">TL;DR</span>
+          <div class="tldr-copy">
+            <p>
+              StreetWorld is a <strong>high-fidelity</strong> benchmark for
+              <strong>fully closed-loop</strong> autonomous driving, where policy
+              actions shape subsequent observations.
+            </p>
+            <p>
+              It provides <strong>2,000+ scenes</strong>, combining
+              dynamic Gaussian splatting reconstructions from
+              <img
+                class="dataset-logo"
+                src="./assets/nuscenes-logo.svg"
+                alt="nuScenes"
+                width="500"
+                height="87"
+              />
+              and
+              <span class="dataset-brand"
+                ><img
+                  class="dataset-logo"
+                  src="./assets/waymo-logo.svg"
+                  alt=""
+                  width="3814"
+                  height="2018"
+                />Waymo</span
+              > with integrated NuRec assets.
+            </p>
+            <p>
+              A <strong>Gym-style interface</strong> and
+              <strong>modular design</strong> let researchers customize evaluation
+              settings and integrate new scenes, rendering backends, and driving
+              policies.
+            </p>
+          </div>
+        </div>
+        <a
+          class="next-section"
+          href="#gallery"
+          aria-label="Explore Street Gallery"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4v16m-6-6 6 6 6-6" /></svg
+        ></a>
+      </section>
+
+      <section
+        id="gallery"
+        class="chapter"
+        data-transition="cover"
+        aria-labelledby="gallery-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="gallery-title">Street Gallery</h2>
+          <p class="section-description">StreetWorld provides over 2,000 photorealistic, dynamic street scenes, combining reconstructions from Waymo and nuScenes with integrated NuRec assets. This gallery showcases representative scenes spanning different weather, road conditions, and driving behaviors.</p>
+        </div>
+        <div class="chapter-media">
+          <fieldset class="filter-group media-options" data-switch="dataset" aria-label="Dataset">
+            <div class="filter-options">
+              <button
+                  class="selected"
+                  data-value="nuScenes"
+                  aria-pressed="true"
+                >
+                  nuScenes</button
+                ><button data-value="Waymo" aria-pressed="false">Waymo</button
+                ><button data-value="NuRec" aria-pressed="false">NuRec</button>
+            </div>
+          </fieldset>
+          <div class="gallery-layout scene-surface">
+            <div class="rig-panel">
+              <span
+                class="rig-loader"
+                data-gallery-rig-loader
+                role="status"
+                aria-label="Loading camera views"
+              ></span>
+              <img
+                class="rig-preview"
+                data-gallery-rig
+                hidden
+                width="480"
+                height="360"
+                alt="Six camera views arranged around the vehicle, with rear-facing panels mirrored"
+              />
+              <canvas
+                data-visual="rig"
+                aria-label="Vehicle viewed directly from above and behind, looking forward; six flat rectangular camera panels arranged around the vehicle at their corresponding front and rear positions"
+              ></canvas>
+            </div>
+            <div class="camera-bank">
+              <div class="camera-grid" data-camera-grid="gallery"></div>
+            </div>
+          </div>
+        </div>
+        <div class="scene-footer" data-scene-controls="gallery"></div>
+      </section>
+
+      <section
+        id="policy"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="policy-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="policy-title">AD Policy Evaluation</h2>
+          <p class="section-description">StreetWorld currently supports 15+ end-to-end autonomous driving policies. This section shows how different policies respond to the same scenes through synchronized camera observations and map trajectories.</p>
+        </div>
+        <div class="chapter-media">
+          <fieldset class="filter-group media-options" data-switch="policy" aria-label="Policy">
+            <div class="filter-options">
+              <button class="selected" data-value="Expert" aria-pressed="true">
+                  Expert</button
+                ><button data-value="UniAD" aria-pressed="false">UniAD</button
+                ><button data-value="VAD" aria-pressed="false">VAD</button
+                ><button data-value="DiffusionDrive" aria-pressed="false">
+                  DiffusionDrive</button
+                ><button data-value="OpenDriveVLA" aria-pressed="false">
+                  OpenDriveVLA</button
+                ><button data-value="AutoVLA" aria-pressed="false">AutoVLA</button
+                ><button data-value="Epona" aria-pressed="false">Epona</button
+                ><button data-value="ST-P3" aria-pressed="false">ST-P3</button>
+            </div>
+          </fieldset>
+          <div class="evaluation-layout scene-surface">
+            <div class="map-slot">
+              <div class="map-panel hud-panel">
+                <span class="panel-tag">Map</span>
+                <video
+                  class="map-video"
+                  data-map
+                  muted
+                  playsinline
+                  preload="none"
+                  aria-label="Policy scene map and ego trajectory"
+                ></video>
+              </div>
+            </div>
+            <div class="camera-bank">
+              <div class="camera-grid" data-camera-grid="policy"></div>
+            </div>
+          </div>
+        </div>
+        <div class="scene-footer" data-scene-controls="policy"></div>
+      </section>
+
+      <section
+        id="traffic"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="traffic-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="traffic-title">Traffic Simulation</h2>
+          <p class="section-description">StreetWorld draws on <a href="https://github.com/metadriverse/metadrive">MetaDrive</a> and <a href="https://github.com/hyzhou404/HUGSIM">HUGSIM</a> to provide basic traffic simulation algorithms, including Replay, Trajectory IDM, and IDM. Its modular architecture allows users to switch between these methods or define their own.</p>
+        </div>
+        <div class="traffic-media">
+          <div class="traffic-column-labels">
+            <span></span><span>Map</span><span>Rear left</span><span>Rear</span
+            ><span>Rear right</span>
+          </div>
+          <div class="traffic-rows scene-surface" id="traffic-rows"></div>
+        </div>
+        <div class="scene-footer" data-scene-controls="traffic"></div>
+      </section>
+
+      <section
+        id="renderer"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="renderer-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="renderer-title">Renderer Variants</h2>
+          <p class="section-description">StreetWorld's modular design supports the integration of different Gaussian splatting renderers.</p>
+        </div>
+        <div class="chapter-media">
+          <fieldset class="filter-group media-options" data-switch="renderer" aria-label="Renderer">
+            <div class="filter-options">
+              <button
+                  class="selected"
+                  data-value="Street GS"
+                  aria-pressed="true"
+                >
+                  Street GS</button
+                ><button data-value="OmniRe" aria-pressed="false">OmniRe</button
+                ><button data-value="InfiniSplat" aria-pressed="false">
+                  InfiniSplat
+                </button>
+            </div>
+          </fieldset>
+          <div class="evaluation-layout scene-surface">
+            <div class="map-slot">
+              <div class="map-panel hud-panel">
+                <span class="panel-tag">Map</span>
+                <video
+                  class="map-video"
+                  data-map
+                  muted
+                  playsinline
+                  preload="none"
+                  aria-label="Renderer scene map and ego trajectory"
+                ></video>
+              </div>
+            </div>
+            <div class="camera-bank">
+              <div class="camera-grid" data-camera-grid="renderer"></div>
+            </div>
+          </div>
+        </div>
+        <div class="scene-footer" data-scene-controls="renderer"></div>
+      </section>
+
+      <section
+        id="leaderboard"
+        class="chapter"
+        data-transition="cover"
+        aria-labelledby="leaderboard-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="leaderboard-title">Leaderboard</h2>
+          <div class="section-toolbar">
+            <div
+              class="switch-tabs"
+              data-switch="frequency"
+              role="group"
+              aria-label="Evaluation frequency"
+            >
+              <button class="selected" data-value="2 Hz" aria-pressed="true">
+                nuScenes (2 Hz)</button
+              ><button data-value="10 Hz" aria-pressed="false">
+                nuScenes (10 Hz)
+              </button>
+            </div>
+          </div>
+          <p class="section-description">StreetWorld benchmarks end-to-end autonomous driving policies through closed-loop simulation on nuScenes street-scene assets.</p>
+        </div>
+        <div class="benchmark-filters">
+          <fieldset class="filter-group">
+            <legend>Category</legend>
+            <div id="category-filter" class="filter-options"></div>
+          </fieldset>
+          <fieldset class="filter-group" id="scenario-group" hidden>
+            <legend>Scenario</legend>
+            <div id="scenario-filter" class="filter-options"></div>
+          </fieldset>
+          <p id="filter-summary" class="sr-only" aria-live="polite">
+            All scenarios
+          </p>
+        </div>
+        <div class="leaderboard-table hud-panel">
+          <div class="table-scroll">
+            <table>
+              <caption id="leaderboard-caption" class="sr-only">nuScenes evaluation results</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col" class="sortable"><button class="leaderboard-sort" type="button" data-leaderboard-sort="policy" aria-label="Sort by AD policy in ascending order">AD policy <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" title="Non-collision"><button class="leaderboard-sort" type="button" data-leaderboard-sort="NC" aria-label="Sort by NC in descending order">NC (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" title="Drivable area compliance"><button class="leaderboard-sort" type="button" data-leaderboard-sort="DAC" aria-label="Sort by DAC in descending order">DAC (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" title="Time to collision"><button class="leaderboard-sort" type="button" data-leaderboard-sort="TTC" aria-label="Sort by TTC in descending order">TTC (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" title="Comfort"><button class="leaderboard-sort" type="button" data-leaderboard-sort="COM" aria-label="Sort by COM in descending order">COM (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" aria-sort="descending" title="Route completion"><button class="leaderboard-sort" type="button" data-leaderboard-sort="RC" aria-label="Sort by RC in ascending order">RC (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                  <th scope="col" class="sortable" title="Route efficiency normalized by the simulator maximum vehicle speed"><button class="leaderboard-sort" type="button" data-leaderboard-sort="RE" aria-label="Sort by RE in descending order">RE (%) <svg class="sort-icon" viewBox="0 0 12 14" aria-hidden="true"><path class="sort-up" d="m3 5 3-3 3 3"/><path class="sort-down" d="m3 9 3 3 3-3"/></svg></button></th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <p class="table-footnote">NaN value will count as 0</p>
+      </section>
+
+      <section
+        id="framework"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="framework-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="framework-title">Framework</h2>
+          <div class="section-description">
+            <p>StreetWorld consists of three core modules: the Scene Manager, the closed-loop simulation framework, and the Env Interface. The Scene Manager initializes scenarios by loading and parsing their assets and supports scene editing.</p>
+            <p>During simulation, Actor and Participants manage the ego agent and other traffic entities, respectively. Each agent perceives the Environment through its Observer, selects actions through its Policy, and executes those actions through its Controller. The Environment collects actions from all agents, advances the physics simulation, and computes rewards using a configurable evaluation and reward model.</p>
+            <p>During evaluation, different AD policies interact with the simulator through the unified Env Interface, either remotely or locally.</p>
+          </div>
+        </div>
+        <figure
+          class="framework-diagram"
+          tabindex="0"
+          aria-label="StreetWorld framework diagram; scroll horizontally on smaller screens"
+        >
+          <img
+            src="./assets/framework.svg?v=91bcac9687f2"
+            width="1404"
+            height="548"
+            alt="Scene Manager initializes simulation environments using GS assets, traffic data, HD maps and collision models. Actor and Participants each form a Policy–Controller–Observer loop with the Environment, which updates and evaluates the scene. Env Interface provides Remote and Local access, with bidirectional connections to the simulation and AD policies including Expert, Keyboard, UniAD and VLA."
+          />
+        </figure>
+      </section>
+
+      <section
+        id="comparison"
+        class="chapter"
+        data-transition="cover"
+        aria-labelledby="comparison-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="comparison-title">Comparison</h2>
+          <p class="section-description">The simulator and benchmark comparison tables highlight StreetWorld's advantages over existing simulators and driving benchmarks.</p>
+        </div>
+        <div class="comparison-tables">
+          <section class="comparison-group" aria-labelledby="benchmark-comparison-title">
+            <h3 id="benchmark-comparison-title">Benchmarks</h3>
+            <div class="leaderboard-table comparison-table-panel hud-panel">
+              <div class="table-scroll" tabindex="0" aria-label="Benchmarks comparison; scroll horizontally to view all columns">
+                <table class="comparison-table" id="benchmark-comparison-table">
+                  <caption class="sr-only">Benchmarks: evaluation dimensions by comparison subject</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Dimension</th>
+                      <th scope="col">nuScenes</th>
+                      <th scope="col">nuPlan</th>
+                      <th scope="col">NAVSIM</th>
+                      <th scope="col">Bench2Drive</th>
+                      <th scope="col" class="comparison-current">StreetWorld</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Sensor closed loop</th>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Configurable</th>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Photorealism</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Large-scale assets</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Data frequency</th>
+                      <td>2 Hz</td>
+                      <td>2 Hz</td>
+                      <td>2 Hz</td>
+                      <td>10 Hz</td>
+                      <td class="comparison-current">Configurable</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="comparison-group" aria-labelledby="simulator-comparison-title">
+            <h3 id="simulator-comparison-title">Simulators</h3>
+            <div class="leaderboard-table comparison-table-panel hud-panel">
+              <div class="table-scroll" tabindex="0" aria-label="Simulators comparison; scroll horizontally to view all columns">
+                <table class="comparison-table" id="simulator-comparison-table">
+                  <caption class="sr-only">Simulators: evaluation dimensions by comparison subject</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Dimension</th>
+                      <th scope="col">CARLA</th>
+                      <th scope="col">MetaDrive</th>
+                      <th scope="col">HUGSIM</th>
+                      <th scope="col">RealEngine</th>
+                      <th scope="col">DriveArena</th>
+                      <th scope="col">AlpaSim</th>
+                      <th scope="col">AlpaSim<sup>*</sup></th>
+                      <th scope="col" class="comparison-current">StreetWorld</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Scene representation</th>
+                      <td>Mesh</td>
+                      <td>Mesh</td>
+                      <td>GS + Mesh</td>
+                      <td>GS + Mesh</td>
+                      <td>VM</td>
+                      <td>GS</td>
+                      <td>VM</td>
+                      <td class="comparison-current">GS + Mesh</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Large-scale assets</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><span class="comparison-unknown" role="img" aria-label="Unknown">?</span></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Consistency</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Extensibility</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Traffic simulation</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Photorealism</th>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Real-time simulation</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Physics engine</th>
+                      <td>Chaos</td>
+                      <td>Bullet</td>
+                      <td><span class="comparison-unspecified" role="img" aria-label="Not specified">—</span></td>
+                      <td><span class="comparison-unspecified" role="img" aria-label="Not specified">—</span></td>
+                      <td><span class="comparison-unspecified" role="img" aria-label="Not specified">—</span></td>
+                      <td><span class="comparison-unspecified" role="img" aria-label="Not specified">—</span></td>
+                      <td><span class="comparison-unspecified" role="img" aria-label="Not specified">—</span></td>
+                      <td class="comparison-current">Bullet</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Terrain support</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Simulation frequency</th>
+                      <td>Configurable</td>
+                      <td>Configurable</td>
+                      <td>Configurable</td>
+                      <td>2 Hz</td>
+                      <td>2 Hz</td>
+                      <td>Configurable</td>
+                      <td>3.75 Hz</td>
+                      <td class="comparison-current">Configurable</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Synchronization mode</th>
+                      <td>Sync / Async</td>
+                      <td>Sync</td>
+                      <td>Sync</td>
+                      <td>Sync</td>
+                      <td>Sync</td>
+                      <td>Sync</td>
+                      <td>Sync</td>
+                      <td class="comparison-current">Sync / Async</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Open source</th>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td><svg class="comparison-mark unsupported" viewBox="0 0 24 24" role="img" aria-label="Not supported"><path d="M7 7 17 17 M17 7 7 17" /></svg></td>
+                      <td class="comparison-current"><svg class="comparison-mark supported" viewBox="0 0 24 24" role="img" aria-label="Supported"><path d="M5 12.5 9.5 17 19 7" /></svg></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="comparison-note">GS: Gaussian splatting. VM: video diffusion. <span>AlpaSim* denotes the VM variant.</span></p>
+          </section>
+        </div>
+      </section>
+
+      <section
+        id="citation"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="citation-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="citation-title">BibTeX</h2>
+        </div>
+        <div class="citation-panel hud-panel">
+          <div class="citation-toolbar">
+            <span>streetworld.bib</span>
+            <button
+              id="copy-citation"
+              class="copy-button"
+              aria-label="Copy BibTeX"
+            >
+              Copy <span>⧉</span>
+            </button>
+          </div>
+          <pre><code id="bibtex"><span class="code-type">@misc</span>{streetworld,
+  <span class="code-key">title</span>  = {<span class="code-value">StreetWorld: A Comprehensive and Photorealistic Closed-Loop Autonomous Driving Benchmark</span>},
+  <span class="code-key">author</span> = {<span class="code-value">Fu, Lvchang and Cao, Hejiakang and Zhu, Futang and
+            Zai, Yongchen and Yang, Zhen and Xie, Tian and
+            Bao, Hujun and Zhou, Xiaowei and Peng, Sida</span>},
+  <span class="code-key">year</span>   = {<span class="code-value">2026</span>}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+    <nav class="chapter-rail" aria-label="Chapters"></nav>
+    <div id="announcement" class="sr-only" aria-live="polite"></div>
+  </body>
+</html>

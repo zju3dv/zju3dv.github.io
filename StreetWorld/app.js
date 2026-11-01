@@ -3,7 +3,7 @@ import {
   visualState,
   cameraRigs,
   camerasFor,
-} from "./visuals.js?v=4d04bb434ba2";
+} from "./visuals.js?v=e1deec242f86";
 import { synchronizeVideos } from "./media-sync.js?v=3efaf08eff74";
 import { loadMedia } from "./media-cache.js?v=f051d8ff7aec";
 
@@ -14,17 +14,18 @@ const names = [
   "AD Policy Evaluation",
   "Traffic Simulation",
   "Renderer Variants",
+  "Realistic Terrain",
   "Leaderboard",
   "Framework",
   "Comparison",
   "BibTeX",
 ];
-const scenes = { gallery: 0, policy: 0, traffic: 0, renderer: 0 };
+const scenes = { gallery: 0, policy: 0, traffic: 0, renderer: 0, terrain: 0 };
 const cameraNames = cameraRigs.nuScenes.map((camera) => camera.name);
 const galleryAssetBase = "./assets/project-page-dist/asset-present";
 const galleryMediaVersion = "d158a10883aa";
 const sceneThumbnailBase = "./assets/project-page-dist/thumbnails";
-const sceneThumbnailVersion = "af176815cd1f";
+const sceneThumbnailVersion = "ac15ac1f3cd9";
 const gallerySceneSets = {
   nuScenes: {
     directory: "nuscenes",
@@ -91,10 +92,12 @@ const gallerySceneSets = {
 };
 const chapterAssetBase = "./assets/project-page-dist";
 const chapterCameraVersion = "ac89b551d903";
+const terrainMediaVersion = "0a709e82f102";
 const chapterScenes = {
   policy: ["0013", "0001", "0204", "0230"],
   traffic: ["0018", "0104", "0202", "0891"],
   renderer: ["0017", "0277", "waymo-670", "waymo-718"],
+  terrain: ["078", "575", "590", "605", "614"],
 };
 const policyDirectories = {
   Expert: "expert",
@@ -137,7 +140,7 @@ function updateNavigation() {
     const section = link.hash.slice(1);
     const selected =
       section === current.id ||
-      (section === "gallery" && activeIndex >= 1 && activeIndex <= 4);
+      (section === "gallery" && activeIndex >= 1 && activeIndex <= 5);
     link.classList.toggle("active", selected);
     if (selected) link.setAttribute("aria-current", "true");
     else link.removeAttribute("aria-current");
@@ -531,6 +534,17 @@ document.querySelectorAll("#traffic-rows video").forEach((video) => {
   video.addEventListener("loadstart", () => view.classList.remove("collision"));
 });
 
+const terrainMedia = document.querySelector("#terrain .terrain-media");
+const terrainVideo = terrainMedia.querySelector("video");
+const terrainLoader = terrainMedia.querySelector("[data-terrain-loader]");
+for (const event of ["emptied", "waiting", "canplay"]) {
+  terrainVideo.addEventListener(event, () => {
+    const loading = terrainVideo.readyState < 3;
+    terrainMedia.setAttribute("aria-busy", String(loading));
+    terrainLoader.hidden = !loading;
+  });
+}
+
 const chapterMedia = Object.fromEntries(
   Object.keys(chapterScenes).map((owner) => [
     owner,
@@ -565,7 +579,10 @@ function updateChapterMedia(owner) {
   if (selection !== state.selection) {
     state.stop?.();
     state.stop = null;
-    if (owner === "traffic") {
+    if (owner === "terrain") {
+      const video = chapter.querySelector(".terrain-video");
+      setVideoSource(video, `${chapterAssetBase}/realistic-terrain/${scene}.mp4?v=${terrainMediaVersion}`);
+    } else if (owner === "traffic") {
       const channels = ["BACK_LEFT", "BACK", "BACK_RIGHT"];
       chapter.querySelectorAll("[data-traffic-mode]").forEach((row) => {
         const mode = row.dataset.trafficMode;
@@ -665,6 +682,9 @@ function sceneMediaURLs(owner, index) {
     return [...Object.values(config.channels).map((channel) => `${base}/${channel}.mp4?v=${galleryMediaVersion}`), `${base}/RIG.gif?v=${galleryMediaVersion}`];
   }
   const scene = chapterScenes[owner][index];
+  if (owner === "terrain") {
+    return [`${chapterAssetBase}/realistic-terrain/${scene}.mp4?v=${terrainMediaVersion}`];
+  }
   if (owner === "traffic") {
     const base = `${chapterAssetBase}/traffic-sim/${scene}`;
     return trafficModes.flatMap(({ directory }) => [
@@ -736,11 +756,12 @@ function updateSceneFooter(owner) {
   const config = owner === "gallery" ? gallerySceneSets[visualState.dataset] : null;
   const directory = owner === "gallery" ? `gallery/${config.directory}` : owner;
   const ids = owner === "gallery" ? config.scenes : chapterScenes[owner];
+  const thumbnailVersion = owner === "terrain" ? terrainMediaVersion : sceneThumbnailVersion;
   if (group.dataset.collection !== directory) {
     group.innerHTML = ids
       .map((id, index) => {
         const number = String(index + 1).padStart(2, "0");
-        return `<button class="scene-thumbnail" type="button" data-scene="${index}" aria-label="Scene ${number}: ${id}"><img src="${sceneThumbnailBase}/${directory}/${id}.webp?v=${sceneThumbnailVersion}" width="320" height="180" alt="" loading="lazy" decoding="async"></button>`;
+        return `<button class="scene-thumbnail" type="button" data-scene="${index}" aria-label="Scene ${number}: ${id}"><img src="${sceneThumbnailBase}/${directory}/${id}.webp?v=${thumbnailVersion}" width="320" height="180" alt="" loading="lazy" decoding="async"></button>`;
       })
       .join("");
     group.dataset.collection = directory;

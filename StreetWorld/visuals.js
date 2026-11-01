@@ -4,7 +4,7 @@ export const visualState = {
   policy: "Expert",
   renderer: "Street GS",
   frequency: "2 Hz",
-  scenes: { gallery: 0, policy: 0, traffic: 0, renderer: 0 },
+  scenes: { gallery: 0, policy: 0, traffic: 0, renderer: 0, terrain: 0 },
   paused: { gallery: false, policy: false, renderer: false },
 };
 
@@ -93,7 +93,7 @@ function contour(ctx, project, points, color, width = 1, closed = false) {
   path(ctx, samples.map(project), null, color, width, closed);
 }
 
-function car(ctx, project, x = 0, z = 0, scale = 1, time = 0) {
+export function car(ctx, project, x = 0, z = 0, scale = 1, time = 0) {
   const p = ([vx, vy, vz]) =>
     project([x + vx * scale, vy * scale, z + vz * scale]);
   const mirror = ([vx, vy, vz]) => [-vx, vy, vz];

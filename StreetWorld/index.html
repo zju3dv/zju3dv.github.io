@@ -10,8 +10,8 @@
     />
     <title>StreetWorld: A Comprehensive and Photorealistic Closed-Loop Autonomous Driving Benchmark</title>
     <link rel="icon" href="./favicon.svg?v=4180a86e12f9" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=e934a3814e22" />
-    <script type="module" src="./app.js?v=f3d3d158ae56"></script>
+    <link rel="stylesheet" href="./styles.css?v=ca4c7d1b47f1" />
+    <script type="module" src="./app.js?v=38373eb339f6"></script>
   </head>
   <body>
     <a class="skip-link" href="#gallery">Skip to Street Gallery</a>
@@ -337,6 +337,27 @@
           </div>
         </div>
         <div class="scene-footer" data-scene-controls="renderer"></div>
+      </section>
+
+      <section
+        id="terrain"
+        class="chapter"
+        data-transition="slide"
+        aria-labelledby="terrain-title"
+        inert
+      >
+        <div class="section-heading">
+          <h2 id="terrain-title">Realistic Terrain</h2>
+          <p class="section-description">Our ground geometry estimation pipeline enables autonomous driving simulation on realistic terrain.</p>
+        </div>
+        <div class="chapter-media scene-surface terrain-media" aria-busy="true">
+          <span class="rig-loader" data-terrain-loader role="status"
+            aria-label="Loading terrain scene"></span>
+          <video class="terrain-video" muted playsinline preload="none"
+            width="1440" height="684"
+            aria-label="Waymo driving simulation with three camera views and reconstructed ground geometry"></video>
+        </div>
+        <div class="scene-footer" data-scene-controls="terrain"></div>
       </section>
 
       <section

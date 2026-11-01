@@ -645,6 +645,32 @@ h2 {
   width: 100%;
   margin: auto 0;
 }
+
+#terrain .terrain-media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#terrain .terrain-media[aria-busy="true"] .terrain-video {
+  visibility: hidden;
+}
+
+.terrain-video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(100%, 620px);
+  aspect-ratio: 1440 / 684;
+  object-fit: contain;
+  mask-image: linear-gradient(transparent, #000 3%, #000 90%, transparent),
+    linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  mask-composite: intersect;
+}
+
 .gallery-layout,
 .evaluation-layout {
   display: grid;

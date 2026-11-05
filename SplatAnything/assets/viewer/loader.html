@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SplatAnything 3D viewer</title>
+    <!--
+      Opens a SuperSplat standalone viewer HTML hosted elsewhere (e.g. a HuggingFace
+      dataset). Usage: loader.html?src=<https URL of the exported viewer HTML>.
+      HuggingFace serves those files as downloads, so the page is fetched here and
+      written into this document, as on the InfiniSplat v2 project page.
+    -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #09090b;
+        color: #e4e4e7;
+        font:
+          15px/1.5 -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          system-ui,
+          sans-serif;
+      }
+      #status {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 24px;
+        text-align: center;
+      }
+      #progress {
+        display: block;
+        width: min(320px, 80vw);
+        height: 6px;
+        overflow: hidden;
+        border: 0;
+        border-radius: 999px;
+        background: #3f3f46;
+        accent-color: #60a5fa;
+      }
+      #progress::-webkit-progress-bar {
+        background: #3f3f46;
+        border-radius: 999px;
+      }
+      #progress::-webkit-progress-value {
+        background: #60a5fa;
+        border-radius: 999px;
+      }
+      #progress::-moz-progress-bar {
+        background: #60a5fa;
+        border-radius: 999px;
+      }
+      #scene-label {
+        color: #fafafa;
+        font-size: 17px;
+        font-weight: 600;
+      }
+      #details {
+        color: #a1a1aa;
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+      }
+      #message {
+        max-width: 420px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media (max-width: 480px) {
+        #status { gap: 10px; padding: 16px; }
+        #scene-label { font-size: 15px; }
+        #details { font-size: 12px; }
+      }
+      button,
+      a {
+        padding: 7px 14px;
+        border: 1px solid #3f3f46;
+        border-radius: 999px;
+        background: #18181b;
+        color: #fafafa;
+        font: inherit;
+        font-size: 13px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status">
+      <span id="scene-label"></span>
+      <span id="message" role="status">Downloading scene HTML…</span>
+      <progress id="progress" max="100" aria-label="Scene HTML download progress"></progress>
+      <span id="details"></span>
+      <div class="actions">
+        <button id="retry" type="button" hidden>Try again</button
+        ><a id="download" hidden>Download viewer HTML</a>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const message = document.getElementById("message");
+        const progress = document.getElementById("progress");
+        const details = document.getElementById("details");
+        const retry = document.getElementById("retry");
+        const download = document.getElementById("download");
+        const actions = document.querySelector(".actions");
+        const params = new URLSearchParams(location.search);
+        const bytes = Number(params.get("bytes"));
+        const expected = Number.isSafeInteger(bytes) && bytes > 0 ? bytes : 0;
+        const label = params.get("label") || "3D scene";
+        document.getElementById("scene-label").textContent = label;
+        document.title = `${label} — SplatAnything`;
+        let source;
+        try {
+          source = new URL(params.get("src"));
+          if (!["https:", "http:"].includes(source.protocol)) throw Error();
+        } catch {
+          message.textContent = "No 3D scene was specified.";
+          progress.hidden = true;
+          return;
+        }
+        const downloadURL = new URL(source);
+        downloadURL.searchParams.set("download", "true");
+        download.href = downloadURL.href;
+        download.target = "_blank";
+        download.rel = "noopener noreferrer";
+        const megabytes = (bytes) => (bytes / 1e6).toFixed(1);
+        let controller;
+        const cancel = () => controller?.abort();
+        addEventListener("pagehide", cancel);
+        addEventListener("beforeunload", cancel);
+        addEventListener("message", (event) => {
+          if (
+            event.source === parent && event.origin === location.origin &&
+            event.data?.type === "splatanything-cancel-download"
+          ) cancel();
+        });
+
+        function showProgress(loaded, total) {
+          if (total) {
+            const percent = Math.min(100, Math.floor(loaded / total * 100));
+            progress.value = percent;
+            progress.setAttribute("aria-valuetext", `${percent}% downloaded`);
+            details.textContent = `${percent}% · ${megabytes(loaded)} / ${megabytes(total)} MB`;
+          } else {
+            progress.removeAttribute("value");
+            progress.setAttribute("aria-valuetext", `${megabytes(loaded)} MB downloaded`);
+            details.textContent = `${megabytes(loaded)} MB downloaded`;
+          }
+        }
+
+        async function load() {
+          cancel();
+          const request = new AbortController();
+          controller = request;
+          retry.hidden = download.hidden = true;
+          actions.hidden = true;
+          progress.hidden = details.hidden = false;
+          showProgress(0, expected);
+          message.textContent = "Downloading scene HTML…";
+          try {
+            const response = await fetch(source, {
+              credentials: "omit",
+              signal: request.signal,
+            });
+            if (!response.ok)
+              throw Error(`download returned HTTP ${response.status}`);
+            // Repository metadata supplies the uncompressed size even when the
+            // CDN omits Content-Length or transfers a compressed response.
+            const total = expected || Number(response.headers.get("content-length")) || 0;
+            showProgress(0, total);
+            const reader = response.body.getReader();
+            const parts = [];
+            let loaded = 0;
+            let painted = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              parts.push(value);
+              loaded += value.byteLength;
+              if (performance.now() - painted > 100) {
+                showProgress(loaded, total);
+                painted = performance.now();
+              }
+            }
+            if (!loaded) throw Error("the scene file is empty");
+            if (expected && loaded !== expected)
+              throw Error("the scene download was incomplete; please retry");
+            showProgress(loaded, total || loaded);
+            message.textContent = "Starting viewer…";
+            // Keep this http(s) document URL: the exported viewer resolves its
+            // asset names against location.href, which blob: or srcdoc pages break.
+            const blob = new Blob(parts, { type: "text/html" });
+            parts.length = 0;
+            const html = await blob.text();
+            if (request.signal.aborted) return;
+            document.open();
+            document.write(html);
+            document.close();
+          } catch (error) {
+            if (request.signal.aborted) return;
+            progress.hidden = details.hidden = true;
+            message.textContent = `Could not load the scene: ${error.message}.`;
+            retry.hidden = download.hidden = false;
+            actions.hidden = false;
+          }
+        }
+        retry.addEventListener("click", load);
+        load();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#fff"/>
+  <defs>
+    <path id="infinity" pathLength="100"
+      d="M32 16C22 2 4 2 4 16S22 30 32 16S60 2 60 16S42 30 32 16Z"/>
+  </defs>
+  <g transform="translate(0 16)" fill="none" stroke-width="4"
+    stroke-linecap="round" stroke-linejoin="round">
+    <use href="#infinity" stroke="#18181b"/>
+    <use href="#infinity" stroke="#3080ff" stroke-dasharray="16 84"/>
+  </g>
+</svg>

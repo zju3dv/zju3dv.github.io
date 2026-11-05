@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="description"
+      content="SplatAnything — Gaussian Spacing Normalization for Feed-Forward 3DGS across Arbitrary Scenes. Interactive 3D Gaussian Splatting results and method comparisons."
+    />
+    <title>SplatAnything</title>
+    <link rel="icon" href="assets/favicon.svg?v=infinity-blue" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/gallery.js"></script>
+    <script defer src="assets/js/content.js"></script>
+    <script defer src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14m-6-6 6 6-6 6" />
+      </symbol>
+      <symbol id="icon-diagonal" viewBox="0 0 24 24">
+        <path d="M7 17 17 7M8 7h9v9" />
+      </symbol>
+      <symbol id="icon-expand" viewBox="0 0 24 24">
+        <path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" />
+      </symbol>
+      <symbol id="icon-reset" viewBox="0 0 24 24">
+        <path d="M4 10a8 8 0 1 1 1 7M4 4v6h6" />
+      </symbol>
+      <symbol id="icon-cube" viewBox="0 0 64 64">
+        <path
+          d="m32 5 24 13v28L32 59 8 46V18Z M8 18l24 14 24-14M32 32v27M20 12l24 14v27M44 12 20 26v27M8 32l24 14 24-14"
+        />
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="m9 5 11 7-11 7Z" />
+      </symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M9 5v14M15 5v14" />
+      </symbol>
+      <symbol id="icon-paper" viewBox="0 0 24 24">
+        <path d="M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6" />
+      </symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24">
+        <path d="m7 6-6 6 6 6m10-12 6 6-6 6M14 3l-4 18" />
+      </symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24">
+        <path d="M9 9h11v11H9Zm-4 6H4V4h11v1" />
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24">
+        <path d="m7 10 5 5 5-5" />
+      </symbol>
+      <symbol id="icon-back" viewBox="0 0 24 24">
+        <path d="M19 12H5m6-6-6 6 6 6" />
+      </symbol>
+      <symbol id="icon-object" viewBox="0 0 24 24">
+        <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Zm-8 4.5 8 4.5 8-4.5M12 12v9" />
+      </symbol>
+      <symbol id="icon-indoor" viewBox="0 0 24 24">
+        <path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5M9.5 20v-5.5h5V20" />
+      </symbol>
+      <symbol id="icon-street" viewBox="0 0 24 24">
+        <path d="M9.5 3 4 21m10.5-18L20 21M12 4.5v2.5m0 3.5v3m0 3.5V20" />
+      </symbol>
+      <symbol id="icon-aerial" viewBox="0 0 24 24">
+        <path
+          d="M10 10h4v4h-4Zm0 0L7 7m7 3 3-3m-3 7 3 3m-7-3-3 3M7 4.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm10 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-10 10a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm10 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
+        />
+      </symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="#top"
+          ><span class="project-name">SplatAnything</span></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="#tldr">Overview</a>
+          <a href="#demo">Video</a>
+          <a href="#method">Method</a>
+          <a href="#qualitative">Results</a>
+          <!-- <a href="#comparisons">Compare</a> -->
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero container" id="top" aria-labelledby="project-title">
+        <div class="hero-topline">
+          <span class="hero-badge"
+            ><i aria-hidden="true"></i>Feed-Forward 3D Gaussian Splatting</span
+          ><button
+            class="motion-toggle"
+            id="title-motion-toggle"
+            type="button"
+            aria-label="Pause title animation"
+            aria-pressed="false"
+            title="Pause title animation"
+            hidden
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-pause" />
+            </svg>
+          </button>
+        </div>
+        <h1 id="project-title">
+          <span class="project-name"
+            ><span class="splat-word" id="splat-word"
+              ><span class="splat-ink">Splat</span></span
+            ><span class="title-rest">Anything</span></span
+          >
+          <span class="title-infinity" aria-hidden="true">
+            <svg viewBox="0 0 64 32" focusable="false">
+              <defs>
+                <path
+                  id="title-infinity-path"
+                  pathLength="100"
+                  d="M32 16C22 2 4 2 4 16S22 30 32 16S60 2 60 16S42 30 32 16Z"
+                />
+              </defs>
+              <use class="infinity-track" href="#title-infinity-path" />
+              <use class="infinity-flow" href="#title-infinity-path" />
+            </svg>
+          </span>
+        </h1>
+        <p class="hero-subtitle" id="project-subtitle">
+          Gaussian Spacing Normalization for Feed-Forward 3DGS across Arbitrary
+          Scenes
+        </p>
+        <div id="authors" class="authors">
+          <span class="content-placeholder">Authors</span>
+        </div>
+        <div id="affiliations" class="affiliations">
+          <span class="content-placeholder">Affiliations</span>
+        </div>
+        <p id="author-note" class="author-note" hidden>✉ Corresponding authors</p>
+        <div class="resource-links">
+          <a
+            class="button button-primary"
+            data-resource="paper"
+            aria-disabled="true"
+            title="Paper link coming soon"
+            ><svg class="icon"><use href="#icon-paper" /></svg> Paper</a
+          >
+          <a
+            class="button"
+            data-resource="code"
+            aria-disabled="true"
+            title="Code link coming soon"
+            ><svg class="icon"><use href="#icon-code" /></svg> Code</a
+          >
+          <a
+            class="button"
+            data-resource="huggingface"
+            aria-disabled="true"
+            title="HuggingFace Demo link coming soon"
+            >HuggingFace Demo <svg class="icon"><use href="#icon-arrow" /></svg
+          ></a>
+        </div>
+      </section>
+
+      <section class="section container" id="tldr" aria-labelledby="tldr-title">
+        <div class="section-heading">
+          <h2 id="tldr-title">TL;DR</h2>
+        </div>
+        <div class="tldr-copy" id="tldr-copy">
+          <div class="text-skeleton" aria-label="Research summary to be added">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <h2 id="demo-title">Demo Video</h2>
+        </div>
+        <div class="window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"
+              ><i></i><i></i><i></i
+            ></span>
+            <span class="window-title">demo_video.mp4</span>
+          </div>
+          <div class="film-stage" id="film-stage">
+            <div class="film-placeholder" id="film-placeholder">
+              <span class="play-disc" aria-hidden="true"
+                ><svg><use href="#icon-play" /></svg
+              ></span>
+              <span class="film-note">Demo video coming soon</span>
+            </div>
+            <div class="video-loading" id="video-loading" hidden>
+              <div class="video-loading-indicator" aria-hidden="true">
+                <span class="video-loading-ring"></span>
+                <span id="video-loading-percent">0%</span>
+              </div>
+              <span id="video-loading-status" class="sr-only" role="status"
+                >Loading video…</span
+              >
+              <progress
+                id="video-loading-progress"
+                class="sr-only"
+                max="100"
+                aria-label="Demo video loading progress"
+              ></progress>
+            </div>
+          </div>
+        </div>
+        <div
+          class="video-chapters"
+          id="video-chapters"
+          role="group"
+          aria-label="Jump to a scene in the demo video"
+          hidden
+        ></div>
+        <p class="media-caption" id="video-caption" hidden></p>
+      </section>
+
+      <section
+        class="section container method-section"
+        id="method"
+        aria-labelledby="method-title"
+      >
+        <div class="section-heading">
+          <h2 id="method-title">Method</h2>
+        </div>
+        <div class="method-figures">
+          <figure class="method-figure">
+            <div class="method-image">
+              <img
+                src="images/method/pipeline_2.jpg"
+                width="4101"
+                height="774"
+                alt="SplatAnything pipeline: input images pass through a frozen geometry model, Gaussian Spacing Normalization, and a trainable Gaussian model to produce a 3DGS reconstruction."
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="method-caption">
+              <div class="method-caption-heading">
+                <h3><span class="method-label">(a)</span> Overall pipeline</h3>
+                <a
+                  class="method-fullsize"
+                  href="images/method/pipeline_2.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open figure (a), overall pipeline, at full resolution"
+                  >Full size <svg class="icon" aria-hidden="true"><use href="#icon-diagonal" /></svg
+                ></a>
+              </div>
+              <p>
+                <strong>Architecture of SplatAnything.</strong> Given <i>N</i>
+                input images and optional camera parameters, a frozen geometry
+                foundation model first estimates multi-view geometry. We convert
+                the geometry from its native radial-distance-normalized space to
+                the proposed Gaussian-spacing-normalized space and predict
+                per-pixel Gaussian attribute through a Gaussian backbone and a
+                lightweight GShead.
+              </p>
+            </figcaption>
+          </figure>
+
+          <figure class="method-figure">
+            <div class="method-image">
+              <img
+                src="images/method/pipeline_1.jpg"
+                width="4100"
+                height="1471"
+                alt="Radial distance normalization leaves different Gaussian spacings and inconsistent scale targets across scenes; Gaussian Spacing Normalization aligns a representative spacing statistic to alleviate supervision ambiguity."
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="method-caption">
+              <div class="method-caption-heading">
+                <h3><span class="method-label">(b)</span> Normalization space for feed-forward 3DGS</h3>
+                <a
+                  class="method-fullsize"
+                  href="images/method/pipeline_1.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open figure (b), Gaussian Spacing Normalization, at full resolution"
+                  >Full size <svg class="icon" aria-hidden="true"><use href="#icon-diagonal" /></svg
+                ></a>
+              </div>
+              <div class="method-explanation">
+                <p>
+                  <strong>Radial Distance Normalization.</strong> Fixing the mean
+                  radial distance to the reference-camera origin does not align
+                  Gaussian spacing. Similar image regions may therefore require
+                  different Gaussian-scale targets as scene scale or camera
+                  configuration changes, making supervision ambiguous.
+                </p>
+                <p>
+                  <strong>Gaussian Spacing Normalization.</strong> Canonicalizing
+                  the median Gaussian spacing gives predictions a more consistent
+                  spatial reference across scenes. This alleviates ambiguity in
+                  Gaussian-scale supervision, helping avoid under-coverage and
+                  excessive overlap.
+                </p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        class="section container"
+        id="qualitative"
+        aria-labelledby="qualitative-title"
+      >
+        <div class="section-heading">
+          <h2 id="qualitative-title">Qualitative Results</h2>
+        </div>
+        <div class="gallery-controls">
+          <div
+            class="category-tabs"
+            id="qualitative-tabs"
+            role="tablist"
+            aria-label="Scene category"
+          ></div>
+        </div>
+        <div id="qualitative-panel" role="tabpanel" tabindex="0">
+          <div class="viewer-card">
+            <div class="viewer-toolbar">
+              <div class="viewer-title">
+                <strong id="qualitative-scene-name">Scene 01</strong
+                ><span class="badge" id="qualitative-dataset"></span>
+              </div>
+              <div class="viewer-tools">
+                <button
+                  class="text-button"
+                  type="button"
+                  data-back="qualitative-viewer"
+                  hidden
+                >
+                  <svg class="icon"><use href="#icon-back" /></svg> Back to
+                  preview</button
+                ><a
+                  class="icon-button"
+                  data-standalone="qualitative-viewer"
+                  aria-disabled="true"
+                  aria-label="Open viewer in a new tab"
+                  title="Open viewer in a new tab"
+                  ><svg class="icon"><use href="#icon-diagonal" /></svg></a
+                ><button
+                  class="icon-button"
+                  type="button"
+                  data-reset="qualitative-viewer"
+                  aria-label="Reset scene view"
+                  title="Reset scene view"
+                  disabled
+                >
+                  <svg class="icon"><use href="#icon-reset" /></svg></button
+                ><button
+                  class="icon-button"
+                  type="button"
+                  data-fullscreen="qualitative-viewer"
+                  aria-label="Expand scene viewer"
+                  title="Expand scene viewer"
+                >
+                  <svg class="icon"><use href="#icon-expand" /></svg>
+                </button>
+              </div>
+            </div>
+            <div class="viewer-stage" id="qualitative-viewer"></div>
+            <div class="viewer-footer">
+              <span
+                >Drag to orbit · Scroll to zoom<span class="fly-hint">
+                  · Fly: WASD + Mouse, Esc to exit</span
+                ></span
+              ><span class="powered-by">Viewed with SuperSplat</span>
+            </div>
+          </div>
+          <p class="viewer-download-hint" id="qualitative-download-hint">
+            Click <strong>Explore in 3D</strong> to download this scene’s HTML
+            viewer from Hugging Face and explore it interactively.
+          </p>
+          <div
+            class="scene-grid"
+            id="qualitative-scenes"
+            role="group"
+            aria-label="Select a reconstruction scene"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Comparison module temporarily disabled. Restore with setupComparison() in app.js.
+      <section
+        class="section container"
+        id="comparisons"
+        aria-labelledby="comparison-title"
+      >
+        <div class="section-heading">
+          <h2 id="comparison-title">Quantitative Comparisons</h2>
+        </div>
+        <div class="gallery-controls">
+          <div
+            class="category-tabs"
+            id="comparison-tabs"
+            role="tablist"
+            aria-label="Comparison scene category"
+          ></div>
+          <span class="gallery-count" id="comparison-count"></span>
+        </div>
+        <div id="comparison-panel" role="tabpanel" tabindex="0">
+          <div class="comparison-grid">
+            <article class="viewer-card ours-card" aria-label="Our method">
+              <div class="viewer-toolbar">
+                <div class="viewer-title">
+                  <strong>Ours</strong
+                  ><span class="badge badge-dark">SplatAnything</span>
+                </div>
+                <div class="viewer-tools">
+                  <a
+                    class="icon-button"
+                    data-standalone="ours-viewer"
+                    aria-disabled="true"
+                    aria-label="Open ours in a new tab"
+                    title="Open ours in a new tab"
+                    ><svg class="icon"><use href="#icon-diagonal" /></svg></a
+                  ><button
+                    class="icon-button"
+                    type="button"
+                    data-reset="ours-viewer"
+                    aria-label="Reset ours view"
+                    title="Reset ours view"
+                    disabled
+                  >
+                    <svg class="icon"><use href="#icon-reset" /></svg></button
+                  ><button
+                    class="icon-button"
+                    type="button"
+                    data-fullscreen="ours-viewer"
+                    aria-label="Expand ours viewer"
+                    title="Expand ours viewer"
+                  >
+                    <svg class="icon"><use href="#icon-expand" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="viewer-stage compare-stage" id="ours-viewer"></div>
+              <div class="viewer-footer">
+                <span class="compare-scene-name">Scene 01</span
+                ><span>Our method</span>
+              </div>
+            </article>
+            <article
+              class="viewer-card baseline-card"
+              aria-label="Comparison method"
+            >
+              <div class="viewer-toolbar">
+                <div class="model-control">
+                  <label for="model-select" class="sr-only"
+                    >Comparison method</label
+                  ><select id="model-select"></select
+                  ><svg class="icon"><use href="#icon-chevron" /></svg>
+                </div>
+                <div class="viewer-tools">
+                  <a
+                    class="icon-button"
+                    data-standalone="baseline-viewer"
+                    aria-disabled="true"
+                    aria-label="Open comparison method in a new tab"
+                    title="Open comparison method in a new tab"
+                    ><svg class="icon"><use href="#icon-diagonal" /></svg></a
+                  ><button
+                    class="icon-button"
+                    type="button"
+                    data-reset="baseline-viewer"
+                    aria-label="Reset comparison view"
+                    title="Reset comparison view"
+                    disabled
+                  >
+                    <svg class="icon"><use href="#icon-reset" /></svg></button
+                  ><button
+                    class="icon-button"
+                    type="button"
+                    data-fullscreen="baseline-viewer"
+                    aria-label="Expand comparison viewer"
+                    title="Expand comparison viewer"
+                  >
+                    <svg class="icon"><use href="#icon-expand" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="viewer-stage compare-stage"
+                id="baseline-viewer"
+              ></div>
+              <div class="viewer-footer">
+                <span class="compare-scene-name">Scene 01</span
+                ><span id="baseline-method-label">Comparison method</span>
+              </div>
+            </article>
+          </div>
+          <div class="comparison-footnote">
+            <span id="comparison-hint"
+              >Switch the method on the right to compare.</span
+            ><button
+              class="text-button"
+              type="button"
+              id="comparison-back"
+              hidden
+            >
+              <svg class="icon"><use href="#icon-back" /></svg> Back to previews
+            </button>
+          </div>
+          <div
+            class="scene-grid"
+            id="comparison-scenes"
+            role="group"
+            aria-label="Select a comparison scene"
+          ></div>
+        </div>
+      </section>
+      -->
+
+      <section
+        class="section container"
+        id="acknowledgements"
+        aria-labelledby="acknowledgements-title"
+      >
+        <div class="section-heading">
+          <h2 id="acknowledgements-title">Acknowledgements</h2>
+          <p id="acknowledgements-copy"></p>
+        </div>
+      </section>
+
+      <section
+        class="section container"
+        id="citation"
+        aria-labelledby="citation-title"
+      >
+        <div class="section-heading">
+          <h2 id="citation-title">Citation</h2>
+        </div>
+        <div class="window citation-window">
+          <div class="window-bar">
+            <span class="window-dots" aria-hidden="true"
+              ><i></i><i></i><i></i
+            ></span>
+            <span class="window-title">splatanything.bib</span>
+            <button class="copy-citation" type="button" id="copy-citation">
+              <svg class="icon"><use href="#icon-copy" /></svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre
+            class="citation-code"
+            tabindex="0"
+            aria-label="BibTeX citation"
+          ><code id="citation-code"></code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span class="project-name">SplatAnything</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+    <div
+      class="sr-only"
+      id="announcer"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <noscript
+      ><div class="no-script">
+        Enable JavaScript to switch scenes and load interactive 3D viewers.
+      </div></noscript
+    >
+  </body>
+</html>

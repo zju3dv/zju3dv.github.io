@@ -1,0 +1,276 @@
+{
+  "dataset": "ritianyu/SplatAnything_Demo",
+  "revision": "de6459bfe59506c3e602831703e079491e2e3f75",
+  "scenes": {
+    "object-1": {
+      "path": "object/1/case4_32frames_stride1_gaussians.html",
+      "bytes": 24908290,
+      "sha256": "4ac80f1c4b4c8e49a6dff5a7fea12a5437d075a7292a47ff927137d1c7ef4d83"
+    },
+    "object-2": {
+      "path": "object/2/case2_32frames_stride1_gaussians.html",
+      "bytes": 26631572,
+      "sha256": "07c2de623ee8ab0660b87999b6f1612cba87181eed4389201741c804da46320a"
+    },
+    "object-3": {
+      "path": "object/3/case3_48frames_stride1_gaussians.html",
+      "bytes": 55496531,
+      "sha256": "36a29c3ce114af42a52027a94ffdb53ec2ba58439f5edb6d62b8e99279914811"
+    },
+    "object-4": {
+      "path": "object/4/case4_48frames_stride1_gaussians.html",
+      "bytes": 42540535,
+      "sha256": "ebd3e52bd302de4fdeabff3e4d9c29e3dea51e8acb3d6b85cb39be96caea1e00"
+    },
+    "object-5": {
+      "path": "object/5/case7_48frames_stride1_gaussians.html",
+      "bytes": 38467877,
+      "sha256": "e7aa6cd0a3e92cd2ed45a8a2d81f84514b5e5e33b9f92d9d87067dd9bbc5faf0"
+    },
+    "object-6": {
+      "path": "object/6/case8_48frames_stride1_gaussians.html",
+      "bytes": 44669744,
+      "sha256": "c6f33e2fd1b6ce14f23957923e8512386e68762afae16c441fef2bfda3f10b39"
+    },
+    "object-7": {
+      "path": "object/7/case7_32frames_stride1_gaussians.html",
+      "bytes": 27511376,
+      "sha256": "7508d97ff614b191309a04b568d664e4091c87a760f7e2e3d561025c3f57112a"
+    },
+    "object-8": {
+      "path": "object/8/gaussians (27).html",
+      "bytes": 20266392,
+      "sha256": "35ed977ff07e16aaebabd821c39db22b3b4d905c25838e03a3195c9f6c2b8c05"
+    },
+    "object-9": {
+      "path": "object/9/box_109__wcam_wintrs.html",
+      "bytes": 11922509,
+      "sha256": "d1c94859db18cd17e5bde4579c1d18d9fc260a595272eadf19a5da512878bd1c"
+    },
+    "object-10": {
+      "path": "object/10/hamburger_043__wcam_wintrs.html",
+      "bytes": 13602109,
+      "sha256": "e7ef714a81f47a1735dd8e11dd4618d54f91226b0d2495ab0c9209a2b900a474"
+    },
+    "object-11": {
+      "path": "object/11/pomegranate_052__wcam_wintrs.html",
+      "bytes": 17054423,
+      "sha256": "da8cdff8b40f0817e27efbfe661c1b7476c771f1c347815ed3d48a5825c4f5b6"
+    },
+    "object-12": {
+      "path": "object/12/popcorn_040__wcam_wintrs.html",
+      "bytes": 12939442,
+      "sha256": "9a79247828fc497368bf1ddf330457f6441bcd2de12a6120da4206bd61b3e2ca"
+    },
+    "indoor-1": {
+      "path": "indoor/1/1_9frames_stride1_no_pose_gaussians.html",
+      "bytes": 60760983,
+      "sha256": "10350c811ac1ad9676c0a2f09b3162082e7f027779bf8eb6698295d1673b1d66"
+    },
+    "indoor-2": {
+      "path": "indoor/2/2_12frames_stride1_no_pose_gaussians.html",
+      "bytes": 81537723,
+      "sha256": "bda283dae6aed7ee5c516b83427312ad5c8b7a539be6201327c2fb4c6691c714"
+    },
+    "indoor-3": {
+      "path": "indoor/3/4_11frames_stride1_no_pose_gaussians (1).html",
+      "bytes": 65057896,
+      "sha256": "39ce4a7aa549ac7724badba08579e51221ba179fc2d06364bbe6c06dd2a1a21e"
+    },
+    "indoor-4": {
+      "path": "indoor/4/5_12frames_stride1_no_pose_gaussians (1).html",
+      "bytes": 97991775,
+      "sha256": "dda56abbf421cd2cd2322d1c204be569b856927acdd5b1eaa347a9c000f3e6d0"
+    },
+    "indoor-5": {
+      "path": "indoor/5/7_24frames_stride1_pose_gaussians (3).html",
+      "bytes": 121877518,
+      "sha256": "07fc48d825e2c16262e90afac28ad009b752315043d28974f3500123a1501ae6"
+    },
+    "indoor-6": {
+      "path": "indoor/6/10_7frames_stride1_no_pose_gaussians.html",
+      "bytes": 53239418,
+      "sha256": "3acb0377fe6db1c133be2bad3e71e4ce6ab93b692844f6ead564c071b000d44c"
+    },
+    "indoor-7": {
+      "path": "indoor/7/11_24frames_stride1_pose_gaussians.html",
+      "bytes": 87590258,
+      "sha256": "3fe341f7b74cf1aff5a30f1e05197a15110893c09c4a3914625b0c3b17efcabe"
+    },
+    "indoor-8": {
+      "path": "indoor/8/12_24frames_stride1_pose_gaussians.html",
+      "bytes": 77258674,
+      "sha256": "ce8cf73acc06a444f5a13772f3623d8f41e2781797e85e63b70a01c0c2bca9bb"
+    },
+    "indoor-9": {
+      "path": "indoor/9/kicker_DSC_6487_JPG__wcam_wintrs (1).html",
+      "bytes": 70607857,
+      "sha256": "3d0d635cc2ee61b2f5f942d54c31bc37ccaa247a8d7976364d560f684e957bfd"
+    },
+    "indoor-10": {
+      "path": "indoor/10/office_DSC_0219_JPG__wcam_wintrs.html",
+      "bytes": 64207309,
+      "sha256": "8944c4769bb9dd3b2d238a6d3ebe2822a1703d68e9543878e34510eb1012d36e"
+    },
+    "indoor-11": {
+      "path": "indoor/11/19_8frames_stride1_no_pose_gaussians.html",
+      "bytes": 41325642,
+      "sha256": "ed0f29f25f89b1eff15322e8351273c440ea6ca28f3a83dd59befe2b6ed68bab"
+    },
+    "indoor-12": {
+      "path": "indoor/12/20_16frames_stride1_pose_gaussians.html",
+      "bytes": 76342975,
+      "sha256": "e6dac0aaf33dfb67ff45ff375b73e936130a1740e43a7f03c9fa3685ed2a7240"
+    },
+    "street-2": {
+      "path": "street/1/2_64frames_stride1_pose_gaussians.html",
+      "bytes": 140234837,
+      "sha256": "83e91a3fa5b2e3164e5ebcc793d26a6aad2ff1c63fd6bdd54f0d2b43fed9403e"
+    },
+    "street-1": {
+      "path": "street/2/21_64frames_stride1_pose_gaussians (1).html",
+      "bytes": 143961194,
+      "sha256": "4db2580cc65772add870ab93799ec4f658c51c744500d65e1e65fd07eab87e23"
+    },
+    "street-4": {
+      "path": "street/3/5_50frames_stride1_pose_gaussians.html",
+      "bytes": 122937461,
+      "sha256": "cefe68580aa478815c857e94dff69c26cdcaa4704d3ea3b77a5d03e92ff6da92"
+    },
+    "street-3": {
+      "path": "street/4/3_64frames_stride1_pose_gaussians.html",
+      "bytes": 95275965,
+      "sha256": "994b6fc074842e11f7b3b88dabbe21ce0ecbdf6eecd6353623fbd4faf483ad2c"
+    },
+    "street-5": {
+      "path": "street/5/6_31frames_stride1_pose_gaussians.html",
+      "bytes": 101578394,
+      "sha256": "f9c28df4ea240c22edc63fea8a0691f08ba4da9f9c251931dec0396031ff5456"
+    },
+    "street-6": {
+      "path": "street/6/7_63frames_stride1_pose_gaussians.html",
+      "bytes": 160573134,
+      "sha256": "1082d71ab3a66e69f0c45b7f62944fc3dab9a7a3a744a171b92e5397e901d1d7"
+    },
+    "street-7": {
+      "path": "street/7/gaussians (5).html",
+      "bytes": 145368919,
+      "sha256": "3b6318099e8db0c41634ff9ce2ed63656b66da494409e043cbe433c9b52fa37c"
+    },
+    "street-8": {
+      "path": "street/8/12_24frames_stride1_pose_gaussians (2).html",
+      "bytes": 68165378,
+      "sha256": "43636a2d448a18070dc27d8afd32da8649e3f4f53b2004c73252b09fa79cf812"
+    },
+    "street-9": {
+      "path": "street/9/15_64frames_stride1_pose_gaussians.html",
+      "bytes": 174249104,
+      "sha256": "8cb520e114fa52e2ef3183b45bdd01e2c32c4a5fcee411d010bed8f82bc98e2a"
+    },
+    "street-10": {
+      "path": "street/10/17_64frames_stride1_pose_gaussians.html",
+      "bytes": 116220599,
+      "sha256": "d5b38196fa9b8a25f55b84ba8dfc790397d75a98cffb4b74268d902c3c40e930"
+    },
+    "street-11": {
+      "path": "street/11/18_64frames_stride1_pose_gaussians.html",
+      "bytes": 109938135,
+      "sha256": "06cdf47e54409a084c7a7990cbf24f7a598cc816001f1d76e134ca31322276de"
+    },
+    "street-12": {
+      "path": "street/12/20_64frames_stride1_pose_gaussians.html",
+      "bytes": 129313788,
+      "sha256": "d967d2a13336c64fa33a6556f68704f5f3cb3d43d2e650143a73e639309a9a1b"
+    },
+    "aerial-11": {
+      "path": "aerial/1/20_100frames_stride1_pose_gaussians.html",
+      "bytes": 117031166,
+      "sha256": "aeae9efd44caf8dfbe7310bd2519b936d8580f9672a9ddb9ad5d5469d28ac628"
+    },
+    "aerial-12": {
+      "path": "aerial/2/21_63frames_stride1_pose_gaussians.html",
+      "bytes": 83361197,
+      "sha256": "833c9bd5a88c024186c9f1f079ceb67d1f63e1e739856ac77146e5fd0d80e6a3"
+    },
+    "aerial-13": {
+      "path": "aerial/3/22_72frames_stride1_pose_gaussians.html",
+      "bytes": 62081578,
+      "sha256": "7210a9a27181443a4acad91c928b7cd986980c0d83f16a1b968fa8ea9af53559"
+    },
+    "aerial-10": {
+      "path": "aerial/4/18_100frames_stride1_pose_gaussians (1).html",
+      "bytes": 154537847,
+      "sha256": "d01270f3906ebccf76ce2b2b25834558f9f1937c585c9f998ead90c80e8de983"
+    },
+    "aerial-5": {
+      "path": "aerial/5/7_100frames_stride1_pose_gaussians.html",
+      "bytes": 86353340,
+      "sha256": "80b614ac5db77bb5f3c6e060cacb3226970500c37d3b888e683a4847fe05ec92"
+    },
+    "aerial-18": {
+      "path": "aerial/6/34_85frames_stride1_pose_gaussians.html",
+      "bytes": 78731233,
+      "sha256": "b7147d7951a441b484c082278054baa32dd123e46e3c418a83a2708214477a91"
+    },
+    "aerial-7": {
+      "path": "aerial/7/9_100frames_stride1_pose_gaussians.html",
+      "bytes": 142485287,
+      "sha256": "a2f17ba8836d990f8b09fcaa68c03209b8fb8a267fd0cab0d2cc60647373caa7"
+    },
+    "aerial-8": {
+      "path": "aerial/8/11_100frames_stride1_pose_gaussians.html",
+      "bytes": 177570677,
+      "sha256": "ccba1926a57929e8fe1301c9a2eb28729b83ab64448e7c698e901fdc0ed4f704"
+    },
+    "aerial-9": {
+      "path": "aerial/9/14_100frames_stride1_pose_gaussians.html",
+      "bytes": 151913679,
+      "sha256": "210779806b013e2f45e41e9d24c1a9a239244b1793c772f1750dd2cbdfc3a4ec"
+    },
+    "aerial-4": {
+      "path": "aerial/10/6_100frames_stride1_pose_gaussians.html",
+      "bytes": 64687319,
+      "sha256": "dad9d49da31332e3a77569b4692e89ffec937eb69006e266348e74879dc6e5fd"
+    },
+    "aerial-1": {
+      "path": "aerial/11/2_100frames_stride1_pose_gaussians.html",
+      "bytes": 58514595,
+      "sha256": "ca1fa68f7d3ca5f3d236797c1cb201c38d0b40ff1fd45cca924f8c674ec5cd6a"
+    },
+    "aerial-2": {
+      "path": "aerial/12/3_100frames_stride1_pose_gaussians.html",
+      "bytes": 149853662,
+      "sha256": "732f39a155baae5a68252fec045fd90734e2813ef3244dca65960b03d34618fc"
+    },
+    "aerial-3": {
+      "path": "aerial/13/5_100frames_stride1_pose_gaussians.html",
+      "bytes": 78690416,
+      "sha256": "f30390ccebbb386849b7b97fb15bf2acf360c52531806876fff5edbe2b12af83"
+    },
+    "aerial-14": {
+      "path": "aerial/14/25_45frames_stride1_pose_gaussians.html",
+      "bytes": 55695348,
+      "sha256": "268e836e9865741ecae1ab3be6de3a6bb334503b1576b613686f210304ec9d32"
+    },
+    "aerial-15": {
+      "path": "aerial/15/27_84frames_stride1_pose_gaussians.html",
+      "bytes": 78162949,
+      "sha256": "dd2a109a9eb1743e9c358e2895d48f00dc1df057b312dc8cb43170ba3085d41c"
+    },
+    "aerial-16": {
+      "path": "aerial/16/28_76frames_stride1_pose_gaussians.html",
+      "bytes": 95793545,
+      "sha256": "f9907d4ffbc84f8394be3c4ca11672f23d94ee16de15ec389c78c39b7e5e5e71"
+    },
+    "aerial-17": {
+      "path": "aerial/17/29_89frames_stride1_pose_gaussians.html",
+      "bytes": 83564855,
+      "sha256": "d849e6eb62c760c6b4323ee9eaef21ed6efc734ece9b9bce7fd04d013f416912"
+    },
+    "aerial-6": {
+      "path": "aerial/18/8_100frames_stride1_pose_gaussians.html",
+      "bytes": 121805670,
+      "sha256": "a3b39fbef47a1d906d3d7beed660ca28e6fec5f66e3d09df570f7bad23b87f1d"
+    }
+  }
+}

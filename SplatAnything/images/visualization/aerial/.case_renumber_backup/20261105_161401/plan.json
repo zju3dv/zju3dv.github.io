@@ -1,0 +1,353 @@
+{
+  "site": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything",
+  "root": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial",
+  "work": "/tmp/aerial_previews_renumber__w16z0b9",
+  "backup": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/.case_renumber_backup/20261105_161401",
+  "items": [
+    {
+      "scene": "2",
+      "old_id": "2",
+      "new_id": "1",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/2_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17249192,
+      "source_sha256": "46a39b98edd653bd7041e0a48c89f0d73ac528bcae0a567bb5411c4b483355ae",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/2/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/1/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "ee2a921bfe2b0f1f3ae35de006b3f80d7bf443cc94c47567df5635a0e67333c2",
+        "frame_0000.png": "00ecca48ef73e7859e2c6f2d086bd4c6429025d3bf76bd4e1877bdc6b4b29e70",
+        "poster.jpg": "010e3563b93e94f79c36515f13fc7359b5a5e586a0a0cbcd04dbd71f483f21bd"
+      }
+    },
+    {
+      "scene": "3",
+      "old_id": "3",
+      "new_id": "2",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/3_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17355644,
+      "source_sha256": "591e075e408c339e2366761f45b8d118b42cdaa509bae83577df7b696ca9eeba",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/3/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/2/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0029.png": "57509bf2626ba43530fa95c7aaaabb252f874f4f06d03bd41253d655d3c9a706",
+        "thumb.jpg": "333b9b70c7034398a30927ab7ea40e00a0bb3b5f83fda32b7199ff2323bd50f5",
+        "poster.jpg": "d6e782d2f96072508849281959a35dea80e1f20f14308ff091f1796c6addcdaf"
+      }
+    },
+    {
+      "scene": "5",
+      "old_id": "5",
+      "new_id": "3",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/5_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17257430,
+      "source_sha256": "43cf0d4e68741904c4a6afdc548a6ad3ffd367b35753512762aba1cd8cfc33f2",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/5/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/3/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "9e60f7c7862ec35062cb0b4d00bd29f0c06152c55d5f306c4ba9b8e51c84f0bf",
+        "frame_0000.png": "e6a4fe3bde1ee578f672014c8bb3f0817aa98cf53fc31052abb040ccbe494329",
+        "poster.jpg": "4f777f0f6ea1c009e0f233a0eb6367f0ff875ed888c377d47b1ff6cc5713c239"
+      }
+    },
+    {
+      "scene": "6",
+      "old_id": "6",
+      "new_id": "4",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/6_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17315153,
+      "source_sha256": "6fda5b842a9c1e9ef3aec0fbd4d95a6d649e6801670831db4e2db0b9cab26d23",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/6/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/4/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "e467e467fb7b7b970ef2564e950dfd33a87c5312859041377c06c88c8b3d4b02",
+        "frame_0000.png": "62f12261095c193f7ae26c63fd6eea46c34751ca7490e55bc7ad2454db152993",
+        "poster.jpg": "d1c9b578ffd206d2e7f7feaa2afcdd3dc1f3732cd73bb9b2ce680c22da7fcdfc"
+      }
+    },
+    {
+      "scene": "7",
+      "old_id": "7",
+      "new_id": "5",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/7_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17260514,
+      "source_sha256": "a574a24445a315109a3e8bca925d9083a7389e5fd7885fcc59b8c2f7214d65f9",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/7/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/5/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "92bed446409094292e96ad9d14632420b8f2dc0b6884ec0d30e2d35c0e05147a",
+        "frame_0000.png": "479aa7bcaeea56f2c70c519df130979c6fd23d2b4afd0139de86d6423f44dbca",
+        "poster.jpg": "eace599b349dd8bbd4dbd9d6233187b1c052f1c127e92c758e9a9e44abc7179c"
+      }
+    },
+    {
+      "scene": "8",
+      "old_id": "8",
+      "new_id": "6",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/8_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17202969,
+      "source_sha256": "6c6ae4afc587a0c9a2d7aafbf0b96b7616571e34917d21209a3ef6997431bb9a",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/8/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/6/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "235d7dfb0b00c129c2264f19b2b83b7d6ca2833b6e395d71520fbeeae1e2faa2",
+        "frame_0000.png": "a73c05afb29d88e6958b110af33bc84961879eba4ef91f48376805bc5e7a9fda",
+        "poster.jpg": "a1b01b0c23cf4172e714ddad8cc1d738c1d4ed7304a8a2d134c0115402b97485"
+      }
+    },
+    {
+      "scene": "9",
+      "old_id": "9",
+      "new_id": "7",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/9_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17270459,
+      "source_sha256": "87d5135db74ade2dfda8007049fa17e340ec0ff9edd6227f601ae675830d4e32",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/9/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/7/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "c388d621bf99d0b3c22ec5a31a094c9ada2b31a5c6dd1389e492a71fb030b708",
+        "frame_0000.png": "208335445b77821221e3e2776c881b8b2ffdfb84afb08cd8305bdcb2257e77fa",
+        "poster.jpg": "37887d14595af200517ab9acbf8a3fea60d79bd2c6b08a0aafe99aecb5933ce4"
+      }
+    },
+    {
+      "scene": "11",
+      "old_id": "11",
+      "new_id": "8",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/11_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17269608,
+      "source_sha256": "0ee75a4e159675c37a8a805d4906438edcd5b0fb4c4d8faee24b266c0cb7d88f",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/11/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/8/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "5849651e5e7b29e93e614607b4865d6445368b55aa4e260abfa91ee3005e89de",
+        "frame_0000.png": "af8485bfe26b46d82ff63a78b0e14c2071bef2c7152fdd1d4dfc3661ae3f0258",
+        "poster.jpg": "f818175f413b60c147d1809c70f222b4ce84dee0f450a6c1aefa6158ddea39d1"
+      }
+    },
+    {
+      "scene": "14",
+      "old_id": "14",
+      "new_id": "9",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/14_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17271093,
+      "source_sha256": "b23f4b703d2cc4a603aa68704118427e53d7fad4024941a4e840a9b72fe47a3c",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/14/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/9/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "7a81008c780a71f64052433aaa745b275a734f7b9196ee059307dcd01a3009d9",
+        "frame_0000.png": "05f046cee3c9479c1973df625e8425b1890936bba0ef07b7d7f84047a42ef3c7",
+        "poster.jpg": "b18473c3f8ab810b9c9e046b83c01ab9f8aec2fa970dce3af9c010ee77139bce"
+      }
+    },
+    {
+      "scene": "18",
+      "old_id": "18",
+      "new_id": "10",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/18_100frames_stride1_pose_gaussians (1).mp4",
+      "source_bytes": 17303074,
+      "source_sha256": "1a7186d5fc370c5716121fbd35b4d0b5b783fbb34fe6f8343db705b05e376d82",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/18/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/10/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "thumb.jpg": "de9e258211e631f9c9110a15d970b0eb4b3edc057f73f0b6a1ec41b2216d2a0a",
+        "frame_0000.png": "bdd0f3b65e747fc66afbe677b8a6488e319d042999832b472bd08e02d5dbdf22",
+        "poster.jpg": "03128c3d3d5ba204f9e0114bfab173a8e6352a5cec611dbb74e5783be0623a86"
+      }
+    },
+    {
+      "scene": "20",
+      "old_id": "20",
+      "new_id": "11",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/20_100frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17166585,
+      "source_sha256": "62ab19f14de0fb71d541d9d4b9678ef062ac2580d3fbf12a8a71cbef2f41e197",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/20/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/11/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "47d3f546320e5a5cab42e68557b77f4cb31fd3e8e4abdfb29246582adb5af279"
+      }
+    },
+    {
+      "scene": "21",
+      "old_id": "21",
+      "new_id": "12",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/21_63frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17113126,
+      "source_sha256": "e8184d659d92f34142ac4d7117cb87694758f0831a2b114c7dc0c24ecd0f65a5",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/21/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/12/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "1b9234e7ad017191332ed215051448a169f5dcd938cd2afcf0e7081790fec5c2"
+      }
+    },
+    {
+      "scene": "22",
+      "old_id": "22",
+      "new_id": "13",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/22_72frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17224648,
+      "source_sha256": "3880678dfb762ff541df59d65481d444022f3c462956c4358a203b99eef408ae",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/22/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/13/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "3626168f9b53b85d54ba1317c6ddb18d4824b08643e4535036778a8540275753"
+      }
+    },
+    {
+      "scene": "25",
+      "old_id": "25",
+      "new_id": "14",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/25_45frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17233745,
+      "source_sha256": "f5afbd1f596f9d61b11a1d1f376a5916d1d03c9f3b33c1ec06e500eb9e790e04",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/25/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/14/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "570dd60a141007ba00499e379b8d033256c031045f3fc8456b14e298a5242de1"
+      }
+    },
+    {
+      "scene": "27",
+      "old_id": "27",
+      "new_id": "15",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/27_84frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17289885,
+      "source_sha256": "67bcb094aed205b3086914c3e570fb7d4efe92d149ad9e1c85a2cf30eef5ac96",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/27/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/15/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "8e8ff5723fcbb6ad41a8e3f60ffb56d6be74b340d36bf91ed8f5f136e9a44528"
+      }
+    },
+    {
+      "scene": "28",
+      "old_id": "28",
+      "new_id": "16",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/28_76frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17192625,
+      "source_sha256": "b2d6c260e27b891a0c98c59e87955120bdb4ddbd70b4b47566d6bde758362cd8",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/28/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/16/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "df2e02bfe00541bc7e8406ad29ff7a8171fe9c3879417550c1d119f1f2e33d8d"
+      }
+    },
+    {
+      "scene": "29",
+      "old_id": "29",
+      "new_id": "17",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/29_89frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17268185,
+      "source_sha256": "2d884872181baec11ccb280b7f88156d9cd77a533eaa7c3a8f9d0b83e7768e0d",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/29/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/17/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "df620a86a3fd05d6f05c9f036ed177fa01b13010d077833f377dea18cd146c5a"
+      }
+    },
+    {
+      "scene": "34",
+      "old_id": "34",
+      "new_id": "18",
+      "source": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/video/34_85frames_stride1_pose_gaussians.mp4",
+      "source_bytes": 17105653,
+      "source_sha256": "530e11dd519111e9ef0bdbd7d7159eb7aefd38ff614d402e41ee45dc8a7fdb42",
+      "output_old": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/34/preview.mp4",
+      "output_final": "/apdcephfs/private_henryu/zju3dv.github.io/SplatAnything/images/visualization/aerial/18/preview.mp4",
+      "frames_source": 298,
+      "duration": 9.933333333333334,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "original_files": {
+        "frame_0000.png": "ea5787f2a88f20bfebaf46ab1d222f99740beb690c118f7273fb3ede2d0936ca"
+      }
+    }
+  ],
+  "status": "encoding"
+}

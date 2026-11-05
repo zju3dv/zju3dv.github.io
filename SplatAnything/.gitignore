@@ -1,0 +1,6 @@
+# Large Gaussian viewer exports are downloaded from Hugging Face.
+/images/visualization/**/*.html
+
+# Local Python bytecode.
+__pycache__/
+*.py[cod]

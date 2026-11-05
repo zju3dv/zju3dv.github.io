@@ -215,7 +215,7 @@
     if (source) {
       const player = document.createElement("video");
       player.id = "demo-player";
-      player.controls = true;
+      player.controls = false;
       player.playsInline = true;
       player.preload = "auto";
       player.setAttribute("aria-label", "SplatAnything demo video");
@@ -229,63 +229,53 @@
       const chapters = (video.chapters || [])
         .filter((chapter) => Number.isFinite(chapter.time) && chapter.time >= 0)
         .sort((a, b) => a.time - b.time);
-      let pendingTime = null;
-      let buffering = true;
-      let stalled = false;
+      let downloadController = null;
+      let objectURL = "";
+      let downloaded = false;
+      let ready = false;
+      let failed = false;
+      let received = 0;
+      let total = 0;
 
       function updateLoading() {
-        if (player.error) return;
-        loading.hidden = !buffering;
-        const duration = player.duration;
-        let percent = null;
-        if (Number.isFinite(duration) && duration > 0) {
-          // Sum every buffered range: seeking can leave gaps in the download.
-          let buffered = 0;
-          for (let i = 0; i < player.buffered.length; i++)
-            buffered += Math.max(
-              0,
-              Math.min(duration, player.buffered.end(i)) -
-                player.buffered.start(i),
-            );
-          percent =
-            buffered >= duration - 0.1
-              ? 100
-              : Math.min(99, Math.floor((buffered / duration) * 100));
+        loading.hidden = ready || failed;
+        stage.setAttribute("aria-busy", String(!ready && !failed));
+        const percent = downloaded
+          ? 100
+          : total > 0 ? Math.min(99, Math.floor((received / total) * 100)) : 0;
+        if (total > 0 || downloaded) {
           progress.value = percent;
-          progress.setAttribute("aria-valuetext", `${percent}% buffered`);
+          progress.setAttribute("aria-valuetext", `${percent}% downloaded`);
         } else {
           progress.removeAttribute("value");
-          progress.setAttribute("aria-valuetext", "Loading video metadata");
+          progress.setAttribute(
+            "aria-valuetext",
+            `${(received / 1024 / 1024).toFixed(1)} MB downloaded`,
+          );
         }
-        loadingPercent.textContent = `${percent ?? 0}%`;
-        const message = stalled
-          ? "Waiting for connection…"
-          : buffering ? "Loading video…" : "Video ready";
+        loadingPercent.textContent = `${percent}%`;
+        const message = ready
+          ? "Video ready"
+          : downloaded ? "Preparing video…" : "Downloading video…";
         if (loadingStatus.textContent !== message)
           loadingStatus.textContent = message;
-      }
-
-      function seekToChapter() {
-        if (pendingTime === null || player.readyState < 1) return;
-        player.currentTime = Math.min(
-          pendingTime,
-          Math.max(0, player.duration - 0.01),
-        );
-        pendingTime = null;
       }
 
       const chapterButtons = chapters.map((chapter) => {
         const button = text("button", "video-chapter");
         button.type = "button";
+        button.disabled = true;
         button.dataset.category = chapter.id;
         button.setAttribute("aria-controls", player.id);
         button.setAttribute("aria-pressed", "false");
         button.setAttribute("aria-label", `Play ${chapter.label}`);
         button.append(icon(chapter.id), text("span", "", chapter.label));
         button.addEventListener("click", () => {
-          pendingTime = chapter.time;
-          seekToChapter();
-          // Start in the click gesture, even when metadata is still loading.
+          if (!ready) return;
+          player.currentTime = Math.min(
+            chapter.time,
+            Math.max(0, player.duration - 0.01),
+          );
           player.play().catch((error) => {
             if (error.name === "NotAllowedError")
               showToast("Press play to watch the selected chapter.");
@@ -306,36 +296,28 @@
         );
       }
 
-      player.addEventListener("loadedmetadata", () => {
-        seekToChapter();
+      player.addEventListener("canplay", () => {
+        if (!downloaded || failed) return;
+        ready = true;
+        player.controls = true;
+        chapterButtons.forEach((button) => {
+          button.disabled = false;
+        });
         updateLoading();
       });
-      for (const type of ["progress", "durationchange", "loadeddata", "suspend"])
-        player.addEventListener(type, () => {
-          stalled = false;
-          updateLoading();
-        });
-      for (const type of ["loadstart", "waiting", "seeking"])
-        player.addEventListener(type, () => {
-          buffering = true;
-          updateLoading();
-        });
-      for (const type of ["canplay", "playing", "seeked"])
-        player.addEventListener(type, () => {
-          buffering = player.readyState < 3;
-          stalled = false;
-          updateLoading();
-          updateChapter();
-        });
-      player.addEventListener("stalled", () => {
-        stalled = true;
-        updateLoading();
-      });
+      player.addEventListener("seeked", updateChapter);
       player.addEventListener("timeupdate", updateChapter);
-      player.addEventListener("error", () => {
+
+      function showVideoError() {
+        if (failed) return;
+        failed = true;
+        ready = false;
+        downloadController?.abort();
+        player.pause();
+        player.controls = false;
         filmPlaying = false;
         syncPreviews();
-        loading.hidden = true;
+        updateLoading();
         chapterButtons.forEach((button) => {
           button.disabled = true;
         });
@@ -343,26 +325,86 @@
         fallback.append(text("p", "", "The video is unavailable."));
         const retry = text("button", "button", "Retry video");
         retry.type = "button";
-        retry.addEventListener("click", () => {
-          buffering = true;
-          stalled = false;
-          pendingTime = null;
-          chapterButtons.forEach((button) => {
-            button.disabled = false;
-          });
-          stage.replaceChildren(player, loading);
-          player.load();
-          updateLoading();
-          updateChapter();
-        });
+        retry.addEventListener("click", downloadVideo);
         const link = text("a", "mono", "Open video ↗");
         link.href = source;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         fallback.append(retry, link);
         stage.replaceChildren(fallback);
+      }
+
+      player.addEventListener("error", () => {
+        if (downloaded) showVideoError();
       });
-      updateLoading();
+
+      async function downloadVideo() {
+        downloadController?.abort();
+        const controller = new AbortController();
+        downloadController = controller;
+        downloaded = false;
+        ready = false;
+        failed = false;
+        received = 0;
+        total = 0;
+        player.pause();
+        player.controls = false;
+        player.removeAttribute("src");
+        player.load();
+        if (objectURL) URL.revokeObjectURL(objectURL);
+        objectURL = "";
+        chapterButtons.forEach((button) => {
+          button.disabled = true;
+        });
+        stage.replaceChildren(player, loading);
+        updateChapter();
+        updateLoading();
+
+        try {
+          // Native preload can stop early. Fetch the complete file before the
+          // player receives a source, so playback and seeking use local bytes.
+          const response = await fetch(source, { signal: controller.signal });
+          if (!response.ok) throw new Error(`Video download: ${response.status}`);
+          total = Number(response.headers.get("Content-Length")) || 0;
+          updateLoading();
+          let blob;
+          if (response.body) {
+            const reader = response.body.getReader();
+            const parts = [];
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              parts.push(value);
+              received += value.byteLength;
+              updateLoading();
+            }
+            blob = new Blob(parts, {
+              type: response.headers.get("Content-Type") || "video/mp4",
+            });
+          } else {
+            blob = await response.blob();
+            received = blob.size;
+          }
+          if (controller.signal.aborted) return;
+          if (
+            !blob.size ||
+            (total && !response.headers.get("Content-Encoding") && received !== total)
+          )
+            throw new Error("Incomplete video download");
+          objectURL = URL.createObjectURL(blob);
+          downloaded = true;
+          updateLoading();
+          player.src = objectURL;
+        } catch (error) {
+          if (!controller.signal.aborted) showVideoError();
+        }
+      }
+
+      window.addEventListener("pagehide", (event) => {
+        if (event.persisted) return;
+        downloadController?.abort();
+        if (objectURL) URL.revokeObjectURL(objectURL);
+      });
       player.addEventListener("play", () => {
         filmPlaying = true;
         syncPreviews();
@@ -372,8 +414,7 @@
           filmPlaying = false;
           syncPreviews();
         });
-      stage.replaceChildren(player, loading);
-      player.src = source;
+      downloadVideo();
     } else if (embed) {
       const frame = document.createElement("iframe");
       frame.title = "SplatAnything demo video";

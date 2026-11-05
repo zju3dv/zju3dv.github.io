@@ -249,6 +249,7 @@ h2 {
   transition: scale .45s var(--spring), box-shadow .3s;
 }
 .paper-button .ui-icon { width: 19px; height: 19px; }
+.paper-button .hf-icon { font-size: 19px; line-height: 1; }
 .paper-button small {
   padding: 4px 7px; border-radius: 999px;
   background: rgba(5, 5, 5, .06); color: var(--muted);

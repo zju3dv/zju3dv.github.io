@@ -1,0 +1,188 @@
+{
+  "scene": "605-segment-9105380625923157726",
+  "mode": "stop_reverse",
+  "actual_physics": true,
+  "terrain": "MeshTerrain",
+  "map_id": null,
+  "policy": "EnvInputPolicy",
+  "control": "WASD press/release at 50 Hz using the WebUI keyboard mapping",
+  "keyboard_steering_limit_degrees": 12.0,
+  "physics_steps": 1266,
+  "simulation_seconds": 25.32,
+  "camera_names": [
+    "FRONT_LEFT",
+    "FRONT",
+    "FRONT_RIGHT"
+  ],
+  "frames": 254,
+  "fps": 10,
+  "reason": "arrive_dest",
+  "collision": false,
+  "route_length_m": 107.29599693687564,
+  "final_progress_m": 107.27067725678964,
+  "max_route_error_m": 0.5373775943072068,
+  "minimum_signed_speed_mps": -0.6986661230349223,
+  "stop_speed_max_mps": 0.10577634768808987,
+  "backward_distance_m": 0.9895433495580335,
+  "resumed_speed_mps": 5.857692341282609,
+  "events": [
+    {
+      "phase": "decelerate",
+      "time_s": 7.039999999999938,
+      "progress_m": 40.865034335459924
+    },
+    {
+      "phase": "stopped",
+      "time_s": 9.519999999999886,
+      "progress_m": 48.37644964165432
+    },
+    {
+      "phase": "reverse",
+      "time_s": 10.339999999999868,
+      "progress_m": 48.388571693410775
+    },
+    {
+      "phase": "reverse_brake",
+      "time_s": 11.939999999999834,
+      "progress_m": 47.58567789826186
+    },
+    {
+      "phase": "restart_hold",
+      "time_s": 12.439999999999824,
+      "progress_m": 47.40751319392997
+    },
+    {
+      "phase": "resume",
+      "time_s": 12.859999999999815,
+      "progress_m": 47.40121016244403
+    }
+  ],
+  "reactive_following_vehicle_ids": [
+    "-loyCz9dizYeKVbj37yipg",
+    "koyUCvUtDszJQZizEbG6fA",
+    "yfwL5MODDe0Cz8o09Itxaw"
+  ],
+  "archive_member_sha256": {
+    "format_version": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+    "scene": "225f9fea148aafa8aa09ab3c62565028f25aad53ce25c467307db3633a7c81b4",
+    "camera": "31a5cbf922ab50199bf32925778473ca91e66cbdebeff18459384e1a1e3ba65e",
+    "ego_pose": "41685d29eb81095d5a106e1788d605b7db74275ca3533495bfe65e444fc892f4",
+    "bounding_box": "cbf6496714c928cca74542ad3db28b1d2a084e167546e3cb047797547369447e",
+    "object_offset": "63d243dad6eb9cf9aba51f0521e6d795f06b2035198c6b44ff26fd4cf6af5c94",
+    "background": "dac23ed997cec31abf4b87bd8b1890637a8361f145f08b9fa80f1d6732d16666",
+    "objects": "f2903b37cc51768bc81706637bbb34b27de56b9cd936fa2da42adb1ac8e209aa",
+    "skymap": "93ca745447e5be3fb8eaf0076d35fff16a7e26866e86b7f73cfd0cbd93591399"
+  },
+  "source_frames": 254,
+  "presentation_start_frame": 0,
+  "presentation_start_seconds": 0.0,
+  "stream": {
+    "codec_name": "h264",
+    "width": 1440,
+    "height": 684,
+    "r_frame_rate": "10/1",
+    "duration": "25.400000",
+    "nb_frames": "254"
+  },
+  "bytes": 6885289,
+  "sha256": "2c8afdbe16c0787caf3335355f6986f404b0d1472732afdf16ad211ebb585390",
+  "source_mesh": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/waymo_demo_terrain/ground/605-segment-9105380625923157726.obj",
+  "mesh_sha256": "88dbd4b6c2b7fb557d0dd739c205cb73b636cfd5d98b6502b563570444e19355",
+  "trajectory": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/605/trajectory.jsonl",
+  "wasd_inputs": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/605/keys.jsonl",
+  "route_source": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/605/trajectory.jsonl",
+  "display_surface": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/605/road-surface.json",
+  "display_surface_method": "Original V2 thin-plate height field resampled on symmetric normal offsets of the actual WASD path",
+  "height_field_original_vertex_error_m": 5.299654048940283e-10,
+  "original_triangle_interpolation_error_m": 0.001130482782699005,
+  "left_right_distance_error_m": 9.139355938714289e-13,
+  "left_right_symmetry_error_m": 0.0,
+  "actual_path_max_distance_m": 0.013806960481649193,
+  "projection": {
+    "view": {
+      "width": 1600,
+      "height": 760,
+      "focal": 1100,
+      "eye": [
+        -17.606656813208502,
+        0,
+        3.742410434719668
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "distance": 18,
+      "angleDegrees": 12,
+      "followsRoadGrade": true,
+      "gradeReferenceMeters": [
+        0,
+        12
+      ]
+    },
+    "panelView": {
+      "width": 1600,
+      "height": 760,
+      "focal": 2200,
+      "eye": [
+        -34,
+        0,
+        14
+      ],
+      "target": [
+        6,
+        0,
+        3.1
+      ]
+    },
+    "vehicle": {
+      "width": 1600,
+      "height": 760,
+      "focal": 1100,
+      "eye": [
+        -17.606656813208502,
+        0,
+        3.742410434719668
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "distance": 18,
+      "angleDegrees": 12
+    },
+    "groundScale": 1.25,
+    "groundOffset": [
+      0,
+      -35
+    ],
+    "elevationScale": 2,
+    "attitudeScale": 0.5
+  },
+  "mesh_half_width_m": 3,
+  "mesh_extent_m": [
+    -16,
+    45
+  ],
+  "vehicle_yaw": "fixed",
+  "vehicle_model": "Terrain-only revision of the original wireframe car, with a continuous roof-to-shoulder contour and subdued distant edges; no body or glass fills",
+  "surface": "Smooth lit symmetric road sampled from the original estimated height field",
+  "fade": {
+    "rear_clearance_after_tail_m": 1,
+    "rear_m": [
+      -16,
+      -3.4
+    ],
+    "front_m": [
+      30,
+      45
+    ],
+    "symmetric_side_feather_m": 0.18
+  },
+  "camera_page_source_sha256": "bedb7b17e1e5363b55757eddcf3b613a9b90d40d17b6d7a1b70fc3ff9efac2b4",
+  "camera_pixels_reused_before_encoding": true,
+  "simulation_rerun": false,
+  "render_method": "Observer distance reduced to 18 meters and focal length to 1100, preserving the original near-vehicle scale; ground camera follows the 0-to-12-meter road grade at a 12-degree relative angle; vehicle observer lowered to 12 degrees with half recorded attitude; front fade uses road distance from 30 to 45 meters; existing camera-panel pixels are copied unchanged before encoding"
+}

@@ -1,0 +1,229 @@
+{
+  "title": "StreetWorld: A Photorealistic Closed-Loop Simulator for Benchmarking Autonomous Driving",
+  "presentation": "streetworld-promo.pptx",
+  "output": "streetworld-promo.mp4",
+  "fps": 30,
+  "frames": 3949,
+  "duration_seconds": 131.63333333333333,
+  "chapter_hold_seconds": 2,
+  "cover_hold_seconds": 3,
+  "ending_hold_seconds": 2,
+  "audio": false,
+  "timeline": [
+    {
+      "kind": "cover",
+      "slide": 1,
+      "start_frame": 0,
+      "frames": 90,
+      "source": null
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 2,
+      "start_frame": 90,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 2,
+      "start_frame": 111,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "push",
+      "incoming_slide": 3,
+      "start_frame": 171,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 3,
+      "start_frame": 201,
+      "frames": 905,
+      "source": "P03_GS_Assets/edited/streetworld-assets.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 4,
+      "start_frame": 1106,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 4,
+      "start_frame": 1127,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "push",
+      "incoming_slide": 5,
+      "start_frame": 1187,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 5,
+      "start_frame": 1217,
+      "frames": 351,
+      "source": "P05_Policy_Evaluation/edited/streetworld-policies.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 6,
+      "start_frame": 1568,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 6,
+      "start_frame": 1589,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "push",
+      "incoming_slide": 7,
+      "start_frame": 1649,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 7,
+      "start_frame": 1679,
+      "frames": 242,
+      "source": "P07_Web_Controller/edited/streetworld-web-controller.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 8,
+      "start_frame": 1921,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 8,
+      "start_frame": 1942,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 9,
+      "start_frame": 2002,
+      "frames": 21
+    },
+    {
+      "kind": "video",
+      "slide": 9,
+      "start_frame": 2023,
+      "frames": 435,
+      "source": "P09_Reactive_Traffic/edited/streetworld-reactive-traffic.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 10,
+      "start_frame": 2458,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 10,
+      "start_frame": 2479,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 11,
+      "start_frame": 2539,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 11,
+      "start_frame": 2560,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "morph",
+      "incoming_slide": 12,
+      "start_frame": 2620,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 12,
+      "start_frame": 2650,
+      "frames": 333,
+      "source": "P12_Multi_Modal_Rendering/edited/streetworld-multi-modal-rendering.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 13,
+      "start_frame": 2983,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 13,
+      "start_frame": 3004,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "morph",
+      "incoming_slide": 14,
+      "start_frame": 3064,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 14,
+      "start_frame": 3094,
+      "frames": 300,
+      "source": "P14_Object_Editing/edited/streetworld-object-editing.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 15,
+      "start_frame": 3394,
+      "frames": 21
+    },
+    {
+      "kind": "chapter",
+      "slide": 15,
+      "start_frame": 3415,
+      "frames": 60,
+      "source": null
+    },
+    {
+      "kind": "morph",
+      "incoming_slide": 16,
+      "start_frame": 3475,
+      "frames": 30
+    },
+    {
+      "kind": "video",
+      "slide": 16,
+      "start_frame": 3505,
+      "frames": 363,
+      "source": "P16_Renderer_Variants/edited/streetworld-renderer-variants.mp4"
+    },
+    {
+      "kind": "fade",
+      "incoming_slide": 17,
+      "start_frame": 3868,
+      "frames": 21
+    },
+    {
+      "kind": "ending",
+      "slide": 17,
+      "start_frame": 3889,
+      "frames": 60,
+      "source": null
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "title": "Realistic Terrain",
+  "description": "Our ground geometry estimation pipeline enables autonomous driving simulation on realistic terrain.",
+  "default_scene": "078",
+  "control": "Existing recorded WASD episodes",
+  "simulation_rerun": true,
+  "simulation_records_unchanged": false,
+  "ground_observer_degrees": 12,
+  "mesh_half_width_m": 3,
+  "map_id": null,
+  "scenes": [
+    {
+      "id": "078",
+      "scene": "078-segment-4266984864799709257",
+      "mode": "stop_reverse",
+      "video": "078.mp4",
+      "metadata": "078.json",
+      "thumbnail": "../thumbnails/terrain/078.webp",
+      "frames": 293,
+      "duration_seconds": 29.3,
+      "simulation_seconds": 29.26,
+      "sha256": "d6a4fbba5dd53bc9c4a833c7c55544444558d94d207cc898186c4e78b74ea417",
+      "bytes": 7113862,
+      "reason": "arrive_dest",
+      "backward_distance_m": 0.9999439592530521,
+      "source_frames": 293,
+      "presentation_start_frame": 0,
+      "simulation_rerun": true,
+      "max_route_error_m": 0.073217306831991
+    },
+    {
+      "id": "575",
+      "scene": "575-segment-8399876466981146110",
+      "mode": "slow_down",
+      "video": "575.mp4",
+      "metadata": "575.json",
+      "thumbnail": "../thumbnails/terrain/575.webp",
+      "frames": 138,
+      "duration_seconds": 13.8,
+      "simulation_seconds": 14.780000000000001,
+      "sha256": "2372deb0cda671586e44707b5c1abacc9881f4fd84683390470d9816507de24c",
+      "bytes": 3299027,
+      "reason": "arrive_dest",
+      "backward_distance_m": 0,
+      "source_frames": 148,
+      "presentation_start_frame": 10
+    },
+    {
+      "id": "590",
+      "scene": "590-segment-8806931859563747931",
+      "mode": "slow_down",
+      "video": "590.mp4",
+      "metadata": "590.json",
+      "thumbnail": "../thumbnails/terrain/590.webp",
+      "frames": 257,
+      "duration_seconds": 25.7,
+      "simulation_seconds": 26.62,
+      "sha256": "40b7d68f377fcb947ce933ee2d8cc07ee375874a022ae1c109dcf62ad0ad5a0d",
+      "bytes": 2265475,
+      "reason": "arrive_dest",
+      "backward_distance_m": 0,
+      "source_frames": 267,
+      "presentation_start_frame": 10
+    },
+    {
+      "id": "605",
+      "scene": "605-segment-9105380625923157726",
+      "mode": "stop_reverse",
+      "video": "605.mp4",
+      "metadata": "605.json",
+      "thumbnail": "../thumbnails/terrain/605.webp",
+      "frames": 254,
+      "duration_seconds": 25.4,
+      "simulation_seconds": 25.32,
+      "sha256": "2c8afdbe16c0787caf3335355f6986f404b0d1472732afdf16ad211ebb585390",
+      "bytes": 6885289,
+      "reason": "arrive_dest",
+      "backward_distance_m": 0.9895433495580335,
+      "source_frames": 254,
+      "presentation_start_frame": 0
+    },
+    {
+      "id": "614",
+      "scene": "614-segment-9288629315134424745",
+      "mode": "stop_reverse",
+      "video": "614.mp4",
+      "metadata": "614.json",
+      "thumbnail": "../thumbnails/terrain/614.webp",
+      "frames": 222,
+      "duration_seconds": 22.2,
+      "simulation_seconds": 23.42,
+      "sha256": "80b06a82eb8e7e898fa9485f99e1b7badb8b66568fb74597967e4064bd6384cf",
+      "bytes": 8571523,
+      "reason": "arrive_dest",
+      "backward_distance_m": 1.0128056913085501,
+      "source_frames": 235,
+      "presentation_start_frame": 13,
+      "lighting": {
+        "keyDirection": [
+          1,
+          -0.12,
+          0.65
+        ],
+        "keyStrength": 0.7,
+        "specularStrength": 0.3,
+        "specularExponent": 24
+      }
+    }
+  ],
+  "front_fade_m": [
+    30,
+    45
+  ],
+  "ground_observer_reference": "0-to-12-meter road grade",
+  "vehicle_observer_degrees": 12,
+  "projection_pixels_per_meter": 61.111111111111114,
+  "vehicle_model": "Terrain-only refinement of the original transparent wireframe car; continuous roof-to-shoulder contour and subdued distant edges; no solid fills",
+  "resimulated_scenes": [
+    "078"
+  ]
+}

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 35 1334 246" role="img" aria-labelledby="title desc">
+  <title id="title">StreetWorld</title>
+  <desc id="desc">A light blue and cyan StreetWorld wordmark with a road curving into the W and a location pin forming the o.</desc>
+  <defs>
+    <linearGradient id="street" x1="0" y1="60" x2="0" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#edfaff"/>
+      <stop offset=".45" stop-color="#a6d9ef"/>
+      <stop offset="1" stop-color="#5e9ec5"/>
+    </linearGradient>
+    <linearGradient id="speed" x1="215" y1="75" x2="385" y2="75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0645c5"/>
+      <stop offset=".55" stop-color="#008ded"/>
+      <stop offset="1" stop-color="#00d7e2"/>
+    </linearGradient>
+    <linearGradient id="w" x1="0" y1="49" x2="0" y2="237" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00cbe9"/>
+      <stop offset=".3" stop-color="#009cf1"/>
+      <stop offset=".68" stop-color="#0064f5"/>
+      <stop offset="1" stop-color="#003eea"/>
+    </linearGradient>
+    <linearGradient id="world" x1="1090" y1="58" x2="1090" y2="234" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#02d4df"/>
+      <stop offset=".4" stop-color="#00b8ec"/>
+      <stop offset="1" stop-color="#0077eb"/>
+    </linearGradient>
+    <linearGradient id="d" x1="1190" y1="232" x2="1285" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0094d6"/>
+      <stop offset=".55" stop-color="#00b6df"/>
+      <stop offset="1" stop-color="#00d9d9"/>
+    </linearGradient>
+    <linearGradient id="road" x1="625" y1="0" x2="835" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#021f3d"/>
+      <stop offset=".25" stop-color="#032957"/>
+      <stop offset=".6" stop-color="#0443bf"/>
+      <stop offset=".84" stop-color="#0086eb"/>
+      <stop offset="1" stop-color="#00bce4"/>
+    </linearGradient>
+    <linearGradient id="road-divider" x1="670" y1="0" x2="710" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4a9bc9" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#f4fdff"/>
+    </linearGradient>
+    <linearGradient id="road-edge" x1="700" y1="267" x2="830" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#357aff"/>
+      <stop offset=".5" stop-color="#51d9f9"/>
+      <stop offset="1" stop-color="#b1f7ff"/>
+    </linearGradient>
+    <linearGradient id="base-road" x1="694" y1="260" x2="1268" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#064bd9"/>
+      <stop offset=".4" stop-color="#008de8"/>
+      <stop offset="1" stop-color="#00d5d3"/>
+    </linearGradient>
+    <linearGradient id="pin-body" x1="0" y1="97" x2="0" y2="255" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00d0e8"/>
+      <stop offset=".47" stop-color="#0082fb"/>
+      <stop offset="1" stop-color="#0735ed"/>
+    </linearGradient>
+    <linearGradient id="pin-face" x1="0" y1="131" x2="0" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f3fdff"/>
+      <stop offset=".35" stop-color="#b5f7ff"/>
+      <stop offset="1" stop-color="#05e5ec"/>
+    </linearGradient>
+    <path id="letter-e" fill-rule="evenodd" d="M381 231C350 231 337 217 345 188L355 154C364 125 384 111 414 111H436C465 111 477 123 470 148L461 183H387L385 189C382 198 387 201 399 201H453L446 231ZM394 159H428L430 151C432 145 429 143 422 143H413C403 143 397 148 395 154Z"/>
+    <filter id="street-t-glow" x="-30%" y="-10%" width="160%" height="120%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+    <path id="street-rim" pathLength="100" d="M654 79L646 113H670L663 143H640L629 187C626 197 629 202 641 200C711 194 777 134 830 55"/>
+    <path id="street-road" d="M611 86L654 79L646 113H670L663 143H640L629 187C626 197 629 202 641 200C711 194 777 134 830 55C813 174 775 240 709 260C677 270 649 270 614 269C401 269 186 261 25 250C187 240 421 242 593 242C635 243 669 232 690 219C672 228 650 232 627 232C594 232 578 222 586 193Z"/>
+  </defs>
+
+  <!-- Two tapered speed lines above the t. -->
+  <g fill="url(#speed)">
+    <path d="M240 62H286C307 62 331 64 345 67C312 71 270 74 230 74Z"/>
+    <path d="M225 83H301C328 83 362 84 385 87C343 92 277 93 215 93Z"/>
+  </g>
+
+  <!-- Letter outlines keep the wordmark independent of installed fonts. -->
+  <g fill="url(#street)">
+    <path d="M96 60H228L196 100H99C87 100 79 106 77 116C75 122 79 125 88 125H132C170 125 187 143 180 177C173 212 151 231 111 231H-8L33 190H105C118 190 126 184 128 175C130 168 126 164 117 164H79C48 164 29 149 36 118C44 79 65 60 96 60Z"/>
+    <path d="M215 94H253L247 118H270L263 143H239L229 184C226 196 228 201 240 201H248L240 231H214C189 231 179 220 186 198L199 143H183L190 118H207Z"/>
+    <path d="M252 231L274 156C282 126 298 112 328 112H359L350 146H329C321 146 316 151 313 162L294 231Z"/>
+    <use href="#letter-e"/>
+    <use href="#letter-e" transform="translate(123 0)"/>
+  </g>
+  <path d="M44 91C55 71 73 60 96 60H227" fill="none" stroke="#0a4b81" stroke-width="1" opacity=".45"/>
+
+  <!-- A rounded W, with the rising road covering its left foot. -->
+  <path fill="url(#w)" d="M681 49H721C729 49 732 52 732 59L739 141L785 71C795 55 803 55 813 55H830L835 142L876 69C884 54 893 49 905 49H934L851 215C840 234 831 237 818 237H809C795 237 790 230 789 218L785 157L737 229C729 241 718 245 701 245H698Z"/>
+  <path d="M682 50H721C728 50 731 53 731 59M786 71C795 56 803 56 813 56H829M877 69C885 54 894 50 905 50H933" fill="none" stroke="#7eecfa" stroke-width="1.2" opacity=".6"/>
+  <path d="M682 51L694 178" fill="none" stroke="#0666e7" stroke-width="1.2" opacity=".65"/>
+
+  <g>
+    <path fill="url(#world)" d="M1017 233L1033 161C1041 127 1056 111 1088 111H1118L1110 145H1091C1081 145 1075 151 1072 163L1060 233Z"/>
+    <path fill="url(#world)" d="M1132 81C1136 64 1149 59 1160 59H1178L1141 233H1098Z"/>
+    <path fill="url(#d)" fill-rule="evenodd" d="M1284 55H1308L1278 195C1272 221 1258 235 1231 235H1205C1171 235 1154 222 1163 188L1170 153C1178 121 1198 108 1226 108H1255L1265 74C1268 61 1276 55 1284 55ZM1230 142C1220 142 1215 147 1212 158L1205 186C1202 196 1204 200 1214 200H1224C1233 200 1237 196 1239 186L1249 142Z"/>
+  </g>
+
+  <!-- The right road is a single tapered strip beneath World. -->
+  <path fill="url(#base-road)" d="M694 269L734 248C900 247 1090 247 1268 256C1097 267 898 270 694 269Z"/>
+  <path fill="#eefbff" d="M754 255H776V259H754ZM802 255H824V259H802Z"/>
+
+  <!-- The t and the rising road share one continuous outline. -->
+  <use href="#street-road" fill="url(#road)"/>
+  <!-- One uninterrupted contour joins the t to the rising road. Only its t segment glows. -->
+  <use href="#street-rim" fill="none" stroke="#3c91c8" stroke-width="4" stroke-dasharray="42.5 57.5" stroke-linecap="round" opacity=".35" filter="url(#street-t-glow)"/>
+  <use href="#street-rim" fill="none" stroke="url(#road-divider)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M695 265C775 244 815 168 830 55" fill="none" stroke="url(#road-edge)" stroke-width="3.5"/>
+  <path fill="#f8fcff" d="M263 252H291V256H263ZM321 253H350V257H321ZM381 254H409V258H381ZM442 254H470V258H442ZM505 255H533V259H505ZM568 255H597V259H568ZM631 254L654 251L655 255L632 258ZM674 232L700 221L706 227L680 239ZM718 196L738 183L744 188L723 204ZM754 165L769 151L775 155L760 172ZM778 138L786 127L791 130L783 143ZM791 118L798 108L802 110L795 121ZM803 99L809 90L812 92L806 102ZM813 82L817 75L819 76L815 84ZM821 68L824 63L826 64L823 70Z"/>
+
+  <!-- The o is a circular location pin with a vector cutout. -->
+  <path fill="url(#pin-body)" d="M953 255L911 215C885 190 884 157 900 130C914 108 936 97 961 97C998 97 1028 126 1028 164C1028 189 1016 208 997 225Z"/>
+  <path d="M900 130C914 108 936 98 961 98C982 98 1001 107 1014 122" fill="none" stroke="#38e4ee" stroke-width="1" opacity=".55"/>
+  <path fill="url(#pin-face)" fill-rule="evenodd" d="M954 218L934 192C927 184 924 175 924 165C924 146 939 131 959 131C978 131 994 146 994 165C994 175 990 183 983 192ZM979 165A20 20 0 1 0 939 165A20 20 0 1 0 979 165Z"/>
+</svg>

@@ -1,0 +1,195 @@
+{
+  "scene": "078-segment-4266984864799709257",
+  "mode": "stop_reverse",
+  "actual_physics": true,
+  "terrain": "MeshTerrain",
+  "map_id": null,
+  "policy": "EnvInputPolicy",
+  "control": "WASD press/release at 50 Hz using the WebUI keyboard mapping",
+  "keyboard_steering_limit_degrees": 12.0,
+  "tracking_lookahead_min_m": 1.5,
+  "tracking_lookahead_seconds": 0.15,
+  "camera_extrinsics": "ScenarioDataManager camera calibration in the simulated vehicle-center frame",
+  "physics_steps": 1463,
+  "simulation_seconds": 29.26,
+  "camera_names": [
+    "FRONT_LEFT",
+    "FRONT",
+    "FRONT_RIGHT"
+  ],
+  "frames": 293,
+  "fps": 10,
+  "reason": "arrive_dest",
+  "collision": false,
+  "route_length_m": 125.80336699308391,
+  "final_progress_m": 125.80336699308391,
+  "max_route_error_m": 0.073217306831991,
+  "median_route_error_m": 0.028127012280592632,
+  "p95_route_error_m": 0.06376313370355904,
+  "minimum_signed_speed_mps": -0.7484631461436582,
+  "stop_speed_max_mps": 0.08246233553309298,
+  "backward_distance_m": 0.9999439592530521,
+  "resumed_speed_mps": 5.937696713002426,
+  "events": [
+    {
+      "phase": "decelerate",
+      "time_s": 8.059999999999917,
+      "progress_m": 47.85924367164373
+    },
+    {
+      "phase": "stopped",
+      "time_s": 11.399999999999846,
+      "progress_m": 58.21600400113864
+    },
+    {
+      "phase": "reverse",
+      "time_s": 12.219999999999828,
+      "progress_m": 58.231453747753086
+    },
+    {
+      "phase": "reverse_brake",
+      "time_s": 13.699999999999797,
+      "progress_m": 57.423533246618994
+    },
+    {
+      "phase": "restart_hold",
+      "time_s": 14.199999999999786,
+      "progress_m": 57.242632661338526
+    },
+    {
+      "phase": "resume",
+      "time_s": 14.619999999999777,
+      "progress_m": 57.233834086133626
+    }
+  ],
+  "reactive_following_vehicle_ids": [
+    "4wNDm9z7sH7T7ToWJ-euUg",
+    "OmJnmO93WJtMEssSgIQu9w",
+    "YGUJ6kgScvc3DFnG43cEjg",
+    "b6f-mDeAQoQAPLmj1AiZHw"
+  ],
+  "archive_member_sha256": {
+    "format_version": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+    "scene": "595cf870d329dc9740e2acf7df217b48f60434a22d9e17efc6386efbf174fe8e",
+    "camera": "206bf28d216f0980046d2b2bcc0f74de2229d56a6a47c1dbd60ef7f83836e895",
+    "ego_pose": "fe5e80f3446e0d48ba12d182ee1cc56b92929f40fd99475d129a6ebf58ae5bae",
+    "bounding_box": "8ace8560eb4bb9ed904152f0cfec6eaa4305410c936574066ee9688ada302682",
+    "object_offset": "de708fe93decf1159b924b2102bcd74e501d3e1ed373209269485ad961dab7b8",
+    "background": "1d3919508ae9b36216c8fde303ebba8a531109b39728bfab72a6410c27690538",
+    "objects": "56cf3caf9cd0e12c6375b2c76858c86aaf2b7a402985d39bbf089cec3a058566",
+    "skymap": "701c02d12bc0fd9247762dea5f77de4264e7cca82e582d1c5283f738fbe01dc2"
+  },
+  "source_frames": 293,
+  "presentation_start_frame": 0,
+  "presentation_start_seconds": 0.0,
+  "stream": {
+    "codec_name": "h264",
+    "width": 1440,
+    "height": 684,
+    "r_frame_rate": "10/1",
+    "duration": "29.300000",
+    "nb_frames": "293"
+  },
+  "bytes": 7113862,
+  "sha256": "d6a4fbba5dd53bc9c4a833c7c55544444558d94d207cc898186c4e78b74ea417",
+  "source_mesh": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/waymo_mesh_robustness_20261030/078/ground/078-segment-4266984864799709257.obj",
+  "mesh_sha256": "6dcaacb602924f152f5b646fad54139fbf67153a9878c05a72f7b565f97ff16d",
+  "trajectory": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/078/trajectory.jsonl",
+  "wasd_inputs": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/078/keys.jsonl",
+  "route_source": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/078/trajectory.jsonl",
+  "display_surface": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/078/road-surface.json",
+  "display_surface_method": "Original V2 thin-plate height field resampled on symmetric normal offsets of the actual WASD path",
+  "height_field_original_vertex_error_m": 6.029523547113058e-10,
+  "original_triangle_interpolation_error_m": 0.0021811238519546805,
+  "left_right_distance_error_m": 9.78772618509538e-13,
+  "left_right_symmetry_error_m": 0.0,
+  "actual_path_max_distance_m": 0.01395349887798581,
+  "projection": {
+    "view": {
+      "width": 1600,
+      "height": 760,
+      "focal": 1100,
+      "eye": [
+        -17.606656813208502,
+        0,
+        3.742410434719668
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "distance": 18,
+      "angleDegrees": 12,
+      "followsRoadGrade": true,
+      "gradeReferenceMeters": [
+        0,
+        12
+      ]
+    },
+    "panelView": {
+      "width": 1600,
+      "height": 760,
+      "focal": 2200,
+      "eye": [
+        -34,
+        0,
+        14
+      ],
+      "target": [
+        6,
+        0,
+        3.1
+      ]
+    },
+    "vehicle": {
+      "width": 1600,
+      "height": 760,
+      "focal": 1100,
+      "eye": [
+        -17.606656813208502,
+        0,
+        3.742410434719668
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "distance": 18,
+      "angleDegrees": 12
+    },
+    "groundScale": 1.25,
+    "groundOffset": [
+      0,
+      -35
+    ],
+    "elevationScale": 2,
+    "attitudeScale": 0.5
+  },
+  "mesh_half_width_m": 3,
+  "mesh_extent_m": [
+    -16,
+    45
+  ],
+  "vehicle_yaw": "fixed",
+  "vehicle_model": "Terrain-only revision of the original wireframe car, with a continuous roof-to-shoulder contour and subdued distant edges; no body or glass fills",
+  "surface": "Smooth lit symmetric road sampled from the original estimated height field",
+  "fade": {
+    "rear_clearance_after_tail_m": 1,
+    "rear_m": [
+      -16,
+      -3.4
+    ],
+    "front_m": [
+      30,
+      45
+    ],
+    "symmetric_side_feather_m": 0.18
+  },
+  "camera_source": "/mnt/nas/home--fulvchang/repos/StreetWorld/outputs/terrain_project_wasd/078/cameras.mp4",
+  "camera_source_sha256": "7ed7b87c689b421b0d59d2356894fcd83c5f22fbfc9420abe72c239ff93fdeb4",
+  "camera_pixels_reused_before_encoding": false,
+  "simulation_rerun": true,
+  "render_method": "Fresh calibrated Gaussian camera recordings projected onto the unchanged camera panels, with the current lit mesh and wireframe vehicle; WASD simulation rerun follows the expert path"
+}

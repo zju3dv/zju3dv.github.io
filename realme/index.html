@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RealMe creates immersive volumetric video from sparse, low-resolution captures with 2K, 4D-consistent video enhancement.">
+  <meta property="og:title" content="RealMe: Immersive Volumetric Video from Minimal Captures">
+  <meta property="og:description" content="SIGGRAPH Asia 2026 Conference Papers">
+  <meta property="og:image" content="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/teaser.webp">
+  <title>RealMe | SIGGRAPH Asia 2026</title>
+  <link rel="icon" href="assets/favicon-film-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/favicon-film.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="side-nav" aria-label="Page sections">
+    <a class="nav-brand" href="#top">RealMe</a>
+    <span class="nav-label">EXPLORE</span>
+    <a href="#demo">Demo Video</a>
+    <a href="#method">Method</a>
+    <a href="#results">Comparisons</a>
+    <a href="#dataset">RealVV dataset</a>
+    <a href="#citation">Citation</a>
+    <a class="nav-footer" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path></svg>Back to top</a>
+  </nav>
+
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <h1><span class="title-mark">RealMe</span> <span class="title-colon">:</span> Immersive Volumetric Video from Minimal Captures</h1>
+        <div class="authors" aria-label="Authors">
+          <a href="https://zicx.top/" target="_blank" rel="noopener noreferrer">Chenxu Zhou<sup>1</sup></a>
+          <a href="https://fishfishson.github.io/" target="_blank" rel="noopener noreferrer">Zhiyuan Yu<sup>1,†</sup></a>
+          <a href="https://krahets.com/" target="_blank" rel="noopener noreferrer">Yudong Jin<sup>1</sup></a>
+          <a href="https://stland-admin.github.io/" target="_blank" rel="noopener noreferrer">Yinji Shentu<sup>1</sup></a>
+          <a href="https://cn.linkedin.com/in/yu-zhang-4388aa336" target="_blank" rel="noopener noreferrer">Yu Zhang<sup>2</sup></a>
+          <a href="https://jiamingsun.me/" target="_blank" rel="noopener noreferrer">Jiaming Sun<sup>2</sup></a>
+          <a href="https://xzhou.me/" target="_blank" rel="noopener noreferrer">Xiaowei Zhou<sup>1</sup></a>
+        </div>
+        <div class="affiliations">
+          <span><sup>1</sup> State Key Laboratory of CAD&amp;CG, Zhejiang University</span>
+          <span><sup>2</sup> 4DV.ai</span>
+        </div>
+        <p class="author-note">† Corresponding author</p>
+        <a class="venue" href="https://asia.siggraph.org/2026/" target="_blank" rel="noopener noreferrer">
+          <img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/siggraph-asia-symbol.png" width="192" height="192" alt="">
+          <span>SIGGRAPH Asia 2026</span>
+        </a>
+        <div class="resource-links" aria-label="Project resources">
+          <a href="https://arxiv.org/pdf/2610.30023" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/icons/pdf.svg" alt="">Paper</a>
+          <a href="https://arxiv.org/abs/2610.30023" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/icons/arxiv.svg" alt="">arXiv</a>
+          <a href="https://github.com/zju3dv/RealMe" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/icons/github.svg" alt="">Code</a>
+          <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/icons/googledrive.svg" alt="">Data</a>
+        </div>
+      </div>
+    </header>
+
+    <blockquote class="tldr">
+      <strong>TL;DR</strong>
+      <ul>
+        <li>RealMe turns <strong>sparse, low-resolution</strong> multi-view captures into <strong>2K</strong>, <strong>4D-consistent</strong> volumetric video.</li>
+        <li>We adapt a <strong class="tldr-method">high-resolution diffusion prior</strong> for 4D enhancement, with <strong class="tldr-method">frequency guidance</strong> to recover fine details.</li>
+        <li>We create <a href="#dataset">RealVV</a>, a self-captured multi-view dataset for challenging capture settings.</li>
+      </ul>
+    </blockquote>
+
+    <section id="demo" class="page-section" aria-labelledby="demo-title">
+      <h2 class="section-heading" id="demo-title">Demo Video</h2>
+      <div class="demo-stage">
+        <video class="demo-video" src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/videos/demo-held.mp4" controls playsinline preload="metadata" poster="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/cover/demo-cover-dark.png" aria-label="RealMe demo video"></video>
+        <span class="demo-loading" role="status"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5 2.5v15L17 10 5 2.5z"></path></svg>Video loading</span>
+      </div>
+    </section>
+
+    <section id="method" class="page-section" aria-labelledby="method-title">
+      <h2 class="section-heading" id="method-title">Method</h2>
+      <p class="section-intro method-intro"><strong>Pipeline overview.</strong> From sparse, low-resolution (720p) multi-view captures, <strong>RealMe</strong> builds a coarse 4D representation and creates auxiliary videos from novel-view renders and crops of the inputs. Conditioned on these auxiliary videos, a high-resolution video diffusion model generates enhanced videos that are used together with the original captures to optimize the final 4D representation.</p>
+      <figure class="feature-figure pipeline">
+        <a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/pipeline-white.webp" target="_blank" rel="noopener" aria-label="Open RealMe pipeline figure at full size"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/pipeline.webp" width="2600" height="946" alt="RealMe pipeline: limited captures, auxiliary data construction, video diffusion enhancement, and optimized 4D reconstruction" loading="lazy"></a>
+      </figure>
+      <div class="architecture">
+        <h3>Model Architecture</h3>
+        <figure class="feature-figure architecture-figure">
+          <a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/model-architecture-white.webp" target="_blank" rel="noopener" aria-label="Open model architecture figure at full size"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/model-architecture.webp" width="2200" height="1731" alt="ControlNet and diffusion transformer architecture with layout-aware positional embeddings and factorized spatio-temporal attention" loading="lazy"></a>
+        </figure>
+        <ul class="architecture-points">
+          <li><strong>ControlNet.</strong> A frozen VAE encodes the auxiliary videos into condition latents, while a frozen text encoder provides prompt features. ControlNet converts both into control signals injected as conditioning residuals into each DiT block.</li>
+          <li><strong>Layout-aware positional embeddings.</strong> We extend image positional IDs with frame and viewpoint indices alongside the two latent-grid coordinates. Rotary embeddings over these four axes distinguish tokens at the same grid location across different frames and views.</li>
+          <li><strong>DiT with factorized spatio-temporal attention.</strong> DiT blocks replace full attention with separate temporal and spatial patterns, where the spatial axis indexes viewpoints rather than image patches. This propagates information across frames and views during denoising, improving 4D consistency.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="results" class="page-section" aria-labelledby="results-title">
+      <h2 class="section-heading" id="results-title">Comparisons</h2>
+      <p class="section-intro">RealMe outperforms state-of-the-art methods in novel-view synthesis quality and 4D consistency on both datasets.</p>
+
+      <div class="comparison-toolbar">
+        <div class="dataset-switcher" role="group" aria-label="Comparison dataset">
+          <button type="button" data-dataset="realvv" aria-pressed="true">RealVV</button>
+          <button type="button" data-dataset="dna" aria-pressed="false">DNA-Rendering</button>
+        </div>
+        <button class="autoplay-toggle" type="button" role="switch" aria-checked="true"><span>Auto-play</span><span class="autoplay-track" aria-hidden="true"></span><span class="autoplay-state" aria-hidden="true">On</span></button>
+      </div>
+
+      <div class="comparison-case">
+        <div class="video-grid" data-scene="realvv-close">
+          <figure><video data-method="ftgs" src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/videos/realvv-close-ftgs.mp4" controls muted loop playsinline preload="none" poster="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-close-ftgs.jpg" aria-label="FTGS RealVV scene 008 result"></video><figcaption>FTGS</figcaption></figure>
+          <figure><video data-method="difix3d" src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/videos/realvv-close-difix3d.mp4" controls muted loop playsinline preload="none" poster="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-close-difix3d.jpg" aria-label="DIFIX3D+ RealVV scene 008 result"></video><figcaption>DIFIX3D+</figcaption></figure>
+          <figure><video data-method="diffuman4d" src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/videos/realvv-close-diffuman4d.mp4" controls muted loop playsinline preload="none" poster="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-close-diffuman4d.jpg" aria-label="Diffuman4D RealVV scene 008 result"></video><figcaption>Diffuman4D</figcaption></figure>
+          <figure class="ours"><video data-method="ours" src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/videos/realvv-close-ours.mp4" controls muted playsinline preload="none" poster="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-close-ours.jpg" aria-label="Ours RealVV scene 008 result"></video><figcaption>Ours</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="scene-switcher" data-dataset="realvv" role="group" aria-label="Choose RealVV scene">
+        <button class="scene-arrow" type="button" data-direction="-1" aria-label="Previous RealVV scene"></button>
+        <div class="scene-list">
+          <div class="scene-track">
+            <span class="scene-selection" aria-hidden="true"></span>
+            <button type="button" data-scene="realvv-close" aria-label="RealVV scene 008, long-focus view" aria-pressed="true"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-close-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-001" aria-label="RealVV scene 001" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-001-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-004" aria-label="RealVV scene 004" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-004-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-006" aria-label="RealVV scene 006" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-006-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-wide" aria-label="RealVV scene 007, wide view" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-wide-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-011" aria-label="RealVV scene 011" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-011-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="realvv-012" aria-label="RealVV scene 012" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-012-ours.jpg" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <button class="scene-arrow" type="button" data-direction="1" aria-label="Next RealVV scene"></button>
+      </div>
+
+      <div class="scene-switcher" data-dataset="dna" role="group" aria-label="Choose DNA-Rendering scene and camera" hidden>
+        <button class="scene-arrow" type="button" data-direction="-1" aria-label="Previous DNA-Rendering scene"></button>
+        <div class="scene-list">
+          <div class="scene-track">
+            <span class="scene-selection" aria-hidden="true"></span>
+            <button type="button" data-scene="dna-0023-00" aria-label="DNA-Rendering sequence 0023, camera 00" aria-pressed="true"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0023-00-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0023-12" aria-label="DNA-Rendering sequence 0023, camera 12" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0023-12-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-rendering" aria-label="DNA-Rendering sequence 0023, camera 24" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-rendering-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0023-36" aria-label="DNA-Rendering sequence 0023, camera 36" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0023-36-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0811-00" aria-label="DNA-Rendering sequence 0811, camera 00" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0811-00-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0811-12" aria-label="DNA-Rendering sequence 0811, camera 12" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0811-12-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0811-24" aria-label="DNA-Rendering sequence 0811, camera 24" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0811-24-ours.jpg" alt="" loading="lazy"></button>
+            <button type="button" data-scene="dna-0811-36" aria-label="DNA-Rendering sequence 0811, camera 36" aria-pressed="false"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/dna-0811-36-ours.jpg" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <button class="scene-arrow" type="button" data-direction="1" aria-label="Next DNA-Rendering scene"></button>
+      </div>
+
+      <div class="detail-block">
+        <div class="case-heading">
+          <h3>Detail comparison</h3>
+        </div>
+        <div class="detail-set">
+          <div class="detail-label-row">
+            <p class="detail-set-label">Indoor capture</p>
+            <p class="detail-hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"></circle><path d="M10.5 7.75v5.5M7.75 10.5h5.5M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>Zoom in for a better view</p>
+          </div>
+          <div class="capture-grid detail-grid">
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-input.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-input.webp" width="793" height="446" alt="Indoor portrait from the low-resolution input" loading="lazy"></a><figcaption>Input</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-star.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-star.webp" width="911" height="512" alt="Indoor portrait enhanced by STAR" loading="lazy"></a><figcaption>STAR</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-flashvsr.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-flashvsr.webp" width="911" height="512" alt="Indoor portrait enhanced by FlashVSR" loading="lazy"></a><figcaption>FlashVSR</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-ours.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-indoor-ours.webp" width="911" height="512" alt="Indoor portrait enhanced by RealMe" loading="lazy"></a><figcaption>Ours</figcaption></figure>
+          </div>
+        </div>
+        <div class="detail-set">
+          <p class="detail-set-label">Studio capture</p>
+          <div class="capture-grid detail-grid">
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-input.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-input.webp" width="793" height="446" alt="Studio portrait from the low-resolution input" loading="lazy"></a><figcaption>Input</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-star.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-star.webp" width="911" height="512" alt="Studio portrait enhanced by STAR" loading="lazy"></a><figcaption>STAR</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-flashvsr.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-flashvsr.webp" width="911" height="512" alt="Studio portrait enhanced by FlashVSR" loading="lazy"></a><figcaption>FlashVSR</figcaption></figure>
+            <figure><a href="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-ours.webp" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/detail-studio-ours.webp" width="911" height="512" alt="Studio portrait enhanced by RealMe" loading="lazy"></a><figcaption>Ours</figcaption></figure>
+          </div>
+        </div>
+        <p class="detail-note">Compared with STAR and FlashVSR, RealMe restores finer facial, hair, and clothing detail with a more natural appearance.</p>
+      </div>
+    </section>
+
+    <section id="dataset" class="page-section" aria-labelledby="dataset-title">
+      <h2 class="section-heading" id="dataset-title">RealVV Dataset</h2>
+      <p class="section-intro">Our self-captured RealVV dataset includes varied actors, actions, scenes, camera baselines, and focal settings.</p>
+      <div class="dataset-grid" aria-label="Five RealVV scenes, each shown as a short-focus capture, long-focus capture, mask, and camera-rig view">
+        <h3>Short-focus</h3><h3>Long-focus</h3><h3>Mask</h3><h3>Camera rigs</h3>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-01-short.webp" width="678" height="374" alt="Scene 1: seated performer, short-focus view" loading="lazy"><figcaption>Short-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-01-long.webp" width="678" height="374" alt="Scene 1: seated performer, long-focus view" loading="lazy"><figcaption>Long-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-01-mask.webp" width="678" height="374" alt="Scene 1: foreground mask" loading="lazy"><figcaption>Mask</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-01-rig.webp" width="678" height="374" alt="Scene 1: camera-rig view" loading="lazy"><figcaption>Camera rigs</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-02-short.webp" width="678" height="374" alt="Scene 2: performer in a dark studio, short-focus view" loading="lazy"><figcaption>Short-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-02-long.webp" width="678" height="374" alt="Scene 2: performer in a dark studio, long-focus view" loading="lazy"><figcaption>Long-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-02-mask.webp" width="678" height="374" alt="Scene 2: foreground mask" loading="lazy"><figcaption>Mask</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-02-rig.webp" width="678" height="374" alt="Scene 2: camera-rig view" loading="lazy"><figcaption>Camera rigs</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-03-short.webp" width="678" height="374" alt="Scene 3: performer in a purple-lit studio, short-focus view" loading="lazy"><figcaption>Short-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-03-long.webp" width="678" height="374" alt="Scene 3: performer in a purple-lit studio, long-focus view" loading="lazy"><figcaption>Long-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-03-mask.webp" width="678" height="374" alt="Scene 3: foreground mask" loading="lazy"><figcaption>Mask</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-03-rig.webp" width="678" height="374" alt="Scene 3: camera-rig view" loading="lazy"><figcaption>Camera rigs</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-04-short.webp" width="678" height="374" alt="Scene 4: performer in a green studio, short-focus view" loading="lazy"><figcaption>Short-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-04-long.webp" width="678" height="374" alt="Scene 4: performer in a green studio, long-focus view" loading="lazy"><figcaption>Long-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-04-mask.webp" width="678" height="374" alt="Scene 4: foreground mask" loading="lazy"><figcaption>Mask</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-04-rig.webp" width="678" height="374" alt="Scene 4: camera-rig view" loading="lazy"><figcaption>Camera rigs</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-05-short.webp" width="678" height="374" alt="Scene 5: performer in a white studio, short-focus view" loading="lazy"><figcaption>Short-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-05-long.webp" width="678" height="374" alt="Scene 5: performer in a white studio, long-focus view" loading="lazy"><figcaption>Long-focus</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-05-mask.webp" width="678" height="374" alt="Scene 5: foreground mask" loading="lazy"><figcaption>Mask</figcaption></figure>
+        <figure><img src="https://raw.githubusercontent.com/cxzhou35/projects/main/realme/assets/images/realvv-dataset-05-rig.webp" width="678" height="374" alt="Scene 5: camera-rig view" loading="lazy"><figcaption>Camera rigs</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="acknowledgements" class="page-section closing-section" aria-labelledby="acknowledgements-title">
+      <h2 class="section-heading" id="acknowledgements-title">Acknowledgements</h2>
+      <p>We would like to thank Yujie Guo, Zhen Xu, and Taoming Liu for their insightful discussions.</p>
+      <p>This work was partially supported by the National Key R&amp;D Program of China (No. 2024YFB2809105), the Zhejiang Provincial Natural Science Foundation of China (No. LR25F020003), and the Information Technology Center and State Key Lab of CAD&amp;CG, Zhejiang University.</p>
+      <p>All actors shown in the dataset have authorized the use of their footage.</p>
+    </section>
+
+    <section id="citation" class="page-section closing-section" aria-labelledby="citation-title">
+      <h2 class="section-heading" id="citation-title">Citation</h2>
+      <div class="bibtex-box">
+        <button class="bibtex-copy" type="button" aria-label="Copy BibTeX citation" title="Copy BibTeX citation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="m5 12 4 4L19 6"></path></svg>
+        </button>
+        <span class="bibtex-copy-status" role="status"></span>
+        <pre class="bibtex"><code>@inproceedings{zhou2026realme,
+  title     = {RealMe: Immersive Volumetric Video from Minimal Captures},
+  author    = {Zhou, Chenxu and Yu, Zhiyuan and Jin, Yudong and Shentu, Yinji and Zhang, Yu and Sun, Jiaming and Zhou, Xiaowei},
+  booktitle = {SIGGRAPH Asia 2026 Conference Papers},
+  year      = {2026},
+  doi       = {10.1145/3829340.3842349}
+}</code></pre>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 RealMe</span>
+      <span>Original page content is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>.</span>
+    </footer>
+  </main>
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -285,18 +285,6 @@ h3 {
   font-weight: 600;
 }
 
-.hero-button[data-link="code"],
-.hero-button[data-link="code"]:hover,
-.hero-button[data-link="code"]:active,
-.hero-button[data-link="code"]:focus,
-.hero-button[data-link="code"]:focus-visible,
-.hero-button[data-link="code"]:visited {
-  color: #667085;
-  text-decoration: none;
-  outline: none;
-  box-shadow: none;
-}
-
 .hero-button.is-disabled {
   cursor: default;
 }

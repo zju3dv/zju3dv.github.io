@@ -12,6 +12,7 @@
     <link rel="icon" href="assets/favicon.svg?v=infinity-blue" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <script defer src="assets/js/gallery.js"></script>
+    <script defer src="assets/js/application.js"></script>
     <script defer src="assets/js/content.js"></script>
     <script defer src="assets/js/app.js"></script>
   </head>
@@ -74,6 +75,12 @@
           d="M10 10h4v4h-4Zm0 0L7 7m7 3 3-3m-3 7 3 3m-7-3-3 3M7 4.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm10 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-10 10a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm10 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
         />
       </symbol>
+      <symbol id="icon-rig" viewBox="0 0 24 24">
+        <path d="m5 10 2-5h10l2 5M4 10h16v8H4Zm3 8v3m10-3v3M7 13h2m6 0h2M12 5V2m-3 0h6" />
+      </symbol>
+      <symbol id="icon-pano" viewBox="0 0 24 24">
+        <path d="M3 7h18v10h-6l-3-3-3 3H3Zm0 2L1 10v4l2 1m18-6 2 1v4l-2 1M6 10h3v3H6Zm9 0h3v3h-3Z" />
+      </symbol>
     </svg>
 
     <header class="site-header">
@@ -86,6 +93,7 @@
           <a href="#demo">Video</a>
           <a href="#method">Method</a>
           <a href="#qualitative">Results</a>
+          <a href="#application">Application</a>
           <!-- <a href="#comparisons">Compare</a> -->
           <a href="#citation">Citation</a>
         </nav>
@@ -388,6 +396,87 @@
             id="qualitative-scenes"
             role="group"
             aria-label="Select a reconstruction scene"
+          ></div>
+        </div>
+      </section>
+
+      <section
+        class="section container"
+        id="application"
+        aria-labelledby="application-title"
+      >
+        <div class="section-heading">
+          <h2 id="application-title">Application</h2>
+        </div>
+        <div class="gallery-controls">
+          <div
+            class="category-tabs application-tabs"
+            id="application-tabs"
+            role="tablist"
+            aria-label="Application category"
+          ></div>
+        </div>
+        <div id="application-panel" role="tabpanel" tabindex="0">
+          <div class="viewer-card">
+            <div class="viewer-toolbar">
+              <div class="viewer-title">
+                <strong id="application-scene-name">Scene 01</strong
+                ><span class="badge" id="application-dataset"></span>
+              </div>
+              <div class="viewer-tools">
+                <button
+                  class="text-button"
+                  type="button"
+                  data-back="application-viewer"
+                  hidden
+                >
+                  <svg class="icon"><use href="#icon-back" /></svg> Back to
+                  preview</button
+                ><a
+                  class="icon-button"
+                  data-standalone="application-viewer"
+                  aria-disabled="true"
+                  aria-label="Open viewer in a new tab"
+                  title="Open viewer in a new tab"
+                  ><svg class="icon"><use href="#icon-diagonal" /></svg></a
+                ><button
+                  class="icon-button"
+                  type="button"
+                  data-reset="application-viewer"
+                  aria-label="Reset scene view"
+                  title="Reset scene view"
+                  disabled
+                >
+                  <svg class="icon"><use href="#icon-reset" /></svg></button
+                ><button
+                  class="icon-button"
+                  type="button"
+                  data-fullscreen="application-viewer"
+                  aria-label="Expand scene viewer"
+                  title="Expand scene viewer"
+                >
+                  <svg class="icon"><use href="#icon-expand" /></svg>
+                </button>
+              </div>
+            </div>
+            <div class="viewer-stage" id="application-viewer"></div>
+            <div class="viewer-footer">
+              <span
+                >Drag to orbit · Scroll to zoom<span class="fly-hint">
+                  · Fly: WASD + Mouse, Esc to exit</span
+                ></span
+              ><span class="powered-by">Viewed with SuperSplat</span>
+            </div>
+          </div>
+          <p class="viewer-download-hint" id="application-download-hint">
+            Click <strong>Explore in 3D</strong> to download this scene’s HTML
+            viewer from Hugging Face and explore it interactively.
+          </p>
+          <div
+            class="scene-grid"
+            id="application-scenes"
+            role="group"
+            aria-label="Select an application case"
           ></div>
         </div>
       </section>

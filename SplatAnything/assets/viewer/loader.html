@@ -7,6 +7,7 @@
     <!--
       Opens a SuperSplat standalone viewer HTML hosted elsewhere (e.g. a HuggingFace
       dataset). Usage: loader.html?src=<https URL of the exported viewer HTML>.
+      Numbered dataset folders: loader.html?repo=<owner/dataset>&directory=<category/N>.
       HuggingFace serves those files as downloads, so the page is fetched here and
       written into this document, as on the InfiniSplat v2 project page.
     -->
@@ -126,24 +127,32 @@
         const actions = document.querySelector(".actions");
         const params = new URLSearchParams(location.search);
         const bytes = Number(params.get("bytes"));
-        const expected = Number.isSafeInteger(bytes) && bytes > 0 ? bytes : 0;
+        let expected = Number.isSafeInteger(bytes) && bytes > 0 ? bytes : 0;
+        const repository = params.get("repo");
+        const directory = params.get("directory");
+        const lookup = Boolean(repository || directory);
         const label = params.get("label") || "3D scene";
         document.getElementById("scene-label").textContent = label;
         document.title = `${label} — SplatAnything`;
-        let source;
+        let source = null;
         try {
-          source = new URL(params.get("src"));
-          if (!["https:", "http:"].includes(source.protocol)) throw Error();
+          if (lookup) {
+            if (
+              !/^[\w.-]+\/[\w.-]+$/.test(repository || "") ||
+              !/^(object|indoor|street|aerial|rig|pano)\/[1-9]\d*$/.test(directory || "")
+            ) throw Error();
+          } else {
+            source = new URL(params.get("src"));
+            if (!["https:", "http:"].includes(source.protocol)) throw Error();
+          }
         } catch {
           message.textContent = "No 3D scene was specified.";
           progress.hidden = true;
           return;
         }
-        const downloadURL = new URL(source);
-        downloadURL.searchParams.set("download", "true");
-        download.href = downloadURL.href;
         download.target = "_blank";
         download.rel = "noopener noreferrer";
+        const encodePath = (value) => value.split("/").map(encodeURIComponent).join("/");
         const megabytes = (bytes) => (bytes / 1e6).toFixed(1);
         let controller;
         const cancel = () => controller?.abort();
@@ -173,14 +182,44 @@
           cancel();
           const request = new AbortController();
           controller = request;
+          if (lookup) {
+            source = null;
+            expected = 0;
+          }
           retry.hidden = download.hidden = true;
           actions.hidden = true;
           progress.hidden = details.hidden = false;
           showProgress(0, expected);
-          message.textContent = "Downloading scene HTML…";
+          message.textContent = lookup ? "Finding scene HTML…" : "Downloading scene HTML…";
           try {
+            if (lookup) {
+              // The local folder number is authoritative. Resolve this folder
+              // afresh so dataset reorders do not reuse old filenames or sizes.
+              const listing = await fetch(
+                `https://huggingface.co/api/datasets/${encodePath(repository)}/tree/main/${encodePath(directory)}?recursive=false&limit=1000`,
+                { credentials: "omit", cache: "no-store", signal: request.signal },
+              );
+              if (!listing.ok)
+                throw Error(`cannot read ${directory} (HTTP ${listing.status})`);
+              const entries = await listing.json();
+              const candidates = entries.filter((entry) =>
+                entry.type === "file" && /\.html$/i.test(entry.path) &&
+                entry.path.slice(0, entry.path.lastIndexOf("/")) === directory,
+              );
+              if (candidates.length !== 1)
+                throw Error(`expected one HTML file in ${directory}, found ${candidates.length}`);
+              const entry = candidates[0];
+              expected = Number.isSafeInteger(entry.size) && entry.size > 0 ? entry.size : 0;
+              source = new URL(`https://huggingface.co/datasets/${encodePath(repository)}/resolve/main/${encodePath(entry.path)}`);
+            }
+            const downloadURL = new URL(source);
+            downloadURL.searchParams.set("download", "true");
+            download.href = downloadURL.href;
+            message.textContent = "Downloading scene HTML…";
+            showProgress(0, expected);
             const response = await fetch(source, {
               credentials: "omit",
+              cache: lookup ? "no-store" : "default",
               signal: request.signal,
             });
             if (!response.ok)
@@ -221,7 +260,8 @@
             if (request.signal.aborted) return;
             progress.hidden = details.hidden = true;
             message.textContent = `Could not load the scene: ${error.message}.`;
-            retry.hidden = download.hidden = false;
+            retry.hidden = false;
+            download.hidden = !source;
             actions.hidden = false;
           }
         }

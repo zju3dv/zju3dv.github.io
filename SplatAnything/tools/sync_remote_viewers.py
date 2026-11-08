@@ -2,14 +2,13 @@
 """Verify Hugging Face HTML files and persist scene-to-file mappings.
 
 Run after uploading new viewer files, then run tools/sync_gallery.py.
-Existing scene IDs retain their remote directory when display order changes.
+Local directory IDs always select the same numbered remote directory.
 """
 
 import argparse
 import json
 from pathlib import Path, PurePosixPath
 import re
-from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,20 +33,16 @@ def main():
     }
     raw = (ROOT / "assets/js/gallery.js").read_text()
     gallery = json.loads(raw.split("window.SPLAT_GALLERY = ", 1)[1].rstrip().removesuffix(";"))
-    previous = json.loads(MANIFEST.read_text())["scenes"] if MANIFEST.exists() else {}
     scenes = {}
     used = set()
     for category, items in gallery.items():
-        for index, scene in enumerate(items, 1):
-            old = previous.get(scene["id"], {})
-            directory = (
-                str(PurePosixPath(old["path"]).parent)
-                if old else f"{category}/{index}"
-            )
+        for scene in items:
+            number = scene["id"].removeprefix(f"{category}-")
+            if not number.isdigit():
+                raise RuntimeError(f"Invalid local scene ID: {scene['id']}")
+            directory = f"{category}/{number}"
             candidates = [name for name in files if str(PurePosixPath(name).parent) == directory]
-            if old.get("path") in candidates:
-                path = old["path"]
-            elif len(candidates) == 1:
+            if len(candidates) == 1:
                 path = candidates[0]
             else:
                 raise RuntimeError(f"{scene['id']}: expected one HTML in {directory}, found {candidates}")
@@ -61,7 +56,7 @@ def main():
                 "sha256": entry.get("lfs", {}).get("oid", ""),
             }
     manifest = {"dataset": args.repo, "revision": revision, "scenes": scenes}
-    base = f"https://huggingface.co/datasets/{args.repo}/resolve/{quote(revision)}/"
+    base = f"https://huggingface.co/datasets/{args.repo}/resolve/main/"
     content_path = ROOT / "assets/js/content.js"
     content, count = re.subn(r'(?m)^(\s*viewerBase:\s*)"[^"]*"', lambda m: m[1] + json.dumps(base), content_path.read_text())
     if count != 1:

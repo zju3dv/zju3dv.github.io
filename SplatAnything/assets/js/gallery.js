@@ -9,7 +9,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/1/poster.jpg",
       "preview": "images/visualization/object/1/preview.mp4",
       "viewer": "object/1/case4_32frames_stride1_gaussians.html",
-      "viewerBytes": 24908290
+      "viewerBytes": 24908290,
+      "viewerDirectory": "object/1"
     },
     {
       "id": "object-2",
@@ -19,7 +20,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/2/poster.jpg",
       "preview": "images/visualization/object/2/preview.mp4",
       "viewer": "object/2/case2_32frames_stride1_gaussians.html",
-      "viewerBytes": 26631572
+      "viewerBytes": 26631572,
+      "viewerDirectory": "object/2"
     },
     {
       "id": "object-3",
@@ -29,7 +31,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/3/poster.jpg",
       "preview": "images/visualization/object/3/preview.mp4",
       "viewer": "object/3/case3_48frames_stride1_gaussians.html",
-      "viewerBytes": 55496531
+      "viewerBytes": 55496531,
+      "viewerDirectory": "object/3"
     },
     {
       "id": "object-4",
@@ -39,7 +42,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/4/poster.jpg",
       "preview": "images/visualization/object/4/preview.mp4",
       "viewer": "object/4/case4_48frames_stride1_gaussians.html",
-      "viewerBytes": 42540535
+      "viewerBytes": 42540535,
+      "viewerDirectory": "object/4"
     },
     {
       "id": "object-5",
@@ -49,7 +53,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/5/poster.jpg",
       "preview": "images/visualization/object/5/preview.mp4",
       "viewer": "object/5/case7_48frames_stride1_gaussians.html",
-      "viewerBytes": 38467877
+      "viewerBytes": 38467877,
+      "viewerDirectory": "object/5"
     },
     {
       "id": "object-6",
@@ -59,7 +64,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/6/poster.jpg",
       "preview": "images/visualization/object/6/preview.mp4",
       "viewer": "object/6/case8_48frames_stride1_gaussians.html",
-      "viewerBytes": 44669744
+      "viewerBytes": 44669744,
+      "viewerDirectory": "object/6"
     },
     {
       "id": "object-7",
@@ -69,7 +75,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/7/poster.jpg",
       "preview": "images/visualization/object/7/preview.mp4",
       "viewer": "object/7/case7_32frames_stride1_gaussians.html",
-      "viewerBytes": 27511376
+      "viewerBytes": 27511376,
+      "viewerDirectory": "object/7"
     },
     {
       "id": "object-8",
@@ -79,7 +86,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/8/poster.jpg",
       "preview": "images/visualization/object/8/preview.mp4",
       "viewer": "object/8/gaussians (27).html",
-      "viewerBytes": 20266392
+      "viewerBytes": 20266392,
+      "viewerDirectory": "object/8"
     },
     {
       "id": "object-9",
@@ -89,7 +97,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/9/poster.jpg",
       "preview": "images/visualization/object/9/preview.mp4",
       "viewer": "object/9/box_109__wcam_wintrs.html",
-      "viewerBytes": 11922509
+      "viewerBytes": 11922509,
+      "viewerDirectory": "object/9"
     },
     {
       "id": "object-10",
@@ -99,7 +108,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/10/poster.jpg",
       "preview": "images/visualization/object/10/preview.mp4",
       "viewer": "object/10/hamburger_043__wcam_wintrs.html",
-      "viewerBytes": 13602109
+      "viewerBytes": 13602109,
+      "viewerDirectory": "object/10"
     },
     {
       "id": "object-11",
@@ -109,7 +119,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/11/poster.jpg",
       "preview": "images/visualization/object/11/preview.mp4",
       "viewer": "object/11/pomegranate_052__wcam_wintrs.html",
-      "viewerBytes": 17054423
+      "viewerBytes": 17054423,
+      "viewerDirectory": "object/11"
     },
     {
       "id": "object-12",
@@ -119,7 +130,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/object/12/poster.jpg",
       "preview": "images/visualization/object/12/preview.mp4",
       "viewer": "object/12/popcorn_040__wcam_wintrs.html",
-      "viewerBytes": 12939442
+      "viewerBytes": 12939442,
+      "viewerDirectory": "object/12"
     }
   ],
   "indoor": [
@@ -132,7 +144,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/1/preview.mp4",
       "viewer": "indoor/1/1_9frames_stride1_no_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/1/1_9frames_stride1_no_pose_gaussians.html",
-      "viewerBytes": 60760983
+      "viewerBytes": 60760983,
+      "viewerDirectory": "indoor/1"
     },
     {
       "id": "indoor-2",
@@ -143,7 +156,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/2/preview.mp4",
       "viewer": "indoor/2/2_12frames_stride1_no_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/2/2_12frames_stride1_no_pose_gaussians.html",
-      "viewerBytes": 81537723
+      "viewerBytes": 81537723,
+      "viewerDirectory": "indoor/2"
     },
     {
       "id": "indoor-3",
@@ -154,7 +168,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/3/preview.mp4",
       "viewer": "indoor/3/4_11frames_stride1_no_pose_gaussians (1).html",
       "localViewer": "./images/visualization/indoor/3/4_11frames_stride1_no_pose_gaussians (1).html",
-      "viewerBytes": 65057896
+      "viewerBytes": 65057896,
+      "viewerDirectory": "indoor/3"
     },
     {
       "id": "indoor-4",
@@ -165,7 +180,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/4/preview.mp4",
       "viewer": "indoor/4/5_12frames_stride1_no_pose_gaussians (1).html",
       "localViewer": "./images/visualization/indoor/4/5_12frames_stride1_no_pose_gaussians (1).html",
-      "viewerBytes": 97991775
+      "viewerBytes": 97991775,
+      "viewerDirectory": "indoor/4"
     },
     {
       "id": "indoor-5",
@@ -176,7 +192,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/5/preview.mp4",
       "viewer": "indoor/5/7_24frames_stride1_pose_gaussians (3).html",
       "localViewer": "./images/visualization/indoor/5/7_24frames_stride1_pose_gaussians (3).html",
-      "viewerBytes": 121877518
+      "viewerBytes": 121877518,
+      "viewerDirectory": "indoor/5"
     },
     {
       "id": "indoor-6",
@@ -187,7 +204,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/6/preview.mp4",
       "viewer": "indoor/6/10_7frames_stride1_no_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/6/10_7frames_stride1_no_pose_gaussians.html",
-      "viewerBytes": 53239418
+      "viewerBytes": 53239418,
+      "viewerDirectory": "indoor/6"
     },
     {
       "id": "indoor-7",
@@ -198,7 +216,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/7/preview.mp4",
       "viewer": "indoor/7/11_24frames_stride1_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/7/11_24frames_stride1_pose_gaussians.html",
-      "viewerBytes": 87590258
+      "viewerBytes": 87590258,
+      "viewerDirectory": "indoor/7"
     },
     {
       "id": "indoor-8",
@@ -209,7 +228,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/8/preview.mp4",
       "viewer": "indoor/8/12_24frames_stride1_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/8/12_24frames_stride1_pose_gaussians.html",
-      "viewerBytes": 77258674
+      "viewerBytes": 77258674,
+      "viewerDirectory": "indoor/8"
     },
     {
       "id": "indoor-9",
@@ -220,7 +240,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/9/preview.mp4",
       "viewer": "indoor/9/kicker_DSC_6487_JPG__wcam_wintrs (1).html",
       "localViewer": "./images/visualization/indoor/9/kicker_DSC_6487_JPG__wcam_wintrs (1).html",
-      "viewerBytes": 70607857
+      "viewerBytes": 70607857,
+      "viewerDirectory": "indoor/9"
     },
     {
       "id": "indoor-10",
@@ -231,7 +252,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/10/preview.mp4",
       "viewer": "indoor/10/office_DSC_0219_JPG__wcam_wintrs.html",
       "localViewer": "./images/visualization/indoor/10/office_DSC_0219_JPG__wcam_wintrs.html",
-      "viewerBytes": 64207309
+      "viewerBytes": 64207309,
+      "viewerDirectory": "indoor/10"
     },
     {
       "id": "indoor-11",
@@ -242,7 +264,8 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/11/preview.mp4",
       "viewer": "indoor/11/19_8frames_stride1_no_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/11/19_8frames_stride1_no_pose_gaussians.html",
-      "viewerBytes": 41325642
+      "viewerBytes": 41325642,
+      "viewerDirectory": "indoor/11"
     },
     {
       "id": "indoor-12",
@@ -253,49 +276,54 @@ window.SPLAT_GALLERY = {
       "preview": "images/visualization/indoor/12/preview.mp4",
       "viewer": "indoor/12/20_16frames_stride1_pose_gaussians.html",
       "localViewer": "./images/visualization/indoor/12/20_16frames_stride1_pose_gaussians.html",
-      "viewerBytes": 76342975
+      "viewerBytes": 76342975,
+      "viewerDirectory": "indoor/12"
     }
   ],
   "street": [
     {
-      "id": "street-2",
-      "name": "Street 01",
-      "dataset": "",
-      "thumbnail": "images/visualization/street/2/thumb.jpg",
-      "poster": "images/visualization/street/2/poster.jpg",
-      "preview": "images/visualization/street/2/preview.mp4",
-      "viewer": "street/1/2_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 140234837
-    },
-    {
       "id": "street-1",
-      "name": "Street 02",
+      "name": "Street 01",
       "dataset": "",
       "thumbnail": "images/visualization/street/1/thumb.jpg",
       "poster": "images/visualization/street/1/poster.jpg",
       "preview": "images/visualization/street/1/preview.mp4",
-      "viewer": "street/2/21_64frames_stride1_pose_gaussians (1).html",
-      "viewerBytes": 143961194
+      "viewer": "street/1/2_64frames_stride1_pose_gaussians.html",
+      "viewerBytes": 140234837,
+      "viewerDirectory": "street/1"
     },
     {
-      "id": "street-4",
-      "name": "Street 03",
+      "id": "street-2",
+      "name": "Street 02",
       "dataset": "",
-      "thumbnail": "images/visualization/street/4/thumb.jpg",
-      "poster": "images/visualization/street/4/poster.jpg",
-      "preview": "images/visualization/street/4/preview.mp4",
-      "viewer": "street/3/5_50frames_stride1_pose_gaussians.html",
-      "viewerBytes": 122937461
+      "thumbnail": "images/visualization/street/2/thumb.jpg",
+      "poster": "images/visualization/street/2/poster.jpg",
+      "preview": "images/visualization/street/2/preview.mp4",
+      "viewer": "street/2/21_64frames_stride1_pose_gaussians (1).html",
+      "viewerBytes": 143961194,
+      "viewerDirectory": "street/2"
     },
     {
       "id": "street-3",
-      "name": "Street 04",
+      "name": "Street 03",
       "dataset": "",
       "thumbnail": "images/visualization/street/3/thumb.jpg",
       "poster": "images/visualization/street/3/poster.jpg",
       "preview": "images/visualization/street/3/preview.mp4",
+      "viewer": "street/3/5_50frames_stride1_pose_gaussians.html",
+      "viewerBytes": 122937461,
+      "viewerDirectory": "street/3"
+    },
+    {
+      "id": "street-4",
+      "name": "Street 04",
+      "dataset": "",
+      "thumbnail": "images/visualization/street/4/thumb.jpg",
+      "poster": "images/visualization/street/4/poster.jpg",
+      "preview": "images/visualization/street/4/preview.mp4",
       "viewer": "street/4/3_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 95275965
+      "viewerBytes": 95275965,
+      "viewerDirectory": "street/4"
     },
     {
       "id": "street-5",
@@ -305,7 +333,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/5/poster.jpg",
       "preview": "images/visualization/street/5/preview.mp4",
       "viewer": "street/5/6_31frames_stride1_pose_gaussians.html",
-      "viewerBytes": 101578394
+      "viewerBytes": 101578394,
+      "viewerDirectory": "street/5"
     },
     {
       "id": "street-6",
@@ -315,7 +344,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/6/poster.jpg",
       "preview": "images/visualization/street/6/preview.mp4",
       "viewer": "street/6/7_63frames_stride1_pose_gaussians.html",
-      "viewerBytes": 160573134
+      "viewerBytes": 160573134,
+      "viewerDirectory": "street/6"
     },
     {
       "id": "street-7",
@@ -325,7 +355,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/7/poster.jpg",
       "preview": "images/visualization/street/7/preview.mp4",
       "viewer": "street/7/gaussians (5).html",
-      "viewerBytes": 145368919
+      "viewerBytes": 145368919,
+      "viewerDirectory": "street/7"
     },
     {
       "id": "street-8",
@@ -335,7 +366,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/8/poster.jpg",
       "preview": "images/visualization/street/8/preview.mp4",
       "viewer": "street/8/12_24frames_stride1_pose_gaussians (2).html",
-      "viewerBytes": 68165378
+      "viewerBytes": 68165378,
+      "viewerDirectory": "street/8"
     },
     {
       "id": "street-9",
@@ -345,7 +377,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/9/poster.jpg",
       "preview": "images/visualization/street/9/preview.mp4",
       "viewer": "street/9/15_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 174249104
+      "viewerBytes": 174249104,
+      "viewerDirectory": "street/9"
     },
     {
       "id": "street-10",
@@ -355,7 +388,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/10/poster.jpg",
       "preview": "images/visualization/street/10/preview.mp4",
       "viewer": "street/10/17_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 116220599
+      "viewerBytes": 116220599,
+      "viewerDirectory": "street/10"
     },
     {
       "id": "street-11",
@@ -365,7 +399,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/11/poster.jpg",
       "preview": "images/visualization/street/11/preview.mp4",
       "viewer": "street/11/18_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 109938135
+      "viewerBytes": 109938135,
+      "viewerDirectory": "street/11"
     },
     {
       "id": "street-12",
@@ -375,7 +410,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/street/12/poster.jpg",
       "preview": "images/visualization/street/12/preview.mp4",
       "viewer": "street/12/20_64frames_stride1_pose_gaussians.html",
-      "viewerBytes": 129313788
+      "viewerBytes": 129313788,
+      "viewerDirectory": "street/12"
     }
   ],
   "aerial": [
@@ -386,8 +422,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/11/thumb.jpg",
       "poster": "images/visualization/aerial/11/poster.jpg",
       "preview": "images/visualization/aerial/11/preview.mp4",
-      "viewer": "aerial/1/20_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 117031166
+      "viewer": "aerial/11/2_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 58514595,
+      "viewerDirectory": "aerial/11"
     },
     {
       "id": "aerial-12",
@@ -396,8 +433,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/12/thumb.jpg",
       "poster": "images/visualization/aerial/12/poster.jpg",
       "preview": "images/visualization/aerial/12/preview.mp4",
-      "viewer": "aerial/2/21_63frames_stride1_pose_gaussians.html",
-      "viewerBytes": 83361197
+      "viewer": "aerial/12/3_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 149853662,
+      "viewerDirectory": "aerial/12"
     },
     {
       "id": "aerial-13",
@@ -406,8 +444,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/13/thumb.jpg",
       "poster": "images/visualization/aerial/13/poster.jpg",
       "preview": "images/visualization/aerial/13/preview.mp4",
-      "viewer": "aerial/3/22_72frames_stride1_pose_gaussians.html",
-      "viewerBytes": 62081578
+      "viewer": "aerial/13/5_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 78690416,
+      "viewerDirectory": "aerial/13"
     },
     {
       "id": "aerial-10",
@@ -416,8 +455,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/10/thumb.jpg",
       "poster": "images/visualization/aerial/10/poster.jpg",
       "preview": "images/visualization/aerial/10/preview.mp4",
-      "viewer": "aerial/4/18_100frames_stride1_pose_gaussians (1).html",
-      "viewerBytes": 154537847
+      "viewer": "aerial/10/6_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 64687319,
+      "viewerDirectory": "aerial/10"
     },
     {
       "id": "aerial-5",
@@ -427,7 +467,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/5/poster.jpg",
       "preview": "images/visualization/aerial/5/preview.mp4",
       "viewer": "aerial/5/7_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 86353340
+      "viewerBytes": 86353340,
+      "viewerDirectory": "aerial/5"
     },
     {
       "id": "aerial-18",
@@ -436,8 +477,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/18/thumb.jpg",
       "poster": "images/visualization/aerial/18/poster.jpg",
       "preview": "images/visualization/aerial/18/preview.mp4",
-      "viewer": "aerial/6/34_85frames_stride1_pose_gaussians.html",
-      "viewerBytes": 78731233
+      "viewer": "aerial/18/8_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 121805670,
+      "viewerDirectory": "aerial/18"
     },
     {
       "id": "aerial-7",
@@ -447,7 +489,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/7/poster.jpg",
       "preview": "images/visualization/aerial/7/preview.mp4",
       "viewer": "aerial/7/9_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 142485287
+      "viewerBytes": 142485287,
+      "viewerDirectory": "aerial/7"
     },
     {
       "id": "aerial-8",
@@ -457,7 +500,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/8/poster.jpg",
       "preview": "images/visualization/aerial/8/preview.mp4",
       "viewer": "aerial/8/11_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 177570677
+      "viewerBytes": 177570677,
+      "viewerDirectory": "aerial/8"
     },
     {
       "id": "aerial-9",
@@ -467,7 +511,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/9/poster.jpg",
       "preview": "images/visualization/aerial/9/preview.mp4",
       "viewer": "aerial/9/14_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 151913679
+      "viewerBytes": 151913679,
+      "viewerDirectory": "aerial/9"
     },
     {
       "id": "aerial-4",
@@ -476,8 +521,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/4/thumb.jpg",
       "poster": "images/visualization/aerial/4/poster.jpg",
       "preview": "images/visualization/aerial/4/preview.mp4",
-      "viewer": "aerial/10/6_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 64687319
+      "viewer": "aerial/4/18_100frames_stride1_pose_gaussians (1).html",
+      "viewerBytes": 154537847,
+      "viewerDirectory": "aerial/4"
     },
     {
       "id": "aerial-1",
@@ -486,8 +532,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/1/thumb.jpg",
       "poster": "images/visualization/aerial/1/poster.jpg",
       "preview": "images/visualization/aerial/1/preview.mp4",
-      "viewer": "aerial/11/2_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 58514595
+      "viewer": "aerial/1/20_100frames_stride1_pose_gaussians.html",
+      "viewerBytes": 117031166,
+      "viewerDirectory": "aerial/1"
     },
     {
       "id": "aerial-2",
@@ -496,8 +543,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/2/thumb.jpg",
       "poster": "images/visualization/aerial/2/poster.jpg",
       "preview": "images/visualization/aerial/2/preview.mp4",
-      "viewer": "aerial/12/3_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 149853662
+      "viewer": "aerial/2/21_63frames_stride1_pose_gaussians.html",
+      "viewerBytes": 83361197,
+      "viewerDirectory": "aerial/2"
     },
     {
       "id": "aerial-3",
@@ -506,8 +554,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/3/thumb.jpg",
       "poster": "images/visualization/aerial/3/poster.jpg",
       "preview": "images/visualization/aerial/3/preview.mp4",
-      "viewer": "aerial/13/5_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 78690416
+      "viewer": "aerial/3/22_72frames_stride1_pose_gaussians.html",
+      "viewerBytes": 62081578,
+      "viewerDirectory": "aerial/3"
     },
     {
       "id": "aerial-14",
@@ -517,7 +566,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/14/poster.jpg",
       "preview": "images/visualization/aerial/14/preview.mp4",
       "viewer": "aerial/14/25_45frames_stride1_pose_gaussians.html",
-      "viewerBytes": 55695348
+      "viewerBytes": 55695348,
+      "viewerDirectory": "aerial/14"
     },
     {
       "id": "aerial-15",
@@ -527,7 +577,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/15/poster.jpg",
       "preview": "images/visualization/aerial/15/preview.mp4",
       "viewer": "aerial/15/27_84frames_stride1_pose_gaussians.html",
-      "viewerBytes": 78162949
+      "viewerBytes": 78162949,
+      "viewerDirectory": "aerial/15"
     },
     {
       "id": "aerial-16",
@@ -537,7 +588,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/16/poster.jpg",
       "preview": "images/visualization/aerial/16/preview.mp4",
       "viewer": "aerial/16/28_76frames_stride1_pose_gaussians.html",
-      "viewerBytes": 95793545
+      "viewerBytes": 95793545,
+      "viewerDirectory": "aerial/16"
     },
     {
       "id": "aerial-17",
@@ -547,7 +599,8 @@ window.SPLAT_GALLERY = {
       "poster": "images/visualization/aerial/17/poster.jpg",
       "preview": "images/visualization/aerial/17/preview.mp4",
       "viewer": "aerial/17/29_89frames_stride1_pose_gaussians.html",
-      "viewerBytes": 83564855
+      "viewerBytes": 83564855,
+      "viewerDirectory": "aerial/17"
     },
     {
       "id": "aerial-6",
@@ -556,8 +609,9 @@ window.SPLAT_GALLERY = {
       "thumbnail": "images/visualization/aerial/6/thumb.jpg",
       "poster": "images/visualization/aerial/6/poster.jpg",
       "preview": "images/visualization/aerial/6/preview.mp4",
-      "viewer": "aerial/18/8_100frames_stride1_pose_gaussians.html",
-      "viewerBytes": 121805670
+      "viewer": "aerial/6/34_85frames_stride1_pose_gaussians.html",
+      "viewerBytes": 78731233,
+      "viewerDirectory": "aerial/6"
     }
   ]
 };

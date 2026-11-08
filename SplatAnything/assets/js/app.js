@@ -43,6 +43,18 @@
     const base = assetURL(content.viewerBase);
     const sitePath = /^(?:[a-z][a-z\d+.-]*:|\/|\.\.?\/)/i.test(value);
     if (!value) return "";
+    // Resolve the current HTML in the same numbered dataset folder on click.
+    // Filenames and sizes can change when the dataset owner reorders cases.
+    const dataset = base && new URL(base);
+    const repository = dataset?.hostname === "huggingface.co"
+      && /^\/datasets\/([^/]+\/[^/]+)\/resolve\//.exec(dataset.pathname)?.[1];
+    if (!sitePath && repository && /^[a-z]+\/\d+$/.test(data.viewerDirectory || "")) {
+      const loader = new URL("assets/viewer/loader.html", document.baseURI);
+      loader.searchParams.set("repo", repository);
+      loader.searchParams.set("directory", data.viewerDirectory);
+      if (data.label) loader.searchParams.set("label", data.label);
+      return loader.href;
+    }
     let url;
     try {
       if (sitePath) url = new URL(value, document.baseURI);
@@ -431,7 +443,7 @@
   }
 
   // These line drawings are neutral template artwork, not research results.
-  const categoryArtwork = { object: 0, street: 1, indoor: 2, aerial: 3 };
+  const categoryArtwork = { object: 0, street: 1, indoor: 2, aerial: 3, rig: 1, pano: 2 };
   function thumbnailGeometry(index, category) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 240 95");
@@ -464,7 +476,7 @@
     const placeholderLabel = text(
       "span",
       "thumb-placeholder-label",
-      "IMAGE PLACEHOLDER",
+      ["rig", "pano"].includes(category) ? "PREVIEW COMING SOON" : "IMAGE PLACEHOLDER",
     );
     thumbnail.append(artwork, placeholderLabel);
     const url = assetURL(scene.thumbnail || scene.poster || scene.ours?.poster);
@@ -667,6 +679,8 @@
         orbit.setAttribute("aria-hidden", "true");
         orbit.append(icon("cube", "empty-cube"));
         preview.append(orbit);
+        if (this.stage.id === "application-viewer")
+          preview.append(text("span", "preview-pending", "Preview coming soon"));
       }
       if (this.url) {
         const explore = text("button", "explore-button");
@@ -677,8 +691,8 @@
         );
         explore.setAttribute("aria-label", `Explore ${data.label} in 3D`);
         explore.title = "Download this scene’s HTML viewer and explore in 3D";
-        if (this.stage.id === "qualitative-viewer")
-          explore.setAttribute("aria-describedby", "qualitative-download-hint");
+        if (["qualitative-viewer", "application-viewer"].includes(this.stage.id))
+          explore.setAttribute("aria-describedby", this.stage.id.replace("-viewer", "-download-hint"));
         explore.addEventListener("click", () => this.onExplore(this));
         preview.append(explore);
       } else
@@ -792,7 +806,7 @@
   }
 
   // Category tabs + scene grid shared by the gallery and the comparison.
-  const categoryIcons = ["object", "indoor", "street", "aerial"];
+  const categoryIcons = ["object", "indoor", "street", "aerial", "rig", "pano"];
   function setupCategories({ prefix, groups, onScene, emptyText }) {
     const tabs = $(`#${prefix}-tabs`);
     const grid = $(`#${prefix}-scenes`);
@@ -880,27 +894,28 @@
     }
   }
 
-  function setupQualitative() {
-    const viewer = new Viewer("qualitative-viewer");
+  function setupGallery(prefix, groups) {
+    const viewer = new Viewer(`${prefix}-viewer`);
     setupCategories({
-      prefix: "qualitative",
-      groups: content.qualitative || [],
+      prefix,
+      groups: groups || [],
       emptyText: "Scenes coming soon.",
       onScene(group, scene, index, notify) {
         const label = group?.label || "Scene gallery";
         if (!scene) {
-          $("#qualitative-scene-name").textContent = "Scenes coming soon";
-          $("#qualitative-dataset").textContent = group?.label || "";
+          $(`#${prefix}-scene-name`).textContent = "Scenes coming soon";
+          $(`#${prefix}-dataset`).textContent = group?.label || "";
           viewer.set({ key: group?.id || "empty", label });
           return;
         }
         const name = sceneName(scene, index);
-        $("#qualitative-scene-name").textContent = name;
-        $("#qualitative-dataset").textContent = scene.dataset || label;
+        $(`#${prefix}-scene-name`).textContent = name;
+        $(`#${prefix}-dataset`).textContent = scene.dataset || label;
         // A new scene always starts from its preview, as on InfiniSplat v2.
         viewer.set({
           key: scene.id,
           viewer: scene.viewer,
+          viewerDirectory: scene.viewerDirectory,
           viewerBytes: scene.viewerBytes,
           localViewer: scene.localViewer,
           poster: scene.poster,
@@ -1355,7 +1370,8 @@
   reducedMotion.addEventListener("change", syncPreviews);
   setupProject();
   setupVideo();
-  setupQualitative();
+  setupGallery("qualitative", content.qualitative);
+  setupGallery("application", content.application);
   // Temporarily disabled together with the comparison section in index.html.
   // setupComparison();
   setupClosing();

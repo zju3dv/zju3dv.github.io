@@ -61,7 +61,7 @@ window.SPLAT_CONTENT = {
   // Empty uses each scene's localViewer for local validation, when available.
   // Root of the hosted viewer HTML files; scene `viewer` paths are relative to it,
   // e.g. "https://huggingface.co/datasets/<user>/<repo>/resolve/main/".
-  viewerBase: "https://huggingface.co/datasets/ritianyu/SplatAnything_Demo/resolve/de6459bfe59506c3e602831703e079491e2e3f75/",
+  viewerBase: "https://huggingface.co/datasets/ritianyu/SplatAnything_Demo/resolve/main/",
   // Names listed in `links` are turned into links inside `text`.
   acknowledgements: {
     text: "We thank Jiawei Wang and Yujie Guo for insightful discussions and valuable feedback.",
@@ -83,10 +83,11 @@ window.SPLAT_CONTENT = {
     caption: "",
     aspectRatio: "16 / 9",
     chapters: [
-      { id: "object", label: "Objects", time: 2 },
-      { id: "indoor", label: "Indoor Scenes", time: 13 },
-      { id: "street", label: "Street Scenes", time: 25 },
-      { id: "aerial", label: "Aerial Scenes", time: 38 },
+      { id: "object", label: "Objects", time: 3 },
+      { id: "indoor", label: "Indoor Scenes", time: 16 },
+      { id: "street", label: "Street Scenes", time: 27 },
+      { id: "aerial", label: "Aerial Scenes", time: 40 },
+      { id: "pano", label: "Panoramic Scenes", time: 58 },
     ],
   },
   // Categories become the gallery tabs. Scenes come from images/visualization via
@@ -96,6 +97,18 @@ window.SPLAT_CONTENT = {
     { id: "indoor", label: "Indoor Scenes", scenes: window.SPLAT_GALLERY?.indoor || [] },
     { id: "street", label: "Street Scenes", scenes: window.SPLAT_GALLERY?.street || [] },
     { id: "aerial", label: "Aerial Scenes", scenes: window.SPLAT_GALLERY?.aerial || [] },
+  ],
+  application: [
+    {
+      id: "pano",
+      label: "Pano-Recon for AR/VR",
+      scenes: window.SPLAT_APPLICATION?.pano || [],
+    },
+    {
+      id: "rig",
+      label: "Rig-Recon for Autonomous Driving",
+      scenes: window.SPLAT_APPLICATION?.rig || [],
+    },
   ],
   comparison: {
     methods: [

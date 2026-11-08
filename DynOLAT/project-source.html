@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="story-document" data-type="software">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Four insights behind DynOLAT: why human relighting needs explicit direction and intensity control, OLAT responses, and dynamic video supervision.">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <meta name="theme-color" content="#000000">
+  <title>The Insights Behind DynOLAT</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="assets/dynolat-mark.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="styles.css?v=20261108-7">
+  <link rel="stylesheet" href="project-source.css?v=20261108-3">
+  <script src="selection-copy.js?v=20261105-1" defer></script>
+</head>
+<body class="story-page">
+  <a class="story-skip" href="#project-source">Skip to story</a>
+  <header class="story-nav"><div><a class="story-home" href="index.html">← DynOLAT</a><nav aria-label="Story chapters"><a href="#rendering">01 · Rendering</a><a href="#supervision">02 · Supervision</a><a href="#olat">03 · OLAT</a><a href="#motion">04 · Motion</a></nav></div></header>
+  <main>
+    <section class="section section-block project-source" id="project-source" aria-labelledby="project-source-title">
+      <div class="container section-inner">
+        <div class="section__head">
+          <h1 class="section-title" id="project-source-title">The Insights Behind DynOLAT</h1>
+          <p class="source-question">How can we relight a moving person with precise control over light direction and relative intensity?</p>
+          <p class="source-intro">DynOLAT predicts how the same performance responds to individual light directions, then combines those responses using weights from the target environment.</p>
+          <ol class="source-roadmap" aria-label="Four questions and their answers">
+            <li><a href="#rendering"><span class="source-roadmap__index">01 · Rendering</span><span><strong>Why is physical human rendering difficult?</strong><span>Accurate appearance depends on both recovered assets and light-transport approximation.</span></span></a></li>
+            <li><a href="#supervision"><span class="source-roadmap__index">02 · Supervision</span><span><strong>Why can realistic results still miss the target light?</strong><span>Supervision must constrain both light direction and relative strength.</span></span></a></li>
+            <li><a href="#olat"><span class="source-roadmap__index">03 · OLAT</span><span><strong>How does OLAT make lighting control explicit?</strong><span>Predict directional responses; compose them with explicit intensity weights.</span></span></a></li>
+            <li><a href="#motion"><span class="source-roadmap__index">04 · Motion</span><span><strong>Why must we capture and learn through motion?</strong><span>Dynamic pairs teach changing responses; video prediction preserves the performance over time.</span></span></a></li>
+          </ol>
+        </div>
+
+        <article id="rendering" class="source-chapter">
+          <header><span class="source-index"><span class="source-index__number">01</span> <span>Rendering</span></span><h2>Why is physical human rendering difficult?</h2></header>
+          <div class="source-body">
+            <p class="source-answer">Accurate rendering depends on both the recovered person and the approximation of light transport.</p>
+            <ol class="source-points">
+              <li><h3>Recovering the person.</h3><p>Images do not uniquely determine geometry or the materials of skin, hair, and clothing. Dedicated capture and per-person optimization make scaling to new people and performances costly.</p></li>
+              <li><h3>Computing the appearance.</h3><p>Scattering and self-shadowing depend on that scene model and its numerical approximation. <a href="https://homepages.inf.ed.ac.uk/ksubr/Files/Papers/SIG22_Compactness.pdf">Soler et al. (2022)</a> analyzed finite-basis approximations of light transport. They show that, in general, increasing the basis size cannot make the worst-case error vanish across all lighting conditions.</p></li>
+            </ol>
+            <figure class="story-figure"><img src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/project-source/transport-paths.svg" width="640" height="400" loading="lazy" alt="Color-matched paths, arrows, and labels show reflection, scattering, and self-occlusion around a person. All depend on geometry, materials, and visibility."><figcaption>Reflection, scattering, and self-occlusion shape appearance through geometry, materials, and visibility.</figcaption></figure>
+            <p class="source-transition">Generative priors offer a way to learn appearance responses without explicitly recovering every physical property.</p>
+          </div>
+        </article>
+
+        <article id="supervision" class="source-chapter">
+          <header><span class="source-index"><span class="source-index__number">02</span> <span>Supervision</span></span><h2>Why can realistic results still miss the target light?</h2></header>
+          <div class="source-body">
+            <p class="source-answer">Visual realism alone does not ensure that an output follows the specified illumination.</p>
+            <p>Most generative relighting methods directly learn the final relit image or video, using mixed illumination—such as an environment map or a background image—as the condition.</p>
+            <details class="source-detail">
+              <summary>Related work: learning the relit result directly</summary>
+              <div>
+                <p><strong><a href="https://proceedings.iclr.cc/paper_files/paper/2025/file/1cce374fec7829c24a97ae0e91cd0999-Paper-Conference.pdf">IC-Light</a>.</strong> The target lighting is expressed through an environment or background condition, and the model generates the relit image directly. Its in-the-wild branch constructs pairs using appearance degradation or augmentation and estimated target lighting. Training also uses rendered and real Light Stage data, with light-transport consistency. The constructed pairs help scale training, while their lighting supervision remains approximate.</p>
+                <p><strong><a href="https://arxiv.org/abs/2501.18590">DiffusionRenderer</a>.</strong> Its forward renderer directly generates video conditioned on G-buffers and an environment map. To bridge the synthetic-to-real gap, it adds auto-labeled real videos and a real-data LoRA. Its training therefore combines exact synthetic labels with estimated geometry, materials, and lighting from real footage.</p>
+              </div>
+            </details>
+            <ol class="source-points">
+              <li><h3>Direction must match.</h3><p>Shadows and highlights can drift away from the target direction, even in a convincing generated video.</p></li>
+              <li><h3>Relative strength must match.</h3><p>Output brightness should follow the relative intensities in the environment map; a plausible overall appearance does not establish this control.</p></li>
+            </ol>
+            <p>Capturing real relighting pairs is difficult, and even accurately measured pairs under mixed illumination leave the contributions of individual light directions entangled.</p>
+            <figure class="story-figure"><img src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/project-source/mixed-supervision.svg" width="640" height="504" loading="lazy" alt="A shared flat-lit input feeds Generation. Three spatial environment maps retain distributed background illumination and colored bright regions in different positions. Each output combines their directions, colors, and strengths in a smooth body gradient."><figcaption>Each output combines many lighting directions. Its appearance alone does not reveal their separate contributions.</figcaption></figure>
+            <p class="source-transition">Can we supervise each direction’s response separately?</p>
+            <details class="source-detail">
+              <summary>Why independent observations matter: a two-light example</summary>
+              <div>
+                <p>Fix the person, pose, and camera, and consider one pixel in one color channel with a linear response. Let <i>a</i> and <i>b</i> be its unknown responses to the left and right lights.</p>
+                <div class="source-example" role="group" aria-label="Two independent lighting mixtures reveal two unknown responses">
+                  <p class="source-example__title">Two unknowns → two independent observations</p>
+                  <p>Photo 1: 80% left + 20% right → brightness 12.<br>Photo 2: 20% left + 80% right → brightness 18.</p>
+                  <p>The responses are <i>a</i> = 10 and <i>b</i> = 20: 0.8 × 10 + 0.2 × 20 = 12, and 0.2 × 10 + 0.8 × 20 = 18. These are illustrative linear brightness values.</p>
+                  <p>Doubling the first setup gives brightness 24, but no independent equation. A different mixing ratio adds information; a brighter copy does not.</p>
+                </div>
+                <p>For <i>N</i> independent directions, recovering <i>N</i> unknown responses without additional assumptions needs at least <i>N</i> independent equations. An <i>h</i> × <i>w</i> environment map has <i>h</i> × <i>w</i> directional bins, with one unknown response per bin at each pixel.</p>
+                <p><strong>One-Light-At-a-Time (OLAT)</strong> capture measures one direction at a time. These lighting patterns are orthogonal because they share no illuminated directions. With nonnegative intensities, overlapping directions cannot cancel to make two patterns orthogonal; a complete orthogonal design over the directional bins therefore leads naturally to OLAT.</p>
+                <p>Independent mixed-light patterns can also supply the equations needed to solve for all <i>N</i> unknown directional responses, but OLAT’s orthogonal patterns isolate each response directly. This substantially simplifies the learning task: the model learns a single direction’s effect without first disentangling overlapping lights.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article id="olat" class="source-chapter source-chapter--key">
+          <header><span class="source-index"><span class="source-index__number">03</span> <span>OLAT</span></span><h2>How does OLAT make lighting control explicit?</h2></header>
+          <div class="source-body">
+            <p class="source-answer">Separate directional response prediction from the weights that set relative lighting strength.</p>
+            <ol class="source-points">
+              <li><h3>Learn one direction at a time.</h3><p>One-Light-At-a-Time (OLAT) capture records a single light’s full response, including shadows and indirect scattering. Aligned flat-lit / OLAT pairs adapt a pretrained generative prior to predict that response from a flat-lit reference and a target direction.</p></li>
+              <li><h3>Assemble the target illumination.</h3><p>Under linear light transport, separate lights’ contributions add. We combine the decoded responses in <strong>linear color space</strong>: the predicted basis specifies the direction, and its environment-derived weight sets the relative strength per color channel.</p></li>
+            </ol>
+            <details class="source-detail">
+              <summary>Related work: measured lighting responses</summary>
+              <div>
+                <p>Paul Debevec’s <a href="https://www.pauldebevec.com/Research/LS/debevec-siggraph2000-high.pdf">Light Stage</a> measured directional facial reflectance; <a href="https://arxiv.org/abs/2508.09137">HumanOLAT</a> provides multi-view full-body OLAT captures; Meta’s <a href="https://arxiv.org/abs/2312.03704">Relightable Gaussian Codec Avatars</a> learns relightable avatars from controlled lighting capture. These works use different capture patterns and representations, while demonstrating the value of measured appearance.</p>
+              </div>
+            </details>
+            <p class="source-composition" role="math" aria-label="Relit frame approximately equals the sum of each direction weight times its OLAT response">Relit frame ≈ Σ(direction weight × OLAT response)</p>
+            <figure class="story-figure"><img src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/project-source/olat-composition.svg" width="640" height="400" loading="lazy" alt="Three human figures show warm left lighting, teal right lighting, and blue top lighting through body gradients. The light colors and directions match the gradients."><figcaption>The same pose under three single lights, weighted to compose a new environment.</figcaption></figure>
+            <p class="source-transition">For a moving person, these responses must track the entire performance.</p>
+            <details class="source-detail">
+              <summary>OLAT prediction and lighting composition</summary>
+              <div>
+                <div class="source-equation" role="group" aria-label="Conditional generative adaptation and linear OLAT composition">
+                  <p class="source-equation__label">Adapt in latent space; compose in linear image space</p>
+                  <p class="source-math"><i>p</i><sub>θ</sub>(<i>Z</i><sup>OLAT</sup> | <i>Z</i><sup>flat</sup>, <i>ω</i><sub>k</sub>)<br><i>I</i><sub>t</sub>(<i>x</i>; <i>L</i>) ≈ ∑<sub>k</sub> <i>w</i><sub>k</sub>(<i>L</i>) <i>B</i><sub>t,k</sub>(<i>x</i>)</p>
+                  <p class="source-equation__caption"><i>Z</i><sup>flat</sup> and <i>Z</i><sup>OLAT</sup> encode paired sequences; <i>p</i><sub>θ</sub> denotes the adapted conditional generation distribution for direction <i>ω</i><sub>k</sub>. <i>B</i><sub>t,k</sub>(<i>x</i>) is the decoded response at frame <i>t</i>, pixel <i>x</i>, and direction <i>k</i>. <i>L</i> is the target environment; <i>w</i><sub>k</sub>(<i>L</i>) integrates its linear HDR radiance over the region assigned to that direction.</p>
+                </div>
+                <p>The model learns directional responses in latent space and combines them in linear image space after decoding. The supervision design supplies isolated targets.</p>
+                <p>Training samples individual lighting directions on a sphere; weighted composition supplies their combinations under new environments. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=6">Paper §3.6 ↗</a></p>
+              </div>
+            </details>
+            <details class="source-detail">
+              <summary>How the project started</summary>
+              <div>
+                <p><a href="https://arxiv.org/abs/2410.08188">DifFRelight</a> inspired us: its subject-specific diffusion model demonstrated realistic facial performance relighting from flat-lit and OLAT captures. We wanted to extend this direction to full bodies, motion, and unseen people using a pretrained video model.</p>
+                <p>We initially collected conventional static flat-lit / OLAT pairs. Early experiments showed that their pose coverage was insufficient even for a fixed subject, motivating dynamic capture.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article id="motion" class="source-chapter">
+          <header><span class="source-index"><span class="source-index__number">04</span> <span>Motion</span></span><h2>Why must we capture and learn through motion?</h2></header>
+          <div class="source-body">
+            <p class="source-answer">A few static poses cannot cover the range of motion in a performance. Learning changing light responses calls for dynamic pose coverage and sequence-level prediction.</p>
+            <ol class="source-points">
+              <li><h3>Capture changing poses.</h3><p>Full-body motion changes clothing, surface orientation, and self-occlusion throughout the performance.</p></li>
+              <li><h3>Build aligned supervision.</h3><p>We alternate flat-lit and OLAT frames, then use optical flow to align them. The model learns missing directional responses from these partial observations across motion.</p></li>
+              <li><h3>Learn sequences while retaining detail.</h3><p>A video model predicts a directional response for the whole sequence. Latent Bridge Matching starts from the input video’s latents, preserving the person’s identity, textures, and motion as the lighting changes. To further improve detail preservation, we jointly train with static images for sharper supervision.</p></li>
+            </ol>
+            <figure class="story-figure"><img src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/project-source/dynamic-pairs.svg" width="640" height="576" loading="lazy" alt="Top: four frames hold the same pose under Flat-lit, OLAT A, OLAT B, and OLAT C lighting. Bottom: four frames alternate Flat-lit and OLAT A while the arms move from partly raised to nearly overhead. Every OLAT light is white and offset from the person; directional shading distinguishes it from flat-lit illumination."><figcaption>Static capture holds one pose across a lighting sweep. Dynamic capture alternates Flat-lit and OLAT during motion, then aligns the observations into video pairs.</figcaption></figure>
+            <details class="source-detail">
+              <summary>Capture design, long sequences, and consistency</summary>
+              <div>
+                <div class="source-equation" role="group" aria-label="Video conditioned OLAT prediction task">
+                  <p class="source-equation__label">Learn a response across an entire sequence</p>
+                  <p class="source-math">B̂<sub>1:T,k</sub> = <i>F</i><sub>θ</sub>(<i>V</i><sup>flat</sup><sub>1:T</sub>, <i>ω</i><sub>k</sub>)</p>
+                  <p class="source-equation__caption"><i>F</i><sub>θ</sub> predicts an OLAT basis sequence B̂<sub>1:T,k</sub> for direction <i>ω</i><sub>k</sub>, conditioned on the flat-lit sequence <i>V</i><sup>flat</sup><sub>1:T</sub>. <i>T</i> is the sequence length.</p>
+                </div>
+                <p><strong>Capture.</strong> We switch the illumination between flat-lit and OLAT while the person moves. Using two spatially distant OLAT directions within each sequence helps disentangle lighting changes from motion. Optical flow between flat-lit frames aligns the intervening OLAT observations into paired video supervision. From these sampled observations, the model learns to predict full directional response sequences. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=7">Paper §4 ↗</a></p>
+                <p><strong>Long sequences.</strong> Independently generated video chunks can flicker at their boundaries. Recurrent bridge context reuses previously generated OLAT frames to constrain overlapping windows, carrying appearance and lighting context beyond the training window. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=6">Paper §3.5 ↗</a></p>
+                <p><strong>Consistency.</strong> Latent Bridge Matching keeps predicted OLAT videos closely aligned with the input performance. A 4D Gaussian Splatting reconstruction built from independently relit, synchronized multi-view videos further illustrates the model’s implicit consistency across views. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=20">Supplement §F ↗</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <p class="source-takeaway">Learn directional responses through motion.<br><strong>Compose them for explicit lighting control.</strong></p>
+        <details class="source-detail source-notes">
+          <summary>What comes next?</summary>
+          <div class="source-body">
+            <p>Future work can build on this foundation with more efficient OLAT basis prediction, explicit consistency across directions and views, finer illumination capture, and dynamic lighting benchmarks. The dataset can also support neural rendering and controllable generative video editing. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=14">Paper §6 ↗</a></p>
+          </div>
+        </details>
+        <details class="source-detail source-notes">
+          <summary>Some interesting candidate titles for this paper</summary>
+          <div class="source-body">
+            <ol class="source-candidate-titles">
+              <li><strong>Neural Light Stage.</strong> A proposal-oriented name: we bake the capabilities of a Light Stage into a generative model through fine-tuning.</li>
+              <li><strong>LoongFlight (飞龙在天).</strong> “<span class="source-acronym-letter">L</span>earning <span class="source-acronym-letter">O</span>LAT Vide<span class="source-acronym-letter">o</span> Predictio<span class="source-acronym-letter">n</span> for <span class="source-acronym-letter">G</span>eneralizable Dynamic <span class="source-acronym-letter">F</span>ull-body Re<span class="source-acronym-letter">light</span>ing.” The highlighted letters spell the name.</li>
+              <li><strong>MOONPHASE.</strong> “<span class="source-acronym-letter">M</span>odeling <span class="source-acronym-letter">O</span>LAT Vide<span class="source-acronym-letter">o</span> Predictio<span class="source-acronym-letter">n</span> for <span class="source-acronym-letter">Ph</span>otoreal Full-body <span class="source-acronym-letter">A</span>vatar <span class="source-acronym-letter">S</span>equential R<span class="source-acronym-letter">e</span>lighting.” The name evokes the Moon under changing directions of sunlight—a natural analogy for OLAT observations.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+  <footer class="story-footer"><a href="index.html#demo">Watch the demo</a><a href="index.html#method">Explore the method →</a></footer>
+</body>
+</html>

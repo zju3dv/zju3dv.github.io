@@ -53,8 +53,8 @@ window.SPLAT_CONTENT = {
     affiliations: ["Zhejiang University", "Tencent Hunyuan", "Causa Robotics"],
     links: {
       paper: "https://arxiv.org/pdf/2611.08264v1",
-      code: "",
-      huggingface: "http://28.85.97.38:8081/",
+      code: "https://github.com/zju3dv/SplatAnything",
+      huggingface: "https://huggingface.co/spaces/ritianyu/SplatAnything",
       series: "https://github.com/zju3dv/InfiniSplat",
     },
   },

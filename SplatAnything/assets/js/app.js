@@ -102,14 +102,13 @@
     if (project.name) {
       document.title = project.name;
       $$(".project-name").forEach((element) => {
-        if (
-          element.closest("#project-title") &&
-          project.name === "SplatAnything"
-        )
-          return;
         element.textContent = project.name;
       });
     }
+    if (project.version)
+      $$("[data-project-version]").forEach((element) => {
+        element.textContent = `(${project.version})`;
+      });
     if (project.subtitle) $("#project-subtitle").textContent = project.subtitle;
     const subtitle = $("#project-subtitle");
     const subtitleText = subtitle.textContent.replace(/\s+/g, " ").trim();
@@ -1195,166 +1194,17 @@
     update();
   }
 
-  function setupSplatWord() {
-    const word = $("#splat-word");
-    if (!word) return;
-    const ink = $(".splat-ink", word);
-    const ns = "http://www.w3.org/2000/svg";
-    let lastSize = "";
-
-    function buildSplats() {
-      // Measure the stable wrapper, not the animated/scaled ink layer.
-      const { width, height } = word.getBoundingClientRect();
-      if (!width || !height) return;
-      const style = getComputedStyle(ink);
-      const sizeKey = `${width}:${height}:${style.fontFamily}`;
-      if (sizeKey === lastSize) return;
-      lastSize = sizeKey;
-      const fontSize = parseFloat(style.fontSize);
-      // The detached canvas samples the local font once per resize. Only SVG
-      // ellipses inside the word are animated; no page-level particle renderer.
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.ceil(width);
-      canvas.height = Math.ceil(height);
-      const ctx = canvas.getContext("2d", { willReadFrequently: true });
-      if (!ctx) return;
-      ctx.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-      ctx.fillStyle = "#000";
-      const metrics = ctx.measureText("Splat");
-      const ascent = metrics.fontBoundingBoxAscent || fontSize * 0.9;
-      const descent = metrics.fontBoundingBoxDescent || fontSize * 0.23;
-      const baseline = (height - ascent - descent) / 2 + ascent;
-      const spacing = parseFloat(style.letterSpacing) || 0;
-      if ("letterSpacing" in ctx) {
-        ctx.letterSpacing = `${spacing}px`;
-        ctx.fillText("Splat", 0, baseline);
-      } else {
-        [..."Splat"].forEach((letter, index) => {
-          ctx.fillText(
-            letter,
-            ctx.measureText("Splat".slice(0, index)).width + spacing * index,
-            baseline,
-          );
-        });
-      }
-      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-      const step = Math.max(2.5, fontSize / 22);
-      const points = [];
-      for (let y = step / 2; y < height; y += step) {
-        for (let x = step / 2; x < width; x += step) {
-          const alpha =
-            pixels[(Math.floor(y) * canvas.width + Math.floor(x)) * 4 + 3];
-          if (alpha > 85) points.push({ x, y });
-        }
-      }
-      if (!points.length) return;
-      const svg = document.createElementNS(ns, "svg");
-      svg.setAttribute("class", "splat-particles");
-      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-      svg.setAttribute("aria-hidden", "true");
-      svg.setAttribute("focusable", "false");
-      const defs = document.createElementNS(ns, "defs");
-      for (const [id, color] of [
-        ["splat-ink-dark", "#18181b"],
-        ["splat-ink-blue", "#3080ff"],
-      ]) {
-        const gradient = document.createElementNS(ns, "radialGradient");
-        gradient.id = id;
-        for (const [offset, opacity] of [
-          ["0%", ".95"],
-          ["45%", ".8"],
-          ["100%", "0"],
-        ]) {
-          const stop = document.createElementNS(ns, "stop");
-          stop.setAttribute("offset", offset);
-          stop.setAttribute("stop-color", color);
-          stop.setAttribute("stop-opacity", opacity);
-          gradient.append(stop);
-        }
-        defs.append(gradient);
-      }
-      svg.append(defs);
-      const stride = Math.max(1, Math.ceil(points.length / 180));
-      points
-        .filter((_, index) => index % stride === 0)
-        .forEach(({ x, y }, index) => {
-          const dot = document.createElementNS(ns, "ellipse");
-          dot.setAttribute("class", "splat-dab");
-          dot.setAttribute("cx", x);
-          dot.setAttribute("cy", y);
-          dot.setAttribute("rx", step * (1 + (index % 3) * 0.1));
-          dot.setAttribute("ry", step * 0.78);
-          dot.setAttribute(
-            "fill",
-            `url(#${index % 6 === 0 ? "splat-ink-blue" : "splat-ink-dark"})`,
-          );
-          dot.style.setProperty(
-            "--dx",
-            `${((x - width / 2) * 0.15 + Math.sin(index * 2.4) * fontSize * 0.06).toFixed(2)}px`,
-          );
-          dot.style.setProperty(
-            "--dy",
-            `${((y - height / 2) * 0.24 + Math.cos(index * 1.7) * fontSize * 0.05).toFixed(2)}px`,
-          );
-          dot.style.setProperty(
-            "--rotation",
-            `${((index * 37) % 100) - 50}deg`,
-          );
-          svg.append(dot);
-        });
-      $(".splat-particles", word)?.remove();
-      word.append(svg);
-      word.classList.add("splats-ready");
-      word.getAnimations({ subtree: true }).forEach((animation) => {
-        animation.currentTime = 0;
-      });
-    }
-
-    document.fonts.ready.then(() => {
-      buildSplats();
-      if ("ResizeObserver" in window)
-        new ResizeObserver(buildSplats).observe(word);
-      else addEventListener("resize", buildSplats, { passive: true });
-    });
-    // Hover replays the brief dispersion; the normal loop rests most of the time.
-    word.addEventListener("pointerenter", (event) => {
-      if (
-        event.pointerType !== "mouse" ||
-        $(".hero").matches(".is-title-still, .is-motion-paused")
-      )
-        return;
-      word.getAnimations({ subtree: true }).forEach((animation) => {
-        animation.currentTime = 650;
-      });
-    });
-  }
-
   function setupTitleMotion() {
     const hero = $(".hero");
-    const toggle = $("#title-motion-toggle");
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
-    let paused = false;
     let visible = true;
 
     function sync() {
-      const still = paused || preference.matches;
+      const still = preference.matches;
       hero.classList.toggle("is-title-still", still);
       hero.classList.toggle("is-motion-paused", !visible || document.hidden);
-      toggle.hidden = preference.matches;
-      toggle.setAttribute("aria-pressed", String(paused));
-      const label = paused ? "Play title animation" : "Pause title animation";
-      toggle.setAttribute("aria-label", label);
-      toggle.title = label;
-      $("use", toggle).setAttribute(
-        "href",
-        paused ? "#icon-play" : "#icon-pause",
-      );
     }
 
-    toggle.addEventListener("click", () => {
-      paused = !paused;
-      sync();
-    });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
@@ -1378,5 +1228,4 @@
   setupFullscreen();
   setupNavigation();
   setupTitleMotion();
-  setupSplatWord();
 })();

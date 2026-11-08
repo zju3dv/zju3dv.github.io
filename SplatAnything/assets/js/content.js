@@ -10,6 +10,7 @@
 window.SPLAT_CONTENT = {
   project: {
     name: "SplatAnything",
+    version: "InfiniSplat v3",
     subtitle: "",
     authors: [
       {
@@ -50,7 +51,12 @@ window.SPLAT_CONTENT = {
       { name: "Sida Peng", url: "https://pengsida.net/", affiliation: "1,3" },
     ],
     affiliations: ["Zhejiang University", "Tencent Hunyuan", "Causa Robotics"],
-    links: { paper: "", code: "", huggingface: "" },
+    links: {
+      paper: "https://arxiv.org/pdf/2611.08264v1",
+      code: "",
+      huggingface: "http://28.85.97.38:8081/",
+      series: "https://github.com/zju3dv/InfiniSplat",
+    },
   },
   // A string, or an array of points shown as a numbered list. **text** is bold;
   // the project name is set in the title font.

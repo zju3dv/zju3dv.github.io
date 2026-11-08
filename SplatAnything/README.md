@@ -18,10 +18,11 @@ python3 tools/serve.py 8080
 
 | 字段                   | 用途                                                                                  |
 | ---------------------- | ------------------------------------------------------------------------------------- |
+| `project.version`      | 主标题括号中的版本名称，当前为 `InfiniSplat v3`                                      |
 | `project.subtitle`     | 论文副标题；出现 Gaussian Spacing Normalization 时自动突出显示                        |
 | `project.authors`      | 作者数组，例如 `{ name: '姓名', url: '作者主页', affiliation: '1' }`                  |
 | `project.affiliations` | 单位名称数组                                                                          |
-| `project.links`        | `paper`、`code`、`huggingface` 分别对应 Paper、Code、HuggingFace Demo；留空时不可点击 |
+| `project.links`        | `paper`、`code`、`huggingface`、`series` 对应资源按钮；`series` 为 InfiniSplat Series 仓库链接，留空时不可点击 |
 | `tldr`                 | 第一模块的简介，支持换行，按纯文本处理                                                |
 | `video.src`            | 视频文件地址，例如 `assets/media/demo.mp4`                                            |
 | `video.poster`         | 视频封面图片                                                                          |
@@ -207,10 +208,10 @@ mv index.html index-light.html && mv index-classic.html index.html
 
 （`index-classic.html` 引用的是 `-classic` 版样式和脚本，改名后仍然有效。）
 
-**当前设计**参考 learn.shareai.run 的配色：白色底、`#f4f4f5` 浅灰面板、`#e4e4e7` 细边框、`#09090b` 正文和 `#71717a` 次要文字；主按钮与类别分段控件选中态为近黑色；Demo 视频和 BibTeX 放在带红黄绿三点的黑色窗口里；四个类别分别使用浅蓝、浅绿、浅琥珀、浅紫徽章（场景编号与数据集标签随类别变色）。正文使用系统字体栈（Apple 设备上为 SF Pro / SF Mono），项目名 SplatAnything 沿用原版的 Georgia 斜体；副标题在宽度 1000px 以上的屏幕保持一行，更窄时自动换行。标题居中。首屏保留原版的 “Splat” 标题特效：每 9 秒短暂散开成椭圆色斑再聚合（近黑色斑点，约六分之一为蓝色点缀），鼠标移入可重播，标签旁的圆形按钮可暂停；标题离开视口或页面进入后台时自动暂停，系统开启“减少动态效果”时显示静态标题。
+**当前设计**参考 learn.shareai.run 的配色：白色底、`#f4f4f5` 浅灰面板、`#e4e4e7` 细边框、`#09090b` 正文和 `#71717a` 次要文字；主按钮与类别分段控件选中态为近黑色；Demo 视频和 BibTeX 放在带红黄绿三点的黑色窗口里；四个类别分别使用浅蓝、浅绿、浅琥珀、浅紫徽章（场景编号与数据集标签随类别变色）。正文使用系统字体栈（Apple 设备上为 SF Pro / SF Mono），项目名 SplatAnything 沿用原版的 Georgia 斜体；副标题在宽度 1000px 以上的屏幕保持一行，更窄时自动换行。标题居中。首屏主标题为静态的 “SplatAnything (InfiniSplat v3)”，字号较原版缩小；顶部说明徽章、暂停按钮和 Splat 粒子特效已移除。资源区提供 InfiniSplat Series 按钮，链接到 `https://github.com/zju3dv/InfiniSplat`。
 
 - `index.html`：首屏与概览、视频、Method、结果、致谢、引用模块；对比模块保留代码，当前已注释停用。
-- 主标题右上角的 ♾️ 标志使用 SVG 和蓝色流动线段动画，随标题字号缩放，并与标题的暂停按钮、离开视口暂停及“减少动态效果”设置同步。
+- 主标题右上角的 ♾️ 标志使用 SVG 和蓝色流动线段动画，随标题字号缩放，离开视口或页面进入后台时自动暂停，系统开启“减少动态效果”时静止。
 - `assets/css/style.css`：当前设计的全部样式，颜色集中在文件开头的变量中。
 - `assets/js/app.js`：内容渲染、类别与场景切换、预览与查看器切换、双栏对比、加载、全屏和引用复制。
 - `assets/favicon.svg`：标签页图标，与标题右上角共用同款黑色轮廓、蓝色线段的 ♾️ 造型。

@@ -43,9 +43,6 @@
       <symbol id="icon-play" viewBox="0 0 24 24">
         <path d="m9 5 11 7-11 7Z" />
       </symbol>
-      <symbol id="icon-pause" viewBox="0 0 24 24">
-        <path d="M9 5v14M15 5v14" />
-      </symbol>
       <symbol id="icon-paper" viewBox="0 0 24 24">
         <path d="M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6" />
       </symbol>
@@ -86,7 +83,8 @@
     <header class="site-header">
       <div class="header-inner container">
         <a class="brand" href="#top"
-          ><span class="project-name">SplatAnything</span></a
+          ><span class="project-name">SplatAnything</span>
+          <span data-project-version>(InfiniSplat v3)</span></a
         >
         <nav aria-label="Main navigation">
           <a href="#tldr">Overview</a>
@@ -102,29 +100,9 @@
 
     <main id="main">
       <section class="hero container" id="top" aria-labelledby="project-title">
-        <div class="hero-topline">
-          <span class="hero-badge"
-            ><i aria-hidden="true"></i>Feed-Forward 3D Gaussian Splatting</span
-          ><button
-            class="motion-toggle"
-            id="title-motion-toggle"
-            type="button"
-            aria-label="Pause title animation"
-            aria-pressed="false"
-            title="Pause title animation"
-            hidden
-          >
-            <svg class="icon" aria-hidden="true">
-              <use href="#icon-pause" />
-            </svg>
-          </button>
-        </div>
         <h1 id="project-title">
-          <span class="project-name"
-            ><span class="splat-word" id="splat-word"
-              ><span class="splat-ink">Splat</span></span
-            ><span class="title-rest">Anything</span></span
-          >
+          <span class="project-name">SplatAnything</span>
+          <span class="project-version" id="project-version" data-project-version>(InfiniSplat v3)</span>
           <span class="title-infinity" aria-hidden="true">
             <svg viewBox="0 0 64 32" focusable="false">
               <defs>
@@ -164,6 +142,14 @@
             aria-disabled="true"
             title="Code link coming soon"
             ><svg class="icon"><use href="#icon-code" /></svg> Code</a
+          >
+          <a
+            class="button"
+            data-resource="series"
+            href="https://github.com/zju3dv/InfiniSplat"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg class="icon"><use href="#icon-code" /></svg> InfiniSplat Series</a
           >
           <a
             class="button"
@@ -653,7 +639,10 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <span class="project-name">SplatAnything</span>
+        <span class="brand"
+          ><span class="project-name">SplatAnything</span>
+          <span data-project-version>(InfiniSplat v3)</span></span
+        >
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

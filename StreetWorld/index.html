@@ -431,7 +431,7 @@
         <div class="section-heading">
           <h2 id="framework-title">Framework</h2>
           <div class="section-description">
-            <p>StreetWorld consists of three core modules: the Scene Manager, the closed-loop simulation framework, and the Env Interface. The Scene Manager initializes scenarios by loading and parsing their assets and supports scene editing.</p>
+            <p>StreetWorld consists of three core modules: the Scene Manager, the closed-loop simulation framework, and the Env Interface. The Scene Manager initializes scenarios by loading and parsing their assets and supports scenario configuration.</p>
             <p>During simulation, Actor and Participants manage the ego agent and other traffic entities, respectively. Each agent perceives the Environment through its Observer, selects actions through its Policy, and executes those actions through its Controller. The Environment collects actions from all agents, advances the physics simulation, and computes rewards using a configurable evaluation and reward model.</p>
             <p>During evaluation, different AD policies interact with the simulator through the unified Env Interface, either remotely or locally.</p>
           </div>
@@ -442,10 +442,10 @@
           aria-label="StreetWorld framework diagram; scroll horizontally on smaller screens"
         >
           <img
-            src="./assets/framework.svg?v=91bcac9687f2"
+            src="./assets/framework.svg?v=2f60a2374be4"
             width="1404"
             height="548"
-            alt="Scene Manager initializes simulation environments using GS assets, traffic data, HD maps and collision models. Actor and Participants each form a Policy–Controller–Observer loop with the Environment, which updates and evaluates the scene. Env Interface provides Remote and Local access, with bidirectional connections to the simulation and AD policies including Expert, Keyboard, UniAD and VLA."
+            alt="Scene Manager provides Initialization and Configuration using GS assets, traffic data, HD maps and collision models. Actor and Participants each form a Policy–Controller–Observer loop with the Environment, which updates and evaluates the scene. Env Interface provides Remote and Local access, with bidirectional connections to the simulation and AD policies including Expert, Keyboard, UniAD and VLA."
           />
         </figure>
       </section>

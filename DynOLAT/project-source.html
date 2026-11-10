@@ -10,7 +10,7 @@
   <title>The Insights Behind DynOLAT</title>
   <link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" href="assets/dynolat-mark.svg" type="image/svg+xml" sizes="any">
-  <link rel="stylesheet" href="styles.css?v=20261108-7">
+  <link rel="stylesheet" href="styles.css?v=20261110-1">
   <link rel="stylesheet" href="project-source.css?v=20261108-3">
   <script src="selection-copy.js?v=20261105-1" defer></script>
 </head>
@@ -108,7 +108,7 @@
                   <p class="source-equation__caption"><i>Z</i><sup>flat</sup> and <i>Z</i><sup>OLAT</sup> encode paired sequences; <i>p</i><sub>θ</sub> denotes the adapted conditional generation distribution for direction <i>ω</i><sub>k</sub>. <i>B</i><sub>t,k</sub>(<i>x</i>) is the decoded response at frame <i>t</i>, pixel <i>x</i>, and direction <i>k</i>. <i>L</i> is the target environment; <i>w</i><sub>k</sub>(<i>L</i>) integrates its linear HDR radiance over the region assigned to that direction.</p>
                 </div>
                 <p>The model learns directional responses in latent space and combines them in linear image space after decoding. The supervision design supplies isolated targets.</p>
-                <p>Training samples individual lighting directions on a sphere; weighted composition supplies their combinations under new environments. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=6">Paper §3.6 ↗</a></p>
+                <p>Training samples individual lighting directions on a sphere; weighted composition supplies their combinations under new environments. <a href="https://arxiv.org/pdf/2611.11210#page=6">Paper §3.6 ↗</a></p>
               </div>
             </details>
             <details class="source-detail">
@@ -139,9 +139,9 @@
                   <p class="source-math">B̂<sub>1:T,k</sub> = <i>F</i><sub>θ</sub>(<i>V</i><sup>flat</sup><sub>1:T</sub>, <i>ω</i><sub>k</sub>)</p>
                   <p class="source-equation__caption"><i>F</i><sub>θ</sub> predicts an OLAT basis sequence B̂<sub>1:T,k</sub> for direction <i>ω</i><sub>k</sub>, conditioned on the flat-lit sequence <i>V</i><sup>flat</sup><sub>1:T</sub>. <i>T</i> is the sequence length.</p>
                 </div>
-                <p><strong>Capture.</strong> We switch the illumination between flat-lit and OLAT while the person moves. Using two spatially distant OLAT directions within each sequence helps disentangle lighting changes from motion. Optical flow between flat-lit frames aligns the intervening OLAT observations into paired video supervision. From these sampled observations, the model learns to predict full directional response sequences. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=7">Paper §4 ↗</a></p>
-                <p><strong>Long sequences.</strong> Independently generated video chunks can flicker at their boundaries. Recurrent bridge context reuses previously generated OLAT frames to constrain overlapping windows, carrying appearance and lighting context beyond the training window. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=6">Paper §3.5 ↗</a></p>
-                <p><strong>Consistency.</strong> Latent Bridge Matching keeps predicted OLAT videos closely aligned with the input performance. A 4D Gaussian Splatting reconstruction built from independently relit, synchronized multi-view videos further illustrates the model’s implicit consistency across views. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=20">Supplement §F ↗</a></p>
+                <p><strong>Capture.</strong> We switch the illumination between flat-lit and OLAT while the person moves. Using two spatially distant OLAT directions within each sequence helps disentangle lighting changes from motion. Optical flow between flat-lit frames aligns the intervening OLAT observations into paired video supervision. From these sampled observations, the model learns to predict full directional response sequences. <a href="https://arxiv.org/pdf/2611.11210#page=7">Paper §4 ↗</a></p>
+                <p><strong>Long sequences.</strong> Independently generated video chunks can flicker at their boundaries. Recurrent bridge context reuses previously generated OLAT frames to constrain overlapping windows, carrying appearance and lighting context beyond the training window. <a href="https://arxiv.org/pdf/2611.11210#page=6">Paper §3.5 ↗</a></p>
+                <p><strong>Consistency.</strong> Latent Bridge Matching keeps predicted OLAT videos closely aligned with the input performance. A 4D Gaussian Splatting reconstruction built from independently relit, synchronized multi-view videos further illustrates the model’s implicit consistency across views. <a href="https://arxiv.org/pdf/2611.11210#page=20">Supplement §F ↗</a></p>
               </div>
             </details>
           </div>
@@ -150,7 +150,7 @@
         <details class="source-detail source-notes">
           <summary>What comes next?</summary>
           <div class="source-body">
-            <p>Future work can build on this foundation with more efficient OLAT basis prediction, explicit consistency across directions and views, finer illumination capture, and dynamic lighting benchmarks. The dataset can also support neural rendering and controllable generative video editing. <a href="https://mozilla.github.io/pdf.js/legacy/web/viewer.html?file=https%3A%2F%2Fraw.githubusercontent.com%2Fxiaotao1340%2Fassets%2Fmain%2Fproject_page%2FDynOLAT%2FDynOLAT.pdf#page=14">Paper §6 ↗</a></p>
+            <p>Future work can build on this foundation with more efficient OLAT basis prediction, explicit consistency across directions and views, finer illumination capture, and dynamic lighting benchmarks. The dataset can also support neural rendering and controllable generative video editing. <a href="https://arxiv.org/pdf/2611.11210#page=14">Paper §6 ↗</a></p>
           </div>
         </details>
         <details class="source-detail source-notes">

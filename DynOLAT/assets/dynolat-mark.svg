@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="mark-title">
+  <title id="mark-title">DynOLAT light ring</title>
+  <defs>
+    <linearGradient id="ring" x1="13" y1="51" x2="46" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#498ce3"/><stop offset=".48" stop-color="#64cce4"/><stop offset=".82" stop-color="#c8edf1"/><stop offset="1" stop-color="#ffdea6"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop stop-color="#ffe1ab" stop-opacity=".6"/><stop offset="1" stop-color="#ffc978" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#0c131e"/>
+  <circle cx="31" cy="34" r="19.5" fill="none" stroke="url(#ring)" stroke-width="7.5"/>
+  <circle cx="45" cy="20" r="16" fill="url(#halo)"/>
+  <path d="M45 8 C46.2 16.8 48.2 18.8 57 20 C48.2 21.2 46.2 23.2 45 32 C43.8 23.2 41.8 21.2 33 20 C41.8 18.8 43.8 16.8 45 8Z" fill="#fff4dc"/>
+  <circle cx="45" cy="20" r="2.5" fill="#fff"/>
+</svg>

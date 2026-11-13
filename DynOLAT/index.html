@@ -1,0 +1,384 @@
+
+<!doctype html>
+<html lang="en" data-type="software">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="DynOLAT relights full-body human performances from monocular video by predicting and linearly combining videos illuminated from individual light directions.">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <meta name="theme-color" content="#000000">
+  <title>DynOLAT: OLAT Video Prediction for Controllable Dynamic Full-Body Relighting</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="assets/dynolat-mark.svg" type="image/svg+xml" sizes="any">
+  <link rel="preload" href="assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lato-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=20261110-1">
+  <script src="selection-copy.js?v=20261105-1" defer></script>
+  <script src="title-lighting.js?v=20261108-7" defer></script>
+  <script src="script.js?v=20261107-2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to content</a>
+  <header class="topbar" data-topbar>
+    <div class="topbar__pill" inert>
+      <a class="topbar__brand" href="#home" aria-label="DynOLAT home">
+        <img class="brand-mark" src="assets/dynolat-mark.svg" width="64" height="64" alt="">
+        <span class="scroll-brand-left">DynOLAT</span>
+      </a>
+      <nav class="topbar__nav side-nav" aria-label="Section navigation">
+        <a class="topbar__link nav-link active" href="#home">Home</a>
+        <a class="topbar__link nav-link" href="#demo">Demo</a>
+        <a class="topbar__link nav-link" href="project-source.html">Insights</a>
+        <a class="topbar__link nav-link" href="#abstract">Overview</a>
+        <a class="topbar__link nav-link" href="#method">Method</a>
+        <a class="topbar__link nav-link" href="#dataset">Dataset</a>
+        <a class="topbar__link nav-link" href="#more-results">Results</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="paper-page" id="top">
+    <section class="hero section-block" id="home" data-topbar-trigger>
+      <div class="container section-inner">
+        <h1 class="hero__title" aria-label="DynOLAT: OLAT Video Prediction for Controllable Dynamic Full-Body Relighting">
+          <span class="hero__title-main">
+            <span class="title-design" data-title-design><span class="title-text" data-title-text>DynOLAT</span><canvas class="title-lighting" data-title-canvas aria-hidden="true"></canvas></span>
+          </span>
+          <span class="hero__title-sub">
+            OLAT Video Prediction for<br class="hero__br--wide"> Controllable Dynamic Full-Body Relighting
+          </span>
+        </h1>
+
+        <p class="publication-note">SIGGRAPH Asia 2026 <span class="publication-note__track">TOG</span></p>
+
+        <ul class="authors" aria-label="Authors">
+          <li><a href="https://xiaotao1340.github.io/" target="_blank" rel="noopener noreferrer">Taoming Liu</a><sup>1,*</sup></li>
+          <li><a href="https://stland-admin.github.io/" target="_blank" rel="noopener noreferrer">Yinji ShenTu</a><sup>1,*</sup></li>
+          <li><a href="https://www.guangzhaohe.com/" target="_blank" rel="noopener noreferrer">Guangzhao He</a><sup>2</sup></li>
+          <li><a href="https://krahets.com/" target="_blank" rel="noopener noreferrer">Yudong Jin</a><sup>1</sup></li>
+          <li>Yukang Ye<sup>3</sup></li>
+          <li><a href="https://derizsy.github.io/" target="_blank" rel="noopener noreferrer">Siyu Zhang</a><sup>3</sup></li>
+          <li>Fan Jia<sup>4</sup></li>
+          <li><a href="http://www.cad.zju.edu.cn/home/huawei/" target="_blank" rel="noopener noreferrer">Wei Hua</a><sup>1,5</sup></li>
+          <li><a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank" rel="noopener noreferrer">Hujun Bao</a><sup>1</sup></li>
+          <li><a href="https://www.xzhou.me/" target="_blank" rel="noopener noreferrer">Xiaowei Zhou</a><sup>1,&dagger;</sup></li>
+        </ul>
+        <p class="affiliations" aria-label="Affiliations">
+          <span><sup>1</sup> Zhejiang University</span>
+          <span><sup>2</sup> Cornell University</span>
+          <span><sup>3</sup> 4DV.ai</span>
+          <span><sup>4</sup> Ant Group</span>
+          <span><sup>5</sup> Zhejiang Lab</span>
+        </p>
+        <p class="author-note">
+          <span><sup>*</sup> Equal contribution.</span>
+          <span><sup>&dagger;</sup> Corresponding author.</span>
+        </p>
+
+        <div class="home-links actions" aria-label="Project links">
+          <a class="home-link-btn button" href="https://arxiv.org/abs/2611.11210" target="_blank" rel="noopener"><svg class="home-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3.8423 0a1.0037 1.0037 0 0 0-.922.6078c-.1536.3687-.0438.6275.2938 1.1113l6.9185 8.3597-1.0223 1.1058a1.0393 1.0393 0 0 0 .003 1.4229l1.2292 1.3135-5.4391 6.4444c-.2803.299-.4538.823-.2971 1.1986a1.0253 1.0253 0 0 0 .9585.635.9133.9133 0 0 0 .6891-.3405l5.783-6.126 7.4902 8.0051a.8527.8527 0 0 0 .6835.2597.9575.9575 0 0 0 .8777-.6138c.1577-.377-.017-.7502-.306-1.1407l-7.0518-8.3418 1.0632-1.13a.9626.9626 0 0 0 .0089-1.3165L4.6336.4639s-.3733-.4535-.768-.463zm0 .272h.0166c.2179.0052.4874.2715.5644.3639l.005.006.0052.0055 10.169 10.9905a.6915.6915 0 0 1-.0072.945l-1.0666 1.133-1.4982-1.7724-8.5994-10.39c-.3286-.472-.352-.6183-.2592-.841a.7307.7307 0 0 1 .6704-.4401Zm14.341 1.5701a.877.877 0 0 0-.6554.2418l-5.6962 6.1584 1.6944 1.8319 5.3089-6.5138c.3251-.4335.479-.6603.3247-1.0292a1.1205 1.1205 0 0 0-.9763-.689zm-7.6557 12.2823 1.3186 1.4135-5.7864 6.1295a.6494.6494 0 0 1-.4959.26.7516.7516 0 0 1-.706-.4669c-.1119-.2682.0359-.6864.2442-.9083l.0051-.0055.0047-.0055z" /></svg><span>arXiv</span></a>
+          <a class="home-link-btn button" href="https://arxiv.org/pdf/2611.11210" target="_blank" rel="noopener" title="Complete paper, including supplementary material; 28 pages"><svg class="home-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg><span>Paper</span></a>
+          <span class="home-link-btn button button--pending" aria-disabled="true" title="Code has not been released yet"><span class="home-link-label"><svg class="home-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg><span>Code</span></span> <small>not released yet</small></span>
+          <a class="home-link-btn button" href="https://huggingface.co/datasets/STLAND/ZJU_OLAT" target="_blank" rel="noopener"><svg class="home-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624" /></svg><span>Dataset</span></a>
+          <a class="home-link-btn button" href="#demo"><svg class="home-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m10 8 6 4-6 4Z" fill="currentColor" stroke="none"/></svg><span>Video</span></a>
+        </div>
+      </div>
+
+      <div class="container hero-demo" id="demo">
+        <p class="hero-tagline">One video. Explicit light directions. Controllable relighting.</p>
+        <div class="preview-heading demo-heading">
+          <h2>Demo video</h2>
+          <div class="demo-actions">
+            <button class="preview-toggle" type="button" data-demo-toggle>Play demo</button>
+            <a href="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/dynolat-demo.mp4" download>Download video</a>
+          </div>
+        </div>
+        <figure class="full-demo">
+          <div class="media-frame media-frame--video">
+            <video id="demo-video" class="demo-video" controls playsinline preload="none" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/dynolat-demo-poster.jpg" aria-label="DynOLAT full supplementary demo video">
+              <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/dynolat-demo.mp4" type="video/mp4">
+              Your browser does not support this video. <a href="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/dynolat-demo.mp4" download>Download the MP4</a>.
+            </video>
+          </div>
+          <figcaption class="preview-caption">Full supplementary video · 4:48 · 720p</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-block" id="abstract">
+      <div class="container section-inner">
+        <div class="section__head overview-heading" id="project-source">
+          <h2 class="section-title">Controlling Light, Preserving Motion</h2>
+          <a class="button button--resource insights-link" href="project-source.html">Insights <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <p class="section-text prose">
+          DynOLAT relights full-body human performances from monocular flat-lit video. For videos captured under uncontrolled illumination, a lightweight delighting model first maps the input toward the flat-lit training domain. The OLAT predictor then generates temporally consistent One-Light-At-a-Time (OLAT) basis videos, each showing the same performance illuminated from a single direction. By linearly combining these basis videos with adjustable weights, DynOLAT controls lighting direction and relative intensity. To train this model, we build a dynamic capture pipeline and collect over 24 million frames from 224 identity-outfit combinations. Experiments with the trained model show that DynOLAT responds more faithfully to variations in target lighting direction and relative intensity than the tested baselines, enabling controllable video relighting while preserving fine appearance details and temporal coherence.
+        </p>
+        <aside class="tldr-card callout">
+          <h3 class="card-title">TLDR</h3>
+          <p>Given a video of a person, DynOLAT predicts the same performance lit from individual directions, then combines these predictions to relight the person under new lighting.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-block" id="method">
+      <div class="container section-inner">
+        <div class="section__head">
+          <h2 class="section-title">Method</h2>
+          <p class="section__lead section-text">
+            Given a flat-lit video and a target light direction, our model predicts the corresponding OLAT basis video. We then combine predictions for different directions in linear color space to synthesize the performance under a target environment map.
+          </p>
+        </div>
+        <figure class="method-figure">
+          <div class="method-viewport" tabindex="0" role="region" aria-label="Method diagram; scroll horizontally to inspect details on small screens">
+            <img src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/pipeline-auto.svg" width="4541" height="1998" loading="lazy" alt="DynOLAT pipeline: a flat-lit input video and spherical harmonic light embeddings condition the Bridge Matching Video Model to predict OLAT videos, which are combined in linear color space to produce relit videos under new environment maps.">
+          </div>
+          <figcaption>Light-conditioned video prediction produces temporally coherent OLAT bases. Combining these bases in linear color space yields relit videos under new environment maps.</figcaption>
+        </figure>
+        <ol class="method-list card-grid method-grid">
+          <li class="info-card">
+            <div class="feature-heading"><h3 class="card-title">OLAT Video Prediction</h3></div>
+            <p>Spherical harmonic embeddings encode target light directions. The video model predicts a corresponding sequence of OLAT basis frames for each direction.</p>
+          </li>
+          <li class="info-card">
+            <div class="feature-heading"><h3 class="card-title">Latent Bridge Matching</h3></div>
+            <p>Bridge matching transports flat-lit source latents toward OLAT target latents, reducing distribution mismatch while preserving temporal structure and identity details.</p>
+          </li>
+          <li class="info-card">
+            <div class="feature-heading"><h3 class="card-title">Linear Space Combination</h3></div>
+            <p>We combine the predicted OLAT videos in linear color space using illumination weights to synthesize the performance under a target environment map.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-block" id="dataset">
+      <div class="container section-inner">
+        <div class="section__head dataset-heading">
+          <h2 class="section-title">Dataset</h2>
+          <a class="button button--resource dataset-link" href="https://huggingface.co/datasets/STLAND/ZJU_OLAT" target="_blank" rel="noopener"><span>HF Dataset</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <div class="dataset-summary" aria-label="Dataset scale">
+          <p><strong>24M+</strong><span>captured frames</span></p>
+          <p><strong>224</strong><span>identity-outfit combinations</span></p>
+          <p><strong>4K</strong><span>multi-view capture</span></p>
+        </div>
+        <div class="card-grid dataset-grid">
+          <article class="info-card">
+            <svg class="feature-symbol" viewBox="0 0 96 48" fill="none" aria-hidden="true"><path class="feature-symbol__quiet" d="M17 38a31 31 0 0 1 62 0M48 10v9M24 16l10 9M72 16l-10 9M22 38h13M74 38H61"/><circle cx="48" cy="7" r="3"/><circle cx="23" cy="15" r="3"/><circle cx="73" cy="15" r="3"/><circle cx="17" cy="38" r="3"/><circle cx="79" cy="38" r="3"/><circle cx="48" cy="29" r="3"/><path d="m40 42 3-8h10l3 8M48 34v8"/></svg>
+            <h3 class="card-title">Capture Setup</h3>
+            <p>Our LightStage has 101 addressable light units. The dynamic and static subsets use 68 and 70 synchronized cameras, respectively.</p>
+          </article>
+          <article class="info-card">
+            <svg class="feature-symbol" viewBox="0 0 96 48" fill="none" aria-hidden="true"><g class="feature-symbol__quiet"><rect x="3" y="12" width="25" height="28" rx="3"/><rect x="68" y="12" width="25" height="28" rx="3"/><circle cx="15.5" cy="23" r="2.5"/><path d="m9 34 2-7h9l2 7M15.5 27v9"/><circle cx="80.5" cy="23" r="2.5"/><path d="m73 28 4-1h7l4-6M77 27l-1 8m8-8 2 8"/></g><rect x="33" y="6" width="30" height="36" rx="3" fill="#14232e"/><circle cx="48" cy="19" r="3.5"/><path d="m39 32 4-7h10l4 7M44 25l-1 12m9-12 1 12M37 10h3m16 0h3"/></svg>
+            <h3 class="card-title">Coverage</h3>
+            <p>189 dynamic and 35 static identity-outfit combinations, spanning varied clothing, motion, and viewpoints. Different outfits of one person count separately.</p>
+          </article>
+          <article class="info-card">
+            <svg class="feature-symbol" viewBox="0 0 96 48" fill="none" aria-hidden="true">
+              <g class="paired-frame--flat">
+                <rect x="3" y="7" width="30" height="35" rx="3" fill="#14232e"/>
+                <path class="feature-symbol__light" d="M6 15v17M30 15v17M13 10h10"/>
+                <circle cx="18" cy="19" r="3"/><path d="m10 32 3-7h10l3 7M15 25l-1 12m7-12 1 12"/>
+              </g>
+              <g class="paired-frame--olat">
+                <rect x="63" y="7" width="30" height="35" rx="3"/>
+                <path d="M78 8h12a2 2 0 0 1 2 2v29a2 2 0 0 1-2 2H78Z" fill="currentColor" fill-opacity=".14" stroke="none"/>
+                <path class="feature-symbol__light" d="M90 15v17"/>
+                <circle cx="78" cy="19" r="3"/><path d="m70 32 3-7h10l3 7M75 25l-1 12m7-12 1 12"/>
+              </g>
+              <path d="M39 19h18l-4-4M57 30H39l4 4"/>
+            </svg>
+            <h3 class="card-title">Paired supervision</h3>
+            <p>Time-multiplexed flat-lit and OLAT frames are aligned using optical flow to form paired supervision for learning light responses.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-block more-results" id="more-results" aria-labelledby="more-results-title">
+      <div class="container section-inner">
+        <div class="section__head more-results-heading">
+          <h2 class="section-title" id="more-results-title">More Results</h2>
+        </div>
+        <div class="results-gallery" data-results-gallery>
+          <div class="gallery-page" id="results-page-1" role="tabpanel" aria-labelledby="results-tab-1">
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_2_012_small_workshop_8k.jpg" aria-label="Relighting in a small workshop">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_2_012_small_workshop_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_2_016_outdoor_00058.jpg" aria-label="Relighting on an outdoor path">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_2_016_outdoor_00058.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_2_013_stone_alley_03_8k.jpg" aria-label="Relighting in a stone alley">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_2_013_stone_alley_03_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-page" id="results-page-2" role="tabpanel" aria-labelledby="results-tab-2" hidden>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_3_021_vulture_hide_8k.jpg" aria-label="Relighting inside a wildlife hide">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_3_021_vulture_hide_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_7_062_outdoor_00028.jpg" aria-label="Relighting beside a stone building">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_7_062_outdoor_00028.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_3_025_blouberg_sunrise_1_8k.jpg" aria-label="Relighting on the coast at sunrise">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_3_025_blouberg_sunrise_1_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-page" id="results-page-3" role="tabpanel" aria-labelledby="results-tab-3" hidden>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_3_025_014_terrace_near_the_granaries_-_sunset.jpg" aria-label="Relighting on a terrace at sunset">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_3_025_014_terrace_near_the_granaries_-_sunset.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_4_031_thatch_chapel_8k.jpg" aria-label="Relighting in a thatched chapel">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_4_031_thatch_chapel_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_6_054_anniversary_lounge_8k.jpg" aria-label="Relighting in a lounge">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_6_054_anniversary_lounge_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-page" id="results-page-4" role="tabpanel" aria-labelledby="results-tab-4" hidden>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_9_080_subway_entrance_8k.jpg" aria-label="Relighting at a subway entrance">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_9_080_subway_entrance_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_4_034_indoor_00018.jpg" aria-label="Relighting inside a chapel">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_4_034_indoor_00018.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_12_110_signal_hill_dawn_8k.jpg" aria-label="Relighting on a hillside at dawn">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_12_110_signal_hill_dawn_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-page" id="results-page-5" role="tabpanel" aria-labelledby="results-tab-5" hidden>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_7_066_small_cathedral_8k.jpg" aria-label="Relighting in a small cathedral">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_7_066_small_cathedral_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_5_040_st_peters_square_night_8k.jpg" aria-label="Relighting in a city square at night">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_5_040_st_peters_square_night_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_9_087_wrestling_gym_8k.jpg" aria-label="Relighting in a wrestling gym">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_9_087_wrestling_gym_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-page" id="results-page-6" role="tabpanel" aria-labelledby="results-tab-6" hidden>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_10_094_woods_8k.jpg" aria-label="Relighting in the woods">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_10_094_woods_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_8_078_urban_street_01_8k.jpg" aria-label="Relighting on an urban street">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_8_078_urban_street_01_8k.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure class="jcam-card">
+              <video controls playsinline muted loop preload="none" width="1088" height="1920" poster="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_14_139_072_ferry_to_stockholm.jpg" aria-label="Relighting on a ferry">
+                <source src="https://raw.githubusercontent.com/xiaotao1340/assets/main/project_page/DynOLAT/videos/jcam/jcams_start_14_139_072_ferry_to_stockholm.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+          <div class="gallery-footer" role="group" aria-label="Browse relighting results">
+            <div class="gallery-controls">
+              <button class="gallery-arrow" type="button" data-gallery-previous aria-label="Previous three videos" disabled>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+              </button>
+              <div class="gallery-tabs" role="tablist" aria-label="Relighting video groups">
+                <button class="gallery-tab" type="button" id="results-tab-1" role="tab" aria-controls="results-page-1" aria-selected="true" aria-label="Videos 1 to 3 of 18" tabindex="0">01</button>
+                <button class="gallery-tab" type="button" id="results-tab-2" role="tab" aria-controls="results-page-2" aria-selected="false" aria-label="Videos 4 to 6 of 18" tabindex="-1">02</button>
+                <button class="gallery-tab" type="button" id="results-tab-3" role="tab" aria-controls="results-page-3" aria-selected="false" aria-label="Videos 7 to 9 of 18" tabindex="-1">03</button>
+                <button class="gallery-tab" type="button" id="results-tab-4" role="tab" aria-controls="results-page-4" aria-selected="false" aria-label="Videos 10 to 12 of 18" tabindex="-1">04</button>
+                <button class="gallery-tab" type="button" id="results-tab-5" role="tab" aria-controls="results-page-5" aria-selected="false" aria-label="Videos 13 to 15 of 18" tabindex="-1">05</button>
+                <button class="gallery-tab" type="button" id="results-tab-6" role="tab" aria-controls="results-page-6" aria-selected="false" aria-label="Videos 16 to 18 of 18" tabindex="-1">06</button>
+              </div>
+              <button class="gallery-arrow" type="button" data-gallery-next aria-label="Next three videos">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+              </button>
+            </div>
+            <label class="gallery-sync" title="Play, pause, and seek all three videos together">
+              <input type="checkbox" role="switch" data-gallery-sync checked>
+              <span class="gallery-sync__track" aria-hidden="true"></span>
+              <span>Sync playback</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-block" id="limitations">
+      <div class="container section-inner">
+        <div class="section__head"><h2 class="section-title">Scope &amp; limitations</h2></div>
+        <p class="section-text prose">The system uses delighting to adapt videos captured under uncontrolled lighting to the flat-lit domain used to train the OLAT predictor. However, strong cast shadows and colored illumination can persist after delighting. The pretrained video VAE limits the reconstruction of fine details, and generating and storing many OLAT basis videos adds computational and storage costs. Consistency across OLAT predictions and camera views is not guaranteed. See the <a href="https://arxiv.org/pdf/2611.11210#page=19" target="_blank" rel="noopener">supplementary analysis</a> for failure cases.</p>
+      </div>
+    </section>
+
+    <section class="section section-block" id="acknowledgments">
+      <div class="container section-inner">
+        <div class="section__head"><h2 class="section-title">Acknowledgments</h2></div>
+        <div class="acknowledgments-copy section-text prose">
+          <p>We thank Dongli Tan for LightStage camera calibration and Linxian Wu for providing paired outdoor environment panoramas and reference images captured under the same lighting conditions.</p>
+          <p>We would also like to thank Jiaming Sun, Zhiyuan Yu, Yunzhi Yan, Shangzhan Zhang, Li Ma, and Sida Peng for their insightful discussions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-block" id="citation">
+      <div class="container section-inner">
+        <div class="section__head">
+          <h2 class="section-title">Citation</h2>
+        </div>
+        <div class="citation-box">
+          <div class="citation-toolbar">
+            <span class="citation-format" aria-hidden="true">BibTeX</span>
+            <button class="citation-copy" type="button" data-copy-citation aria-label="Copy BibTeX">
+              <svg class="copy-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+              <span data-copy-label aria-live="polite" aria-atomic="true">Copy</span>
+            </button>
+          </div>
+          <pre class="citation-code" tabindex="0" aria-label="DynOLAT BibTeX citation"><code id="citation-bibtex">@article{liu2026dynolat,
+  author = {Liu, Taoming and ShenTu, Yinji and He, Guangzhao and Jin, Yudong and Ye, Yukang and Zhang, Siyu and Jia, Fan and Hua, Wei and Bao, Hujun and Zhou, Xiaowei},
+  title = {{DynOLAT}: {OLAT} Video Prediction for Controllable Dynamic Full-Body Relighting},
+  journal = {ACM Transactions on Graphics},
+  number = {6},
+  volume = {45},
+  month = {December},
+  year = {2026}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><p>DynOLAT: OLAT Video Prediction for Controllable Dynamic Full-Body Relighting</p></div>
+  </footer>
+</body>
+</html>

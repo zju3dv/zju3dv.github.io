@@ -50,7 +50,7 @@
     <text class="heading" x="40" y="46">SCENE MANAGER</text>
     <path class="divider" d="M40 64H1064 M728 80V160"/>
     <text class="module-title" x="40" y="92">LARGE-SCALE SCENARIOS</text>
-    <text class="module-title" x="758" y="92">KEY FUNCTIONS</text>
+    <text class="module-title" x="758" y="92">KEY FEATURES</text>
     <g text-anchor="middle">
       <rect class="node" x="40" y="110" width="152" height="44" rx="2"/>
       <text x="116" y="138">GS Assets</text>
@@ -63,7 +63,7 @@
       <rect class="node" x="758" y="110" width="145" height="44" rx="2"/>
       <text x="830.5" y="138">Initialization</text>
       <rect class="node" x="919" y="110" width="145" height="44" rx="2"/>
-      <text x="991.5" y="138">Editing</text>
+      <text x="991.5" y="138">Configuration</text>
     </g>
     <path class="flow action" d="M552 182V222"/>
     <text class="flow-label cyan" x="574" y="207">Initialize simulation environments</text>

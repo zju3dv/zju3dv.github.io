@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e4e4e0">
+  <meta name="description" content="SuperNav-1.5 equips agentic navigation systems with structured spatial memory for efficient exploration, successive goals, and navigation across sessions.">
+  <meta property="og:title" content="SuperNav-1.5 — Structured Spatial Memory">
+  <meta property="og:description" content="Structured Spatial Memory For Agentic Navigation Systems">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/teaser.webp">
+  <title>SuperNav-1.5 — Structured Spatial Memory For Agentic Navigation Systems</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
+  <link rel="preload" href="assets/fonts/font-4.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#top" aria-label="SuperNav-1.5 home"><img src="assets/favicon.svg" width="30" height="30" alt="">SuperNav<span class="version">1.5</span></a>
+    <nav aria-label="Main navigation"><a href="#real-world">Real world</a><a href="#simulation">Simulation</a><a href="#method">Method</a><a href="#results">Results</a><a class="nav-citation" href="#bibtex">BibTeX <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" id="top" aria-labelledby="paper-title">
+      <div class="hero-copy">
+        <div class="hero-intro hero-card">
+        <p class="eyebrow"><span class="signal-dot"></span> A little memory. A long way forward.</p>
+        <h1 id="paper-title"><img class="animated-wordmark" src="supernav1.5-wordmark.svg" width="1160" height="340" alt="SuperNav-1.5" fetchpriority="high"><span class="title-subtitle">Structured Spatial Memory<br>For Agentic Navigation Systems</span></h1>
+        <div class="paper-meta">
+          <p class="authors"><span>Jiarui Guo<sup>1</sup></span><span><a href="https://the0xka1.cc/" target="_blank" rel="noopener noreferrer">Jinkai Zhang</a><sup>1</sup></span><span><a href="https://yuanhongyu.xyz/" target="_blank" rel="noopener noreferrer">Yuanhong Yu</a><sup>1</sup></span><span>Yongchen Zai<sup>2</sup></span><span>Futang Zhu<sup>2</sup></span><span><a href="https://csse.szu.edu.cn/pages/user/index?id=531" target="_blank" rel="noopener noreferrer">Ruizhen Hu</a><sup>3</sup></span><span><a href="https://pengsida.net/" target="_blank" rel="noopener noreferrer">Sida Peng</a><sup>1</sup></span><span><a href="https://xzhou.me/" target="_blank" rel="noopener noreferrer">Xiaowei Zhou</a><sup>1</sup></span></p>
+          <p class="affiliations"><span><sup>1</sup> Zhejiang University</span><span><sup>2</sup> BYD New Technology Research Institute</span><span><sup>3</sup> Shenzhen University</span></p>
+        </div>
+        <div class="resources" aria-label="Project resources">
+          <span class="resource pending" aria-label="Paper, coming soon"><span aria-hidden="true">↗</span> Paper <small>Soon</small></span>
+          <span class="resource pending" aria-label="Code, coming soon"><span aria-hidden="true">〈/〉</span> Code <small>Soon</small></span>
+          <a class="resource primary" href="#opening-video"><span aria-hidden="true">▷</span> Videos</a>
+          <a class="resource" href="#bibtex"><span aria-hidden="true">{ }</span> BibTeX</a>
+        </div>
+        </div>
+        <div class="hero-summary hero-card">
+        <div class="tldr"><h2>TL<span>;</span>DR</h2> <p><b>SuperNav-1.5</b> gives navigation agents a structured spatial memory: an area-segmented occupancy map with agent-maintained memory nodes. It connects scene recall to executable routes, helping the agent explore efficiently, reach successive goals, and reuse its memory across sessions.</p></div>
+        <a class="predecessor" href="https://zju3dv.github.io/SuperNav/">Built on SuperNav <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="comparison" id="comparison" aria-label="Recorded navigation trajectory comparisons">
+        <div class="comparison-top"><span class="eyebrow"><span class="signal-dot"></span> Memory in motion</span><span class="case-counter" id="case-count">01 / 04</span></div>
+        <h2 class="comparison-title" id="comparison-title">Same goal. Less wandering.</h2>
+        <p class="comparison-type" id="comparison-type">With memory / Without memory</p>
+        <div class="trajectory-panels" id="trajectory-panels"><p class="trace-loading" role="status">Loading recorded trajectories…</p></div>
+        <p class="trace-goal" id="trace-goal">Preparing comparison</p>
+        <div class="playback-track" aria-hidden="true"><span id="playback-progress"></span></div>
+        <div class="playback-controls">
+          <div class="case-dots" id="case-dots" aria-label="Select a comparison"></div>
+          <div class="playback-buttons"><button class="icon-button" id="previous-case" type="button" aria-label="Previous comparison">←</button><button class="pause-button" id="pause-playback" type="button" aria-label="Pause trajectory playback">Pause <span aria-hidden="true">Ⅱ</span></button><button class="icon-button" id="next-case" type="button" aria-label="Next comparison">→</button></div>
+        </div>
+        <p class="trace-note" id="trace-note">Recorded paths, illustrated at a shared distance rate. Not execution timing.</p>
+        <noscript><p class="trace-note">Enable JavaScript to view the recorded trajectory comparisons.</p></noscript>
+      </div>
+    </section>
+
+    <section class="opening wrap section" id="opening-video" aria-labelledby="opening-title">
+      <!-- <div class="section-heading"><div><h2 id="opening-title">The bigger picture.</h2></div><p>Spatial memory that turns past exploration<br class="desktop-break"> into the next direct route.</p></div> -->
+      <video class="opening-video" controls autoplay muted loop playsinline preload="metadata" width="1920" height="1080" poster="assets/overview/supernav-1.5-overview.webp" aria-label="SuperNav-1.5 overview: structured spatial memory for agentic navigation systems">
+        <source src="https://raw.githubusercontent.com/bugByteMe/SuperNav-1.5-assets/main/assets/overview/supernav-1.5-overview.mp4" type="video/mp4">
+        <a href="https://raw.githubusercontent.com/bugByteMe/SuperNav-1.5-assets/main/assets/overview/supernav-1.5-overview.mp4">Download the overview video</a>.
+      </video>
+    </section>
+
+    <section class="section wrap" id="real-world" aria-labelledby="real-title">
+      <div class="section-heading"><div><h2 id="real-title">Real-world demos.</h2></div><p>From everyday requests to longer journeys.<br class="desktop-break"> Six demonstrations on a real robot.</p></div>
+      <div class="demo-gallery" id="real-demo-groups"><p role="status">Loading real-world demonstrations…</p></div>
+      <noscript><p>Enable JavaScript to select the six real-world videos: two demand-driven, two multi-object, and two long-distance demonstrations.</p></noscript>
+    </section>
+
+    <section class="simulation-section" id="simulation" aria-labelledby="simulation-title"><div class="section wrap">
+      <div class="section-heading"><div><h2 id="simulation-title">Simulation demos.</h2></div><p>Twelve demonstrations, from a single target<br class="desktop-break"> to memory reused across sessions.</p></div>
+      <div class="demo-gallery" id="simulation-demo-groups"><p role="status">Loading simulation demonstrations…</p></div>
+      <noscript><p>Enable JavaScript to browse twelve simulation videos: four single-object, four multi-object, and four multi-session demonstrations.</p></noscript>
+    </div></section>
+
+    <section class="section wrap method" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><div><h2 id="method-title">A memory grounded in space.</h2></div><p>Remember what matters.<br>Keep it connected to a navigable map.</p></div>
+      <figure class="paper-figure teaser"><div class="figure-label"><span class="eyebrow">The idea</span><span>01</span></div><a class="figure-zoom" href="assets/images/teaser.webp" target="_blank" rel="noopener" aria-label="Open teaser at full resolution"><img src="assets/images/teaser.webp" width="3735" height="1440" loading="lazy" alt="First-time navigation explores many rooms to find a pillow on a window bench. Second-time navigation uses spatial memory to take a more direct route."></a><figcaption>From searching to remembering. Experience from a first visit helps the agent take a more direct route on its next. <a href="assets/images/teaser.webp" target="_blank" rel="noopener">Full resolution ↗</a></figcaption></figure>
+      <div class="method-principles"><article><span class="principle-number">01</span><h3>Build a spatial memory.</h3><p>An area-segmented occupancy map stores traversable geometry. The agent creates and updates map-grounded memory nodes containing useful scene information.</p></article><article><span class="principle-number">02</span><h3>Recall a place. Find a route.</h3><p>The agent queries remembered locations or selects unvisited areas. Geometric navigation turns its selected destination into an executable path.</p></article><article><span class="principle-number">03</span><h3>Reuse memory across sessions.</h3><p>Agent-guided relocalization aligns new observations with the stored map, allowing the agent to reuse memory even from a different starting position.</p></article></div>
+      <figure class="paper-figure pipeline"><div class="figure-label"><span class="eyebrow">The pipeline</span><span>02</span></div><a class="figure-zoom" href="assets/images/pipeline.webp" target="_blank" rel="noopener" aria-label="Open pipeline at full resolution"><img src="assets/images/pipeline.webp" width="3735" height="1830" loading="lazy" alt="SuperNav-1.5 pipeline: an annotated occupancy map and memory nodes support relocalization, memory lookup, and geometric navigation. Mapping and keyframe captioning run asynchronously while the agent maintains memory."></a><figcaption>Structured spatial memory, memory-guided navigation, and asynchronous memory construction work together in one agentic system. <a href="assets/images/pipeline.webp" target="_blank" rel="noopener">Full resolution ↗</a></figcaption></figure>
+    </section>
+
+    <section class="results-section" id="results" aria-labelledby="results-title"><div class="section wrap">
+      <div class="section-heading"><div><h2 id="results-title">Results.</h2></div><p>Success and path efficiency across<br class="desktop-break"> four navigation settings.</p></div>
+      <div class="result-highlights">
+        <div><span class="eyebrow">Habitat-GS · Multi-object SR</span><p class="metric-values"><span class="metric-before">34%</span><span class="metric-arrow" aria-label="to">→</span><strong>52%</strong></p><span class="metric-gain">+18 percentage points</span><small>SuperNav → SuperNav-1.5</small></div>
+        <div><span class="eyebrow">Demand-driven · SPL</span><p class="metric-values"><span class="metric-before">0.1801</span><span class="metric-arrow" aria-label="to">→</span><strong>0.3867</strong></p><span class="metric-gain">2.15× path efficiency</span><small>SuperNav → SuperNav-1.5</small></div>
+        <div><span class="eyebrow">Cross-session · SPL</span><p class="metric-values"><span class="metric-before">0.4364</span><span class="metric-arrow" aria-label="to">→</span><strong>0.5022</strong></p><span class="metric-gain">+15.1% SPL</span><small>Without memory → With memory · changed spawn</small></div>
+      </div>
+      <div class="gallery-tabs result-tabs" role="tablist" aria-label="Experiment results">
+        <button id="result-tab-hm3d" type="button" role="tab" aria-controls="result-hm3d" aria-selected="true" tabindex="0">HM3D-OVON</button>
+        <button id="result-tab-habitat-gs" type="button" role="tab" aria-controls="result-habitat-gs" aria-selected="false" tabindex="-1">Habitat-GS</button>
+        <button id="result-tab-demand-driven" type="button" role="tab" aria-controls="result-demand-driven" aria-selected="false" tabindex="-1">Demand-driven</button>
+        <button id="result-tab-cross-session" type="button" role="tab" aria-controls="result-cross-session" aria-selected="false" tabindex="-1">Cross-session</button>
+      </div>
+      <article class="result-block" id="result-hm3d" role="tabpanel" aria-labelledby="result-tab-hm3d" tabindex="0"><div class="result-heading"><h3>HM3D-OVON</h3><p>120 val-unseen episodes · SR (%) and SPL ↑</p></div><div class="table-scroll" role="region" aria-label="HM3D results table" tabindex="0"><table><thead><tr><th rowspan="2" scope="col">Method</th><th rowspan="2" scope="col">Budget</th><th colspan="2" scope="colgroup">1 m</th></tr><tr><th scope="col">SR ↑</th><th scope="col">SPL ↑</th></tr></thead><tbody><tr><th scope="row">AstraNav-Memory</th><td>500 steps</td><td>62.50</td><td>0.3490</td></tr><tr><th scope="row">OmniNav</th><td>500 steps</td><td>59.20</td><td>0.3320</td></tr><tr class="ours"><th scope="row">SuperNav-1.5</th><td>500 steps</td><td>78.33</td><td>0.4354</td></tr><tr class="budget-divider"><th scope="row">HarnessVLN</th><td>3600 s</td><td>53.33</td><td>0.2941</td></tr><tr><th scope="row">SuperNav</th><td>3600 s</td><td>73.33</td><td>0.4105</td></tr><tr class="ours"><th scope="row">SuperNav-1.5</th><td>3600 s</td><td>80.00</td><td>0.4317</td></tr></tbody></table></div><p class="table-note">Compare within each evaluation budget. Success is evaluated at a 1 m distance threshold.</p></article>
+      <article class="result-block" id="result-habitat-gs" role="tabpanel" aria-labelledby="result-tab-habitat-gs" tabindex="0" hidden><div class="result-heading"><h3>Habitat-GS</h3><p>150 single-object + 150 multi-object episodes · 3600 s</p></div><div class="table-scroll" role="region" aria-label="Habitat-GS results table" tabindex="0"><table><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">Single-object</th><th colspan="2" scope="colgroup">Multi-object</th></tr><tr><th scope="col">SR (%) ↑</th><th scope="col">SPL ↑</th><th scope="col">SR (%) ↑</th><th scope="col">SPL ↑</th></tr></thead><tbody><tr><th scope="row">NaVid</th><td>24.67</td><td>0.1599</td><td>2.67</td><td>0.0216</td></tr><tr><th scope="row">Uni-NaVid</th><td>34.00</td><td>0.1833</td><td>1.33</td><td>0.0131</td></tr><tr><th scope="row">StreamVLN</th><td>13.33</td><td>0.1036</td><td>0.00</td><td>0.0000</td></tr><tr><th scope="row">OmniNav</th><td>27.33</td><td>0.2133</td><td>4.00</td><td>0.0275</td></tr><tr><th scope="row">SuperNav</th><td>78.00</td><td>0.4127</td><td>34.00</td><td>0.1388</td></tr><tr class="ours"><th scope="row">SuperNav-1.5</th><td>79.33</td><td>0.4246</td><td>52.00</td><td>0.2494</td></tr></tbody></table></div><p class="table-note">SuperNav and SuperNav-1.5 use GPT-5.6-terra and the same geometry-based executor.</p></article>
+        <article class="result-block" id="result-demand-driven" role="tabpanel" aria-labelledby="result-tab-demand-driven" tabindex="0" hidden><div class="result-heading"><h3>Demand-driven</h3><p>Demand-Bench · 200 episodes · 3600 s</p></div><div class="table-scroll" role="region" aria-label="Demand-driven results table" tabindex="0"><table><thead><tr><th scope="col">Method</th><th scope="col">SR (%) ↑</th><th scope="col">SPL ↑</th></tr></thead><tbody><tr><th scope="row">NaVid</th><td>17.00</td><td>0.0920</td></tr><tr><th scope="row">Uni-NaVid</th><td>25.00</td><td>0.0943</td></tr><tr><th scope="row">StreamVLN</th><td>25.50</td><td>0.0775</td></tr><tr><th scope="row">OmniNav</th><td>37.50</td><td>0.1213</td></tr><tr><th scope="row">SuperNav</th><td>59.50</td><td>0.1801</td></tr><tr class="ours"><th scope="row">SuperNav-1.5</th><td>61.00</td><td>0.3867</td></tr></tbody></table></div><p class="table-note">70 single-object and 130 multi-object episodes. Path efficiency is labeled SPL following the paper’s experiment description.</p></article>
+        <article class="result-block" id="result-cross-session" role="tabpanel" aria-labelledby="result-tab-cross-session" tabindex="0" hidden><div class="result-heading"><h3>Cross-session</h3><p>Habitat-GS · 150 episodes · Memory reuse</p></div><div class="table-scroll" role="region" aria-label="Cross-session results table" tabindex="0"><table><thead><tr><th scope="col">Session / memory</th><th scope="col">Spawn</th><th scope="col">SR (%) ↑</th><th scope="col">SPL ↑</th></tr></thead><tbody><tr><th scope="row">Session 1</th><td>A</td><td>79.33</td><td>0.4246</td></tr><tr class="ours"><th scope="row">Session 2 / with memory</th><td>A</td><td>82.67</td><td>0.5195</td></tr><tr class="budget-divider"><th scope="row">Session 2 / without memory</th><td>B</td><td>78.00</td><td>0.4364</td></tr><tr class="ours"><th scope="row">Session 2 / with memory</th><td>B</td><td>82.00</td><td>0.5022</td></tr></tbody></table></div><p class="table-note">A: unchanged spawn. B: changed spawn. Session 2 with memory inherits the map and memory nodes from Session 1.</p></article>
+      <p class="results-footnote">SR: success rate. SPL: success weighted by path length. Values transcribed from the SuperNav-1.5 manuscript.</p>
+    </div></section>
+
+    <section class="section wrap citation" id="bibtex" aria-labelledby="bibtex-title"><div><h2 id="bibtex-title">BibTeX</h2><p>Citation details are on the way.</p></div><div class="citation-placeholder"><span class="eyebrow">Coming soon</span><pre aria-label="BibTeX placeholder"><code>// BibTeX will be added here.</code></pre></div></section>
+  </main>
+  <footer class="wrap site-footer"><a class="wordmark" href="#top">SuperNav<span class="version">1.5</span></a><p>Structured memory. Purposeful navigation.</p><a href="https://zju3dv.github.io/SuperNav/">Meet the original SuperNav <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>

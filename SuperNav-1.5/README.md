@@ -17,7 +17,7 @@ MP4s are ignored by this directory's `.gitignore`. To reproduce posters or the o
 ## Updating content
 
 - The title, authors, method text, and results are in `index.html`. Paper and Code are intentionally pending; replace their resource spans with links once URLs are available.
-- The opening video is `assets/overview/supernav-1.5-overview.mp4` in the assets repository, a silent 63-second 1080p/30 fps overview built from existing assets. Each demo section has one reusable player, category tabs, and a selectable video list. `assets/demos.json` defines all eighteen available demos: six real-world videos and twelve simulation videos (four each for single-object, multi-object, and multi-session navigation).
+- The opening video is `assets/overview/supernav-1.5-overview.mp4` in the assets repository, a silent 42-second 1080p/30 fps overview built from existing assets. Each demo section has one reusable player, category tabs, and a selectable video list. `assets/demos.json` defines all eighteen available demos: six real-world videos and twelve simulation videos (four each for single-object, multi-object, and multi-session navigation).
 - Both demo sections default to an “All” category assembled from the catalog groups, retaining the category order and each video's original category label. Individual category tabs still filter the same reusable player and video list.
 - Run `python scripts/prepare_demo_posters.py` with FFmpeg installed to regenerate posters from the catalog. Videos load on demand; selecting a new demo replaces the existing player's source, and starting playback pauses the other section's player.
 - BibTeX is intentionally pending. Add the final citation to the citation code block.
@@ -36,15 +36,15 @@ After copying local MP4s from the assets repository, run `python SuperNav-1.5/sc
 
 The editable sequence is:
 
-- 0–6 s: centered title moves upward and shrinks; subtitle appears.
-- 6–18 s: one real-world video plays alone for one second, followed by successive arrivals into a six-video grid (three real-world and three simulation categories).
-- 18–24 s: “Agent Maintained Memory Node” and six staggered dots.
-- 24–35 s: dots become a right-hand column; “Grounded in Geometry” gives way to the paper's annotated SLAM map, and the dots move onto corresponding numbered map locations.
-- 35–43 s: “Navigation with Memory Efficiently”, followed by the three requested navigation components, one by one.
-- 43–57 s: recorded with/without-memory comparison for scene `0941_841859`; both paths use the same illustrated distance rate, not execution timing. Completion ticks appear independently.
-- 57–63 s: closing title and subtitle.
+- 0–4 s: centered title moves upward and shrinks; subtitle appears.
+- 4–12 s: one real-world video plays alone for one second, followed by successive arrivals into a six-video grid (three real-world and three simulation categories).
+- 12–16 s: “Agent Maintained Memory Node” and six staggered dots.
+- 16–23 s: dots become a right-hand column; “Grounded in Geometry” gives way to the paper's annotated SLAM map, and the dots move onto corresponding numbered map locations.
+- 23–28 s: “Navigation with Memory Efficiently”, followed by the three requested navigation components, one by one.
+- 28–38 s: recorded with/without-memory comparison for scene `0941_841859`; both paths use the same illustrated distance rate, not execution timing. Completion ticks appear independently.
+- 38–42 s: closing title and subtitle.
 
-The film retains the supplied script wording and the site's Space Grotesk / IBM Plex Mono fonts and stone, orange, and yellow palette. It has no narration or music. The overview autoplays muted and loops, with native controls retained; browsers may defer autoplay until the player is visible. Starting the overview pauses other demo players, and vice versa.
+The film retains the supplied script wording and the site's Space Grotesk / IBM Plex Mono fonts and stone, orange, and yellow palette. Small section labels, counters, footers, and extra taglines are omitted; only primary titles and meaningful demo/map/comparison labels remain. It has no narration or music. The overview autoplays muted and loops, with native controls retained; browsers may defer autoplay until the player is visible. Starting the overview pauses other demo players, and vice versa.
 
 ### Paper and trajectory assets
 

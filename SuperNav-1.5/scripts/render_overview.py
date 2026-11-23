@@ -1,4 +1,4 @@
-"""Render the editable 63-second overview film from local project assets.
+"""Render the editable 42-second overview film from local project assets.
 
 Requires Python, Pillow, and FFmpeg. No synthesized navigation data or audio.
 Run from any directory: python SuperNav-1.5/scripts/render_overview.py
@@ -13,11 +13,24 @@ import subprocess
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
-W, H, FPS, DURATION = 1920, 1080, 30, 63
+W, H, FPS, DURATION = 1920, 1080, 30, 42
 BG, CARD, INK = "#e4e4e0", "#f7f7f5", "#050505"
 MUTED, LINE, ORANGE, YELLOW = "#595953", "#d3d3cd", "#ff7f00", "#fbff00"
-STAGES = [(0, "title"), (6, "grid"), (18, "memory"), (24, "geometry"),
-          (35, "navigation"), (43, "comparison"), (57, "closing")]
+STAGES = [(0, "title"), (4, "grid"), (12, "memory"), (16, "geometry"),
+          (23, "navigation"), (28, "comparison"), (38, "closing")]
+# Keep scene choreography editable in its original time coordinates while
+# shortening both animated motion and holds in the exported film.
+SCENE_TIMES = {"title": (6, 4), "grid": (12, 8), "memory": (6, 4),
+               "geometry": (11, 7), "navigation": (8, 5),
+               "comparison": (14, 10), "closing": (6, 4)}
+
+
+def scene_time(name, seconds):
+    original, shortened = SCENE_TIMES[name]
+    if name == "grid":
+        # Preserve the requested one-second solo clip before the grid builds.
+        return seconds if seconds <= 1 else 1 + (seconds-1)*(original-1)/(shortened-1)
+    return seconds * original / shortened
 
 
 def ease(value):
@@ -45,18 +58,6 @@ def text(image, value, x, y, size=48, fill=INK, weight="medium", anchor="mm", op
         layer = Image.new("RGBA", (W, H))
         ImageDraw.Draw(layer).text((x, y), value, font=font(size, weight), fill=fill, anchor=anchor)
         image.paste(layer, (0, 0), layer.getchannel("A").point(lambda a: round(a * opacity)))
-
-
-def heading(image, label, number):
-    d = ImageDraw.Draw(image)
-    d.ellipse((100, 85, 112, 97), fill=ORANGE)
-    text(image, label.upper(), 132, 91, 22, anchor="lm", weight="mono")
-    text(image, number, 1810, 91, 22, MUTED, "mono", "rm")
-
-
-def footer(image, label="STRUCTURED MEMORY. PURPOSEFUL NAVIGATION."):
-    text(image, "SuperNav-1.5", 100, 1020, 22, anchor="lm", weight="bold")
-    text(image, label, 1820, 1020, 18, MUTED, "mono", "rm")
 
 
 def brand(image, y=470, size=154, opacity=1):
@@ -153,20 +154,16 @@ class Overview:
             alpha = ease((t-.5)/.8)
             text(image, "Structured Spatial Memory", 960, 580, 56, opacity=alpha)
             text(image, "For Agentic Navigation Systems", 960, 655, 56, opacity=alpha)
-            text(image, "EXPLORE → REMEMBER → NAVIGATE", 960, 835, 27, MUTED, "mono", opacity=ease((t-1.2)/.7))
         else:
             p = ease((t-1.3)/1.4)
             brand(image, lerp(540, 360, p), lerp(170, 126, p), ease(t/.55))
             alpha = ease((t-2.4)/.8)
             text(image, "Structured Spatial Memory", 960, 550, 64, opacity=alpha)
             text(image, "For Agentic Navigation Systems", 960, 635, 64, opacity=alpha)
-            text(image, "A LITTLE MEMORY. A LONG WAY FORWARD.", 960, 835, 25, MUTED, "mono", opacity=ease((t-3.6)/.7))
-        footer(image)
         return image
 
     def grid(self, t, preview=False):
         image = Image.new("RGB", (W, H), BG)
-        heading(image, "One system. Many journeys.", "01 / 05")
         text(image, "Explore. Remember. Navigate.", 960, 150, 58)
         for i, demo in enumerate(self.demos):
             arrival = 0 if i == 0 else 1 + (i-1)*.8
@@ -195,24 +192,19 @@ class Overview:
             layer.paste(frame,(x,y))
             d.text((x+16,y+height+23), self.labels[i], font=font(21), fill=INK, anchor="lm")
             image.paste(layer,(0,0),layer.getchannel("A").point(lambda a:round(a*alpha)))
-        footer(image, "REAL-WORLD + SIMULATION DEMONSTRATIONS")
         return image
 
     def memory(self, t):
         image = Image.new("RGB", (W,H), BG)
-        heading(image, "Structured spatial memory", "02 / 05")
         text(image, "Agent Maintained Memory Node", 960, 420, 88, weight="bold", opacity=ease(t/.6))
         for i in range(6):
             p = ease((t-1.2-i*.3)/.5)
             if p:
                 dot(image, 610+i*140, 650, max(1,round(20*p)))
-        text(image, "Scene recall, connected to navigable space.", 960, 835, 34, MUTED, opacity=ease((t-3.2)/.7))
-        footer(image)
         return image
 
     def geometry(self, t):
         image = Image.new("RGB", (W,H), BG)
-        heading(image, "Structured spatial memory", "03 / 05")
         transition = ease(t/1.3)
         title_alpha = (1-ease((t-1.3)/.7))
         text(image, "Agent Maintained Memory Node", lerp(960,690,transition), lerp(420,370,transition),
@@ -224,7 +216,6 @@ class Overview:
             layer = Image.new("RGB", (W,H), BG)
             card(layer, (120,170,1300,960))
             layer.paste(self.map,self.map_origin)
-            text(layer,"ANNOTATED SLAM MAP",720,918,24,MUTED,"mono")
             image = Image.blend(image,layer,map_alpha)
         for i in range(6):
             x = lerp(610+i*140,1530,transition)
@@ -236,14 +227,10 @@ class Overview:
             dot(image,x,y,20,self.node_ids[i] if p>.9 else None)
             if p<.03 and transition>.95:
                 text(image,f"Memory node {self.node_ids[i]:02}",1575,y,25,anchor="lm",opacity=ease((t-1)/.5))
-        text(image,"Memory grounded",1530,810,38,weight="bold",opacity=ease((t-8)/.8))
-        text(image,"in navigable space.",1530,865,34,MUTED,opacity=ease((t-8.4)/.8))
-        footer(image,"MAP EXCERPT FROM THE SUPERNAV-1.5 PIPELINE")
         return image
 
     def navigation(self,t):
         image = Image.new("RGB",(W,H),BG)
-        heading(image,"Navigation with spatial memory","04 / 05")
         text(image,"Navigation with Memory Efficiently",960,425,86,weight="bold",opacity=ease(t/.7))
         values = ["Memory Query", "Geometric Navigation", "Agent Guided Relocalization"]
         centers = [355,870,1490]
@@ -252,12 +239,10 @@ class Overview:
             text(image,value,x,625+(1-p)*20,34,opacity=p)
             if i<2:
                 text(image,"|",[590,1150][i],625,34,ORANGE,opacity=p)
-        footer(image)
         return image
 
     def comparison(self,t):
         image=Image.new("RGB",(W,H),BG)
-        heading(image,"Same goal. Less wandering.","05 / 05")
         text(image,"Navigation with memory",960,165,65,weight="bold")
         text(image,"Goal: find the bedside table lamp",960,241,31,MUTED)
         max_length=max(p[0]["pathLength"] for p in self.panels)
@@ -303,10 +288,10 @@ class Overview:
             d.line((left+30,875,left+790,875),fill=LINE,width=2)
             text(image,f'{panel["pathLength"]:.1f} m',left+32,906,29,weight="mono",anchor="lm")
             text(image,f'SPL {panel["spl"]:.3f}',left+788,906,29,weight="mono",anchor="rm")
-        footer(image,"RECORDED PATHS · SHARED DISTANCE RATE · NOT EXECUTION TIMING")
         return image
 
     def scene(self,name,t,preview=False):
+        t=scene_time(name,t)
         if name=="title":return self.title(t)
         if name=="closing":return self.title(t,True)
         if name=="grid":return self.grid(t,preview)
@@ -316,13 +301,13 @@ class Overview:
         index=max(i for i,(start,_) in enumerate(STAGES) if t>=start)
         start,name=STAGES[index]
         image=self.scene(name,t-start,preview)
-        if index and t-start<.35:
+        if index and t-start<.23:
             old_start,old_name=STAGES[index-1]
             # Previous grid endpoint is frozen during its transition out.
             old=self.scene(old_name,start-old_start-.001,preview)
-            image=Image.blend(old,image,ease((t-start)/.35))
-        if t>DURATION-.6:
-            image=Image.blend(image,Image.new("RGB",(W,H),BG),ease((t-(DURATION-.6))/.6))
+            image=Image.blend(old,image,ease((t-start)/.23))
+        if t>DURATION-.4:
+            image=Image.blend(image,Image.new("RGB",(W,H),BG),ease((t-(DURATION-.4))/.4))
         return image
 
     def render(self,output):
@@ -345,7 +330,7 @@ class Overview:
                 encoder.terminate()
                 encoder.wait()
             for decoder in self.decoders:decoder.close()
-        self.frame(3.8,True).save(output.with_suffix(".webp"),quality=94)
+        self.frame(2.8,True).save(output.with_suffix(".webp"),quality=94)
         print(output,flush=True)
 
 
@@ -356,7 +341,7 @@ def main():
     args=parser.parse_args()
     movie=Overview()
     if args.storyboard:
-        samples=[.7,3.8,6.6,11.8,21.5,26.8,30.8,33.7,37.1,40.5,49,55.5,60]
+        samples=[.5,2.8,4.6,8,14.3,17.8,20.3,22.2,24.3,26.4,32.3,36.9,40]
         sheet=Image.new("RGB",(960*3,570*math.ceil(len(samples)/3)),BG)
         for i,t in enumerate(samples):
             frame=movie.frame(t,True).resize((960,540),Image.Resampling.LANCZOS)

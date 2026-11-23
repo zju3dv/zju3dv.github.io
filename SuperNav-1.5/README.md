@@ -40,7 +40,7 @@ The editable sequence is:
 - 4–12 s: one real-world video plays alone for one second, followed by successive arrivals into a six-video grid (three real-world and three simulation categories).
 - 12–16 s: “Agent Maintained Memory Node” and six staggered dots.
 - 16–23 s: dots become a right-hand column; “Grounded in Geometry” gives way to the paper's annotated SLAM map, and the dots move onto corresponding numbered map locations.
-- 23–28 s: “Navigation with Memory Efficiently”, followed by the three requested navigation components, one by one.
+- 23–28 s: “Navigate Efficiently with Memory”, followed by the three requested navigation components, one by one.
 - 28–38 s: recorded with/without-memory comparison for scene `0941_841859`; both paths use the same illustrated distance rate, not execution timing. Completion ticks appear independently.
 - 38–42 s: closing title and subtitle.
 

@@ -231,7 +231,7 @@ class Overview:
 
     def navigation(self,t):
         image = Image.new("RGB",(W,H),BG)
-        text(image,"Navigation with Memory Efficiently",960,425,86,weight="bold",opacity=ease(t/.7))
+        text(image,"Navigate Efficiently with Memory",960,425,86,weight="bold",opacity=ease(t/.7))
         values = ["Memory Query", "Geometric Navigation", "Agent Guided Relocalization"]
         centers = [355,870,1490]
         for i,(value,x) in enumerate(zip(values,centers)):

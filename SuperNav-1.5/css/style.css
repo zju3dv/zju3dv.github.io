@@ -203,12 +203,21 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible {
   font-size:12px;
   letter-spacing:.08em;
 }
-.animated-wordmark {
+.hero-brand {
+  grid-column:1 / -1;
+  display:flex;
+  justify-content:center;
+  min-width:0;
+}
+.hero-brand .animated-wordmark {
   display:block;
   width:100%;
   height:auto;
-  max-width:650px;
+  max-width:1040px;
   color-scheme:light;
+}
+.hero-intro .title-subtitle {
+  margin-top:0;
 }
 .title-name {
   display:flex;

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "real",
+    "mount": "real-demo-groups",
+    "label": "Real-world demonstrations",
+    "groups": [
+      { "title": "Long-distance", "videos": [
+        { "title": "Find the elevator", "src": "assets/realworld_demos/long_distance/elevator_demo.mp4", "poster": "assets/posters/real-elevator.webp" },
+        { "title": "Delivery run", "src": "assets/realworld_demos/long_distance/delivery_demo.mp4", "poster": "assets/posters/real-delivery.webp" }
+      ] },
+      { "title": "Multi-object", "videos": [
+        { "title": "Trash bin → Printer → Stool", "src": "assets/realworld_demos/multi-object/trashbin-printer-stool-demo.mp4", "poster": "assets/posters/real-trashbin-printer-stool.webp" },
+        { "title": "Elevator → Water", "src": "assets/realworld_demos/multi-object/elevator-then-water.mp4", "poster": "assets/posters/real-elevator-water.webp" }
+      ] },
+      { "title": "Demand-driven", "videos": [
+        { "title": "I'm thirsty", "src": "assets/realworld_demos/demand-driven/thirsty_demo.mp4", "poster": "assets/posters/real-thirsty.webp" },
+        { "title": "The floor is dirty", "src": "assets/realworld_demos/demand-driven/dirty-floor-demo.mp4", "poster": "assets/posters/real-dirty-floor.webp" }
+      ] }
+    ]
+  },
+  {
+    "id": "sim",
+    "mount": "simulation-demo-groups",
+    "label": "Simulation demonstrations",
+    "groups": [
+      { "title": "Single-object", "videos": [
+        { "title": "Find the bathrobe", "src": "assets/simulation_demos/single_object/find_the_bathrobe.mp4", "poster": "assets/posters/sim-bathrobe.webp" },
+        { "title": "Find the bed with grey bedding", "src": "assets/simulation_demos/single_object/find_the_bed_with_grey_bedding.mp4", "poster": "assets/posters/sim-grey-bedding.webp" },
+        { "title": "Find the laptop in the pink bedroom", "src": "assets/simulation_demos/single_object/find_the_laptop_in_pink_bedroom.mp4", "poster": "assets/posters/sim-pink-laptop.webp" },
+        { "title": "Find the dark vase with red berry branches", "src": "assets/simulation_demos/single_object/find_the_dark_vase_with_red_berry_branches.mp4", "poster": "assets/posters/sim-red-berry-vase.webp" }
+      ] },
+      { "title": "Multi-object", "videos": [
+        { "title": "Toilet → Desk → Shower → Bed → Laundry unit", "src": "assets/simulation_demos/multi-object/Find_the_toilet_desk_shower_bed_and_laundry_unit.mp4", "poster": "assets/posters/sim-toilet-desk-shower.webp" },
+        { "title": "Sectional sofa → Office chair → Range hood", "src": "assets/simulation_demos/multi-object/Find_the_sectional_sofa_office_chair_and_range_hood.mp4", "poster": "assets/posters/sim-sofa-chair-range-hood.webp" },
+        { "title": "Chair → Wardrobe → Wall-mounted TV", "src": "assets/simulation_demos/multi-object/Find_the_chair_wardrobe_and_wall_mounted_TV.mp4", "poster": "assets/posters/sim-chair-wardrobe-tv.webp" },
+        { "title": "Bedside table → Marble table → Patient bed", "src": "assets/simulation_demos/multi-object/Find_the_bedside_table_marble_table_and_patient_bed.mp4", "poster": "assets/posters/sim-tables-patient-bed.webp" }
+      ] },
+      { "title": "Multi-session", "videos": [
+        { "title": "Find the white bedroom bookshelf by the window", "src": "assets/simulation_demos/multi-session/Find_the_white_bedroom_bookshelf_by_the_window.mp4", "poster": "assets/posters/sim-bedroom-bookshelf.webp" },
+        { "title": "Find the marble dining table", "src": "assets/simulation_demos/multi-session/Find_the_marble_dining_table.mp4", "poster": "assets/posters/sim-marble-dining-table.webp" },
+        { "title": "Find the long white bar", "src": "assets/simulation_demos/multi-session/Find_the_long_white_bar.mp4", "poster": "assets/posters/sim-white-bar.webp" },
+        { "title": "Find the cat climbing frame", "src": "assets/simulation_demos/multi-session/Find_the_cat_climbing_frame.mp4", "poster": "assets/posters/sim-cat-climbing-frame.webp" }
+      ] }
+    ]
+  }
+]

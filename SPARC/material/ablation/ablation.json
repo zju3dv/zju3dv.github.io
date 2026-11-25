@@ -1,0 +1,94 @@
+{
+ "conditions": [
+  {
+   "gt": 0,
+   "label": "First",
+   "image": "material/ablation/inputs/input_0.jpg"
+  },
+  {
+   "gt": 12,
+   "label": "Coverage 1",
+   "image": "material/ablation/inputs/input_1.jpg"
+  },
+  {
+   "gt": 16,
+   "label": "Coverage 2",
+   "image": "material/ablation/inputs/input_2.jpg"
+  },
+  {
+   "gt": 44,
+   "label": "Coverage 3",
+   "image": "material/ablation/inputs/input_3.jpg"
+  },
+  {
+   "gt": 128,
+   "label": "Coverage 4",
+   "image": "material/ablation/inputs/input_4.jpg"
+  }
+ ],
+ "frames": 72,
+ "fps": 16,
+ "shuffled_order": [
+  44,
+  128,
+  12,
+  0,
+  16
+ ],
+ "mean_abs_diff": {
+  "temporal_rope": 6.588284994165103,
+  "ours": 1.750855269531409
+ },
+ "masks": {
+  "dense_camera": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9903134107589722,
+   "kept_ratio": 1.0,
+   "pruned_ratio": 0.0,
+   "keys_per_observed_query": 42120.0,
+   "history_keys_per_observed_query": 17.15959358215332
+  },
+  "dense_bias": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9903134107589722,
+   "kept_ratio": 1.0,
+   "pruned_ratio": 0.0,
+   "keys_per_observed_query": 42120.0,
+   "history_keys_per_observed_query": 17.15959358215332
+  },
+  "history_only": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9903134107589722,
+   "kept_ratio": 0.019072386452490916,
+   "pruned_ratio": 0.9809276135475091,
+   "keys_per_observed_query": 17.15959358215332,
+   "history_keys_per_observed_query": 17.15959358215332
+  },
+  "history_local": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9903134107589722,
+   "kept_ratio": 0.13330948680070237,
+   "pruned_ratio": 0.8666905131992977,
+   "keys_per_observed_query": 7305.2568359375,
+   "history_keys_per_observed_query": 17.15959358215332
+  },
+  "ours": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9903134107589722,
+   "kept_ratio": 0.13330948680070237,
+   "pruned_ratio": 0.8666905131992977,
+   "keys_per_observed_query": 7305.2568359375,
+   "history_keys_per_observed_query": 17.15959358215332
+  }
+ }
+}

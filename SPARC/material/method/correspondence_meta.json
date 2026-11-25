@@ -1,0 +1,362 @@
+{
+ "1": {
+  "conditions": [
+   0,
+   9,
+   29,
+   49,
+   57,
+   77,
+   78,
+   79,
+   80
+  ],
+  "shown": [
+   0,
+   9,
+   29,
+   80
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.979629635810852,
+   "kept_ratio": 0.13925449570214526,
+   "pruned_ratio": 0.8607455042978547,
+   "keys_per_observed_query": 7308.98583984375,
+   "history_keys_per_observed_query": 13.201287269592285
+  },
+  "frames": 18
+ },
+ "10": {
+  "conditions": [
+   0,
+   33,
+   73,
+   521,
+   605,
+   725,
+   726,
+   727,
+   728
+  ],
+  "shown": [
+   0,
+   33,
+   605,
+   728
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.859116792678833,
+   "kept_ratio": 0.20512863238844561,
+   "pruned_ratio": 0.7948713676115544,
+   "keys_per_observed_query": 7270.2880859375,
+   "history_keys_per_observed_query": 8.243988990783691
+  },
+  "frames": 18
+ },
+ "11": {
+  "conditions": [
+   0,
+   73,
+   85,
+   737,
+   765,
+   797,
+   798,
+   799,
+   800
+  ],
+  "shown": [
+   0,
+   73,
+   85,
+   800
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9553775191307068,
+   "kept_ratio": 0.1523751763153077,
+   "pruned_ratio": 0.8476248236846923,
+   "keys_per_observed_query": 7292.99609375,
+   "history_keys_per_observed_query": 10.998881340026855
+  },
+  "frames": 18
+ },
+ "12": {
+  "conditions": [
+   0,
+   53,
+   593,
+   837,
+   841,
+   869,
+   870,
+   871,
+   872
+  ],
+  "shown": [
+   0,
+   53,
+   593,
+   872
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9815883040428162,
+   "kept_ratio": 0.13781413322763433,
+   "pruned_ratio": 0.8621858667723656,
+   "keys_per_observed_query": 7285.73974609375,
+   "history_keys_per_observed_query": 10.625911712646484
+  },
+  "frames": 18
+ },
+ "2": {
+  "conditions": [
+   0,
+   9,
+   105,
+   121,
+   129,
+   149,
+   150,
+   151,
+   152
+  ],
+  "shown": [
+   0,
+   9,
+   129,
+   152
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.8871794939041138,
+   "kept_ratio": 0.19005391595847437,
+   "pruned_ratio": 0.8099460840415256,
+   "keys_per_observed_query": 7299.09375,
+   "history_keys_per_observed_query": 12.706647872924805
+  },
+  "frames": 18
+ },
+ "3": {
+  "conditions": [
+   0,
+   145,
+   173,
+   189,
+   205,
+   221,
+   222,
+   223,
+   224
+  ],
+  "shown": [
+   0,
+   189,
+   205,
+   224
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9720797538757324,
+   "kept_ratio": 0.14314173755353718,
+   "pruned_ratio": 0.8568582624464628,
+   "keys_per_observed_query": 7291.2685546875,
+   "history_keys_per_observed_query": 9.744833946228027
+  },
+  "frames": 18
+ },
+ "4": {
+  "conditions": [
+   0,
+   93,
+   105,
+   181,
+   197,
+   293,
+   294,
+   295,
+   296
+  ],
+  "shown": [
+   0,
+   181,
+   197,
+   296
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9902777671813965,
+   "kept_ratio": 0.1332502909653511,
+   "pruned_ratio": 0.8667497090346489,
+   "keys_per_observed_query": 7300.2275390625,
+   "history_keys_per_observed_query": 11.476067543029785
+  },
+  "frames": 18
+ },
+ "5": {
+  "conditions": [
+   0,
+   85,
+   97,
+   121,
+   173,
+   365,
+   366,
+   367,
+   368
+  ],
+  "shown": [
+   0,
+   121,
+   173,
+   368
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9246794581413269,
+   "kept_ratio": 0.16907203190540482,
+   "pruned_ratio": 0.8309279680945951,
+   "keys_per_observed_query": 7277.625,
+   "history_keys_per_observed_query": 11.023492813110352
+  },
+  "frames": 18
+ },
+ "6": {
+  "conditions": [
+   0,
+   121,
+   141,
+   161,
+   169,
+   437,
+   438,
+   439,
+   440
+  ],
+  "shown": [
+   0,
+   121,
+   141,
+   440
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9959045648574829,
+   "kept_ratio": 0.13002505052718727,
+   "pruned_ratio": 0.8699749494728127,
+   "keys_per_observed_query": 7292.34814453125,
+   "history_keys_per_observed_query": 10.023743629455566
+  },
+  "frames": 18
+ },
+ "7": {
+  "conditions": [
+   0,
+   9,
+   61,
+   85,
+   205,
+   509,
+   510,
+   511,
+   512
+  ],
+  "shown": [
+   0,
+   9,
+   61,
+   512
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.9967592358589172,
+   "kept_ratio": 0.12946446761795766,
+   "pruned_ratio": 0.8705355323820423,
+   "keys_per_observed_query": 7286.67919921875,
+   "history_keys_per_observed_query": 7.255243301391602
+  },
+  "frames": 18
+ },
+ "8": {
+  "conditions": [
+   0,
+   221,
+   224,
+   517,
+   529,
+   581,
+   582,
+   583,
+   584
+  ],
+  "shown": [
+   0,
+   517,
+   529,
+   584
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.691987156867981,
+   "kept_ratio": 0.2974163640897576,
+   "pruned_ratio": 0.7025836359102424,
+   "keys_per_observed_query": 7279.4208984375,
+   "history_keys_per_observed_query": 16.2001953125
+  },
+  "frames": 18
+ },
+ "9": {
+  "conditions": [
+   0,
+   221,
+   601,
+   617,
+   621,
+   653,
+   654,
+   655,
+   656
+  ],
+  "shown": [
+   0,
+   617,
+   621,
+   656
+  ],
+  "stats": {
+   "tokens": 42120,
+   "history_tokens": 14040,
+   "target_tokens": 28080,
+   "observed_ratio": 0.7053418755531311,
+   "kept_ratio": 0.2898944994133345,
+   "pruned_ratio": 0.7101055005866654,
+   "keys_per_observed_query": 7265.3193359375,
+   "history_keys_per_observed_query": 10.366959571838379
+  },
+  "frames": 18
+ }
+}

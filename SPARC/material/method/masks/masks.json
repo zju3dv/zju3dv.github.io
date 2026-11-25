@@ -1,0 +1,602 @@
+[
+ {
+  "chunk": 1,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 9,
+    "role": "coverage"
+   },
+   {
+    "frame": 29,
+    "role": "coverage"
+   },
+   {
+    "frame": 49,
+    "role": "coverage"
+   },
+   {
+    "frame": 57,
+    "role": "coverage"
+   },
+   {
+    "frame": 77,
+    "role": "recent"
+   },
+   {
+    "frame": 78,
+    "role": "recent"
+   },
+   {
+    "frame": 79,
+    "role": "recent"
+   },
+   {
+    "frame": 80,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   81,
+   152
+  ],
+  "image": "material/method/masks/chunk_01.png",
+  "observed": 0.979629635810852,
+  "pruned": 0.8607455042978547,
+  "hist_keys": 13.201287269592285,
+  "keys": 7308.98583984375
+ },
+ {
+  "chunk": 2,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 9,
+    "role": "coverage"
+   },
+   {
+    "frame": 105,
+    "role": "coverage"
+   },
+   {
+    "frame": 121,
+    "role": "coverage"
+   },
+   {
+    "frame": 129,
+    "role": "coverage"
+   },
+   {
+    "frame": 149,
+    "role": "recent"
+   },
+   {
+    "frame": 150,
+    "role": "recent"
+   },
+   {
+    "frame": 151,
+    "role": "recent"
+   },
+   {
+    "frame": 152,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   153,
+   224
+  ],
+  "image": "material/method/masks/chunk_02.png",
+  "observed": 0.8871794939041138,
+  "pruned": 0.8099460840415256,
+  "hist_keys": 12.706647872924805,
+  "keys": 7299.09375
+ },
+ {
+  "chunk": 3,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 145,
+    "role": "coverage"
+   },
+   {
+    "frame": 173,
+    "role": "coverage"
+   },
+   {
+    "frame": 189,
+    "role": "coverage"
+   },
+   {
+    "frame": 205,
+    "role": "coverage"
+   },
+   {
+    "frame": 221,
+    "role": "recent"
+   },
+   {
+    "frame": 222,
+    "role": "recent"
+   },
+   {
+    "frame": 223,
+    "role": "recent"
+   },
+   {
+    "frame": 224,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   225,
+   296
+  ],
+  "image": "material/method/masks/chunk_03.png",
+  "observed": 0.9720797538757324,
+  "pruned": 0.8568582624464628,
+  "hist_keys": 9.744833946228027,
+  "keys": 7291.2685546875
+ },
+ {
+  "chunk": 4,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 93,
+    "role": "coverage"
+   },
+   {
+    "frame": 105,
+    "role": "coverage"
+   },
+   {
+    "frame": 181,
+    "role": "coverage"
+   },
+   {
+    "frame": 197,
+    "role": "coverage"
+   },
+   {
+    "frame": 293,
+    "role": "recent"
+   },
+   {
+    "frame": 294,
+    "role": "recent"
+   },
+   {
+    "frame": 295,
+    "role": "recent"
+   },
+   {
+    "frame": 296,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   297,
+   368
+  ],
+  "image": "material/method/masks/chunk_04.png",
+  "observed": 0.9902777671813965,
+  "pruned": 0.8667497090346489,
+  "hist_keys": 11.476067543029785,
+  "keys": 7300.2275390625
+ },
+ {
+  "chunk": 5,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 85,
+    "role": "coverage"
+   },
+   {
+    "frame": 97,
+    "role": "coverage"
+   },
+   {
+    "frame": 121,
+    "role": "coverage"
+   },
+   {
+    "frame": 173,
+    "role": "coverage"
+   },
+   {
+    "frame": 365,
+    "role": "recent"
+   },
+   {
+    "frame": 366,
+    "role": "recent"
+   },
+   {
+    "frame": 367,
+    "role": "recent"
+   },
+   {
+    "frame": 368,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   369,
+   440
+  ],
+  "image": "material/method/masks/chunk_05.png",
+  "observed": 0.9246794581413269,
+  "pruned": 0.8309279680945951,
+  "hist_keys": 11.023492813110352,
+  "keys": 7277.625
+ },
+ {
+  "chunk": 6,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 121,
+    "role": "coverage"
+   },
+   {
+    "frame": 141,
+    "role": "coverage"
+   },
+   {
+    "frame": 161,
+    "role": "coverage"
+   },
+   {
+    "frame": 169,
+    "role": "coverage"
+   },
+   {
+    "frame": 437,
+    "role": "recent"
+   },
+   {
+    "frame": 438,
+    "role": "recent"
+   },
+   {
+    "frame": 439,
+    "role": "recent"
+   },
+   {
+    "frame": 440,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   441,
+   512
+  ],
+  "image": "material/method/masks/chunk_06.png",
+  "observed": 0.9959045648574829,
+  "pruned": 0.8699749494728127,
+  "hist_keys": 10.023743629455566,
+  "keys": 7292.34814453125
+ },
+ {
+  "chunk": 7,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 9,
+    "role": "coverage"
+   },
+   {
+    "frame": 61,
+    "role": "coverage"
+   },
+   {
+    "frame": 85,
+    "role": "coverage"
+   },
+   {
+    "frame": 205,
+    "role": "coverage"
+   },
+   {
+    "frame": 509,
+    "role": "recent"
+   },
+   {
+    "frame": 510,
+    "role": "recent"
+   },
+   {
+    "frame": 511,
+    "role": "recent"
+   },
+   {
+    "frame": 512,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   513,
+   584
+  ],
+  "image": "material/method/masks/chunk_07.png",
+  "observed": 0.9967592358589172,
+  "pruned": 0.8705355323820423,
+  "hist_keys": 7.255243301391602,
+  "keys": 7286.67919921875
+ },
+ {
+  "chunk": 8,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 221,
+    "role": "coverage"
+   },
+   {
+    "frame": 224,
+    "role": "coverage"
+   },
+   {
+    "frame": 517,
+    "role": "coverage"
+   },
+   {
+    "frame": 529,
+    "role": "coverage"
+   },
+   {
+    "frame": 581,
+    "role": "recent"
+   },
+   {
+    "frame": 582,
+    "role": "recent"
+   },
+   {
+    "frame": 583,
+    "role": "recent"
+   },
+   {
+    "frame": 584,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   585,
+   656
+  ],
+  "image": "material/method/masks/chunk_08.png",
+  "observed": 0.691987156867981,
+  "pruned": 0.7025836359102424,
+  "hist_keys": 16.2001953125,
+  "keys": 7279.4208984375
+ },
+ {
+  "chunk": 9,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 221,
+    "role": "coverage"
+   },
+   {
+    "frame": 601,
+    "role": "coverage"
+   },
+   {
+    "frame": 617,
+    "role": "coverage"
+   },
+   {
+    "frame": 621,
+    "role": "coverage"
+   },
+   {
+    "frame": 653,
+    "role": "recent"
+   },
+   {
+    "frame": 654,
+    "role": "recent"
+   },
+   {
+    "frame": 655,
+    "role": "recent"
+   },
+   {
+    "frame": 656,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   657,
+   728
+  ],
+  "image": "material/method/masks/chunk_09.png",
+  "observed": 0.7053418755531311,
+  "pruned": 0.7101055005866654,
+  "hist_keys": 10.366959571838379,
+  "keys": 7265.3193359375
+ },
+ {
+  "chunk": 10,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 33,
+    "role": "coverage"
+   },
+   {
+    "frame": 73,
+    "role": "coverage"
+   },
+   {
+    "frame": 521,
+    "role": "coverage"
+   },
+   {
+    "frame": 605,
+    "role": "coverage"
+   },
+   {
+    "frame": 725,
+    "role": "recent"
+   },
+   {
+    "frame": 726,
+    "role": "recent"
+   },
+   {
+    "frame": 727,
+    "role": "recent"
+   },
+   {
+    "frame": 728,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   729,
+   800
+  ],
+  "image": "material/method/masks/chunk_10.png",
+  "observed": 0.859116792678833,
+  "pruned": 0.7948713676115544,
+  "hist_keys": 8.243988990783691,
+  "keys": 7270.2880859375
+ },
+ {
+  "chunk": 11,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 73,
+    "role": "coverage"
+   },
+   {
+    "frame": 85,
+    "role": "coverage"
+   },
+   {
+    "frame": 737,
+    "role": "coverage"
+   },
+   {
+    "frame": 765,
+    "role": "coverage"
+   },
+   {
+    "frame": 797,
+    "role": "recent"
+   },
+   {
+    "frame": 798,
+    "role": "recent"
+   },
+   {
+    "frame": 799,
+    "role": "recent"
+   },
+   {
+    "frame": 800,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   801,
+   872
+  ],
+  "image": "material/method/masks/chunk_11.png",
+  "observed": 0.9553775191307068,
+  "pruned": 0.8476248236846923,
+  "hist_keys": 10.998881340026855,
+  "keys": 7292.99609375
+ },
+ {
+  "chunk": 12,
+  "history": [
+   {
+    "frame": 0,
+    "role": "first"
+   },
+   {
+    "frame": 53,
+    "role": "coverage"
+   },
+   {
+    "frame": 593,
+    "role": "coverage"
+   },
+   {
+    "frame": 837,
+    "role": "coverage"
+   },
+   {
+    "frame": 841,
+    "role": "coverage"
+   },
+   {
+    "frame": 869,
+    "role": "recent"
+   },
+   {
+    "frame": 870,
+    "role": "recent"
+   },
+   {
+    "frame": 871,
+    "role": "recent"
+   },
+   {
+    "frame": 872,
+    "role": "recent"
+   }
+  ],
+  "target": [
+   873,
+   944
+  ],
+  "image": "material/method/masks/chunk_12.png",
+  "observed": 0.9815883040428162,
+  "pruned": 0.8621858667723656,
+  "hist_keys": 10.625911712646484,
+  "keys": 7285.73974609375
+ }
+]

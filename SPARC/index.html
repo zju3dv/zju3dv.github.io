@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SPARC: Geometry-Guided Attention Pruning for Long-Horizon Camera-Controlled Video Generation">
+  <meta name="theme-color" content="#ffffff">
+  <title>SPARC: Geometry-Guided Attention Pruning for Long-Horizon Camera-Controlled Video Generation</title>
+  <link rel="icon" href="material/title/sparc_final.png?v=4" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800;6..12,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css?v=20261125d">
+  <script src="static/js/data.js?v=20261125d" defer></script>
+  <script src="static/js/sparc-title.js?v=20261125d" defer></script>
+  <script src="static/js/main.js?v=20261125d" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="toc" id="toc">
+    <div class="toc-inner">
+      <nav class="toc-links" id="toc-links" aria-label="Table of contents">
+        <a href="#gallery" data-target="gallery">Gallery</a>
+        <a href="#video" data-target="video">Overview Video</a>
+        <a href="#motivation" data-target="motivation">Motivation</a>
+        <a href="#method" data-target="method">Method</a>
+        <a href="#ablation" data-target="ablation">Ablation</a>
+        <span class="toc-sep" aria-hidden="true"></span>
+        <a href="#dl3dv" data-target="dl3dv">DL3DV Comparison</a>
+        <a href="#worldscore" data-target="worldscore">WorldScore Comparison</a>
+        <a href="#dynamic" data-target="dynamic">Dynamic Scenes</a>
+        <a href="#bibtex" data-target="bibtex">BibTeX</a>
+      </nav>
+      <button class="toc-toggle" type="button" aria-controls="toc-links" aria-expanded="false" aria-label="Open table of contents">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <span class="toc-progress" aria-hidden="true"></span>
+  </header>
+
+  <div class="hero-bg" aria-hidden="true"><div class="token-field" id="token-field"></div></div>
+
+  <main id="main">
+    <header class="paper-header" id="top">
+      <h1 class="title">
+        <span class="visually-hidden">SPARC: Geometry-Guided Attention Pruning for Long-Horizon Camera-Controlled Video Generation</span>
+        <span class="title-anim" id="title-anim" aria-hidden="true">
+          <video class="title-video" muted playsinline preload="auto" poster="material/title/sparc_final.png?v=4">
+            <source src="material/title/sparc_title_hevc.mov?v=3" type='video/quicktime; codecs="hvc1"'>
+            <source src="material/title/sparc_title.webm?v=3" type='video/webm; codecs="vp9"'>
+          </video>
+        </span>
+        <span class="subtitle" aria-hidden="true">Geometry-Guided Attention Pruning for <span class="nowrap">Long-Horizon</span> <span class="nowrap">Camera-Controlled</span> Video Generation</span>
+      </h1>
+      <p class="venue">arXiv 2026</p>
+      <p class="authors">
+        <span class="author"><a href="https://yzszy.github.io/" target="_blank" rel="noopener">Zesong Yang</a><sup>1</sup></span>
+        <span class="author"><a href="https://chenweikai.github.io/" target="_blank" rel="noopener">Weikai Chen</a><sup>2‡</sup></span>
+        <span class="author"><a href="https://scholar.google.com/citations?user=WhwTrhcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">Liyuan Cui</a><sup>1</sup></span>
+        <span class="author"><a href="https://y-u-a-n-l-i.github.io/" target="_blank" rel="noopener">Yuan Li</a><sup>1</sup></span>
+        <span class="author"><a href="https://jaceyhuang.github.io/" target="_blank" rel="noopener">Jiaxin Huang</a><sup>1</sup></span>
+        <span class="author"><a href="https://lutao2021.github.io/" target="_blank" rel="noopener">Lutao Jiang</a><sup>3</sup></span>
+        <span class="author">Runze Zhang<sup>2</sup></span>
+        <span class="author">Yingda Yin<sup>2</sup></span>
+        <span class="author">Xiaoyang Huang<sup>2</sup></span>
+        <span class="author">Kai Yan<sup>2</sup></span>
+        <span class="author">Keyang Luo<sup>2</sup></span>
+        <span class="author">Xin WANG<sup>2</sup></span>
+        <span class="author"><a href="http://www.cad.zju.edu.cn/home/bao" target="_blank" rel="noopener">Hujun Bao</a><sup>1</sup></span>
+        <span class="author"><a href="https://zhpcui.github.io/" target="_blank" rel="noopener">Zhaopeng Cui</a><sup>1†</sup></span>
+      </p>
+      <p class="affiliations">
+        <span><sup>1</sup>State Key Laboratory of CAD&amp;CG, Zhejiang University</span>
+        <span><sup>2</sup>LIGHTSPEED</span>
+        <span><sup>3</sup>HKUST(GZ)</span>
+      </p>
+      <p class="author-notes"><span><sup>‡</sup>Project Lead</span><span><sup>†</sup>Corresponding Author</span></p>
+      <div class="header-links">
+        <span class="link-btn is-soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+          Paper <span class="link-soon">coming soon</span>
+        </span>
+        <span class="link-btn is-soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+          Code <span class="link-soon">coming soon</span>
+        </span>
+        <a class="link-btn link-btn--light" href="#video">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+          Video
+        </a>
+      </div>
+      <ul class="highlights" aria-label="Highlights">
+        <li>Unify <strong>Camera Control</strong> and <strong>Persistent Memory</strong> from the native self-attention</li>
+        <li><strong>Only Attention Pruning</strong>, <strong>No</strong> additional learnable control or memory modules</li>
+        <li><strong>90%+ Attention Pruned</strong> · &gt;50× faster with 4-step DMD</li>
+      </ul>
+    </header>
+
+    <section class="paper-section" id="gallery" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Gallery</h2>
+      <p class="section-intro">
+        Given a single image, a text prompt and a camera trajectory, <strong class="inline-accent">SPARC</strong> generates <strong>minute-long videos</strong> that precisely follow the prescribed camera and <strong>faithfully restore previously observed content upon revisitation</strong>. 
+      </p>
+      <div class="bento" id="gallery-grid"></div>
+      <noscript><p class="note">Enable JavaScript to view the gallery.</p></noscript>
+    </section>
+
+    <section class="paper-section" id="video" aria-labelledby="video-title">
+      <h2 id="video-title">Overview Video</h2>
+      <figure class="media-figure">
+        <div class="media-frame">
+          <video data-src="material/video/SPARC_video.mp4?v=6" data-stream poster="material/video/SPARC_video_poster.jpg?v=6" width="1920" height="1080" controls playsinline preload="none" aria-label="SPARC overview video"></video>
+        </div>
+        <figcaption><p>A walkthrough of the project page, showcasing minute-long video generation, our motivation, method visualizations, comparisons with baseline methods, and extensions to dynamic scenes.</p></figcaption>
+      </figure>
+    </section>
+
+    <section class="paper-section" id="motivation" aria-labelledby="motivation-title">
+      <h2 id="motivation-title">Motivation</h2>
+      <ul class="motivation-points">
+        <li class="mp-limit"><strong>Long-horizon camera-controlled generation</strong> requires accurate camera trajectory adherence and consistent scene identity upon revisitation. Existing methods rely on <strong>camera-conditioning modules</strong>, <strong>explicit 3D reconstruction</strong>, or <strong>historical frame context</strong>, introducing architectural complexity or costly dense attention over historical observations.</li>
+        <li class="mp-insight">For each target chunk, <strong>most tokens have been previously observed</strong>, with <strong>each corresponding to only a handful of historical tokens</strong>. Dense attention introduces redundant computation and potentially impairing accurate retrieval.</li>
+        <li class="mp-ours">We reveal that <strong>camera control and persistent memory share a common requirement for spatially grounded historical retrieval</strong>, motivating a unified attention-based solution: <strong class="inline-accent">SPARC</strong> directly restricts the attention scope with geometry, <strong>without any additional learnable modules</strong>.</li>
+      </ul>
+      <div class="split">
+        <figure class="media-figure">
+          <div class="media-frame">
+            <video data-src="material/motivation/cameras3d_static.mp4" poster="material/motivation/cameras3d_static_poster.jpg" width="1920" height="1028" muted loop playsinline controls preload="none" aria-label="History and target cameras of one chunk in 3D"></video>
+          </div>
+          <figcaption><p>One DL3DV chunk in 3D: the 9 retrieved history frames (left) with their <span class="key key--blue"></span>cameras, and the <span class="key key--orange"></span>target cameras appearing as the 72 target frames are generated (the panel plays the generated frame of the newest camera). The target trajectory moves into regions that the history has already observed.</p></figcaption>
+        </figure>
+        <div class="stat-stack">
+          <div class="stat"><span class="stat-num">90.6%</span><span class="stat-label">target tokens already observed in history</span></div>
+          <div class="stat"><span class="stat-num">≈10 <small>/ 14,040</small></span><span class="stat-label">history tokens matched by one observed query</span></div>
+          <div class="stat"><span class="stat-num">18.0%</span><span class="stat-label">query–key pairs kept after geometry-guided pruning</span></div>
+        </div>
+      </div>
+      <figure class="media-figure">
+        <div class="media-frame">
+          <video data-src="material/motivation/motivation_anim.mp4" poster="material/motivation/motivation_anim_poster.jpg" width="1920" height="1028" muted loop playsinline controls preload="none" aria-label="Animated motivation figure"></video>
+        </div>
+        <figcaption><p><strong>Where does each target token need to look?</strong> On the same chunk, <strong>90.6%</strong> of the target tokens already have a geometric correspondence in the 9 retrieved history frames, and an observed query matches only about <strong>10 of 14,040</strong> history tokens. Newly revealed regions have no match and keep dense attention. Geometry-guided pruning keeps only <strong>18%</strong> of the query–key pairs on this chunk.</p></figcaption>
+      </figure>
+    </section>
+
+    <section class="paper-section" id="method" aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <div class="method-copy">
+        <p><strong class="inline-accent">SPARC</strong> is a geometry-guided attention pruning framework that directly restructures the native self-attention of a pretrained video diffusion transformer. For each target chunk, it <strong>constructs token-level correspondences with retrieved historical observations through per-history local geometric projection</strong>, and applies <strong>asymmetric attention pruning</strong> based on target-region visibility.</p>
+        <p class="method-highlight">Geometry determines <em>where the pretrained model attends</em> — attention pruning serves as geometric conditioning and memory addressing, rather than merely a computational optimization.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar-n">1</span>
+          <h3>Geometry-guided token correspondence</h3>
+          <p>Each retrieved frame is lifted into its <strong>own local mesh</strong> — no global fusion. Rasterized under the history and target cameras, a <strong>shared triangle ID links each target token to its source token</strong>.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-n">2</span>
+          <h3>Correspondence-aware attention pruning</h3>
+          <p><strong>Observed</strong> queries attend only to their <strong>matched history</strong> and a <strong>local spatiotemporal window</strong>; <strong>unobserved</strong> queries keep <strong>dense attention</strong>. A <strong>correspondence bias</strong> strengthens the matched history.</p>
+        </article>
+        <article class="pillar">
+          <span class="pillar-n">3</span>
+          <h3>Long-horizon memory</h3>
+          <p><strong>Coverage-based retrieval</strong> selects a compact history, and a <strong>shared RoPE index</strong> makes it order-invariant. With 4-step <strong>DMD</strong>, the DiT runs <strong>53.6×</strong> faster per chunk.</p>
+        </article>
+      </div>
+      <figure class="method-figure">
+        <a class="method-image-link" href="material/method/pipeline_full.jpg" target="_blank" rel="noopener" aria-label="Open the full-resolution pipeline figure">
+          <img src="material/method/pipeline.jpg" width="2400" height="997" loading="lazy" decoding="async" alt="SPARC system overview">
+        </a>
+        <figcaption><p><strong>System overview.</strong> For each target chunk, SPARC establishes token-level correspondences with historical observations through local geometric projection, and prunes the backbone's native self-attention to focus on geometrically corresponding historical tokens and local spatiotemporal context for previously observed regions, while newly revealed regions retain dense attention. Historical RoPE re-indexing removes artificial temporal ordering among the retrieved observations; generated observations are appended to the history bank for continuous rollout.</p></figcaption>
+      </figure>
+      <div class="tabs" data-tabs>
+        <div class="tab-bar" role="tablist" aria-label="Method visualizations">
+          <button class="tab" role="tab" aria-selected="false" data-tab="pipeline-anim">Pipeline animation</button>
+          <button class="tab is-active" role="tab" aria-selected="true" data-tab="corr-vis">Correspondence construction</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="mask-vis">Per-chunk attention mask</button>
+        </div>
+        <div class="tab-panel" data-panel="pipeline-anim" hidden>
+          <figure class="media-figure">
+            <div class="media-frame">
+              <video data-src="material/method/pipeline_anim.mp4" poster="material/method/pipeline_anim_poster.jpg" width="1920" height="1028" muted loop playsinline controls preload="none" aria-label="Animated pipeline"></video>
+            </div>
+            <figcaption><p>The pipeline figure built up step by step: retrieval, per-history correspondence, the concatenated token sequence with shared historical RoPE index, and the three attention scopes of the pruned self-attention.</p></figcaption>
+          </figure>
+        </div>
+        <div class="tab-panel is-active" data-panel="corr-vis">
+          <figure class="media-figure">
+            <div class="media-frame">
+              <video data-src="material/method/correspondence.mp4" poster="material/method/correspondence_poster.jpg" width="1920" height="1080" muted loop playsinline controls preload="none" aria-label="Correspondence construction along the roaming trajectory"></video>
+            </div>
+            <figcaption><p>Along a 12-chunk roaming trajectory: for every target frame, each retrieved history frame contributes <strong>its own local mesh</strong>; rays from the target camera through the sampled target tokens hit the mesh, and the hit face identifies the source token (same colours in the target and history frames). <em>Right:</em> all local geometries overlaid — no global fusion — and the chunk's exact attention mask with the current target latent highlighted.</p></figcaption>
+          </figure>
+        </div>
+        <div class="tab-panel" data-panel="mask-vis" hidden>
+          <div class="mask-explorer" id="mask-explorer"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper-section" id="ablation" aria-labelledby="ablation-title">
+      <h2 id="ablation-title">Ablation Study</h2>
+      <p class="section-intro">Controlled novel-view generation on <strong>Tanks and Temples</strong>: camera-calibrated multi-view images serve as the history, and a 72-frame chunk is generated along a held-out trajectory with ground truth. All variants share identical data and training settings.</p>
+      <div class="abl-conds" id="abl-conds"></div>
+      <figure class="media-figure">
+        <div class="media-frame">
+          <video data-src="material/ablation/variants.mp4" poster="material/ablation/variants_poster.jpg" width="1824" height="710" muted loop playsinline controls preload="none" aria-label="Ablation of the attention pruning components"></video>
+        </div>
+      </figure>
+      <div class="abl-cards" id="abl-cards"></div>
+      <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>Masks are exact for this chunk (42,120 tokens, 99.0% of the target observed), drawn over [history | target] token rows; matched history is drawn by presence, so its sparsity is understated visually.</p>
+      <div class="split split--rope">
+        <figure class="media-figure">
+          <div class="media-frame">
+            <video data-src="material/ablation/rope.mp4" poster="material/ablation/rope_poster.jpg" width="1824" height="710" muted loop playsinline controls preload="none" aria-label="Order-invariant historical positioning"></video>
+          </div>
+        </figure>
+        <div class="rope-copy">
+          <h3>Order-invariant historical positioning</h3>
+          <p>Coverage keyframes are selected by geometric relevance, so their concatenation order carries no temporal meaning. Shuffling the retrieved history (here to <span id="rope-order"></span>) changes the output under <strong>sequential RoPE</strong>, while our <strong>shared historical index</strong> produces nearly identical videos.</p>
+          <div class="rope-stats">
+            <div><span class="stat-num stat-num--sm">37.2 dB</span><span class="stat-label">Ours, PSNR to the original order</span></div>
+            <div><span class="stat-num stat-num--sm stat-num--muted">26.7 dB</span><span class="stat-label">Sequential RoPE</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper-section comparison-section" id="dl3dv" aria-labelledby="dl3dv-title">
+      <h2 id="dl3dv-title">Qualitative Comparisons for DL3DV-Evaluation</h2>
+      <p class="section-intro">Given the same first frame and ground-truth camera trajectory, each method autoregressively generates a 45-second video. We compare against explicit-3D approaches (<strong>Lyra2</strong>, <strong>Spatia</strong>, <strong>WorldStereo</strong>, <strong>UCM</strong>) and implicit approaches (<strong>WorldPlay</strong>, <strong>Lingbot-World</strong>, <strong>Infinite-World</strong>). Below, camera trajectories estimated from the generated videos with <a href="https://research.nvidia.com/labs/toronto-ai/vipe" target="_blank" rel="noopener">ViPE</a> and Sim(3)-aligned are compared with the ground truth. <strong class="inline-accent">SPARC</strong> keeps both the scene appearance and the camera path throughout the rollout.</p>
+      <div class="compare" data-dataset="dl3dv" data-baked="2" data-speed="2"></div>
+      <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>Videos are downsampled by 2× in each dimension and sped up 2× to reduce storage requirements.</p>
+    </section>
+
+    <section class="paper-section comparison-section" id="worldscore" aria-labelledby="worldscore-title">
+      <h2 id="worldscore-title">Qualitative Comparisons for WorldScore-Evaluation</h2>
+      <p class="section-intro">We generate <strong>closed-loop camera trajectories</strong> on WorldScore-Static to evaluate <strong>long-horizon revisitation</strong>. Since each trajectory returns to previously observed viewpoints, a model with consistent memory should reproduce the same content when the camera revisits it. <strong>GT</strong> shows the input reference image. <strong class="inline-accent">SPARC</strong> faithfully restores the scene, whereas baselines distort it or fail to recover the originally observed content.</p>
+      <div class="compare" data-dataset="worldScore" data-baked="2" data-speed="2"></div>
+      <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>Videos are downsampled by 2× in each dimension and sped up 2× to reduce storage requirements.</p>
+    </section>
+
+    <section class="paper-section" id="dynamic" aria-labelledby="dynamic-title">
+      <h2 id="dynamic-title">Training-Free Dynamic Scene Generation</h2>
+      <p class="section-intro">Although trained exclusively on static scenes, <strong class="inline-accent">SPARC</strong> extends to dynamic scenes <strong>without additional training</strong>. Since geometric correspondences govern the scope of historical attention, manipulating them enables controllable object motion while preserving background consistency: we segment the foreground object and <strong>shift its correspondence locations along a prescribed motion trajectory</strong>, and SPARC synthesizes natural object motion consistent with that trajectory.</p>
+      <figure class="media-figure">
+        <div class="media-frame">
+          <video data-src="material/dynamic/dynamic_scene_principle.mp4" poster="material/dynamic/dynamic_poster.jpg" width="1920" height="1080" muted loop playsinline controls preload="none" aria-label="Training-free dynamic scene generation"></video>
+        </div>
+      </figure>
+    </section>
+
+    <section class="paper-section" id="bibtex" aria-labelledby="bibtex-title">
+      <h2 id="bibtex-title">BibTeX</h2>
+      <div class="bibtex-box">
+        <button class="bibtex-copy" id="bibtex-copy" type="button" aria-label="Copy BibTeX to clipboard">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+          <span>Copy</span>
+        </button>
+<pre class="bibtex"><code id="bibtex-code">@article{yang2026sparc,
+  title   = {SPARC: Geometry-Guided Attention Pruning for Long-Horizon Camera-Controlled Video Generation},
+  author  = {Yang, Zesong and Chen, Weikai and Cui, Liyuan and Li, Yuan and Huang, Jiaxin and
+             Jiang, Lutao and Zhang, Runze and Yin, Yingda and Huang, Xiaoyang and Yan, Kai and
+             Luo, Keyang and Wang, Xin and Bao, Hujun and Cui, Zhaopeng},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SPARC authors. Template inspired by academic project pages.</p>
+  </footer>
+</body>
+</html>

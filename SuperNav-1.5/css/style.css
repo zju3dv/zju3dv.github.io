@@ -1017,26 +1017,19 @@ tbody .ours>.regular-score {
   color:var(--muted);
   margin-top:16px;
 }
-.citation-placeholder {
+.citation-code {
+  min-width:0;
   border:1px solid var(--line);
   border-radius:8px;
   background:var(--card);
   padding:26px 28px
 }
-.citation-placeholder>.eyebrow {
-  display:inline-block;
-  background:var(--mark);
-  padding:3px 7px;
-  color:#474a00;
-  font-size:12px;
-  border-radius:3px;
-  margin:0;
-}
-.citation-placeholder pre {
+.citation-code pre {
   font:14px var(--mono);
   color:var(--muted);
   white-space:pre-wrap;
-  margin:24px 0 8px;
+  overflow-wrap:anywhere;
+  margin:0;
 }
 .site-footer {
   border-top:1px solid var(--line);
@@ -1493,7 +1486,7 @@ tbody .ours>.regular-score {
     grid-template-columns:1fr;
     gap:25px
   }
-  .citation-placeholder {
+  .citation-code {
     padding:22px
   }
   .site-footer {
